@@ -1,0 +1,10 @@
+{
+  "buildCommand": "pnpm build",
+  "outputDirectory": "www/dist",
+  "rewrites": [
+    { "source": "/theme/assets/:path*", "destination": "/assets/:path*" },
+    { "source": "/theme/vite.svg", "destination": "/vite.svg" },
+    { "source": "/theme", "destination": "/index.html" },
+    { "source": "/theme/:path*", "destination": "/index.html" }
+  ]
+}

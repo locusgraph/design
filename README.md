@@ -39,6 +39,17 @@ pnpm --filter @locus/components typecheck
 pnpm --filter @locus/svgs typecheck
 ```
 
+## Deploy
+
+The app is built to run at **/theme** (e.g. `https://design.locusgraph.com/theme`).
+
+- **Vercel:** [vercel.json](vercel.json) is set up with the right rewrites so `/theme` and `/theme/*` serve the SPA and `/theme/assets/*` serve built files.
+- **Other hosts (Reloda, Netlify, Cloudflare, etc.):** Configure SPA fallback so that:
+  - `/theme` and `/theme/*` (except static files) serve your built `index.html`.
+  - `/theme/assets/*` is served from the build’s `assets/` folder (or equivalent rewrite).
+
+Build output is in `www/dist/`. Use that as the deployment root and apply the rewrites above.
+
 ## Release
 
 Packages are published to [GitHub Packages](https://github.com/features/packages) (npm registry).
