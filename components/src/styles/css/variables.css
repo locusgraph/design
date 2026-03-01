@@ -1,0 +1,7 @@
+/**
+ * Semantic theme tokens. Composed from variables/light.css and variables/dark.css.
+ * inline.css maps these to Tailwind --color-* / radius-*.
+ */
+
+@import "./variables/light.css";
+@import "./variables/dark.css";

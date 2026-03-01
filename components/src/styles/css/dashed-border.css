@@ -1,0 +1,159 @@
+@layer utilities {
+  .bg-input {
+    background-color: var(--input);
+  }
+
+  .animated-dashed-border-all {
+    position: relative;
+    z-index: 9999;
+    border: 0;
+    --border-width: 1px;
+    background-image:
+      linear-gradient(
+        90deg,
+        color-mix(in oklch, var(--foreground) 30%, transparent) 30%,
+        transparent 30%
+      ),
+      linear-gradient(
+        90deg,
+        color-mix(in oklch, var(--foreground) 30%, transparent) 30%,
+        transparent 30%
+      ),
+      linear-gradient(
+        0deg,
+        color-mix(in oklch, var(--foreground) 30%, transparent) 30%,
+        transparent 30%
+      ),
+      linear-gradient(
+        0deg,
+        color-mix(in oklch, var(--foreground) 30%, transparent) 30%,
+        transparent 30%
+      );
+    background-size:
+      8px var(--border-width),
+      8px var(--border-width),
+      var(--border-width) 8px,
+      var(--border-width) 8px;
+    background-position:
+      0 0,
+      0 100%,
+      0 0,
+      100% 0;
+    background-repeat: repeat-x, repeat-x, repeat-y, repeat-y;
+    animation: dash-move-all 1s linear infinite;
+  }
+
+  @keyframes dash-move-all {
+    0% {
+      background-position:
+        0 0,
+        0 100%,
+        0 0,
+        100% 0;
+    }
+    100% {
+      background-position:
+        8px 0,
+        -8px 100%,
+        0 -8px,
+        100% 8px;
+    }
+  }
+
+  .animated-dashed-border-right {
+    position: relative;
+    z-index: 9999;
+    border-right: 0;
+    --border-width: 1px;
+    background-image: linear-gradient(
+      0deg,
+      color-mix(in oklch, var(--foreground) 30%, transparent) 30%,
+      transparent 30%
+    );
+    background-size: var(--border-width) 8px;
+    background-position: 100% 0;
+    background-repeat: repeat-y;
+    animation: dash-move-right 1s linear infinite;
+  }
+
+  @keyframes dash-move-right {
+    0% {
+      background-position: 100% 0;
+    }
+    100% {
+      background-position: 100% 8px;
+    }
+  }
+
+  [data-slot="sidebar-container"] {
+    position: relative;
+  }
+
+  [data-slot="sidebar-container"]::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 1px;
+    height: 100%;
+    background-image: linear-gradient(
+      0deg,
+      color-mix(in oklch, var(--foreground) 30%, transparent) 30%,
+      transparent 30%
+    );
+    background-size: 1px 8px;
+    background-repeat: repeat-y;
+    animation: dash-move-right 1s linear infinite;
+    pointer-events: none;
+  }
+
+  .animated-dashed-border-bottom {
+    position: relative;
+    z-index: 9999;
+    border-bottom: 0;
+    --border-width: 1px;
+    background-image: linear-gradient(
+      90deg,
+      color-mix(in oklch, var(--foreground) 30%, transparent) 30%,
+      transparent 30%
+    );
+    background-size: 8px var(--border-width);
+    background-position: 0 100%;
+    background-repeat: repeat-x;
+    animation: dash-move-bottom 1s linear infinite;
+  }
+
+  @keyframes dash-move-bottom {
+    0% {
+      background-position: 0 100%;
+    }
+    100% {
+      background-position: 8px 100%;
+    }
+  }
+
+  .animated-dashed-border-top {
+    position: relative;
+    z-index: 9999;
+    border-top: 0;
+    --border-width: 1px;
+    background-image: linear-gradient(
+      90deg,
+      color-mix(in oklch, var(--foreground) 30%, transparent) 30%,
+      transparent 30%
+    );
+    background-size: 8px var(--border-width);
+    background-position: 0 0;
+    background-repeat: repeat-x;
+    animation: dash-move-top 1s linear infinite;
+  }
+
+  @keyframes dash-move-top {
+    0% {
+      background-position: 0 0;
+    }
+    100% {
+      background-position: 8px 0;
+    }
+  }
+}

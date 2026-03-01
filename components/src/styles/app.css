@@ -1,0 +1,18 @@
+/**
+ * Main CSS entry. Imports Tailwind and modular styles in dependency order.
+ * - colors.css: palette scale variables (--primary-*, --neutral-*, etc.)
+ * - variables.css: semantic tokens (--radius, --background, etc.) and theme overrides
+ * - inline.css: Tailwind @theme inline (radius scale, --color-* mappings)
+ * - fonts.css: @font-face and --font-sans
+ * - base.css: custom variant, html/body, @layer base, keyframes
+ */
+
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@import "./css/colors.css";
+@import "./css/variables.css";
+@import "./css/inline.css";
+@import "./css/fonts.css";
+@import "./css/base.css";
+@import "./css/dashed-border.css";

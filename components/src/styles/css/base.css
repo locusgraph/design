@@ -1,0 +1,70 @@
+/**
+ * Base styles: custom variant, html/body, @layer base, keyframes.
+ */
+
+@custom-variant dark (&:is(.dark *));
+
+html,
+body {
+  color-scheme: light;
+}
+
+.dark {
+  color-scheme: dark;
+}
+
+/* Smooth transition when switching light ↔ dark theme */
+html {
+  transition:
+    background-color 0.3s ease-in-out,
+    color 0.3s ease-in-out;
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+    transition-property: background-color, color, border-color;
+    transition-duration: 0.3s;
+    transition-timing-function: ease-in-out;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+
+  /* Scrollbar styling */
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: var(--zinc-300);
+    border-radius: 4px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(--zinc-400);
+  }
+
+  .dark ::-webkit-scrollbar-thumb {
+    background: var(--zinc-700);
+  }
+
+  .dark ::-webkit-scrollbar-thumb:hover {
+    background: var(--zinc-600);
+  }
+
+  /* Firefox scrollbar */
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: var(--zinc-300) transparent;
+  }
+
+  .dark * {
+    scrollbar-color: var(--zinc-700) transparent;
+  }
+}

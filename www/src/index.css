@@ -1,0 +1,15 @@
+@import "@locus/components/styles";
+
+@theme {
+  --font-sans:
+    "Raveo", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji",
+    "Segoe UI Symbol", "Noto Color Emoji";
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  @apply bg-background text-foreground antialiased;
+}

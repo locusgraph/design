@@ -1,0 +1,99 @@
+/**
+ * Dark theme – semantic tokens for .dark.
+ * Mapped from palette (colors.css); inline.css maps to Tailwind --color-*.
+ */
+
+.dark {
+  --radius: 0.5rem;
+
+  --border: var(--zinc-800);
+  --ring: var(--zinc-600);
+  --input: var(--zinc-800);
+
+  --background: var(--zinc-950);
+  --foreground: var(--zinc-50);
+  --overlay: var(--zinc-950);
+
+  --muted: var(--zinc-800);
+  --muted-foreground: var(--zinc-400);
+
+  --card: var(--zinc-900);
+  --card-foreground: var(--zinc-50);
+
+  --popover: var(--zinc-900);
+  --popover-foreground: var(--zinc-50);
+
+  --accent: var(--zinc-800);
+  --accent-foreground: var(--zinc-50);
+
+  --primary: var(--zinc-50);
+  --primary-foreground: var(--zinc-950);
+
+  --destructive: var(--error-50);
+  --destructive-foreground: var(--error-950);
+
+  --confirm: var(--success-50);
+  --confirm-foreground: var(--success-950);
+
+  --notice: var(--warning-50);
+  --notice-foreground: var(--warning-950);
+
+  --hnt: var(--teal-50);
+  --hnt-foreground: var(--teal-950);
+
+  /* Primary Shades */
+  --primary-100: var(--zinc-100);
+  --primary-200: var(--zinc-200);
+  --primary-300: var(--zinc-300);
+  --primary-400: var(--zinc-400);
+  --primary-500: var(--zinc-500);
+  --primary-600: var(--zinc-600);
+  --primary-700: var(--zinc-700);
+  --primary-800: var(--zinc-800);
+  --primary-900: var(--zinc-900);
+
+  /* Destructive Shades */
+  --destructive-100: var(--error-100);
+  --destructive-200: var(--error-200);
+  --destructive-300: var(--error-300);
+  --destructive-400: var(--error-400);
+  --destructive-500: var(--error-500);
+  --destructive-600: var(--error-600);
+  --destructive-700: var(--error-700);
+  --destructive-800: var(--error-800);
+  --destructive-900: var(--error-900);
+
+  /* Confirm Shades */
+  --confirm-100: var(--success-100);
+  --confirm-200: var(--success-200);
+  --confirm-300: var(--success-300);
+  --confirm-400: var(--success-400);
+  --confirm-500: var(--success-500);
+  --confirm-600: var(--success-600);
+  --confirm-700: var(--success-700);
+  --confirm-800: var(--success-800);
+  --confirm-900: var(--success-900);
+
+  /* Notice Shades (from palette warning) */
+
+  --notice-100: var(--warning-100);
+  --notice-200: var(--warning-200);
+  --notice-300: var(--warning-300);
+  --notice-400: var(--warning-400);
+  --notice-500: var(--warning-500);
+  --notice-600: var(--warning-600);
+  --notice-700: var(--warning-700);
+  --notice-800: var(--warning-800);
+  --notice-900: var(--warning-900);
+
+  /* HNT Shades (from palette teal) */
+  --hnt-100: var(--teal-100);
+  --hnt-200: var(--teal-200);
+  --hnt-300: var(--teal-300);
+  --hnt-400: var(--teal-400);
+  --hnt-500: var(--teal-500);
+  --hnt-600: var(--teal-600);
+  --hnt-700: var(--teal-700);
+  --hnt-800: var(--teal-800);
+  --hnt-900: var(--teal-900);
+}

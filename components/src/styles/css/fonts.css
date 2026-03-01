@@ -1,0 +1,27 @@
+/**
+ * Font faces and Tailwind font-sans theme.
+ */
+
+@font-face {
+  font-family: "Raveo";
+  src: url("https://cdn.jsdelivr.net/gh/jakubfoglar/raveo@main/fonts/RaveoVariable.woff2")
+    format("woff2");
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Raveo Display";
+  src: url("https://cdn.jsdelivr.net/gh/jakubfoglar/raveo@main/fonts/RaveoDisplayVariable.woff2")
+    format("woff2");
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@theme {
+  --font-sans:
+    "Raveo", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji",
+    "Segoe UI Symbol", "Noto Color Emoji";
+}

@@ -1,0 +1,71 @@
+# Publish @locus/* packages to GitHub Package Registry when a release is published.
+# Ensure package.json in components/ and svgs/ have "publishConfig": { "registry": "https://npm.pkg.github.com" }
+# and "repository": { "type": "git", "url": "https://github.com/OWNER/REPO.git" } (replace OWNER/REPO).
+
+name: Release to GitHub Packages
+
+on:
+  release:
+    types: [published]
+  workflow_dispatch:
+    inputs:
+      version:
+        description: "Version to publish (e.g. 0.0.2). Leave empty to use existing versions in package.json."
+        required: false
+
+env:
+  REGISTRY: https://npm.pkg.github.com
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: "pnpm"
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 9
+
+      - name: Configure npm for GitHub Packages
+        run: |
+          echo "@locus:registry=${{ env.REGISTRY }}" >> .npmrc
+          echo "${{ env.REGISTRY }}/:_authToken=${{ secrets.GITHUB_TOKEN }}" >> .npmrc
+
+      - name: Set version from input (optional)
+        if: github.event_name == 'workflow_dispatch' && inputs.version != ''
+        run: |
+          for dir in components svgs; do
+            if [ -f "$dir/package.json" ]; then
+              node -e "
+                const fs = require('fs');
+                const p = JSON.parse(fs.readFileSync('$dir/package.json', 'utf8'));
+                if (!p.private) {
+                  p.version = '${{ inputs.version }}';
+                  fs.writeFileSync('$dir/package.json', JSON.stringify(p, null, 2));
+                }
+              "
+            fi
+          done
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Typecheck
+        run: pnpm -r run typecheck
+
+      - name: Publish to GitHub Packages
+        run: pnpm publish -r --no-git-checks --access restricted
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}

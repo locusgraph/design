@@ -1,0 +1,12 @@
+{
+  "name": "locusgraph-design",
+  "private": true,
+  "scripts": {
+    "dev": "pnpm --filter @locus/www dev",
+    "build": "pnpm --filter @locus/www build",
+    "typecheck": "pnpm -r run typecheck"
+  },
+  "devDependencies": {
+    "typescript": "~5.9.3"
+  }
+}

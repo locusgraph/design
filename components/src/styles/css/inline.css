@@ -1,0 +1,115 @@
+/**
+ * Tailwind v4 @theme inline – radius, semantic colors, and color-scale mappings.
+ * Depends on variables.css (--radius, --background, etc.) and colors.css (--zinc-*, --teal-*, etc.).
+ */
+
+@theme inline {
+  /* Radius */
+  --radius-sm: var(--radius);
+  --radius-md: calc(var(--radius) + 4px);
+  --radius-lg: calc(var(--radius) + 8px);
+  --radius-xl: calc(var(--radius) + 12px);
+  --radius-2xl: calc(var(--radius) + 16px);
+  --radius-3xl: calc(var(--radius) + 24px);
+  --radius-4xl: calc(var(--radius) + 32px);
+
+  --color-border: var(--border);
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+
+  /* Background Shades */
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-overlay: var(--overlay);
+
+  /* Muted */
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+
+  /* Card */
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+
+  /* Popover */
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+
+  /* Accent */
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+
+  /* Primary Shades */
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+
+  /* Destructive Shades */
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+
+  /* Confirm Shades */
+  --color-confirm: var(--confirm);
+  --color-confirm-foreground: var(--confirm-foreground);
+
+  /* Notice Shades */
+  --color-notice: var(--notice);
+  --color-notice-foreground: var(--notice-foreground);
+
+  /* HNT Shades */
+  --color-hnt: var(--hnt);
+  --color-hnt-foreground: var(--hnt-foreground);
+
+  /* Primary Shades */
+  --color-primary-100: var(--primary-100);
+  --color-primary-200: var(--primary-200);
+  --color-primary-300: var(--primary-300);
+  --color-primary-400: var(--primary-400);
+  --color-primary-500: var(--primary-500);
+  --color-primary-600: var(--primary-600);
+  --color-primary-700: var(--primary-700);
+  --color-primary-800: var(--primary-800);
+  --color-primary-900: var(--primary-900);
+
+  /* Destructive Shades */
+  --color-destructive-100: var(--destructive-100);
+  --color-destructive-200: var(--destructive-200);
+  --color-destructive-300: var(--destructive-300);
+  --color-destructive-400: var(--destructive-400);
+  --color-destructive-500: var(--destructive-500);
+  --color-destructive-600: var(--destructive-600);
+  --color-destructive-700: var(--destructive-700);
+  --color-destructive-800: var(--destructive-800);
+  --color-destructive-900: var(--destructive-900);
+
+  /* Confirm Shades */
+  --color-confirm-100: var(--confirm-100);
+  --color-confirm-200: var(--confirm-200);
+  --color-confirm-300: var(--confirm-300);
+  --color-confirm-400: var(--confirm-400);
+  --color-confirm-500: var(--confirm-500);
+  --color-confirm-600: var(--confirm-600);
+  --color-confirm-700: var(--confirm-700);
+  --color-confirm-800: var(--confirm-800);
+  --color-confirm-900: var(--confirm-900);
+
+  /* Notice Shades */
+  --color-notice-100: var(--notice-100);
+  --color-notice-200: var(--notice-200);
+  --color-notice-300: var(--notice-300);
+  --color-notice-400: var(--notice-400);
+  --color-notice-500: var(--notice-500);
+  --color-notice-600: var(--notice-600);
+  --color-notice-700: var(--notice-700);
+  --color-notice-800: var(--notice-800);
+  --color-notice-900: var(--notice-900);
+
+  /* HNT Shades */
+  --color-hnt-100: var(--hnt-100);
+  --color-hnt-200: var(--hnt-200);
+  --color-hnt-300: var(--hnt-300);
+  --color-hnt-400: var(--hnt-400);
+  --color-hnt-500: var(--hnt-500);
+  --color-hnt-600: var(--hnt-600);
+  --color-hnt-700: var(--hnt-700);
+  --color-hnt-800: var(--hnt-800);
+  --color-hnt-900: var(--hnt-900);
+}

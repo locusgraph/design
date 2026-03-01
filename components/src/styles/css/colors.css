@@ -1,0 +1,118 @@
+/**
+ * Hyperbola color scale variables.
+ * Single source of truth for palette shades (50–950).
+ * Tailwind theme (inline.css) maps --color-* to these via var().
+ */
+
+:root {
+  /* Zinc */
+  --zinc-50: oklch(0.9731 0 0);
+  --zinc-100: oklch(0.9702 0 0);
+  --zinc-200: oklch(0.9219 0 0);
+  --zinc-300: oklch(0.8699 0 0);
+  --zinc-400: oklch(0.7155 0 0);
+  --zinc-500: oklch(0.5555 0 0);
+  --zinc-600: oklch(0.4386 0 0);
+  --zinc-700: oklch(0.3715 0 0);
+  --zinc-800: oklch(0.2686 0 0);
+  --zinc-900: oklch(0.2046 0 0);
+  --zinc-950: oklch(0.1448 0 0);
+
+  /* Teal (palette for semantic “hnt”) */
+
+  --teal-50: oklch(0.9876 0.0129 185.11);
+  --teal-100: oklch(0.9423 0.0567 185.32);
+  --teal-200: oklch(0.9028 0.0951 184.07);
+  --teal-300: oklch(0.8699 0.1252 182.45);
+  --teal-400: oklch(0.8463 0.1454 179.94);
+  --teal-500: oklch(0.8269 0.1535 176.79);
+  --teal-600: oklch(0.711 0.1319 176.87);
+  --teal-700: oklch(0.5934 0.1092 177.83);
+  --teal-800: oklch(0.469 0.0864 177.47);
+  --teal-900: oklch(0.3397 0.0616 180);
+  --teal-950: oklch(0.2698 0.0491 179.49);
+
+  /* Error/Red */
+
+  --error-50: oklch(0.9521 0.0088 26.02);
+  --error-100: oklch(0.8817 0.0489 21.25);
+  --error-200: oklch(0.8171 0.0913 22.56);
+  --error-300: oklch(0.7588 0.1355 23.47);
+  --error-400: oklch(0.7089 0.1788 25.44);
+  --error-500: oklch(0.6707 0.2167 27.52);
+  --error-600: oklch(0.5846 0.185 27.21);
+  --error-700: oklch(0.4952 0.1518 27.13);
+  --error-800: oklch(0.4021 0.1164 26.45);
+  --error-900: oklch(0.2475 0.0518 25.18);
+  --error-950: oklch(0.2032 0.0305 23.52);
+
+  /* Success/Green */
+
+  --success-50: oklch(0.964 0.0102 145.5);
+  --success-100: oklch(0.9444 0.0527 147.68);
+  --success-200: oklch(0.9281 0.094 146.97);
+  --success-300: oklch(0.9137 0.1355 146.29);
+  --success-400: oklch(0.9028 0.173 145.68);
+  --success-500: oklch(0.8944 0.2077 145.19);
+  --success-600: oklch(0.7765 0.177 145.29);
+  --success-700: oklch(0.6539 0.1448 145.44);
+  --success-800: oklch(0.5069 0.1072 145.43);
+  --success-900: oklch(0.3598 0.0642 146.11);
+  --success-950: oklch(0.2035 0.0253 146.85);
+
+  /* Warning (palette for semantic “notice”) */
+
+  --warning-50: oklch(0.983 0.0195 87.51);
+  --warning-100: oklch(0.9606 0.0468 88.29);
+  --warning-200: oklch(0.9358 0.0792 89.21);
+  --warning-300: oklch(0.9122 0.1102 89.51);
+  --warning-400: oklch(0.89 0.1375 89.24);
+  --warning-500: oklch(0.9049 0.118 89.16);
+  --warning-600: oklch(0.8059 0.122 82.77);
+  --warning-700: oklch(0.6734 0.1092 81.63);
+  --warning-800: oklch(0.502 0.0759 80.95);
+  --warning-900: oklch(0.3308 0.0254 64.29);
+  --warning-950: oklch(0.2441 0.0144 67.07);
+
+  /* Purple */
+
+  --purple-50: oklch(0.9672 0.0175 296.64);
+  --purple-100: oklch(0.941 0.0311 293.78);
+  --purple-200: oklch(0.8892 0.059 292.62);
+  --purple-300: oklch(0.8021 0.1099 293.17);
+  --purple-400: oklch(0.6979 0.1743 292.63);
+  --purple-500: oklch(0.5841 0.2467 290.27);
+  --purple-600: oklch(0.5368 0.2652 290.81);
+  --purple-700: oklch(0.4898 0.2576 290.31);
+  --purple-800: oklch(0.4307 0.226 290.24);
+  --purple-900: oklch(0.3768 0.1916 291.12);
+  --purple-950: oklch(0.2809 0.1454 288.65);
+
+  /* Orange */
+
+  --orange-50: oklch(0.9796 0.0158 73.68);
+  --orange-100: oklch(0.9559 0.0388 78.59);
+  --orange-200: oklch(0.9058 0.0762 73.67);
+  --orange-300: oklch(0.8456 0.1204 69.65);
+  --orange-400: oklch(0.7707 0.1618 58.33);
+  --orange-500: oklch(0.719 0.1885 49.05);
+  --orange-600: oklch(0.6587 0.1964 42.07);
+  --orange-700: oklch(0.5635 0.1757 39.33);
+  --orange-800: oklch(0.4786 0.1441 38.87);
+  --orange-900: oklch(0.4146 0.1173 39.72);
+  --orange-950: oklch(0.2693 0.0768 37.87);
+
+  /* Blue */
+
+  --blue-50: oklch(0.9672 0.0175 296.64);
+  --blue-100: oklch(0.941 0.0311 293.78);
+  --blue-200: oklch(0.8892 0.059 292.62);
+  --blue-300: oklch(0.8021 0.1099 293.17);
+  --blue-400: oklch(0.6979 0.1743 292.63);
+  --blue-500: oklch(0.5841 0.2467 290.27);
+  --blue-600: oklch(0.6281 0.1231 268.89);
+  --blue-700: oklch(0.5306 0.1019 269.97);
+  --blue-800: oklch(0.4307 0.0782 270.86);
+  --blue-900: oklch(0.2642 0.0346 271.94);
+  --blue-950: oklch(0.2117 0.02 275.76);
+}
