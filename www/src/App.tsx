@@ -5,7 +5,7 @@ import BrandingSection from "./pages/$section";
 
 function App() {
   return (
-    <BrowserRouter basename="/theme">
+    <BrowserRouter>
       <Routes>
         <Route element={<BrandingLayout />}>
           <Route index element={<BrandingIndex />} />

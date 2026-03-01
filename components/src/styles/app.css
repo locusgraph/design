@@ -8,6 +8,10 @@
  */
 
 @import "tailwindcss";
+
+/* Scan this package so Tailwind generates utilities (flex, padding, gap, etc.) used by components */
+@source "../locus";
+
 @import "tw-animate-css";
 
 @import "./css/colors.css";
