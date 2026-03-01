@@ -91,7 +91,7 @@ importers:
         specifier: ^5.9.3
         version: 5.9.3
 
-  svg:
+  svgs:
     devDependencies:
       '@types/react':
         specifier: ^19.0.8
