@@ -111,7 +111,7 @@ export default defineDemo({
       description: "A thread with a composer; sending pins the view to the new message.",
       component: Live,
     },
-    "Long session": {
+    LongSession: {
       description:
         "400 turns. Above 50 turns only the turns near the viewport are mounted, so long agent sessions stay fast; pass virtualize={false} to mount every turn.",
       component: LongSession,

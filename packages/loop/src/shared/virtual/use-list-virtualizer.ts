@@ -1,5 +1,5 @@
 import { defaultRangeExtractor, type Range, useVirtualizer } from "@tanstack/react-virtual";
-import { type CSSProperties, type FocusEvent, type Key, useCallback, useState } from "react";
+import { type CSSProperties, type FocusEvent, useCallback, useState } from "react";
 
 export const virtualizeAboveCount = 50;
 
@@ -13,7 +13,7 @@ export type ListVirtualizerOptions = {
   count: number;
   getScrollElement: () => HTMLElement | null;
   estimateSize: (index: number) => number;
-  getItemKey: (index: number) => Key;
+  getItemKey: (index: number) => string | number;
   anchorTo?: "start" | "end";
 };
 

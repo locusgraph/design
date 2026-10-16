@@ -2,7 +2,6 @@ import { cn } from "@locusgraph/components";
 import {
   cloneElement,
   isValidElement,
-  type Key,
   type ReactNode,
   type RefObject,
   useEffect,
@@ -23,7 +22,7 @@ type VirtualChatItemsProps = {
   onScrollingChange: (scrolling: boolean) => void;
 };
 
-function itemKey(item: ReactNode, index: number): Key {
+function itemKey(item: ReactNode, index: number): string | number {
   return isValidElement(item) && item.key !== null ? item.key : index;
 }
 

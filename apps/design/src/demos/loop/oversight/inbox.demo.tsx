@@ -95,7 +95,7 @@ export default defineDemo({
   ],
   examples: {
     Empty: { description: "Nothing waiting.", component: Empty },
-    "Long queue": {
+    LongQueue: {
       description:
         "300 approvals. Above 50 the list scrolls inside the panel and only the rows near the viewport are mounted.",
       component: LongQueue,

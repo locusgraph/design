@@ -103,7 +103,7 @@ export default defineDemo({
   ],
   examples: {
     Empty: { description: "Before the first conversation.", component: Empty },
-    "Long history": {
+    LongHistory: {
       description: "1,000 threads. Above 50 threads only the rows near the viewport are mounted.",
       component: LongHistory,
     },
