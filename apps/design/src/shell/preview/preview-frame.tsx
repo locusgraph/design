@@ -38,6 +38,7 @@ export function PreviewFrame({ message, viewport, height }: PreviewFrameProps) {
   const frame = useRef<HTMLIFrameElement>(null);
   const { ready, contentHeight } = useFrameEvents(frame);
   const frameHeight = Math.max(height === "tall" ? TALL_HEIGHT : AUTO_MIN_HEIGHT, contentHeight);
+  const [initialTheme] = useState(message.theme);
 
   useEffect(() => {
     if (ready) {
@@ -50,8 +51,8 @@ export function PreviewFrame({ message, viewport, height }: PreviewFrameProps) {
       <iframe
         ref={frame}
         title="Component preview"
-        src="/frame.html"
-        style={{ height: frameHeight }}
+        src={`/frame.html?theme=${initialTheme}`}
+        style={{ height: frameHeight, colorScheme: message.theme }}
         className={cn(
           "border-0 transition-[width,height] duration-200",
           viewport === "mobile" ? "w-[375px] border-x" : "w-full"

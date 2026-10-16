@@ -4,6 +4,21 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Locus Design Preview</title>
+    <style>
+      html {
+        background: #ffffff;
+        color-scheme: light;
+      }
+      html.dark {
+        background: #101011;
+        color-scheme: dark;
+      }
+    </style>
+    <script>
+      if (new URLSearchParams(location.search).get("theme") === "dark") {
+        document.documentElement.classList.add("dark");
+      }
+    </script>
   </head>
   <body>
     <div id="root"></div>
