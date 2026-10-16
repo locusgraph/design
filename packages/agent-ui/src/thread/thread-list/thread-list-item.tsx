@@ -61,6 +61,7 @@ export function ThreadListItem({
           <span className="min-w-0 flex-1 truncate">{thread.title}</span>
           <time
             dateTime={thread.updatedAt}
+            suppressHydrationWarning
             className={cn(
               "shrink-0 font-mono text-[11px] font-normal text-muted-foreground tabular-nums",
               hasMenu && timeHiddenByMenuClass

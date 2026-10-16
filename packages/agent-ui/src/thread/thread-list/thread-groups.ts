@@ -1,30 +1,40 @@
-import { formatDate } from "@locusgraph/utils";
 import type { ThreadSummary } from "./thread-list-item";
 
 export type ThreadGroup = { key: string; label: string; threads: ThreadSummary[] };
-
-const dayMs = 86_400_000;
 
 const timeOfDay = new Intl.DateTimeFormat("en-US", {
   hour: "2-digit",
   minute: "2-digit",
   hourCycle: "h23",
-  timeZone: "UTC",
 });
 
-function utcDayOf(value: string | number | Date) {
-  const time = new Date(value).getTime();
-  return Number.isNaN(time) ? Number.NaN : Math.floor(time / dayMs);
+const calendarDate = new Intl.DateTimeFormat("en-US", { dateStyle: "medium" });
+
+function localDayStart(value: string | number | Date) {
+  const date = new Date(value);
+  if (Number.isNaN(date.getTime())) {
+    return undefined;
+  }
+  return new Date(date.getFullYear(), date.getMonth(), date.getDate());
 }
 
-function dayLabel(day: number, today: number) {
-  if (day === today) {
+function daysBetween(earlier: Date, later: Date) {
+  const utcOf = (date: Date) => Date.UTC(date.getFullYear(), date.getMonth(), date.getDate());
+  return Math.round((utcOf(later) - utcOf(earlier)) / 86_400_000);
+}
+
+function dayLabel(day: Date | undefined, today: Date | undefined) {
+  if (!day) {
+    return "Earlier";
+  }
+  const daysAgo = today ? daysBetween(day, today) : Number.NaN;
+  if (daysAgo === 0) {
     return "Today";
   }
-  if (day === today - 1) {
+  if (daysAgo === 1) {
     return "Yesterday";
   }
-  return Number.isNaN(day) ? "Earlier" : formatDate(day * dayMs);
+  return calendarDate.format(day);
 }
 
 export function formatTimeOfDay(value: string) {
@@ -33,11 +43,11 @@ export function formatTimeOfDay(value: string) {
 }
 
 export function groupThreadsByDay(threads: ThreadSummary[], now: Date | string): ThreadGroup[] {
-  const today = utcDayOf(now);
+  const today = localDayStart(now);
   const groups = new Map<string, ThreadGroup>();
   for (const thread of threads) {
-    const day = utcDayOf(thread.updatedAt);
-    const key = String(day);
+    const day = localDayStart(thread.updatedAt);
+    const key = day ? String(day.getTime()) : "earlier";
     const group = groups.get(key) ?? { key, label: dayLabel(day, today), threads: [] };
     group.threads.push(thread);
     groups.set(key, group);

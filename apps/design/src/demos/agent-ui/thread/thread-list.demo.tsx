@@ -2,19 +2,23 @@ import { ThreadList, type ThreadSummary } from "@locusgraph/agent-ui";
 import { useState } from "react";
 import { defineDemo, toggle } from "../../../registry/define-demo";
 
-const demoNow = "2026-10-16T18:00:00.000Z";
+function localIso(month: number, day: number, hour: number, minute: number) {
+  return new Date(2026, month - 1, day, hour, minute).toISOString();
+}
+
+const demoNow = localIso(10, 16, 18, 0);
 
 const initialThreads: ThreadSummary[] = [
-  { id: "thr_9g4m", title: "Forecast for the indexer", updatedAt: "2026-10-16T15:12:00.000Z" },
-  { id: "thr_8f2k", title: "October spend by model", updatedAt: "2026-10-16T09:30:00.000Z" },
-  { id: "thr_7d1a", title: "Support agent cost per ticket", updatedAt: "2026-10-15T16:05:00.000Z" },
-  { id: "thr_7c0b", title: "Idle API keys", updatedAt: "2026-10-15T08:40:00.000Z" },
-  { id: "thr_6c9e", title: "Acme account graph cleanup", updatedAt: "2026-10-09T11:20:00.000Z" },
-  { id: "thr_5b3x", title: "Stripe migration memories", updatedAt: "2026-09-28T08:45:00.000Z" },
+  { id: "thr_9g4m", title: "Forecast for the indexer", updatedAt: localIso(10, 16, 15, 12) },
+  { id: "thr_8f2k", title: "October spend by model", updatedAt: localIso(10, 16, 9, 30) },
+  { id: "thr_7d1a", title: "Support agent cost per ticket", updatedAt: localIso(10, 15, 16, 5) },
+  { id: "thr_7c0b", title: "Idle API keys", updatedAt: localIso(10, 15, 8, 40) },
+  { id: "thr_6c9e", title: "Acme account graph cleanup", updatedAt: localIso(10, 9, 11, 20) },
+  { id: "thr_5b3x", title: "Stripe migration memories", updatedAt: localIso(9, 28, 8, 45) },
   {
     id: "thr_4a7q",
     title: "Budget alerts for the data team",
-    updatedAt: "2026-09-12T13:10:00.000Z",
+    updatedAt: localIso(9, 12, 13, 10),
   },
 ];
 

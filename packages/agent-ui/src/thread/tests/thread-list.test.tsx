@@ -2,9 +2,13 @@ import { renderToStaticMarkup } from "react-dom/server";
 import { describe, expect, it } from "vitest";
 import { ThreadList } from "../index";
 
+function localIso(month: number, day: number, hour: number, minute = 0) {
+  return new Date(2026, month - 1, day, hour, minute).toISOString();
+}
+
 const threads = [
-  { id: "thr_1", title: "October spend by model", updatedAt: "2026-10-16T09:30:00.000Z" },
-  { id: "thr_2", title: "Graph schema for invoices", updatedAt: "2026-10-02T14:00:00.000Z" },
+  { id: "thr_1", title: "October spend by model", updatedAt: localIso(10, 16, 9, 30) },
+  { id: "thr_2", title: "Graph schema for invoices", updatedAt: localIso(10, 2, 14) },
 ];
 
 describe("ThreadList", () => {
@@ -13,7 +17,7 @@ describe("ThreadList", () => {
       <ThreadList
         threads={threads}
         activeId="thr_2"
-        now="2026-10-17T12:00:00.000Z"
+        now={localIso(10, 17, 12)}
         onSelect={() => {}}
       />
     );
@@ -38,7 +42,7 @@ describe("ThreadList", () => {
 
   it("labels threads from the current day as today", () => {
     const html = renderToStaticMarkup(
-      <ThreadList threads={threads} now="2026-10-16T20:00:00.000Z" onSelect={() => {}} />
+      <ThreadList threads={threads} now={localIso(10, 16, 20)} onSelect={() => {}} />
     );
     expect(html).toContain("Today");
     expect(html).not.toContain("Yesterday");

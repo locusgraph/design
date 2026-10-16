@@ -60,6 +60,7 @@ export function ThreadList({
                 <h3
                   id={`thread-group-${group.key}`}
                   className={cn(eyebrowClass, "px-2 pb-1 text-[10.5px]")}
+                  suppressHydrationWarning
                 >
                   {group.label}
                 </h3>
