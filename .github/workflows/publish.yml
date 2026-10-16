@@ -1,0 +1,40 @@
+name: publish
+
+on:
+  push:
+    tags:
+      - "blocks-v*"
+      - "brand-v*"
+      - "components-v*"
+      - "config-v*"
+      - "email-v*"
+      - "tokens-v*"
+      - "utils-v*"
+
+permissions:
+  contents: read
+  id-token: write
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+          registry-url: https://registry.npmjs.org
+      - run: pnpm install --frozen-lockfile
+      - name: Find the package and check the tag matches its version
+        run: |
+          folder="${GITHUB_REF_NAME%-v*}"
+          version=$(node -p "require('./packages/$folder/package.json').version")
+          test "$folder-v$version" = "$GITHUB_REF_NAME" || { echo "tag $GITHUB_REF_NAME does not match packages/$folder version $version"; exit 1; }
+          echo "PACKAGE=@locusgraph/$folder" >> "$GITHUB_ENV"
+      - run: pnpm --filter "$PACKAGE" --if-present typecheck
+      - run: pnpm --filter "$PACKAGE" --if-present test
+      - run: pnpm --filter "$PACKAGE" publish --no-git-checks
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
