@@ -54,3 +54,12 @@
 @utility scrollbar-gutter-stable {
   scrollbar-gutter: stable;
 }
+
+@utility eyebrow {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  line-height: 1rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
