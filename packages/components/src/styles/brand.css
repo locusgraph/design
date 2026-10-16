@@ -1,0 +1,142 @@
+:root {
+  --brand-glow: #0099ff;
+  --brand-loop: 7s;
+  --brand-grid-image:
+    radial-gradient(circle, color-mix(in oklch, var(--foreground) 7%, transparent) 1.5px, transparent 1.5px),
+    repeating-linear-gradient(0deg, transparent 0 23px, color-mix(in oklch, var(--foreground) 3%, transparent) 23px 24px),
+    repeating-linear-gradient(90deg, transparent 0 23px, color-mix(in oklch, var(--foreground) 3%, transparent) 23px 24px);
+  --brand-grid-size: 24px 24px, 24px 24px, 24px 24px;
+}
+
+.brand-grid {
+  position: relative;
+  isolation: isolate;
+  background-color: var(--background);
+}
+
+.brand-grid::before,
+.brand-grid::after {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  pointer-events: none;
+}
+
+.brand-grid::before {
+  inset: 0;
+  background-image: var(--brand-grid-image);
+  background-size: var(--brand-grid-size);
+  -webkit-mask-image: radial-gradient(ellipse 62% 58% at 50% 46%, #000 18%, transparent 76%);
+  mask-image: radial-gradient(ellipse 62% 58% at 50% 46%, #000 18%, transparent 76%);
+}
+
+.brand-grid::after {
+  left: 50%;
+  top: 46%;
+  width: min(44rem, 92vw);
+  aspect-ratio: 1;
+  transform: translate(-50%, -50%) scale(0.98);
+  transform-origin: center;
+  background: radial-gradient(circle, color-mix(in oklch, var(--brand-glow) 16%, transparent), transparent 62%);
+  filter: blur(14px);
+  opacity: 0.55;
+  animation: brand-grid-halo var(--brand-loop) ease-in-out infinite;
+}
+
+@keyframes brand-grid-halo {
+  0%,
+  46% {
+    opacity: 0.5;
+    transform: translate(-50%, -50%) scale(0.98);
+  }
+  60% {
+    opacity: 0.86;
+    transform: translate(-50%, -50%) scale(1.03);
+  }
+  66% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1.07);
+  }
+  80% {
+    opacity: 0.72;
+    transform: translate(-50%, -50%) scale(1.02);
+  }
+  100% {
+    opacity: 0.5;
+    transform: translate(-50%, -50%) scale(0.98);
+  }
+}
+
+.brand-grid-quiet {
+  position: relative;
+  isolation: isolate;
+  background-color: var(--background);
+}
+
+.brand-grid-quiet::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto;
+  height: 40rem;
+  z-index: -1;
+  pointer-events: none;
+  background-image: radial-gradient(circle, color-mix(in oklch, var(--foreground) 22%, transparent) 0.8px, transparent 1px);
+  background-size: 16px 16px;
+  background-position: 8px 8px;
+  -webkit-mask-image: radial-gradient(ellipse 70% 100% at 50% 0%, #000 10%, transparent 75%);
+  mask-image: radial-gradient(ellipse 70% 100% at 50% 0%, #000 10%, transparent 75%);
+}
+
+.brand-grid-quiet::after {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  pointer-events: none;
+  left: 50%;
+  top: min(34%, 18rem);
+  width: min(40rem, 70%);
+  aspect-ratio: 1;
+  transform: translate(-50%, -50%);
+  background: radial-gradient(circle, color-mix(in oklch, var(--brand-glow) 9%, transparent), transparent 66%);
+  opacity: 0.4;
+}
+
+@keyframes ignite {
+  0% {
+    opacity: 0;
+    transform: scale(0.4) rotate(-10deg);
+    filter: blur(4px);
+  }
+  60% {
+    opacity: 1;
+    transform: scale(1.08) rotate(0deg);
+    filter: blur(0) drop-shadow(0 0 16px var(--brand-glow));
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) rotate(0deg);
+    filter: drop-shadow(0 0 7px color-mix(in oklch, var(--brand-glow) 55%, transparent));
+  }
+}
+
+.ignites {
+  animation: ignite 900ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.tracked {
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  font-size: 10px;
+  color: color-mix(in oklch, var(--foreground) 55%, transparent);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ignites {
+    animation: none;
+    opacity: 1;
+  }
+  .brand-grid::after {
+    animation: none;
+    opacity: 0.6;
+  }
+}

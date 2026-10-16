@@ -1,0 +1,12 @@
+{
+  "extends": [
+    "@spendgraph/config/typescript/base.json",
+    "@spendgraph/config/typescript/tests.json"
+  ],
+  "compilerOptions": {
+    "lib": ["ES2022", "DOM", "DOM.Iterable"],
+    "jsx": "react-jsx",
+    "types": ["node", "vite/client", "vitest/globals"]
+  },
+  "include": ["src", "tests", "vite.config.ts"]
+}

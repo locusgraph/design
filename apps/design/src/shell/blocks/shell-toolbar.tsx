@@ -1,0 +1,122 @@
+import {
+  Button,
+  Separator,
+  Tabs,
+  TabsList,
+  TabsTrigger,
+  ToggleGroup,
+  ToggleGroupItem,
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
+} from "@locusgraph/components";
+import {
+  ExternalLinkIcon,
+  MaximizeIcon,
+  MonitorIcon,
+  RotateCwIcon,
+  SmartphoneIcon,
+  TabletIcon,
+} from "lucide-react";
+import type * as React from "react";
+
+export type ShellView = "preview" | "layout" | "code";
+export type ShellViewport = "desktop" | "tablet" | "mobile";
+
+type ShellToolbarProps = {
+  title: string;
+  description: string;
+  view: ShellView;
+  viewport: ShellViewport;
+  frameUrl: string;
+  onViewChange: (view: ShellView) => void;
+  onViewportChange: (viewport: ShellViewport) => void;
+  onReload: () => void;
+  onFullscreen: () => void;
+};
+
+const viewports: { value: ShellViewport; label: string; icon: React.ComponentType }[] = [
+  { value: "desktop", label: "Desktop", icon: MonitorIcon },
+  { value: "tablet", label: "Tablet", icon: TabletIcon },
+  { value: "mobile", label: "Mobile", icon: SmartphoneIcon },
+];
+
+function IconAction({ label, children }: { label: string; children: React.ReactNode }) {
+  return (
+    <Tooltip>
+      <TooltipTrigger asChild>{children}</TooltipTrigger>
+      <TooltipContent>{label}</TooltipContent>
+    </Tooltip>
+  );
+}
+
+export function ShellToolbar(props: ShellToolbarProps) {
+  return (
+    <div className="flex flex-wrap items-center gap-2">
+      <Tabs value={props.view} onValueChange={(value) => props.onViewChange(value as ShellView)}>
+        <TabsList className="h-8">
+          <TabsTrigger value="preview" className="text-xs">
+            Preview
+          </TabsTrigger>
+          <TabsTrigger value="layout" className="text-xs">
+            Layout
+          </TabsTrigger>
+          <TabsTrigger value="code" className="text-xs">
+            Code
+          </TabsTrigger>
+        </TabsList>
+      </Tabs>
+      <Separator orientation="vertical" className="mx-1 h-4" />
+      <p className="text-sm font-medium">{props.title}</p>
+      <p className="hidden text-sm text-muted-foreground xl:block">{props.description}</p>
+      <div className="ml-auto flex h-8 items-center gap-1 rounded-md border p-0.5">
+        <ToggleGroup
+          type="single"
+          size="sm"
+          value={props.viewport}
+          onValueChange={(value) => value && props.onViewportChange(value as ShellViewport)}
+        >
+          {viewports.map((viewport) => (
+            <ToggleGroupItem
+              key={viewport.value}
+              value={viewport.value}
+              aria-label={viewport.label}
+              className="size-6"
+            >
+              <viewport.icon />
+            </ToggleGroupItem>
+          ))}
+        </ToggleGroup>
+        <Separator orientation="vertical" className="h-4" />
+        <IconAction label="Full screen">
+          <Button
+            variant="ghost"
+            size="icon-xs"
+            aria-label="Full screen"
+            disabled={props.view === "code"}
+            onClick={props.onFullscreen}
+          >
+            <MaximizeIcon />
+          </Button>
+        </IconAction>
+        <IconAction label="Open in new tab">
+          <Button asChild variant="ghost" size="icon-xs">
+            <a href={props.frameUrl} target="_blank" rel="noreferrer" aria-label="Open in new tab">
+              <ExternalLinkIcon />
+            </a>
+          </Button>
+        </IconAction>
+        <IconAction label="Reload">
+          <Button
+            variant="ghost"
+            size="icon-xs"
+            aria-label="Reload preview"
+            onClick={props.onReload}
+          >
+            <RotateCwIcon />
+          </Button>
+        </IconAction>
+      </div>
+    </div>
+  );
+}

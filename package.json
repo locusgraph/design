@@ -1,0 +1,27 @@
+{
+  "name": "locusgraph-design",
+  "private": true,
+  "license": "MIT",
+  "type": "module",
+  "scripts": {
+    "prepare": "git config core.hooksPath .githooks || true",
+    "build": "pnpm -r --sort build",
+    "dev": "pnpm --filter @locusgraph/design dev",
+    "typecheck": "tsc -p tsconfig.json && pnpm --filter @locusgraph/components typecheck && pnpm --filter @locusgraph/design typecheck",
+    "lint": "biome check .",
+    "format": "biome check --write .",
+    "test": "vitest run",
+    "check": "pnpm lint && pnpm typecheck && pnpm test"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "catalog:",
+    "@spendgraph/config": "catalog:",
+    "@types/node": "catalog:",
+    "typescript": "catalog:",
+    "vitest": "catalog:"
+  },
+  "packageManager": "pnpm@12.4.1",
+  "engines": {
+    "node": ">=22"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "extends": [
+    "@spendgraph/config/typescript/library.json",
+    "@spendgraph/config/typescript/tests.json"
+  ],
+  "compilerOptions": {
+    "rootDir": "src",
+    "lib": ["ES2022", "DOM", "DOM.Iterable"],
+    "jsx": "react-jsx"
+  },
+  "include": ["src"]
+}
