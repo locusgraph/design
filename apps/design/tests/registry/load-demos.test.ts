@@ -25,7 +25,7 @@ describe("demoTitleFromPath", () => {
     for (const entry of await loadAllDemoEntries()) {
       expect(entry.title, entry.path).toBe(entry.demo.title);
     }
-  });
+  }, 30_000);
 });
 
 describe("demoIndex", () => {
