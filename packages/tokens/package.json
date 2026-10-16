@@ -1,6 +1,6 @@
 {
   "name": "@locusgraph/tokens",
-  "version": "0.1.1",
+  "version": "0.2.0",
   "description": "LocusGraph design tokens: theme CSS for Tailwind v4, typography, brand effects and motion, plus the color and type values for places CSS cannot reach.",
   "license": "MIT",
   "repository": {
