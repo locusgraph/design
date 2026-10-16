@@ -2,26 +2,26 @@ import { Button } from "@locusgraph/components";
 import { ArrowUpIcon, PaperclipIcon, SquareIcon } from "lucide-react";
 import { useRef } from "react";
 
-export type PromptStatus = "ready" | "submitting" | "streaming" | "error";
+export type ComposerStatus = "ready" | "submitting" | "streaming" | "error";
 
-export function isPromptBusy(status: PromptStatus): boolean {
+export function isComposerBusy(status: ComposerStatus): boolean {
   return status === "submitting" || status === "streaming";
 }
 
-type PromptSubmitProps = {
-  status: PromptStatus;
+type ComposerSubmitProps = {
+  status: ComposerStatus;
   canSend: boolean;
   onStop?: () => void;
 };
 
-export function PromptSubmit({ status, canSend, onStop }: PromptSubmitProps) {
-  if (isPromptBusy(status)) {
+export function ComposerSubmit({ status, canSend, onStop }: ComposerSubmitProps) {
+  if (isComposerBusy(status)) {
     return (
       <Button
         type="button"
         size="sm"
         variant="outline"
-        data-slot="prompt-input-stop"
+        data-slot="composer-stop"
         aria-label="Stop"
         disabled={!onStop}
         onClick={onStop}
@@ -35,7 +35,7 @@ export function PromptSubmit({ status, canSend, onStop }: PromptSubmitProps) {
     <Button
       type="submit"
       size="icon-sm"
-      data-slot="prompt-input-send"
+      data-slot="composer-send"
       aria-label="Send"
       disabled={!canSend}
     >
@@ -44,13 +44,17 @@ export function PromptSubmit({ status, canSend, onStop }: PromptSubmitProps) {
   );
 }
 
-type PromptAttachButtonProps = {
+type ComposerAttachButtonProps = {
   accept?: string;
   disabled?: boolean;
   onAttachFiles: (files: File[]) => void;
 };
 
-export function PromptAttachButton({ accept, disabled, onAttachFiles }: PromptAttachButtonProps) {
+export function ComposerAttachButton({
+  accept,
+  disabled,
+  onAttachFiles,
+}: ComposerAttachButtonProps) {
   const inputRef = useRef<HTMLInputElement>(null);
   return (
     <>
@@ -74,7 +78,7 @@ export function PromptAttachButton({ accept, disabled, onAttachFiles }: PromptAt
         type="button"
         size="icon-sm"
         variant="ghost"
-        data-slot="prompt-input-attach"
+        data-slot="composer-attach"
         aria-label="Attach files"
         className="text-muted-foreground hover:text-foreground"
         disabled={disabled}

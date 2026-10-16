@@ -24,7 +24,7 @@ export function InboxRow({ item, now, selected, onSelect, onApprove, onDeny }: I
   const destructive = item.risk === "destructive";
   return (
     <li
-      data-slot="approval-inbox-item"
+      data-slot="inbox-item"
       data-risk={item.risk}
       data-selected={selected || undefined}
       className={cn(

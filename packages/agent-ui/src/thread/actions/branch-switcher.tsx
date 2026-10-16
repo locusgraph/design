@@ -14,7 +14,7 @@ export function BranchSwitcher({ branch, onBranchChange }: BranchSwitcherProps) 
     <div
       data-slot="branch-switcher"
       role="group"
-      aria-label="Response versions"
+      aria-label="Reply versions"
       className="flex items-center"
     >
       <ActionButton

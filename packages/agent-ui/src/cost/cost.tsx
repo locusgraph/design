@@ -5,7 +5,7 @@ import { ApprovalPanel, PanelHeader } from "../shared/panel";
 import type { RunUsage } from "../types";
 import { sumUsage, type UsageTotals } from "./shared/usage-totals";
 
-export type RunCostProps = {
+export type CostProps = {
   usage: RunUsage | RunUsage[];
   variant?: "compact" | "detailed";
   label?: string;
@@ -24,14 +24,14 @@ function modelsOf(attempts: RunUsage[]): string | undefined {
 function WastedNote({ totals }: { totals: UsageTotals }) {
   if (totals.failedAttempts === 0) return null;
   return (
-    <span data-slot="run-cost-wasted" className="text-destructive tabular-nums">
+    <span data-slot="cost-wasted" className="text-destructive tabular-nums">
       {pluralize(totals.failedAttempts, "failed attempt")} · {formatMicroUsd(totals.wastedMicroUsd)}{" "}
       wasted
     </span>
   );
 }
 
-function CompactRunCost({
+function CompactCost({
   attempts,
   totals,
   className,
@@ -43,7 +43,7 @@ function CompactRunCost({
   const model = modelsOf(attempts);
   return (
     <span
-      data-slot="run-cost"
+      data-slot="cost"
       data-variant="compact"
       data-failed={totals.failedAttempts > 0 || undefined}
       className={cn(
@@ -64,7 +64,7 @@ function CompactRunCost({
 function AttemptRow({ attempt, position }: { attempt: RunUsage; position: number }) {
   return (
     <li
-      data-slot="run-cost-attempt"
+      data-slot="cost-attempt"
       data-failed={attempt.failed || undefined}
       className="grid grid-cols-[1fr_auto_4.5rem] items-baseline gap-x-4 px-5 py-2.5 text-sm tabular-nums"
     >
@@ -94,7 +94,7 @@ function AttemptRow({ attempt, position }: { attempt: RunUsage; position: number
   );
 }
 
-function DetailedRunCost({
+function DetailedCost({
   attempts,
   totals,
   label,
@@ -108,7 +108,7 @@ function DetailedRunCost({
   const failed = totals.failedAttempts > 0;
   return (
     <ApprovalPanel
-      data-slot="run-cost"
+      data-slot="cost"
       data-variant="detailed"
       data-failed={failed || undefined}
       aria-label={label}
@@ -140,18 +140,11 @@ function DetailedRunCost({
   );
 }
 
-export function RunCost({
-  usage,
-  variant = "compact",
-  label = "Run cost",
-  className,
-}: RunCostProps) {
+export function Cost({ usage, variant = "compact", label = "Run cost", className }: CostProps) {
   const attempts = attemptsOf(usage);
   const totals = sumUsage(attempts);
   if (variant === "detailed") {
-    return (
-      <DetailedRunCost attempts={attempts} totals={totals} label={label} className={className} />
-    );
+    return <DetailedCost attempts={attempts} totals={totals} label={label} className={className} />;
   }
-  return <CompactRunCost attempts={attempts} totals={totals} className={className} />;
+  return <CompactCost attempts={attempts} totals={totals} className={className} />;
 }

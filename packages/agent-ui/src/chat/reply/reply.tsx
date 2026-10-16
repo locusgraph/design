@@ -6,7 +6,7 @@ import remarkGfm from "remark-gfm";
 import type { StreamState } from "../../types";
 import { markdownComponents } from "./markdown-components";
 
-export type ResponseProps = Omit<React.ComponentProps<"div">, "children"> & {
+export type ReplyProps = Omit<React.ComponentProps<"div">, "children"> & {
   children: string;
   state?: StreamState;
 };
@@ -30,12 +30,12 @@ const Markdown = memo(function Markdown({ markdown }: { markdown: string }) {
 const streamingCaret =
   "data-[state=streaming]:[&>:last-child]:after:ml-0.5 data-[state=streaming]:[&>:last-child]:after:inline-block data-[state=streaming]:[&>:last-child]:after:h-[1em] data-[state=streaming]:[&>:last-child]:after:w-[0.5ch] data-[state=streaming]:[&>:last-child]:after:translate-y-[0.15em] data-[state=streaming]:[&>:last-child]:after:bg-foreground/70 data-[state=streaming]:[&>:last-child]:after:content-[''] motion-safe:data-[state=streaming]:[&>:last-child]:after:animate-pulse";
 
-export function Response({ children, state = "done", className, ...props }: ResponseProps) {
+export function Reply({ children, state = "done", className, ...props }: ReplyProps) {
   const isStreaming = state === "streaming";
   const markdown = isStreaming ? closeOpenCodeFence(children) : children;
   return (
     <div
-      data-slot="response"
+      data-slot="reply"
       data-state={state}
       aria-live={isStreaming ? "polite" : undefined}
       className={cn(

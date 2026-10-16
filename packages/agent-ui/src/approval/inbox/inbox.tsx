@@ -14,7 +14,7 @@ import type { PendingApproval } from "../types";
 import { InboxRow } from "./inbox-row";
 import { bulkApprovable, selectAllState, selectedIn, toggled } from "./inbox-selection";
 
-export type ApprovalInboxProps = {
+export type InboxProps = {
   items: PendingApproval[];
   now?: number;
   title?: string;
@@ -24,7 +24,7 @@ export type ApprovalInboxProps = {
   className?: string;
 };
 
-export function ApprovalInbox({
+export function Inbox({
   items,
   now = Date.now(),
   title = "Waiting for approval",
@@ -32,7 +32,7 @@ export function ApprovalInbox({
   onDeny,
   onApproveAll,
   className,
-}: ApprovalInboxProps) {
+}: InboxProps) {
   const selectAllId = useId();
   const [selected, setSelected] = useState<Set<string>>(() => new Set());
   const selectable = bulkApprovable(items);
@@ -41,7 +41,7 @@ export function ApprovalInbox({
   const hasDestructive = selectable.length < items.length;
   const empty = items.length === 0;
   return (
-    <ApprovalPanel data-slot="approval-inbox" aria-label={title} className={className}>
+    <ApprovalPanel data-slot="inbox" aria-label={title} className={className}>
       <PanelHeader
         icon={<InboxIcon aria-hidden />}
         eyebrow="Approvals"
@@ -51,7 +51,7 @@ export function ApprovalInbox({
       <PanelTitle>{title}</PanelTitle>
       {empty ? (
         <PanelEmpty
-          data-slot="approval-inbox-empty"
+          data-slot="inbox-empty"
           icon={<InboxIcon aria-hidden />}
           title="Nothing waiting for you"
           description="When an agent needs approval to write, pay, send or delete, it shows up here."

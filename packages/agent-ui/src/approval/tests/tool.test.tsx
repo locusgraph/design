@@ -1,7 +1,7 @@
 import { renderToStaticMarkup } from "react-dom/server";
 import { describe, expect, it } from "vitest";
 import type { ToolPart } from "../../types";
-import { ToolApproval, ToolArgsEditor } from "../index";
+import { Approval, ArgsEditor } from "../index";
 import { validateDrafts, valuesFromDrafts } from "../tool/args/args-validation";
 
 const deletePart: ToolPart = {
@@ -13,12 +13,12 @@ const deletePart: ToolPart = {
 
 const noop = () => {};
 
-describe("ToolApproval", () => {
+describe("Approval", () => {
   it("lists the inputs readably and names the approve action", () => {
     const html = renderToStaticMarkup(
-      <ToolApproval part={deletePart} actionLabel="Delete 2 files" onApprove={noop} onDeny={noop} />
+      <Approval part={deletePart} actionLabel="Delete 2 files" onApprove={noop} onDeny={noop} />
     );
-    expect(html).toContain('data-slot="tool-approval"');
+    expect(html).toContain('data-slot="approval"');
     expect(html).toContain("delete_files");
     expect(html).toContain("Dry run");
     expect(html).toContain("graphs/acme/old.json, graphs/acme/tmp.json");
@@ -29,7 +29,7 @@ describe("ToolApproval", () => {
 
   it("uses stronger copy for destructive tools", () => {
     const html = renderToStaticMarkup(
-      <ToolApproval part={deletePart} risk="destructive" onApprove={noop} onDeny={noop} />
+      <Approval part={deletePart} risk="destructive" onApprove={noop} onDeny={noop} />
     );
     expect(html).toContain('data-risk="destructive"');
     expect(html).toContain("This can&#x27;t be undone.");
@@ -39,7 +39,7 @@ describe("ToolApproval", () => {
 
   it("shows who decided and when instead of the buttons", () => {
     const html = renderToStaticMarkup(
-      <ToolApproval
+      <Approval
         part={{ ...deletePart, state: "approval-responded" }}
         decision={{
           approved: false,
@@ -59,7 +59,7 @@ describe("ToolApproval", () => {
 
   it("shows raw JSON when the input is not an object", () => {
     const html = renderToStaticMarkup(
-      <ToolApproval part={{ ...deletePart, input: "rm -rf" }} onApprove={noop} onDeny={noop} />
+      <Approval part={{ ...deletePart, input: "rm -rf" }} onApprove={noop} onDeny={noop} />
     );
     expect(html).toContain("&quot;rm -rf&quot;");
     expect(html).not.toContain("Show raw");
@@ -78,10 +78,10 @@ const fields = [
   },
 ];
 
-describe("ToolArgsEditor", () => {
+describe("ArgsEditor", () => {
   it("renders a field per schema entry with the initial values", () => {
     const html = renderToStaticMarkup(
-      <ToolArgsEditor
+      <ArgsEditor
         toolName="send_invoice"
         fields={fields}
         initialValues={{ to: "ops@acme.dev", amount: 120, currency: "usd" }}

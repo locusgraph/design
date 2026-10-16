@@ -1,7 +1,7 @@
 import { renderToStaticMarkup } from "react-dom/server";
 import { describe, expect, it } from "vitest";
 import type { AgentMessage } from "../../types";
-import { ChatMessage } from "../index";
+import { Turn } from "../index";
 
 const userMessage: AgentMessage = {
   id: "msg_1",
@@ -39,34 +39,32 @@ const assistantMessage: AgentMessage = {
   ],
 };
 
-describe("ChatMessage", () => {
+describe("Turn", () => {
   it("lays out a user message on the right with its attachments", () => {
-    const html = renderToStaticMarkup(<ChatMessage message={userMessage} />);
+    const html = renderToStaticMarkup(<Turn message={userMessage} />);
     expect(html).toContain('data-align="end"');
     expect(html).toContain('data-role="user"');
     expect(html).toContain("Why did spend jump yesterday?");
     expect(html).toContain("spend.csv");
-    expect(html).not.toContain('data-slot="response"');
+    expect(html).not.toContain('data-slot="reply"');
   });
 
   it("renders reasoning, tool calls and sources with the rich components by default", () => {
-    const html = renderToStaticMarkup(<ChatMessage message={assistantMessage} />);
+    const html = renderToStaticMarkup(<Turn message={assistantMessage} />);
     expect(html).toContain('data-align="start"');
     expect(html).toContain("<strong>planner</strong>");
     expect(html).toContain("query_spend");
     expect(html).toContain("Timed out");
     expect(html).toContain("Used 2 sources");
-    expect(html.indexOf('data-slot="reasoning"')).toBeLessThan(
-      html.indexOf('data-slot="tool-call"')
-    );
-    expect(html.indexOf('data-slot="tool-call"')).toBeLessThan(html.indexOf("planner"));
+    expect(html.indexOf('data-slot="thinking"')).toBeLessThan(html.indexOf('data-slot="tool"'));
+    expect(html.indexOf('data-slot="tool"')).toBeLessThan(html.indexOf("planner"));
     expect(html.match(/data-kind="sources"/g)).toHaveLength(1);
     expect(html).toContain('data-slot="sources"');
   });
 
   it("uses render props for reasoning, tools and sources when given", () => {
     const html = renderToStaticMarkup(
-      <ChatMessage
+      <Turn
         message={assistantMessage}
         renderReasoning={(part) => <i>rich {part.text}</i>}
         renderTool={(part) => <i>rich {part.toolCallId}</i>}

@@ -42,7 +42,7 @@ export function LocusMark() {
   return (
     <LocusGraphMark
       ref={ref}
-      data-slot="loader-locus"
+      data-slot="pulse-locus"
       className="h-[1.35em] w-auto text-foreground"
     />
   );

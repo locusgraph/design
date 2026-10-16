@@ -7,7 +7,7 @@ import { formatDuration, sumUsage } from "./shared/usage-totals";
 
 export type { CostStep, CostStepStatus } from "./shared/step-cost-row";
 
-export type StepCostTimelineProps = {
+export type CostStepsProps = {
   steps: CostStep[];
   label?: string;
   emptyText?: string;
@@ -46,17 +46,17 @@ function Totals({ totals }: { totals: StepTotals }) {
   );
 }
 
-export function StepCostTimeline({
+export function CostSteps({
   steps,
   label = "Cost by step",
   emptyText = "No steps have run yet.",
   className,
-}: StepCostTimelineProps) {
+}: CostStepsProps) {
   const totals = stepCostTotals(steps);
   const maxCost = Math.max(0, ...steps.map((step) => step.usage.costMicroUsd));
   const running = steps.some((step) => step.status === "running");
   return (
-    <ApprovalPanel data-slot="step-cost-timeline" aria-label={label} className={className}>
+    <ApprovalPanel data-slot="cost-steps" aria-label={label} className={className}>
       <PanelHeader
         icon={<ChartNoAxesGanttIcon aria-hidden />}
         eyebrow={label}

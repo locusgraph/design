@@ -5,7 +5,7 @@ import { type ComponentProps, useEffect, useState } from "react";
 import { CopyCodeButton } from "./copy-code-button";
 import { highlightToHtml } from "./highlight";
 
-type CodeBlockProps = Omit<ComponentProps<"figure">, "children"> & {
+type CodeProps = Omit<ComponentProps<"figure">, "children"> & {
   code: string;
   language?: string;
   filename?: string;
@@ -42,7 +42,7 @@ function useHighlightedHtml(code: string, language: string) {
   return html;
 }
 
-export function CodeBlock({
+export function Code({
   code,
   language = "text",
   filename,
@@ -50,11 +50,11 @@ export function CodeBlock({
   onCopy,
   className,
   ...props
-}: CodeBlockProps) {
+}: CodeProps) {
   const html = useHighlightedHtml(code, language);
   return (
     <figure
-      data-slot="code-block"
+      data-slot="code"
       data-language={language}
       className={cn("min-w-0 bg-card text-card-foreground ring-1 ring-border", className)}
       {...props}

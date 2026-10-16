@@ -6,16 +6,16 @@ import {
   Message as MessageRow,
 } from "@locusgraph/components";
 import type * as React from "react";
-import { Reasoning } from "../../agent/reasoning/reasoning";
-import { ToolCall } from "../../agent/tool-call/tool-call";
+import { Thinking } from "../../agent/thinking/thinking";
+import { Tool } from "../../agent/tool/tool";
 import { Sources } from "../../memory/sources";
 import type { AgentMessage, ReasoningPart, SourceUrlPart, TextPart, ToolPart } from "../../types";
-import { Attachments } from "../attachments/attachments";
-import { attachmentFromFilePart } from "../attachments/file-meta";
-import { Response } from "../response/response";
+import { fileFromFilePart } from "../files/file-meta";
+import { Files } from "../files/files";
+import { Reply } from "../reply/reply";
 import { groupParts, type PartSegment } from "./group-parts";
 
-export type ChatMessageProps = Omit<React.ComponentProps<"div">, "children"> & {
+export type TurnProps = Omit<React.ComponentProps<"div">, "children"> & {
   message: AgentMessage;
   avatar?: React.ReactNode;
   footer?: React.ReactNode;
@@ -30,7 +30,7 @@ const roleLabels: Record<AgentMessage["role"], string> = {
   system: "System note",
 };
 
-type PartRenderers = Pick<ChatMessageProps, "renderReasoning" | "renderTool" | "renderSources">;
+type PartRenderers = Pick<TurnProps, "renderReasoning" | "renderTool" | "renderSources">;
 
 function UserText({ part }: { part: TextPart }) {
   return (
@@ -48,9 +48,9 @@ function partClassName(role: AgentMessage["role"], kind: PartSegment["kind"]) {
     return "w-full items-end";
   }
   if (role === "system") {
-    return "border-l-2 border-border pl-3 *:data-[slot=response]:text-xs *:data-[slot=response]:text-muted-foreground";
+    return "border-l-2 border-border pl-3 *:data-[slot=reply]:text-xs *:data-[slot=reply]:text-muted-foreground";
   }
-  return cn(kind === "text" && "*:data-[slot=response]:max-w-[68ch]");
+  return cn(kind === "text" && "*:data-[slot=reply]:max-w-[68ch]");
 }
 
 function renderSegment(segment: PartSegment, isUser: boolean, renderers: PartRenderers) {
@@ -59,13 +59,13 @@ function renderSegment(segment: PartSegment, isUser: boolean, renderers: PartRen
       return isUser ? (
         <UserText part={segment.part} />
       ) : (
-        <Response state={segment.part.state}>{segment.part.text}</Response>
+        <Reply state={segment.part.state}>{segment.part.text}</Reply>
       );
     case "reasoning":
       return renderers.renderReasoning ? (
         renderers.renderReasoning(segment.part)
       ) : (
-        <Reasoning
+        <Thinking
           text={segment.part.text}
           state={segment.part.state}
           durationMs={segment.part.durationMs}
@@ -75,7 +75,7 @@ function renderSegment(segment: PartSegment, isUser: boolean, renderers: PartRen
       return renderers.renderTool ? (
         renderers.renderTool(segment.part)
       ) : (
-        <ToolCall part={segment.part} />
+        <Tool part={segment.part} />
       );
     case "sources":
       return renderers.renderSources ? (
@@ -85,15 +85,15 @@ function renderSegment(segment: PartSegment, isUser: boolean, renderers: PartRen
       );
     case "files":
       return (
-        <Attachments
-          items={segment.parts.map(attachmentFromFilePart)}
+        <Files
+          items={segment.parts.map(fileFromFilePart)}
           className={cn(isUser && "justify-end")}
         />
       );
   }
 }
 
-export function ChatMessage({
+export function Turn({
   message,
   avatar,
   footer,
@@ -102,7 +102,7 @@ export function ChatMessage({
   renderSources,
   className,
   ...props
-}: ChatMessageProps) {
+}: TurnProps) {
   const isUser = message.role === "user";
   const renderers = { renderReasoning, renderTool, renderSources };
   return (

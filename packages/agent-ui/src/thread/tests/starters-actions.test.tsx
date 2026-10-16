@@ -1,11 +1,11 @@
 import { renderToStaticMarkup } from "react-dom/server";
 import { describe, expect, it } from "vitest";
-import { MessageActions, Suggestions } from "../index";
+import { Actions, Starters } from "../index";
 
-describe("Suggestions", () => {
+describe("Starters", () => {
   it("renders each prompt as a button", () => {
     const html = renderToStaticMarkup(
-      <Suggestions
+      <Starters
         onSelect={() => {}}
         suggestions={[
           "Why did spend jump on Tuesday?",
@@ -13,7 +13,7 @@ describe("Suggestions", () => {
         ]}
       />
     );
-    expect(html).toContain('data-slot="suggestions"');
+    expect(html).toContain('data-slot="starters"');
     expect(html.match(/<button/g)).toHaveLength(2);
     expect(html).toContain("Why did spend jump on Tuesday?");
     expect(html).toContain("Billing graph");
@@ -21,17 +21,17 @@ describe("Suggestions", () => {
   });
 
   it("renders nothing without suggestions", () => {
-    expect(renderToStaticMarkup(<Suggestions onSelect={() => {}} suggestions={[]} />)).toBe("");
+    expect(renderToStaticMarkup(<Starters onSelect={() => {}} suggestions={[]} />)).toBe("");
   });
 });
 
-describe("MessageActions", () => {
+describe("Actions", () => {
   it("renders nothing without callbacks", () => {
-    expect(renderToStaticMarkup(<MessageActions branch={{ index: 1, count: 3 }} />)).toBe("");
+    expect(renderToStaticMarkup(<Actions branch={{ index: 1, count: 3 }} />)).toBe("");
   });
 
   it("renders only the actions whose callbacks are passed", () => {
-    const html = renderToStaticMarkup(<MessageActions onCopy={() => {}} />);
+    const html = renderToStaticMarkup(<Actions onCopy={() => {}} />);
     expect(html).toContain('aria-label="Copy"');
     expect(html).not.toContain('aria-label="Retry"');
     expect(html).not.toContain('aria-label="Good response"');
@@ -39,7 +39,7 @@ describe("MessageActions", () => {
 
   it("shows the branch label and pressed feedback", () => {
     const html = renderToStaticMarkup(
-      <MessageActions
+      <Actions
         onRetry={() => {}}
         feedback="up"
         onFeedback={() => {}}
@@ -57,7 +57,7 @@ describe("MessageActions", () => {
 
   it("disables previous on the first branch", () => {
     const html = renderToStaticMarkup(
-      <MessageActions branch={{ index: 0, count: 2 }} onBranchChange={() => {}} />
+      <Actions branch={{ index: 0, count: 2 }} onBranchChange={() => {}} />
     );
     expect(html).toContain("1 / 2");
     expect(html).toMatch(

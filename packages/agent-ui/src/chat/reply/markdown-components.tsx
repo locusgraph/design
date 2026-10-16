@@ -1,6 +1,6 @@
 import { cn } from "@locusgraph/components";
 import type { Components } from "react-markdown";
-import { FencedCodeBlock, fencedCode } from "./fenced-code";
+import { FencedCode, fencedCode } from "./fenced-code";
 
 const blockGap = "mt-4 first:mt-0";
 
@@ -72,7 +72,7 @@ export const markdownComponents: Components = {
   ),
   pre: ({ node, className, ...props }) =>
     fencedCode(node) ? (
-      <FencedCodeBlock node={node} />
+      <FencedCode node={node} />
     ) : (
       <pre
         className={cn(
@@ -93,7 +93,7 @@ export const markdownComponents: Components = {
     />
   ),
   table: ({ node: _node, className, ...props }) => (
-    <div data-slot="response-table" className={cn("overflow-x-auto ring-1 ring-border", blockGap)}>
+    <div data-slot="reply-table" className={cn("overflow-x-auto ring-1 ring-border", blockGap)}>
       <table
         className={cn(
           "w-full border-collapse text-sm [&_td:not(:first-child)]:tabular-nums",

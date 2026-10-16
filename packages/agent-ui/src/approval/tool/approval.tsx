@@ -18,7 +18,7 @@ import type { ApprovalDecision } from "../types";
 import { DenyForm } from "./deny-form";
 import { ToolInputs } from "./tool-inputs";
 
-export type ToolApprovalProps = {
+export type ApprovalProps = {
   part: ToolPart;
   risk?: RiskLevel;
   actionLabel?: string;
@@ -31,7 +31,7 @@ export type ToolApprovalProps = {
 };
 
 const settledStateLabels: Partial<Record<ToolState, string>> = {
-  "approval-responded": "Response sent. Waiting for the tool to run.",
+  "approval-responded": "Reply sent. Waiting for the tool to run.",
   "output-available": "Approved and run.",
   "output-error": "Approved, but the tool failed.",
   "output-denied": "Denied. The tool did not run.",
@@ -57,7 +57,7 @@ function decidedResult(toolName: string, state: ToolState, decision: ApprovalDec
   return settledStateLabels[state] ?? `${toolName} ${decision.approved ? "approved" : "denied"}`;
 }
 
-export function ToolApproval({
+export function Approval({
   part,
   risk = "write",
   actionLabel,
@@ -67,7 +67,7 @@ export function ToolApproval({
   onDeny,
   autoFocus = true,
   className,
-}: ToolApprovalProps) {
+}: ApprovalProps) {
   const [denying, setDenying] = useState(false);
   const toolName = toolNameOf(part);
   const awaiting = !decision && part.state === "approval-requested";
@@ -77,7 +77,7 @@ export function ToolApproval({
   const header = headerStatus(awaiting, decision);
   return (
     <ApprovalPanel
-      data-slot="tool-approval"
+      data-slot="approval"
       data-risk={risk}
       data-state={decision ? (decision.approved ? "approved" : "denied") : part.state}
       aria-label={`Approve ${toolName}`}

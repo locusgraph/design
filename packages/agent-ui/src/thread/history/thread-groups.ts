@@ -1,6 +1,6 @@
-import type { ThreadSummary } from "./thread-list-item";
+import type { HistoryItem } from "./history-row";
 
-export type ThreadGroup = { key: string; label: string; threads: ThreadSummary[] };
+export type ThreadGroup = { key: string; label: string; threads: HistoryItem[] };
 
 const timeOfDay = new Intl.DateTimeFormat("en-US", {
   hour: "2-digit",
@@ -42,7 +42,7 @@ export function formatTimeOfDay(value: string) {
   return Number.isNaN(date.getTime()) ? "" : timeOfDay.format(date);
 }
 
-export function groupThreadsByDay(threads: ThreadSummary[], now: Date | string): ThreadGroup[] {
+export function groupThreadsByDay(threads: HistoryItem[], now: Date | string): ThreadGroup[] {
   const today = localDayStart(now);
   const groups = new Map<string, ThreadGroup>();
   for (const thread of threads) {

@@ -8,23 +8,18 @@ import {
   XIcon,
 } from "lucide-react";
 import type * as React from "react";
-import {
-  type AttachmentItem,
-  fileExtensionLabel,
-  formatBytes,
-  isImageAttachment,
-} from "./file-meta";
+import { type FileItem, fileExtensionLabel, formatBytes, isImageFile } from "./file-meta";
 
-export type AttachmentsLayout = "inline" | "grid";
+export type FilesLayout = "inline" | "grid";
 
-export type AttachmentsProps = Omit<React.ComponentProps<"ul">, "children"> & {
-  items: AttachmentItem[];
-  layout?: AttachmentsLayout;
+export type FilesProps = Omit<React.ComponentProps<"ul">, "children"> & {
+  items: FileItem[];
+  layout?: FilesLayout;
   onRemove?: (id: string) => void;
 };
 
 type ChipProps = {
-  item: AttachmentItem;
+  item: FileItem;
   isGrid: boolean;
   onRemove?: (id: string) => void;
 };
@@ -40,7 +35,7 @@ function iconForMediaType(mediaType: string | undefined): LucideIcon {
   return match ? match[1] : FileIcon;
 }
 
-function describeAttachment(item: AttachmentItem): string | undefined {
+function describeFile(item: FileItem): string | undefined {
   const parts = [
     fileExtensionLabel(item),
     item.sizeBytes === undefined ? undefined : formatBytes(item.sizeBytes),
@@ -49,17 +44,17 @@ function describeAttachment(item: AttachmentItem): string | undefined {
   return description || undefined;
 }
 
-function AttachmentPreview({ item, isGrid }: Omit<ChipProps, "onRemove">) {
+function FilePreview({ item, isGrid }: Omit<ChipProps, "onRemove">) {
   const Icon = iconForMediaType(item.mediaType);
   return (
     <span
-      data-slot="attachments-preview"
+      data-slot="files-preview"
       className={cn(
         "grid shrink-0 place-items-center overflow-hidden bg-muted text-muted-foreground",
         isGrid ? "aspect-[16/10] w-full" : "size-10"
       )}
     >
-      {isImageAttachment(item) ? (
+      {isImageFile(item) ? (
         <img src={item.url} alt="" loading="lazy" className="size-full object-cover" />
       ) : (
         <Icon aria-hidden="true" className={isGrid ? "size-6" : "size-4"} />
@@ -84,18 +79,18 @@ function RemoveButton({ item, isGrid, onRemove }: Required<ChipProps>) {
   );
 }
 
-function AttachmentChip({ item, isGrid, onRemove }: ChipProps) {
-  const description = describeAttachment(item);
+function FileChip({ item, isGrid, onRemove }: ChipProps) {
+  const description = describeFile(item);
   return (
     <li
-      data-slot="attachments-item"
+      data-slot="files-item"
       className={cn(
         "relative flex min-w-0 bg-card text-card-foreground ring-1 ring-border",
         isGrid ? "flex-col" : "w-60 max-w-full items-center gap-2.5 pr-1",
         !isGrid && !onRemove && "pr-3"
       )}
     >
-      <AttachmentPreview item={item} isGrid={isGrid} />
+      <FilePreview item={item} isGrid={isGrid} />
       <span className={cn("flex min-w-0 flex-1 flex-col gap-0.5", isGrid && "px-2.5 py-2")}>
         <span title={item.name} className="truncate text-xs leading-tight font-medium">
           {item.name}
@@ -111,22 +106,16 @@ function AttachmentChip({ item, isGrid, onRemove }: ChipProps) {
   );
 }
 
-export function Attachments({
-  items,
-  layout = "inline",
-  onRemove,
-  className,
-  ...props
-}: AttachmentsProps) {
+export function Files({ items, layout = "inline", onRemove, className, ...props }: FilesProps) {
   if (items.length === 0) {
     return null;
   }
   const isGrid = layout === "grid";
   return (
     <ul
-      data-slot="attachments"
+      data-slot="files"
       data-layout={layout}
-      aria-label="Attachments"
+      aria-label="Files"
       className={cn(
         isGrid ? "grid grid-cols-2 gap-2 sm:grid-cols-3" : "flex flex-wrap gap-2",
         className
@@ -134,7 +123,7 @@ export function Attachments({
       {...props}
     >
       {items.map((item) => (
-        <AttachmentChip key={item.id} item={item} isGrid={isGrid} onRemove={onRemove} />
+        <FileChip key={item.id} item={item} isGrid={isGrid} onRemove={onRemove} />
       ))}
     </ul>
   );

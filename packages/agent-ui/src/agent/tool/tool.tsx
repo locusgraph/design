@@ -7,20 +7,20 @@ import { type ToolPart, toolNameOf } from "../../types";
 import { JsonBlock } from "./json-block";
 import { ToolStatus } from "./tool-status";
 
-export type ToolCallProps = {
+export type ToolProps = {
   part: ToolPart;
   defaultOpen?: boolean;
   className?: string;
 };
 
-export function ToolCall({ part, defaultOpen = false, className }: ToolCallProps) {
+export function Tool({ part, defaultOpen = false, className }: ToolProps) {
   const [open, setOpen] = useState(defaultOpen);
   const hasInput = part.input !== undefined;
   const hasOutput = part.state === "output-available" && part.output !== undefined;
 
   return (
     <Collapsible
-      data-slot="tool-call"
+      data-slot="tool"
       data-state={part.state}
       data-tool-call-id={part.toolCallId}
       open={open}
@@ -49,7 +49,7 @@ export function ToolCall({ part, defaultOpen = false, className }: ToolCallProps
       </CollapsibleTrigger>
       {part.errorText && (
         <p
-          data-slot="tool-call-error"
+          data-slot="tool-error"
           role="alert"
           className="border-t border-border px-3 py-2.5 text-sm text-destructive"
         >
@@ -57,7 +57,7 @@ export function ToolCall({ part, defaultOpen = false, className }: ToolCallProps
         </p>
       )}
       <CollapsibleContent
-        data-slot="tool-call-content"
+        data-slot="tool-content"
         className="flex flex-col gap-4 border-t border-border px-3 pt-3 pb-4"
       >
         {hasInput && <JsonBlock label="Input" value={part.input} />}

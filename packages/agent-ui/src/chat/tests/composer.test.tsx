@@ -1,28 +1,24 @@
 import { renderToStaticMarkup } from "react-dom/server";
 import { describe, expect, it } from "vitest";
-import { PromptInput } from "../index";
+import { Composer } from "../index";
 
 const noop = () => {};
 
-describe("PromptInput", () => {
+describe("Composer", () => {
   it("shows a disabled Send button while the prompt is empty", () => {
-    const html = renderToStaticMarkup(<PromptInput onSubmit={noop} />);
+    const html = renderToStaticMarkup(<Composer onSubmit={noop} />);
     expect(html).toContain('aria-label="Message"');
     expect(html).toMatch(/aria-label="Send"[^>]*disabled=""/);
     expect(html).not.toContain('aria-label="Stop"');
   });
 
   it("enables Send once there is text", () => {
-    const html = renderToStaticMarkup(
-      <PromptInput onSubmit={noop} defaultValue="Summarise memory" />
-    );
+    const html = renderToStaticMarkup(<Composer onSubmit={noop} defaultValue="Summarise memory" />);
     expect(html).not.toMatch(/aria-label="Send"[^>]*disabled=""/);
   });
 
   it.each(["submitting", "streaming"] as const)("shows Stop while %s", (status) => {
-    const html = renderToStaticMarkup(
-      <PromptInput onSubmit={noop} onStop={noop} status={status} />
-    );
+    const html = renderToStaticMarkup(<Composer onSubmit={noop} onStop={noop} status={status} />);
     expect(html).toContain('aria-label="Stop"');
     expect(html).not.toContain('aria-label="Send"');
     expect(html).toContain('aria-busy="true"');
@@ -30,7 +26,7 @@ describe("PromptInput", () => {
 
   it("renders the attachments and model slots, attach button and error", () => {
     const html = renderToStaticMarkup(
-      <PromptInput
+      <Composer
         onSubmit={noop}
         onAttachFiles={noop}
         status="error"
@@ -47,7 +43,7 @@ describe("PromptInput", () => {
   });
 
   it("disables the textarea when disabled", () => {
-    const html = renderToStaticMarkup(<PromptInput onSubmit={noop} disabled defaultValue="hi" />);
+    const html = renderToStaticMarkup(<Composer onSubmit={noop} disabled defaultValue="hi" />);
     expect(html).toMatch(/<textarea[^>]*disabled=""/);
     expect(html).toContain('data-disabled="true"');
   });

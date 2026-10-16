@@ -3,17 +3,17 @@
 import { cn, Textarea } from "@locusgraph/components";
 import * as React from "react";
 import {
-  isPromptBusy,
-  PromptAttachButton,
-  type PromptStatus,
-  PromptSubmit,
-} from "./prompt-actions";
+  ComposerAttachButton,
+  type ComposerStatus,
+  ComposerSubmit,
+  isComposerBusy,
+} from "./composer-actions";
 import { useAutoGrow } from "./use-auto-grow";
 
-export type PromptInputProps = Omit<React.ComponentProps<"form">, "onSubmit" | "children"> & {
+export type ComposerProps = Omit<React.ComponentProps<"form">, "onSubmit" | "children"> & {
   onSubmit: (text: string, files: File[]) => void;
   onStop?: () => void;
-  status?: PromptStatus;
+  status?: ComposerStatus;
   disabled?: boolean;
   value?: string;
   defaultValue?: string;
@@ -34,7 +34,7 @@ function isSendShortcut(event: React.KeyboardEvent<HTMLTextAreaElement>): boolea
   return event.key === "Enter" && !event.shiftKey && !event.nativeEvent.isComposing;
 }
 
-export function PromptInput({
+export function Composer({
   onSubmit,
   onStop,
   status = "ready",
@@ -52,13 +52,13 @@ export function PromptInput({
   errorMessage,
   className,
   ...props
-}: PromptInputProps) {
+}: ComposerProps) {
   const [uncontrolledText, setUncontrolledText] = React.useState(defaultValue);
   const text = value ?? uncontrolledText;
   const errorId = React.useId();
   const textareaRef = React.useRef<HTMLTextAreaElement>(null);
   useAutoGrow(textareaRef, text);
-  const isBusy = isPromptBusy(status);
+  const isBusy = isComposerBusy(status);
   const canSend = !disabled && !isBusy && (text.trim().length > 0 || files.length > 0);
 
   const changeText = (next: string) => {
@@ -80,7 +80,7 @@ export function PromptInput({
 
   return (
     <form
-      data-slot="prompt-input"
+      data-slot="composer"
       data-status={status}
       data-disabled={disabled || undefined}
       aria-busy={isBusy || undefined}
@@ -95,7 +95,7 @@ export function PromptInput({
       {...props}
     >
       {attachments && (
-        <div data-slot="prompt-input-attachments" className="px-3 pt-3 empty:hidden">
+        <div data-slot="composer-attachments" className="px-3 pt-3 empty:hidden">
           {attachments}
         </div>
       )}
@@ -122,9 +122,9 @@ export function PromptInput({
           {errorMessage}
         </p>
       )}
-      <div data-slot="prompt-input-toolbar" className="flex items-center gap-1 px-2.5 pt-1 pb-2.5">
+      <div data-slot="composer-toolbar" className="flex items-center gap-1 px-2.5 pt-1 pb-2.5">
         {onAttachFiles && (
-          <PromptAttachButton
+          <ComposerAttachButton
             accept={accept}
             disabled={disabled || isBusy}
             onAttachFiles={onAttachFiles}
@@ -132,14 +132,14 @@ export function PromptInput({
         )}
         {modelSlot && (
           <div
-            data-slot="prompt-input-model"
+            data-slot="composer-model"
             className={cn("min-w-0", disabled && "pointer-events-none opacity-50")}
           >
             {modelSlot}
           </div>
         )}
         <div className="ml-auto">
-          <PromptSubmit status={status} canSend={canSend} onStop={onStop} />
+          <ComposerSubmit status={status} canSend={canSend} onStop={onStop} />
         </div>
       </div>
     </form>

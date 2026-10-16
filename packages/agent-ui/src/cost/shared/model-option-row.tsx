@@ -49,7 +49,7 @@ export function ModelOptionRow({ model }: { model: ModelOption }) {
   return (
     <DropdownMenuRadioItem
       value={model.id}
-      data-slot="model-selector-item"
+      data-slot="model-picker-item"
       className="group grid grid-cols-[1fr_auto_1rem] items-center gap-x-3 rounded-none px-3 py-2.5 transition-colors duration-150 focus:bg-accent/50 data-[state=checked]:bg-accent motion-reduce:transition-none [&>span:first-child]:hidden"
     >
       <span className="flex min-w-0 flex-col gap-0.5">

@@ -1,6 +1,6 @@
 import type { FilePart } from "../../types";
 
-export type AttachmentItem = {
+export type FileItem = {
   id: string;
   name: string;
   mediaType?: string;
@@ -21,11 +21,11 @@ export function formatBytes(bytes: number): string {
   return `${rounded} ${byteUnits[unitIndex]}`;
 }
 
-export function isImageAttachment(item: AttachmentItem): boolean {
+export function isImageFile(item: FileItem): boolean {
   return Boolean(item.url && item.mediaType?.startsWith("image/"));
 }
 
-export function fileExtensionLabel(item: AttachmentItem): string | undefined {
+export function fileExtensionLabel(item: FileItem): string | undefined {
   const extension = item.name.includes(".") ? item.name.split(".").at(-1) : undefined;
   return extension ? extension.toUpperCase() : undefined;
 }
@@ -35,7 +35,7 @@ export function filenameFromUrl(url: string): string {
   return lastSegment && !url.startsWith("data:") ? decodeURIComponent(lastSegment) : "Attachment";
 }
 
-export function attachmentFromFilePart(part: FilePart, index: number): AttachmentItem {
+export function fileFromFilePart(part: FilePart, index: number): FileItem {
   return {
     id: `${index}:${part.url.slice(0, 64)}`,
     name: part.filename ?? filenameFromUrl(part.url),

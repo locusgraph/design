@@ -22,7 +22,7 @@ export function BarsMark() {
   return (
     <span
       aria-hidden
-      data-slot="loader-bars"
+      data-slot="pulse-bars"
       className="inline-flex h-[1em] items-center gap-[0.14em] text-foreground/70"
     >
       {barDelays.map((delay) => (

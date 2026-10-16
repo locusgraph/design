@@ -12,25 +12,25 @@ pnpm add @locusgraph/agent-ui @locusgraph/components
 ```
 
 ```tsx
-import { ChatMessage, Conversation, PromptInput } from "@locusgraph/agent-ui";
+import { Chat, Composer, Turn } from "@locusgraph/agent-ui";
 
-<Conversation>
+<Chat>
   {messages.map((message) => (
-    <ChatMessage key={message.id} message={message} />
+    <Turn key={message.id} message={message} />
   ))}
-</Conversation>
-<PromptInput status={status} onSubmit={(text) => sendMessage({ text })} onStop={stop} />
+</Chat>
+<Composer status={status} onSubmit={(text) => sendMessage({ text })} onStop={stop} />
 ```
 
 | Group | Components |
 |---|---|
-| Chat | `Conversation`, `ChatMessage`, `Response`, `PromptInput`, `Attachments` |
-| Thread | `Suggestions`, `MessageActions`, `ThreadList`, `CodeBlock`, `Artifact` |
-| Agent | `Reasoning`, `Steps`, `ToolCall`, `Loader` |
-| Human in the loop | `ToolApproval`, `ToolArgsEditor`, `PlanApproval`, `AgentQuestion`, `SpendApproval`, `MemoryReview`, `RunControls`, `ApprovalInbox` |
-| Memory | `InlineCitation`, `Sources`, `MemoryRecall`, `MemoryWrite` |
-| Cost | `ContextMeter`, `RunCost`, `StepCostTimeline`, `ModelSelector` |
+| Chat | `Chat`, `Turn`, `Reply`, `Composer`, `Files` |
+| Thread | `Starters`, `Actions`, `History`, `Code`, `Canvas` |
+| Agent | `Thinking`, `Steps`, `Tool`, `Pulse` |
+| Human in the loop | `Approval`, `ArgsEditor`, `PlanReview`, `Question`, `SpendGate`, `MemoryReview`, `RunBar`, `Inbox` |
+| Memory | `Cite`, `Sources`, `Recall`, `Memorized` |
+| Cost | `Context`, `Cost`, `CostSteps`, `ModelPicker` |
 
-`ChatMessage` renders reasoning, tool and source parts with `Reasoning`, `ToolCall` and `Sources`; pass `renderReasoning`, `renderTool` or `renderSources` to replace them. A tool part in the `approval-requested` state is where `ToolApproval` goes: wire its `onApprove` and `onDeny` to the AI SDK's tool approval response.
+`Turn` renders reasoning, tool and source parts with `Thinking`, `Tool` and `Sources`; pass `renderReasoning`, `renderTool` or `renderSources` to replace them. A tool part in the `approval-requested` state is where `Approval` goes: wire its `onApprove` and `onDeny` to the AI SDK's tool approval response.
 
 Approvals follow one rule: tools that only read run without asking; tools that write, pay, send or delete pause and show exactly what is being approved, with stronger warnings for destructive ones. Money is integer micro-USD, formatted with `@locusgraph/utils`.

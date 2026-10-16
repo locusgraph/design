@@ -1,1 +1,1 @@
-export type LoaderTone = "neutral" | "brand";
+export type PulseTone = "neutral" | "brand";

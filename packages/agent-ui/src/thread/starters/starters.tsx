@@ -2,35 +2,35 @@ import { cn } from "@locusgraph/components";
 import { ArrowUpRightIcon } from "lucide-react";
 import type { ComponentProps } from "react";
 
-export type Suggestion = string | { text: string; label?: string };
+export type Starter = string | { text: string; label?: string };
 
-type SuggestionsProps = Omit<ComponentProps<"div">, "onSelect"> & {
-  suggestions: Suggestion[];
+type StartersProps = Omit<ComponentProps<"div">, "onSelect"> & {
+  suggestions: Starter[];
   onSelect: (text: string) => void;
   disabled?: boolean;
 };
 
-function textOf(suggestion: Suggestion) {
+function textOf(suggestion: Starter) {
   return typeof suggestion === "string" ? suggestion : suggestion.text;
 }
 
-function labelOf(suggestion: Suggestion) {
+function labelOf(suggestion: Starter) {
   return typeof suggestion === "string" ? suggestion : (suggestion.label ?? suggestion.text);
 }
 
-export function Suggestions({
+export function Starters({
   suggestions,
   onSelect,
   disabled = false,
   className,
   ...props
-}: SuggestionsProps) {
+}: StartersProps) {
   if (suggestions.length === 0) {
     return null;
   }
   return (
     <div
-      data-slot="suggestions"
+      data-slot="starters"
       role="group"
       aria-label="Suggested prompts"
       className={cn("flex flex-col divide-y bg-card ring-1 ring-border", className)}

@@ -1,5 +1,5 @@
 import type { ExtraProps } from "react-markdown";
-import { CodeBlock } from "../../thread/code-block/code-block";
+import { Code } from "../../thread/code/code";
 
 type HastNode = NonNullable<ExtraProps["node"]>;
 type HastChild = HastNode["children"][number];
@@ -28,8 +28,8 @@ export function fencedCode(node: HastNode | undefined) {
   };
 }
 
-export function FencedCodeBlock({ node }: ExtraProps) {
+export function FencedCode({ node }: ExtraProps) {
   const fenced = fencedCode(node);
   if (!fenced) return null;
-  return <CodeBlock code={fenced.code} language={fenced.language} className="mt-4 first:mt-0" />;
+  return <Code code={fenced.code} language={fenced.language} className="mt-4 first:mt-0" />;
 }

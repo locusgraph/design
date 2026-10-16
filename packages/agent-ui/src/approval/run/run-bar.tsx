@@ -1,10 +1,10 @@
 import { Button, cn } from "@locusgraph/components";
 import { PauseIcon, PlayIcon, SkipForwardIcon, SquareIcon } from "lucide-react";
 import { StatusDot, type StatusTone } from "../../shared/status-dot";
-import type { RunControlStatus } from "../types";
+import type { RunBarStatus } from "../types";
 
-export type RunControlsProps = {
-  status: RunControlStatus;
+export type RunBarProps = {
+  status: RunBarStatus;
   runName?: string;
   elapsedMs?: number;
   onPause: () => void;
@@ -15,14 +15,14 @@ export type RunControlsProps = {
   className?: string;
 };
 
-const statusLabels: Record<RunControlStatus, string> = {
+const statusLabels: Record<RunBarStatus, string> = {
   running: "Running",
   paused: "Paused",
   stopped: "Stopped",
   done: "Done",
 };
 
-const statusTone: Record<RunControlStatus, StatusTone> = {
+const statusTone: Record<RunBarStatus, StatusTone> = {
   running: "running",
   paused: "waiting",
   stopped: "danger",
@@ -42,7 +42,7 @@ function formatElapsed(elapsedMs: number) {
   return `${minutes}:${twoDigits(seconds)}`;
 }
 
-export function RunControls({
+export function RunBar({
   status,
   runName,
   elapsedMs,
@@ -52,14 +52,14 @@ export function RunControls({
   onStep,
   pending = false,
   className,
-}: RunControlsProps) {
+}: RunBarProps) {
   const live = status === "running" || status === "paused";
   const paused = status === "paused";
   return (
     <div
       role="toolbar"
       aria-label={runName ? `Controls for ${runName}` : "Run controls"}
-      data-slot="run-controls"
+      data-slot="run-bar"
       data-status={status}
       className={cn(
         "flex min-h-10 min-w-0 flex-wrap items-center gap-x-3 gap-y-2 bg-card py-2 pr-2 pl-3 text-card-foreground ring-1 ring-border",

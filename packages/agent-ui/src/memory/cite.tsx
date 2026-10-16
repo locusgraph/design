@@ -4,7 +4,7 @@ import type { Citation } from "../types";
 import { hostLabel } from "./shared/host-label";
 import { SourceMark } from "./shared/source-mark";
 
-export type InlineCitationProps = {
+export type CiteProps = {
   citation: Citation;
   onOpen?: (citation: Citation) => void;
   className?: string;
@@ -17,7 +17,7 @@ export function citationLabel(citation: Citation): string {
   return `Source ${citation.index}: ${citation.title}`;
 }
 
-export function InlineCitation({ citation, onOpen, className }: InlineCitationProps) {
+export function Cite({ citation, onOpen, className }: CiteProps) {
   const host = hostLabel(citation.url);
   const label = citationLabel(citation);
   const open = (event: MouseEvent) => {
@@ -27,7 +27,7 @@ export function InlineCitation({ citation, onOpen, className }: InlineCitationPr
   };
   return (
     <sup
-      data-slot="inline-citation"
+      data-slot="cite"
       data-index={citation.index}
       className={cn("relative -top-1 ml-0.5 align-baseline leading-none", className)}
     >
@@ -51,7 +51,7 @@ export function InlineCitation({ citation, onOpen, className }: InlineCitationPr
           )}
         </HoverCardTrigger>
         <HoverCardContent
-          data-slot="inline-citation-card"
+          data-slot="cite-card"
           side="bottom"
           align="start"
           sideOffset={6}

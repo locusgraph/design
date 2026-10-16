@@ -4,10 +4,10 @@ import { formatTimeOfDay } from "./thread-groups";
 import { ThreadItemMenu } from "./thread-item-menu";
 import { ThreadTitleEditor } from "./thread-title-editor";
 
-export type ThreadSummary = { id: string; title: string; updatedAt: string };
+export type HistoryItem = { id: string; title: string; updatedAt: string };
 
-type ThreadListItemProps = {
-  thread: ThreadSummary;
+type HistoryRowProps = {
+  thread: HistoryItem;
   active: boolean;
   onSelect: (id: string) => void;
   onRename?: (id: string, title: string) => void;
@@ -17,18 +17,12 @@ type ThreadListItemProps = {
 const timeHiddenByMenuClass =
   "max-sm:hidden sm:group-focus-within:invisible sm:group-hover:invisible sm:group-has-[[data-state=open]]:invisible";
 
-export function ThreadListItem({
-  thread,
-  active,
-  onSelect,
-  onRename,
-  onArchive,
-}: ThreadListItemProps) {
+export function HistoryRow({ thread, active, onSelect, onRename, onArchive }: HistoryRowProps) {
   const [editing, setEditing] = useState(false);
   const hasMenu = onRename !== undefined || onArchive !== undefined;
   return (
     <li
-      data-slot="thread-list-item"
+      data-slot="history-item"
       data-active={active || undefined}
       className={cn(
         "group relative flex items-center motion-safe:transition-colors",

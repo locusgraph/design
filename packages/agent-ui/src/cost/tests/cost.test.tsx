@@ -1,10 +1,10 @@
 import { renderToStaticMarkup } from "react-dom/server";
 import { describe, expect, it } from "vitest";
-import { ContextMeter, ModelSelector, RunCost, StepCostTimeline } from "../index";
+import { Context, Cost, CostSteps, ModelPicker } from "../index";
 
-describe("ContextMeter", () => {
+describe("Context", () => {
   it("is a meter with its percent", () => {
-    const html = renderToStaticMarkup(<ContextMeter usedTokens={50_000} limitTokens={200_000} />);
+    const html = renderToStaticMarkup(<Context usedTokens={50_000} limitTokens={200_000} />);
     expect(html).toContain('role="meter"');
     expect(html).toContain('aria-valuenow="25"');
     expect(html).toContain('data-status="ok"');
@@ -13,12 +13,12 @@ describe("ContextMeter", () => {
 
   it("turns amber near the limit and red when full", () => {
     const near = renderToStaticMarkup(
-      <ContextMeter usedTokens={170_000} limitTokens={200_000} variant="ring" />
+      <Context usedTokens={170_000} limitTokens={200_000} variant="ring" />
     );
     expect(near).toContain('data-status="near"');
     expect(near).toContain("text-warn");
     expect(near).toContain('aria-valuenow="85"');
-    const full = renderToStaticMarkup(<ContextMeter usedTokens={200_000} limitTokens={200_000} />);
+    const full = renderToStaticMarkup(<Context usedTokens={200_000} limitTokens={200_000} />);
     expect(full).toContain('data-status="full"');
     expect(full).toContain("text-destructive");
     expect(full).toContain('aria-valuenow="100"');
@@ -26,7 +26,7 @@ describe("ContextMeter", () => {
 
   it("is focusable when it has a breakdown", () => {
     const html = renderToStaticMarkup(
-      <ContextMeter
+      <Context
         usedTokens={1_000}
         limitTokens={8_000}
         breakdown={[{ label: "System prompt", tokens: 1_000 }]}
@@ -36,7 +36,7 @@ describe("ContextMeter", () => {
   });
 });
 
-describe("RunCost", () => {
+describe("Cost", () => {
   const failed = {
     inputTokens: 1_200,
     outputTokens: 0,
@@ -53,7 +53,7 @@ describe("RunCost", () => {
   const attempts = [failed, succeeded];
 
   it("shows tokens, model and cost compactly", () => {
-    const html = renderToStaticMarkup(<RunCost usage={succeeded} />);
+    const html = renderToStaticMarkup(<Cost usage={succeeded} />);
     expect(html).toContain("1,250 in");
     expect(html).toContain("420 out");
     expect(html).toContain("$0.0101");
@@ -61,7 +61,7 @@ describe("RunCost", () => {
   });
 
   it("marks failed attempts and their wasted cost in red", () => {
-    const html = renderToStaticMarkup(<RunCost usage={attempts} variant="detailed" />);
+    const html = renderToStaticMarkup(<Cost usage={attempts} variant="detailed" />);
     expect(html).toContain("$0.0137");
     expect(html).toContain("1 failed attempt · $0.0036");
     expect(html).toContain("text-destructive");
@@ -69,7 +69,7 @@ describe("RunCost", () => {
   });
 });
 
-describe("StepCostTimeline", () => {
+describe("CostSteps", () => {
   const steps = [
     {
       id: "plan",
@@ -88,7 +88,7 @@ describe("StepCostTimeline", () => {
   ];
 
   it("totals cost, tokens, time and waste", () => {
-    const html = renderToStaticMarkup(<StepCostTimeline steps={steps} />);
+    const html = renderToStaticMarkup(<CostSteps steps={steps} />);
     expect(html).toContain("$2.50");
     expect(html).toContain("1,300 in · 300 out");
     expect(html).toContain("2.0s");
@@ -98,16 +98,14 @@ describe("StepCostTimeline", () => {
   });
 
   it("says when there are no steps", () => {
-    expect(renderToStaticMarkup(<StepCostTimeline steps={[]} />)).toContain(
-      "No steps have run yet."
-    );
+    expect(renderToStaticMarkup(<CostSteps steps={[]} />)).toContain("No steps have run yet.");
   });
 });
 
-describe("ModelSelector", () => {
+describe("ModelPicker", () => {
   it("shows the selected model and its provider", () => {
     const html = renderToStaticMarkup(
-      <ModelSelector
+      <ModelPicker
         value="sonnet"
         onChange={() => {}}
         models={[

@@ -16,7 +16,7 @@ import type { ApprovalDecision, PlanStepDraft } from "../types";
 import { PlanStepRow, type StepAction, stepControlId } from "./plan-step-row";
 import { applyStepAction, describeStepAction, focusAfterAction } from "./plan-steps";
 
-export type PlanApprovalProps = {
+export type PlanReviewProps = {
   steps: PlanStepDraft[];
   title?: string;
   description?: string;
@@ -43,7 +43,7 @@ function DecidedSteps({ steps }: { steps: PlanStepDraft[] }) {
   );
 }
 
-export function PlanApproval({
+export function PlanReview({
   steps: initialSteps,
   title = "Review the plan",
   description = "The agent will run these steps in order. Edit, reorder or remove steps before it starts.",
@@ -53,7 +53,7 @@ export function PlanApproval({
   onCancel,
   autoFocus = true,
   className,
-}: PlanApprovalProps) {
+}: PlanReviewProps) {
   const idPrefix = useId();
   const [steps, setSteps] = useState(initialSteps);
   const [announcement, setAnnouncement] = useState("");
@@ -81,7 +81,7 @@ export function PlanApproval({
 
   return (
     <ApprovalPanel
-      data-slot="plan-approval"
+      data-slot="plan-review"
       data-decided={decision ? true : undefined}
       aria-label={title}
       className={className}

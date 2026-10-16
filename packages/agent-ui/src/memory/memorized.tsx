@@ -4,58 +4,52 @@ import { BookmarkPlusIcon, CheckIcon, Undo2Icon } from "lucide-react";
 import { StatusDot } from "../shared/status-dot";
 import { eyebrowClass, ruledListClass } from "./shared/disclosure";
 
-export type MemoryWriteStatus = "saved" | "undone";
+export type MemorizedStatus = "saved" | "undone";
 
-export type MemoryWriteItem = {
+export type MemorizedItem = {
   id: string;
   text: string;
   kind?: string;
-  status: MemoryWriteStatus;
+  status: MemorizedStatus;
 };
 
-export type MemoryWriteProps = {
-  items: MemoryWriteItem[];
+export type MemorizedProps = {
+  items: MemorizedItem[];
   onUndo?: (id: string) => void;
   className?: string;
 };
 
-export function memoryWriteSummary(items: MemoryWriteItem[]): string {
+export function memorizedSummary(items: MemorizedItem[]): string {
   const saved = items.filter((item) => item.status === "saved").length;
   return `Saved ${pluralize(saved, "memory", "memories")}`;
 }
 
-export function MemoryWrite({ items, onUndo, className }: MemoryWriteProps) {
+export function Memorized({ items, onUndo, className }: MemorizedProps) {
   if (items.length === 0) return null;
   return (
     <section
-      data-slot="memory-write"
+      data-slot="memorized"
       aria-label="Saved to memory"
       className={cn("flex min-w-0 flex-col gap-2", className)}
     >
       <header aria-live="polite" className={cn("flex items-center gap-2 py-1", eyebrowClass)}>
         <BookmarkPlusIcon aria-hidden />
-        {memoryWriteSummary(items)}
+        {memorizedSummary(items)}
       </header>
       <ul className={ruledListClass}>
         {items.map((item) => (
-          <MemoryWriteRow key={item.id} item={item} onUndo={onUndo} />
+          <MemorizedRow key={item.id} item={item} onUndo={onUndo} />
         ))}
       </ul>
     </section>
   );
 }
 
-function MemoryWriteRow({
-  item,
-  onUndo,
-}: {
-  item: MemoryWriteItem;
-  onUndo?: (id: string) => void;
-}) {
+function MemorizedRow({ item, onUndo }: { item: MemorizedItem; onUndo?: (id: string) => void }) {
   const undone = item.status === "undone";
   return (
     <li
-      data-slot="memory-write-item"
+      data-slot="memorized-item"
       data-status={item.status}
       className="flex min-h-11 items-center gap-3 px-3 py-2.5"
     >

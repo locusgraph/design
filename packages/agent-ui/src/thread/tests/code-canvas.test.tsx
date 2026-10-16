@@ -1,6 +1,6 @@
 import { renderToStaticMarkup } from "react-dom/server";
 import { describe, expect, it } from "vitest";
-import { Artifact, CodeBlock } from "../index";
+import { Canvas, Code } from "../index";
 
 const versions = [
   { id: "v1", label: "v1", createdAt: "2026-10-14T10:00:00.000Z" },
@@ -8,12 +8,12 @@ const versions = [
   { id: "v3", label: "v3", createdAt: "2026-10-16T10:00:00.000Z" },
 ];
 
-describe("CodeBlock", () => {
+describe("Code", () => {
   it("renders plain code with the language and filename before highlighting", () => {
     const html = renderToStaticMarkup(
-      <CodeBlock code={"const limit = 5 < 6;"} language="ts" filename="quota.ts" />
+      <Code code={"const limit = 5 < 6;"} language="ts" filename="quota.ts" />
     );
-    expect(html).toContain('data-slot="code-block"');
+    expect(html).toContain('data-slot="code"');
     expect(html).toContain("<pre");
     expect(html).toContain("const limit = 5 &lt; 6;");
     expect(html).toContain(">ts</span>");
@@ -22,15 +22,15 @@ describe("CodeBlock", () => {
   });
 
   it("hides the copy button when asked", () => {
-    const html = renderToStaticMarkup(<CodeBlock code="ls" language="bash" showCopy={false} />);
+    const html = renderToStaticMarkup(<Code code="ls" language="bash" showCopy={false} />);
     expect(html).not.toContain("Copy code");
   });
 });
 
-describe("Artifact", () => {
+describe("Canvas", () => {
   it("shows the chosen version, kind and close button", () => {
     const html = renderToStaticMarkup(
-      <Artifact
+      <Canvas
         title="Spend report"
         kind="Document"
         versions={versions}
@@ -39,10 +39,10 @@ describe("Artifact", () => {
         onClose={() => {}}
       >
         <p>Body</p>
-      </Artifact>
+      </Canvas>
     );
-    expect(html).toContain('data-slot="artifact"');
-    expect(html).toContain('<span data-slot="artifact-current-version">v2</span>');
+    expect(html).toContain('data-slot="canvas"');
+    expect(html).toContain('<span data-slot="canvas-current-version">v2</span>');
     expect(html).toContain("Oct 15, 2026");
     expect(html).toContain("Document");
     expect(html).toContain('aria-label="Close panel"');
@@ -51,11 +51,11 @@ describe("Artifact", () => {
 
   it("falls back to the latest version and omits the close button", () => {
     const html = renderToStaticMarkup(
-      <Artifact title="Schema" versions={versions}>
+      <Canvas title="Schema" versions={versions}>
         x
-      </Artifact>
+      </Canvas>
     );
-    expect(html).toContain('<span data-slot="artifact-current-version">v3</span>');
+    expect(html).toContain('<span data-slot="canvas-current-version">v3</span>');
     expect(html).not.toContain("Close panel");
   });
 });

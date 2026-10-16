@@ -3,12 +3,12 @@
 import { Button, cn, ScrollArea } from "@locusgraph/components";
 import { XIcon } from "lucide-react";
 import type { ComponentProps, ReactNode } from "react";
-import { type ArtifactVersion, VersionSwitcher } from "./version-switcher";
+import { type CanvasVersion, VersionSwitcher } from "./version-switcher";
 
-type ArtifactProps = Omit<ComponentProps<"aside">, "title"> & {
+type CanvasProps = Omit<ComponentProps<"aside">, "title"> & {
   title: string;
   kind?: string;
-  versions?: ArtifactVersion[];
+  versions?: CanvasVersion[];
   versionId?: string;
   onVersionChange?: (id: string) => void;
   actions?: ReactNode;
@@ -16,11 +16,11 @@ type ArtifactProps = Omit<ComponentProps<"aside">, "title"> & {
   children: ReactNode;
 };
 
-function currentVersionOf(versions: ArtifactVersion[], versionId?: string) {
+function currentVersionOf(versions: CanvasVersion[], versionId?: string) {
   return versions.find((version) => version.id === versionId) ?? versions.at(-1);
 }
 
-export function Artifact({
+export function Canvas({
   title,
   kind,
   versions = [],
@@ -31,11 +31,11 @@ export function Artifact({
   children,
   className,
   ...props
-}: ArtifactProps) {
+}: CanvasProps) {
   const current = currentVersionOf(versions, versionId);
   return (
     <aside
-      data-slot="artifact"
+      data-slot="canvas"
       aria-label={title}
       className={cn(
         "flex h-full min-h-0 min-w-0 flex-col bg-card text-card-foreground ring-1 ring-border",
@@ -68,8 +68,8 @@ export function Artifact({
       </header>
       <ScrollArea className="min-h-0 flex-1">
         <div
-          data-slot="artifact-content"
-          className="px-5 py-4 has-[>[data-slot=code-block]:only-child]:p-0 [&>[data-slot=code-block]:only-child]:ring-0"
+          data-slot="canvas-content"
+          className="px-5 py-4 has-[>[data-slot=code]:only-child]:p-0 [&>[data-slot=code]:only-child]:ring-0"
         >
           {children}
         </div>

@@ -5,32 +5,32 @@ import { ArrowDownIcon } from "lucide-react";
 import * as React from "react";
 import { useStickToBottom } from "./use-stick-to-bottom";
 
-export type ConversationProps = React.ComponentProps<"div"> & {
+export type ChatProps = React.ComponentProps<"div"> & {
   empty?: React.ReactNode;
   label?: string;
   jumpLabel?: string;
 };
 
-export function Conversation({
+export function Chat({
   children,
   empty,
-  label = "Conversation",
+  label = "Chat",
   jumpLabel = "Jump to latest",
   className,
   ...props
-}: ConversationProps) {
+}: ChatProps) {
   const { viewportRef, contentRef, isAtBottom, handleScroll, scrollToLatest } = useStickToBottom();
   const isEmpty = React.Children.toArray(children).length === 0;
   return (
     <div
-      data-slot="conversation"
+      data-slot="chat"
       data-empty={isEmpty || undefined}
       className={cn("relative flex min-h-0 flex-1 flex-col overflow-hidden", className)}
       {...props}
     >
       <div
         ref={viewportRef}
-        data-slot="conversation-viewport"
+        data-slot="chat-viewport"
         role="log"
         aria-label={label}
         tabIndex={0}
@@ -39,12 +39,12 @@ export function Conversation({
       >
         <div
           ref={contentRef}
-          data-slot="conversation-content"
+          data-slot="chat-content"
           className="mx-auto flex min-h-full w-full max-w-3xl flex-col gap-8 px-4 py-6 [&>[data-role=user]+[data-role=assistant]]:-mt-4"
         >
           {isEmpty ? (
             <div
-              data-slot="conversation-empty"
+              data-slot="chat-empty"
               className="flex flex-1 flex-col items-center justify-center text-center"
             >
               {empty}
@@ -59,7 +59,7 @@ export function Conversation({
           type="button"
           variant="outline"
           size="sm"
-          data-slot="conversation-jump"
+          data-slot="chat-jump"
           onClick={scrollToLatest}
           className="absolute bottom-3 left-1/2 h-7 -translate-x-1/2 bg-card px-3 text-xs text-muted-foreground shadow-none hover:text-foreground motion-safe:animate-in motion-safe:fade-in-0 dark:bg-card"
         >

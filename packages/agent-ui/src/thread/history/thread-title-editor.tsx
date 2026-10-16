@@ -20,7 +20,7 @@ export function ThreadTitleEditor({ title, onCommit, onCancel }: ThreadTitleEdit
   return (
     <Input
       data-slot="thread-title-editor"
-      aria-label="Conversation title"
+      aria-label="Chat title"
       autoFocus
       value={draft}
       className="h-7 text-sm"

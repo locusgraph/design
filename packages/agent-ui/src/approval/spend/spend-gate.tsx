@@ -16,7 +16,7 @@ import { RaiseCapForm } from "./raise-cap-form";
 import { spendSituation, suggestedCapMicroUsd } from "./spend-math";
 import { SpendMeter } from "./spend-meter";
 
-export type SpendApprovalProps = {
+export type SpendGateProps = {
   spentMicroUsd: number;
   estimateMicroUsd: number;
   capMicroUsd: number;
@@ -46,7 +46,7 @@ const situationCopy = {
 
 const situationStatus = { "over-cap": "Over cap", "out-of-credits": "Out of credits" } as const;
 
-export function SpendApproval({
+export function SpendGate({
   spentMicroUsd,
   estimateMicroUsd,
   capMicroUsd,
@@ -59,7 +59,7 @@ export function SpendApproval({
   onBuyCredits,
   autoFocus = true,
   className,
-}: SpendApprovalProps) {
+}: SpendGateProps) {
   const situation = spendSituation(balanceMicroUsd, estimateMicroUsd);
   const outOfCredits = situation === "out-of-credits";
   const projected = spentMicroUsd + estimateMicroUsd;
@@ -68,7 +68,7 @@ export function SpendApproval({
   const meter = { spentMicroUsd, estimateMicroUsd, capMicroUsd, balanceMicroUsd, outOfCredits };
   return (
     <ApprovalPanel
-      data-slot="spend-approval"
+      data-slot="spend-gate"
       data-situation={situation}
       aria-label={copy.title}
       className={cn(!decision && outOfCredits && "ring-destructive/60", className)}

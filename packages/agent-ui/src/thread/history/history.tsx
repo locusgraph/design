@@ -3,11 +3,11 @@
 import { Button, cn, ScrollArea } from "@locusgraph/components";
 import { PlusIcon } from "lucide-react";
 import type { ComponentProps } from "react";
+import { type HistoryItem, HistoryRow } from "./history-row";
 import { groupThreadsByDay } from "./thread-groups";
-import { ThreadListItem, type ThreadSummary } from "./thread-list-item";
 
-type ThreadListProps = Omit<ComponentProps<"nav">, "onSelect"> & {
-  threads: ThreadSummary[];
+type HistoryProps = Omit<ComponentProps<"nav">, "onSelect"> & {
+  threads: HistoryItem[];
   activeId?: string | null;
   onSelect: (id: string) => void;
   onNew?: () => void;
@@ -18,7 +18,7 @@ type ThreadListProps = Omit<ComponentProps<"nav">, "onSelect"> & {
   now?: Date | string;
 };
 
-export function ThreadList({
+export function History({
   threads,
   activeId = null,
   onSelect,
@@ -30,11 +30,11 @@ export function ThreadList({
   now = new Date(),
   className,
   ...props
-}: ThreadListProps) {
+}: HistoryProps) {
   const groups = groupThreadsByDay(threads, now);
   return (
     <nav
-      data-slot="thread-list"
+      data-slot="history"
       aria-label={label}
       className={cn("flex min-h-0 flex-col gap-2", className)}
       {...props}
@@ -64,7 +64,7 @@ export function ThreadList({
                 </h3>
                 <ul className="flex flex-col">
                   {group.threads.map((thread) => (
-                    <ThreadListItem
+                    <HistoryRow
                       key={thread.id}
                       thread={thread}
                       active={thread.id === activeId}

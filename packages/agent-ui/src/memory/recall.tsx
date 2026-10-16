@@ -9,7 +9,7 @@ import {
   ruledListClass,
 } from "./shared/disclosure";
 
-export type MemoryRecallProps = {
+export type RecallProps = {
   memories: MemoryRef[];
   onOpenMemory?: (id: string) => void;
   defaultOpen?: boolean;
@@ -20,16 +20,11 @@ export function relevancePercent(relevance: number): number {
   return Math.round(Math.min(Math.max(relevance, 0), 1) * 100);
 }
 
-export function MemoryRecall({
-  memories,
-  onOpenMemory,
-  defaultOpen = false,
-  className,
-}: MemoryRecallProps) {
+export function Recall({ memories, onOpenMemory, defaultOpen = false, className }: RecallProps) {
   if (memories.length === 0) return null;
   return (
     <Collapsible
-      data-slot="memory-recall"
+      data-slot="recall"
       defaultOpen={defaultOpen}
       className={cn("flex min-w-0 flex-col gap-2", className)}
     >
@@ -41,7 +36,7 @@ export function MemoryRecall({
       <CollapsibleContent>
         <ul className={ruledListClass}>
           {memories.map((memory) => (
-            <MemoryRecallRow key={memory.id} memory={memory} onOpenMemory={onOpenMemory} />
+            <RecallRow key={memory.id} memory={memory} onOpenMemory={onOpenMemory} />
           ))}
         </ul>
       </CollapsibleContent>
@@ -75,7 +70,7 @@ function RelevanceMeter({ memory }: { memory: MemoryRef }) {
   );
 }
 
-function MemoryRecallRow({
+function RecallRow({
   memory,
   onOpenMemory,
 }: {
@@ -99,7 +94,7 @@ function MemoryRecallRow({
   );
   const rowClass = "flex w-full flex-col items-start gap-1 px-3 py-2.5 text-left";
   return (
-    <li data-slot="memory-recall-item" data-id={memory.id}>
+    <li data-slot="recall-item" data-id={memory.id}>
       {onOpenMemory ? (
         <button
           type="button"

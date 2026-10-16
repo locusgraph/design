@@ -6,12 +6,12 @@ import { useEffect, useRef, useState } from "react";
 import type { ReasoningPart } from "../../types";
 import { firstLineOf, thoughtDurationLabel } from "./thought-duration";
 
-export type ReasoningProps = Omit<ReasoningPart, "type"> & {
+export type ThinkingProps = Omit<ReasoningPart, "type"> & {
   defaultOpen?: boolean;
   className?: string;
 };
 
-function useReasoningOpen(streaming: boolean, defaultOpen: boolean | undefined) {
+function useThinkingOpen(streaming: boolean, defaultOpen: boolean | undefined) {
   const [open, setOpen] = useState(defaultOpen ?? streaming);
   const openedByUser = useRef(false);
   const wasStreaming = useRef(streaming);
@@ -31,14 +31,14 @@ function useReasoningOpen(streaming: boolean, defaultOpen: boolean | undefined) 
   return [open, toggle] as const;
 }
 
-export function Reasoning({ text, state, durationMs, defaultOpen, className }: ReasoningProps) {
+export function Thinking({ text, state, durationMs, defaultOpen, className }: ThinkingProps) {
   const streaming = state === "streaming";
-  const [open, setOpen] = useReasoningOpen(streaming, defaultOpen);
+  const [open, setOpen] = useThinkingOpen(streaming, defaultOpen);
   const summary = firstLineOf(text);
 
   return (
     <Collapsible
-      data-slot="reasoning"
+      data-slot="thinking"
       data-state={streaming ? "streaming" : "done"}
       open={open}
       onOpenChange={setOpen}
@@ -62,14 +62,14 @@ export function Reasoning({ text, state, durationMs, defaultOpen, className }: R
       </CollapsibleTrigger>
       {!open && summary && (
         <p
-          data-slot="reasoning-summary"
+          data-slot="thinking-summary"
           className="ml-[6.5px] truncate border-l border-border pl-4 text-muted-foreground/80"
         >
           {summary}
         </p>
       )}
       <CollapsibleContent
-        data-slot="reasoning-content"
+        data-slot="thinking-content"
         className="ml-[6.5px] border-l border-border pl-4 leading-relaxed whitespace-pre-wrap"
       >
         {text}

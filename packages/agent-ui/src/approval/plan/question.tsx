@@ -16,7 +16,7 @@ import { QuestionChoices } from "./question-choices";
 
 export type AnsweredQuestion = QuestionAnswer & { by?: string; at?: DecidedAt };
 
-export type AgentQuestionProps = {
+export type QuestionProps = {
   question: string;
   options?: QuestionOption[];
   allowText?: boolean;
@@ -34,7 +34,7 @@ function answerText(answer: AnsweredQuestion, options: QuestionOption[]) {
   return [option?.label, answer.text].filter(Boolean).join(" · ");
 }
 
-export function AgentQuestion({
+export function Question({
   question,
   options = [],
   allowText = options.length === 0,
@@ -45,7 +45,7 @@ export function AgentQuestion({
   onAnswer,
   autoFocus = true,
   className,
-}: AgentQuestionProps) {
+}: QuestionProps) {
   const textId = useId();
   const [optionId, setOptionId] = useState<string>();
   const [text, setText] = useState("");
@@ -59,7 +59,7 @@ export function AgentQuestion({
   };
   return (
     <ApprovalPanel
-      data-slot="agent-question"
+      data-slot="question"
       data-answered={answer ? true : undefined}
       className={className}
     >

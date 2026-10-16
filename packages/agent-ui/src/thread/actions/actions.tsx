@@ -9,7 +9,7 @@ import { BranchSwitcher, type MessageBranch } from "./branch-switcher";
 
 export type MessageFeedback = "up" | "down" | null;
 
-type MessageActionsProps = ComponentProps<"div"> & {
+type ActionsProps = ComponentProps<"div"> & {
   onCopy?: () => void;
   onRetry?: () => void;
   feedback?: MessageFeedback;
@@ -22,7 +22,7 @@ function toggledFeedback(current: MessageFeedback, chosen: "up" | "down"): Messa
   return current === chosen ? null : chosen;
 }
 
-export function MessageActions({
+export function Actions({
   onCopy,
   onRetry,
   feedback = null,
@@ -31,7 +31,7 @@ export function MessageActions({
   onBranchChange,
   className,
   ...props
-}: MessageActionsProps) {
+}: ActionsProps) {
   const { copied, markCopied } = useCopied();
   const showBranch = branch !== undefined && branch.count > 1 && onBranchChange !== undefined;
   if (!onCopy && !onRetry && !onFeedback && !showBranch) {
@@ -40,7 +40,7 @@ export function MessageActions({
   return (
     <TooltipProvider>
       <div
-        data-slot="message-actions"
+        data-slot="actions"
         role="toolbar"
         aria-label="Message actions"
         className={cn("flex items-center gap-0.5", className)}

@@ -1,6 +1,6 @@
 import { renderToStaticMarkup } from "react-dom/server";
 import { describe, expect, it } from "vitest";
-import { AgentQuestion, PlanApproval } from "../index";
+import { PlanReview, Question } from "../index";
 import { applyStepAction } from "../plan/plan-steps";
 
 const steps = [
@@ -11,10 +11,10 @@ const steps = [
 
 const noop = () => {};
 
-describe("PlanApproval", () => {
+describe("PlanReview", () => {
   it("lists editable steps with move and remove controls", () => {
     const html = renderToStaticMarkup(
-      <PlanApproval steps={steps} onApprove={noop} onCancel={noop} />
+      <PlanReview steps={steps} onApprove={noop} onCancel={noop} />
     );
     expect(html).toContain('value="Merge duplicate customers"');
     expect(html).toContain("Move step 1 up");
@@ -30,7 +30,7 @@ describe("PlanApproval", () => {
 
   it("shows the decision once approved", () => {
     const html = renderToStaticMarkup(
-      <PlanApproval
+      <PlanReview
         steps={steps}
         decision={{ approved: true, by: "Ravi", at: Date.UTC(2026, 9, 17, 9, 5) }}
         onApprove={noop}
@@ -42,7 +42,7 @@ describe("PlanApproval", () => {
   });
 });
 
-describe("AgentQuestion", () => {
+describe("Question", () => {
   const options = [
     { id: "prod", label: "Production", description: "acme-prod" },
     { id: "staging", label: "Staging" },
@@ -50,7 +50,7 @@ describe("AgentQuestion", () => {
 
   it("offers pill choices as a radio group", () => {
     const html = renderToStaticMarkup(
-      <AgentQuestion question="Which graph should I update?" options={options} onAnswer={noop} />
+      <Question question="Which graph should I update?" options={options} onAnswer={noop} />
     );
     expect(html).toContain('role="radiogroup"');
     expect(html).toContain('aria-checked="false"');
@@ -59,16 +59,14 @@ describe("AgentQuestion", () => {
   });
 
   it("asks for free text when there are no options", () => {
-    const html = renderToStaticMarkup(
-      <AgentQuestion question="Name the new graph" onAnswer={noop} />
-    );
+    const html = renderToStaticMarkup(<Question question="Name the new graph" onAnswer={noop} />);
     expect(html).toContain("<textarea");
     expect(html).toContain("Your answer");
   });
 
   it("shows the answer once answered", () => {
     const html = renderToStaticMarkup(
-      <AgentQuestion
+      <Question
         question="Which graph should I update?"
         options={options}
         answer={{ optionId: "staging", text: "test first", by: "Maya Chen" }}

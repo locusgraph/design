@@ -1,7 +1,7 @@
 import { renderToStaticMarkup } from "react-dom/server";
 import { describe, expect, it } from "vitest";
 import type { ToolPart, ToolState } from "../../types";
-import { ToolCall, toolStateLabels } from "../index";
+import { Tool, toolStateLabels } from "../index";
 
 const base: ToolPart = {
   type: "tool-memory.search",
@@ -20,24 +20,24 @@ const expectedLabels: Record<ToolState, string> = {
   "output-denied": "Denied",
 };
 
-describe("ToolCall", () => {
+describe("Tool", () => {
   it.each(Object.entries(expectedLabels))("labels %s as %s", (state, label) => {
-    const html = renderToStaticMarkup(<ToolCall part={{ ...base, state: state as ToolState }} />);
+    const html = renderToStaticMarkup(<Tool part={{ ...base, state: state as ToolState }} />);
     expect(html).toContain(label);
     expect(toolStateLabels[state as ToolState]).toBe(label);
   });
 
   it("names the tool from its type or toolName", () => {
-    expect(renderToStaticMarkup(<ToolCall part={base} />)).toContain("memory.search");
+    expect(renderToStaticMarkup(<Tool part={base} />)).toContain("memory.search");
     const dynamic = renderToStaticMarkup(
-      <ToolCall part={{ ...base, type: "dynamic-tool", toolName: "graph.write" }} />
+      <Tool part={{ ...base, type: "dynamic-tool", toolName: "graph.write" }} />
     );
     expect(dynamic).toContain("graph.write");
   });
 
   it("renders input and output as pretty JSON when open", () => {
     const html = renderToStaticMarkup(
-      <ToolCall part={{ ...base, state: "output-available", output: { hits: 2 } }} defaultOpen />
+      <Tool part={{ ...base, state: "output-available", output: { hits: 2 } }} defaultOpen />
     );
     expect(html).toContain("&quot;query&quot;: &quot;billing owner&quot;");
     expect(html).toContain("&quot;hits&quot;: 2");
@@ -45,12 +45,12 @@ describe("ToolCall", () => {
   });
 
   it("hides the JSON when closed", () => {
-    expect(renderToStaticMarkup(<ToolCall part={base} />)).not.toContain("billing owner");
+    expect(renderToStaticMarkup(<Tool part={base} />)).not.toContain("billing owner");
   });
 
   it("shows the error text in the destructive color", () => {
     const html = renderToStaticMarkup(
-      <ToolCall part={{ ...base, state: "output-error", errorText: "Graph is read-only" }} />
+      <Tool part={{ ...base, state: "output-error", errorText: "Graph is read-only" }} />
     );
     expect(html).toMatch(/text-destructive[^>]*>Graph is read-only/);
   });

@@ -9,18 +9,18 @@ import {
 import { formatDate } from "@locusgraph/utils";
 import { ChevronDownIcon } from "lucide-react";
 
-export type ArtifactVersion = { id: string; label: string; createdAt: string };
+export type CanvasVersion = { id: string; label: string; createdAt: string };
 
 type VersionSwitcherProps = {
-  versions: ArtifactVersion[];
-  current: ArtifactVersion;
+  versions: CanvasVersion[];
+  current: CanvasVersion;
   onVersionChange?: (id: string) => void;
 };
 
 export function VersionSwitcher({ versions, current, onVersionChange }: VersionSwitcherProps) {
   const label = (
     <span className="flex items-center gap-2 font-mono text-[11px] tabular-nums">
-      <span data-slot="artifact-current-version">{current.label}</span>
+      <span data-slot="canvas-current-version">{current.label}</span>
       {versions.length > 1 && <span className="text-muted-foreground">of {versions.length}</span>}
       <time dateTime={current.createdAt} className="text-muted-foreground">
         {formatDate(current.createdAt)}

@@ -1,6 +1,6 @@
 import { renderToStaticMarkup } from "react-dom/server";
 import { describe, expect, it } from "vitest";
-import { ApprovalInbox } from "../index";
+import { Inbox } from "../index";
 import { formatWaiting } from "../shared/time";
 
 const now = Date.UTC(2026, 9, 17, 12, 0);
@@ -24,10 +24,10 @@ const items = [
   },
 ];
 
-describe("ApprovalInbox", () => {
+describe("Inbox", () => {
   it("lists pending approvals with waiting time", () => {
     const html = renderToStaticMarkup(
-      <ApprovalInbox items={items} now={now} onApprove={noop} onDeny={noop} onApproveAll={noop} />
+      <Inbox items={items} now={now} onApprove={noop} onDeny={noop} onApproveAll={noop} />
     );
     expect(html).toContain("Send invoice INV-2041");
     expect(html).toContain("7 min");
@@ -38,9 +38,9 @@ describe("ApprovalInbox", () => {
 
   it("shows an empty state", () => {
     const html = renderToStaticMarkup(
-      <ApprovalInbox items={[]} onApprove={noop} onDeny={noop} onApproveAll={noop} />
+      <Inbox items={[]} onApprove={noop} onDeny={noop} onApproveAll={noop} />
     );
-    expect(html).toContain('data-slot="approval-inbox-empty"');
+    expect(html).toContain('data-slot="inbox-empty"');
     expect(html).toContain("Nothing waiting for you");
     expect(html).not.toContain("Approve selected");
   });

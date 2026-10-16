@@ -1,16 +1,16 @@
 import { renderToStaticMarkup } from "react-dom/server";
 import { describe, expect, it } from "vitest";
-import { MemoryReview, RunControls, SpendApproval } from "../index";
+import { MemoryReview, RunBar, SpendGate } from "../index";
 import { reviewResult } from "../memory/memory-choices";
 
 const noop = () => {};
 
-describe("SpendApproval", () => {
+describe("SpendGate", () => {
   const spend = { spentMicroUsd: 4_120_000, estimateMicroUsd: 1_350_000, capMicroUsd: 5_000_000 };
 
   it("warns when the run would pass its cap", () => {
     const html = renderToStaticMarkup(
-      <SpendApproval
+      <SpendGate
         {...spend}
         balanceMicroUsd={18_000_000}
         onAllowOnce={noop}
@@ -27,7 +27,7 @@ describe("SpendApproval", () => {
 
   it("is red and offers credits when out of credits", () => {
     const html = renderToStaticMarkup(
-      <SpendApproval
+      <SpendGate
         {...spend}
         balanceMicroUsd={200_000}
         onAllowOnce={noop}
@@ -74,22 +74,20 @@ describe("MemoryReview", () => {
   });
 });
 
-describe("RunControls", () => {
+describe("RunBar", () => {
   const callbacks = { onPause: noop, onResume: noop, onStop: noop, onStep: noop };
 
   it("offers pause and stop while running", () => {
     const html = renderToStaticMarkup(
-      <RunControls status="running" runName="Nightly reconcile" {...callbacks} />
+      <RunBar status="running" runName="Nightly reconcile" {...callbacks} />
     );
     expect(html).toContain("Pause");
     expect(html).toMatch(/<button(?=[^>]*aria-label="Run one step")(?=[^>]*disabled="")[^>]*>/);
   });
 
   it("offers resume and step while paused, nothing when done", () => {
-    expect(renderToStaticMarkup(<RunControls status="paused" {...callbacks} />)).toContain(
-      "Resume"
-    );
-    const done = renderToStaticMarkup(<RunControls status="done" {...callbacks} />);
+    expect(renderToStaticMarkup(<RunBar status="paused" {...callbacks} />)).toContain("Resume");
+    const done = renderToStaticMarkup(<RunBar status="done" {...callbacks} />);
     expect(done).not.toContain("<button");
   });
 });

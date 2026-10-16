@@ -1,13 +1,13 @@
 import { renderToStaticMarkup } from "react-dom/server";
 import { describe, expect, it } from "vitest";
-import { closeOpenCodeFence, Response } from "../index";
+import { closeOpenCodeFence, Reply } from "../index";
 
 const table = "| Model | Cost |\n| --- | --- |\n| gpt-5 | $4.20 |\n";
 
-describe("Response", () => {
+describe("Reply", () => {
   it("streams markdown with a table and announces politely", () => {
     const html = renderToStaticMarkup(
-      <Response state="streaming">{`Spend by model:\n\n${table}`}</Response>
+      <Reply state="streaming">{`Spend by model:\n\n${table}`}</Reply>
     );
     expect(html).toContain('aria-live="polite"');
     expect(html).toContain('data-state="streaming"');
@@ -18,7 +18,7 @@ describe("Response", () => {
 
   it("stops announcing when done and opens links in a new tab", () => {
     const html = renderToStaticMarkup(
-      <Response>{"- one\n- [LocusGraph](https://locusgraph.com)\n\n`inline`"}</Response>
+      <Reply>{"- one\n- [LocusGraph](https://locusgraph.com)\n\n`inline`"}</Reply>
     );
     expect(html).not.toContain("aria-live");
     expect(html).toContain("<ul");
@@ -30,19 +30,15 @@ describe("Response", () => {
   it("closes an open code fence while streaming so the block does not jump", () => {
     expect(closeOpenCodeFence("```ts\nconst a = 1")).toBe("```ts\nconst a = 1\n```");
     expect(closeOpenCodeFence("```ts\nconst a = 1\n```")).toBe("```ts\nconst a = 1\n```");
-    const html = renderToStaticMarkup(
-      <Response state="streaming">{"```ts\nconst a = 1"}</Response>
-    );
+    const html = renderToStaticMarkup(<Reply state="streaming">{"```ts\nconst a = 1"}</Reply>);
     expect(html).toContain("<pre");
   });
 });
 
-describe("Response code blocks", () => {
-  it("renders fenced code through CodeBlock with its language", () => {
-    const html = renderToStaticMarkup(
-      <Response>{"Run this:\n\n```ts\nconst cost = 42;\n```"}</Response>
-    );
-    expect(html).toContain('data-slot="code-block"');
+describe("Reply code blocks", () => {
+  it("renders fenced code through Code with its language", () => {
+    const html = renderToStaticMarkup(<Reply>{"Run this:\n\n```ts\nconst cost = 42;\n```"}</Reply>);
+    expect(html).toContain('data-slot="code"');
     expect(html).toContain('data-language="ts"');
     expect(html).toContain("const cost = 42;");
   });

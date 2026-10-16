@@ -15,7 +15,7 @@ export {
   modelPriceLabel,
 } from "./shared/model-option-row";
 
-export type ModelSelectorProps = {
+export type ModelPickerProps = {
   models: ModelOption[];
   value: string;
   onChange: (id: string) => void;
@@ -24,19 +24,19 @@ export type ModelSelectorProps = {
   className?: string;
 };
 
-export function ModelSelector({
+export function ModelPicker({
   models,
   value,
   onChange,
   label = "Model",
   disabled = false,
   className,
-}: ModelSelectorProps) {
+}: ModelPickerProps) {
   const selected = models.find((model) => model.id === value);
   return (
     <DropdownMenu>
       <DropdownMenuTrigger
-        data-slot="model-selector"
+        data-slot="model-picker"
         data-value={value}
         disabled={disabled}
         aria-label={`${label}: ${selected?.name ?? "none selected"}`}

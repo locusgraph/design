@@ -1,6 +1,6 @@
 import { renderToStaticMarkup } from "react-dom/server";
 import { describe, expect, it } from "vitest";
-import { InlineCitation, MemoryRecall, MemoryWrite, Sources } from "../index";
+import { Cite, Memorized, Recall, Sources } from "../index";
 
 const citation = {
   index: 2,
@@ -9,10 +9,10 @@ const citation = {
   snippet: "Recall ranks memories by relevance and recency.",
 };
 
-describe("InlineCitation", () => {
+describe("Cite", () => {
   it("renders the number as a link labelled with the source", () => {
-    const html = renderToStaticMarkup(<InlineCitation citation={citation} />);
-    expect(html).toContain('data-slot="inline-citation"');
+    const html = renderToStaticMarkup(<Cite citation={citation} />);
+    expect(html).toContain('data-slot="cite"');
     expect(html).toContain('aria-label="Source 2: Recall ranking in LocusGraph"');
     expect(html).toContain('href="https://www.docs.locusgraph.com/recall"');
     expect(html).toContain(">2</a>");
@@ -20,7 +20,7 @@ describe("InlineCitation", () => {
 
   it("renders a button when the citation has no url", () => {
     const html = renderToStaticMarkup(
-      <InlineCitation citation={{ index: 1, title: "Team notes" }} onOpen={() => {}} />
+      <Cite citation={{ index: 1, title: "Team notes" }} onOpen={() => {}} />
     );
     expect(html).toContain('<button type="button" aria-label="Source 1: Team notes"');
   });
@@ -50,21 +50,19 @@ describe("Sources", () => {
   });
 });
 
-describe("MemoryRecall", () => {
+describe("Recall", () => {
   const memories = [
     { id: "mem_1", label: "Prefers weekly invoices", kind: "preference", relevance: 0.92 },
     { id: "mem_2", label: "Billing contact is Dana", kind: "fact", relevance: 0.456 },
   ];
 
   it("counts recalled memories", () => {
-    expect(renderToStaticMarkup(<MemoryRecall memories={memories} />)).toContain(
-      "Recalled 2 memories"
-    );
+    expect(renderToStaticMarkup(<Recall memories={memories} />)).toContain("Recalled 2 memories");
   });
 
   it("exposes relevance as a meter", () => {
     const html = renderToStaticMarkup(
-      <MemoryRecall memories={memories} defaultOpen onOpenMemory={() => {}} />
+      <Recall memories={memories} defaultOpen onOpenMemory={() => {}} />
     );
     expect(html).toContain('role="meter"');
     expect(html).toContain('aria-valuenow="92"');
@@ -74,10 +72,10 @@ describe("MemoryRecall", () => {
   });
 });
 
-describe("MemoryWrite", () => {
+describe("Memorized", () => {
   it("strikes through undone items and counts only saved ones", () => {
     const html = renderToStaticMarkup(
-      <MemoryWrite
+      <Memorized
         items={[
           { id: "w1", text: "Ships on Fridays", status: "saved" },
           { id: "w2", text: "Uses Postgres", kind: "fact", status: "undone" },

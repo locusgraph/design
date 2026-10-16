@@ -17,7 +17,7 @@ import type { ApprovalDecision, ArgField, ArgValues } from "../../types";
 import { ArgsField } from "./args-field";
 import { draftsFrom, validateDrafts, valuesFromDrafts } from "./args-validation";
 
-export type ToolArgsEditorProps = {
+export type ArgsEditorProps = {
   toolName: string;
   fields: ArgField[];
   initialValues?: ArgValues;
@@ -35,7 +35,7 @@ function errorSummary(count: number) {
   return count === 1 ? "1 field needs a fix." : `${count} fields need a fix.`;
 }
 
-export function ToolArgsEditor({
+export function ArgsEditor({
   toolName,
   fields,
   initialValues = {},
@@ -47,7 +47,7 @@ export function ToolArgsEditor({
   onCancel,
   autoFocus = false,
   className,
-}: ToolArgsEditorProps) {
+}: ArgsEditorProps) {
   const baseId = useId();
   const [drafts, setDrafts] = useState(() => draftsFrom(fields, initialValues));
   const [showErrors, setShowErrors] = useState(false);
@@ -58,7 +58,7 @@ export function ToolArgsEditor({
   const submitRef = useFocusOnMount<HTMLButtonElement>(autoFocus && !decision);
   return (
     <ApprovalPanel
-      data-slot="tool-args-editor"
+      data-slot="args-editor"
       data-risk={risk}
       aria-label={`Edit ${toolName} inputs`}
       data-state={decision ? (decision.approved ? "approved" : "denied") : "editing"}

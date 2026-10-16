@@ -8,7 +8,7 @@ export type { ContextSegment } from "./shared/context-breakdown";
 
 export type ContextStatus = "ok" | "near" | "full";
 
-export type ContextMeterProps = {
+export type ContextProps = {
   usedTokens: number;
   limitTokens: number;
   breakdown?: ContextSegment[];
@@ -64,21 +64,21 @@ function BarContent({
   );
 }
 
-export function ContextMeter({
+export function Context({
   usedTokens,
   limitTokens,
   breakdown,
   variant = "bar",
   label = "Context",
   className,
-}: ContextMeterProps) {
+}: ContextProps) {
   const percent = quotaPercent({ used: usedTokens, included: limitTokens });
   const status = contextStatus(usedTokens, limitTokens);
   const summary = `${formatCount(usedTokens)} of ${formatCount(limitTokens)} tokens`;
   const hasBreakdown = breakdown !== undefined && breakdown.length > 0;
   const meter = (
     <div
-      data-slot="context-meter"
+      data-slot="context"
       data-status={status}
       data-variant={variant}
       role="meter"

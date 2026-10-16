@@ -2,7 +2,7 @@ export function SpinnerMark() {
   return (
     <svg
       aria-hidden
-      data-slot="loader-spinner"
+      data-slot="pulse-spinner"
       viewBox="0 0 16 16"
       className="size-[1.1em] motion-safe:animate-spin"
       fill="none"

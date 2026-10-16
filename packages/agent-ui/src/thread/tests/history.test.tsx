@@ -1,6 +1,6 @@
 import { renderToStaticMarkup } from "react-dom/server";
 import { describe, expect, it } from "vitest";
-import { ThreadList } from "../index";
+import { History } from "../index";
 
 function localIso(month: number, day: number, hour: number, minute = 0) {
   return new Date(2026, month - 1, day, hour, minute).toISOString();
@@ -11,17 +11,12 @@ const threads = [
   { id: "thr_2", title: "Graph schema for invoices", updatedAt: localIso(10, 2, 14) },
 ];
 
-describe("ThreadList", () => {
+describe("History", () => {
   it("marks the active conversation and groups threads by day", () => {
     const html = renderToStaticMarkup(
-      <ThreadList
-        threads={threads}
-        activeId="thr_2"
-        now={localIso(10, 17, 12)}
-        onSelect={() => {}}
-      />
+      <History threads={threads} activeId="thr_2" now={localIso(10, 17, 12)} onSelect={() => {}} />
     );
-    expect(html).toContain('data-slot="thread-list"');
+    expect(html).toContain('data-slot="history"');
     expect(html.match(/aria-current="page"/g)).toHaveLength(1);
     expect(html).toMatch(/aria-current="page"[^>]*>.*Graph schema for invoices/);
     expect(html).toContain("Yesterday");
@@ -33,7 +28,7 @@ describe("ThreadList", () => {
 
   it("shows new chat and item menus only with callbacks", () => {
     const html = renderToStaticMarkup(
-      <ThreadList threads={threads} onSelect={() => {}} onNew={() => {}} onArchive={() => {}} />
+      <History threads={threads} onSelect={() => {}} onNew={() => {}} onArchive={() => {}} />
     );
     expect(html).toContain("New chat");
     expect(html).toContain('aria-label="Options for October spend by model"');
@@ -42,14 +37,14 @@ describe("ThreadList", () => {
 
   it("labels threads from the current day as today", () => {
     const html = renderToStaticMarkup(
-      <ThreadList threads={threads} now={localIso(10, 16, 20)} onSelect={() => {}} />
+      <History threads={threads} now={localIso(10, 16, 20)} onSelect={() => {}} />
     );
     expect(html).toContain("Today");
     expect(html).not.toContain("Yesterday");
   });
 
   it("shows the empty text without threads", () => {
-    const html = renderToStaticMarkup(<ThreadList threads={[]} onSelect={() => {}} />);
+    const html = renderToStaticMarkup(<History threads={[]} onSelect={() => {}} />);
     expect(html).toContain("No conversations yet.");
     expect(html).not.toContain("<ul");
   });

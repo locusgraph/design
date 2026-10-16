@@ -1,4 +1,4 @@
-import { CodeBlock } from "../../thread/code-block/code-block";
+import { Code } from "../../thread/code/code";
 
 export function prettyJson(value: unknown) {
   if (typeof value === "string") return value;
@@ -11,7 +11,7 @@ export function prettyJson(value: unknown) {
 
 export function JsonBlock({ label, value }: { label: string; value: unknown }) {
   return (
-    <CodeBlock
+    <Code
       data-slot="tool-json"
       code={prettyJson(value)}
       language="json"

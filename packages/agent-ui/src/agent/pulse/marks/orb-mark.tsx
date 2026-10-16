@@ -10,7 +10,7 @@ export function OrbMark() {
   const ref = useLoopAnimation<HTMLSpanElement>(breathe, 1500);
   return (
     <span aria-hidden className="inline-flex size-[1.25em] items-center justify-center">
-      <span ref={ref} data-slot="loader-orb" className="size-[0.8em] rounded-full bg-foreground" />
+      <span ref={ref} data-slot="pulse-orb" className="size-[0.8em] rounded-full bg-foreground" />
     </span>
   );
 }

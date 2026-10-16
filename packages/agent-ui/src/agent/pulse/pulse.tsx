@@ -1,16 +1,16 @@
 import { cn } from "@locusgraph/components";
 import type { ReactNode } from "react";
 import { GradientLabel } from "./gradient-label";
-import type { LoaderTone } from "./loader-tone";
 import { BarsMark } from "./marks/bars-mark";
 import { GlyphMark } from "./marks/glyph-mark";
 import { LocusMark } from "./marks/locus-mark";
 import { OrbMark } from "./marks/orb-mark";
 import { SpinnerMark } from "./marks/spinner-mark";
+import type { PulseTone } from "./pulse-tone";
 
-export type { LoaderTone };
+export type { PulseTone };
 
-export type LoaderVariant =
+export type PulseVariant =
   | "dots"
   | "shimmer"
   | "glyph"
@@ -20,7 +20,7 @@ export type LoaderVariant =
   | "spinner"
   | "locus";
 
-export const loaderVariants: LoaderVariant[] = [
+export const pulseVariants: PulseVariant[] = [
   "dots",
   "shimmer",
   "glyph",
@@ -31,11 +31,11 @@ export const loaderVariants: LoaderVariant[] = [
   "locus",
 ];
 
-export type LoaderProps = {
-  variant?: LoaderVariant;
+export type PulseProps = {
+  variant?: PulseVariant;
   label?: string;
   showLabel?: boolean;
-  tone?: LoaderTone;
+  tone?: PulseTone;
   className?: string;
 };
 
@@ -57,9 +57,9 @@ function TypingDots() {
   );
 }
 
-type MarkProps = { tone: LoaderTone };
+type MarkProps = { tone: PulseTone };
 
-const marks: Partial<Record<LoaderVariant, (props: MarkProps) => ReactNode>> = {
+const marks: Partial<Record<PulseVariant, (props: MarkProps) => ReactNode>> = {
   dots: TypingDots,
   glyph: GlyphMark,
   orb: OrbMark,
@@ -68,7 +68,7 @@ const marks: Partial<Record<LoaderVariant, (props: MarkProps) => ReactNode>> = {
   locus: LocusMark,
 };
 
-const labelShownByDefault: Record<LoaderVariant, boolean> = {
+const labelShownByDefault: Record<PulseVariant, boolean> = {
   dots: false,
   shimmer: true,
   glyph: true,
@@ -79,7 +79,7 @@ const labelShownByDefault: Record<LoaderVariant, boolean> = {
   locus: true,
 };
 
-type VisibleLabelProps = { variant: LoaderVariant; label: string; tone: LoaderTone };
+type VisibleLabelProps = { variant: PulseVariant; label: string; tone: PulseTone };
 
 function VisibleLabel({ variant, label, tone }: VisibleLabelProps) {
   if (variant === "gradient") return <GradientLabel label={label} tone={tone} />;
@@ -87,18 +87,18 @@ function VisibleLabel({ variant, label, tone }: VisibleLabelProps) {
   return <span className={cn(shimmers && "motion-safe:shimmer")}>{label}</span>;
 }
 
-export function Loader({
+export function Pulse({
   variant = "dots",
   label = "Thinking…",
   showLabel,
   tone = "neutral",
   className,
-}: LoaderProps) {
+}: PulseProps) {
   const Mark = marks[variant];
   const labelVisible = showLabel ?? labelShownByDefault[variant];
   return (
     <span
-      data-slot="loader"
+      data-slot="pulse"
       data-variant={variant}
       role="status"
       aria-live="polite"

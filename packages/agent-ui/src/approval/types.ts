@@ -42,7 +42,7 @@ export type MemoryReviewResult = {
   discarded: ProposedMemory[];
 };
 
-export type RunControlStatus = "running" | "paused" | "stopped" | "done";
+export type RunBarStatus = "running" | "paused" | "stopped" | "done";
 
 export type PendingApproval = {
   id: string;
