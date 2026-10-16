@@ -1,4 +1,4 @@
-import type { AgentMessage, ApprovalDecision, ToolPart } from "@locusgraph/agent-ui";
+import type { AgentMessage, ApprovalDecision, ToolPart } from "@locusgraph/loop";
 
 export const archiveCallId = "call_archive";
 

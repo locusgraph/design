@@ -1,5 +1,6 @@
 "use client";
 
+import { RuleGrid, RuleGridCell } from "@locusgraph/components";
 import {
   type AgentMessage,
   Approval,
@@ -9,8 +10,7 @@ import {
   Tool,
   type ToolPart,
   Turn,
-} from "@locusgraph/agent-ui";
-import { RuleGrid, RuleGridCell } from "@locusgraph/components";
+} from "@locusgraph/loop";
 import { useState } from "react";
 import {
   archiveCallId,

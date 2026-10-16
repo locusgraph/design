@@ -4,7 +4,7 @@ import { pathToFileURL } from "node:url";
 
 register("./published-resolve.mjs", import.meta.url);
 
-const packages = ["tokens", "utils", "brand", "components", "blocks", "agent-ui", "email"];
+const packages = ["tokens", "utils", "brand", "components", "blocks", "loop", "email"];
 
 function publishedEntry(folder) {
   const manifest = JSON.parse(
