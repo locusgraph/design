@@ -6,14 +6,19 @@ import {
   OnThisPage,
   Toaster,
 } from "@locusgraph/components";
-import { useCallback, useState } from "react";
-import { findDemoIndexEntry, useDemoEntry } from "./registry/load-demos";
+import { useCallback, useEffect, useRef, useState } from "react";
+import {
+  type DemoEntry,
+  findDemoIndexEntry,
+  prefetchDemoEntries,
+  useDemoEntry,
+} from "./registry/load-demos";
 import { ShellsPage } from "./shell/blocks/shells-page";
 import { InstallationPage, installationSections } from "./shell/guides/installation-page";
 import { HomePage, homeSections } from "./shell/home-page";
 import { LandingPage } from "./shell/landing/landing-page";
 import { HeaderActions } from "./shell/nav/header-actions";
-import { libraries, libraryOfPath } from "./shell/nav/libraries";
+import { libraries, libraryEntries, libraryOfPath } from "./shell/nav/libraries";
 import { PlaygroundLink, playgroundNavGroups } from "./shell/nav/playground-nav";
 import { SearchDialog, useSearchShortcut } from "./shell/nav/search-dialog";
 import { DemoPage } from "./shell/page/demo-page";
@@ -33,6 +38,22 @@ const headerLinks = [
   { title: "Shells", href: "/shells" },
 ];
 
+function useShownEntry(loaded: DemoEntry | undefined, isDemoPage: boolean) {
+  const previous = useRef<DemoEntry | undefined>(undefined);
+  if (loaded) previous.current = loaded;
+  if (!isDemoPage) previous.current = undefined;
+  return loaded ?? previous.current;
+}
+
+function usePrefetchLibrary(id: ReturnType<typeof libraryOfPath>["id"]) {
+  useEffect(() => {
+    const paths = libraryEntries(id).map((entry) => entry.path);
+    const start = () => void prefetchDemoEntries(paths);
+    const timer = globalThis.setTimeout(start, 1500);
+    return () => globalThis.clearTimeout(timer);
+  }, [id]);
+}
+
 export function App() {
   const { path, params } = useLocation();
   const settings = readShellSettings(params);
@@ -41,7 +62,8 @@ export function App() {
   useSearchShortcut(openSearch);
   useDocumentTheme(settings.theme);
   const isDemoPage = findDemoIndexEntry(path) !== undefined;
-  const entry = useDemoEntry(path);
+  const loadedEntry = useDemoEntry(path);
+  const entry = useShownEntry(loadedEntry, isDemoPage);
   const docs = usePageDocs(entry);
   const activeHref = `/${path}`;
   const isShellsPage = path === "shells";
@@ -49,6 +71,7 @@ export function App() {
   const isFullWidth = isShellsPage || isLandingPage;
   const isInstallationPage = path === "installation";
   const library = libraryOfPath(path);
+  usePrefetchLibrary(library.id);
   const navGroups = playgroundNavGroups(library);
   const pageSections =
     docs?.sections ??
@@ -98,13 +121,7 @@ export function App() {
         ) : isInstallationPage ? (
           <InstallationPage />
         ) : entry && docs ? (
-          <DemoPage
-            key={entry.path}
-            entry={entry}
-            docs={docs}
-            params={params}
-            settings={settings}
-          />
+          <DemoPage entry={entry} docs={docs} params={params} settings={settings} />
         ) : isDemoPage ? (
           <div aria-busy="true" className="min-h-svh" />
         ) : (

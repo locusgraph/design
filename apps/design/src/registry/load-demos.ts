@@ -59,6 +59,7 @@ export function findDemoIndexEntry(path: string) {
 }
 
 const loading = new Map<string, Promise<DemoEntry>>();
+const loaded = new Map<string, DemoEntry>();
 
 export function loadDemoEntry(path: string): Promise<DemoEntry> | undefined {
   const index = findDemoIndexEntry(path);
@@ -70,11 +71,11 @@ export function loadDemoEntry(path: string): Promise<DemoEntry> | undefined {
   }
   let entry = loading.get(path);
   if (!entry) {
-    entry = Promise.all([loadModule(), loadSource()]).then(([demo, source]) => ({
-      ...index,
-      demo,
-      source,
-    }));
+    entry = Promise.all([loadModule(), loadSource()]).then(([demo, source]) => {
+      const ready = { ...index, demo, source };
+      loaded.set(path, ready);
+      return ready;
+    });
     loading.set(path, entry);
   }
   return entry;
@@ -84,22 +85,36 @@ export function loadAllDemoEntries(): Promise<DemoEntry[]> {
   return Promise.all(demoIndex.map((entry) => loadDemoEntry(entry.path) as Promise<DemoEntry>));
 }
 
+export function prefetchDemoEntries(paths: string[], concurrency = 4) {
+  const queue = paths.filter((path) => !loading.has(path));
+  const worker = async () => {
+    for (let path = queue.shift(); path; path = queue.shift()) {
+      await loadDemoEntry(path)?.catch(() => undefined);
+    }
+  };
+  return Promise.all(Array.from({ length: concurrency }, worker));
+}
+
 export function useDemoEntry(path: string | undefined) {
-  const [loaded, setLoaded] = useState<DemoEntry>();
+  const [, setVersion] = useState(0);
+  const ready = path ? loaded.get(path) : undefined;
   useEffect(() => {
-    const pending = path ? loadDemoEntry(path) : undefined;
+    if (!path || loaded.has(path)) {
+      return;
+    }
+    const pending = loadDemoEntry(path);
     if (!pending) {
       return;
     }
     let current = true;
-    void pending.then((entry) => {
+    void pending.then(() => {
       if (current) {
-        setLoaded(entry);
+        setVersion((version) => version + 1);
       }
     });
     return () => {
       current = false;
     };
   }, [path]);
-  return loaded?.path === path ? loaded : undefined;
+  return ready;
 }
