@@ -4,6 +4,7 @@ import type { DemoEntry } from "../../registry/load-demos";
 import type { ShellSettings } from "../../url-state";
 import { Playground } from "../demo/playground";
 import { libraryEntries, libraryOfPath } from "../nav/libraries";
+import { InstallationSection } from "./install/installation-section";
 import type { PageDocs } from "./page-docs";
 import { PageHeader } from "./page-header";
 import { PagePager } from "./page-pager";
@@ -38,11 +39,12 @@ export function DemoPage({ entry, docs, params, settings }: DemoPageProps) {
       <section id="playground" className="scroll-mt-24">
         <Playground entry={entry} values={values} settings={settings} />
       </section>
-      <UsageSection
-        importLine={docs.importLine}
-        usageCode={docs.usageCode}
+      <InstallationSection
         registryName={entry.path.split("/").at(-1) ?? ""}
+        libraryPackage={libraryOfPath(entry.path).packageName}
+        importLine={docs.importLine}
       />
+      <UsageSection importLine={docs.importLine} usageCode={docs.usageCode} />
       {docs.composition && <CompositionSection title={demo.title} tree={docs.composition} />}
       {docs.examples.length > 0 && (
         <section id="examples" className="flex scroll-mt-24 flex-col gap-8">

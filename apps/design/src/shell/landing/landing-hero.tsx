@@ -41,6 +41,18 @@ export function LandingHero() {
           </PlaygroundLink>
         </Button>
       </div>
+      <p className="flex flex-wrap items-center gap-x-3 gap-y-1 font-mono text-xs text-muted-foreground">
+        <span>
+          or copy the source:{" "}
+          <span className="text-foreground/80">pnpm dlx shadcn@latest add @locus/…</span>
+        </span>
+        <PlaygroundLink
+          href="/installation#copy-with-shadcn"
+          className="underline-offset-4 outline-none hover:text-foreground hover:underline focus-visible:ring-2 focus-visible:ring-ring"
+        >
+          Registry →
+        </PlaygroundLink>
+      </p>
     </header>
   );
 }

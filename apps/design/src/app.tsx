@@ -13,6 +13,7 @@ import {
   prefetchDemoEntries,
   useDemoEntry,
 } from "./registry/load-demos";
+import { usePageHead } from "./seo/use-page-head";
 import { ShellsPage } from "./shell/blocks/shells-page";
 import { InstallationPage, installationSections } from "./shell/guides/installation-page";
 import { HomePage, homeSections } from "./shell/home-page";
@@ -65,6 +66,7 @@ export function App() {
   const loadedEntry = useDemoEntry(path);
   const entry = useShownEntry(loadedEntry, isDemoPage);
   const docs = usePageDocs(entry);
+  usePageHead(path, loadedEntry);
   const activeHref = `/${path}`;
   const isShellsPage = path === "shells";
   const isLandingPage = path === "";
