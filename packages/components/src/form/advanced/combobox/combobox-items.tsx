@@ -37,10 +37,7 @@ function ComboboxLabel({ className, ...props }: ComboboxPrimitive.GroupLabel.Pro
   return (
     <ComboboxPrimitive.GroupLabel
       data-slot="combobox-label"
-      className={cn(
-        "px-2 py-1.5 text-xs text-muted-foreground pointer-coarse:px-3 pointer-coarse:py-2 pointer-coarse:text-sm",
-        className
-      )}
+      className={cn("eyebrow px-2 pt-2 pb-1 pointer-coarse:px-3", className)}
       {...props}
     />
   );

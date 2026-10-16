@@ -59,13 +59,7 @@ function RuleGridCell({
 }
 
 function RuleGridLabel({ className, ...props }: React.ComponentProps<"span">) {
-  return (
-    <span
-      data-slot="rule-grid-label"
-      className={cn("font-mono text-[11.5px] text-muted-foreground", className)}
-      {...props}
-    />
-  );
+  return <span data-slot="rule-grid-label" className={cn("eyebrow", className)} {...props} />;
 }
 
 function RuleGridTitle({ className, ...props }: React.ComponentProps<"div">) {
