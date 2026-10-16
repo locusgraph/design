@@ -1,11 +1,11 @@
 {
   "$schema": "https://json.schemastore.org/tsconfig",
   "extends": [
-    "@spendgraph/config/typescript/base.json",
-    "@spendgraph/config/typescript/tests.json"
+    "@locusgraph/config/typescript/base.json",
+    "@locusgraph/config/typescript/tests.json"
   ],
   "compilerOptions": {
     "types": ["node", "vitest/globals"]
   },
-  "include": ["*.config.ts", "apps/*/vitest.config.ts", "packages/*/vitest.config.ts", "types"]
+  "include": ["*.config.ts", "apps/*/vitest.config.ts", "packages/*/vitest.config.ts"]
 }

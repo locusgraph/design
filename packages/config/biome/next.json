@@ -1,0 +1,27 @@
+{
+  "$schema": "https://biomejs.dev/schemas/2.5.8/schema.json",
+  "linter": {
+    "domains": {
+      "react": "recommended",
+      "next": "recommended"
+    },
+    "rules": {
+      "correctness": {
+        "useExhaustiveDependencies": "warn",
+        "useHookAtTopLevel": "error"
+      },
+      "performance": {
+        "noImgElement": "error",
+        "noSyncScripts": "error",
+        "noUnwantedPolyfillio": "error"
+      },
+      "suspicious": {
+        "noDocumentImportInPage": "error",
+        "noHeadImportInDocument": "error"
+      },
+      "style": {
+        "noHeadElement": "error"
+      }
+    }
+  }
+}

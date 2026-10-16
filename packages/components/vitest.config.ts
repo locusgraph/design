@@ -1,4 +1,4 @@
-import { packageTests } from "@spendgraph/config/vitest";
+import { packageTests } from "@locusgraph/config/vitest";
 import { defineConfig } from "vitest/config";
 
 export default defineConfig(

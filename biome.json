@@ -1,6 +1,6 @@
 {
   "$schema": "./node_modules/@biomejs/biome/configuration_schema.json",
-  "extends": ["@spendgraph/config/biome/base.json"],
+  "extends": ["@locusgraph/config/biome/base.json"],
   "vcs": {
     "enabled": true,
     "clientKind": "git",
