@@ -62,6 +62,7 @@ export default defineDemo({
   props: [
     { name: "KeysTable.keys", type: "ApiKeyRow[]" },
     { name: "KeysTable.actions", type: "(key: ApiKeyRow) => ReactNode" },
+    { name: "KeysTable.highlightedId", type: "string", defaultValue: "flashes a just-created key" },
     { name: "NoKeys.newKeyHref", type: "string", defaultValue: "omit for read-only roles" },
   ],
   examples: {
