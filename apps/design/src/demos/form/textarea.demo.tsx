@@ -30,9 +30,9 @@ function Invalid() {
 
 function WithButton() {
   return (
-    <div className="grid w-full max-w-sm gap-2">
+    <div className="grid w-full max-w-sm gap-3">
       <Textarea placeholder="Describe the billing issue" />
-      <Button>Send to support</Button>
+      <Button className="justify-self-end">Send to support</Button>
     </div>
   );
 }

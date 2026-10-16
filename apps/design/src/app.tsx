@@ -81,7 +81,9 @@ export function App() {
           )
         }
         aside={
-          isShellsPage || pageSections.length === 0 ? undefined : (
+          isShellsPage ? undefined : pageSections.length === 0 ? (
+            <span aria-hidden="true" />
+          ) : (
             <OnThisPage key={entry?.path ?? path} sections={pageSections} />
           )
         }

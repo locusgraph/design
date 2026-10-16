@@ -1,5 +1,4 @@
 import { type AgentMessage, ChatMessage, Conversation, PromptInput } from "@locusgraph/agent-ui";
-import { RuleGridLabel } from "@locusgraph/components";
 import { useState } from "react";
 import { defineDemo, toggle } from "../../../registry/define-demo";
 
@@ -38,7 +37,7 @@ const thread: AgentMessage[] = [
 
 const emptyState = (
   <div className="flex flex-col items-center gap-1">
-    <RuleGridLabel>New conversation</RuleGridLabel>
+    <span className="eyebrow">New conversation</span>
     <p className="text-sm text-muted-foreground">Ask what your agents remember or spend.</p>
   </div>
 );

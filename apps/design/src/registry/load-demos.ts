@@ -1,10 +1,6 @@
 import { useEffect, useState } from "react";
 import type { Demo } from "./define-demo";
 
-/**
- * What the menu, search, home page and pager need: known from the file name,
- * so listing every demo loads none of them.
- */
 export type DemoIndexEntry = {
   path: string;
   group: string;
@@ -12,7 +8,6 @@ export type DemoIndexEntry = {
   title: string;
 };
 
-/** A demo page's full entry, loaded when the page opens. */
 export type DemoEntry = DemoIndexEntry & { demo: Demo; source: string };
 
 const demoModules = import.meta.glob<Demo>("../demos/**/*.demo.tsx", { import: "default" });
@@ -92,7 +87,6 @@ export function loadAllDemoEntries(): Promise<DemoEntry[]> {
   return Promise.all(demoIndex.map((entry) => loadDemoEntry(entry.path) as Promise<DemoEntry>));
 }
 
-/** The demo at `path` once its module has loaded; undefined while it loads or when there is none. */
 export function useDemoEntry(path: string | undefined) {
   const [loaded, setLoaded] = useState<DemoEntry>();
   useEffect(() => {

@@ -35,9 +35,10 @@ export default defineDemo({
   title: "Context Meter",
   description:
     "Context window used against its limit. Amber from 80%, red when full. With a breakdown, hover or focus shows what fills the window.",
+  previewHeight: "tall",
   controls: { level: select(levelOptions, "near"), variant: select(variants) },
   playground: ({ level, variant }) => (
-    <div className="w-[22rem] max-w-full">
+    <div className="h-[20rem] w-[22rem] max-w-full">
       <ContextMeter
         variant={variant}
         usedTokens={levels[level]}

@@ -45,8 +45,10 @@ export default defineDemo({
   ],
   examples: {
     AllKinds: {
-      description: "Each type takes its color from the theme status tokens.",
+      description:
+        "Each type marks its icon and left rule with a theme status token; the text stays neutral.",
       component: AllKinds,
     },
   },
+  previewHeight: "tall",
 });

@@ -4,12 +4,42 @@ import { defineDemo, select } from "../../registry/define-demo";
 const scenarios = ["fine", "near", "over"] as const;
 
 const quotasFor = {
-  fine: [{ key: "spendgraph.events", period: "month", used: 18200, included: 100000 }],
-  near: [{ key: "spendgraph.events", period: "month", used: 86000, included: 100000 }],
-  over: [{ key: "spendgraph.events", period: "month", used: 10450, included: 10000 }],
+  fine: [
+    {
+      key: "spendgraph.events",
+      label: "SpendGraph events",
+      period: "month",
+      used: 18200,
+      included: 100000,
+    },
+  ],
+  near: [
+    {
+      key: "spendgraph.events",
+      label: "SpendGraph events",
+      period: "month",
+      used: 86000,
+      included: 100000,
+    },
+  ],
+  over: [
+    {
+      key: "spendgraph.events",
+      label: "SpendGraph events",
+      period: "month",
+      used: 10450,
+      included: 10000,
+    },
+  ],
 } satisfies Record<(typeof scenarios)[number], Quota[]>;
 
-const graphs: Quota = { key: "locusgraph.graphs", period: "lifetime", used: 0, included: 1 };
+const graphs: Quota = {
+  key: "locusgraph.graphs",
+  label: "LocusGraph graphs",
+  period: "lifetime",
+  used: 0,
+  included: 1,
+};
 
 function LowCredits() {
   return (
@@ -52,6 +82,7 @@ export default defineDemo({
   code: () => "<UsageSummary quotas={quotas} />",
   props: [
     { name: "UsageSummary.quotas", type: "Quota[]" },
+    { name: "Quota.label", type: "string", defaultValue: "falls back to key" },
     { name: "UsageAttention.balanceMicroUsd", type: "number | null" },
     { name: "UsageAttention.paidPlan", type: "boolean" },
     { name: "UsageAttention.linkComponent", type: 'LinkComponent | "a"', defaultValue: '"a"' },

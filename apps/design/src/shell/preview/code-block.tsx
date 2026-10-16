@@ -75,7 +75,7 @@ function CopyButton({ text }: { text: string }) {
       size="icon-sm"
       aria-label="Copy code"
       onClick={copy}
-      className="absolute top-2 right-2"
+      className="absolute top-2 right-2 bg-surface hover:bg-accent"
     >
       {copied ? <CheckIcon /> : <CopyIcon />}
     </Button>

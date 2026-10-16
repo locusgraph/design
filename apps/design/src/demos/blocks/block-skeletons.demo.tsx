@@ -5,7 +5,7 @@ import {
   UsageSummarySkeleton,
   WalletPanelSkeleton,
 } from "@locusgraph/blocks";
-import { RuleGrid } from "@locusgraph/components";
+import { RuleGrid, RuleGridCell } from "@locusgraph/components";
 import { defineDemo, select } from "../../registry/define-demo";
 
 const blocks = ["usage", "wallet", "plans", "keys"] as const;
@@ -22,7 +22,13 @@ function renderBlock(block: Block) {
       </RuleGrid>
     ),
     plans: <PlanOptionsSkeleton plans={2} />,
-    keys: <KeysTableSkeleton rows={3} />,
+    keys: (
+      <RuleGrid columns={1}>
+        <RuleGridCell className="p-0">
+          <KeysTableSkeleton rows={3} actions />
+        </RuleGridCell>
+      </RuleGrid>
+    ),
   };
   return <div className="w-full max-w-3xl">{skeletons[block]}</div>;
 }
@@ -32,7 +38,7 @@ const blockCode = {
   wallet:
     "<RuleGrid columns={2}>\n  <WalletPanelSkeleton />\n  <CreditPacksSkeleton />\n</RuleGrid>",
   plans: "<PlanOptionsSkeleton plans={2} />",
-  keys: "<KeysTableSkeleton rows={3} />",
+  keys: "<KeysTableSkeleton rows={3} actions />",
 } as const;
 
 function Usage() {
@@ -63,7 +69,11 @@ function Plans() {
 function Keys() {
   return (
     <div className="w-full max-w-3xl">
-      <KeysTableSkeleton rows={4} />
+      <RuleGrid columns={1}>
+        <RuleGridCell className="p-0">
+          <KeysTableSkeleton rows={4} actions />
+        </RuleGridCell>
+      </RuleGrid>
     </div>
   );
 }
@@ -82,6 +92,8 @@ export default defineDemo({
     { name: "PlanOptionsSkeleton.plans", type: "number", defaultValue: "2" },
     { name: "PlanOptionsSkeleton.points", type: "number", defaultValue: "2" },
     { name: "KeysTableSkeleton.rows", type: "number", defaultValue: "3" },
+    { name: "KeysTableSkeleton.actions", type: "boolean", defaultValue: "false" },
+    { name: "PlanOptionsSkeleton.currentIndex", type: "number", defaultValue: "0" },
   ],
   examples: {
     Usage: { description: "Three quota meters while usage loads.", component: Usage },

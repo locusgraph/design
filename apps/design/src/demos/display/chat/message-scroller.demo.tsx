@@ -56,7 +56,7 @@ function Thread() {
 function Basic() {
   return (
     <MessageScrollerProvider>
-      <div className="h-96 w-full max-w-sm overflow-hidden rounded-xl border">
+      <div className="h-96 w-full max-w-sm overflow-hidden border">
         <MessageScroller>
           <MessageScrollerViewport>
             <Thread />
@@ -71,7 +71,7 @@ function Basic() {
 function OpenAtStart() {
   return (
     <MessageScrollerProvider defaultScrollPosition="start">
-      <div className="h-80 w-full max-w-sm overflow-hidden rounded-xl border">
+      <div className="h-80 w-full max-w-sm overflow-hidden border">
         <MessageScroller>
           <MessageScrollerViewport>
             <Thread />
@@ -87,7 +87,7 @@ function OpenAtStart() {
 function LastAnchor() {
   return (
     <MessageScrollerProvider defaultScrollPosition="last-anchor">
-      <div className="h-80 w-full max-w-sm overflow-hidden rounded-xl border">
+      <div className="h-80 w-full max-w-sm overflow-hidden border">
         <MessageScroller>
           <MessageScrollerViewport>
             <Thread />
@@ -114,7 +114,7 @@ export default defineDemo({
       defaultScrollPosition={defaultScrollPosition}
       autoScroll={autoScroll}
     >
-      <div className="h-96 w-80 overflow-hidden rounded-xl border">
+      <div className="h-96 w-80 overflow-hidden border">
         <MessageScroller>
           <MessageScrollerViewport>
             <Thread />

@@ -35,7 +35,7 @@ function EditOrganization({
           <SheetTitle>Edit organization</SheetTitle>
           <SheetDescription>Changes apply to every member of Acme Inc.</SheetDescription>
         </SheetHeader>
-        <div className="grid gap-3 px-4">
+        <div className="grid gap-2 px-6">
           <Label htmlFor="sheet-org-name">Name</Label>
           <Input id="sheet-org-name" defaultValue="Acme Inc." />
         </div>
@@ -61,7 +61,7 @@ function InvoiceDetails() {
           <SheetTitle>Invoice INV-0042</SheetTitle>
           <SheetDescription>Team plan, October 2026.</SheetDescription>
         </SheetHeader>
-        <dl className="grid grid-cols-2 gap-2 px-4 text-sm">
+        <dl className="grid grid-cols-2 gap-2 px-6 text-sm">
           <dt className="text-muted-foreground">Seats</dt>
           <dd className="text-right">12</dd>
           <dt className="text-muted-foreground">Total</dt>

@@ -70,7 +70,7 @@ function CustomTool() {
       className="w-full max-w-xl"
       message={assistantMessage}
       renderTool={(part) => (
-        <span className="font-mono text-[11.5px] text-muted-foreground">
+        <span className="font-mono text-xs text-muted-foreground">
           {part.type} · {part.state}
         </span>
       )}

@@ -56,8 +56,8 @@ function Horizontal() {
         <Switch id="usage-alerts" defaultChecked />
       </Field>
       <Field orientation="horizontal">
-        <Checkbox id="invoice-copies" />
         <FieldLabel htmlFor="invoice-copies">Send invoice copies to all owners</FieldLabel>
+        <Checkbox id="invoice-copies" />
       </Field>
     </FieldGroup>
   );

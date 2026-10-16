@@ -26,13 +26,19 @@ const invoices = [
   { id: "INV-0917", date: "Aug 1, 2026", amount: "$360.00", status: "Refunded" },
 ];
 
+function invoiceStatusClassName(status: string) {
+  return status === "Paid"
+    ? "bg-good/10 text-good"
+    : "bg-transparent text-muted-foreground ring-1 ring-border";
+}
+
 export function BillingOverview() {
   return (
     <div className="flex flex-col gap-6">
       <RuleGrid columns={3}>
         {stats.map((stat) => (
           <RuleGridCell key={stat.label} className="p-5">
-            <RuleGridLabel>{stat.label}</RuleGridLabel>
+            <RuleGridLabel className="eyebrow">{stat.label}</RuleGridLabel>
             <span className="text-2xl font-semibold tracking-[-0.02em]">{stat.value}</span>
             <RuleGridDescription>{stat.detail}</RuleGridDescription>
           </RuleGridCell>
@@ -44,14 +50,16 @@ export function BillingOverview() {
           <RuleGridDescription>82,400 of 100,000 included runs</RuleGridDescription>
           <Progress value={82} />
         </RuleGridCell>
+      </RuleGrid>
+      <RuleGrid columns={1}>
         <RuleGridCell className="p-0">
           <Table>
             <TableHeader>
               <TableRow>
-                <TableHead>Invoice</TableHead>
-                <TableHead>Date</TableHead>
-                <TableHead>Amount</TableHead>
-                <TableHead>Status</TableHead>
+                <TableHead className="eyebrow">Invoice</TableHead>
+                <TableHead className="eyebrow">Date</TableHead>
+                <TableHead className="eyebrow">Amount</TableHead>
+                <TableHead className="eyebrow">Status</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
@@ -61,7 +69,7 @@ export function BillingOverview() {
                   <TableCell>{invoice.date}</TableCell>
                   <TableCell>{invoice.amount}</TableCell>
                   <TableCell>
-                    <Badge variant={invoice.status === "Paid" ? "secondary" : "outline"}>
+                    <Badge className={invoiceStatusClassName(invoice.status)}>
                       {invoice.status}
                     </Badge>
                   </TableCell>

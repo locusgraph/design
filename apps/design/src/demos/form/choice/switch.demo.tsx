@@ -35,12 +35,12 @@ function SettingsList() {
 function Controlled() {
   const [enabled, setEnabled] = useState(false);
   return (
-    <div className="flex flex-col gap-2">
+    <div className="flex flex-col gap-1">
       <div className="flex items-center gap-2">
         <Switch id="annual" checked={enabled} onCheckedChange={setEnabled} />
         <Label htmlFor="annual">Bill annually</Label>
       </div>
-      <p className="text-sm text-muted-foreground">
+      <p className="pl-11 text-sm text-muted-foreground">
         {enabled ? "$480 per year, two months free." : "$48 per month."}
       </p>
     </div>

@@ -1,6 +1,7 @@
 import {
   Field,
   FieldDescription,
+  FieldError,
   FieldLabel,
   InputOTP,
   InputOTPGroup,
@@ -67,13 +68,17 @@ function WithField() {
 
 function Invalid() {
   return (
-    <InputOTP maxLength={4} defaultValue="1234">
-      <InputOTPGroup>
-        {[0, 1, 2, 3].map((index) => (
-          <InputOTPSlot key={index} index={index} aria-invalid="true" />
-        ))}
-      </InputOTPGroup>
-    </InputOTP>
+    <Field className="w-fit">
+      <FieldLabel htmlFor="rejected-code">Verification code</FieldLabel>
+      <InputOTP id="rejected-code" maxLength={4} defaultValue="1234">
+        <InputOTPGroup>
+          {[0, 1, 2, 3].map((index) => (
+            <InputOTPSlot key={index} index={index} aria-invalid="true" />
+          ))}
+        </InputOTPGroup>
+      </InputOTP>
+      <FieldError>That code has expired. Request a new one.</FieldError>
+    </Field>
   );
 }
 

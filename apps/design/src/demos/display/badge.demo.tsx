@@ -3,13 +3,26 @@ import { CheckIcon } from "lucide-react";
 import { formatProp } from "../../registry/control-values";
 import { defineDemo, select, text } from "../../registry/define-demo";
 
-const variants = ["default", "secondary", "destructive", "outline", "ghost", "link"] as const;
+const variants = [
+  "default",
+  "secondary",
+  "success",
+  "warning",
+  "destructive-soft",
+  "destructive",
+  "outline",
+  "ghost",
+  "link",
+] as const;
 
 function Variants() {
   return (
     <div className="flex flex-wrap items-center gap-2">
       <Badge>Default</Badge>
       <Badge variant="secondary">Secondary</Badge>
+      <Badge variant="success">Success</Badge>
+      <Badge variant="warning">Warning</Badge>
+      <Badge variant="destructive-soft">Destructive soft</Badge>
       <Badge variant="destructive">Destructive</Badge>
       <Badge variant="outline">Outline</Badge>
     </div>
@@ -19,12 +32,12 @@ function Variants() {
 function PlanStatus() {
   return (
     <div className="flex flex-wrap items-center gap-2">
-      <Badge variant="secondary">
+      <Badge variant="success">
         <CheckIcon />
         Active
       </Badge>
       <Badge variant="outline">Trial</Badge>
-      <Badge variant="destructive">Past due</Badge>
+      <Badge variant="destructive-soft">Past due</Badge>
     </div>
   );
 }

@@ -35,7 +35,7 @@ export default defineDemo({
     "The LocusGraph mark and wordmark, and the Google and GitHub marks for sign-in. From @locusgraph/brand.",
   controls: { size: select(sizeOptions, "md"), wordmark: toggle(true) },
   playground: ({ size, wordmark }) => (
-    <div className="flex items-center gap-6">
+    <div className="flex items-center gap-2.5">
       <LocusGraphMark className={sizes[size]} />
       {wordmark && <LocusGraphWordmark className="text-2xl" />}
     </div>

@@ -14,9 +14,9 @@ function VideoThumbnail() {
     <div className="w-full max-w-md">
       <AspectRatio
         ratio={16 / 9}
-        className="flex items-center justify-center overflow-hidden rounded-lg bg-gradient-to-br from-slate-800 to-slate-950"
+        className="flex items-center justify-center overflow-hidden bg-muted ring-1 ring-border"
       >
-        <span className="flex size-12 items-center justify-center rounded-full bg-white/90 text-slate-900">
+        <span className="flex size-12 items-center justify-center rounded-full bg-primary text-primary-foreground">
           <PlayIcon className="size-5" />
         </span>
       </AspectRatio>
@@ -29,7 +29,7 @@ function SquareAvatar() {
     <div className="w-32">
       <AspectRatio
         ratio={1}
-        className="flex items-center justify-center rounded-xl bg-gradient-to-br from-violet-500 to-fuchsia-500 text-2xl font-semibold text-white"
+        className="flex items-center justify-center bg-muted text-2xl font-semibold text-foreground ring-1 ring-border"
       >
         AC
       </AspectRatio>
@@ -42,10 +42,12 @@ function PlanBanner() {
     <div className="w-full max-w-lg">
       <AspectRatio
         ratio={21 / 9}
-        className="flex flex-col justify-end gap-1 overflow-hidden rounded-lg bg-gradient-to-r from-emerald-500 to-teal-600 p-6 text-white"
+        className="flex flex-col justify-end gap-1 overflow-hidden bg-muted p-6 ring-1 ring-border"
       >
-        <span className="text-xs font-medium uppercase opacity-80">Pro plan</span>
-        <span className="text-xl font-semibold">Unlimited seats for your whole team</span>
+        <span className="eyebrow">Pro plan</span>
+        <span className="text-xl font-semibold text-foreground">
+          Unlimited seats for your whole team
+        </span>
       </AspectRatio>
     </div>
   );
@@ -61,14 +63,14 @@ export default defineDemo({
     <div className="w-80">
       <AspectRatio
         ratio={parseRatio(ratio)}
-        className="flex items-center justify-center rounded-lg bg-gradient-to-br from-sky-500 to-indigo-600 text-sm font-medium text-white"
+        className="flex items-center justify-center bg-muted font-mono text-sm text-muted-foreground ring-1 ring-border"
       >
         {ratio}
       </AspectRatio>
     </div>
   ),
   code: ({ ratio }) =>
-    `<div className="w-80">\n  <AspectRatio ratio={${ratio}} className="rounded-lg bg-muted">\n    <img src="/invoice-preview.png" alt="Invoice preview" className="size-full object-cover" />\n  </AspectRatio>\n</div>`,
+    `<div className="w-80">\n  <AspectRatio ratio={${ratio}} className="bg-muted">\n    <img src="/invoice-preview.png" alt="Invoice preview" className="size-full object-cover" />\n  </AspectRatio>\n</div>`,
   props: [
     { name: "ratio", type: "number", defaultValue: "1" },
     { name: "asChild", type: "boolean", defaultValue: "false" },

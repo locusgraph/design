@@ -43,13 +43,18 @@ const models: ModelOption[] = [
 
 function ChooseModel() {
   const [value, setValue] = useState("claude-sonnet-4.5");
-  return <ModelSelector models={models} value={value} onChange={setValue} />;
+  return (
+    <div className="flex h-[24rem] w-full justify-center">
+      <ModelSelector models={models} value={value} onChange={setValue} />
+    </div>
+  );
 }
 
 export default defineDemo({
   title: "Model Selector",
   description:
     "A quiet trigger with the model and its provider. The menu lists each model with speed, context size and price per million tokens, and checks the one in use. Small enough for a prompt input's model slot.",
+  previewHeight: "tall",
   controls: {},
   playground: () => <ChooseModel />,
   code: () => `<ModelSelector models={models} value={modelId} onChange={setModelId} />`,

@@ -25,7 +25,7 @@ function UserAvatar() {
 function AgentAvatar() {
   return (
     <Avatar>
-      <AvatarFallback className="bg-primary text-primary-foreground">AI</AvatarFallback>
+      <AvatarFallback>AI</AvatarFallback>
     </Avatar>
   );
 }

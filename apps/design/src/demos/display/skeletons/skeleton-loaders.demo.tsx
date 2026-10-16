@@ -23,7 +23,7 @@ function renderLoader(kind: Kind, amount: Amount) {
     text: <SkeletonText lines={value} className="w-80" />,
     avatar: <SkeletonAvatar size={sizes[value]} />,
     button: <SkeletonButton size={buttonSizes[value]} />,
-    table: <SkeletonTable rows={value} columns={4} className="max-w-2xl" />,
+    table: <SkeletonTable rows={value} columns={4} />,
     "rule-grid": <SkeletonRuleGrid cells={value} columns={value} className="w-full max-w-3xl" />,
   };
   return loaders[kind];
@@ -62,7 +62,7 @@ function PanelWithAction() {
 }
 
 function InvoiceTable() {
-  return <SkeletonTable rows={3} columns={5} label="Loading invoices" className="max-w-2xl" />;
+  return <SkeletonTable rows={3} columns={4} label="Loading invoices" />;
 }
 
 function StatGrid() {

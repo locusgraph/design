@@ -1,4 +1,6 @@
 import {
+  Avatar,
+  AvatarFallback,
   Button,
   Item,
   ItemActions,
@@ -18,31 +20,29 @@ const variants = ["default", "outline", "muted"] as const;
 const sizes = ["default", "sm"] as const;
 
 const members = [
-  { name: "Nadia Khan", email: "nadia@acme.dev", role: "Owner", color: "bg-violet-500" },
-  { name: "Omar Diaz", email: "omar@acme.dev", role: "Admin", color: "bg-emerald-500" },
-  { name: "Lee Park", email: "lee@acme.dev", role: "Member", color: "bg-sky-500" },
+  { name: "Nadia Khan", email: "nadia@acme.dev", role: "Owner" },
+  { name: "Omar Diaz", email: "omar@acme.dev", role: "Admin" },
+  { name: "Lee Park", email: "lee@acme.dev", role: "Member" },
 ];
 
-function Initials({ name, color }: { name: string; color: string }) {
-  return (
-    <div className={`flex size-full items-center justify-center text-sm text-white ${color}`}>
-      {name
-        .split(" ")
-        .map((part) => part[0])
-        .join("")}
-    </div>
-  );
+function initialsOf(name: string) {
+  return name
+    .split(" ")
+    .map((part) => part[0])
+    .join("");
 }
 
 function MemberList() {
   return (
-    <ItemGroup className="w-full max-w-md rounded-lg border">
+    <ItemGroup className="w-full max-w-md border">
       {members.map((member, index) => (
         <Fragment key={member.email}>
           {index > 0 && <ItemSeparator />}
           <Item size="sm">
-            <ItemMedia variant="image">
-              <Initials name={member.name} color={member.color} />
+            <ItemMedia>
+              <Avatar className="size-10">
+                <AvatarFallback>{initialsOf(member.name)}</AvatarFallback>
+              </Avatar>
             </ItemMedia>
             <ItemContent>
               <ItemTitle>{member.name}</ItemTitle>
@@ -102,7 +102,7 @@ export default defineDemo({
     title: text("Production API key"),
   },
   playground: ({ variant, size, title }) => (
-    <Item variant={variant} size={size} className="w-96">
+    <Item variant={variant} size={size} className="w-full max-w-md">
       <ItemMedia variant="icon">
         <KeyRoundIcon />
       </ItemMedia>

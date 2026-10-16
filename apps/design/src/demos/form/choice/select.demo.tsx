@@ -1,6 +1,7 @@
 import {
   Field,
   FieldDescription,
+  FieldError,
   FieldLabel,
   Select,
   SelectContent,
@@ -73,16 +74,20 @@ function Groups() {
 
 function Invalid() {
   return (
-    <Select>
-      <SelectTrigger className="w-56" aria-invalid="true">
-        <SelectValue placeholder="Select a billing country" />
-      </SelectTrigger>
-      <SelectContent>
-        <SelectItem value="us">United States</SelectItem>
-        <SelectItem value="de">Germany</SelectItem>
-        <SelectItem value="in">India</SelectItem>
-      </SelectContent>
-    </Select>
+    <Field className="w-56">
+      <FieldLabel htmlFor="billing-country">Billing country</FieldLabel>
+      <Select>
+        <SelectTrigger id="billing-country" className="w-full" aria-invalid="true">
+          <SelectValue placeholder="Select a billing country" />
+        </SelectTrigger>
+        <SelectContent>
+          <SelectItem value="us">United States</SelectItem>
+          <SelectItem value="de">Germany</SelectItem>
+          <SelectItem value="in">India</SelectItem>
+        </SelectContent>
+      </Select>
+      <FieldError>A billing country is required.</FieldError>
+    </Field>
   );
 }
 

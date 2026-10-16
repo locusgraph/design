@@ -27,13 +27,15 @@ function SpendLimit({
         <Button variant="outline">Set spend limit</Button>
       </PopoverTrigger>
       <PopoverContent align={align} side={side}>
-        <div className="grid gap-3">
+        <div className="grid gap-4">
           <div className="grid gap-1">
             <h4 className="text-sm font-medium">Monthly spend limit</h4>
-            <p className="text-sm text-muted-foreground">Usage stops when the limit is reached.</p>
+            <p className="text-sm text-muted-foreground">Usage pauses at the limit.</p>
           </div>
-          <Label htmlFor="popover-limit">Limit in USD</Label>
-          <Input id="popover-limit" defaultValue="500" />
+          <div className="grid gap-1.5">
+            <Label htmlFor="popover-limit">Limit in USD</Label>
+            <Input id="popover-limit" defaultValue="500" />
+          </div>
         </div>
       </PopoverContent>
     </Popover>
@@ -63,9 +65,11 @@ function InviteForm() {
         <Button>Invite member</Button>
       </PopoverTrigger>
       <PopoverContent>
-        <div className="grid gap-3">
-          <Label htmlFor="popover-invite">Email</Label>
-          <Input id="popover-invite" type="email" placeholder="ada@acme.com" />
+        <div className="grid gap-4">
+          <div className="grid gap-1.5">
+            <Label htmlFor="popover-invite">Email</Label>
+            <Input id="popover-invite" type="email" placeholder="ada@acme.com" />
+          </div>
           <Button size="sm">Send invite</Button>
         </div>
       </PopoverContent>

@@ -27,7 +27,14 @@ function Playground({ withBranches }: { withBranches: boolean }) {
 }
 
 function CopyOnly() {
-  return <MessageActions onCopy={() => {}} />;
+  return (
+    <div className="flex w-full max-w-xl flex-col items-end gap-1">
+      <p className="max-w-[85%] bg-muted px-3.5 py-2 text-sm">
+        How much did the support agent spend in September?
+      </p>
+      <MessageActions onCopy={() => {}} />
+    </div>
+  );
 }
 
 export default defineDemo({

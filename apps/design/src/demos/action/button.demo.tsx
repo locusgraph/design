@@ -46,7 +46,7 @@ function WithIcon() {
         <PlusIcon />
         New key
       </Button>
-      <Button variant="destructive">
+      <Button variant="outline" className="text-destructive hover:text-destructive">
         <TrashIcon />
         Remove member
       </Button>

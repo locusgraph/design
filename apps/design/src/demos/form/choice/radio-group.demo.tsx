@@ -23,7 +23,7 @@ const plans = [
 
 function WithDescriptions() {
   return (
-    <FieldSet className="max-w-sm">
+    <FieldSet className="w-full max-w-sm">
       <FieldLegend variant="label">Plan</FieldLegend>
       <RadioGroup defaultValue="team">
         {plans.map((plan) => (
@@ -47,7 +47,7 @@ function Cards() {
         <Label
           key={plan.value}
           htmlFor={`card-${plan.value}`}
-          className="flex flex-col items-start gap-2 rounded-lg border p-3 has-[[data-state=checked]]:border-primary"
+          className="flex items-center gap-2 border p-3 has-[[data-state=checked]]:border-primary"
         >
           <RadioGroupItem id={`card-${plan.value}`} value={plan.value} />
           <span>{plan.name}</span>

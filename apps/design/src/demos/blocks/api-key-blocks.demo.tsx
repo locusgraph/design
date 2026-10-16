@@ -45,7 +45,11 @@ export default defineDemo({
             <KeysTable
               keys={keys}
               actions={() => (
-                <Button size="sm" variant="ghost">
+                <Button
+                  size="sm"
+                  variant="ghost"
+                  className="text-muted-foreground hover:text-destructive"
+                >
                   Revoke
                 </Button>
               )}

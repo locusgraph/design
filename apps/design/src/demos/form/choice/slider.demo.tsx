@@ -11,8 +11,10 @@ function SeatCount() {
   return (
     <div className="flex w-full max-w-sm flex-col gap-3">
       <div className="flex items-center justify-between">
-        <Label htmlFor="seats">Seats</Label>
-        <span className="text-sm text-muted-foreground">
+        <Label htmlFor="seats" className="font-normal text-muted-foreground">
+          Seats
+        </Label>
+        <span className="text-sm font-medium tabular-nums">
           {seats[0]} seats, ${(seats[0] ?? 0) * 8}/mo
         </span>
       </div>
@@ -26,8 +28,8 @@ function Range() {
   return (
     <div className="flex w-full max-w-sm flex-col gap-3">
       <div className="flex items-center justify-between">
-        <Label>Alert between</Label>
-        <span className="text-sm text-muted-foreground">
+        <Label className="font-normal text-muted-foreground">Alert between</Label>
+        <span className="text-sm font-medium tabular-nums">
           {range[0]}% and {range[1]}% of quota
         </span>
       </div>
@@ -48,7 +50,7 @@ function Vertical() {
 function Disabled() {
   return (
     <div className="flex w-full max-w-sm flex-col gap-3">
-      <Label>Spend cap (set by your plan)</Label>
+      <Label className="text-muted-foreground">Spend cap (set by your plan)</Label>
       <Slider defaultValue={[60]} disabled aria-label="Locked spend cap" />
     </div>
   );

@@ -36,7 +36,7 @@ function AddSeats({
             <DrawerTitle>{title}</DrawerTitle>
             <DrawerDescription>Each seat adds $20 to the next invoice.</DrawerDescription>
           </DrawerHeader>
-          <div className="grid gap-3 px-4">
+          <div className="grid gap-2 px-6">
             <Label htmlFor="drawer-seats">Seats</Label>
             <Input id="drawer-seats" type="number" defaultValue="5" />
           </div>

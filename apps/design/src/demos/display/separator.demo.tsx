@@ -31,20 +31,20 @@ function Vertical() {
 
 function InList() {
   return (
-    <div className="w-72 rounded-lg border text-sm">
+    <div className="w-72 border text-sm">
       <div className="flex justify-between px-4 py-3">
-        <span>Seats</span>
-        <span>$120.00</span>
+        <span className="text-muted-foreground">Seats</span>
+        <span className="tabular-nums">$120.00</span>
       </div>
       <Separator />
       <div className="flex justify-between px-4 py-3">
-        <span>Usage</span>
-        <span>$38.40</span>
+        <span className="text-muted-foreground">Usage</span>
+        <span className="tabular-nums">$38.40</span>
       </div>
       <Separator />
-      <div className="flex justify-between px-4 py-3 font-medium">
+      <div className="flex justify-between px-4 py-3 font-semibold">
         <span>Total</span>
-        <span>$158.40</span>
+        <span className="tabular-nums">$158.40</span>
       </div>
     </div>
   );

@@ -9,7 +9,14 @@ import {
   AttachmentTitle,
   Spinner,
 } from "@locusgraph/components";
-import { AlertCircleIcon, FileSpreadsheetIcon, FileTextIcon, XIcon } from "lucide-react";
+import {
+  AlertCircleIcon,
+  FileSpreadsheetIcon,
+  FileTextIcon,
+  ImageIcon,
+  RotateCcwIcon,
+  XIcon,
+} from "lucide-react";
 import { formatProp } from "../../../registry/control-values";
 import { defineDemo, select } from "../../../registry/define-demo";
 
@@ -17,9 +24,9 @@ const states = ["done", "uploading", "processing", "error", "idle"] as const;
 const sizes = ["default", "sm", "xs"] as const;
 
 const files = [
-  { name: "invoice-0042.pdf", meta: "PDF · 84 KB", gradient: "from-rose-400 to-orange-400" },
-  { name: "usage-march.csv", meta: "CSV · 1.2 MB", gradient: "from-emerald-400 to-teal-500" },
-  { name: "org-chart.png", meta: "PNG · 640 KB", gradient: "from-sky-400 to-indigo-500" },
+  { name: "invoice-0042.pdf", meta: "PDF · 84 KB", Icon: FileTextIcon },
+  { name: "usage-march.csv", meta: "CSV · 1.2 MB", Icon: FileSpreadsheetIcon },
+  { name: "org-chart.png", meta: "PNG · 640 KB", Icon: ImageIcon },
 ];
 
 const descriptions: Record<(typeof states)[number], string> = {
@@ -41,6 +48,11 @@ function States() {
           <AttachmentTitle>usage-march.csv</AttachmentTitle>
           <AttachmentDescription>Uploading · 64%</AttachmentDescription>
         </AttachmentContent>
+        <AttachmentActions>
+          <AttachmentAction aria-label="Cancel upload of usage-march.csv">
+            <XIcon />
+          </AttachmentAction>
+        </AttachmentActions>
       </Attachment>
       <Attachment state="error" className="w-full">
         <AttachmentMedia>
@@ -50,6 +62,14 @@ function States() {
           <AttachmentTitle>contract.docx</AttachmentTitle>
           <AttachmentDescription>File is larger than 20 MB</AttachmentDescription>
         </AttachmentContent>
+        <AttachmentActions>
+          <AttachmentAction aria-label="Retry contract.docx">
+            <RotateCcwIcon />
+          </AttachmentAction>
+          <AttachmentAction aria-label="Remove contract.docx">
+            <XIcon />
+          </AttachmentAction>
+        </AttachmentActions>
       </Attachment>
       <Attachment className="w-full">
         <AttachmentMedia>
@@ -69,8 +89,8 @@ function Group() {
     <AttachmentGroup className="w-full max-w-sm">
       {files.map((file) => (
         <Attachment key={file.name} orientation="vertical">
-          <AttachmentMedia variant="image">
-            <div className={`size-full bg-gradient-to-br ${file.gradient}`} />
+          <AttachmentMedia>
+            <file.Icon />
           </AttachmentMedia>
           <AttachmentContent>
             <AttachmentTitle>{file.name}</AttachmentTitle>

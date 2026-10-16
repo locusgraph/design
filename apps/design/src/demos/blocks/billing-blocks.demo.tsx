@@ -21,12 +21,15 @@ function Plans() {
           {
             name: "Free",
             price: "$0",
+            amountCents: 0,
             points: ["LocusGraph Free", "SpendGraph Free"],
             current: true,
           },
           {
             name: "Pro",
             price: "$40.00 per month",
+            amountCents: 4000,
+            interval: "month",
             points: ["Every product on one plan", "Higher monthly quotas"],
             current: false,
           },
@@ -45,15 +48,22 @@ export default defineDemo({
   playground: ({ balance }) => (
     <RuleGrid columns={2} className="w-full max-w-3xl">
       <WalletPanel balanceMicroUsd={balances[balance]} grants={balance === "empty" ? [] : grants} />
-      <CreditPacks packs={packs} onBuy={() => {}} />
+      <CreditPacks
+        packs={packs}
+        onBuy={() => {}}
+        highlightedPackId={balance === "fine" ? undefined : "credits_200"}
+      />
     </RuleGrid>
   ),
   code: () =>
-    `<RuleGrid columns={2}>\n  <WalletPanel balanceMicroUsd={wallet.balanceMicroUsd} grants={grants} />\n  <CreditPacks packs={wallet.packs} onBuy={openCheckout} pending={pending} />\n</RuleGrid>`,
+    `<RuleGrid columns={2}>\n  <WalletPanel balanceMicroUsd={wallet.balanceMicroUsd} grants={grants} />\n  <CreditPacks packs={wallet.packs} onBuy={openCheckout} pendingPackId={pendingPackId} />\n</RuleGrid>`,
   props: [
     { name: "WalletPanel.balanceMicroUsd", type: "number" },
     { name: "WalletPanel.grants", type: "WalletGrant[]" },
     { name: "CreditPacks.onBuy", type: "(packId: string) => void" },
+    { name: "CreditPacks.highlightedPackId", type: "string", defaultValue: "pack to suggest" },
+    { name: "CreditPacks.pendingPackId", type: "string", defaultValue: "shows a spinner" },
+    { name: "PlanOffer.amountCents", type: "number", defaultValue: "falls back to price" },
     { name: "PlanOptions.actionFor", type: "(plan: PlanOffer) => ReactNode" },
   ],
   examples: {

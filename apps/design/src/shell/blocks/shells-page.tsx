@@ -1,8 +1,13 @@
+import { cn } from "@locusgraph/components";
 import { shellEntries } from "../../shells/load-shells";
 import type { Theme } from "../../url-state";
 import { ShellViewer } from "./shell-viewer";
+import { useCurrentShell } from "./use-current-shell";
+
+const shellIds = shellEntries.map((shell) => shell.id);
 
 export function ShellsPage({ theme }: { theme: Theme }) {
+  const currentShellId = useCurrentShell(shellIds);
   return (
     <div className="flex flex-col gap-10">
       <header className="mx-auto flex max-w-2xl flex-col items-center gap-3 py-8 text-center">
@@ -17,7 +22,11 @@ export function ShellsPage({ theme }: { theme: Theme }) {
           <a
             key={shell.id}
             href={`#${shell.id}`}
-            className="border-b-2 border-transparent pb-2 text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
+            aria-current={shell.id === currentShellId ? "location" : undefined}
+            className={cn(
+              "-mb-px border-b-2 border-transparent pb-2 text-sm font-medium text-muted-foreground transition-colors hover:text-foreground",
+              shell.id === currentShellId && "border-foreground text-foreground"
+            )}
           >
             {shell.title}
           </a>

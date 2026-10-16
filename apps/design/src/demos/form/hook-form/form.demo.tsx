@@ -21,7 +21,7 @@ function PlaygroundForm({ showDescription, submitLabel }: PlaygroundProps) {
   const form = useForm<{ name: string }>({ defaultValues: { name: "" } });
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(() => form.reset())} className="flex w-80 flex-col gap-4">
+      <form onSubmit={form.handleSubmit(() => form.reset())} className="flex w-80 flex-col gap-6">
         <FormField
           control={form.control}
           name="name"
@@ -49,7 +49,7 @@ function BillingDetails() {
   const form = useForm<BillingValues>({ defaultValues: { company: "", billingEmail: "" } });
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(() => form.reset())} className="flex w-80 flex-col gap-4">
+      <form onSubmit={form.handleSubmit(() => form.reset())} className="flex w-80 flex-col gap-6">
         <FormField
           control={form.control}
           name="company"
@@ -97,7 +97,7 @@ function InviteMember() {
   });
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(() => form.reset())} className="flex w-80 flex-col gap-4">
+      <form onSubmit={form.handleSubmit(() => form.reset())} className="flex w-80 flex-col gap-6">
         <FormField
           control={form.control}
           name="email"
@@ -108,6 +108,7 @@ function InviteMember() {
               <FormControl>
                 <Input type="email" placeholder="teammate@acme.com" {...field} />
               </FormControl>
+              <FormDescription>Send invite turns on once an email is entered.</FormDescription>
               <FormMessage />
             </FormItem>
           )}
@@ -116,7 +117,7 @@ function InviteMember() {
           control={form.control}
           name="sendWelcome"
           render={({ field }) => (
-            <FormItem className="flex items-center justify-between rounded-lg border p-3">
+            <FormItem className="flex items-center justify-between">
               <FormLabel>Send a welcome email</FormLabel>
               <FormControl>
                 <Switch checked={field.value} onCheckedChange={field.onChange} />

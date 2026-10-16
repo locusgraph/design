@@ -5,18 +5,24 @@ const invoices = Array.from({ length: 30 }, (_, index) => `INV-${String(1000 + i
 const plans = ["Free", "Starter", "Pro", "Team", "Business", "Enterprise", "Custom"];
 const heights = { sm: "h-40", md: "h-56", lg: "h-72" } as const;
 
+function InvoiceList({ heading }: { heading: string }) {
+  return (
+    <div className="p-4">
+      <h4 className="eyebrow mb-3">{heading}</h4>
+      {invoices.map((invoice) => (
+        <div key={invoice}>
+          <div className="text-sm tabular-nums">{invoice}</div>
+          <Separator className="my-2" />
+        </div>
+      ))}
+    </div>
+  );
+}
+
 function Basic() {
   return (
     <ScrollArea className="h-72 w-48 rounded-md border">
-      <div className="p-4">
-        <h4 className="mb-4 text-sm leading-none font-medium">Invoices</h4>
-        {invoices.map((invoice) => (
-          <div key={invoice}>
-            <div className="text-sm">{invoice}</div>
-            <Separator className="my-2" />
-          </div>
-        ))}
-      </div>
+      <InvoiceList heading="Invoices" />
     </ScrollArea>
   );
 }
@@ -63,21 +69,13 @@ export default defineDemo({
   controls: { height: select(["md", "sm", "lg"]), heading: text("Invoices") },
   playground: ({ height, heading }) => (
     <ScrollArea className={`${heights[height]} w-56 rounded-md border`}>
-      <div className="p-4">
-        <h4 className="mb-4 text-sm leading-none font-medium">{heading}</h4>
-        {invoices.map((invoice) => (
-          <div key={invoice}>
-            <div className="text-sm">{invoice}</div>
-            <Separator className="my-2" />
-          </div>
-        ))}
-      </div>
+      <InvoiceList heading={heading} />
     </ScrollArea>
   ),
   code: ({ height, heading }) =>
-    `<ScrollArea className="${heights[height]} w-56 rounded-md border">\n  <div className="p-4">\n    <h4>${heading}</h4>\n    {invoices.map((invoice) => (\n      <div key={invoice}>{invoice}</div>\n    ))}\n  </div>\n</ScrollArea>`,
+    `<ScrollArea className="${heights[height]} w-56 rounded-md border">\n  <div className="p-4">\n    <h4 className="eyebrow">${heading}</h4>\n    {invoices.map((invoice) => (\n      <div key={invoice}>{invoice}</div>\n    ))}\n  </div>\n</ScrollArea>`,
   props: [
-    { name: "type", type: "auto | always | scroll | hover", defaultValue: "hover" },
+    { name: "type", type: "auto | always | scroll | hover", defaultValue: "auto" },
     { name: "scrollHideDelay", type: "number (ms)", defaultValue: "600" },
     { name: "className", type: "string (set a height or width)" },
     { name: "ScrollBar.orientation", type: "vertical | horizontal", defaultValue: "vertical" },
