@@ -1,6 +1,6 @@
 {
   "name": "@locusgraph/utils",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Formatting and quota helpers LocusGraph apps share: money in cents and micro-USD, counts, dates and usage status.",
   "license": "MIT",
   "repository": {
@@ -29,7 +29,7 @@
     }
   },
   "scripts": {
-    "build": "rm -rf dist && tsc -p tsconfig.build.json",
+    "build": "rm -rf dist && tsc -p tsconfig.build.json && node ../../scripts/esm-extensions.mjs dist",
     "prepack": "pnpm run build",
     "typecheck": "tsc -p tsconfig.json --noEmit",
     "test": "vitest run"
