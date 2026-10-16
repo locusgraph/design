@@ -3,6 +3,11 @@ import { basename, dirname, join, relative } from "node:path";
 
 export const sourcePackages = ["utils", "brand", "components", "blocks", "loop"];
 
+const sourceRoots = [
+  ...sourcePackages.map((packageName) => ({ packageName, dir: join("packages", packageName, "src") })),
+  { packageName: "patterns", dir: join("apps", "design", "src", "patterns") },
+];
+
 function sourceFiles(dir) {
   return readdirSync(dir, { withFileTypes: true }).flatMap((entry) => {
     const path = join(dir, entry.name);
@@ -52,8 +57,8 @@ export function definedExports(source) {
 }
 
 export function collectSourceFiles(root) {
-  const files = sourcePackages.flatMap((packageName) => {
-    const srcDir = join(root, "packages", packageName, "src");
+  const files = sourceRoots.flatMap(({ packageName, dir }) => {
+    const srcDir = join(root, dir);
     return sourceFiles(srcDir).map((path) => ({
       packageName,
       path,

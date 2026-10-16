@@ -37,7 +37,7 @@ export function LandingTile({
       </div>
       <Link
         href={href}
-        className="group flex items-end justify-between gap-4 border-t bg-muted/40 px-6 py-4 outline-none hover:bg-muted/70 focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-ring"
+        className="group flex items-end justify-between gap-4 border-t bg-muted/70 px-6 py-4 outline-none hover:bg-muted focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-ring"
       >
         <span className="flex min-w-0 flex-col gap-0.5">
           <span className="text-[15px] font-semibold tracking-tight">{title}</span>

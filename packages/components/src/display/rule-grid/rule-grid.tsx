@@ -63,7 +63,7 @@ function RuleGridHeader({ className, ...props }: React.ComponentProps<"div">) {
     <div
       data-slot="rule-grid-header"
       className={cn(
-        "-mx-6 -mt-6 mb-2 flex min-h-11 items-center gap-2 border-b bg-muted/20 px-6 py-2.5",
+        "-mx-6 -mt-6 mb-2 flex min-h-11 items-center gap-2 border-b bg-muted/35 px-6 py-2.5",
         className
       )}
       {...props}
@@ -76,7 +76,7 @@ function RuleGridFooter({ className, ...props }: React.ComponentProps<"div">) {
     <div
       data-slot="rule-grid-footer"
       className={cn(
-        "-mx-6 mt-auto -mb-6 flex min-h-12 flex-wrap items-center gap-2 border-t bg-muted/40 px-6 py-3",
+        "-mx-6 mt-auto -mb-6 flex min-h-12 flex-wrap items-center gap-2 border-t bg-muted/70 px-6 py-3",
         className
       )}
       {...props}
