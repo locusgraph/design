@@ -6,6 +6,7 @@ describe("libraries", () => {
   it("files blocks and brand demos under their own package and everything else under components", () => {
     expect(libraryOfGroup("blocks")).toBe("blocks");
     expect(libraryOfGroup("brand")).toBe("brand");
+    expect(libraryOfGroup("agent-ui")).toBe("agent-ui");
     expect(libraryOfGroup("form")).toBe("components");
   });
 
@@ -20,6 +21,7 @@ describe("libraries", () => {
     const listed = [
       ...libraryEntries("components"),
       ...libraryEntries("blocks"),
+      ...libraryEntries("agent-ui"),
       ...libraryEntries("brand"),
     ];
     expect(listed).toHaveLength(demoIndex.length);

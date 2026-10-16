@@ -4,14 +4,22 @@ import { type Library, libraryEntries } from "./nav/libraries";
 import { PlaygroundLink } from "./nav/playground-nav";
 
 function groupTitle(group: string) {
-  return group.charAt(0).toUpperCase() + group.slice(1);
+  return group
+    .split("-")
+    .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+    .join(" ");
+}
+
+function groupKey(library: Library, entry: DemoIndexEntry) {
+  return library.id === "components" ? entry.group : entry.section || entry.group;
 }
 
 function libraryGroups(library: Library) {
   const entries = libraryEntries(library.id);
-  return [...new Set(entries.map((entry) => entry.group))].sort().map((group) => ({
+  const keys = entries.map((entry) => groupKey(library, entry));
+  return [...new Set(keys)].sort().map((group) => ({
     group,
-    entries: entries.filter((entry) => entry.group === group),
+    entries: entries.filter((entry) => groupKey(library, entry) === group),
   }));
 }
 
