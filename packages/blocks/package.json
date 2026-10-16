@@ -1,0 +1,61 @@
+{
+  "name": "@locusgraph/blocks",
+  "version": "0.1.0",
+  "description": "Product sections built from @locusgraph/components: usage meters and alerts, wallet, credit packs, plan options and API keys.",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/locusgraph/design.git",
+    "directory": "packages/blocks"
+  },
+  "homepage": "https://design.locusgraph.com",
+  "type": "module",
+  "sideEffects": [
+    "**/*.css"
+  ],
+  "files": [
+    "dist"
+  ],
+  "exports": {
+    ".": "./src/index.ts",
+    "./sources.css": "./src/sources.css"
+  },
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org",
+    "access": "public",
+    "provenance": true,
+    "exports": {
+      ".": {
+        "types": "./dist/index.d.ts",
+        "default": "./dist/index.js"
+      },
+      "./sources.css": "./dist/sources.css"
+    }
+  },
+  "scripts": {
+    "build": "rm -rf dist && tsc -p tsconfig.build.json && cp src/sources.css dist/sources.css",
+    "prepack": "pnpm run build",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "test": "vitest run"
+  },
+  "peerDependencies": {
+    "@locusgraph/components": "workspace:^",
+    "react": "^19.2.0",
+    "react-dom": "^19.2.0"
+  },
+  "dependencies": {
+    "@locusgraph/utils": "workspace:*",
+    "lucide-react": "catalog:"
+  },
+  "devDependencies": {
+    "@locusgraph/components": "workspace:*",
+    "@locusgraph/config": "workspace:*",
+    "@types/node": "catalog:",
+    "@types/react": "catalog:",
+    "@types/react-dom": "catalog:",
+    "react": "catalog:",
+    "react-dom": "catalog:",
+    "typescript": "catalog:",
+    "vitest": "catalog:"
+  }
+}
