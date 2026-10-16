@@ -23,6 +23,14 @@ pnpm add @locusgraph/components @locusgraph/blocks @locusgraph/loop @locusgraph/
 @import "@locusgraph/brand/sources.css";
 \`\`\`
 
+## Copy the source with shadcn
+
+\`\`\`bash
+pnpm dlx shadcn@latest add https://design.locusgraph.com/r/theme.json https://design.locusgraph.com/r/approval.json
+\`\`\`
+
+Every item is listed at https://design.locusgraph.com/r/registry.json. Files land in \`components/locus\`; import \`styles/locus.css\` after Tailwind.
+
 ## House style
 
 - Containers are square (radius 0). Buttons are pills (\`rounded-full\`).

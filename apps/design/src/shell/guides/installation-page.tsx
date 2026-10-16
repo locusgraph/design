@@ -5,6 +5,7 @@ import * as snippets from "./installation-snippets";
 
 export const installationSections: PageSection[] = [
   { id: "add-the-package", title: "Add the package" },
+  { id: "copy-with-shadcn", title: "Or copy with shadcn" },
   { id: "add-tailwind", title: "Add Tailwind" },
   { id: "import-the-theme", title: "Import the theme" },
   { id: "configure-the-bundler", title: "Configure the bundler" },
@@ -44,6 +45,26 @@ export function InstallationPage() {
           <p>The package is on npm. A fix or a new component reaches your app as a new version.</p>
         </Prose>
         <Code code={snippets.addFromRegistry} language="bash" />
+      </Step>
+      <Step id="copy-with-shadcn" title="Or copy with shadcn">
+        <Prose>
+          <p>
+            To own the code instead, add the components with the shadcn CLI. Each one is copied into
+            components/locus with the parts it needs. Register the registry once in components.json.
+          </p>
+        </Prose>
+        <Code code={snippets.shadcnRegistry} language="json" />
+        <Code code={snippets.shadcnAdd} language="bash" />
+        <Prose>
+          <p>
+            The theme lands in styles/locus.css. Import it after Tailwind; it also sets the shadcn
+            colors and radius in your global CSS, so existing shadcn components match. If shadcn
+            init added a font such as Geist to your layout, remove it to use Inter. With pnpm 12,
+            set the @carbon/icons-react and @carbon/icon-helpers install scripts to false under
+            allowBuilds; they only send telemetry.
+          </p>
+        </Prose>
+        <Code code={snippets.shadcnTheme} language="css" />
       </Step>
       <Step id="add-tailwind" title="Add Tailwind">
         <Prose>

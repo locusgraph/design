@@ -55,3 +55,14 @@ export function UpgradePanel() {
 }`;
 
 export const darkMode = `document.documentElement.classList.toggle("dark", theme === "dark");`;
+
+export const shadcnRegistry = `{
+  "registries": {
+    "@locus": "https://design.locusgraph.com/r/{name}.json"
+  }
+}`;
+
+export const shadcnAdd = `pnpm dlx shadcn@latest add @locus/theme @locus/button @locus/approval`;
+
+export const shadcnTheme = `@import "tailwindcss";
+@import "../styles/locus.css";`;
