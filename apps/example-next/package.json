@@ -1,0 +1,32 @@
+{
+  "name": "@locusgraph/example-next",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "next dev --port 3100",
+    "build": "next build",
+    "start": "next start --port 3100",
+    "typecheck": "tsc -p tsconfig.json --noEmit"
+  },
+  "dependencies": {
+    "@locusgraph/blocks": "workspace:*",
+    "@locusgraph/brand": "workspace:*",
+    "@locusgraph/components": "workspace:*",
+    "@locusgraph/email": "workspace:*",
+    "@locusgraph/utils": "workspace:*",
+    "lucide-react": "catalog:",
+    "next": "catalog:",
+    "react": "catalog:",
+    "react-dom": "catalog:"
+  },
+  "devDependencies": {
+    "@locusgraph/config": "workspace:*",
+    "@tailwindcss/postcss": "catalog:",
+    "@types/node": "catalog:",
+    "@types/react": "catalog:",
+    "@types/react-dom": "catalog:",
+    "tailwindcss": "catalog:",
+    "tw-animate-css": "catalog:",
+    "typescript": "catalog:"
+  }
+}

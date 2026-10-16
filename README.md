@@ -13,6 +13,8 @@ shell, and one theme with light and dark modes.
 | [`@locusgraph/utils`](packages/utils) | Money, counts, dates and quota helpers |
 | [`@locusgraph/config`](packages/config) | Biome, TypeScript and Vitest settings, replacing `@spendgraph/config` |
 
+Examples: [Next.js App Router](apps/example-next) and [React with Vite](apps/example-react).
+
 - **Docs** ([apps/design](apps/design)): every component with a live playground, usage and props,
   at [design.locusgraph.com](https://design.locusgraph.com).
 

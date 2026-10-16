@@ -1,0 +1,33 @@
+{
+  "name": "@locusgraph/example-react",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite --port 3200",
+    "build": "vite build",
+    "preview": "vite preview --port 3200",
+    "typecheck": "tsc -p tsconfig.json --noEmit"
+  },
+  "dependencies": {
+    "@locusgraph/blocks": "workspace:*",
+    "@locusgraph/brand": "workspace:*",
+    "@locusgraph/components": "workspace:*",
+    "@locusgraph/email": "workspace:*",
+    "@locusgraph/utils": "workspace:*",
+    "lucide-react": "catalog:",
+    "react": "catalog:",
+    "react-dom": "catalog:"
+  },
+  "devDependencies": {
+    "@locusgraph/config": "workspace:*",
+    "@tailwindcss/vite": "catalog:",
+    "@types/node": "catalog:",
+    "@types/react": "catalog:",
+    "@types/react-dom": "catalog:",
+    "@vitejs/plugin-react": "catalog:",
+    "tailwindcss": "catalog:",
+    "tw-animate-css": "catalog:",
+    "typescript": "catalog:",
+    "vite": "catalog:"
+  }
+}
