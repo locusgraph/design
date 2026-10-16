@@ -1,4 +1,4 @@
-import { ChevronRightIcon } from "lucide-react";
+import { ChevronRight as ChevronRightIcon } from "@carbon/icons-react";
 import type * as React from "react";
 import type { LinkComponent } from "./link";
 

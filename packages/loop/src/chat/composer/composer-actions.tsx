@@ -1,5 +1,9 @@
+import {
+  ArrowUp as ArrowUpIcon,
+  Attachment as PaperclipIcon,
+  StopFilledAlt as SquareIcon,
+} from "@carbon/icons-react";
 import { Button } from "@locusgraph/components";
-import { ArrowUpIcon, PaperclipIcon, SquareIcon } from "lucide-react";
 import { useRef } from "react";
 
 export type ComposerStatus = "ready" | "submitting" | "streaming" | "error";

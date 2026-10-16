@@ -1,5 +1,9 @@
+import {
+  ArrowRight as ArrowRightIcon,
+  Add as PlusIcon,
+  TrashCan as TrashIcon,
+} from "@carbon/icons-react";
 import { Button } from "@locusgraph/components";
-import { ArrowRightIcon, PlusIcon, TrashIcon } from "lucide-react";
 import { formatProp } from "../../registry/control-values";
 import { defineDemo, select, text, toggle } from "../../registry/define-demo";
 

@@ -1,7 +1,7 @@
 "use client";
 
+import { Checkmark as CheckIcon, CircleSolid as CircleIcon } from "@carbon/icons-react";
 import { cn } from "cn";
-import { CheckIcon, CircleIcon } from "lucide-react";
 import * as MenubarPrimitive from "radix-ui/menubar";
 import * as React from "react";
 

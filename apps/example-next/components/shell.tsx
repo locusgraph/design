@@ -1,8 +1,8 @@
 "use client";
 
+import { Bot as BotIcon, Grid as LayoutGridIcon, Email as MailIcon } from "@carbon/icons-react";
 import { LocusGraphMark } from "@locusgraph/brand";
 import { AppHeader, AppShell, AppSidebar, ThemeToggle } from "@locusgraph/components";
-import { BotIcon, LayoutGridIcon, MailIcon } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import type * as React from "react";

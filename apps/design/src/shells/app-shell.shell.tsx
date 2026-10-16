@@ -1,4 +1,12 @@
 import {
+  Purchase as CreditCardIcon,
+  Document as FileTextIcon,
+  Meter as GaugeIcon,
+  Password as KeyRoundIcon,
+  Grid as LayoutGridIcon,
+  UserMultiple as UsersIcon,
+} from "@carbon/icons-react";
+import {
   AppHeader,
   AppShell,
   AppSidebar,
@@ -7,14 +15,6 @@ import {
   Separator,
   ThemeToggle,
 } from "@locusgraph/components";
-import {
-  CreditCardIcon,
-  FileTextIcon,
-  GaugeIcon,
-  KeyRoundIcon,
-  LayoutGridIcon,
-  UsersIcon,
-} from "lucide-react";
 import { BillingOverview } from "./content/billing-overview";
 import { useShellTheme } from "./content/use-shell-theme";
 import { defineShell } from "./define-shell";

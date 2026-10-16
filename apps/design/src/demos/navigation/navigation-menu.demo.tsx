@@ -1,4 +1,9 @@
 import {
+  Purchase as CreditCardIcon,
+  Password as KeyRoundIcon,
+  UserMultiple as UsersIcon,
+} from "@carbon/icons-react";
+import {
   NavigationMenu,
   NavigationMenuContent,
   NavigationMenuItem,
@@ -7,7 +12,6 @@ import {
   NavigationMenuTrigger,
   navigationMenuTriggerStyle,
 } from "@locusgraph/components";
-import { CreditCardIcon, KeyRoundIcon, UsersIcon } from "lucide-react";
 import { formatProp } from "../../registry/control-values";
 import { defineDemo, text, toggle } from "../../registry/define-demo";
 

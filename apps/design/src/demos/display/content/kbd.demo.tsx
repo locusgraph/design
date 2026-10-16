@@ -1,3 +1,4 @@
+import { ArrowUp as ArrowUpIcon, MacCommand as CommandIcon } from "@carbon/icons-react";
 import {
   Button,
   Kbd,
@@ -7,7 +8,6 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@locusgraph/components";
-import { ArrowUpIcon, CommandIcon } from "lucide-react";
 import { defineDemo, text, toggle } from "../../../registry/define-demo";
 
 function splitKeys(keys: string) {

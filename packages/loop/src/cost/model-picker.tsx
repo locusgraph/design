@@ -1,3 +1,4 @@
+import { ChevronDown as ChevronDownIcon } from "@carbon/icons-react";
 import {
   cn,
   DropdownMenu,
@@ -6,7 +7,6 @@ import {
   DropdownMenuRadioGroup,
   DropdownMenuTrigger,
 } from "@locusgraph/components";
-import { ChevronDownIcon } from "lucide-react";
 import { type ModelOption, ModelOptionRow } from "./shared/model-option-row";
 
 export {

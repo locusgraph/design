@@ -1,8 +1,8 @@
 "use client";
 
 import { Combobox as ComboboxPrimitive } from "@base-ui/react";
+import { Checkmark as CheckIcon } from "@carbon/icons-react";
 import { cn } from "cn";
-import { CheckIcon } from "lucide-react";
 
 function ComboboxItem({ className, children, ...props }: ComboboxPrimitive.Item.Props) {
   return (

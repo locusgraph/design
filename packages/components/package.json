@@ -43,6 +43,7 @@
   },
   "dependencies": {
     "@base-ui/react": "catalog:",
+    "@carbon/icons-react": "catalog:",
     "@locusgraph/tokens": "workspace:*",
     "@shadcn/react": "catalog:",
     "class-variance-authority": "catalog:",
@@ -50,7 +51,6 @@
     "cn": "catalog:",
     "embla-carousel-react": "catalog:",
     "input-otp": "catalog:",
-    "lucide-react": "catalog:",
     "radix-ui": "catalog:",
     "react-day-picker": "catalog:",
     "react-hook-form": "catalog:",

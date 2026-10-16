@@ -1,5 +1,9 @@
+import {
+  TextBold as BoldIcon,
+  TextItalic as ItalicIcon,
+  TextUnderline as UnderlineIcon,
+} from "@carbon/icons-react";
 import { ToggleGroup, ToggleGroupItem } from "@locusgraph/components";
-import { BoldIcon, ItalicIcon, UnderlineIcon } from "lucide-react";
 import { formatProp } from "../../registry/control-values";
 import { defineDemo, select, toggle } from "../../registry/define-demo";
 

@@ -1,7 +1,11 @@
 "use client";
 
+import {
+  ChevronDown as ChevronDownIcon,
+  ChevronLeft as ChevronLeftIcon,
+  ChevronRight as ChevronRightIcon,
+} from "@carbon/icons-react";
 import { cn } from "cn";
-import { ChevronDownIcon, ChevronLeftIcon, ChevronRightIcon } from "lucide-react";
 import * as React from "react";
 import { DayPicker, getDefaultClassNames } from "react-day-picker";
 

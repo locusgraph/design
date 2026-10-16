@@ -1,7 +1,13 @@
 "use client";
 
+import {
+  Checkmark as CheckIcon,
+  Copy as CopyIcon,
+  Renew as RefreshCwIcon,
+  ThumbsDown as ThumbsDownIcon,
+  ThumbsUp as ThumbsUpIcon,
+} from "@carbon/icons-react";
 import { cn, TooltipProvider } from "@locusgraph/components";
-import { CheckIcon, CopyIcon, RefreshCwIcon, ThumbsDownIcon, ThumbsUpIcon } from "lucide-react";
 import type { ComponentProps } from "react";
 import { useCopied } from "../use-copied";
 import { ActionButton } from "./action-button";

@@ -1,7 +1,7 @@
 "use client";
 
+import { Add as PlusIcon } from "@carbon/icons-react";
 import { Button, cn, ScrollArea } from "@locusgraph/components";
-import { PlusIcon } from "lucide-react";
 import type { ComponentProps } from "react";
 import { type HistoryItem, HistoryRow } from "./history-row";
 import { groupThreadsByDay } from "./thread-groups";

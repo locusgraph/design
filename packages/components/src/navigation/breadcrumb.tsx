@@ -1,5 +1,5 @@
+import { ChevronRight, OverflowMenuHorizontal as MoreHorizontal } from "@carbon/icons-react";
 import { cn } from "cn";
-import { ChevronRight, MoreHorizontal } from "lucide-react";
 import * as Slot from "radix-ui/slot";
 import * as React from "react";
 

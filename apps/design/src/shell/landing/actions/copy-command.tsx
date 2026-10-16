@@ -1,5 +1,5 @@
+import { Checkmark as CheckIcon, Copy as CopyIcon } from "@carbon/icons-react";
 import { Button } from "@locusgraph/components";
-import { CheckIcon, CopyIcon } from "lucide-react";
 import { useState } from "react";
 
 export function CopyCommand({ command, prompt = true }: { command: string; prompt?: boolean }) {

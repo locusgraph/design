@@ -1,3 +1,4 @@
+import { Warning as CircleAlertIcon } from "@carbon/icons-react";
 import { Alert, AlertDescription, AlertTitle, Button } from "@locusgraph/components";
 import {
   type BalanceLevel,
@@ -6,7 +7,6 @@ import {
   formatMicroUsd,
   quotaStatus,
 } from "@locusgraph/utils";
-import { CircleAlertIcon } from "lucide-react";
 import { type LinkComponent, periodLabel, type QuotaData } from "../types";
 
 type UsageAlertProps = {

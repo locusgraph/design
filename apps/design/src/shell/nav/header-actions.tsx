@@ -1,11 +1,15 @@
 import {
+  Screen as MonitorIcon,
+  Search as SearchIcon,
+  Mobile as SmartphoneIcon,
+} from "@carbon/icons-react";
+import {
   Button,
   Separator,
   ThemeToggle,
   ToggleGroup,
   ToggleGroupItem,
 } from "@locusgraph/components";
-import { MonitorIcon, SearchIcon, SmartphoneIcon } from "lucide-react";
 import { type ShellSettings, setParam } from "../../url-state";
 
 type HeaderActionsProps = { settings: ShellSettings; onSearch: () => void };

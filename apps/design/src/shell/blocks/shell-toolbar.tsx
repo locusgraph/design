@@ -1,4 +1,12 @@
 import {
+  Launch as ExternalLinkIcon,
+  Maximize as MaximizeIcon,
+  Screen as MonitorIcon,
+  Restart as RotateCwIcon,
+  Mobile as SmartphoneIcon,
+  Tablet as TabletIcon,
+} from "@carbon/icons-react";
+import {
   Button,
   Separator,
   Tabs,
@@ -10,14 +18,6 @@ import {
   TooltipContent,
   TooltipTrigger,
 } from "@locusgraph/components";
-import {
-  ExternalLinkIcon,
-  MaximizeIcon,
-  MonitorIcon,
-  RotateCwIcon,
-  SmartphoneIcon,
-  TabletIcon,
-} from "lucide-react";
 import type * as React from "react";
 
 export type ShellView = "preview" | "layout" | "code";

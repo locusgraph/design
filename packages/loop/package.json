@@ -44,9 +44,9 @@
     "react-dom": "^19.2.0"
   },
   "dependencies": {
+    "@carbon/icons-react": "catalog:",
     "@locusgraph/brand": "workspace:*",
     "@locusgraph/utils": "workspace:*",
-    "lucide-react": "catalog:",
     "react-markdown": "catalog:",
     "remark-gfm": "catalog:",
     "shiki": "catalog:"

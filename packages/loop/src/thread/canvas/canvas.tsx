@@ -1,7 +1,7 @@
 "use client";
 
+import { Close as XIcon } from "@carbon/icons-react";
 import { Button, cn, ScrollArea } from "@locusgraph/components";
-import { XIcon } from "lucide-react";
 import type { ComponentProps, ReactNode } from "react";
 import { type CanvasVersion, VersionSwitcher } from "./version-switcher";
 

@@ -1,5 +1,10 @@
+import {
+  Purchase as CreditCardIcon,
+  Password as KeyRoundIcon,
+  Search as SearchIcon,
+  UserFollow as UserPlusIcon,
+} from "@carbon/icons-react";
 import { Marker, MarkerContent, MarkerIcon, Spinner } from "@locusgraph/components";
-import { CreditCardIcon, KeyRoundIcon, SearchIcon, UserPlusIcon } from "lucide-react";
 import { formatProp } from "../../../registry/control-values";
 import { defineDemo, select, text, toggle } from "../../../registry/define-demo";
 

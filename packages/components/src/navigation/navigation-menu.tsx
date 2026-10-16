@@ -1,6 +1,6 @@
+import { ChevronDown as ChevronDownIcon } from "@carbon/icons-react";
 import { cva } from "class-variance-authority";
 import { cn } from "cn";
-import { ChevronDownIcon } from "lucide-react";
 import * as NavigationMenuPrimitive from "radix-ui/navigation-menu";
 import * as React from "react";
 

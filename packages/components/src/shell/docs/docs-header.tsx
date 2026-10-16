@@ -1,7 +1,7 @@
 "use client";
 
+import { Menu as MenuIcon } from "@carbon/icons-react";
 import { cn } from "cn";
-import { MenuIcon } from "lucide-react";
 import type * as React from "react";
 import { useState } from "react";
 import { Button } from "../../action/button";

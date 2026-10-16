@@ -1,4 +1,11 @@
 import {
+  Purchase as CreditCardIcon,
+  Document as FileTextIcon,
+  Password as KeyRoundIcon,
+  Settings as SettingsIcon,
+  UserMultiple as UsersIcon,
+} from "@carbon/icons-react";
+import {
   Button,
   Command,
   CommandDialog,
@@ -10,7 +17,6 @@ import {
   CommandSeparator,
   CommandShortcut,
 } from "@locusgraph/components";
-import { CreditCardIcon, FileTextIcon, KeyRoundIcon, SettingsIcon, UsersIcon } from "lucide-react";
 import { useState } from "react";
 import { defineDemo, text, toggle } from "../../../registry/define-demo";
 

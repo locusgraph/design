@@ -1,7 +1,7 @@
 "use client";
 
+import { ArrowDown as ArrowDownIcon } from "@carbon/icons-react";
 import { Button, cn } from "@locusgraph/components";
-import { ArrowDownIcon } from "lucide-react";
 import * as React from "react";
 import { useStickToBottom } from "./use-stick-to-bottom";
 

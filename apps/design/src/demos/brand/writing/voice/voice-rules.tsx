@@ -1,5 +1,5 @@
+import { Warning as CircleAlert, CheckmarkOutline as CircleCheck } from "@carbon/icons-react";
 import { Alert, AlertDescription, AlertTitle, Button } from "@locusgraph/components";
-import { CircleAlert, CircleCheck } from "lucide-react";
 import type { ReactNode } from "react";
 
 export type VoiceRule = {

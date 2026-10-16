@@ -9,13 +9,13 @@
     "typecheck": "tsc -p tsconfig.json --noEmit"
   },
   "dependencies": {
-    "@locusgraph/loop": "workspace:*",
+    "@carbon/icons-react": "catalog:",
     "@locusgraph/blocks": "workspace:*",
     "@locusgraph/brand": "workspace:*",
     "@locusgraph/components": "workspace:*",
     "@locusgraph/email": "workspace:*",
+    "@locusgraph/loop": "workspace:*",
     "@locusgraph/utils": "workspace:*",
-    "lucide-react": "catalog:",
     "next": "catalog:",
     "react": "catalog:",
     "react-dom": "catalog:"

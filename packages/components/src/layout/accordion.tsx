@@ -1,7 +1,7 @@
 "use client";
 
+import { ChevronDown as ChevronDownIcon } from "@carbon/icons-react";
 import { cn } from "cn";
-import { ChevronDownIcon } from "lucide-react";
 import * as AccordionPrimitive from "radix-ui/accordion";
 import type * as React from "react";
 

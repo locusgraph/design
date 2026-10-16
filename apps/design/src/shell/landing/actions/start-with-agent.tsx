@@ -1,5 +1,10 @@
+import {
+  Asterisk as AsteriskIcon,
+  Cube as BoxIcon,
+  Checkmark as CheckIcon,
+  Copy as CopyIcon,
+} from "@carbon/icons-react";
 import { cn } from "@locusgraph/components";
-import { AsteriskIcon, BoxIcon, CheckIcon, CopyIcon } from "lucide-react";
 import type * as React from "react";
 import { useState } from "react";
 

@@ -1,5 +1,5 @@
+import { Checkmark as CheckIcon, Copy as CopyIcon } from "@carbon/icons-react";
 import { Button, cn } from "@locusgraph/components";
-import { CheckIcon, CopyIcon } from "lucide-react";
 import { useEffect, useState } from "react";
 import type { HighlighterCore, LanguageRegistration } from "shiki/core";
 

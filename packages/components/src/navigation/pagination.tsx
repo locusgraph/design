@@ -1,5 +1,9 @@
+import {
+  ChevronLeft as ChevronLeftIcon,
+  ChevronRight as ChevronRightIcon,
+  OverflowMenuHorizontal as MoreHorizontalIcon,
+} from "@carbon/icons-react";
 import { cn } from "cn";
-import { ChevronLeftIcon, ChevronRightIcon, MoreHorizontalIcon } from "lucide-react";
 import * as React from "react";
 
 import { type Button, buttonVariants } from "../action/button";

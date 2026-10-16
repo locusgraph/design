@@ -1,11 +1,15 @@
 import {
+  Archive as ArchiveIcon,
+  OverflowMenuHorizontal as EllipsisIcon,
+  Edit as PencilIcon,
+} from "@carbon/icons-react";
+import {
   Button,
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@locusgraph/components";
-import { ArchiveIcon, EllipsisIcon, PencilIcon } from "lucide-react";
 
 type ThreadItemMenuProps = {
   title: string;

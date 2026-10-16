@@ -1,5 +1,5 @@
+import { ArrowUpRight as ArrowUpRightIcon } from "@carbon/icons-react";
 import { cn } from "@locusgraph/components";
-import { ArrowUpRightIcon } from "lucide-react";
 import type { ComponentProps } from "react";
 
 export type Starter = string | { text: string; label?: string };

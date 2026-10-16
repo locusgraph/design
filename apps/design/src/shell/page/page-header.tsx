@@ -1,5 +1,10 @@
+import {
+  ArrowLeft as ArrowLeftIcon,
+  ArrowRight as ArrowRightIcon,
+  Checkmark as CheckIcon,
+  Copy as CopyIcon,
+} from "@carbon/icons-react";
 import { Button, Tooltip, TooltipContent, TooltipTrigger } from "@locusgraph/components";
-import { ArrowLeftIcon, ArrowRightIcon, CheckIcon, CopyIcon } from "lucide-react";
 import { useState } from "react";
 import type { DemoIndexEntry } from "../../registry/load-demos";
 import { PlaygroundLink } from "../nav/playground-nav";

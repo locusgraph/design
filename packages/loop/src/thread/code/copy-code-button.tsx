@@ -1,5 +1,5 @@
+import { Checkmark as CheckIcon, Copy as CopyIcon } from "@carbon/icons-react";
 import { Button } from "@locusgraph/components";
-import { CheckIcon, CopyIcon } from "lucide-react";
 import { useCopied, writeToClipboard } from "../use-copied";
 
 type CopyCodeButtonProps = {

@@ -1,5 +1,5 @@
+import { ArrowRight as ArrowRightIcon } from "@carbon/icons-react";
 import { cn, RuleGridCell } from "@locusgraph/components";
-import { ArrowRightIcon } from "lucide-react";
 import type * as React from "react";
 import { PlaygroundLink } from "../nav/playground-nav";
 

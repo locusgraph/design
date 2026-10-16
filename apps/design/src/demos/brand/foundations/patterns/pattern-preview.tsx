@@ -1,6 +1,6 @@
+import { Reset as RotateCcw } from "@carbon/icons-react";
 import { LocusGraphMark, LocusGraphWordmark } from "@locusgraph/brand";
 import { Button } from "@locusgraph/components";
-import { RotateCcw } from "lucide-react";
 import { useState } from "react";
 
 export const brandPatterns = [

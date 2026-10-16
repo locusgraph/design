@@ -1,3 +1,4 @@
+import { SquareSlash as SlashIcon } from "@carbon/icons-react";
 import {
   Breadcrumb,
   BreadcrumbEllipsis,
@@ -7,7 +8,6 @@ import {
   BreadcrumbPage,
   BreadcrumbSeparator,
 } from "@locusgraph/components";
-import { SlashIcon } from "lucide-react";
 import { defineDemo, select, text, toggle } from "../../registry/define-demo";
 
 const separators = ["chevron", "slash"] as const;

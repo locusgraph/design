@@ -1,5 +1,5 @@
+import { ArrowRight as ArrowRightIcon } from "@carbon/icons-react";
 import { Button } from "@locusgraph/components";
-import { ArrowRightIcon } from "lucide-react";
 import { PlaygroundLink } from "../nav/playground-nav";
 import { StartWithAgent } from "./actions/start-with-agent";
 

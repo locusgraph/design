@@ -1,3 +1,4 @@
+import { ChevronDown as ChevronDownIcon } from "@carbon/icons-react";
 import {
   Button,
   DropdownMenu,
@@ -7,7 +8,6 @@ import {
   DropdownMenuTrigger,
 } from "@locusgraph/components";
 import { formatDate } from "@locusgraph/utils";
-import { ChevronDownIcon } from "lucide-react";
 
 export type CanvasVersion = { id: string; label: string; createdAt: string };
 

@@ -1,4 +1,9 @@
 import {
+  ChevronRight as ChevronRightIcon,
+  Password as KeyRoundIcon,
+  Security as ShieldCheckIcon,
+} from "@carbon/icons-react";
+import {
   Avatar,
   AvatarFallback,
   Button,
@@ -11,7 +16,6 @@ import {
   ItemSeparator,
   ItemTitle,
 } from "@locusgraph/components";
-import { ChevronRightIcon, KeyRoundIcon, ShieldCheckIcon } from "lucide-react";
 import { Fragment } from "react";
 import { formatProp } from "../../../registry/control-values";
 import { defineDemo, select, text } from "../../../registry/define-demo";

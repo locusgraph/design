@@ -1,7 +1,7 @@
 "use client";
 
+import { ChevronRight as ChevronRightIcon } from "@carbon/icons-react";
 import { cn } from "cn";
-import { ChevronRightIcon } from "lucide-react";
 import * as DropdownMenuPrimitive from "radix-ui/dropdown-menu";
 import type * as React from "react";
 

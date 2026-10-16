@@ -1,3 +1,4 @@
+import { Password as KeyRoundIcon, Add as PlusIcon } from "@carbon/icons-react";
 import {
   Button,
   RuleGrid,
@@ -5,7 +6,6 @@ import {
   RuleGridDescription,
   RuleGridTitle,
 } from "@locusgraph/components";
-import { KeyRoundIcon, PlusIcon } from "lucide-react";
 import type { LinkComponent } from "../types";
 
 type KeysEmptyProps = {

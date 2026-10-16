@@ -1,7 +1,7 @@
 "use client";
 
+import { ArrowLeft, ArrowRight } from "@carbon/icons-react";
 import { cn } from "cn";
-import { ArrowLeft, ArrowRight } from "lucide-react";
 import * as React from "react";
 
 import { Button } from "../../action/button";

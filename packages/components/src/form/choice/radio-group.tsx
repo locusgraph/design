@@ -1,7 +1,7 @@
 "use client";
 
+import { CircleSolid as CircleIcon } from "@carbon/icons-react";
 import { cn } from "cn";
-import { CircleIcon } from "lucide-react";
 import * as RadioGroupPrimitive from "radix-ui/radio-group";
 import * as React from "react";
 

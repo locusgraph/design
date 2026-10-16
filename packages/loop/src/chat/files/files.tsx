@@ -1,12 +1,12 @@
-import { cn } from "@locusgraph/components";
 import {
-  FileCodeIcon,
-  FileIcon,
-  FileSpreadsheetIcon,
-  FileTextIcon,
-  type LucideIcon,
-  XIcon,
-} from "lucide-react";
+  type CarbonIconType as CarbonIcon,
+  Code as FileCodeIcon,
+  DocumentBlank as FileIcon,
+  DataTable as FileSpreadsheetIcon,
+  Document as FileTextIcon,
+  Close as XIcon,
+} from "@carbon/icons-react";
+import { cn } from "@locusgraph/components";
 import type * as React from "react";
 import { type FileItem, fileExtensionLabel, formatBytes, isImageFile } from "./file-meta";
 
@@ -24,13 +24,13 @@ type ChipProps = {
   onRemove?: (id: string) => void;
 };
 
-const iconsByMediaType: [RegExp, LucideIcon][] = [
+const iconsByMediaType: [RegExp, CarbonIcon][] = [
   [/csv|spreadsheet|excel/, FileSpreadsheetIcon],
   [/json|javascript|typescript|xml|x-python/, FileCodeIcon],
   [/text|pdf|markdown|word/, FileTextIcon],
 ];
 
-function iconForMediaType(mediaType: string | undefined): LucideIcon {
+function iconForMediaType(mediaType: string | undefined): CarbonIcon {
   const match = iconsByMediaType.find(([pattern]) => mediaType && pattern.test(mediaType));
   return match ? match[1] : FileIcon;
 }
