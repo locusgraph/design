@@ -43,11 +43,8 @@
   },
   "dependencies": {
     "@base-ui/react": "catalog:",
-    "@fontsource-variable/archivo": "catalog:",
-    "@fontsource-variable/fira-code": "catalog:",
-    "@fontsource-variable/inter": "catalog:",
+    "@locusgraph/tokens": "workspace:*",
     "@shadcn/react": "catalog:",
-    "@spendgraph/config": "catalog:",
     "class-variance-authority": "catalog:",
     "cmdk": "catalog:",
     "cn": "catalog:",
@@ -63,6 +60,7 @@
     "vaul": "catalog:"
   },
   "devDependencies": {
+    "@locusgraph/config": "workspace:*",
     "@types/node": "catalog:",
     "@types/react": "catalog:",
     "@types/react-dom": "catalog:",

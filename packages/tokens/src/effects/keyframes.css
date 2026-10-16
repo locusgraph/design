@@ -1,0 +1,97 @@
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@utility rises {
+  animation: rise 220ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  @keyframes rise {
+    from,
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+}
+
+@keyframes sweep {
+  0%,
+  100% {
+    transform: translate(-1.5px, 0);
+  }
+  50% {
+    transform: translate(1.5px, -1px);
+  }
+}
+
+@keyframes ink {
+  0% {
+    stroke-dashoffset: 22;
+  }
+  55%,
+  100% {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes tip {
+  0%,
+  100% {
+    transform: rotate(-9deg);
+  }
+  50% {
+    transform: rotate(9deg);
+  }
+}
+
+@keyframes tick {
+  0%,
+  100% {
+    opacity: 0.25;
+  }
+  40% {
+    opacity: 1;
+  }
+}
+
+@keyframes breathe {
+  0%,
+  100% {
+    transform: scale(0.9);
+    opacity: 0.55;
+  }
+  50% {
+    transform: scale(1.05);
+    opacity: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  @keyframes sweep {
+  }
+  @keyframes tip {
+  }
+  @keyframes breathe {
+  }
+  @keyframes tick {
+    0%,
+    100% {
+      opacity: 1;
+    }
+  }
+  @keyframes ink {
+    0%,
+    100% {
+      stroke-dashoffset: 0;
+    }
+  }
+}
