@@ -10,6 +10,8 @@
     "test": "vitest run"
   },
   "dependencies": {
+    "@locusgraph/blocks": "workspace:*",
+    "@locusgraph/brand": "workspace:*",
     "@locusgraph/components": "workspace:*",
     "@shikijs/langs": "catalog:",
     "@shikijs/themes": "catalog:",
@@ -21,7 +23,7 @@
     "shiki": "catalog:"
   },
   "devDependencies": {
-    "@spendgraph/config": "catalog:",
+    "@locusgraph/config": "workspace:*",
     "@tailwindcss/vite": "catalog:",
     "@types/node": "catalog:",
     "@types/react": "catalog:",

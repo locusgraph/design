@@ -1,6 +1,8 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 @import "@locusgraph/components/theme.css";
+@import "@locusgraph/blocks/sources.css";
+@import "@locusgraph/brand/sources.css";
 
 body {
   background: var(--background);
