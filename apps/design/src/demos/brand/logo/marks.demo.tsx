@@ -1,6 +1,6 @@
 import { GitHubMark, GoogleMark, LocusGraphMark, LocusGraphWordmark } from "@locusgraph/brand";
 import { Button } from "@locusgraph/components";
-import { defineDemo, select, toggle } from "../../registry/define-demo";
+import { defineDemo, select, toggle } from "../../../registry/define-demo";
 
 const sizes = { sm: "size-5", md: "size-8", lg: "size-12" } as const;
 const sizeOptions = ["sm", "md", "lg"] as const;

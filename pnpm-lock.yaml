@@ -310,9 +310,15 @@ importers:
       '@locusgraph/components':
         specifier: workspace:*
         version: link:../../packages/components
+      '@locusgraph/email':
+        specifier: workspace:*
+        version: link:../../packages/email
       '@locusgraph/loop':
         specifier: workspace:*
         version: link:../../packages/loop
+      '@locusgraph/tokens':
+        specifier: workspace:*
+        version: link:../../packages/tokens
       '@shikijs/langs':
         specifier: 'catalog:'
         version: 4.5.0

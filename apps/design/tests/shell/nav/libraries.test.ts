@@ -12,7 +12,7 @@ describe("libraries", () => {
 
   it("finds the library of a home page, a demo page or any other page", () => {
     expect(libraryOfPath("blocks").href).toBe("/blocks");
-    expect(libraryOfPath("brand/marks").id).toBe("brand");
+    expect(libraryOfPath("brand/logo/marks").id).toBe("brand");
     expect(libraryOfPath("action/button").id).toBe("components");
     expect(libraryOfPath("shells").id).toBe("components");
   });
