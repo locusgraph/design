@@ -19,7 +19,8 @@ pnpm add @locusgraph/blocks @locusgraph/components
 | `WalletPanel` | `balanceMicroUsd`, `debtMicroUsd`, `grants`. A Rule Grid cell |
 | `CreditPacks` | `packs`, `onBuy(packId)`, `pending`. A Rule Grid cell |
 | `PlanOptions` | `plans`, `actionFor(plan)` for plans that are not current |
-| `KeysTable` | `keys`, `actions(key)` |
+| `KeysTable` | `keys`, `actions(key)`, `highlightedId` to flash a just-created key. Dates render in the viewer's time zone after hydration |
+| `LocalDate` | `value` (ISO string): UTC on the server, the viewer's time zone after hydration |
 | `NoKeys` | `newKeyHref` (omit for read-only roles), `linkComponent` |
 
 `WalletPanel` and `CreditPacks` are cells, so put them in a `RuleGrid`:

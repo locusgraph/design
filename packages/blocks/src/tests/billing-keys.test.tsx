@@ -80,7 +80,27 @@ describe("keys", () => {
     );
     expect(html).toContain("Untitled");
     expect(html).toContain("Never");
-    expect(html).toContain("Oct 1, 2026");
+    expect(html).toContain('<time dateTime="2026-10-01T00:00:00.000Z">Oct 1, 2026</time>');
+  });
+
+  it("marks only the highlighted key as new", () => {
+    const row = {
+      maskedKey: "lg_…",
+      productLabel: "LocusGraph",
+      createdBy: "You",
+      createdAt: null,
+      expiresAt: null,
+    };
+    const html = renderToStaticMarkup(
+      <KeysTable
+        highlightedId="k2"
+        keys={[
+          { ...row, id: "k1", name: "old" },
+          { ...row, id: "k2", name: "new" },
+        ]}
+      />
+    );
+    expect(html.match(/data-new=""/g)).toHaveLength(1);
   });
 
   it("offers a new key only when an href is given", () => {

@@ -6,16 +6,21 @@ import {
   TableHeader,
   TableRow,
 } from "@locusgraph/components";
-import { formatDate } from "@locusgraph/utils";
 import type * as React from "react";
+import { LocalDate } from "../dates/local-date";
 import type { ApiKeyRow } from "../types";
 
 type KeysTableProps = {
   keys: ApiKeyRow[];
   actions?: (key: ApiKeyRow) => React.ReactNode;
+  highlightedId?: string;
 };
 
-export function KeysTable({ keys, actions }: KeysTableProps) {
+function dateOr(value: string | null, empty: string) {
+  return value ? <LocalDate value={value} /> : empty;
+}
+
+export function KeysTable({ keys, actions, highlightedId }: KeysTableProps) {
   return (
     <Table>
       <TableHeader>
@@ -31,15 +36,19 @@ export function KeysTable({ keys, actions }: KeysTableProps) {
       </TableHeader>
       <TableBody>
         {keys.map((key) => (
-          <TableRow key={key.id}>
+          <TableRow
+            key={key.id}
+            data-new={key.id === highlightedId ? "" : undefined}
+            className="transition-colors duration-1000 data-new:bg-accent"
+          >
             <TableCell className="font-medium">{key.name ?? "Untitled"}</TableCell>
             <TableCell className="hidden font-mono text-muted-foreground md:table-cell">
               {key.maskedKey}
             </TableCell>
             <TableCell>{key.productLabel}</TableCell>
             <TableCell className="hidden md:table-cell">{key.createdBy}</TableCell>
-            <TableCell className="hidden sm:table-cell">{formatDate(key.createdAt)}</TableCell>
-            <TableCell>{formatDate(key.expiresAt, "Never")}</TableCell>
+            <TableCell className="hidden sm:table-cell">{dateOr(key.createdAt, "")}</TableCell>
+            <TableCell>{dateOr(key.expiresAt, "Never")}</TableCell>
             {actions && <TableCell className="text-right">{actions(key)}</TableCell>}
           </TableRow>
         ))}
