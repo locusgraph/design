@@ -1,0 +1,53 @@
+{
+  "name": "@locusgraph/config",
+  "version": "0.1.0",
+  "description": "The Biome, TypeScript, Vitest, Cucumber, PostCSS and shadcn configuration LocusGraph projects share.",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/locusgraph/design.git",
+    "directory": "packages/config"
+  },
+  "homepage": "https://design.locusgraph.com",
+  "type": "module",
+  "files": [
+    "biome",
+    "cucumber",
+    "postcss",
+    "shadcn",
+    "typescript",
+    "vitest"
+  ],
+  "exports": {
+    "./biome/base.json": "./biome/base.json",
+    "./biome/next.json": "./biome/next.json",
+    "./cucumber": {
+      "types": "./cucumber/index.d.mts",
+      "default": "./cucumber/index.mjs"
+    },
+    "./package.json": "./package.json",
+    "./postcss": "./postcss/index.mjs",
+    "./shadcn/components.json": "./shadcn/components.json",
+    "./typescript/base.json": "./typescript/base.json",
+    "./typescript/library.json": "./typescript/library.json",
+    "./typescript/next.json": "./typescript/next.json",
+    "./typescript/tests.json": "./typescript/tests.json",
+    "./vitest": {
+      "types": "./vitest/index.d.mts",
+      "default": "./vitest/index.mjs"
+    }
+  },
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org",
+    "access": "public",
+    "provenance": true
+  },
+  "peerDependencies": {
+    "vitest": ">=4"
+  },
+  "peerDependenciesMeta": {
+    "vitest": {
+      "optional": true
+    }
+  }
+}

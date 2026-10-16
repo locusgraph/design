@@ -1,7 +1,7 @@
 {
   "extends": [
-    "@spendgraph/config/typescript/library.json",
-    "@spendgraph/config/typescript/tests.json"
+    "@locusgraph/config/typescript/library.json",
+    "@locusgraph/config/typescript/tests.json"
   ],
   "compilerOptions": {
     "rootDir": "src",

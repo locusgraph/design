@@ -1,5 +1,5 @@
 {
-  "extends": "@spendgraph/config/typescript/library.json",
+  "extends": "@locusgraph/config/typescript/library.json",
   "compilerOptions": {
     "rootDir": "src",
     "outDir": "dist",

@@ -1,0 +1,83 @@
+{
+  "$schema": "https://biomejs.dev/schemas/2.5.8/schema.json",
+  "formatter": {
+    "enabled": true,
+    "indentStyle": "space",
+    "indentWidth": 2,
+    "lineWidth": 100
+  },
+  "javascript": {
+    "formatter": {
+      "quoteStyle": "double",
+      "semicolons": "always",
+      "trailingCommas": "es5"
+    }
+  },
+  "assist": {
+    "enabled": true,
+    "actions": {
+      "source": {
+        "organizeImports": "on"
+      }
+    }
+  },
+  "linter": {
+    "enabled": true,
+    "rules": {
+      "preset": "none",
+      "correctness": {
+        "noUnusedImports": "error",
+        "noUnusedVariables": "error",
+        "noUnusedFunctionParameters": "error",
+        "noUnusedPrivateClassMembers": "error",
+        "noUnusedLabels": "error",
+        "noConstantCondition": "error",
+        "noSelfAssign": "error",
+        "noSwitchDeclarations": "error",
+        "useValidTypeof": "error"
+      },
+      "performance": {
+        "noAccumulatingSpread": "error",
+        "noDelete": "error"
+      },
+      "complexity": {
+        "noUselessCatch": "error",
+        "noUselessTernary": "error",
+        "noUselessStringConcat": "error",
+        "noUselessUndefinedInitialization": "error",
+        "noUselessFragments": "error",
+        "noUselessTypeConstraint": "error",
+        "noAdjacentSpacesInRegex": "error",
+        "useFlatMap": "error",
+        "useOptionalChain": "error",
+        "useDateNow": "error",
+        "useLiteralKeys": "error"
+      },
+      "suspicious": {
+        "noExplicitAny": "error",
+        "noDoubleEquals": "error",
+        "noAsyncPromiseExecutor": "error",
+        "noArrayIndexKey": "warn",
+        "noDuplicateObjectKeys": "error",
+        "noFallthroughSwitchClause": "error",
+        "noConsole": {
+          "level": "off"
+        }
+      },
+      "style": {
+        "useConst": "error",
+        "useTemplate": "error",
+        "noUselessElse": "error",
+        "useNodejsImportProtocol": "error"
+      }
+    }
+  },
+  "css": {
+    "linter": {
+      "enabled": false
+    },
+    "formatter": {
+      "enabled": false
+    }
+  }
+}
