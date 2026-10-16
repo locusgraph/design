@@ -1,10 +1,11 @@
 import { mkdirSync, rmSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
-import { collectSourceFiles, exportIndex, sourcePackages } from "./collect.mjs";
-import { demoDescriptions } from "./descriptions.mjs";
-import { rewriteSource } from "./rewrite.mjs";
-import { themeItem } from "./theme.mjs";
-import { versionResolver } from "./versions.mjs";
+import { collectSourceFiles, exportIndex, sourcePackages } from "./lib/collect.mjs";
+import { demoDescriptions } from "./lib/descriptions.mjs";
+import { pageBundles } from "./lib/page-bundles.mjs";
+import { rewriteSource } from "./lib/rewrite.mjs";
+import { themeItem } from "./lib/theme/theme.mjs";
+import { versionResolver } from "./lib/versions.mjs";
 
 const root = new URL("../..", import.meta.url).pathname;
 const outDir = join(root, "apps/design/public/r");
@@ -55,7 +56,23 @@ function buildItems() {
       categories: [file.packageName],
     };
   });
-  return [{ $schema: schema, ...themeItem(root, versionOf) }, ...items];
+  const bundles = pageBundles(root, exportsByPackage, new Set(items.map((item) => item.name))).map(
+    (bundle) => ({
+      $schema: schema,
+      name: bundle.name,
+      type: "registry:item",
+      title: titleOf(bundle.name),
+      description:
+        descriptions.get(bundle.name) ?? `Everything the ${titleOf(bundle.name)} page uses.`,
+      registryDependencies: [
+        `${baseUrl}/r/theme.json`,
+        ...bundle.items.map((name) => `${baseUrl}/r/${name}.json`),
+      ],
+      files: [],
+      categories: ["page"],
+    })
+  );
+  return [{ $schema: schema, ...themeItem(root, versionOf) }, ...items, ...bundles];
 }
 
 function catalogEntry(item) {

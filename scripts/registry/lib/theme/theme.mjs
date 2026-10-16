@@ -1,5 +1,6 @@
 import { readFileSync } from "node:fs";
 import { dirname, join, resolve } from "node:path";
+import { paletteVariables, prefixVariables, shadcnCssVars } from "./theme-vars.mjs";
 
 const localImport = /^@import\s+"(\.[^"]+)";\s*$/gm;
 
@@ -10,12 +11,10 @@ function inlineImports(file) {
 
 export function themeItem(root, versionOf) {
   const tokens = join(root, "packages/tokens/src");
-  const content = [
-    inlineImports(join(tokens, "theme.css")),
-    inlineImports(join(tokens, "typeset.css")),
-  ]
+  const css = [inlineImports(join(tokens, "theme.css")), inlineImports(join(tokens, "typeset.css"))]
     .join("\n")
     .trim();
+  const content = prefixVariables(css, paletteVariables(join(tokens, "palette.css")));
   return {
     name: "theme",
     type: "registry:theme",
@@ -27,6 +26,7 @@ export function themeItem(root, versionOf) {
       "@fontsource-variable/archivo",
       "@fontsource-variable/fira-code",
     ].map(versionOf),
+    cssVars: shadcnCssVars,
     files: [
       {
         path: "locus/locus.css",

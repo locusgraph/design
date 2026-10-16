@@ -57,9 +57,11 @@ export function InstallationPage() {
         <Code code={snippets.shadcnAdd} language="bash" />
         <Prose>
           <p>
-            The theme lands in styles/locus.css. Import it after Tailwind. With pnpm 12, set the
-            @carbon/icons-react and @carbon/icon-helpers install scripts to false under allowBuilds;
-            they only send telemetry.
+            The theme lands in styles/locus.css. Import it after Tailwind; it also sets the shadcn
+            colors and radius in your global CSS, so existing shadcn components match. If shadcn
+            init added a font such as Geist to your layout, remove it to use Inter. With pnpm 12,
+            set the @carbon/icons-react and @carbon/icon-helpers install scripts to false under
+            allowBuilds; they only send telemetry.
           </p>
         </Prose>
         <Code code={snippets.shadcnTheme} language="css" />

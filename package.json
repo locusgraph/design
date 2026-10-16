@@ -13,7 +13,8 @@
     "test": "vitest run",
     "check": "pnpm lint && pnpm typecheck && pnpm test && pnpm registry",
     "check:node": "node scripts/check-node-imports.mjs",
-    "registry": "node scripts/registry/build.mjs"
+    "registry": "node scripts/registry/build.mjs",
+    "registry:test": "node scripts/registry/install-test/run.mjs"
   },
   "devDependencies": {
     "@biomejs/biome": "catalog:",
