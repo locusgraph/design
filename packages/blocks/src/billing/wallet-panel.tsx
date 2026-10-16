@@ -17,12 +17,32 @@ const levelHint = {
   },
 } as const;
 
+function GrantList({ grants }: { grants: WalletGrant[] }) {
+  return (
+    <ul className="flex flex-col divide-y divide-line">
+      {grants.map((grant) => (
+        <li key={`${grant.label}:${grant.expiresAt}`} className="flex justify-between gap-4 py-2">
+          <span>{grant.label}</span>
+          <span className="flex items-baseline gap-2 tabular-nums">
+            <span className="font-medium text-foreground">
+              {formatMicroUsd(grant.remainingMicroUsd)}
+            </span>
+            <span className="text-muted-foreground">
+              {grant.expiresAt ? `expires ${formatDate(grant.expiresAt)}` : "never expires"}
+            </span>
+          </span>
+        </li>
+      ))}
+    </ul>
+  );
+}
+
 export function WalletPanel({ balanceMicroUsd, debtMicroUsd = 0, grants }: WalletPanelProps) {
   const level = balanceLevel(balanceMicroUsd);
   const hint = level === "fine" ? null : levelHint[level];
   return (
     <RuleGridCell data-level={level} className="gap-4">
-      <span className="flex items-center justify-between">
+      <span className="flex min-h-6 items-center justify-between">
         <RuleGridLabel>Prepaid credits</RuleGridLabel>
         {hint && (
           <Badge
@@ -34,31 +54,17 @@ export function WalletPanel({ balanceMicroUsd, debtMicroUsd = 0, grants }: Walle
         )}
       </span>
       <div className="flex flex-col gap-1">
-        <span className="font-heading text-3xl font-semibold tracking-[-0.02em] tabular-nums">
+        <span
+          className={`font-heading text-3xl font-semibold tracking-[-0.02em] tabular-nums ${hint?.tone ?? ""}`}
+        >
           {formatMicroUsd(balanceMicroUsd)}
         </span>
-        {hint && <p className={`text-sm ${hint.tone}`}>{hint.text}</p>}
+        {hint && <p className="text-sm text-muted-foreground">{hint.text}</p>}
       </div>
       <div className="flex flex-col gap-3 text-sm">
-        {grants.length > 0 ? (
-          <ul className="flex flex-col divide-y divide-line">
-            {grants.map((grant) => (
-              <li
-                key={`${grant.label}:${grant.expiresAt}`}
-                className="flex justify-between gap-4 py-2"
-              >
-                <span>{grant.label}</span>
-                <span className="text-muted-foreground tabular-nums">
-                  {formatMicroUsd(grant.remainingMicroUsd)} ·{" "}
-                  {grant.expiresAt ? `expires ${formatDate(grant.expiresAt)}` : "never expires"}
-                </span>
-              </li>
-            ))}
-          </ul>
-        ) : (
-          <p className="text-muted-foreground">
-            No credits yet. Buy a pack to keep using paid features.
-          </p>
+        {grants.length > 0 && <GrantList grants={grants} />}
+        {grants.length === 0 && level !== "empty" && (
+          <p className="text-muted-foreground">No credit grants to show.</p>
         )}
         {debtMicroUsd > 0 && (
           <p className="text-destructive">

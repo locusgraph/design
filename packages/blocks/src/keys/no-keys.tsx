@@ -3,7 +3,7 @@ import {
   RuleGrid,
   RuleGridCell,
   RuleGridDescription,
-  RuleGridLabel,
+  RuleGridTitle,
 } from "@locusgraph/components";
 import { KeyRoundIcon, PlusIcon } from "lucide-react";
 import type { LinkComponent } from "../types";
@@ -23,12 +23,12 @@ export function NoKeys({
 }: NoKeysProps) {
   return (
     <RuleGrid columns={1}>
-      <RuleGridCell className="items-center gap-3 py-12 text-center">
-        <KeyRoundIcon className="size-5 text-muted-foreground" />
-        <RuleGridLabel>No API keys yet</RuleGridLabel>
+      <RuleGridCell className="items-center gap-2 py-12 text-center">
+        <KeyRoundIcon className="mb-1 size-5 text-muted-foreground" />
+        <RuleGridTitle>No API keys yet</RuleGridTitle>
         <RuleGridDescription className="max-w-sm">{description}</RuleGridDescription>
         {newKeyHref && (
-          <Button asChild size="sm">
+          <Button asChild size="sm" className="mt-2">
             <Link href={newKeyHref}>
               <PlusIcon />
               New key

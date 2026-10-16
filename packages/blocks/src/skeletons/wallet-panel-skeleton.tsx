@@ -14,7 +14,7 @@ export function WalletPanelSkeleton({ grants = 1 }: WalletPanelSkeletonProps) {
   const count = Math.max(0, Math.floor(grants));
   return (
     <RuleGridCell data-slot="wallet-panel-skeleton" {...skeletonRootProps} className="gap-4">
-      <span className="flex items-center justify-between">
+      <span className="flex min-h-6 items-center justify-between">
         <RuleGridLabel>Prepaid credits</RuleGridLabel>
       </span>
       <div className="flex flex-col gap-1" aria-hidden="true">

@@ -1,12 +1,7 @@
-import {
-  Badge,
-  RuleGrid,
-  RuleGridCell,
-  RuleGridDescription,
-  RuleGridTitle,
-} from "@locusgraph/components";
+import { Badge, RuleGrid, RuleGridCell, RuleGridTitle } from "@locusgraph/components";
 import type * as React from "react";
 import type { PlanOffer } from "../types";
+import { PlanPrice } from "./plan-price";
 
 type PlanOptionsProps = {
   plans: PlanOffer[];
@@ -20,19 +15,25 @@ export function PlanOptions({ plans, actionFor }: PlanOptionsProps) {
         const action = plan.current ? null : actionFor?.(plan);
         return (
           <RuleGridCell key={plan.name} data-current={plan.current || undefined} className="gap-4">
-            <div className="flex flex-col gap-1.5">
-              <RuleGridTitle className="flex items-center gap-2">
+            <div className="flex flex-col gap-2">
+              <RuleGridTitle className="flex min-h-6 items-center gap-2">
                 {plan.name}
                 {plan.current && <Badge variant="secondary">Current</Badge>}
               </RuleGridTitle>
-              <RuleGridDescription>{plan.price}</RuleGridDescription>
+              <PlanPrice plan={plan} />
             </div>
             <ul className="flex flex-col gap-1.5 text-sm text-muted-foreground">
               {plan.points.map((point) => (
                 <li key={point}>{point}</li>
               ))}
             </ul>
-            {action && <div className="mt-auto">{action}</div>}
+            {plan.current ? (
+              <p className="mt-auto flex min-h-8 items-center text-sm text-muted-foreground">
+                Your plan
+              </p>
+            ) : (
+              action && <div className="mt-auto">{action}</div>
+            )}
           </RuleGridCell>
         );
       })}

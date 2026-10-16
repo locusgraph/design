@@ -9,9 +9,14 @@ import {
 type PlanOptionsSkeletonProps = {
   plans?: number;
   points?: number;
+  currentIndex?: number;
 };
 
-export function PlanOptionsSkeleton({ plans = 2, points = 2 }: PlanOptionsSkeletonProps) {
+export function PlanOptionsSkeleton({
+  plans = 2,
+  points = 2,
+  currentIndex = 0,
+}: PlanOptionsSkeletonProps) {
   const planCount = Math.max(1, Math.floor(plans));
   const pointCount = Math.max(0, Math.floor(points));
   return (
@@ -28,9 +33,11 @@ export function PlanOptionsSkeleton({ plans = 2, points = 2 }: PlanOptionsSkelet
           aria-hidden="true"
           className="gap-4"
         >
-          <div className="flex flex-col gap-1.5">
-            <SkeletonBar className="h-5 w-20" />
-            <SkeletonBar className="h-4 w-32" />
+          <div className="flex flex-col gap-2">
+            <div className="flex min-h-6 items-center">
+              <SkeletonBar className="h-5 w-20" />
+            </div>
+            <SkeletonBar className="h-8 w-28" />
           </div>
           <div className="flex flex-col gap-1.5">
             {Array.from({ length: pointCount }, (_, point) => (
@@ -38,7 +45,13 @@ export function PlanOptionsSkeleton({ plans = 2, points = 2 }: PlanOptionsSkelet
               <SkeletonBar key={point} className="h-4 w-40" />
             ))}
           </div>
-          <SkeletonBar className="mt-auto h-8 w-28 rounded-full" />
+          {plan === currentIndex ? (
+            <div className="mt-auto flex min-h-8 items-center">
+              <SkeletonBar className="h-4 w-16" />
+            </div>
+          ) : (
+            <SkeletonBar className="mt-auto h-8 w-28 rounded-full" />
+          )}
         </RuleGridCell>
       ))}
       <SkeletonLoadingLabel>Loading plans…</SkeletonLoadingLabel>

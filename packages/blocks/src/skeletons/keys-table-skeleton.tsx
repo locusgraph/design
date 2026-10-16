@@ -12,29 +12,42 @@ import {
 
 type KeysTableSkeletonProps = {
   rows?: number;
+  actions?: boolean;
 };
 
 const columns = [
-  { name: "Name", visibility: "", bar: "w-28" },
   { name: "Key", visibility: "hidden md:table-cell", bar: "w-36" },
   { name: "Product", visibility: "", bar: "w-20" },
   { name: "Created by", visibility: "hidden md:table-cell", bar: "w-32" },
-  { name: "Created", visibility: "hidden sm:table-cell", bar: "w-20" },
+  { name: "Created", visibility: "hidden md:table-cell", bar: "w-20" },
   { name: "Expires", visibility: "", bar: "w-20" },
 ] as const;
 
-export function KeysTableSkeleton({ rows = 3 }: KeysTableSkeletonProps) {
+function NameCellSkeleton() {
+  return (
+    <TableCell className="max-w-40">
+      <div className="flex flex-col gap-1">
+        <SkeletonBar className="h-4 w-28" />
+        <SkeletonBar className="h-3 w-20 md:hidden" />
+      </div>
+    </TableCell>
+  );
+}
+
+export function KeysTableSkeleton({ rows = 3, actions = false }: KeysTableSkeletonProps) {
   const count = Math.max(1, Math.floor(rows));
   return (
     <div data-slot="keys-table-skeleton" {...skeletonRootProps} className="w-full">
       <Table aria-hidden="true">
         <TableHeader>
           <TableRow className="hover:bg-transparent">
+            <TableHead>Name</TableHead>
             {columns.map((column) => (
               <TableHead key={column.name} className={column.visibility}>
                 {column.name}
               </TableHead>
             ))}
+            {actions && <TableHead className="w-0" />}
           </TableRow>
         </TableHeader>
         <TableBody>
@@ -45,11 +58,17 @@ export function KeysTableSkeleton({ rows = 3 }: KeysTableSkeletonProps) {
               data-slot="keys-table-skeleton-row"
               className="hover:bg-transparent"
             >
+              <NameCellSkeleton />
               {columns.map((column) => (
                 <TableCell key={column.name} className={column.visibility}>
                   <SkeletonBar className={`h-4 ${column.bar}`} />
                 </TableCell>
               ))}
+              {actions && (
+                <TableCell className="w-0 pr-2 text-right">
+                  <SkeletonBar className="ml-auto h-8 w-16 rounded-full" />
+                </TableCell>
+              )}
             </TableRow>
           ))}
         </TableBody>

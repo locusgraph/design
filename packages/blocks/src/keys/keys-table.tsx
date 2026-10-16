@@ -29,7 +29,7 @@ export function KeysTable({ keys, actions, highlightedId }: KeysTableProps) {
           <TableHead className="hidden md:table-cell">Key</TableHead>
           <TableHead>Product</TableHead>
           <TableHead className="hidden md:table-cell">Created by</TableHead>
-          <TableHead className="hidden sm:table-cell">Created</TableHead>
+          <TableHead className="hidden md:table-cell">Created</TableHead>
           <TableHead>Expires</TableHead>
           {actions && <TableHead className="w-0" />}
         </TableRow>
@@ -41,15 +41,24 @@ export function KeysTable({ keys, actions, highlightedId }: KeysTableProps) {
             data-new={key.id === highlightedId ? "" : undefined}
             className="transition-colors duration-1000 data-new:bg-accent"
           >
-            <TableCell className="font-medium">{key.name ?? "Untitled"}</TableCell>
+            <TableCell className="max-w-40">
+              <span className="block truncate font-medium">{key.name ?? "Untitled"}</span>
+              <span className="block truncate font-mono text-xs text-muted-foreground md:hidden">
+                {key.maskedKey}
+              </span>
+            </TableCell>
             <TableCell className="hidden font-mono text-muted-foreground md:table-cell">
               {key.maskedKey}
             </TableCell>
             <TableCell>{key.productLabel}</TableCell>
             <TableCell className="hidden md:table-cell">{key.createdBy}</TableCell>
-            <TableCell className="hidden sm:table-cell">{dateOr(key.createdAt, "")}</TableCell>
+            <TableCell className="hidden md:table-cell">{dateOr(key.createdAt, "—")}</TableCell>
             <TableCell>{dateOr(key.expiresAt, "Never")}</TableCell>
-            {actions && <TableCell className="text-right">{actions(key)}</TableCell>}
+            {actions && (
+              <TableCell className="w-0 pr-2 text-right whitespace-nowrap">
+                {actions(key)}
+              </TableCell>
+            )}
           </TableRow>
         ))}
       </TableBody>

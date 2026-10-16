@@ -15,8 +15,11 @@ export function CreditPacksSkeleton({ packs = 3 }: CreditPacksSkeletonProps) {
   return (
     <RuleGridCell data-slot="credit-packs-skeleton" {...skeletonRootProps} className="gap-4">
       <div className="flex flex-col gap-1.5">
-        <RuleGridLabel>Buy credits</RuleGridLabel>
+        <span className="flex min-h-6 items-center">
+          <RuleGridLabel>Buy credits</RuleGridLabel>
+        </span>
         <SkeletonBar className="h-4 w-full max-w-72" />
+        <SkeletonBar className="h-4 w-3/4 max-w-56" />
       </div>
       <div className="flex flex-wrap gap-2" aria-hidden="true">
         {Array.from({ length: count }, (_, index) => (

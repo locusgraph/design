@@ -7,15 +7,20 @@ export type Quota = {
   period: QuotaPeriod;
   used: number;
   included: number;
+  label?: string;
 };
 
 export type CreditPack = { id: string; priceCents: number; amountMicroUsd: number };
 
 export type WalletGrant = { label: string; remainingMicroUsd: number; expiresAt: string | null };
 
+export type PlanInterval = "month" | "year";
+
 export type PlanOffer = {
   name: string;
   price: string;
+  amountCents?: number;
+  interval?: PlanInterval;
   points: string[];
   current: boolean;
 };
