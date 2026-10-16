@@ -8,6 +8,10 @@ import {
 } from "../shell/preview/frame-messages";
 import { previewBackgroundClass } from "../shell/preview/preview-toolbar";
 import { useDocumentTheme } from "../shell/theme";
+import type { Theme } from "../url-state";
+
+const themeFromUrl: Theme =
+  new URLSearchParams(window.location.search).get("theme") === "dark" ? "dark" : "light";
 
 function useRenderMessage() {
   const [message, setMessage] = useState<FrameRenderMessage | null>(null);
@@ -45,7 +49,8 @@ export function FrameApp() {
   const message = useRenderMessage();
   const content = useRef<HTMLDivElement>(null);
   useReportContentHeight(content);
-  useDocumentTheme(message?.theme ?? "light");
+  const theme = message?.theme ?? themeFromUrl;
+  useDocumentTheme(theme);
   const entry = useDemoEntry(message?.path);
   return (
     <main
@@ -57,7 +62,7 @@ export function FrameApp() {
       <div ref={content} className="flex w-full max-w-full items-center justify-center p-10">
         {entry?.demo.playground(message?.values as never)}
       </div>
-      <Toaster theme={message?.theme ?? "light"} position="bottom-right" />
+      <Toaster theme={theme} position="bottom-right" />
     </main>
   );
 }
