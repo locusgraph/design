@@ -7,7 +7,9 @@ function patternPages(root) {
     readdirSync(folder, { withFileTypes: true }).flatMap((entry) => {
       const path = join(folder, entry.name);
       if (entry.isDirectory()) return walk(path);
-      return entry.name.endsWith(".demo.tsx") ? [relative(dir, path).replace(/\.demo\.tsx$/, "")] : [];
+      return entry.name.endsWith(".demo.tsx")
+        ? [relative(dir, path).replace(/\.demo\.tsx$/, "")]
+        : [];
     });
   return walk(join(dir, "patterns")).sort();
 }

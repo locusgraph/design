@@ -2,10 +2,10 @@ import { mkdirSync, rmSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
 import { collectSourceFiles, exportIndex, sourcePackages } from "./lib/collect.mjs";
 import { demoDescriptions } from "./lib/descriptions.mjs";
-import { pageBundles } from "./lib/page-bundles.mjs";
 import { skillItem } from "./lib/items/skill.mjs";
-import { rewriteSource } from "./lib/rewrite.mjs";
 import { themeItem } from "./lib/items/theme.mjs";
+import { pageBundles } from "./lib/page-bundles.mjs";
+import { rewriteSource } from "./lib/rewrite.mjs";
 import { versionResolver } from "./lib/versions.mjs";
 
 const root = new URL("../..", import.meta.url).pathname;
