@@ -1,0 +1,54 @@
+{
+  "name": "@locusgraph/tokens",
+  "version": "0.1.0",
+  "description": "LocusGraph design tokens: theme CSS for Tailwind v4, typography, brand effects and motion, plus the color and type values for places CSS cannot reach.",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/locusgraph/design.git",
+    "directory": "packages/tokens"
+  },
+  "homepage": "https://design.locusgraph.com",
+  "type": "module",
+  "sideEffects": [
+    "**/*.css"
+  ],
+  "files": [
+    "dist"
+  ],
+  "exports": {
+    ".": "./src/values/index.ts",
+    "./theme.css": "./src/theme.css",
+    "./typeset.css": "./src/typeset.css"
+  },
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org",
+    "access": "public",
+    "provenance": true,
+    "exports": {
+      ".": {
+        "types": "./dist/values/index.d.ts",
+        "default": "./dist/values/index.js"
+      },
+      "./theme.css": "./dist/theme.css",
+      "./typeset.css": "./dist/typeset.css"
+    }
+  },
+  "scripts": {
+    "build": "rm -rf dist && tsc -p tsconfig.build.json && rsync -a --include='*/' --include='*.css' --exclude='*' src/ dist/",
+    "prepack": "pnpm run build",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "@fontsource-variable/archivo": "catalog:",
+    "@fontsource-variable/fira-code": "catalog:",
+    "@fontsource-variable/inter": "catalog:"
+  },
+  "devDependencies": {
+    "@locusgraph/config": "workspace:*",
+    "@types/node": "catalog:",
+    "typescript": "catalog:",
+    "vitest": "catalog:"
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "extends": [
+    "@locusgraph/config/typescript/library.json",
+    "@locusgraph/config/typescript/tests.json"
+  ],
+  "compilerOptions": {
+    "rootDir": "src"
+  },
+  "include": ["src"]
+}
