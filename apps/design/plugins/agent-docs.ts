@@ -1,8 +1,6 @@
-import { fileURLToPath } from "node:url";
-import react from "@vitejs/plugin-react";
-import { createServer, type Plugin, type ViteDevServer } from "vite";
+import type { Plugin, ViteDevServer } from "vite";
+import { withStandaloneServer } from "./standalone-server";
 
-const appRoot = fileURLToPath(new URL("..", import.meta.url));
 const docsModule = "/src/agent-docs/agent-doc-files.ts";
 
 type AgentDocFile = { fileName: string; markdown: string };
@@ -11,17 +9,6 @@ type DocsModule = { agentDocFiles: () => Promise<AgentDocFile[]> };
 async function readDocFiles(server: ViteDevServer) {
   const docs = (await server.ssrLoadModule(docsModule)) as DocsModule;
   return docs.agentDocFiles();
-}
-
-function standaloneServer() {
-  return createServer({
-    root: appRoot,
-    configFile: false,
-    logLevel: "error",
-    appType: "custom",
-    plugins: [react()],
-    server: { middlewareMode: true, hmr: false, ws: false },
-  });
 }
 
 export function agentDocs(): Plugin {
@@ -40,13 +27,9 @@ export function agentDocs(): Plugin {
     },
     async generateBundle() {
       if (this.environment.name !== "client") return;
-      const server = await standaloneServer();
-      try {
-        for (const file of await readDocFiles(server)) {
-          this.emitFile({ type: "asset", fileName: file.fileName, source: file.markdown });
-        }
-      } finally {
-        await server.close();
+      const files = await withStandaloneServer(readDocFiles);
+      for (const file of files) {
+        this.emitFile({ type: "asset", fileName: file.fileName, source: file.markdown });
       }
     },
   };

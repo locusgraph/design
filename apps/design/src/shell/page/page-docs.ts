@@ -13,6 +13,7 @@ import { buildPageMarkdown } from "./page-markdown";
 function pageSections(examples: DocExample[], hasComposition: boolean): PageSection[] {
   return [
     { id: "playground", title: "Playground" },
+    { id: "installation", title: "Installation" },
     { id: "usage", title: "Usage" },
     ...(hasComposition ? [{ id: "composition", title: "Composition" }] : []),
     ...(examples.length > 0 ? [{ id: "examples", title: "Examples" }] : []),
