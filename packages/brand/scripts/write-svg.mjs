@@ -1,10 +1,7 @@
 import { mkdirSync, writeFileSync } from "node:fs";
-import { register } from "node:module";
 import { createElement } from "react";
 import { renderToStaticMarkup } from "react-dom/server";
-
-register("./resolve-js.mjs", import.meta.url);
-const { GitHubMark, GoogleMark, LocusGraphMark } = await import("../dist/index.js");
+import { GitHubMark, GoogleMark, LocusGraphMark } from "../dist/index.js";
 
 const outDir = new URL("../dist/svg/", import.meta.url);
 mkdirSync(outDir, { recursive: true });
