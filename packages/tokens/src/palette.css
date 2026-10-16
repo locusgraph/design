@@ -1,8 +1,8 @@
 :root {
   --surface: #ffffff;
-  --background: var(--surface);
+  --background: #fafafa;
   --foreground: #09090b;
-  --border: color-mix(in oklch, var(--foreground) 13%, var(--surface));
+  --border: color-mix(in oklch, var(--foreground) 9%, var(--surface));
   --muted: #71717a;
   --faint: #a1a1aa;
   --btn: #18181b;
@@ -46,10 +46,10 @@
 }
 
 .dark {
-  --surface: #101011;
-  --background: var(--surface);
+  --surface: #111113;
+  --background: #0c0c0d;
   --foreground: #ededed;
-  --border: color-mix(in oklch, var(--foreground) 13%, var(--surface));
+  --border: color-mix(in oklch, var(--foreground) 10%, var(--surface));
   --muted: #a1a1aa;
   --faint: #71717a;
   --btn: #ededed;

@@ -76,7 +76,6 @@ function Choices() {
 export default defineDemo({
   title: "Menubar",
   isNew: true,
-  previewHeight: "tall",
   description:
     "A row of menus, like a desktop app's menu bar. Good for dense admin tools with many commands.",
   controls: { shortcuts: toggle(true), label: text("Organization") },

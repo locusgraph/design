@@ -61,7 +61,6 @@ function Nested() {
 export default defineDemo({
   title: "Resizable",
   isNew: true,
-  previewHeight: "tall",
   description:
     "Panels that people can resize by dragging the handle between them. Good for list and detail views.",
   controls: {

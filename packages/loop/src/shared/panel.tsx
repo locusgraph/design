@@ -65,7 +65,7 @@ export function PanelFooter({ className, ...props }: ComponentProps<"div">) {
   return (
     <div
       className={cn(
-        "flex flex-wrap items-center justify-end gap-2 border-t bg-muted/30 px-5 py-3",
+        "flex flex-wrap items-center justify-end gap-2 border-t bg-muted/70 px-5 py-3",
         className
       )}
       {...props}

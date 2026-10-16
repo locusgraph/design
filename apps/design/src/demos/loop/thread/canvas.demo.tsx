@@ -106,6 +106,5 @@ export default defineDemo({
       component: SingleVersion,
     },
   },
-  previewHeight: "tall",
   isNew: true,
 });

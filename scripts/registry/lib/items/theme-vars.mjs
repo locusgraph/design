@@ -22,7 +22,7 @@ export function prefixVariables(css, names) {
 }
 
 const shadcnToLocus = {
-  background: "surface",
+  background: "background",
   foreground: "foreground",
   card: "surface",
   "card-foreground": "foreground",

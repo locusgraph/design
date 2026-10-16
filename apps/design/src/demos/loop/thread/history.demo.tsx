@@ -82,6 +82,5 @@ export default defineDemo({
   examples: {
     Empty: { description: "Before the first conversation.", component: Empty },
   },
-  previewHeight: "tall",
   isNew: true,
 });

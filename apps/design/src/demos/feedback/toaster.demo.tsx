@@ -50,5 +50,4 @@ export default defineDemo({
       component: AllKinds,
     },
   },
-  previewHeight: "tall",
 });

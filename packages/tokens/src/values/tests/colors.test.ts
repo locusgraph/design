@@ -15,6 +15,7 @@ function cssValue(block: string, name: string) {
 
 const cssNames = {
   surface: "surface",
+  background: "background",
   foreground: "foreground",
   muted: "muted",
   faint: "faint",
@@ -43,7 +44,7 @@ describe("color values", () => {
   });
 
   it("mixes the hairline from foreground over surface", () => {
-    expect(hairline(lightColors)).toBe("#dfdfdf");
-    expect(hairline({ ...lightColors, foreground: "#000000", surface: "#ffffff" })).toBe("#dedede");
+    expect(hairline(lightColors)).toBe("#e9e9e9");
+    expect(hairline({ ...lightColors, foreground: "#000000", surface: "#ffffff" })).toBe("#e8e8e8");
   });
 });

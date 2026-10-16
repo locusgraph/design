@@ -2,9 +2,10 @@ import { mkdirSync, rmSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
 import { collectSourceFiles, exportIndex, sourcePackages } from "./lib/collect.mjs";
 import { demoDescriptions } from "./lib/descriptions.mjs";
+import { skillItem } from "./lib/items/skill.mjs";
+import { themeItem } from "./lib/items/theme.mjs";
 import { pageBundles } from "./lib/page-bundles.mjs";
 import { rewriteSource } from "./lib/rewrite.mjs";
-import { themeItem } from "./lib/theme/theme.mjs";
 import { versionResolver } from "./lib/versions.mjs";
 
 const root = new URL("../..", import.meta.url).pathname;
@@ -72,7 +73,12 @@ function buildItems() {
       categories: ["page"],
     })
   );
-  return [{ $schema: schema, ...themeItem(root, versionOf) }, ...items, ...bundles];
+  return [
+    { $schema: schema, ...themeItem(root, versionOf) },
+    { $schema: schema, ...skillItem(root, baseUrl) },
+    ...items,
+    ...bundles,
+  ];
 }
 
 function catalogEntry(item) {

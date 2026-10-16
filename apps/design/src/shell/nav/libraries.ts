@@ -1,6 +1,6 @@
 import { type DemoIndexEntry, demoIndexByTitle } from "../../registry/load-demos";
 
-export type LibraryId = "components" | "blocks" | "loop" | "brand";
+export type LibraryId = "components" | "blocks" | "loop" | "patterns" | "brand";
 
 export type Library = {
   id: LibraryId;
@@ -33,6 +33,13 @@ export const libraries: Library[] = [
     noun: "agent components",
   },
   {
+    id: "patterns",
+    title: "Patterns",
+    href: "/patterns",
+    packageName: "@locusgraph/components",
+    noun: "patterns",
+  },
+  {
     id: "brand",
     title: "Brand",
     href: "/brand",
@@ -44,6 +51,7 @@ export const libraries: Library[] = [
 const libraryByGroup: Partial<Record<string, LibraryId>> = {
   blocks: "blocks",
   loop: "loop",
+  patterns: "patterns",
   brand: "brand",
 };
 

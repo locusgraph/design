@@ -136,7 +136,6 @@ function InviteMember() {
 export default defineDemo({
   title: "Form",
   isNew: true,
-  previewHeight: "tall",
   description:
     "Form wires react-hook-form into labels, controls and error messages. Each FormField validates with rules and shows its error under the control.",
   controls: {

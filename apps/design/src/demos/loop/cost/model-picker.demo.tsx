@@ -54,7 +54,6 @@ export default defineDemo({
   title: "Model Picker",
   description:
     "A quiet trigger with the model and its provider. The menu lists each model with speed, context size and price per million tokens, and checks the one in use. Small enough for the composer's model slot.",
-  previewHeight: "tall",
   controls: {},
   playground: () => <ChooseModel />,
   code: () => `<ModelPicker models={models} value={modelId} onChange={setModelId} />`,

@@ -1,7 +1,10 @@
 import {
+  Button,
   RuleGrid,
   RuleGridCell,
   RuleGridDescription,
+  RuleGridFooter,
+  RuleGridHeader,
   RuleGridLabel,
   RuleGridTitle,
 } from "@locusgraph/components";
@@ -88,6 +91,29 @@ function SpanningCell() {
   );
 }
 
+function HeaderAndFooter() {
+  return (
+    <RuleGrid columns={2} className="w-[36rem] max-w-full">
+      {["Starter", "Team"].map((plan) => (
+        <RuleGridCell key={plan} className="min-h-56">
+          <RuleGridHeader>
+            <RuleGridLabel>{plan}</RuleGridLabel>
+          </RuleGridHeader>
+          <RuleGridTitle>{plan === "Team" ? "$40 per seat" : "Free"}</RuleGridTitle>
+          <RuleGridDescription>
+            Solid surface for content, a quiet strip for actions.
+          </RuleGridDescription>
+          <RuleGridFooter>
+            <Button size="sm" variant={plan === "Team" ? "default" : "outline"}>
+              Choose {plan}
+            </Button>
+          </RuleGridFooter>
+        </RuleGridCell>
+      ))}
+    </RuleGrid>
+  );
+}
+
 export default defineDemo({
   title: "Rule Grid",
   description:
@@ -133,6 +159,11 @@ export default defineDemo({
       description: "A featured cell spans two columns; the hairlines stay single.",
       component: SpanningCell,
     },
+    HeaderAndFooter: {
+      description:
+        "RuleGridHeader and RuleGridFooter run edge to edge. The header is a light tint, the footer a stronger one for actions.",
+      component: HeaderAndFooter,
+    },
   },
   composition: {
     name: "RuleGrid",
@@ -140,9 +171,11 @@ export default defineDemo({
       {
         name: "RuleGridCell",
         children: [
+          { name: "RuleGridHeader" },
           { name: "RuleGridLabel" },
           { name: "RuleGridTitle" },
           { name: "RuleGridDescription" },
+          { name: "RuleGridFooter" },
         ],
       },
     ],

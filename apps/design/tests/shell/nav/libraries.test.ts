@@ -7,6 +7,7 @@ describe("libraries", () => {
     expect(libraryOfGroup("blocks")).toBe("blocks");
     expect(libraryOfGroup("brand")).toBe("brand");
     expect(libraryOfGroup("loop")).toBe("loop");
+    expect(libraryOfGroup("patterns")).toBe("patterns");
     expect(libraryOfGroup("form")).toBe("components");
   });
 
@@ -22,6 +23,7 @@ describe("libraries", () => {
       ...libraryEntries("components"),
       ...libraryEntries("blocks"),
       ...libraryEntries("loop"),
+      ...libraryEntries("patterns"),
       ...libraryEntries("brand"),
     ];
     expect(listed).toHaveLength(demoIndex.length);
