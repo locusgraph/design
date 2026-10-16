@@ -1,6 +1,5 @@
-import { Badge, cn } from "@locusgraph/components";
-import { LoaderCircleIcon } from "lucide-react";
 import type { ToolState } from "../../types";
+import { StatusDot, type StatusTone } from "../shared/status-dot";
 
 export const toolStateLabels: Record<ToolState, string> = {
   "input-streaming": "Preparing",
@@ -12,14 +11,14 @@ export const toolStateLabels: Record<ToolState, string> = {
   "output-denied": "Denied",
 };
 
-const toolStateTones: Record<ToolState, string> = {
-  "input-streaming": "text-warn",
-  "input-available": "text-warn",
-  "approval-requested": "text-warn",
-  "approval-responded": "text-foreground",
-  "output-available": "text-foreground",
-  "output-error": "text-destructive border-destructive/40",
-  "output-denied": "text-muted-foreground",
+const toolStateTones: Record<ToolState, StatusTone> = {
+  "input-streaming": "waiting",
+  "input-available": "waiting",
+  "approval-requested": "waiting",
+  "approval-responded": "done",
+  "output-available": "done",
+  "output-error": "danger",
+  "output-denied": "idle",
 };
 
 export function isToolBusy(state: ToolState) {
@@ -28,15 +27,14 @@ export function isToolBusy(state: ToolState) {
 
 export function ToolStatus({ state }: { state: ToolState }) {
   return (
-    <Badge
-      variant="outline"
+    <span
       data-slot="tool-status"
       data-state={state}
       aria-live="polite"
-      className={cn("font-mono text-[11.5px] font-normal", toolStateTones[state])}
+      className="flex shrink-0 items-center gap-1.5 font-mono text-[11px] tracking-wide text-muted-foreground uppercase"
     >
-      {isToolBusy(state) && <LoaderCircleIcon aria-hidden className="motion-safe:animate-spin" />}
+      <StatusDot tone={toolStateTones[state]} />
       {toolStateLabels[state]}
-    </Badge>
+    </span>
   );
 }

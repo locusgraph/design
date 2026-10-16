@@ -1,4 +1,5 @@
 import { Badge } from "@locusgraph/components";
+import type { PanelTone } from "../../shared/panel";
 import type { RiskLevel } from "../../types";
 
 export const riskLabels: Record<RiskLevel, string> = {
@@ -11,6 +12,12 @@ export const riskRing: Record<RiskLevel, string> = {
   read: "ring-border",
   write: "ring-border",
   destructive: "ring-destructive/60",
+};
+
+export const riskTone: Record<RiskLevel, PanelTone> = {
+  read: "idle",
+  write: "waiting",
+  destructive: "danger",
 };
 
 const riskVariant = { read: "outline", write: "secondary", destructive: "destructive" } as const;

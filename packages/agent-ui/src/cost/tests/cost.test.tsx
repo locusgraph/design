@@ -105,7 +105,7 @@ describe("StepCostTimeline", () => {
 });
 
 describe("ModelSelector", () => {
-  it("shows the selected model and its price", () => {
+  it("shows the selected model and its provider", () => {
     const html = renderToStaticMarkup(
       <ModelSelector
         value="sonnet"
@@ -124,7 +124,7 @@ describe("ModelSelector", () => {
       />
     );
     expect(html).toContain('aria-label="Model: Claude Sonnet"');
-    expect(html).toContain("$3.00/M");
+    expect(html).toContain("Anthropic");
     expect(html).not.toContain("Claude Haiku");
   });
 });

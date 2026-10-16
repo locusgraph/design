@@ -31,5 +31,5 @@ export function fencedCode(node: HastNode | undefined) {
 export function FencedCodeBlock({ node }: ExtraProps) {
   const fenced = fencedCode(node);
   if (!fenced) return null;
-  return <CodeBlock code={fenced.code} language={fenced.language} className="mt-3 first:mt-0" />;
+  return <CodeBlock code={fenced.code} language={fenced.language} className="mt-4 first:mt-0" />;
 }

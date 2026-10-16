@@ -23,7 +23,7 @@ export function ThreadTitleEditor({ title, onCommit, onCancel }: ThreadTitleEdit
       aria-label="Conversation title"
       autoFocus
       value={draft}
-      className="h-8 text-sm"
+      className="h-7 text-sm"
       onChange={(event) => setDraft(event.target.value)}
       onFocus={(event) => event.target.select()}
       onBlur={commit}

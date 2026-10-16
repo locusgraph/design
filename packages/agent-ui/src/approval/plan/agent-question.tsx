@@ -1,7 +1,14 @@
-import { Button, Label, Textarea } from "@locusgraph/components";
-import { MessageCircleQuestionIcon } from "lucide-react";
+import { Button, Input, Textarea } from "@locusgraph/components";
+import { ArrowRightIcon, CheckIcon, MessageCircleQuestionIcon } from "lucide-react";
 import { useId, useState } from "react";
-import { ApprovalPanel, LiveStatus } from "../shared/panel";
+import {
+  ApprovalPanel,
+  LiveStatus,
+  PanelBody,
+  PanelFooter,
+  PanelHeader,
+  PanelTitle,
+} from "../../shared/panel";
 import { formatDecidedAt, isoOf } from "../shared/time";
 import { useFocusOnMount } from "../shared/use-focus-on-mount";
 import type { DecidedAt, QuestionAnswer, QuestionOption } from "../types";
@@ -29,22 +36,22 @@ function answerText(answer: AnsweredQuestion, options: QuestionOption[]) {
 
 function AnswerLine({ answer, options }: { answer: AnsweredQuestion; options: QuestionOption[] }) {
   return (
-    <div
-      data-slot="question-answer"
-      className="flex flex-col gap-1 border-l-2 border-primary pl-3 text-sm"
-    >
-      <p className="font-medium">{answerText(answer, options) || "No answer"}</p>
-      {(answer.by || answer.at !== undefined) && (
-        <p className="text-muted-foreground">
-          Answered{answer.by ? ` by ${answer.by}` : ""}
-          {answer.at !== undefined && (
-            <>
-              {" · "}
-              <time dateTime={isoOf(answer.at)}>{formatDecidedAt(answer.at)}</time>
-            </>
-          )}
-        </p>
-      )}
+    <div data-slot="question-answer" className="flex items-start gap-2.5 text-sm">
+      <CheckIcon aria-hidden className="mt-0.5 size-4 shrink-0 text-emerald-500" />
+      <div className="flex min-w-0 flex-col gap-0.5">
+        <p className="font-medium">{answerText(answer, options) || "No answer"}</p>
+        {(answer.by || answer.at !== undefined) && (
+          <p className="text-xs text-muted-foreground">
+            Answered{answer.by ? ` by ${answer.by}` : ""}
+            {answer.at !== undefined && (
+              <>
+                {" · "}
+                <time dateTime={isoOf(answer.at)}>{formatDecidedAt(answer.at)}</time>
+              </>
+            )}
+          </p>
+        )}
+      </div>
     </div>
   );
 }
@@ -53,8 +60,8 @@ export function AgentQuestion({
   question,
   options = [],
   allowText = options.length === 0,
-  textLabel = options.length > 0 ? "Or write your own answer" : "Your answer",
-  textPlaceholder = "Type an answer for the agent",
+  textLabel = options.length > 0 ? "Something else" : "Your answer",
+  textPlaceholder = options.length > 0 ? "Something else…" : "Type an answer for the agent",
   submitLabel = "Send answer",
   answer,
   onAnswer,
@@ -66,57 +73,79 @@ export function AgentQuestion({
   const [text, setText] = useState("");
   const trimmed = text.trim();
   const canSubmit = optionId !== undefined || trimmed !== "";
-  const textRef = useFocusOnMount<HTMLTextAreaElement>(
-    autoFocus && !answer && options.length === 0
-  );
+  const textOnly = options.length === 0;
+  const textRef = useFocusOnMount<HTMLTextAreaElement>(autoFocus && !answer && textOnly);
+  const changeText = (value: string) => {
+    setText(value);
+    if (value.trim() !== "") setOptionId(undefined);
+  };
   return (
     <ApprovalPanel
       data-slot="agent-question"
       data-answered={answer ? true : undefined}
       className={className}
     >
-      <p className="flex items-start gap-2 text-sm font-medium">
-        <MessageCircleQuestionIcon
-          aria-hidden
-          className="mt-0.5 size-4 shrink-0 text-muted-foreground"
-        />
-        {question}
-      </p>
+      <PanelHeader
+        icon={<MessageCircleQuestionIcon aria-hidden />}
+        eyebrow="Agent question"
+        status={answer ? "Answered" : "Waiting for you"}
+        tone={answer ? "done" : "waiting"}
+      />
+      <PanelTitle className={answer ? "text-muted-foreground" : undefined}>{question}</PanelTitle>
       {answer ? (
-        <AnswerLine answer={answer} options={options} />
+        <PanelBody>
+          <AnswerLine answer={answer} options={options} />
+        </PanelBody>
       ) : (
         <form
-          className="flex flex-col gap-3"
           onSubmit={(event) => {
             event.preventDefault();
             if (!canSubmit) return;
             onAnswer({ optionId, text: trimmed === "" ? undefined : trimmed });
           }}
         >
-          {options.length > 0 && (
-            <QuestionChoices
-              label={question}
-              options={options}
-              selectedId={optionId}
-              onSelect={setOptionId}
-              autoFocus={autoFocus}
-            />
-          )}
-          {allowText && (
-            <div className="flex flex-col gap-1.5">
-              <Label htmlFor={textId}>{textLabel}</Label>
+          <PanelBody className="gap-3">
+            {!textOnly && (
+              <QuestionChoices
+                label={question}
+                options={options}
+                selectedId={optionId}
+                onSelect={(id) => {
+                  setOptionId(id);
+                  setText("");
+                }}
+                autoFocus={autoFocus}
+              />
+            )}
+            {allowText && !textOnly && (
+              <Input
+                id={textId}
+                aria-label={textLabel}
+                value={text}
+                placeholder={textPlaceholder}
+                onChange={(event) => changeText(event.target.value)}
+              />
+            )}
+            {textOnly && (
               <Textarea
                 id={textId}
                 ref={textRef}
+                aria-label={textLabel}
                 value={text}
                 placeholder={textPlaceholder}
-                onChange={(event) => setText(event.target.value)}
+                onChange={(event) => changeText(event.target.value)}
               />
-            </div>
-          )}
-          <Button type="submit" size="sm" className="self-start" disabled={!canSubmit}>
-            {submitLabel}
-          </Button>
+            )}
+          </PanelBody>
+          <PanelFooter className="justify-between">
+            <span className="hidden font-mono text-[11px] text-muted-foreground sm:inline">
+              {textOnly ? "The run is paused" : `Press 1–${options.length} to pick`}
+            </span>
+            <Button type="submit" size="sm" disabled={!canSubmit}>
+              {submitLabel}
+              <ArrowRightIcon aria-hidden />
+            </Button>
+          </PanelFooter>
         </form>
       )}
       <LiveStatus

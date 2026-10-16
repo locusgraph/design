@@ -1,8 +1,9 @@
 "use client";
 
-import { Button, cn, RuleGridLabel, ScrollArea } from "@locusgraph/components";
+import { Button, cn, ScrollArea } from "@locusgraph/components";
 import { PlusIcon } from "lucide-react";
 import type { ComponentProps } from "react";
+import { groupThreadsByDay } from "./thread-groups";
 import { ThreadListItem, type ThreadSummary } from "./thread-list-item";
 
 type ThreadListProps = Omit<ComponentProps<"nav">, "onSelect"> & {
@@ -14,7 +15,10 @@ type ThreadListProps = Omit<ComponentProps<"nav">, "onSelect"> & {
   onArchive?: (id: string) => void;
   label?: string;
   emptyText?: string;
+  now?: Date | string;
 };
+
+const eyebrowClass = "font-mono text-[11px] tracking-wide text-muted-foreground uppercase";
 
 export function ThreadList({
   threads,
@@ -25,18 +29,20 @@ export function ThreadList({
   onArchive,
   label = "Conversations",
   emptyText = "No conversations yet.",
+  now = new Date(),
   className,
   ...props
 }: ThreadListProps) {
+  const groups = groupThreadsByDay(threads, now);
   return (
     <nav
       data-slot="thread-list"
       aria-label={label}
-      className={cn("flex min-h-0 flex-col gap-3", className)}
+      className={cn("flex min-h-0 flex-col gap-2", className)}
       {...props}
     >
-      <div className="flex items-center justify-between gap-2">
-        <RuleGridLabel>{label}</RuleGridLabel>
+      <div className="flex h-7 items-center justify-between gap-2 px-2">
+        <span className={eyebrowClass}>{label}</span>
         {onNew && (
           <Button type="button" variant="outline" size="xs" onClick={onNew}>
             <PlusIcon />
@@ -45,21 +51,33 @@ export function ThreadList({
         )}
       </div>
       {threads.length === 0 ? (
-        <p className="py-6 text-center text-sm text-muted-foreground">{emptyText}</p>
+        <p className="px-2 py-6 text-sm text-muted-foreground">{emptyText}</p>
       ) : (
         <ScrollArea className="min-h-0 flex-1">
-          <ul className="flex flex-col gap-px p-px">
-            {threads.map((thread) => (
-              <ThreadListItem
-                key={thread.id}
-                thread={thread}
-                active={thread.id === activeId}
-                onSelect={onSelect}
-                onRename={onRename}
-                onArchive={onArchive}
-              />
+          <div className="flex flex-col gap-4 pr-2.5 pb-2">
+            {groups.map((group) => (
+              <section key={group.key} aria-labelledby={`thread-group-${group.key}`}>
+                <h3
+                  id={`thread-group-${group.key}`}
+                  className={cn(eyebrowClass, "px-2 pb-1 text-[10.5px]")}
+                >
+                  {group.label}
+                </h3>
+                <ul className="flex flex-col">
+                  {group.threads.map((thread) => (
+                    <ThreadListItem
+                      key={thread.id}
+                      thread={thread}
+                      active={thread.id === activeId}
+                      onSelect={onSelect}
+                      onRename={onRename}
+                      onArchive={onArchive}
+                    />
+                  ))}
+                </ul>
+              </section>
             ))}
-          </ul>
+          </div>
         </ScrollArea>
       )}
     </nav>

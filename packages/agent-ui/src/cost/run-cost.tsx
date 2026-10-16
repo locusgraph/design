@@ -1,5 +1,7 @@
-import { Badge, cn, RuleGridLabel } from "@locusgraph/components";
+import { cn } from "@locusgraph/components";
 import { formatCount, formatMicroUsd, pluralize } from "@locusgraph/utils";
+import { CoinsIcon } from "lucide-react";
+import { ApprovalPanel, PanelHeader } from "../shared/panel";
 import type { RunUsage } from "../types";
 import { sumUsage, type UsageTotals } from "./shared/usage-totals";
 
@@ -29,6 +31,10 @@ function WastedNote({ totals }: { totals: UsageTotals }) {
   );
 }
 
+function Dot() {
+  return <span aria-hidden>·</span>;
+}
+
 function CompactRunCost({
   attempts,
   totals,
@@ -45,15 +51,27 @@ function CompactRunCost({
       data-variant="compact"
       data-failed={totals.failedAttempts > 0 || undefined}
       className={cn(
-        "inline-flex flex-wrap items-center gap-x-2 gap-y-0.5 font-mono text-[11.5px] text-muted-foreground tabular-nums",
+        "inline-flex flex-wrap items-baseline gap-x-1.5 gap-y-0.5 font-mono text-[11px] text-muted-foreground tabular-nums",
         className
       )}
     >
-      {model && <span>{model}</span>}
+      <span className="font-medium text-foreground">{formatMicroUsd(totals.costMicroUsd)}</span>
+      <Dot />
       <span>{formatCount(totals.inputTokens)} in</span>
+      <Dot />
       <span>{formatCount(totals.outputTokens)} out</span>
-      <span className="text-foreground">{formatMicroUsd(totals.costMicroUsd)}</span>
-      <WastedNote totals={totals} />
+      {model && (
+        <>
+          <Dot />
+          <span>{model}</span>
+        </>
+      )}
+      {totals.failedAttempts > 0 && (
+        <span className="inline-flex gap-x-1.5 text-destructive">
+          <Dot />
+          <WastedNote totals={totals} />
+        </span>
+      )}
     </span>
   );
 }
@@ -63,23 +81,25 @@ function AttemptRow({ attempt, position }: { attempt: RunUsage; position: number
     <li
       data-slot="run-cost-attempt"
       data-failed={attempt.failed || undefined}
-      className={cn(
-        "grid grid-cols-[1fr_auto_auto_auto] items-center gap-x-4 px-3 py-2 text-sm tabular-nums",
-        attempt.failed && "text-destructive"
-      )}
+      className="grid grid-cols-[1fr_auto_4.5rem] items-baseline gap-x-4 px-5 py-2.5 text-sm tabular-nums"
     >
-      <span className="flex min-w-0 items-center gap-2">
-        <span className="font-mono text-[11.5px] text-muted-foreground">#{position + 1}</span>
-        <span className="truncate">{attempt.model ?? "Attempt"}</span>
+      <span className="flex min-w-0 items-baseline gap-2">
+        <span className="font-mono text-[11px] text-muted-foreground">#{position + 1}</span>
+        <span className={cn("truncate", attempt.failed && "text-muted-foreground")}>
+          {attempt.model ?? "Attempt"}
+        </span>
         {attempt.failed && (
-          <Badge variant="destructive" className="text-[11px]">
+          <span className="font-mono text-[11px] tracking-wide text-destructive uppercase">
             Failed
-          </Badge>
+          </span>
         )}
       </span>
-      <span className="text-xs text-muted-foreground">{formatCount(attempt.inputTokens)} in</span>
-      <span className="text-xs text-muted-foreground">{formatCount(attempt.outputTokens)} out</span>
-      <span className="text-right">{formatMicroUsd(attempt.costMicroUsd)}</span>
+      <span className="font-mono text-[11px] text-muted-foreground max-sm:hidden">
+        {formatCount(attempt.inputTokens)} in · {formatCount(attempt.outputTokens)} out
+      </span>
+      <span className={cn("text-right font-mono text-xs", attempt.failed && "text-destructive")}>
+        {formatMicroUsd(attempt.costMicroUsd)}
+      </span>
     </li>
   );
 }
@@ -95,36 +115,40 @@ function DetailedRunCost({
   label: string;
   className?: string;
 }) {
+  const failed = totals.failedAttempts > 0;
   return (
-    <section
+    <ApprovalPanel
       data-slot="run-cost"
       data-variant="detailed"
-      data-failed={totals.failedAttempts > 0 || undefined}
+      data-failed={failed || undefined}
       aria-label={label}
-      className={cn("flex flex-col border border-border bg-card text-card-foreground", className)}
+      className={className}
     >
-      <header className="flex flex-col gap-1 border-b border-border px-3 py-3">
-        <RuleGridLabel>{label}</RuleGridLabel>
-        <span className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
-          <span className="font-heading text-2xl font-semibold tracking-[-0.02em] tabular-nums">
-            {formatMicroUsd(totals.costMicroUsd)}
-          </span>
-          <span className="text-xs text-muted-foreground tabular-nums">
+      <PanelHeader
+        icon={<CoinsIcon />}
+        eyebrow={label}
+        status={pluralize(attempts.length, "attempt")}
+        tone={failed ? "danger" : "done"}
+      />
+      <div className="flex flex-col gap-1 px-5 pt-2 pb-4">
+        <span className="text-2xl font-semibold tracking-tight tabular-nums">
+          {formatMicroUsd(totals.costMicroUsd)}
+        </span>
+        <span className="flex flex-wrap gap-x-3 gap-y-0.5 text-xs text-muted-foreground tabular-nums">
+          <span>
             {formatCount(totals.inputTokens)} input · {formatCount(totals.outputTokens)} output
             tokens
           </span>
-        </span>
-        <span className="text-xs">
           <WastedNote totals={totals} />
         </span>
-      </header>
-      <ol className="flex flex-col divide-y divide-border">
+      </div>
+      <ol className="flex flex-col divide-y divide-border border-t border-border">
         {attempts.map((attempt, position) => (
           // biome-ignore lint/suspicious/noArrayIndexKey: attempts carry no id and keep their order
           <AttemptRow key={position} attempt={attempt} position={position} />
         ))}
       </ol>
-    </section>
+    </ApprovalPanel>
   );
 }
 

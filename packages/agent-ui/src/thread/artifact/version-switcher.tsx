@@ -19,7 +19,7 @@ type VersionSwitcherProps = {
 
 export function VersionSwitcher({ versions, current, onVersionChange }: VersionSwitcherProps) {
   const label = (
-    <span className="flex items-center gap-1.5 font-mono text-[11.5px]">
+    <span className="flex items-center gap-2 font-mono text-[11px] tabular-nums">
       <span data-slot="artifact-current-version">{current.label}</span>
       <time dateTime={current.createdAt} className="text-muted-foreground">
         {formatDate(current.createdAt)}
@@ -34,8 +34,9 @@ export function VersionSwitcher({ versions, current, onVersionChange }: VersionS
       <DropdownMenuTrigger asChild>
         <Button
           type="button"
-          variant="outline"
+          variant="ghost"
           size="xs"
+          className="-ml-2 font-normal"
           aria-label={`Version ${current.label}, choose another version`}
         >
           {label}

@@ -30,8 +30,8 @@ describe("ApprovalInbox", () => {
       <ApprovalInbox items={items} now={now} onApprove={noop} onDeny={noop} onApproveAll={noop} />
     );
     expect(html).toContain("Send invoice INV-2041");
-    expect(html).toContain("waiting 7 min");
-    expect(html).toContain("waiting 3 h");
+    expect(html).toContain("7 min");
+    expect(html).toContain("3 h");
     expect(html).toContain("Approve selected");
     expect(html).toContain("Destructive requests are approved one at a time.");
   });

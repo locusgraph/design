@@ -6,16 +6,16 @@ export type LoaderProps = {
   className?: string;
 };
 
-const dotDelays = ["[animation-delay:-0.3s]", "[animation-delay:-0.15s]", ""];
+const dotDelays = ["[animation-delay:0ms]", "[animation-delay:200ms]", "[animation-delay:400ms]"];
 
 function TypingDots() {
   return (
-    <span aria-hidden className="flex items-center gap-1">
+    <span aria-hidden className="flex h-5 items-center gap-1">
       {dotDelays.map((delay) => (
         <span
-          key={delay || "last"}
+          key={delay}
           className={cn(
-            "size-1.5 rounded-full bg-muted-foreground motion-safe:animate-bounce",
+            "size-1.5 rounded-full bg-muted-foreground/70 motion-safe:animate-pulse",
             delay
           )}
         />
@@ -39,7 +39,7 @@ export function Loader({ variant = "dots", label = "Thinking…", className }: L
           <span className="sr-only">{label}</span>
         </>
       ) : (
-        <span className="font-mono text-[11.5px] motion-safe:shimmer">{label}</span>
+        <span className="motion-safe:shimmer">{label}</span>
       )}
     </span>
   );

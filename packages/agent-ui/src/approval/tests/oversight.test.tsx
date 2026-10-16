@@ -19,7 +19,7 @@ describe("SpendApproval", () => {
       />
     );
     expect(html).toContain('data-situation="over-cap"');
-    expect(html).toContain("ring-warn/60");
+    expect(html).toContain("Over cap");
     expect(html).toContain("Allow $1.35 once");
     expect(html).toContain('value="6.00"');
     expect(html).toContain("Raise cap to $6.00");
@@ -82,7 +82,7 @@ describe("RunControls", () => {
       <RunControls status="running" runName="Nightly reconcile" {...callbacks} />
     );
     expect(html).toContain("Pause");
-    expect(html).toMatch(/<button[^>]*disabled=""[^>]*>.*?Run one step/);
+    expect(html).toMatch(/<button(?=[^>]*aria-label="Run one step")(?=[^>]*disabled="")[^>]*>/);
   });
 
   it("offers resume and step while paused, nothing when done", () => {

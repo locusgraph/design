@@ -1,14 +1,10 @@
-import {
-  cn,
-  HoverCard,
-  HoverCardContent,
-  HoverCardTrigger,
-  RuleGridLabel,
-} from "@locusgraph/components";
+import { cn, HoverCard, HoverCardContent, HoverCardTrigger } from "@locusgraph/components";
 import { formatCount, nearLimitPercent, quotaPercent } from "@locusgraph/utils";
+import { ContextBreakdown, type ContextSegment } from "./shared/context-breakdown";
+import { MeterBar, MeterRing } from "./shared/meter-marks";
 import { formatTokensShort } from "./shared/usage-totals";
 
-export type ContextSegment = { label: string; tokens: number };
+export type { ContextSegment } from "./shared/context-breakdown";
 
 export type ContextStatus = "ok" | "near" | "full";
 
@@ -28,77 +24,43 @@ export function contextStatus(usedTokens: number, limitTokens: number): ContextS
 }
 
 const statusTone = {
-  ok: "text-foreground",
+  ok: "text-muted-foreground",
   near: "text-warn",
   full: "text-destructive",
 } as const;
 
-const statusFill = { ok: "bg-primary", near: "bg-current", full: "bg-current" } as const;
-
-const ringRadius = 8;
-const ringCircumference = 2 * Math.PI * ringRadius;
-
-function MeterRing({ percent, status }: { percent: number; status: ContextStatus }) {
+function RingContent({ percent, status }: { percent: number; status: ContextStatus }) {
   return (
-    <svg viewBox="0 0 20 20" aria-hidden className="size-4 -rotate-90">
-      <circle
-        cx="10"
-        cy="10"
-        r={ringRadius}
-        fill="none"
-        strokeWidth="2.5"
-        className="stroke-muted"
-      />
-      <circle
-        cx="10"
-        cy="10"
-        r={ringRadius}
-        fill="none"
-        strokeWidth="2.5"
-        strokeDasharray={ringCircumference}
-        strokeDashoffset={ringCircumference * (1 - percent / 100)}
-        className={cn(
-          "transition-[stroke-dashoffset] duration-300 motion-reduce:transition-none",
-          status === "ok" ? "stroke-primary" : "stroke-current"
-        )}
-      />
-    </svg>
+    <>
+      <MeterRing percent={percent} status={status} />
+      <span className="font-mono text-[11px] tabular-nums">{percent}%</span>
+    </>
   );
 }
 
-function MeterBar({ percent, status }: { percent: number; status: ContextStatus }) {
-  return (
-    <span className="relative h-1.5 w-full overflow-hidden rounded-full bg-muted">
-      <span
-        className={cn(
-          "absolute inset-y-0 left-0 rounded-full transition-[width] duration-300 motion-reduce:transition-none",
-          statusFill[status]
-        )}
-        style={{ width: `${percent}%` }}
-      />
-    </span>
-  );
-}
-
-function Breakdown({
-  breakdown,
+function BarContent({
+  label,
+  usedTokens,
   limitTokens,
+  percent,
+  status,
 }: {
-  breakdown: ContextSegment[];
+  label: string;
+  usedTokens: number;
   limitTokens: number;
+  percent: number;
+  status: ContextStatus;
 }) {
   return (
-    <ul data-slot="context-meter-breakdown" className="flex flex-col gap-1.5 text-xs">
-      {breakdown.map((segment) => (
-        <li key={segment.label} className="flex items-baseline justify-between gap-4">
-          <span>{segment.label}</span>
-          <span className="text-muted-foreground tabular-nums">
-            {formatCount(segment.tokens)} ·{" "}
-            {quotaPercent({ used: segment.tokens, included: limitTokens })}%
-          </span>
-        </li>
-      ))}
-    </ul>
+    <>
+      <span className="flex items-baseline justify-between gap-4 font-mono text-[11px] tabular-nums">
+        <span className="tracking-wide text-muted-foreground uppercase">{label}</span>
+        <span className={cn(status === "ok" && "text-foreground")}>
+          {formatTokensShort(usedTokens)} / {formatTokensShort(limitTokens)}
+        </span>
+      </span>
+      <MeterBar percent={percent} status={status} />
+    </>
   );
 }
 
@@ -130,26 +92,22 @@ export function ContextMeter({
         "outline-none focus-visible:ring-2 focus-visible:ring-ring/70",
         statusTone[status],
         variant === "ring"
-          ? "inline-flex items-center gap-1.5 rounded-full px-1.5 py-0.5"
+          ? "inline-flex h-6 items-center gap-1.5 rounded-full px-2 transition-colors duration-150 motion-reduce:transition-none"
           : "flex w-full flex-col gap-2",
+        variant === "ring" && hasBreakdown && "cursor-default hover:bg-accent",
         className
       )}
     >
       {variant === "ring" ? (
-        <>
-          <MeterRing percent={percent} status={status} />
-          <span className="font-mono text-[11.5px] tabular-nums">{percent}%</span>
-        </>
+        <RingContent percent={percent} status={status} />
       ) : (
-        <>
-          <span className="flex items-baseline justify-between gap-4">
-            <RuleGridLabel>{label}</RuleGridLabel>
-            <span className="font-mono text-[11.5px] tabular-nums">
-              {formatTokensShort(usedTokens)} / {formatTokensShort(limitTokens)}
-            </span>
-          </span>
-          <MeterBar percent={percent} status={status} />
-        </>
+        <BarContent
+          label={label}
+          usedTokens={usedTokens}
+          limitTokens={limitTokens}
+          percent={percent}
+          status={status}
+        />
       )}
     </div>
   );
@@ -157,12 +115,18 @@ export function ContextMeter({
   return (
     <HoverCard openDelay={100} closeDelay={100}>
       <HoverCardTrigger asChild>{meter}</HoverCardTrigger>
-      <HoverCardContent className="flex w-60 flex-col gap-2 rounded-none p-3">
-        <span className="flex items-baseline justify-between gap-4">
-          <RuleGridLabel>{label}</RuleGridLabel>
-          <span className="text-xs tabular-nums">{summary}</span>
-        </span>
-        <Breakdown breakdown={breakdown} limitTokens={limitTokens} />
+      <HoverCardContent
+        align="end"
+        className="w-72 rounded-none border-0 p-0 shadow-none ring-1 ring-border"
+      >
+        <ContextBreakdown
+          label={label}
+          usedTokens={usedTokens}
+          limitTokens={limitTokens}
+          percent={percent}
+          status={status}
+          breakdown={breakdown}
+        />
       </HoverCardContent>
     </HoverCard>
   );

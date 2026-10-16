@@ -85,7 +85,7 @@ export function PromptInput({
       data-disabled={disabled || undefined}
       aria-busy={isBusy || undefined}
       className={cn(
-        "flex flex-col gap-2 border bg-card p-2 text-card-foreground transition-colors focus-within:border-ring data-[status=error]:border-destructive/50 data-disabled:opacity-60",
+        "flex flex-col bg-card text-card-foreground ring-1 ring-border transition-shadow focus-within:ring-foreground/40 data-[status=error]:ring-destructive/60 data-disabled:opacity-60",
         className
       )}
       onSubmit={(event) => {
@@ -94,7 +94,11 @@ export function PromptInput({
       }}
       {...props}
     >
-      {attachments && <div data-slot="prompt-input-attachments">{attachments}</div>}
+      {attachments && (
+        <div data-slot="prompt-input-attachments" className="px-3 pt-3 empty:hidden">
+          {attachments}
+        </div>
+      )}
       <Textarea
         ref={textareaRef}
         aria-label={label}
@@ -111,14 +115,14 @@ export function PromptInput({
             send();
           }
         }}
-        className="max-h-48 min-h-10 resize-none border-0 bg-transparent px-2 py-1.5 shadow-none focus-visible:ring-0 dark:bg-transparent"
+        className="max-h-48 min-h-14 resize-none border-0 bg-transparent px-4 pt-3.5 pb-1 text-sm leading-relaxed shadow-none placeholder:text-muted-foreground/80 focus-visible:ring-0 dark:bg-transparent"
       />
       {showError && (
-        <p id={errorId} role="alert" className="px-2 text-xs text-destructive">
+        <p id={errorId} role="alert" className="px-4 pt-1 text-xs text-destructive">
           {errorMessage}
         </p>
       )}
-      <div data-slot="prompt-input-toolbar" className="flex items-center gap-1">
+      <div data-slot="prompt-input-toolbar" className="flex items-center gap-1 px-2.5 pt-1 pb-2.5">
         {onAttachFiles && (
           <PromptAttachButton
             accept={accept}

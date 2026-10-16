@@ -25,14 +25,19 @@ export function ToolCall({ part, defaultOpen = false, className }: ToolCallProps
       data-tool-call-id={part.toolCallId}
       open={open}
       onOpenChange={setOpen}
-      className={cn("flex flex-col rounded-none border border-border", className)}
+      className={cn(
+        "flex min-w-0 flex-col bg-card text-card-foreground ring-1 ring-border",
+        className
+      )}
     >
       <CollapsibleTrigger
         aria-expanded={open}
-        className="flex w-full items-center gap-2 px-3 py-2 text-left transition-colors hover:bg-muted/50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/70 focus-visible:ring-inset"
+        className="flex w-full items-center gap-2.5 px-3 py-2.5 text-left transition-colors hover:bg-accent/50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/70 focus-visible:ring-inset"
       >
         <WrenchIcon aria-hidden className="size-3.5 shrink-0 text-muted-foreground" />
-        <span className="min-w-0 flex-1 truncate font-mono text-[11.5px]">{toolNameOf(part)}</span>
+        <span className="min-w-0 flex-1 truncate font-mono text-[13px] font-medium">
+          {toolNameOf(part)}
+        </span>
         <ToolStatus state={part.state} />
         <ChevronDownIcon
           aria-hidden
@@ -46,14 +51,14 @@ export function ToolCall({ part, defaultOpen = false, className }: ToolCallProps
         <p
           data-slot="tool-call-error"
           role="alert"
-          className="border-t border-border px-3 py-2 text-sm text-destructive"
+          className="border-t border-border px-3 py-2.5 text-sm text-destructive"
         >
           {part.errorText}
         </p>
       )}
       <CollapsibleContent
         data-slot="tool-call-content"
-        className="flex flex-col gap-3 border-t border-border p-3"
+        className="flex flex-col gap-4 border-t border-border px-3 pt-3 pb-4"
       >
         {hasInput && <JsonBlock label="Input" value={part.input} />}
         {hasOutput && <JsonBlock label="Output" value={part.output} />}

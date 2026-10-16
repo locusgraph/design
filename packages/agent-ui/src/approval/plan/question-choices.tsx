@@ -19,6 +19,11 @@ const nextIndexByKey: Record<string, (index: number, count: number) => number> =
   End: (_index, count) => count - 1,
 };
 
+function indexFromDigitKey(key: string, count: number) {
+  const digit = Number(key);
+  return Number.isInteger(digit) && digit >= 1 && digit <= count ? digit - 1 : undefined;
+}
+
 export function QuestionChoices({
   label,
   options,
@@ -33,15 +38,19 @@ export function QuestionChoices({
   const selectedIndex = options.findIndex((option) => option.id === selectedId);
   const tabStop = selectedIndex === -1 ? 0 : selectedIndex;
 
-  function handleKeyDown(event: KeyboardEvent<HTMLButtonElement>, index: number) {
-    const move = nextIndexByKey[event.key];
-    if (!move) return;
-    event.preventDefault();
-    const next = move(index, options.length);
+  function selectIndex(next: number) {
     const option = options[next];
     if (!option) return;
     onSelect(option.id);
     buttons.current[next]?.focus();
+  }
+
+  function handleKeyDown(event: KeyboardEvent<HTMLButtonElement>, index: number) {
+    const byDigit = indexFromDigitKey(event.key, options.length);
+    const move = nextIndexByKey[event.key];
+    if (byDigit === undefined && !move) return;
+    event.preventDefault();
+    selectIndex(byDigit ?? move?.(index, options.length) ?? index);
   }
 
   return (
@@ -49,7 +58,7 @@ export function QuestionChoices({
       role="radiogroup"
       aria-label={label}
       data-slot="question-choices"
-      className="flex flex-wrap gap-2"
+      className="flex flex-col divide-y ring-1 ring-border"
     >
       {options.map((option, index) => {
         const checked = option.id === selectedId;
@@ -67,18 +76,34 @@ export function QuestionChoices({
             onClick={() => onSelect(option.id)}
             onKeyDown={(event) => handleKeyDown(event, index)}
             className={cn(
-              "flex flex-col items-start rounded-full border px-4 py-1.5 text-left text-sm outline-none motion-safe:transition-colors focus-visible:ring-2 focus-visible:ring-ring/70 focus-visible:ring-offset-2 focus-visible:ring-offset-background",
-              checked
-                ? "border-primary bg-primary text-primary-foreground"
-                : "border-border bg-background hover:bg-accent"
+              "group relative flex items-center gap-3 px-3 py-2.5 text-left text-sm outline-none motion-safe:transition-colors focus-visible:z-10 focus-visible:ring-2 focus-visible:ring-ring/70",
+              checked ? "bg-accent" : "hover:bg-accent/50"
             )}
           >
-            <span className="font-medium">{option.label}</span>
-            {option.description && (
-              <span className={cn("text-xs", checked ? "opacity-80" : "text-muted-foreground")}>
-                {option.description}
-              </span>
-            )}
+            <span
+              aria-hidden
+              className={cn(
+                "flex size-5 shrink-0 items-center justify-center font-mono text-[11px] ring-1",
+                checked
+                  ? "bg-primary text-primary-foreground ring-primary"
+                  : "text-muted-foreground ring-border"
+              )}
+            >
+              {index + 1}
+            </span>
+            <span className="flex min-w-0 flex-1 flex-col">
+              <span className="font-medium">{option.label}</span>
+              {option.description && (
+                <span className="text-xs text-muted-foreground">{option.description}</span>
+              )}
+            </span>
+            <span
+              aria-hidden
+              className={cn(
+                "size-3.5 shrink-0 rounded-full ring-1 motion-safe:transition-shadow",
+                checked ? "ring-[4px] ring-primary" : "ring-border"
+              )}
+            />
           </button>
         );
       })}

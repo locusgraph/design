@@ -1,8 +1,16 @@
 import { Button, cn } from "@locusgraph/components";
+import { SquarePenIcon } from "lucide-react";
 import { useId, useMemo, useState } from "react";
+import {
+  ApprovalPanel,
+  LiveStatus,
+  PanelBody,
+  PanelFooter,
+  PanelHeader,
+  PanelTitle,
+} from "../../../shared/panel";
 import type { RiskLevel } from "../../../types";
-import { ApprovalPanel, LiveStatus } from "../../shared/panel";
-import { RiskBadge, riskRing } from "../../shared/risk-badge";
+import { riskLabels, riskRing, riskTone } from "../../shared/risk-badge";
 import type { ArgField, ArgValues } from "../../types";
 import { ArgsField } from "./args-field";
 import { draftsFrom, validateDrafts, valuesFromDrafts } from "./args-validation";
@@ -38,6 +46,7 @@ export function ToolArgsEditor({
   const errors = useMemo(() => validateDrafts(fields, drafts), [fields, drafts]);
   const errorCount = Object.keys(errors).length;
   const visibleErrors = showErrors ? errors : {};
+  const destructive = risk === "destructive";
   return (
     <ApprovalPanel
       data-slot="tool-args-editor"
@@ -45,16 +54,18 @@ export function ToolArgsEditor({
       aria-label={`Edit ${toolName} inputs`}
       className={cn(riskRing[risk], className)}
     >
-      <header className="flex flex-wrap items-center justify-between gap-2">
-        <span className="flex flex-col gap-0.5">
-          <span className="font-mono text-sm font-medium">{toolName}</span>
-          <span className="text-sm text-muted-foreground">Edit the inputs, then approve.</span>
-        </span>
-        <RiskBadge risk={risk} />
-      </header>
+      <PanelHeader
+        icon={<SquarePenIcon aria-hidden />}
+        eyebrow="Edit before approving"
+        status={riskLabels[risk]}
+        tone={riskTone[risk]}
+      />
+      <PanelTitle className="truncate font-mono">{toolName}</PanelTitle>
+      <p className="px-5 pt-1 text-sm text-muted-foreground">
+        Correct the inputs, then approve. The tool runs with what you send.
+      </p>
       <form
         noValidate
-        className="flex flex-col gap-4"
         onSubmit={(event) => {
           event.preventDefault();
           const firstInvalid = fields.find((field) => errors[field.name]);
@@ -67,28 +78,36 @@ export function ToolArgsEditor({
           onApprove(valuesFromDrafts(fields, drafts));
         }}
       >
-        {fields.map((field) => (
-          <ArgsField
-            key={field.name}
-            id={`${baseId}-${field.name}`}
-            field={field}
-            draft={drafts[field.name]}
-            error={visibleErrors[field.name]}
-            onChange={(draft) => setDrafts((current) => ({ ...current, [field.name]: draft }))}
-          />
-        ))}
-        <div className="flex flex-wrap gap-2">
-          <Button
-            type="submit"
-            size="sm"
-            variant={risk === "destructive" ? "destructive" : "default"}
+        <PanelBody className="gap-5">
+          {fields.map((field) => (
+            <ArgsField
+              key={field.name}
+              id={`${baseId}-${field.name}`}
+              field={field}
+              draft={drafts[field.name]}
+              error={visibleErrors[field.name]}
+              onChange={(draft) => setDrafts((current) => ({ ...current, [field.name]: draft }))}
+            />
+          ))}
+        </PanelBody>
+        <PanelFooter className="justify-between">
+          <span
+            className={cn(
+              "hidden font-mono text-[11px] sm:inline",
+              showErrors && errorCount > 0 ? "text-destructive" : "text-muted-foreground"
+            )}
           >
-            {actionLabel ?? `Run ${toolName} with these inputs`}
-          </Button>
-          <Button type="button" size="sm" variant="ghost" onClick={onCancel}>
-            Cancel
-          </Button>
-        </div>
+            {showErrors && errorCount > 0 ? errorSummary(errorCount) : "The run is paused"}
+          </span>
+          <span className="flex flex-wrap gap-2">
+            <Button type="button" size="sm" variant="ghost" onClick={onCancel}>
+              Cancel
+            </Button>
+            <Button type="submit" size="sm" variant={destructive ? "destructive" : "default"}>
+              {actionLabel ?? `Run ${toolName} with these inputs`}
+            </Button>
+          </span>
+        </PanelFooter>
       </form>
       <LiveStatus message={showErrors && errorCount > 0 ? errorSummary(errorCount) : ""} />
     </ApprovalPanel>

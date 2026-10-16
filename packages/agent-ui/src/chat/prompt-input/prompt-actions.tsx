@@ -19,14 +19,15 @@ export function PromptSubmit({ status, canSend, onStop }: PromptSubmitProps) {
     return (
       <Button
         type="button"
-        size="icon-sm"
-        variant="secondary"
+        size="sm"
+        variant="outline"
         data-slot="prompt-input-stop"
         aria-label="Stop"
         disabled={!onStop}
         onClick={onStop}
       >
-        <SquareIcon aria-hidden="true" className="size-3 fill-current" />
+        <SquareIcon aria-hidden="true" className="size-2.5 fill-current" />
+        Stop
       </Button>
     );
   }
@@ -75,6 +76,7 @@ export function PromptAttachButton({ accept, disabled, onAttachFiles }: PromptAt
         variant="ghost"
         data-slot="prompt-input-attach"
         aria-label="Attach files"
+        className="text-muted-foreground hover:text-foreground"
         disabled={disabled}
         onClick={() => inputRef.current?.click()}
       >

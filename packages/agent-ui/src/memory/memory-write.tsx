@@ -1,6 +1,7 @@
-import { Badge, Button, cn, RuleGridLabel } from "@locusgraph/components";
+import { Button, cn } from "@locusgraph/components";
 import { pluralize } from "@locusgraph/utils";
-import { BookmarkPlusIcon, Undo2Icon } from "lucide-react";
+import { BookmarkPlusIcon, CheckIcon, Undo2Icon } from "lucide-react";
+import { eyebrowClass, ruledListClass } from "./shared/disclosure";
 
 export type MemoryWriteStatus = "saved" | "undone";
 
@@ -28,13 +29,13 @@ export function MemoryWrite({ items, onUndo, className }: MemoryWriteProps) {
     <section
       data-slot="memory-write"
       aria-label="Saved to memory"
-      className={cn("flex flex-col border border-border", className)}
+      className={cn("flex min-w-0 flex-col gap-2", className)}
     >
-      <header className="flex items-center gap-2 border-b border-border px-3 py-2">
-        <BookmarkPlusIcon aria-hidden className="size-3.5 text-muted-foreground" />
-        <RuleGridLabel>{memoryWriteSummary(items)}</RuleGridLabel>
+      <header aria-live="polite" className={cn("flex items-center gap-2 py-1", eyebrowClass)}>
+        <BookmarkPlusIcon aria-hidden />
+        {memoryWriteSummary(items)}
       </header>
-      <ul className="flex flex-col divide-y divide-border">
+      <ul className={ruledListClass}>
         {items.map((item) => (
           <MemoryWriteRow key={item.id} item={item} onUndo={onUndo} />
         ))}
@@ -55,26 +56,30 @@ function MemoryWriteRow({
     <li
       data-slot="memory-write-item"
       data-status={item.status}
-      className="flex items-center gap-3 px-3 py-2"
+      className="flex min-h-11 items-center gap-3 px-3 py-2"
     >
-      <span
+      <CheckIcon
+        aria-hidden
         className={cn(
-          "min-w-0 flex-1 text-sm",
-          undone && "text-muted-foreground line-through decoration-muted-foreground"
+          "size-3.5 shrink-0",
+          undone ? "text-muted-foreground/40" : "text-emerald-500"
         )}
-      >
-        {item.text}
-      </span>
-      {item.kind && (
-        <Badge
-          variant="outline"
-          className={cn("font-mono text-[11px] font-normal", undone && "opacity-60")}
+      />
+      <span className="flex min-w-0 flex-1 flex-col gap-0.5">
+        <span
+          className={cn(
+            "text-sm",
+            undone && "text-muted-foreground line-through decoration-muted-foreground"
+          )}
         >
-          {item.kind}
-        </Badge>
-      )}
+          {item.text}
+        </span>
+        {item.kind && <span className="font-mono text-xs text-muted-foreground">{item.kind}</span>}
+      </span>
       {undone ? (
-        <span className="font-mono text-[11.5px] text-muted-foreground">Undone</span>
+        <span className="font-mono text-[11px] tracking-wide text-muted-foreground uppercase">
+          Undone
+        </span>
       ) : (
         onUndo && (
           <Button

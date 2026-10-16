@@ -1,9 +1,15 @@
 import { Collapsible, CollapsibleContent, CollapsibleTrigger, cn } from "@locusgraph/components";
 import { pluralize } from "@locusgraph/utils";
-import { ChevronDownIcon } from "lucide-react";
+import { ChevronRightIcon } from "lucide-react";
 import type { Citation } from "../types";
-import { chevronClass, collapsibleTriggerClass } from "./shared/disclosure";
+import {
+  chevronClass,
+  collapsibleTriggerClass,
+  interactiveRowClass,
+  ruledListClass,
+} from "./shared/disclosure";
 import { hostLabel, type SourceItem, sourceKey, toCitation } from "./shared/host-label";
+import { SourceMark } from "./shared/source-mark";
 
 export type SourcesProps = {
   sources: SourceItem[];
@@ -12,24 +18,36 @@ export type SourcesProps = {
   className?: string;
 };
 
+const stackedMarkLimit = 3;
+
 export function Sources({ sources, onOpen, defaultOpen = false, className }: SourcesProps) {
   if (sources.length === 0) return null;
+  const citations = sources.map(toCitation);
   return (
     <Collapsible
       data-slot="sources"
       defaultOpen={defaultOpen}
-      className={cn("flex flex-col gap-1", className)}
+      className={cn("flex min-w-0 flex-col gap-2", className)}
     >
       <CollapsibleTrigger className={collapsibleTriggerClass}>
+        <span aria-hidden className="flex -space-x-1">
+          {citations.slice(0, stackedMarkLimit).map((citation, position) => (
+            <SourceMark
+              key={sourceKey(sources[position] as SourceItem, position)}
+              citation={citation}
+              className="ring-card"
+            />
+          ))}
+        </span>
         Used {pluralize(sources.length, "source")}
-        <ChevronDownIcon aria-hidden className={chevronClass} />
+        <ChevronRightIcon aria-hidden className={chevronClass} />
       </CollapsibleTrigger>
       <CollapsibleContent>
-        <ol className="flex flex-col divide-y divide-border border border-border">
-          {sources.map((item, position) => (
+        <ol className={ruledListClass}>
+          {citations.map((citation, position) => (
             <SourceRow
-              key={sourceKey(item, position)}
-              citation={toCitation(item, position)}
+              key={sourceKey(sources[position] as SourceItem, position)}
+              citation={citation}
               onOpen={onOpen}
             />
           ))}
@@ -47,19 +65,20 @@ function SourceRow({
   onOpen?: (citation: Citation) => void;
 }) {
   const host = hostLabel(citation.url);
+  const showHost = host !== undefined && host !== citation.title;
   const content = (
     <>
-      <span className="font-mono text-[11.5px] text-muted-foreground tabular-nums">
-        [{citation.index}]
+      <span className="w-4 shrink-0 font-mono text-[11px] text-muted-foreground tabular-nums">
+        {citation.index}
       </span>
+      <SourceMark citation={citation} />
       <span className="min-w-0 flex-1 truncate">{citation.title}</span>
-      {host && (
-        <span className="shrink-0 font-mono text-[11.5px] text-muted-foreground">{host}</span>
+      {showHost && (
+        <span className="max-w-[40%] shrink-0 truncate text-xs text-muted-foreground">{host}</span>
       )}
     </>
   );
-  const rowClass =
-    "flex w-full items-center gap-3 px-3 py-2 text-left text-sm outline-none transition-colors duration-150 hover:bg-accent/60 focus-visible:bg-accent motion-reduce:transition-none";
+  const rowClass = "flex w-full items-center gap-3 px-3 py-2.5 text-left text-sm";
   const label = `Open source ${citation.index}: ${citation.title}`;
   return (
     <li data-slot="sources-item" data-index={citation.index}>
@@ -68,7 +87,7 @@ function SourceRow({
           type="button"
           aria-label={label}
           onClick={() => onOpen(citation)}
-          className={rowClass}
+          className={cn(rowClass, interactiveRowClass)}
         >
           {content}
         </button>
@@ -78,7 +97,7 @@ function SourceRow({
           target="_blank"
           rel="noreferrer"
           aria-label={label}
-          className={rowClass}
+          className={cn(rowClass, interactiveRowClass)}
         >
           {content}
         </a>

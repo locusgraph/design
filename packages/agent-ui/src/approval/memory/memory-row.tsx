@@ -1,4 +1,4 @@
-import { Badge, Button, cn, Textarea } from "@locusgraph/components";
+import { cn, Textarea } from "@locusgraph/components";
 import { ShieldAlertIcon } from "lucide-react";
 import type { ProposedMemory } from "../types";
 import type { MemoryChoice, MemoryDraft } from "./memory-choices";
@@ -17,66 +17,105 @@ const choiceLabels: Record<MemoryChoice, string> = {
 
 const choices: MemoryChoice[] = ["keep", "edit", "discard"];
 
+const selectedChoiceClass: Record<MemoryChoice, string> = {
+  keep: "bg-accent text-foreground shadow-[inset_0_-2px_0_var(--color-primary)]",
+  edit: "bg-accent text-foreground shadow-[inset_0_-2px_0_var(--color-primary)]",
+  discard: "bg-destructive/10 text-destructive shadow-[inset_0_-2px_0_var(--color-destructive)]",
+};
+
+function ChoiceSegments({
+  value,
+  onChange,
+}: {
+  value: MemoryChoice;
+  onChange: (choice: MemoryChoice) => void;
+}) {
+  return (
+    <fieldset className="flex shrink-0 divide-x self-start ring-1 ring-border">
+      <legend className="sr-only">What to do with this memory</legend>
+      {choices.map((choice) => {
+        const pressed = value === choice;
+        return (
+          <button
+            key={choice}
+            type="button"
+            aria-pressed={pressed}
+            onClick={() => onChange(choice)}
+            className={cn(
+              "h-6 px-2.5 text-xs outline-none motion-safe:transition-colors focus-visible:z-10 focus-visible:ring-2 focus-visible:ring-ring/70",
+              pressed
+                ? cn("font-medium", selectedChoiceClass[choice])
+                : "text-muted-foreground hover:bg-accent/50 hover:text-foreground"
+            )}
+          >
+            {choiceLabels[choice]}
+          </button>
+        );
+      })}
+    </fieldset>
+  );
+}
+
+function SensitiveMarker() {
+  return (
+    <span className="flex items-center gap-1 text-amber-600 dark:text-amber-500">
+      <ShieldAlertIcon aria-hidden className="size-3" />
+      Sensitive
+    </span>
+  );
+}
+
 export function MemoryRow({ memory, draft, onChange }: MemoryRowProps) {
   const discarded = draft.choice === "discard";
+  const editing = draft.choice === "edit";
   return (
     <li
       data-slot="memory-review-item"
       data-choice={draft.choice}
       data-sensitive={memory.sensitive || undefined}
-      className="flex flex-col gap-2 px-3 py-3"
+      className={cn(
+        "flex flex-col gap-2 px-3 py-2.5 motion-safe:transition-colors",
+        editing ? "bg-accent/30" : "hover:bg-accent/30"
+      )}
     >
-      <div className="flex flex-wrap items-center gap-2">
-        {memory.kind && (
-          <Badge variant="outline" className="font-mono">
-            {memory.kind}
-          </Badge>
-        )}
-        {memory.sensitive && (
-          <Badge variant="secondary" className="text-warn">
-            <ShieldAlertIcon aria-hidden />
-            Sensitive
-          </Badge>
-        )}
+      <div className="flex items-start gap-3">
+        <div className="flex min-w-0 flex-1 flex-col gap-1">
+          {(memory.kind || memory.sensitive) && (
+            <span className="flex items-center gap-2 font-mono text-[11px] tracking-wide text-muted-foreground uppercase">
+              {memory.kind && <span>{memory.kind}</span>}
+              {memory.sensitive && <SensitiveMarker />}
+            </span>
+          )}
+          {!editing && (
+            <p
+              className={cn(
+                "text-sm",
+                discarded && "text-muted-foreground line-through decoration-muted-foreground/60"
+              )}
+            >
+              {memory.text}
+            </p>
+          )}
+        </div>
+        <ChoiceSegments
+          value={draft.choice}
+          onChange={(choice) => onChange({ ...draft, choice })}
+        />
       </div>
-      {draft.choice === "edit" ? (
+      {editing && (
         <Textarea
           aria-label="Memory text"
           value={draft.text}
           aria-invalid={draft.text.trim() === "" || undefined}
           onChange={(event) => onChange({ ...draft, text: event.target.value })}
+          className="min-h-16 text-sm"
         />
-      ) : (
-        <p className={cn("text-sm", discarded && "text-muted-foreground line-through")}>
-          {memory.text}
-        </p>
       )}
       {memory.sensitive && !discarded && (
-        <p className="text-xs text-warn">
+        <p className="text-xs text-amber-600 dark:text-amber-500">
           This looks like personal or secret data. Keep it only if the agent should remember it.
         </p>
       )}
-      <fieldset className="flex flex-wrap gap-1.5">
-        <legend className="sr-only">What to do with this memory</legend>
-        {choices.map((choice) => (
-          <Button
-            key={choice}
-            type="button"
-            size="xs"
-            variant={
-              draft.choice === choice
-                ? choice === "discard"
-                  ? "destructive"
-                  : "default"
-                : "outline"
-            }
-            aria-pressed={draft.choice === choice}
-            onClick={() => onChange({ ...draft, choice })}
-          >
-            {choiceLabels[choice]}
-          </Button>
-        ))}
-      </fieldset>
     </li>
   );
 }

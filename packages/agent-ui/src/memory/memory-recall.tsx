@@ -1,14 +1,13 @@
-import {
-  Badge,
-  Collapsible,
-  CollapsibleContent,
-  CollapsibleTrigger,
-  cn,
-} from "@locusgraph/components";
+import { Collapsible, CollapsibleContent, CollapsibleTrigger, cn } from "@locusgraph/components";
 import { pluralize } from "@locusgraph/utils";
-import { ChevronDownIcon } from "lucide-react";
+import { ChevronRightIcon, HistoryIcon } from "lucide-react";
 import type { MemoryRef } from "../types";
-import { chevronClass, collapsibleTriggerClass } from "./shared/disclosure";
+import {
+  chevronClass,
+  collapsibleTriggerClass,
+  interactiveRowClass,
+  ruledListClass,
+} from "./shared/disclosure";
 
 export type MemoryRecallProps = {
   memories: MemoryRef[];
@@ -32,14 +31,15 @@ export function MemoryRecall({
     <Collapsible
       data-slot="memory-recall"
       defaultOpen={defaultOpen}
-      className={cn("flex flex-col gap-1", className)}
+      className={cn("flex min-w-0 flex-col gap-2", className)}
     >
       <CollapsibleTrigger className={collapsibleTriggerClass}>
+        <HistoryIcon aria-hidden />
         Recalled {pluralize(memories.length, "memory", "memories")}
-        <ChevronDownIcon aria-hidden className={chevronClass} />
+        <ChevronRightIcon aria-hidden className={chevronClass} />
       </CollapsibleTrigger>
       <CollapsibleContent>
-        <ul className="flex flex-col divide-y divide-border border border-border">
+        <ul className={ruledListClass}>
           {memories.map((memory) => (
             <MemoryRecallRow key={memory.id} memory={memory} onOpenMemory={onOpenMemory} />
           ))}
@@ -49,7 +49,7 @@ export function MemoryRecall({
   );
 }
 
-function RelevanceBar({ memory }: { memory: MemoryRef }) {
+function RelevanceMeter({ memory }: { memory: MemoryRef }) {
   if (memory.relevance === undefined) return null;
   const percent = relevancePercent(memory.relevance);
   return (
@@ -61,14 +61,14 @@ function RelevanceBar({ memory }: { memory: MemoryRef }) {
         aria-valuemax={100}
         aria-valuenow={percent}
         aria-valuetext={`${percent}% relevant`}
-        className="relative h-1 w-14 overflow-hidden rounded-full bg-muted"
+        className="relative h-[3px] w-10 overflow-hidden bg-muted"
       >
         <span
-          className="absolute inset-y-0 left-0 rounded-full bg-primary transition-[width] duration-300 motion-reduce:transition-none"
+          className="absolute inset-y-0 left-0 bg-foreground/60 transition-[width] duration-300 motion-reduce:transition-none"
           style={{ width: `${percent}%` }}
         />
       </span>
-      <span className="w-8 text-right font-mono text-[11.5px] text-muted-foreground tabular-nums">
+      <span className="w-8 text-right font-mono text-[11px] text-muted-foreground tabular-nums">
         {percent}%
       </span>
     </span>
@@ -84,21 +84,20 @@ function MemoryRecallRow({
 }) {
   const content = (
     <>
-      <span className="flex w-full items-center gap-2">
+      <span className="flex w-full items-baseline gap-3">
         <span className="min-w-0 flex-1 truncate text-sm font-medium">{memory.label}</span>
-        {memory.kind && (
-          <Badge variant="outline" className="font-mono text-[11px] font-normal">
-            {memory.kind}
-          </Badge>
-        )}
-        <RelevanceBar memory={memory} />
+        <RelevanceMeter memory={memory} />
       </span>
-      {memory.snippet && (
-        <span className="line-clamp-2 text-xs text-muted-foreground">{memory.snippet}</span>
+      {(memory.kind || memory.snippet) && (
+        <span className="flex w-full gap-2 text-xs text-muted-foreground">
+          {memory.kind && <span className="shrink-0 font-mono">{memory.kind}</span>}
+          {memory.kind && memory.snippet && <span aria-hidden>·</span>}
+          {memory.snippet && <span className="line-clamp-2 min-w-0">{memory.snippet}</span>}
+        </span>
       )}
     </>
   );
-  const rowClass = "flex w-full flex-col items-start gap-1 px-3 py-2 text-left";
+  const rowClass = "flex w-full flex-col items-start gap-1 px-3 py-2.5 text-left";
   return (
     <li data-slot="memory-recall-item" data-id={memory.id}>
       {onOpenMemory ? (
@@ -106,10 +105,7 @@ function MemoryRecallRow({
           type="button"
           aria-label={`Open memory ${memory.label}`}
           onClick={() => onOpenMemory(memory.id)}
-          className={cn(
-            rowClass,
-            "outline-none transition-colors duration-150 hover:bg-accent/60 focus-visible:bg-accent motion-reduce:transition-none"
-          )}
+          className={cn(rowClass, interactiveRowClass)}
         >
           {content}
         </button>

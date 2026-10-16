@@ -1,8 +1,8 @@
-import { Button, Checkbox, cn, Label } from "@locusgraph/components";
+import { Button, Checkbox, Label } from "@locusgraph/components";
 import { pluralize } from "@locusgraph/utils";
 import { InboxIcon } from "lucide-react";
 import { useId, useState } from "react";
-import { LiveStatus } from "../shared/panel";
+import { ApprovalPanel, LiveStatus, PanelFooter, PanelHeader } from "../../shared/panel";
 import type { PendingApproval } from "../types";
 import { InboxRow } from "./inbox-row";
 import { bulkApprovable, selectAllState, selectedIn, toggled } from "./inbox-selection";
@@ -21,11 +21,11 @@ function InboxEmpty() {
   return (
     <div
       data-slot="approval-inbox-empty"
-      className="flex flex-col items-center gap-2 px-6 py-10 text-center"
+      className="flex flex-col items-center gap-1 px-6 pt-8 pb-10 text-center"
     >
-      <InboxIcon aria-hidden className="size-6 text-muted-foreground" />
+      <InboxIcon aria-hidden className="mb-1 size-5 text-muted-foreground" />
       <p className="text-sm font-medium">Nothing waiting for you</p>
-      <p className="max-w-xs text-sm text-muted-foreground">
+      <p className="max-w-xs text-xs text-muted-foreground">
         When an agent needs approval to write, pay, send or delete, it shows up here.
       </p>
     </div>
@@ -47,80 +47,83 @@ export function ApprovalInbox({
   const selectedIds = selectedIn(items, selected);
   const allState = selectAllState(selectable.length, selectedIds.length);
   const hasDestructive = selectable.length < items.length;
+  const empty = items.length === 0;
   return (
-    <section
-      data-slot="approval-inbox"
-      aria-label={title}
-      className={cn(
-        "flex min-w-0 flex-col bg-card text-card-foreground ring-1 ring-border",
-        className
-      )}
-    >
-      <header className="flex flex-wrap items-center gap-3 border-b border-line px-3 py-2.5">
-        {selectable.length > 0 && (
-          <span className="flex items-center gap-2">
-            <Checkbox
-              id={selectAllId}
-              checked={allState}
-              onCheckedChange={(checked) =>
-                setSelected(
-                  checked === true ? new Set(selectable.map((item) => item.id)) : new Set()
-                )
-              }
-            />
-            <Label htmlFor={selectAllId} className="sr-only">
-              Select all that can be approved together
-            </Label>
-          </span>
-        )}
-        <span className="text-sm font-medium">{title}</span>
-        <span className="font-mono text-[11.5px] text-muted-foreground tabular-nums">
-          {items.length}
-        </span>
-        {items.length > 0 && (
-          <Button
-            type="button"
-            size="sm"
-            className="ml-auto"
-            disabled={selectedIds.length === 0}
-            onClick={() => {
-              onApproveAll(selectedIds);
-              setSelected(new Set());
-            }}
-          >
-            {selectedIds.length > 0 ? `Approve ${selectedIds.length} selected` : "Approve selected"}
-          </Button>
-        )}
-      </header>
-      {items.length === 0 ? (
+    <ApprovalPanel data-slot="approval-inbox" aria-label={title} className={className}>
+      <PanelHeader
+        icon={<InboxIcon aria-hidden />}
+        eyebrow={title}
+        status={empty ? "All clear" : `${items.length} waiting`}
+        tone={empty ? "done" : "waiting"}
+      />
+      {empty ? (
         <InboxEmpty />
       ) : (
-        <ul className="flex flex-col divide-y divide-line">
-          {items.map((item) => (
-            <InboxRow
-              key={item.id}
-              item={item}
-              now={now}
-              selected={selected.has(item.id)}
-              onSelect={(on) => setSelected((current) => toggled(current, item.id, on))}
-              onApprove={() => onApprove(item.id)}
-              onDeny={() => onDeny(item.id)}
-            />
-          ))}
-        </ul>
-      )}
-      {hasDestructive && (
-        <p className="border-t border-line px-3 py-2 text-xs text-muted-foreground">
-          Destructive requests are approved one at a time.
-        </p>
+        <>
+          <ul className="mt-3 flex flex-col divide-y border-t">
+            {items.map((item) => (
+              <InboxRow
+                key={item.id}
+                item={item}
+                now={now}
+                selected={selected.has(item.id)}
+                onSelect={(on) => setSelected((current) => toggled(current, item.id, on))}
+                onApprove={() => onApprove(item.id)}
+                onDeny={() => onDeny(item.id)}
+              />
+            ))}
+          </ul>
+          <PanelFooter className="justify-between gap-3">
+            <span className="flex min-w-0 items-center gap-3">
+              {selectable.length > 0 && (
+                <Checkbox
+                  id={selectAllId}
+                  checked={allState}
+                  onCheckedChange={(checked) =>
+                    setSelected(
+                      checked === true ? new Set(selectable.map((item) => item.id)) : new Set()
+                    )
+                  }
+                />
+              )}
+              <Label
+                htmlFor={selectAllId}
+                className="flex min-w-0 flex-col items-start gap-0 font-normal"
+              >
+                <span className="text-sm tabular-nums">
+                  <span className="sr-only">Select all that can be approved together. </span>
+                  {selectedIds.length > 0 ? `${selectedIds.length} selected` : "Select all"}
+                </span>
+                {hasDestructive && (
+                  <span className="text-xs text-muted-foreground">
+                    Destructive requests are approved one at a time.
+                  </span>
+                )}
+              </Label>
+            </span>
+            <Button
+              type="button"
+              size="sm"
+              disabled={selectedIds.length === 0}
+              onClick={() => {
+                onApproveAll(selectedIds);
+                setSelected(new Set());
+              }}
+            >
+              {selectedIds.length > 0
+                ? `Approve ${selectedIds.length} selected`
+                : "Approve selected"}
+            </Button>
+          </PanelFooter>
+        </>
       )}
       <LiveStatus
         message={
-          items.length === 0
+          empty
             ? "No approvals waiting"
             : `${pluralize(items.length, "approval")} waiting, ${selectedIds.length} selected`
         }
       />
-    </section>
+    </ApprovalPanel>
   );
 }

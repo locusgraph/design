@@ -40,7 +40,7 @@ describe("Sources", () => {
 
   it("numbers url parts by position and shows hosts when open", () => {
     const html = renderToStaticMarkup(<Sources sources={sources} defaultOpen />);
-    expect(html).toContain("[2]");
+    expect(html).toContain('data-index="2"');
     expect(html).toContain("docs.locusgraph.com");
     expect(html).toContain("stripe.com");
   });

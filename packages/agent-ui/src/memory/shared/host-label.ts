@@ -27,3 +27,8 @@ export function toCitation(item: SourceItem, position: number): Citation {
 export function sourceKey(item: SourceItem, position: number): string {
   return isSourceUrlPart(item) ? item.sourceId : `${item.index}:${position}`;
 }
+
+export function sourceInitial(citation: Citation): string {
+  const name = hostLabel(citation.url) ?? citation.title;
+  return name.trim().charAt(0).toUpperCase() || "?";
+}

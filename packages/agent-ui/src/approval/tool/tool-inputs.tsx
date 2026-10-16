@@ -1,4 +1,4 @@
-import { Button } from "@locusgraph/components";
+import { cn } from "@locusgraph/components";
 import { useId, useState } from "react";
 
 function isPlainRecord(value: unknown): value is Record<string, unknown> {
@@ -32,47 +32,48 @@ function rawJson(input: unknown) {
   return JSON.stringify(input, null, 2) ?? "undefined";
 }
 
-export function ToolInputs({ input }: { input: unknown }) {
+export function ToolInputs({ input, muted = false }: { input: unknown; muted?: boolean }) {
   const [showRaw, setShowRaw] = useState(false);
   const rawId = useId();
   const entries = isPlainRecord(input) ? Object.entries(input) : null;
   return (
     <div data-slot="tool-inputs" className="flex flex-col gap-2">
       {entries && !showRaw && (
-        <dl className="flex flex-col divide-y divide-line text-sm ring-1 ring-border">
+        <dl
+          className={cn(
+            "flex flex-col divide-y text-sm ring-1 ring-border",
+            muted && "text-muted-foreground"
+          )}
+        >
           {entries.map(([key, value]) => (
-            <div key={key} className="grid grid-cols-[minmax(0,10rem)_minmax(0,1fr)]">
-              <dt className="bg-muted/40 px-3 py-2 text-muted-foreground">{humanizeKey(key)}</dt>
-              <dd className="px-3 py-2 font-mono text-[13px] break-words">
-                {readableValue(value)}
-              </dd>
+            <div
+              key={key}
+              className="grid grid-cols-[minmax(0,8.5rem)_minmax(0,1fr)] items-baseline gap-3 px-3 py-2.5"
+            >
+              <dt className="text-xs text-muted-foreground">{humanizeKey(key)}</dt>
+              <dd className="font-mono text-[13px] break-words">{readableValue(value)}</dd>
             </div>
           ))}
           {entries.length === 0 && (
-            <div className="px-3 py-2 text-muted-foreground">No inputs.</div>
+            <div className="px-3 py-2.5 text-xs text-muted-foreground">No inputs.</div>
           )}
         </dl>
       )}
       {(showRaw || !entries) && (
-        <pre
-          id={rawId}
-          className="overflow-x-auto bg-muted/40 p-3 font-mono text-[12.5px] ring-1 ring-border"
-        >
+        <pre id={rawId} className="overflow-x-auto bg-muted/40 p-3 font-mono text-xs">
           {rawJson(input)}
         </pre>
       )}
       {entries && (
-        <Button
+        <button
           type="button"
-          variant="link"
-          size="xs"
-          className="self-start px-0"
+          className="self-start font-mono text-[11px] tracking-wide text-muted-foreground uppercase outline-none hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring/70 motion-safe:transition-colors"
           aria-expanded={showRaw}
           aria-controls={showRaw ? rawId : undefined}
           onClick={() => setShowRaw((current) => !current)}
         >
           {showRaw ? "Show fields" : "Show raw"}
-        </Button>
+        </button>
       )}
     </div>
   );

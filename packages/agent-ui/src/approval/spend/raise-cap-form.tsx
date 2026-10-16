@@ -32,40 +32,44 @@ export function RaiseCapForm({
     <form
       data-slot="raise-cap-form"
       noValidate
-      className="flex flex-col gap-1.5"
+      className="flex flex-col gap-1.5 border-t pt-4"
       onSubmit={(event) => {
         event.preventDefault();
         setTouched(true);
         if (next !== null && !error) onRaiseCap(next);
       }}
     >
-      <Label htmlFor={inputId}>New cap for this run</Label>
-      <div className="flex flex-wrap items-center gap-2">
-        <div className="relative w-32">
-          <span
-            aria-hidden
-            className="pointer-events-none absolute top-1/2 left-3 -translate-y-1/2 text-sm text-muted-foreground"
-          >
-            $
-          </span>
-          <Input
-            id={inputId}
-            inputMode="decimal"
-            className="pl-6 tabular-nums"
-            value={dollars}
-            disabled={disabled}
-            aria-invalid={visibleError ? true : undefined}
-            aria-describedby={visibleError ? `${inputId}-error` : undefined}
-            onChange={(event) => setDollars(event.target.value)}
-            onBlur={() => setTouched(true)}
-          />
+      <div className="flex flex-wrap items-center justify-between gap-x-4 gap-y-2">
+        <Label htmlFor={inputId} className="text-xs font-normal text-muted-foreground">
+          Or raise the cap for this run
+        </Label>
+        <div className="flex flex-wrap items-center gap-2">
+          <div className="relative w-32">
+            <span
+              aria-hidden
+              className="pointer-events-none absolute top-1/2 left-3 -translate-y-1/2 text-sm text-muted-foreground"
+            >
+              $
+            </span>
+            <Input
+              id={inputId}
+              inputMode="decimal"
+              className="pl-6 tabular-nums"
+              value={dollars}
+              disabled={disabled}
+              aria-invalid={visibleError ? true : undefined}
+              aria-describedby={visibleError ? `${inputId}-error` : undefined}
+              onChange={(event) => setDollars(event.target.value)}
+              onBlur={() => setTouched(true)}
+            />
+          </div>
+          <Button type="submit" size="sm" variant="outline" disabled={disabled}>
+            {next !== null && !error ? `Raise cap to ${formatMicroUsd(next)}` : "Raise cap"}
+          </Button>
         </div>
-        <Button type="submit" size="sm" variant="outline" disabled={disabled}>
-          {next !== null && !error ? `Raise cap to ${formatMicroUsd(next)}` : "Raise cap"}
-        </Button>
       </div>
       {visibleError && (
-        <p id={`${inputId}-error`} className="text-xs text-destructive">
+        <p id={`${inputId}-error`} className="text-right text-xs text-destructive">
           {visibleError}
         </p>
       )}

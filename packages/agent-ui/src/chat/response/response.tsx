@@ -38,7 +38,11 @@ export function Response({ children, state = "done", className, ...props }: Resp
       data-slot="response"
       data-state={state}
       aria-live={isStreaming ? "polite" : undefined}
-      className={cn("min-w-0 text-sm wrap-break-word text-foreground", streamingCaret, className)}
+      className={cn(
+        "min-w-0 text-sm leading-relaxed wrap-break-word text-foreground",
+        streamingCaret,
+        className
+      )}
       {...props}
     >
       <Markdown markdown={markdown} />

@@ -5,6 +5,7 @@ import type { RunControlStatus } from "../types";
 export type RunControlsProps = {
   status: RunControlStatus;
   runName?: string;
+  elapsedMs?: number;
   onPause: () => void;
   onResume: () => void;
   onStop: () => void;
@@ -21,15 +22,29 @@ const statusLabels: Record<RunControlStatus, string> = {
 };
 
 const statusDot: Record<RunControlStatus, string> = {
-  running: "bg-good motion-safe:animate-pulse",
-  paused: "bg-warn",
+  running: "bg-emerald-500 motion-safe:animate-pulse",
+  paused: "bg-amber-500",
   stopped: "bg-destructive",
-  done: "bg-muted-foreground",
+  done: "bg-muted-foreground/50",
 };
+
+function twoDigits(value: number) {
+  return String(value).padStart(2, "0");
+}
+
+function formatElapsed(elapsedMs: number) {
+  const totalSeconds = Math.max(0, Math.floor(elapsedMs / 1000));
+  const hours = Math.floor(totalSeconds / 3600);
+  const minutes = Math.floor((totalSeconds % 3600) / 60);
+  const seconds = totalSeconds % 60;
+  if (hours > 0) return `${hours}:${twoDigits(minutes)}:${twoDigits(seconds)}`;
+  return `${minutes}:${twoDigits(seconds)}`;
+}
 
 export function RunControls({
   status,
   runName,
+  elapsedMs,
   onPause,
   onResume,
   onStop,
@@ -46,22 +61,32 @@ export function RunControls({
       data-slot="run-controls"
       data-status={status}
       className={cn(
-        "flex flex-wrap items-center gap-3 bg-card px-3 py-2 text-card-foreground ring-1 ring-border",
+        "flex min-w-0 flex-wrap items-center gap-x-3 gap-y-2 bg-card py-2 pr-2 pl-3 text-card-foreground ring-1 ring-border",
         className
       )}
     >
-      <span className="flex min-w-0 items-center gap-2 text-sm">
+      <span className="flex min-w-0 flex-1 items-center gap-2.5 text-sm">
         <span aria-hidden className={cn("size-2 shrink-0 rounded-full", statusDot[status])} />
         {runName && <span className="truncate font-medium">{runName}</span>}
-        <span role="status" aria-live="polite" className="text-muted-foreground">
+        <span
+          role="status"
+          aria-live="polite"
+          className="shrink-0 font-mono text-[11px] tracking-wide text-muted-foreground uppercase"
+        >
           {statusLabels[status]}
         </span>
+        {elapsedMs !== undefined && (
+          <span className="shrink-0 font-mono text-xs text-muted-foreground tabular-nums">
+            <span className="sr-only">Elapsed </span>
+            {formatElapsed(elapsedMs)}
+          </span>
+        )}
       </span>
-      <span className="ml-auto flex flex-wrap gap-1.5">
+      <span className="ml-auto flex shrink-0 items-center gap-1">
         <Button
           type="button"
-          size="sm"
-          variant="outline"
+          size="xs"
+          variant={paused ? "default" : "outline"}
           disabled={!live || pending}
           onClick={paused ? onResume : onPause}
         >
@@ -71,23 +96,26 @@ export function RunControls({
         {onStep && (
           <Button
             type="button"
-            size="sm"
-            variant="outline"
+            size="xs"
+            variant="ghost"
+            aria-label="Run one step"
+            title="Run one step"
             disabled={!paused || pending}
             onClick={onStep}
           >
             <SkipForwardIcon aria-hidden />
-            Run one step
+            Step
           </Button>
         )}
         <Button
           type="button"
-          size="sm"
-          variant={live ? "destructive" : "outline"}
+          size="xs"
+          variant="ghost"
+          className="text-destructive hover:bg-destructive/10 hover:text-destructive dark:hover:bg-destructive/15"
           disabled={!live || pending}
           onClick={onStop}
         >
-          <SquareIcon aria-hidden />
+          <SquareIcon aria-hidden className="size-2.5 fill-current" />
           Stop
         </Button>
       </span>

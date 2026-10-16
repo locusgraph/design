@@ -26,7 +26,7 @@ export function BranchSwitcher({ branch, onBranchChange }: BranchSwitcherProps) 
       </ActionButton>
       <span
         aria-live="polite"
-        className="min-w-10 text-center font-mono text-[11.5px] text-muted-foreground tabular-nums"
+        className="min-w-9 text-center font-mono text-[11px] text-muted-foreground tabular-nums"
       >
         {`${position} / ${branch.count}`}
       </span>

@@ -40,7 +40,7 @@ export function Conversation({
         <div
           ref={contentRef}
           data-slot="conversation-content"
-          className="flex min-h-full flex-col gap-6 p-4"
+          className="mx-auto flex min-h-full w-full max-w-3xl flex-col gap-8 px-4 py-6"
         >
           {isEmpty ? (
             <div
@@ -61,9 +61,9 @@ export function Conversation({
           size="sm"
           data-slot="conversation-jump"
           onClick={scrollToLatest}
-          className="absolute bottom-4 left-1/2 -translate-x-1/2 bg-card motion-safe:animate-in motion-safe:fade-in-0"
+          className="absolute bottom-3 left-1/2 h-7 -translate-x-1/2 bg-card px-3 text-xs text-muted-foreground shadow-none hover:text-foreground motion-safe:animate-in motion-safe:fade-in-0 dark:bg-card"
         >
-          <ArrowDownIcon aria-hidden="true" />
+          <ArrowDownIcon aria-hidden="true" className="size-3.5" />
           {jumpLabel}
         </Button>
       )}

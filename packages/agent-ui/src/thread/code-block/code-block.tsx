@@ -14,7 +14,7 @@ type CodeBlockProps = Omit<ComponentProps<"figure">, "children"> & {
 };
 
 const codeAreaClass = cn(
-  "overflow-x-auto p-4 font-mono text-[13px] leading-relaxed",
+  "overflow-x-auto bg-muted/40 px-4 py-3 font-mono text-xs leading-relaxed",
   "[&_pre]:bg-transparent! [&_pre]:outline-none",
   "[&_.shiki_span]:text-(--shiki-light) dark:[&_.shiki_span]:text-(--shiki-dark)"
 );
@@ -56,13 +56,13 @@ export function CodeBlock({
     <figure
       data-slot="code-block"
       data-language={language}
-      className={cn("min-w-0 border border-border bg-card text-card-foreground", className)}
+      className={cn("min-w-0 bg-card text-card-foreground ring-1 ring-border", className)}
       {...props}
     >
-      <figcaption className="flex h-9 items-center justify-between gap-2 border-b border-border pr-1.5 pl-4">
-        <span className="flex min-w-0 items-center gap-2 font-mono text-[11.5px]">
-          {filename && <span className="truncate text-foreground">{filename}</span>}
-          <span className="text-muted-foreground">{language}</span>
+      <figcaption className="flex h-8 items-center justify-between gap-2 border-b pr-1 pl-3 font-mono text-[11px]">
+        <span className="flex min-w-0 items-center gap-2">
+          <span className="tracking-wide text-muted-foreground uppercase">{language}</span>
+          {filename && <span className="truncate text-foreground/80">{filename}</span>}
         </span>
         {showCopy && <CopyCodeButton code={code} onCopy={onCopy} />}
       </figcaption>

@@ -47,6 +47,9 @@ export function MessageActions({
         {...props}
       >
         {showBranch && <BranchSwitcher branch={branch} onBranchChange={onBranchChange} />}
+        {showBranch && (onCopy || onRetry || onFeedback) && (
+          <span aria-hidden className="mx-1 h-3.5 w-px bg-border" />
+        )}
         {onCopy && (
           <ActionButton
             label={copied ? "Copied" : "Copy"}
@@ -55,7 +58,7 @@ export function MessageActions({
               markCopied();
             }}
           >
-            {copied ? <CheckIcon /> : <CopyIcon />}
+            {copied ? <CheckIcon className="text-emerald-500" /> : <CopyIcon />}
           </ActionButton>
         )}
         {onRetry && (

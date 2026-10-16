@@ -1,7 +1,9 @@
 import { cn, HoverCard, HoverCardContent, HoverCardTrigger } from "@locusgraph/components";
 import type { MouseEvent } from "react";
 import type { Citation } from "../types";
+import { eyebrowClass } from "./shared/disclosure";
 import { hostLabel } from "./shared/host-label";
+import { SourceMark } from "./shared/source-mark";
 
 export type InlineCitationProps = {
   citation: Citation;
@@ -10,7 +12,7 @@ export type InlineCitationProps = {
 };
 
 const pillClass =
-  "inline-flex h-4 min-w-4 items-center justify-center rounded-full border border-border bg-muted px-1 font-mono text-[10.5px] leading-none text-muted-foreground tabular-nums no-underline transition-colors duration-150 outline-none hover:bg-accent hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring/70 motion-reduce:transition-none";
+  "inline-flex h-[15px] min-w-[15px] items-center justify-center bg-muted px-1 font-mono text-[10px] leading-none font-medium text-muted-foreground tabular-nums no-underline ring-1 ring-border transition-colors duration-150 outline-none hover:bg-accent hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring/70 motion-reduce:transition-none";
 
 export function citationLabel(citation: Citation): string {
   return `Source ${citation.index}: ${citation.title}`;
@@ -52,15 +54,18 @@ export function InlineCitation({ citation, onOpen, className }: InlineCitationPr
         <HoverCardContent
           data-slot="inline-citation-card"
           align="start"
-          className="flex w-72 flex-col gap-1.5 rounded-none p-3"
+          className="flex w-72 flex-col gap-2 rounded-none p-4"
         >
-          <span className="flex items-center gap-2 font-mono text-[11.5px] text-muted-foreground">
-            <span className="tabular-nums">[{citation.index}]</span>
-            {host && <span className="truncate">{host}</span>}
+          <span className={cn("flex min-w-0 items-center gap-2", eyebrowClass)}>
+            <SourceMark citation={citation} />
+            <span className="truncate">{host ?? "Source"}</span>
+            <span className="ml-auto tabular-nums">{citation.index}</span>
           </span>
-          <span className="text-sm font-medium leading-snug">{citation.title}</span>
+          <span className="text-sm leading-snug font-medium">{citation.title}</span>
           {citation.snippet && (
-            <p className="line-clamp-4 text-xs text-muted-foreground">{citation.snippet}</p>
+            <p className="line-clamp-4 text-xs leading-relaxed text-muted-foreground">
+              {citation.snippet}
+            </p>
           )}
         </HoverCardContent>
       </HoverCard>

@@ -34,3 +34,36 @@ export function DecisionLine({
     </div>
   );
 }
+
+type DecisionSummaryProps = DecisionLineProps & { result: string };
+
+export function DecisionSummary({
+  decision,
+  result,
+  approvedVerb = "Approved",
+  deniedVerb = "Denied",
+}: DecisionSummaryProps) {
+  const Icon = decision.approved ? CheckIcon : XIcon;
+  return (
+    <div
+      data-slot="decision-summary"
+      data-approved={decision.approved}
+      className="flex items-start gap-2.5 text-sm"
+    >
+      <Icon
+        aria-hidden
+        className={`mt-0.5 size-4 shrink-0 ${decision.approved ? "text-emerald-500" : "text-destructive"}`}
+      />
+      <div className="flex min-w-0 flex-col gap-0.5">
+        <p className="font-medium">{result}</p>
+        <p className="text-xs text-muted-foreground">
+          {decision.approved ? approvedVerb : deniedVerb} by {decision.by} ·{" "}
+          <time dateTime={isoOf(decision.at)} className="tabular-nums">
+            {formatDecidedAt(decision.at)}
+          </time>
+        </p>
+        {decision.reason && <p className="text-xs text-muted-foreground">{decision.reason}</p>}
+      </div>
+    </div>
+  );
+}

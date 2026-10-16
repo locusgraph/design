@@ -1,4 +1,5 @@
-import { Button, cn } from "@locusgraph/components";
+import { cn } from "@locusgraph/components";
+import { ArrowUpRightIcon } from "lucide-react";
 import type { ComponentProps } from "react";
 
 export type Suggestion = string | { text: string; label?: string };
@@ -32,21 +33,23 @@ export function Suggestions({
       data-slot="suggestions"
       role="group"
       aria-label="Suggested prompts"
-      className={cn("flex flex-wrap gap-2", className)}
+      className={cn("flex flex-col divide-y bg-card ring-1 ring-border", className)}
       {...props}
     >
       {suggestions.map((suggestion) => (
-        <Button
+        <button
           key={textOf(suggestion)}
           type="button"
-          variant="outline"
-          size="sm"
           disabled={disabled}
-          className="h-auto max-w-full py-1.5 text-left whitespace-normal"
           onClick={() => onSelect(textOf(suggestion))}
+          className="group flex w-full items-center gap-3 px-3 py-2.5 text-left text-sm outline-none hover:bg-accent/50 focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-ring disabled:pointer-events-none disabled:opacity-50 motion-safe:transition-colors"
         >
-          {labelOf(suggestion)}
-        </Button>
+          <span className="min-w-0 flex-1 text-pretty">{labelOf(suggestion)}</span>
+          <ArrowUpRightIcon
+            aria-hidden
+            className="size-3.5 shrink-0 text-muted-foreground opacity-0 group-hover:opacity-100 group-focus-visible:opacity-100 motion-safe:transition-opacity"
+          />
+        </button>
       ))}
     </div>
   );
