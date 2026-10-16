@@ -2,7 +2,7 @@
 
 import { LocusGraphMark } from "@locusgraph/brand";
 import { AppHeader, AppShell, AppSidebar, ThemeToggle } from "@locusgraph/components";
-import { LayoutGridIcon, MailIcon } from "lucide-react";
+import { BotIcon, LayoutGridIcon, MailIcon } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import type * as React from "react";
@@ -14,6 +14,7 @@ const groups = [
     items: [
       { title: "Overview", href: "/", icon: LayoutGridIcon },
       { title: "Emails", href: "/email", icon: MailIcon },
+      { title: "Agent", href: "/agent", icon: BotIcon },
     ],
   },
 ];

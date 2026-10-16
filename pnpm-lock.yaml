@@ -374,6 +374,9 @@ importers:
 
   apps/example-next:
     dependencies:
+      '@locusgraph/agent-ui':
+        specifier: workspace:*
+        version: link:../../packages/agent-ui
       '@locusgraph/blocks':
         specifier: workspace:*
         version: link:../../packages/blocks
@@ -429,6 +432,9 @@ importers:
 
   apps/example-react:
     dependencies:
+      '@locusgraph/agent-ui':
+        specifier: workspace:*
+        version: link:../../packages/agent-ui
       '@locusgraph/blocks':
         specifier: workspace:*
         version: link:../../packages/blocks

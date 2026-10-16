@@ -19,6 +19,7 @@ import {
 } from "@locusgraph/components";
 import { formatMicroUsd } from "@locusgraph/utils";
 import { useState } from "react";
+import { AgentChat } from "./agent/agent-chat";
 import { EmailPreview } from "./email-preview";
 import { grants, keys, organization, packs, plans, quotas, wallet } from "./sample-data";
 
@@ -49,6 +50,7 @@ export function App() {
             <TabsTrigger value="billing">Usage and billing</TabsTrigger>
             <TabsTrigger value="keys">API keys</TabsTrigger>
             <TabsTrigger value="email">Emails</TabsTrigger>
+            <TabsTrigger value="agent">Agent</TabsTrigger>
           </TabsList>
           <TabsContent value="billing" className="enter-cascade flex flex-col gap-8 pt-6">
             <UsageAttention
@@ -89,6 +91,9 @@ export function App() {
           </TabsContent>
           <TabsContent value="email" className="pt-6">
             <EmailPreview />
+          </TabsContent>
+          <TabsContent value="agent" className="pt-6">
+            <AgentChat />
           </TabsContent>
         </Tabs>
       </main>
