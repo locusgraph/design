@@ -38,7 +38,11 @@ export function DemoPage({ entry, docs, params, settings }: DemoPageProps) {
       <section id="playground" className="scroll-mt-24">
         <Playground entry={entry} values={values} settings={settings} />
       </section>
-      <UsageSection importLine={docs.importLine} usageCode={docs.usageCode} />
+      <UsageSection
+        importLine={docs.importLine}
+        usageCode={docs.usageCode}
+        registryName={entry.path.split("/").at(-1) ?? ""}
+      />
       {docs.composition && <CompositionSection title={demo.title} tree={docs.composition} />}
       {docs.examples.length > 0 && (
         <section id="examples" className="flex scroll-mt-24 flex-col gap-8">

@@ -3,12 +3,13 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "vite",
-    "build": "vite build",
+    "dev": "pnpm registry && vite",
+    "build": "pnpm registry && vite build",
     "preview": "vite preview",
     "typecheck": "tsc -p tsconfig.json --noEmit",
     "test": "vitest run",
-    "deploy": "cf deploy"
+    "deploy": "pnpm registry && cf deploy",
+    "registry": "node ../../scripts/registry/build.mjs"
   },
   "dependencies": {
     "@carbon/icons-react": "catalog:",

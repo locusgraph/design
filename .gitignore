@@ -12,3 +12,5 @@ coverage
 .cloudflare
 next-env.d.ts
 .prod.vars
+
+apps/design/public/r
