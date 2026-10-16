@@ -6,14 +6,14 @@ import {
   skeletonRootProps,
 } from "@locusgraph/components";
 
-type CreditPacksSkeletonProps = {
+type TopUpSkeletonProps = {
   packs?: number;
 };
 
-export function CreditPacksSkeleton({ packs = 3 }: CreditPacksSkeletonProps) {
+export function TopUpSkeleton({ packs = 3 }: TopUpSkeletonProps) {
   const count = Math.max(1, Math.floor(packs));
   return (
-    <RuleGridCell data-slot="credit-packs-skeleton" {...skeletonRootProps} className="gap-4">
+    <RuleGridCell data-slot="top-up-skeleton" {...skeletonRootProps} className="gap-4">
       <div className="flex flex-col gap-1.5">
         <span className="flex min-h-6 items-center">
           <RuleGridLabel>Buy credits</RuleGridLabel>

@@ -8,7 +8,7 @@ import {
 import { centsToMicroUsd, formatCents, formatMicroUsd } from "@locusgraph/utils";
 import type { CreditPack } from "../types";
 
-type CreditPacksProps = {
+type TopUpProps = {
   packs: CreditPack[];
   onBuy: (packId: string) => void;
   pending?: boolean;
@@ -21,14 +21,14 @@ function hasBonus(pack: CreditPack) {
   return centsToMicroUsd(pack.priceCents) !== pack.amountMicroUsd;
 }
 
-export function CreditPacks({
+export function TopUp({
   packs,
   onBuy,
   pending = false,
   pendingPackId,
   highlightedPackId,
   description = "Pay once with Stripe. Credits never expire and never renew on their own.",
-}: CreditPacksProps) {
+}: TopUpProps) {
   const busy = pending || pendingPackId !== undefined;
   return (
     <RuleGridCell className="gap-4">

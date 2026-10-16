@@ -6,14 +6,14 @@ import {
   skeletonRootProps,
 } from "@locusgraph/components";
 
-type WalletPanelSkeletonProps = {
+type WalletSkeletonProps = {
   grants?: number;
 };
 
-export function WalletPanelSkeleton({ grants = 1 }: WalletPanelSkeletonProps) {
+export function WalletSkeleton({ grants = 1 }: WalletSkeletonProps) {
   const count = Math.max(0, Math.floor(grants));
   return (
-    <RuleGridCell data-slot="wallet-panel-skeleton" {...skeletonRootProps} className="gap-4">
+    <RuleGridCell data-slot="wallet-skeleton" {...skeletonRootProps} className="gap-4">
       <span className="flex min-h-6 items-center justify-between">
         <RuleGridLabel>Prepaid credits</RuleGridLabel>
       </span>

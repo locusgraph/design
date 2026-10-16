@@ -1,11 +1,11 @@
 import { renderToStaticMarkup } from "react-dom/server";
 import { describe, expect, it } from "vitest";
-import { CreditPacks, KeysTable, NoKeys, PlanOptions, WalletPanel } from "../index";
+import { Keys, KeysEmpty, Plans, TopUp, Wallet } from "../index";
 
-describe("WalletPanel", () => {
+describe("Wallet", () => {
   it("shows the balance, grants and a badge only when low or empty", () => {
     const fine = renderToStaticMarkup(
-      <WalletPanel
+      <Wallet
         balanceMicroUsd={21_000_000}
         grants={[
           {
@@ -20,17 +20,17 @@ describe("WalletPanel", () => {
     expect(fine).toContain("expires Nov 15, 2026");
     expect(fine).not.toContain('data-slot="badge"');
     const empty = renderToStaticMarkup(
-      <WalletPanel balanceMicroUsd={-300_000} debtMicroUsd={300_000} grants={[]} />
+      <Wallet balanceMicroUsd={-300_000} debtMicroUsd={300_000} grants={[]} />
     );
     expect(empty).toContain("Empty");
     expect(empty).toContain("$0.30 owed");
   });
 });
 
-describe("CreditPacks", () => {
+describe("TopUp", () => {
   it("adds the price only when it differs from the amount", () => {
     const html = renderToStaticMarkup(
-      <CreditPacks
+      <TopUp
         onBuy={() => {}}
         packs={[
           { id: "p10", priceCents: 1000, amountMicroUsd: 10_000_000 },
@@ -44,10 +44,10 @@ describe("CreditPacks", () => {
   });
 });
 
-describe("PlanOptions", () => {
+describe("Plans", () => {
   it("marks the current plan and asks for an action only on the others", () => {
     const html = renderToStaticMarkup(
-      <PlanOptions
+      <Plans
         plans={[
           { name: "Free", price: "$0", points: ["A free tier"], current: true },
           { name: "Pro", price: "$40.00 per month", points: ["Higher quotas"], current: false },
@@ -64,7 +64,7 @@ describe("PlanOptions", () => {
 describe("keys", () => {
   it("lists keys with never for no expiry", () => {
     const html = renderToStaticMarkup(
-      <KeysTable
+      <Keys
         keys={[
           {
             id: "k1",
@@ -92,7 +92,7 @@ describe("keys", () => {
       expiresAt: null,
     };
     const html = renderToStaticMarkup(
-      <KeysTable
+      <Keys
         highlightedId="k2"
         keys={[
           { ...row, id: "k1", name: "old" },
@@ -104,8 +104,10 @@ describe("keys", () => {
   });
 
   it("offers a new key only when an href is given", () => {
-    expect(renderToStaticMarkup(<NoKeys newKeyHref="/keys/new" />)).toContain('href="/keys/new"');
-    const readOnly = renderToStaticMarkup(<NoKeys />);
+    expect(renderToStaticMarkup(<KeysEmpty newKeyHref="/keys/new" />)).toContain(
+      'href="/keys/new"'
+    );
+    const readOnly = renderToStaticMarkup(<KeysEmpty />);
     expect(readOnly).toContain("Ask an owner");
     expect(readOnly).not.toContain("href");
   });

@@ -6,30 +6,22 @@ import {
   skeletonRootProps,
 } from "@locusgraph/components";
 
-type PlanOptionsSkeletonProps = {
+type PlansSkeletonProps = {
   plans?: number;
   points?: number;
   currentIndex?: number;
 };
 
-export function PlanOptionsSkeleton({
-  plans = 2,
-  points = 2,
-  currentIndex = 0,
-}: PlanOptionsSkeletonProps) {
+export function PlansSkeleton({ plans = 2, points = 2, currentIndex = 0 }: PlansSkeletonProps) {
   const planCount = Math.max(1, Math.floor(plans));
   const pointCount = Math.max(0, Math.floor(points));
   return (
-    <RuleGrid
-      columns={planCount >= 3 ? 3 : 2}
-      data-slot="plan-options-skeleton"
-      {...skeletonRootProps}
-    >
+    <RuleGrid columns={planCount >= 3 ? 3 : 2} data-slot="plans-skeleton" {...skeletonRootProps}>
       {Array.from({ length: planCount }, (_, plan) => (
         <RuleGridCell
           // biome-ignore lint/suspicious/noArrayIndexKey: placeholder plans have no identity
           key={plan}
-          data-slot="plan-option-skeleton"
+          data-slot="plan-skeleton"
           aria-hidden="true"
           className="gap-4"
         >

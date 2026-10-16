@@ -13,22 +13,22 @@ pnpm add @locusgraph/blocks @locusgraph/components
 
 | Block | Props |
 |---|---|
-| `UsageSummary` | `quotas`, optional `label`, `emptyText` |
-| `QuotaMeter` | `quota` (`key`, `period`, `used`, `included`) |
-| `UsageAttention` | `balanceMicroUsd`, `quotas`, `paidPlan`, `buyCreditsHref`, `upgradeHref`, `linkComponent`. Renders nothing when credits are fine and no quota is over |
-| `WalletPanel` | `balanceMicroUsd`, `debtMicroUsd`, `grants`. A Rule Grid cell |
-| `CreditPacks` | `packs`, `onBuy(packId)`, `pending`. A Rule Grid cell |
-| `PlanOptions` | `plans`, `actionFor(plan)` for plans that are not current |
-| `KeysTable` | `keys`, `actions(key)`, `highlightedId` to flash a just-created key. Dates render in the viewer's time zone after hydration |
+| `Usage` | `quotas`, optional `label`, `emptyText` |
+| `Quota` | `quota`, a `QuotaData` (`key`, `period`, `used`, `included`) |
+| `UsageAlert` | `balanceMicroUsd`, `quotas`, `paidPlan`, `buyCreditsHref`, `upgradeHref`, `linkComponent`. Renders nothing when credits are fine and no quota is over |
+| `Wallet` | `balanceMicroUsd`, `debtMicroUsd`, `grants`. A Rule Grid cell |
+| `TopUp` | `packs`, `onBuy(packId)`, `pending`. A Rule Grid cell |
+| `Plans` | `plans`, `actionFor(plan)` for plans that are not current |
+| `Keys` | `keys`, `actions(key)`, `highlightedId` to flash a just-created key. Dates render in the viewer's time zone after hydration |
 | `LocalDate` | `value` (ISO string): UTC on the server, the viewer's time zone after hydration |
-| `NoKeys` | `newKeyHref` (omit for read-only roles), `linkComponent` |
+| `KeysEmpty` | `newKeyHref` (omit for read-only roles), `linkComponent` |
 
-`WalletPanel` and `CreditPacks` are cells, so put them in a `RuleGrid`:
+`Wallet` and `TopUp` are cells, so put them in a `RuleGrid`:
 
 ```tsx
 <RuleGrid columns={2}>
-  <WalletPanel balanceMicroUsd={wallet.balanceMicroUsd} grants={grants} />
-  <CreditPacks packs={wallet.packs} onBuy={buy} pending={pending} />
+  <Wallet balanceMicroUsd={wallet.balanceMicroUsd} grants={grants} />
+  <TopUp packs={wallet.packs} onBuy={buy} pending={pending} />
 </RuleGrid>
 ```
 

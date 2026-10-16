@@ -10,7 +10,7 @@ import {
   TableRow,
 } from "@locusgraph/components";
 
-type KeysTableSkeletonProps = {
+type KeysSkeletonProps = {
   rows?: number;
   actions?: boolean;
 };
@@ -34,10 +34,10 @@ function NameCellSkeleton() {
   );
 }
 
-export function KeysTableSkeleton({ rows = 3, actions = false }: KeysTableSkeletonProps) {
+export function KeysSkeleton({ rows = 3, actions = false }: KeysSkeletonProps) {
   const count = Math.max(1, Math.floor(rows));
   return (
-    <div data-slot="keys-table-skeleton" {...skeletonRootProps} className="w-full">
+    <div data-slot="keys-skeleton" {...skeletonRootProps} className="w-full">
       <Table aria-hidden="true">
         <TableHeader>
           <TableRow className="hover:bg-transparent">
@@ -55,7 +55,7 @@ export function KeysTableSkeleton({ rows = 3, actions = false }: KeysTableSkelet
             <TableRow
               // biome-ignore lint/suspicious/noArrayIndexKey: placeholder rows have no identity
               key={row}
-              data-slot="keys-table-skeleton-row"
+              data-slot="keys-skeleton-row"
               className="hover:bg-transparent"
             >
               <NameCellSkeleton />

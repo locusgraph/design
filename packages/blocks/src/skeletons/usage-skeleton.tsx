@@ -7,14 +7,14 @@ import {
   skeletonRootProps,
 } from "@locusgraph/components";
 
-type UsageSummarySkeletonProps = {
+type UsageSkeletonProps = {
   quotas?: number;
   label?: string;
 };
 
-function QuotaMeterSkeleton() {
+function QuotaSkeleton() {
   return (
-    <div data-slot="quota-meter-skeleton" aria-hidden="true" className="flex flex-col gap-2">
+    <div data-slot="quota-skeleton" aria-hidden="true" className="flex flex-col gap-2">
       <div className="flex items-baseline justify-between gap-4">
         <SkeletonBar className="h-4 w-28" />
         <SkeletonBar className="h-4 w-36" />
@@ -24,15 +24,15 @@ function QuotaMeterSkeleton() {
   );
 }
 
-export function UsageSummarySkeleton({ quotas = 2, label = "Usage" }: UsageSummarySkeletonProps) {
+export function UsageSkeleton({ quotas = 2, label = "Usage" }: UsageSkeletonProps) {
   const count = Math.max(1, Math.floor(quotas));
   return (
-    <RuleGrid columns={1} data-slot="usage-summary-skeleton" {...skeletonRootProps}>
+    <RuleGrid columns={1} data-slot="usage-skeleton" {...skeletonRootProps}>
       <RuleGridCell className="gap-5">
         <RuleGridLabel>{label}</RuleGridLabel>
         {Array.from({ length: count }, (_, index) => (
           // biome-ignore lint/suspicious/noArrayIndexKey: placeholder meters have no identity
-          <QuotaMeterSkeleton key={index} />
+          <QuotaSkeleton key={index} />
         ))}
         <SkeletonLoadingLabel>Loading usage…</SkeletonLoadingLabel>
       </RuleGridCell>

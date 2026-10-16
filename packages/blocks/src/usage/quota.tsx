@@ -1,6 +1,6 @@
 import { Progress } from "@locusgraph/components";
 import { formatCount, quotaPercent, quotaStatus } from "@locusgraph/utils";
-import { periodLabel, type Quota } from "../types";
+import { periodLabel, type QuotaData } from "../types";
 
 const statusIndicator = {
   ok: "",
@@ -8,7 +8,7 @@ const statusIndicator = {
   over: "[&_[data-slot=progress-indicator]]:bg-destructive",
 } as const;
 
-function QuotaStatusNote({ quota }: { quota: Quota }) {
+function QuotaStatusNote({ quota }: { quota: QuotaData }) {
   const status = quotaStatus(quota);
   if (status === "over") {
     return (
@@ -23,11 +23,11 @@ function QuotaStatusNote({ quota }: { quota: Quota }) {
   return null;
 }
 
-export function QuotaMeter({ quota }: { quota: Quota }) {
+export function Quota({ quota }: { quota: QuotaData }) {
   const percent = quotaPercent(quota);
   const name = quota.label ?? quota.key;
   return (
-    <div data-slot="quota-meter" data-status={quotaStatus(quota)} className="flex flex-col gap-2">
+    <div data-slot="quota" data-status={quotaStatus(quota)} className="flex flex-col gap-2">
       <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1 text-sm">
         <span className={quota.label ? "text-muted-foreground" : "font-mono text-muted-foreground"}>
           {name}

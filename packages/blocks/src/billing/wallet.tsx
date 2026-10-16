@@ -2,7 +2,7 @@ import { Badge, RuleGridCell, RuleGridLabel } from "@locusgraph/components";
 import { balanceLevel, formatDate, formatMicroUsd } from "@locusgraph/utils";
 import type { WalletGrant } from "../types";
 
-type WalletPanelProps = {
+type WalletProps = {
   balanceMicroUsd: number;
   debtMicroUsd?: number;
   grants: WalletGrant[];
@@ -37,7 +37,7 @@ function GrantList({ grants }: { grants: WalletGrant[] }) {
   );
 }
 
-export function WalletPanel({ balanceMicroUsd, debtMicroUsd = 0, grants }: WalletPanelProps) {
+export function Wallet({ balanceMicroUsd, debtMicroUsd = 0, grants }: WalletProps) {
   const level = balanceLevel(balanceMicroUsd);
   const hint = level === "fine" ? null : levelHint[level];
   return (

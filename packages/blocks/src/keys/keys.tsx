@@ -10,7 +10,7 @@ import type * as React from "react";
 import { LocalDate } from "../dates/local-date";
 import type { ApiKeyRow } from "../types";
 
-type KeysTableProps = {
+type KeysProps = {
   keys: ApiKeyRow[];
   actions?: (key: ApiKeyRow) => React.ReactNode;
   highlightedId?: string;
@@ -20,7 +20,7 @@ function dateOr(value: string | null, empty: string) {
   return value ? <LocalDate value={value} /> : empty;
 }
 
-export function KeysTable({ keys, actions, highlightedId }: KeysTableProps) {
+export function Keys({ keys, actions, highlightedId }: KeysProps) {
   return (
     <Table>
       <TableHeader>

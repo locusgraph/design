@@ -3,12 +3,12 @@ import type * as React from "react";
 import type { PlanOffer } from "../types";
 import { PlanPrice } from "./plan-price";
 
-type PlanOptionsProps = {
+type PlansProps = {
   plans: PlanOffer[];
   actionFor?: (plan: PlanOffer) => React.ReactNode;
 };
 
-export function PlanOptions({ plans, actionFor }: PlanOptionsProps) {
+export function Plans({ plans, actionFor }: PlansProps) {
   return (
     <RuleGrid columns={plans.length >= 3 ? 3 : 2}>
       {plans.map((plan) => {

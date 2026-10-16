@@ -8,19 +8,19 @@ import {
 import { KeyRoundIcon, PlusIcon } from "lucide-react";
 import type { LinkComponent } from "../types";
 
-type NoKeysProps = {
+type KeysEmptyProps = {
   newKeyHref?: string;
   description?: string;
   linkComponent?: LinkComponent | "a";
 };
 
-export function NoKeys({
+export function KeysEmpty({
   newKeyHref,
   description = newKeyHref
     ? "Create a key to let a service call LocusGraph products for this organization."
     : "Ask an owner to create a key for this organization.",
   linkComponent: Link = "a",
-}: NoKeysProps) {
+}: KeysEmptyProps) {
   return (
     <RuleGrid columns={1}>
       <RuleGridCell className="items-center gap-2 py-12 text-center">

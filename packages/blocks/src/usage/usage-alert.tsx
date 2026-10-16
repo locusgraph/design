@@ -7,11 +7,11 @@ import {
   quotaStatus,
 } from "@locusgraph/utils";
 import { CircleAlertIcon } from "lucide-react";
-import { type LinkComponent, periodLabel, type Quota } from "../types";
+import { type LinkComponent, periodLabel, type QuotaData } from "../types";
 
-type UsageAttentionProps = {
+type UsageAlertProps = {
   balanceMicroUsd: number | null;
-  quotas: Quota[];
+  quotas: QuotaData[];
   paidPlan: boolean;
   buyCreditsHref: string;
   upgradeHref: string;
@@ -31,14 +31,14 @@ const toneClasses = {
   destructive: "bg-destructive/5 text-card-foreground [&>svg]:text-destructive",
 } as const;
 
-export function UsageAttention({
+export function UsageAlert({
   balanceMicroUsd,
   quotas,
   paidPlan,
   buyCreditsHref,
   upgradeHref,
   linkComponent: Link = "a",
-}: UsageAttentionProps) {
+}: UsageAlertProps) {
   const level = balanceMicroUsd === null ? "fine" : balanceLevel(balanceMicroUsd);
   const over = quotas.filter((quota) => quotaStatus(quota) === "over");
   if (level === "fine" && over.length === 0) return null;

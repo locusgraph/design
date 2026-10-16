@@ -2,7 +2,7 @@ export type { LinkComponent } from "@locusgraph/components";
 
 export type QuotaPeriod = "month" | "lifetime";
 
-export type Quota = {
+export type QuotaData = {
   key: string;
   period: QuotaPeriod;
   used: number;
