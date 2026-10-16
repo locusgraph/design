@@ -10,9 +10,11 @@ import {
   PanelTitle,
 } from "../../shared/panel";
 import { PanelEmpty } from "../../shared/panel-empty";
+import { shouldVirtualize } from "../../shared/virtual/use-list-virtualizer";
 import type { PendingApproval } from "../types";
 import { InboxRow } from "./inbox-row";
 import { bulkApprovable, selectAllState, selectedIn, toggled } from "./inbox-selection";
+import { type InboxRowHandlers, VirtualInboxList } from "./virtual-inbox-list";
 
 export type InboxProps = {
   items: PendingApproval[];
@@ -21,6 +23,7 @@ export type InboxProps = {
   onApprove: (id: string) => void;
   onDeny: (id: string) => void;
   onApproveAll: (ids: string[]) => void;
+  virtualize?: boolean;
   className?: string;
 };
 
@@ -31,6 +34,7 @@ export function Inbox({
   onApprove,
   onDeny,
   onApproveAll,
+  virtualize = true,
   className,
 }: InboxProps) {
   const selectAllId = useId();
@@ -40,6 +44,12 @@ export function Inbox({
   const allState = selectAllState(selectable.length, selectedIds.length);
   const hasDestructive = selectable.length < items.length;
   const empty = items.length === 0;
+  const rowHandlers: InboxRowHandlers = {
+    isSelected: (id) => selected.has(id),
+    onSelect: (id, on) => setSelected((current) => toggled(current, id, on)),
+    onApprove,
+    onDeny,
+  };
   return (
     <ApprovalPanel data-slot="inbox" aria-label={title} className={className}>
       <PanelHeader
@@ -58,19 +68,23 @@ export function Inbox({
         />
       ) : (
         <>
-          <ul className="mt-4 flex flex-col divide-y border-t">
-            {items.map((item) => (
-              <InboxRow
-                key={item.id}
-                item={item}
-                now={now}
-                selected={selected.has(item.id)}
-                onSelect={(on) => setSelected((current) => toggled(current, item.id, on))}
-                onApprove={() => onApprove(item.id)}
-                onDeny={() => onDeny(item.id)}
-              />
-            ))}
-          </ul>
+          {shouldVirtualize(items.length, virtualize) ? (
+            <VirtualInboxList items={items} now={now} {...rowHandlers} />
+          ) : (
+            <ul className="mt-4 flex flex-col divide-y border-t">
+              {items.map((item) => (
+                <InboxRow
+                  key={item.id}
+                  item={item}
+                  now={now}
+                  selected={rowHandlers.isSelected(item.id)}
+                  onSelect={(on) => rowHandlers.onSelect(item.id, on)}
+                  onApprove={() => onApprove(item.id)}
+                  onDeny={() => onDeny(item.id)}
+                />
+              ))}
+            </ul>
+          )}
           <PanelFooter className="justify-between gap-3">
             <span className="flex min-w-0 items-center gap-3">
               {selectable.length > 0 && (

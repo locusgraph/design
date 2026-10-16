@@ -3,12 +3,15 @@
 import { ArrowDown as ArrowDownIcon } from "@carbon/icons-react";
 import { Button, cn } from "@locusgraph/components";
 import * as React from "react";
+import { shouldVirtualize } from "../../shared/virtual/use-list-virtualizer";
 import { useStickToBottom } from "./use-stick-to-bottom";
+import { VirtualChatItems } from "./virtual-chat-items";
 
 export type ChatProps = React.ComponentProps<"div"> & {
   empty?: React.ReactNode;
   label?: string;
   jumpLabel?: string;
+  virtualize?: boolean;
 };
 
 export function Chat({
@@ -16,15 +19,20 @@ export function Chat({
   empty,
   label = "Chat",
   jumpLabel = "Jump to latest",
+  virtualize = true,
   className,
   ...props
 }: ChatProps) {
   const { viewportRef, contentRef, isAtBottom, handleScroll, scrollToLatest } = useStickToBottom();
-  const isEmpty = React.Children.toArray(children).length === 0;
+  const [scrolling, setScrolling] = React.useState(false);
+  const items = React.Children.toArray(children);
+  const isEmpty = items.length === 0;
+  const isVirtual = shouldVirtualize(items.length, virtualize);
   return (
     <div
       data-slot="chat"
       data-empty={isEmpty || undefined}
+      data-virtual={isVirtual || undefined}
       className={cn("relative flex min-h-0 flex-1 flex-col overflow-hidden", className)}
       {...props}
     >
@@ -33,6 +41,7 @@ export function Chat({
         data-slot="chat-viewport"
         role="log"
         aria-label={label}
+        aria-busy={(isVirtual && scrolling) || undefined}
         tabIndex={0}
         onScroll={handleScroll}
         className="min-h-0 flex-1 overflow-y-auto overscroll-contain outline-none focus-visible:ring-1 focus-visible:ring-ring focus-visible:ring-inset"
@@ -49,6 +58,12 @@ export function Chat({
             >
               {empty}
             </div>
+          ) : isVirtual ? (
+            <VirtualChatItems
+              items={items}
+              viewportRef={viewportRef}
+              onScrollingChange={setScrolling}
+            />
           ) : (
             children
           )}

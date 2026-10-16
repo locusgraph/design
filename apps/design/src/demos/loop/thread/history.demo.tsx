@@ -52,6 +52,27 @@ function Playground({ editable }: { editable: boolean }) {
   );
 }
 
+const longHistory: HistoryItem[] = Array.from({ length: 1000 }, (_, index) => ({
+  id: `thr_long_${index}`,
+  title: `${initialThreads[index % initialThreads.length].title} ${index + 1}`,
+  updatedAt: new Date(new Date(demoNow).getTime() - index * 5 * 3_600_000).toISOString(),
+}));
+
+function LongHistory() {
+  const [activeId, setActiveId] = useState<string | null>("thr_long_2");
+  return (
+    <div className="h-80 w-full max-w-xs">
+      <History
+        className="h-full"
+        threads={longHistory}
+        now={demoNow}
+        activeId={activeId}
+        onSelect={setActiveId}
+      />
+    </div>
+  );
+}
+
 function Empty() {
   return (
     <div className="w-full max-w-xs">
@@ -78,9 +99,14 @@ export default defineDemo({
     { name: "label", type: "string", defaultValue: '"Conversations"' },
     { name: "emptyText", type: "string", defaultValue: '"No conversations yet."' },
     { name: "now", type: "Date | string", defaultValue: "new Date()" },
+    { name: "virtualize", type: "boolean", defaultValue: "true" },
   ],
   examples: {
     Empty: { description: "Before the first conversation.", component: Empty },
+    "Long history": {
+      description: "1,000 threads. Above 50 threads only the rows near the viewport are mounted.",
+      component: LongHistory,
+    },
   },
   isNew: true,
 });

@@ -1,4 +1,4 @@
-import type { HistoryItem } from "./history-row";
+import type { HistoryItem } from "./row/history-row";
 
 export type ThreadGroup = { key: string; label: string; threads: HistoryItem[] };
 
