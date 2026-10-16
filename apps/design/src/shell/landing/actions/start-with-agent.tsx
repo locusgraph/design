@@ -45,7 +45,7 @@ export function StartWithAgent({ className }: { className?: string }) {
     }
   };
   return (
-    <div className={cn("flex flex-col items-start gap-2", className)}>
+    <div className={cn("flex flex-col items-start", className)}>
       <button
         type="button"
         onClick={copy}
@@ -59,10 +59,8 @@ export function StartWithAgent({ className }: { className?: string }) {
           <CopyIcon aria-hidden className="size-4 text-muted-foreground" />
         )}
       </button>
-      <span role="status" aria-live="polite" className="pl-3 text-xs text-muted-foreground">
-        {copied
-          ? "Paste it into your agent."
-          : "Copies a prompt that points your agent at /DESIGN.md"}
+      <span role="status" aria-live="polite" className="sr-only">
+        {copied ? "Prompt copied. Paste it into your agent." : ""}
       </span>
     </div>
   );

@@ -15,7 +15,7 @@ export function LandingHero({ packageCount }: { packageCount: number }) {
         Square, ruled and quiet. Components, product blocks and an agent kit with the human in the
         loop, in light and dark.
       </p>
-      <div className="flex w-full flex-col gap-3 sm:w-auto sm:flex-row sm:items-start">
+      <div className="flex w-full flex-col gap-3 sm:w-auto sm:flex-row sm:items-center">
         <StartWithAgent />
         <Button asChild size="lg" variant="ghost" className="self-start">
           <PlaygroundLink href="/components">
@@ -23,7 +23,7 @@ export function LandingHero({ packageCount }: { packageCount: number }) {
             <ArrowRightIcon aria-hidden />
           </PlaygroundLink>
         </Button>
-        <div className="sm:ml-3 sm:w-80 sm:pt-1">
+        <div className="sm:ml-3 sm:w-80">
           <CopyCommand command="pnpm add @locusgraph/components" />
         </div>
       </div>
