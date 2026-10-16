@@ -14,7 +14,7 @@ export const libraries: Library[] = [
   {
     id: "components",
     title: "Components",
-    href: "/",
+    href: "/components",
     packageName: "@locusgraph/components",
     noun: "components",
   },
