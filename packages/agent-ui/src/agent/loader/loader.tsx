@@ -1,8 +1,37 @@
 import { cn } from "@locusgraph/components";
+import type { ReactNode } from "react";
+import { GradientLabel } from "./gradient-label";
+import { BarsMark } from "./marks/bars-mark";
+import { GlyphMark } from "./marks/glyph-mark";
+import { LocusMark } from "./marks/locus-mark";
+import { OrbMark } from "./marks/orb-mark";
+import { SpinnerMark } from "./marks/spinner-mark";
+
+export type LoaderVariant =
+  | "dots"
+  | "shimmer"
+  | "glyph"
+  | "orb"
+  | "gradient"
+  | "bars"
+  | "spinner"
+  | "locus";
+
+export const loaderVariants: LoaderVariant[] = [
+  "dots",
+  "shimmer",
+  "glyph",
+  "orb",
+  "gradient",
+  "bars",
+  "spinner",
+  "locus",
+];
 
 export type LoaderProps = {
-  variant?: "dots" | "shimmer";
+  variant?: LoaderVariant;
   label?: string;
+  showLabel?: boolean;
   className?: string;
 };
 
@@ -24,22 +53,53 @@ function TypingDots() {
   );
 }
 
-export function Loader({ variant = "dots", label = "Thinking…", className }: LoaderProps) {
+const marks: Partial<Record<LoaderVariant, () => ReactNode>> = {
+  dots: TypingDots,
+  glyph: GlyphMark,
+  orb: OrbMark,
+  bars: BarsMark,
+  spinner: SpinnerMark,
+  locus: LocusMark,
+};
+
+const labelShownByDefault: Record<LoaderVariant, boolean> = {
+  dots: false,
+  shimmer: true,
+  glyph: true,
+  orb: false,
+  gradient: true,
+  bars: false,
+  spinner: true,
+  locus: true,
+};
+
+function VisibleLabel({ variant, label }: { variant: LoaderVariant; label: string }) {
+  if (variant === "gradient") return <GradientLabel label={label} />;
+  const shimmers = variant === "shimmer" || variant === "glyph" || variant === "locus";
+  return <span className={cn(shimmers && "motion-safe:shimmer")}>{label}</span>;
+}
+
+export function Loader({
+  variant = "dots",
+  label = "Thinking…",
+  showLabel,
+  className,
+}: LoaderProps) {
+  const Mark = marks[variant];
+  const labelVisible = showLabel ?? labelShownByDefault[variant];
   return (
     <span
       data-slot="loader"
       data-variant={variant}
       role="status"
       aria-live="polite"
-      className={cn("inline-flex items-center text-sm text-muted-foreground", className)}
+      className={cn("inline-flex items-center gap-2 text-sm text-muted-foreground", className)}
     >
-      {variant === "dots" ? (
-        <>
-          <TypingDots />
-          <span className="sr-only">{label}</span>
-        </>
+      {Mark && <Mark />}
+      {labelVisible ? (
+        <VisibleLabel variant={variant} label={label} />
       ) : (
-        <span className="motion-safe:shimmer">{label}</span>
+        <span className="sr-only">{label}</span>
       )}
     </span>
   );

@@ -493,6 +493,9 @@ importers:
 
   packages/agent-ui:
     dependencies:
+      '@locusgraph/brand':
+        specifier: workspace:*
+        version: link:../brand
       '@locusgraph/utils':
         specifier: workspace:*
         version: link:../utils

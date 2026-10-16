@@ -44,6 +44,7 @@
     "react-dom": "^19.2.0"
   },
   "dependencies": {
+    "@locusgraph/brand": "workspace:*",
     "@locusgraph/utils": "workspace:*",
     "lucide-react": "catalog:",
     "react-markdown": "catalog:",
