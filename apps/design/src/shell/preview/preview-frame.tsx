@@ -54,7 +54,8 @@ export function PreviewFrame({ message, viewport, height }: PreviewFrameProps) {
         src={`/frame.html?theme=${initialTheme}`}
         style={{ height: frameHeight, colorScheme: message.theme }}
         className={cn(
-          "border-0 transition-[width,height] duration-200",
+          "border-0 transition-[width,opacity] duration-200",
+          contentHeight === 0 && "opacity-0",
           viewport === "mobile" ? "w-[375px] border-x" : "w-full"
         )}
       />
