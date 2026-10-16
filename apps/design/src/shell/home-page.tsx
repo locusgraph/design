@@ -1,20 +1,25 @@
 import type { PageSection } from "@locusgraph/components";
-import { type DemoIndexEntry, demoIndex, demoIndexByTitle } from "../registry/load-demos";
+import type { DemoIndexEntry } from "../registry/load-demos";
+import { type Library, libraryEntries } from "./nav/libraries";
 import { PlaygroundLink } from "./nav/playground-nav";
 
 function groupTitle(group: string) {
   return group.charAt(0).toUpperCase() + group.slice(1);
 }
 
-const groups = [...new Set(demoIndexByTitle.map((entry) => entry.group))].sort().map((group) => ({
-  group,
-  entries: demoIndexByTitle.filter((entry) => entry.group === group),
-}));
+function libraryGroups(library: Library) {
+  const entries = libraryEntries(library.id);
+  return [...new Set(entries.map((entry) => entry.group))].sort().map((group) => ({
+    group,
+    entries: entries.filter((entry) => entry.group === group),
+  }));
+}
 
-export const homeSections: PageSection[] = groups.map(({ group }) => ({
-  id: group,
-  title: groupTitle(group),
-}));
+export function homeSections(library: Library): PageSection[] {
+  const groups = libraryGroups(library);
+  if (groups.length < 2) return [];
+  return groups.map(({ group }) => ({ id: group, title: groupTitle(group) }));
+}
 
 function ComponentGrid({ entries }: { entries: DemoIndexEntry[] }) {
   return (
@@ -32,22 +37,28 @@ function ComponentGrid({ entries }: { entries: DemoIndexEntry[] }) {
   );
 }
 
-export function HomePage() {
+export function HomePage({ library }: { library: Library }) {
+  const groups = libraryGroups(library);
+  const count = groups.reduce((total, { entries }) => total + entries.length, 0);
   return (
     <article className="mx-auto flex w-full max-w-160 min-w-0 flex-col gap-12">
       <header className="flex flex-col gap-2">
-        <h1 className="text-3xl font-semibold tracking-tight">Components</h1>
+        <h1 className="text-3xl font-semibold tracking-tight">{library.title}</h1>
         <p className="text-balance text-muted-foreground">
-          {demoIndex.length} components in @locusgraph/components, each with a live playground,
-          usage and props.
+          {count} {library.noun} in {library.packageName}, each with a live playground, usage and
+          props.
         </p>
       </header>
-      {groups.map(({ group, entries }) => (
-        <section key={group} id={group} className="flex scroll-mt-24 flex-col gap-4">
-          <h2 className="text-sm font-medium text-muted-foreground">{groupTitle(group)}</h2>
-          <ComponentGrid entries={entries} />
-        </section>
-      ))}
+      {groups.length === 1 ? (
+        <ComponentGrid entries={groups[0]?.entries ?? []} />
+      ) : (
+        groups.map(({ group, entries }) => (
+          <section key={group} id={group} className="flex scroll-mt-24 flex-col gap-4">
+            <h2 className="text-sm font-medium text-muted-foreground">{groupTitle(group)}</h2>
+            <ComponentGrid entries={entries} />
+          </section>
+        ))
+      )}
       <p className="text-sm text-muted-foreground">
         Add a demo with a file in{" "}
         <code className="font-mono text-xs">src/demos/&lt;group&gt;/&lt;name&gt;.demo.tsx</code>. It
