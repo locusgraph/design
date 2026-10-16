@@ -19,7 +19,7 @@ function breakdownFor(usedTokens: number) {
 
 function InComposer() {
   return (
-    <div className="flex w-full max-w-md items-center justify-between border border-border px-3 py-2 text-sm text-muted-foreground">
+    <div className="flex w-[28rem] max-w-full items-center justify-between bg-card py-2 pr-2 pl-4 text-sm text-muted-foreground ring-1 ring-border">
       <span>Ask about Acme's billing…</span>
       <ContextMeter
         variant="ring"
@@ -37,7 +37,7 @@ export default defineDemo({
     "Context window used against its limit. Amber from 80%, red when full. With a breakdown, hover or focus shows what fills the window.",
   controls: { level: select(levelOptions, "near"), variant: select(variants) },
   playground: ({ level, variant }) => (
-    <div className="w-full max-w-sm">
+    <div className="w-[22rem] max-w-full">
       <ContextMeter
         variant={variant}
         usedTokens={levels[level]}

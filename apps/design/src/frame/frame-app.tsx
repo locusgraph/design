@@ -54,7 +54,7 @@ export function FrameApp() {
         previewBackgroundClass[message?.background ?? "surface"]
       )}
     >
-      <div ref={content} className="flex max-w-full items-center justify-center p-10">
+      <div ref={content} className="flex w-full max-w-full items-center justify-center p-10">
         {entry?.demo.playground(message?.values as never)}
       </div>
       <Toaster theme={message?.theme ?? "light"} position="bottom-right" />

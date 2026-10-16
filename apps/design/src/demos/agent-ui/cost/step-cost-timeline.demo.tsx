@@ -42,10 +42,10 @@ const steps: CostStep[] = [
 export default defineDemo({
   title: "Step Cost Timeline",
   description:
-    "What each step of a run cost, as bars proportional to cost, with totals for cost, tokens, time and money wasted on failed steps.",
+    "What each step of a run cost, as ruled rows with a bar proportional to cost. The total leads; tokens, time and money wasted on failed steps follow.",
   controls: { withFailure: toggle(true) },
   playground: ({ withFailure }) => (
-    <div className="w-full max-w-2xl">
+    <div className="w-[36rem] max-w-full">
       <StepCostTimeline
         steps={withFailure ? steps : steps.filter((step) => step.status !== "failed")}
       />

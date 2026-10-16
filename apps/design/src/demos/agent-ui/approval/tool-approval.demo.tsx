@@ -102,7 +102,10 @@ export default defineDemo({
     { name: "autoFocus", type: "boolean", defaultValue: "true" },
   ],
   examples: {
-    Approved: { description: "The result line replaces the buttons.", component: Approved },
+    Approved: {
+      description: "Once decided, the inputs and buttons collapse to who decided and when.",
+      component: Approved,
+    },
     DeniedWithReason: {
       description: "A denial keeps the reason the agent was given.",
       component: DeniedWithReason,

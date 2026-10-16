@@ -31,7 +31,7 @@ const riskOptions = ["write", "destructive"] as const;
 
 function GraphRetention() {
   return (
-    <div className="w-full max-w-lg">
+    <div className="w-full max-w-xl">
       <ToolArgsEditor
         toolName="prune_graph"
         risk="destructive"
@@ -55,7 +55,7 @@ export default defineDemo({
     "Lets a person correct a tool's inputs before approving. Fields come from a small schema; validation runs on submit and focus moves to the first field to fix.",
   controls: { risk: select(riskOptions, "write") },
   playground: ({ risk }) => (
-    <div className="w-full max-w-lg">
+    <div className="w-full max-w-xl">
       <ToolArgsEditor
         toolName="send_invoice"
         risk={risk}

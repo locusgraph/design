@@ -60,7 +60,7 @@ export default defineDemo({
   ],
   examples: {
     Allowed: {
-      description: "After a decision the figures stay for the record.",
+      description: "A decision collapses to who decided, with the spend kept as a muted meter.",
       component: Allowed,
     },
   },

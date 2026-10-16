@@ -20,10 +20,10 @@ const sources: SourceItem[] = [
 export default defineDemo({
   title: "Sources",
   description:
-    "A compact, collapsible list of the sources an answer used. Takes Citation items or AI SDK source-url parts; url parts are numbered by position to match Inline Citation.",
+    "A compact, collapsible list of the sources an answer used, marked by the initial of each host. Takes Citation items or AI SDK source-url parts; url parts are numbered by position to match Inline Citation.",
   controls: { open: toggle(true) },
   playground: ({ open }) => (
-    <div className="w-full max-w-md">
+    <div className="w-full max-w-xl">
       <Sources key={String(open)} sources={sources} defaultOpen={open} />
     </div>
   ),

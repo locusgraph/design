@@ -5,10 +5,11 @@ const statusOptions = ["running", "paused", "stopped", "done"] as const;
 
 function WithoutStepping() {
   return (
-    <div className="w-full max-w-xl">
+    <div className="w-full max-w-2xl">
       <RunControls
         status="running"
         runName="Graph cleanup"
+        elapsedMs={4_380_000}
         onPause={() => {}}
         onResume={() => {}}
         onStop={() => {}}
@@ -20,13 +21,14 @@ function WithoutStepping() {
 export default defineDemo({
   title: "Run Controls",
   description:
-    "Pause, resume, step once or stop a running agent. Only the buttons that make sense for the current status are enabled, and the status is announced.",
+    "A slim status bar for a running agent: status dot, elapsed time, and pause, resume, step once or stop. Only the actions that make sense for the current status are enabled, and the status is announced.",
   controls: { status: select(statusOptions, "running") },
   playground: ({ status }) => (
-    <div className="w-full max-w-xl">
+    <div className="w-full max-w-2xl">
       <RunControls
         status={status}
         runName="Nightly SpendGraph reconcile"
+        elapsedMs={252_000}
         onPause={() => {}}
         onResume={() => {}}
         onStop={() => {}}
@@ -35,10 +37,11 @@ export default defineDemo({
     </div>
   ),
   code: ({ status }) =>
-    `<RunControls\n  status="${status}"\n  runName={run.name}\n  onPause={pause}\n  onResume={resume}\n  onStop={stop}\n  onStep={stepOnce}\n/>`,
+    `<RunControls\n  status="${status}"\n  runName={run.name}\n  elapsedMs={run.elapsedMs}\n  onPause={pause}\n  onResume={resume}\n  onStop={stop}\n  onStep={stepOnce}\n/>`,
   props: [
     { name: "status", type: '"running" | "paused" | "stopped" | "done"' },
     { name: "runName", type: "string" },
+    { name: "elapsedMs", type: "number" },
     { name: "onPause", type: "() => void" },
     { name: "onResume", type: "() => void" },
     { name: "onStop", type: "() => void" },

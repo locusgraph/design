@@ -40,10 +40,10 @@ const memories = [
 export default defineDemo({
   title: "Memory Recall",
   description:
-    "The memories and graph nodes LocusGraph recalled for this answer, each with its kind and relevance. Collapsed, it reads as a single line.",
+    "The memories and graph nodes LocusGraph recalled for this answer, each with its kind and relevance, as ruled rows. Collapsed, it reads as a single line.",
   controls: { open: toggle(true) },
   playground: ({ open }) => (
-    <div className="w-full max-w-lg">
+    <div className="w-full max-w-xl">
       <MemoryRecall
         key={String(open)}
         memories={memories}

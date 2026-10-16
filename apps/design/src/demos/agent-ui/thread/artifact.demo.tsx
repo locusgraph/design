@@ -48,7 +48,7 @@ function Playground({ kind }: { kind: (typeof kinds)[number] }) {
     );
   }
   return (
-    <div className="h-96 w-full max-w-lg">
+    <div className="h-72 w-full max-w-lg">
       <Artifact
         title={kind === "code" ? "budgets.ts" : "September spend report"}
         kind={kind === "code" ? "Code" : "Document"}
@@ -63,7 +63,7 @@ function Playground({ kind }: { kind: (typeof kinds)[number] }) {
         }
       >
         {kind === "code" ? (
-          <CodeBlock language="ts" filename="budgets.ts" code={budgetCode} />
+          <CodeBlock language="ts" code={budgetCode} />
         ) : (
           <Report versionId={versionId} />
         )}
@@ -74,7 +74,7 @@ function Playground({ kind }: { kind: (typeof kinds)[number] }) {
 
 function SingleVersion() {
   return (
-    <div className="h-64 w-full max-w-lg">
+    <div className="h-56 w-full max-w-lg">
       <Artifact title="Acme account summary" kind="Document" versions={versions.slice(0, 1)}>
         <p className="text-sm">Acme renews in March on the Pro plan, owned by Dana Lee.</p>
       </Artifact>
@@ -85,7 +85,7 @@ function SingleVersion() {
 export default defineDemo({
   title: "Artifact",
   description:
-    "A side panel for a document or code the agent generated, with a version switcher, an actions slot and a close button.",
+    "A panel for a document or code the agent generated: kind and title up top, actions and close on the right, and the version switcher in the footer.",
   controls: { kind: select(kinds) },
   playground: ({ kind }) => <Playground kind={kind} />,
   code: () =>
@@ -102,7 +102,7 @@ export default defineDemo({
   ],
   examples: {
     SingleVersion: {
-      description: "With one version the switcher becomes a plain label.",
+      description: "With one version the footer shows a plain label.",
       component: SingleVersion,
     },
   },

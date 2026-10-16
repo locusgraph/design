@@ -53,7 +53,7 @@ function Live() {
         ))}
       </Conversation>
       <PromptInput
-        className="border-x-0 border-b-0"
+        className="border-t ring-0 focus-within:ring-1 focus-within:ring-inset"
         onSubmit={(text) =>
           setMessages((current) => [
             ...current,

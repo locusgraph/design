@@ -33,7 +33,7 @@ function stepsFor(stage: (typeof progress)[number]): AgentStep[] {
 
 function Pending() {
   return (
-    <div className="w-full max-w-md">
+    <div className="w-full max-w-xl">
       <Steps
         title="Next up"
         steps={planned.map((step) => ({ ...step, status: "pending", detail: undefined }))}
@@ -45,10 +45,10 @@ function Pending() {
 export default defineDemo({
   title: "Steps",
   description:
-    "The agent's plan as a list, one status icon per step. The running step is highlighted and the header counts what is done.",
+    "The agent's plan as a vertical timeline. Each step has a status mark (hollow pending, amber spinner, emerald check, red cross) and the header counts what is done.",
   controls: { progress: select(progress) },
   playground: ({ progress: stage }) => (
-    <div className="w-full max-w-md">
+    <div className="w-full max-w-xl">
       <Steps title="Plan" steps={stepsFor(stage)} />
     </div>
   ),

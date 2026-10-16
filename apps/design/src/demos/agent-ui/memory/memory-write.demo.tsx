@@ -20,7 +20,7 @@ function UndoableWrites() {
       current.map((item) => (item.id === id ? { ...item, status: "undone" } : item))
     );
   return (
-    <div className="w-full max-w-lg">
+    <div className="w-full max-w-xl">
       <MemoryWrite items={items} onUndo={undo} />
     </div>
   );

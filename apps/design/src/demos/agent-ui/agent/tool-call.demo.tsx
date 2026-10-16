@@ -54,7 +54,7 @@ function WaitingForApproval() {
 export default defineDemo({
   title: "Tool Call",
   description:
-    "One tool call: its name, a status badge for each state, and its input and output as JSON when opened. Errors show in red without opening.",
+    "One tool call as a single ruled row: the tool name, a status dot and word for each state, and its input and output as JSON when opened. Errors show in red without opening.",
   controls: { state: select(toolStates, "output-available"), open: toggle(true) },
   playground: ({ state, open }) => (
     <div className="w-full max-w-xl">

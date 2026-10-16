@@ -25,7 +25,7 @@ function FreeText() {
 export default defineDemo({
   title: "Agent Question",
   description:
-    "The agent asks something mid-run. Offer pill choices, free text, or both; the answered state shows what was chosen and by whom.",
+    "The agent asks something mid-run. Numbered choices you can pick with 1–9, a free answer, or both. The run waits until you send; the answered state shows what was chosen and by whom.",
   controls: { mode: select(modeOptions, "choices-and-text") },
   playground: ({ mode }) => (
     <div className="w-full max-w-lg">

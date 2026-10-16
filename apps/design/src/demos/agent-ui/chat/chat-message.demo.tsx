@@ -81,7 +81,7 @@ function CustomTool() {
 export default defineDemo({
   title: "Chat Message",
   description:
-    "One AgentMessage with its parts in order. User messages sit on the right, assistant messages on the left. Reasoning, tool calls and sources get a plain rendering unless you pass a render prop.",
+    "One AgentMessage with its parts in order. User text is a compact muted block on the right; assistant text is unboxed prose at a comfortable reading width. Reasoning, tool calls and sources use the rich components unless you pass a render prop.",
   controls: { role: select(roles) },
   playground: ({ role }) => <ChatMessage className="w-full max-w-xl" message={messages[role]} />,
   code: () => "<ChatMessage message={message} />",

@@ -2,9 +2,13 @@ import { ThreadList, type ThreadSummary } from "@locusgraph/agent-ui";
 import { useState } from "react";
 import { defineDemo, toggle } from "../../../registry/define-demo";
 
+const demoNow = "2026-10-16T18:00:00.000Z";
+
 const initialThreads: ThreadSummary[] = [
+  { id: "thr_9g4m", title: "Forecast for the indexer", updatedAt: "2026-10-16T15:12:00.000Z" },
   { id: "thr_8f2k", title: "October spend by model", updatedAt: "2026-10-16T09:30:00.000Z" },
-  { id: "thr_7d1a", title: "Support agent cost per ticket", updatedAt: "2026-10-14T16:05:00.000Z" },
+  { id: "thr_7d1a", title: "Support agent cost per ticket", updatedAt: "2026-10-15T16:05:00.000Z" },
+  { id: "thr_7c0b", title: "Idle API keys", updatedAt: "2026-10-15T08:40:00.000Z" },
   { id: "thr_6c9e", title: "Acme account graph cleanup", updatedAt: "2026-10-09T11:20:00.000Z" },
   { id: "thr_5b3x", title: "Stripe migration memories", updatedAt: "2026-09-28T08:45:00.000Z" },
   {
@@ -25,17 +29,15 @@ function Playground({ editable }: { editable: boolean }) {
     setThreads((current) => current.filter((thread) => thread.id !== id));
   const startNew = () => {
     const id = `thr_${Date.now().toString(36)}`;
-    setThreads((current) => [
-      { id, title: "New conversation", updatedAt: new Date().toISOString() },
-      ...current,
-    ]);
+    setThreads((current) => [{ id, title: "New conversation", updatedAt: demoNow }, ...current]);
     setActiveId(id);
   };
   return (
-    <div className="h-96 w-full max-w-xs">
+    <div className="h-72 w-full max-w-xs">
       <ThreadList
         className="h-full"
         threads={threads}
+        now={demoNow}
         activeId={activeId}
         onSelect={setActiveId}
         onNew={startNew}
@@ -57,7 +59,7 @@ function Empty() {
 export default defineDemo({
   title: "Thread List",
   description:
-    "Conversation history with the active thread marked. Rename inline from the menu or by double click; Enter saves, Escape cancels.",
+    "Conversation history grouped by day, with the active thread marked. Rename inline from the menu or by double click; Enter saves, Escape cancels.",
   controls: { editable: toggle(true) },
   playground: ({ editable }) => <Playground editable={editable} />,
   code: () =>
@@ -71,6 +73,7 @@ export default defineDemo({
     { name: "onArchive", type: "(id: string) => void" },
     { name: "label", type: "string", defaultValue: '"Conversations"' },
     { name: "emptyText", type: "string", defaultValue: '"No conversations yet."' },
+    { name: "now", type: "Date | string", defaultValue: "new Date()" },
   ],
   examples: {
     Empty: { description: "Before the first conversation.", component: Empty },

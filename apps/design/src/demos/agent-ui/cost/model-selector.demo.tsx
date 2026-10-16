@@ -49,7 +49,7 @@ function ChooseModel() {
 export default defineDemo({
   title: "Model Selector",
   description:
-    "A compact pill that picks the model, with price per million tokens, speed and context size for each. Small enough for a prompt input's model slot.",
+    "A quiet trigger with the model and its provider. The menu lists each model with speed, context size and price per million tokens, and checks the one in use. Small enough for a prompt input's model slot.",
   controls: {},
   playground: () => <ChooseModel />,
   code: () => `<ModelSelector models={models} value={modelId} onChange={setModelId} />`,

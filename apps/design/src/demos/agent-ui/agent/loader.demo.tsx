@@ -16,7 +16,7 @@ function Labels() {
 export default defineDemo({
   title: "Loader",
   description:
-    "Shows the agent is working: typing dots, or a shimmering label. Both are a status region with a label for screen readers.",
+    "Shows the agent is working: three softly pulsing dots, or a shimmering label. Both are a status region with a label for screen readers.",
   controls: { variant: select(variants), label: text("Thinking…") },
   playground: ({ variant, label }) => <Loader variant={variant} label={label} />,
   code: ({ variant, label }) =>

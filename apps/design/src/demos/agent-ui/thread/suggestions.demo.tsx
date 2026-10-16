@@ -51,7 +51,7 @@ function ShortLabels() {
 export default defineDemo({
   title: "Suggestions",
   description:
-    "Starter prompts as pills for an empty conversation. Selecting one hands its text to onSelect.",
+    "Starter prompts as ruled rows for an empty conversation. Selecting one hands its text to onSelect.",
   controls: { product: select(products) },
   playground: ({ product }) => <Playground product={product} />,
   code: () => `<Suggestions suggestions={prompts} onSelect={(text) => sendMessage({ text })} />`,
