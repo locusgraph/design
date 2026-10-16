@@ -36,13 +36,17 @@ These rules apply to every source file. They are not suggestions.
 - `packages/config`: `@locusgraph/config`, Biome, TypeScript, Vitest, Cucumber, PostCSS and shadcn settings. Replaces `@spendgraph/config`
 - `packages/tokens`: `@locusgraph/tokens`, `theme.css` (palette, Tailwind mapping, base, brand effects, motion), `typeset.css`, and the color and type values as TypeScript
 - `packages/utils`: `@locusgraph/utils`, money in cents and micro-USD, counts, dates, quota and balance status. No dependencies
-- `packages/brand`: `@locusgraph/brand`, the LocusGraph mark and wordmark and the Google and GitHub marks, as React and SVG
+- `packages/brand`: `@locusgraph/brand`, the LocusGraph and SpendGraph marks and wordmarks, `LocusGraphIcon`, `SocialCard` (inline styles, works in Next.js `ImageResponse`) and the Google and GitHub marks, as React and SVG
 - `packages/components`: `@locusgraph/components`, Radix based React components, Rule Grid, the App and Docs shells, and `theme.css` (tokens plus a Tailwind source for the components)
-- `packages/blocks`: `@locusgraph/blocks`, product sections (usage, wallet, credit packs, plans, API keys) built from components. Props and callbacks only, never fetching
+- `packages/blocks`: `@locusgraph/blocks`, product sections (`Usage`, `UsageAlert`, `Quota`, `Wallet`, `TopUp`, `Plans`, `Keys`, `KeysEmpty` and their skeletons) built from components. Props and callbacks only, never fetching
+- `packages/loop`: `@locusgraph/loop`, agent UI (chat, thread, agent, approval, memory, cost) on Vercel AI SDK `UIMessage` parts. Never calls a model
 - `packages/email`: `@locusgraph/email`, transactional email templates with inline styles from tokens
 
-Dependencies flow one way: `config` ← every package; `tokens` ← `components`, `email`; `utils` ← `blocks`, `email`; `components` ← `blocks`. Never import upward.
-- `apps/design`: playground and docs for every component (Vite), one `src/demos/<group>/<name>.demo.tsx` per component, and the shells at `/shells`
+Dependencies flow one way: `config` ← every package; `tokens` ← `components`, `email`; `utils` ← `blocks`, `loop`, `email`; `brand` ← `loop`; `components` ← `blocks`, `loop`. Never import upward.
+
+Icons come from `@carbon/icons-react`, imported under the local name the code uses (`import { Close as XIcon } from "@carbon/icons-react"`). Its install scripts only send telemetry, so `allowBuilds` keeps them off.
+- `apps/design`: playground and docs for every component (Vite), one `src/demos/<group>/<name>.demo.tsx` per component, the landing page at `/`, the shells at `/shells`, `/DESIGN.md` and one `<path>.md` per page for agents (`src/agent-docs`, `plugins/agent-docs.ts`), deployed to design.locusgraph.com as a Cloudflare Worker (`cloudflare.config.ts`)
+- `scripts/registry`: builds the shadcn registry into `apps/design/public/r` (one item per source file, a bundle per docs page without one, and the `theme` item) and `install-test/` installs every item into a fresh `shadcn init` app and builds it
 - `apps/example-next` (port 3100) and `apps/example-react` (port 3200): small apps that use the packages the way a product would, in Next.js App Router and in Vite. Keep them building; they are the check that the packages work outside the docs site
 
 Components that import Radix use its subpaths (`radix-ui/dialog`), never the `radix-ui` root: the root import hangs the vinext RSC build of apps that use this package.
@@ -51,14 +55,16 @@ Components that import Radix use its subpaths (`radix-ui/dialog`), never the `ra
 
 ```bash
 pnpm install
-pnpm check                                   # lint, typecheck, test
+pnpm check                                   # lint, typecheck, test, registry build
 pnpm dev                                     # docs site on port 5180
+pnpm registry:test                           # every registry item into a fresh shadcn app, tsc and next build
 pnpm --filter @locusgraph/components pack    # build and inspect the publish tarball, no upload
+cd apps/design && pnpm run deploy            # registry, build and deploy to design.locusgraph.com
 ```
 
 ## Releases
 
-Bump `version` in `packages/<folder>/package.json`, merge, then push the tag `<folder>-v<version>` (for example `tokens-v0.1.0`). The `publish` workflow finds the package from the tag, checks the tag matches the version, typechecks, tests, builds and publishes to npm with provenance, using the `NPM_TOKEN` repository secret. Publish a dependency before the packages that use it: `config`, `tokens`, `utils`, `brand`, then `components`, then `blocks` and `email`. Semver: a fix is a patch, a new component or prop a minor, a removed or renamed export, prop or token a major (while 0.x, a minor).
+Bump `version` in `packages/<folder>/package.json`, merge, then push the tag `<folder>-v<version>` (for example `tokens-v0.1.0`). The `publish` workflow finds the package from the tag, checks the tag matches the version, typechecks, tests, builds and publishes to npm with provenance, using the `NPM_TOKEN` repository secret. Publish a dependency before the packages that use it: `config`, `tokens`, `utils`, `brand`, then `components`, then `blocks`, `loop` and `email`. Semver: a fix is a patch, a new component or prop a minor, a removed or renamed export, prop or token a major (while 0.x, a minor).
 
 ## Commits
 
@@ -66,6 +72,6 @@ Enforced by `.githooks/commit-msg` (run `pnpm run prepare` once after cloning):
 
 - One line only: `type(folder): what it does`
 - `type` is one of feat, fix, chore, docs, refactor, test, build, ci, perf, style, revert
-- `folder` is a package folder (`config`, `tokens`, `utils`, `brand`, `components`, `blocks`, `email`), `design`, or `repo`
+- `folder` is a package folder (`config`, `tokens`, `utils`, `brand`, `components`, `blocks`, `loop`, `email`), `design`, or `repo`
 - Lowercase description, no trailing period, at most 100 characters
 - No `Co-Authored-By` trailer
