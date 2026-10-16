@@ -23,28 +23,36 @@ export function docExamples(demo: Demo, fileSource: string): DocExample[] {
   });
 }
 
-function importedComponentNames(fileSource: string) {
-  const match = fileSource.match(/import \{([^}]*)\} from "@locusgraph\/components";/);
-  return (match?.[1] ?? "")
-    .split(",")
-    .map((name) => name.trim())
-    .filter(Boolean);
+function importedNamesByPackage(fileSource: string) {
+  const imports = fileSource.matchAll(/import \{([^}]*)\} from "(@locusgraph\/[a-z-]+)";/g);
+  return [...imports].map(([, names = "", packageName = ""]) => ({
+    packageName,
+    names: names
+      .split(",")
+      .map((name) => name.trim())
+      .filter(Boolean),
+  }));
 }
 
 const MAX_IMPORT_LINE = 80;
 
-export function usageImport(fileSource: string, usageCode: string) {
-  const used = importedComponentNames(fileSource).filter((name) =>
-    new RegExp(`\\b${name}\\b`).test(usageCode)
-  );
-  if (used.length === 0) {
-    return "";
-  }
-  const singleLine = `import { ${used.join(", ")} } from "@locusgraph/components";`;
+function importStatement(names: string[], packageName: string) {
+  const singleLine = `import { ${names.join(", ")} } from "${packageName}";`;
   if (singleLine.length <= MAX_IMPORT_LINE) {
     return singleLine;
   }
-  return `import {\n${used.map((name) => `  ${name},`).join("\n")}\n} from "@locusgraph/components";`;
+  return `import {\n${names.map((name) => `  ${name},`).join("\n")}\n} from "${packageName}";`;
+}
+
+export function usageImport(fileSource: string, usageCode: string) {
+  return importedNamesByPackage(fileSource)
+    .map(({ packageName, names }) => ({
+      packageName,
+      used: names.filter((name) => new RegExp(`\\b${name}\\b`).test(usageCode)),
+    }))
+    .filter(({ used }) => used.length > 0)
+    .map(({ packageName, used }) => importStatement(used, packageName))
+    .join("\n");
 }
 
 export function neighborEntries<Entry extends { path: string }>(entries: Entry[], path: string) {

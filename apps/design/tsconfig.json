@@ -1,7 +1,7 @@
 {
   "extends": [
-    "@spendgraph/config/typescript/base.json",
-    "@spendgraph/config/typescript/tests.json"
+    "@locusgraph/config/typescript/base.json",
+    "@locusgraph/config/typescript/tests.json"
   ],
   "compilerOptions": {
     "lib": ["ES2022", "DOM", "DOM.Iterable"],
