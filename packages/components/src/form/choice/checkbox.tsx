@@ -1,7 +1,7 @@
 "use client";
 
+import { Checkmark as CheckIcon, Subtract as MinusIcon } from "@carbon/icons-react";
 import { cn } from "cn";
-import { CheckIcon, MinusIcon } from "lucide-react";
 import * as CheckboxPrimitive from "radix-ui/checkbox";
 import * as React from "react";
 

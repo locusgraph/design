@@ -1,5 +1,5 @@
+import { Checkmark as Check, Copy } from "@carbon/icons-react";
 import { Button } from "@locusgraph/components";
-import { Check, Copy } from "lucide-react";
 import { useState } from "react";
 import type { ColorValue, PaletteColor } from "./palette";
 

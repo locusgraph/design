@@ -1,4 +1,4 @@
-import { CheckIcon, XIcon } from "lucide-react";
+import { Checkmark as CheckIcon, Close as XIcon } from "@carbon/icons-react";
 import type { ReactNode } from "react";
 import type { DecidedAt } from "../approval/types";
 

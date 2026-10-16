@@ -1,7 +1,11 @@
 "use client";
 
+import {
+  Checkmark as CheckIcon,
+  ChevronDown as ChevronDownIcon,
+  ChevronUp as ChevronUpIcon,
+} from "@carbon/icons-react";
 import { cn } from "cn";
-import { CheckIcon, ChevronDownIcon, ChevronUpIcon } from "lucide-react";
 import * as SelectPrimitive from "radix-ui/select";
 import * as React from "react";
 

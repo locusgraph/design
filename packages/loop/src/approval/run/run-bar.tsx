@@ -1,5 +1,10 @@
+import {
+  Pause as PauseIcon,
+  Play as PlayIcon,
+  SkipForward as SkipForwardIcon,
+  StopFilledAlt as SquareIcon,
+} from "@carbon/icons-react";
 import { Button, cn } from "@locusgraph/components";
-import { PauseIcon, PlayIcon, SkipForwardIcon, SquareIcon } from "lucide-react";
 import { StatusDot, type StatusTone } from "../../shared/status-dot";
 import type { RunBarStatus } from "../types";
 

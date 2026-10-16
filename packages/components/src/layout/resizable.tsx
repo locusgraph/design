@@ -1,7 +1,7 @@
 "use client";
 
+import { Draggable as GripVerticalIcon } from "@carbon/icons-react";
 import { cn } from "cn";
-import { GripVerticalIcon } from "lucide-react";
 import * as ResizablePrimitive from "react-resizable-panels";
 
 function ResizablePanelGroup({ className, ...props }: ResizablePrimitive.GroupProps) {

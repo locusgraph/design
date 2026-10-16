@@ -1,8 +1,8 @@
 "use client";
 
+import { Search as SearchIcon } from "@carbon/icons-react";
 import { Command as CommandPrimitive } from "cmdk";
 import { cn } from "cn";
-import { SearchIcon } from "lucide-react";
 import * as React from "react";
 
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "../dialog";

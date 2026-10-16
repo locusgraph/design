@@ -1,6 +1,6 @@
+import { Download as DownloadIcon } from "@carbon/icons-react";
 import { Button } from "@locusgraph/components";
 import { Canvas, type CanvasVersion, Code } from "@locusgraph/loop";
-import { DownloadIcon } from "lucide-react";
 import { useState } from "react";
 import { defineDemo, select } from "../../../registry/define-demo";
 

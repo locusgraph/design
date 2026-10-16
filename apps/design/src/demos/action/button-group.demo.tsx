@@ -1,11 +1,17 @@
 import {
+  ChevronDown as ChevronDownIcon,
+  Copy as CopyIcon,
+  Subtract as MinusIcon,
+  Add as PlusIcon,
+  Renew as RefreshCwIcon,
+} from "@carbon/icons-react";
+import {
   Button,
   ButtonGroup,
   ButtonGroupSeparator,
   ButtonGroupText,
   Input,
 } from "@locusgraph/components";
-import { ChevronDownIcon, CopyIcon, MinusIcon, PlusIcon, RefreshCwIcon } from "lucide-react";
 import { formatProp } from "../../registry/control-values";
 import { defineDemo, select } from "../../registry/define-demo";
 

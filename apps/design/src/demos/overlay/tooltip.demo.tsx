@@ -1,3 +1,4 @@
+import { Copy as CopyIcon, Information as InfoIcon } from "@carbon/icons-react";
 import {
   Button,
   Kbd,
@@ -6,7 +7,6 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@locusgraph/components";
-import { CopyIcon, InfoIcon } from "lucide-react";
 import { formatProp } from "../../registry/control-values";
 import { defineDemo, select, text, toggle } from "../../registry/define-demo";
 

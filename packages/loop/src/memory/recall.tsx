@@ -1,6 +1,9 @@
+import {
+  ChevronRight as ChevronRightIcon,
+  RecentlyViewed as HistoryIcon,
+} from "@carbon/icons-react";
 import { Collapsible, CollapsibleContent, CollapsibleTrigger, cn } from "@locusgraph/components";
 import { pluralize } from "@locusgraph/utils";
-import { ChevronRightIcon, HistoryIcon } from "lucide-react";
 import type { MemoryRef } from "../types";
 import {
   chevronClass,

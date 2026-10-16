@@ -1,5 +1,10 @@
+import {
+  Checkmark as CheckIcon,
+  InProgress as LoaderCircleIcon,
+  Subtract as MinusIcon,
+  Close as XIcon,
+} from "@carbon/icons-react";
 import { cn } from "@locusgraph/components";
-import { CheckIcon, LoaderCircleIcon, MinusIcon, XIcon } from "lucide-react";
 import type { StepStatus } from "../../types";
 
 export const stepStatusLabels: Record<StepStatus, string> = {
@@ -20,9 +25,9 @@ const stepIconFrames: Record<StepStatus, string> = {
 
 function StepGlyph({ status }: { status: StepStatus }) {
   if (status === "running") return <LoaderCircleIcon className="size-4 motion-safe:animate-spin" />;
-  if (status === "done") return <CheckIcon className="size-2.5" strokeWidth={3} />;
-  if (status === "failed") return <XIcon className="size-2.5" strokeWidth={3} />;
-  if (status === "skipped") return <MinusIcon className="size-2.5" strokeWidth={3} />;
+  if (status === "done") return <CheckIcon className="size-2.5" />;
+  if (status === "failed") return <XIcon className="size-2.5" />;
+  if (status === "skipped") return <MinusIcon className="size-2.5" />;
   return null;
 }
 

@@ -1,6 +1,6 @@
+import { Checkmark as CheckIcon } from "@carbon/icons-react";
 import { DropdownMenuRadioItem } from "@locusgraph/components";
 import { formatMicroUsd } from "@locusgraph/utils";
-import { CheckIcon } from "lucide-react";
 import { formatTokensShort } from "./usage-totals";
 
 export type ModelSpeed = "fast" | "balanced" | "deep";

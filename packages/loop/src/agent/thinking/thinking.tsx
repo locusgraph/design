@@ -1,7 +1,7 @@
 "use client";
 
+import { Idea as BrainIcon, ChevronRight as ChevronRightIcon } from "@carbon/icons-react";
 import { Collapsible, CollapsibleContent, CollapsibleTrigger, cn } from "@locusgraph/components";
-import { BrainIcon, ChevronRightIcon } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import type { ReasoningPart } from "../../types";
 import { firstLineOf, thoughtDurationLabel } from "./thought-duration";

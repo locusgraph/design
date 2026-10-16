@@ -1,8 +1,8 @@
 "use client";
 
 import { Combobox as ComboboxPrimitive } from "@base-ui/react";
+import { Close as XIcon } from "@carbon/icons-react";
 import { cn } from "cn";
-import { XIcon } from "lucide-react";
 import * as React from "react";
 
 import { Button } from "../../../action/button";

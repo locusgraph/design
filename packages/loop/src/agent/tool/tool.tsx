@@ -1,7 +1,7 @@
 "use client";
 
+import { ChevronRight as ChevronRightIcon, Tools as WrenchIcon } from "@carbon/icons-react";
 import { Collapsible, CollapsibleContent, CollapsibleTrigger, cn } from "@locusgraph/components";
-import { ChevronRightIcon, WrenchIcon } from "lucide-react";
 import { useState } from "react";
 import { type ToolPart, toolNameOf } from "../../types";
 import { JsonBlock } from "./json-block";

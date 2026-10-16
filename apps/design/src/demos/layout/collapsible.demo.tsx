@@ -1,10 +1,13 @@
 import {
+  ChevronDown as ChevronDownIcon,
+  ChevronSort as ChevronsUpDownIcon,
+} from "@carbon/icons-react";
+import {
   Button,
   Collapsible,
   CollapsibleContent,
   CollapsibleTrigger,
 } from "@locusgraph/components";
-import { ChevronDownIcon, ChevronsUpDownIcon } from "lucide-react";
 import { formatProp } from "../../registry/control-values";
 import { defineDemo, text, toggle } from "../../registry/define-demo";
 

@@ -1,5 +1,5 @@
+import { Checkmark as CheckIcon, Locked as LockIcon, Close as XIcon } from "@carbon/icons-react";
 import { Button, Checkbox, cn } from "@locusgraph/components";
-import { CheckIcon, LockIcon, XIcon } from "lucide-react";
 import type { RiskLevel } from "../../types";
 import { riskLabels } from "../shared/risk-badge";
 import { formatWaiting, isoOf } from "../shared/time";

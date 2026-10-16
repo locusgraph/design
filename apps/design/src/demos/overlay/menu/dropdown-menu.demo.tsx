@@ -1,4 +1,11 @@
 import {
+  Purchase as CreditCardIcon,
+  Password as KeyRoundIcon,
+  Logout as LogOutIcon,
+  OverflowMenuHorizontal as MoreHorizontalIcon,
+  User as UserIcon,
+} from "@carbon/icons-react";
+import {
   Button,
   DropdownMenu,
   DropdownMenuCheckboxItem,
@@ -15,13 +22,6 @@ import {
   DropdownMenuSubTrigger,
   DropdownMenuTrigger,
 } from "@locusgraph/components";
-import {
-  CreditCardIcon,
-  KeyRoundIcon,
-  LogOutIcon,
-  MoreHorizontalIcon,
-  UserIcon,
-} from "lucide-react";
 import { formatProp } from "../../../registry/control-values";
 import { defineDemo, select, toggle } from "../../../registry/define-demo";
 

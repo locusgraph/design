@@ -1,4 +1,12 @@
 import {
+  Warning as AlertCircleIcon,
+  DataTable as FileSpreadsheetIcon,
+  Document as FileTextIcon,
+  Image as ImageIcon,
+  Reset as RotateCcwIcon,
+  Close as XIcon,
+} from "@carbon/icons-react";
+import {
   Attachment,
   AttachmentAction,
   AttachmentActions,
@@ -9,14 +17,6 @@ import {
   AttachmentTitle,
   Spinner,
 } from "@locusgraph/components";
-import {
-  AlertCircleIcon,
-  FileSpreadsheetIcon,
-  FileTextIcon,
-  ImageIcon,
-  RotateCcwIcon,
-  XIcon,
-} from "lucide-react";
 import { formatProp } from "../../../registry/control-values";
 import { defineDemo, select } from "../../../registry/define-demo";
 

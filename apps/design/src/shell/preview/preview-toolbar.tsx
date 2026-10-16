@@ -1,3 +1,4 @@
+import { Reset as RotateCcwIcon } from "@carbon/icons-react";
 import {
   Button,
   cn,
@@ -7,7 +8,6 @@ import {
   TooltipContent,
   TooltipTrigger,
 } from "@locusgraph/components";
-import { RotateCcwIcon } from "lucide-react";
 import { type PreviewBackground, setParam } from "../../url-state";
 
 export const previewBackgroundClass: Record<PreviewBackground, string> = {

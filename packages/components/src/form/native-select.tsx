@@ -1,5 +1,5 @@
+import { ChevronDown as ChevronDownIcon } from "@carbon/icons-react";
 import { cn } from "cn";
-import { ChevronDownIcon } from "lucide-react";
 import * as React from "react";
 
 function NativeSelect({

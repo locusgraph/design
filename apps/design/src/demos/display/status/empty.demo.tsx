@@ -1,4 +1,9 @@
 import {
+  Password as KeyRoundIcon,
+  Add as PlusIcon,
+  Receipt as ReceiptIcon,
+} from "@carbon/icons-react";
+import {
   Avatar,
   AvatarFallback,
   Button,
@@ -9,7 +14,6 @@ import {
   EmptyMedia,
   EmptyTitle,
 } from "@locusgraph/components";
-import { KeyRoundIcon, PlusIcon, ReceiptIcon } from "lucide-react";
 import { defineDemo, text, toggle } from "../../../registry/define-demo";
 
 function NoInvoices() {

@@ -1,8 +1,8 @@
 "use client";
 
 import { Combobox as ComboboxPrimitive } from "@base-ui/react";
+import { ChevronDown as ChevronDownIcon, Close as XIcon } from "@carbon/icons-react";
 import { cn } from "cn";
-import { ChevronDownIcon, XIcon } from "lucide-react";
 import { InputGroup, InputGroupAddon, InputGroupButton, InputGroupInput } from "../../input-group";
 
 const Combobox = ComboboxPrimitive.Root;

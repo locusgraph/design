@@ -1,6 +1,6 @@
+import { ChevronRight as ChevronRightIcon } from "@carbon/icons-react";
 import { Collapsible, CollapsibleContent, CollapsibleTrigger, cn } from "@locusgraph/components";
 import { pluralize } from "@locusgraph/utils";
-import { ChevronRightIcon } from "lucide-react";
 import type { Citation } from "../types";
 import {
   chevronClass,

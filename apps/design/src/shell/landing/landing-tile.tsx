@@ -1,5 +1,5 @@
+import { ArrowRight as ArrowRightIcon } from "@carbon/icons-react";
 import { cn, RuleGridCell } from "@locusgraph/components";
-import { ArrowRightIcon } from "lucide-react";
 import type * as React from "react";
 import { PlaygroundLink } from "../nav/playground-nav";
 
@@ -11,6 +11,7 @@ type LandingTileProps = {
   preview: React.ReactNode;
   className?: string;
   previewClassName?: string;
+  external?: boolean;
 };
 
 export function LandingTile({
@@ -21,7 +22,9 @@ export function LandingTile({
   preview,
   className,
   previewClassName,
+  external = false,
 }: LandingTileProps) {
+  const Link = external ? "a" : PlaygroundLink;
   return (
     <RuleGridCell className={cn("gap-0 p-0", className)}>
       <div
@@ -32,7 +35,7 @@ export function LandingTile({
       >
         {preview}
       </div>
-      <PlaygroundLink
+      <Link
         href={href}
         className="group flex items-end justify-between gap-4 border-t px-6 py-4 outline-none hover:bg-accent/50 focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-ring"
       >
@@ -47,7 +50,7 @@ export function LandingTile({
             className="size-3.5 motion-safe:transition-transform group-hover:translate-x-0.5"
           />
         </span>
-      </PlaygroundLink>
+      </Link>
     </RuleGridCell>
   );
 }

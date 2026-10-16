@@ -1,4 +1,4 @@
-import { HomeIcon, KeyRoundIcon } from "lucide-react";
+import { Home as HomeIcon, Password as KeyRoundIcon } from "@carbon/icons-react";
 import type * as React from "react";
 import { renderToStaticMarkup } from "react-dom/server";
 import { describe, expect, it } from "vitest";

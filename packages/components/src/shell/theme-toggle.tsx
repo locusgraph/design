@@ -1,6 +1,6 @@
 "use client";
 
-import { MoonIcon, SunIcon } from "lucide-react";
+import { Moon as MoonIcon, Sun as SunIcon } from "@carbon/icons-react";
 import { Button } from "../action/button";
 
 type Theme = "light" | "dark";

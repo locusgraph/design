@@ -1,5 +1,5 @@
+import { Warning as CircleAlert } from "@carbon/icons-react";
 import { Alert, AlertDescription, AlertTitle, Button } from "@locusgraph/components";
-import { CircleAlert } from "lucide-react";
 import { defineDemo, select } from "../../../registry/define-demo";
 import { RulePair, voiceViews } from "./voice/rule-pair";
 import { voiceRules } from "./voice/voice-rules";

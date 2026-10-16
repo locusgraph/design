@@ -1,5 +1,5 @@
+import { Edit as SquarePenIcon } from "@carbon/icons-react";
 import { Button, cn } from "@locusgraph/components";
-import { SquarePenIcon } from "lucide-react";
 import { useId, useMemo, useState } from "react";
 import {
   ApprovalPanel,

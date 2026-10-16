@@ -11,6 +11,7 @@
     "deploy": "cf deploy"
   },
   "dependencies": {
+    "@carbon/icons-react": "catalog:",
     "@locusgraph/blocks": "workspace:*",
     "@locusgraph/brand": "workspace:*",
     "@locusgraph/components": "workspace:*",
@@ -19,7 +20,6 @@
     "@locusgraph/tokens": "workspace:*",
     "@shikijs/langs": "catalog:",
     "@shikijs/themes": "catalog:",
-    "lucide-react": "catalog:",
     "react": "catalog:",
     "react-dom": "catalog:",
     "react-hook-form": "catalog:",

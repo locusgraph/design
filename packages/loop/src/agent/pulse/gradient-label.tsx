@@ -1,5 +1,5 @@
+import { AiGenerate as SparkleIcon } from "@carbon/icons-react";
 import { cn } from "@locusgraph/components";
-import { SparkleIcon } from "lucide-react";
 import type { PulseTone } from "./pulse-tone";
 import { useLoopAnimation } from "./use-loop-animation";
 

@@ -1,5 +1,5 @@
+import { ArrowLeft as ArrowLeftIcon, ArrowRight as ArrowRightIcon } from "@carbon/icons-react";
 import { Button } from "@locusgraph/components";
-import { ArrowLeftIcon, ArrowRightIcon } from "lucide-react";
 import type { DemoIndexEntry } from "../../registry/load-demos";
 import { PlaygroundLink } from "../nav/playground-nav";
 

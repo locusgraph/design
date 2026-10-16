@@ -1,5 +1,6 @@
 "use client";
 
+import { ArrowDown as ArrowDownIcon } from "@carbon/icons-react";
 import {
   MessageScroller as MessageScrollerPrimitive,
   useMessageScroller,
@@ -7,7 +8,6 @@ import {
   useMessageScrollerVisibility,
 } from "@shadcn/react/message-scroller";
 import { cn } from "cn";
-import { ArrowDownIcon } from "lucide-react";
 import * as React from "react";
 
 import { Button } from "../../action/button";

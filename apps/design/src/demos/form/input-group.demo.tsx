@@ -1,3 +1,4 @@
+import { Copy as CopyIcon, Search as SearchIcon } from "@carbon/icons-react";
 import {
   InputGroup,
   InputGroupAddon,
@@ -6,7 +7,6 @@ import {
   InputGroupText,
   InputGroupTextarea,
 } from "@locusgraph/components";
-import { CopyIcon, SearchIcon } from "lucide-react";
 import { defineDemo, select, text, toggle } from "../../registry/define-demo";
 
 const aligns = ["inline-start", "inline-end"] as const;

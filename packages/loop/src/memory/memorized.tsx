@@ -1,6 +1,10 @@
+import {
+  BookmarkAdd as BookmarkPlusIcon,
+  Checkmark as CheckIcon,
+  Undo as Undo2Icon,
+} from "@carbon/icons-react";
 import { Button, cn } from "@locusgraph/components";
 import { pluralize } from "@locusgraph/utils";
-import { BookmarkPlusIcon, CheckIcon, Undo2Icon } from "lucide-react";
 import { StatusDot } from "../shared/status-dot";
 import { eyebrowClass, ruledListClass } from "./shared/disclosure";
 

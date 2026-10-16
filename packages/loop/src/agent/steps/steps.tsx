@@ -1,5 +1,5 @@
+import { ListChecked as ListChecksIcon } from "@carbon/icons-react";
 import { cn } from "@locusgraph/components";
-import { ListChecksIcon } from "lucide-react";
 import { ApprovalPanel, PanelHeader, type PanelTone } from "../../shared/panel";
 import type { AgentStep, StepStatus } from "../../types";
 import { StepIcon, stepStatusLabels } from "./step-icon";

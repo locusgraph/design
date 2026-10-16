@@ -1,6 +1,6 @@
+import { ArrowRight as ArrowRightIcon, ListChecked as ListChecksIcon } from "@carbon/icons-react";
 import { Button } from "@locusgraph/components";
 import { pluralize } from "@locusgraph/utils";
-import { ArrowRightIcon, ListChecksIcon } from "lucide-react";
 import { useEffect, useId, useState } from "react";
 import {
   ApprovalPanel,

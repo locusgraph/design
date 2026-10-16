@@ -1,5 +1,11 @@
+import {
+  Notification as BellIcon,
+  TextBold as BoldIcon,
+  TextItalic as ItalicIcon,
+  Star as StarIcon,
+  TextUnderline as UnderlineIcon,
+} from "@carbon/icons-react";
 import { Toggle } from "@locusgraph/components";
-import { BellIcon, BoldIcon, ItalicIcon, StarIcon, UnderlineIcon } from "lucide-react";
 import { formatProp } from "../../registry/control-values";
 import { defineDemo, select, text, toggle } from "../../registry/define-demo";
 

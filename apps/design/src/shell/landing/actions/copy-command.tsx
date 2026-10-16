@@ -1,8 +1,8 @@
+import { Checkmark as CheckIcon, Copy as CopyIcon } from "@carbon/icons-react";
 import { Button } from "@locusgraph/components";
-import { CheckIcon, CopyIcon } from "lucide-react";
 import { useState } from "react";
 
-export function CopyCommand({ command }: { command: string }) {
+export function CopyCommand({ command, prompt = true }: { command: string; prompt?: boolean }) {
   const [copied, setCopied] = useState(false);
   const copy = async () => {
     try {
@@ -14,11 +14,13 @@ export function CopyCommand({ command }: { command: string }) {
     }
   };
   return (
-    <div className="flex h-9 min-w-0 items-center gap-2 bg-card pr-1 pl-4 font-mono text-[13px] ring-1 ring-border">
-      <span aria-hidden className="text-muted-foreground">
-        $
-      </span>
-      <span className="min-w-0 truncate">{command}</span>
+    <div className="flex h-9 min-w-0 items-center gap-2 bg-muted/40 pr-1 pl-4 font-mono text-[13px]">
+      {prompt && (
+        <span aria-hidden className="text-muted-foreground">
+          $
+        </span>
+      )}
+      <span className="min-w-0 overflow-x-auto whitespace-nowrap">{command}</span>
       <Button
         size="icon-xs"
         variant="ghost"

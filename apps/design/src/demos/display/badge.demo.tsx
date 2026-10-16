@@ -1,5 +1,5 @@
+import { Checkmark as CheckIcon } from "@carbon/icons-react";
 import { Badge } from "@locusgraph/components";
-import { CheckIcon } from "lucide-react";
 import { formatProp } from "../../registry/control-values";
 import { defineDemo, select, text } from "../../registry/define-demo";
 

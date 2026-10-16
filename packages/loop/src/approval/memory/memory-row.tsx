@@ -1,5 +1,5 @@
+import { ShieldAlert as ShieldAlertIcon } from "@carbon/icons-react";
 import { cn, Textarea } from "@locusgraph/components";
-import { ShieldAlertIcon } from "lucide-react";
 import type { ProposedMemory } from "../types";
 import type { MemoryChoice, MemoryDraft } from "./memory-choices";
 

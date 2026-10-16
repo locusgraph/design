@@ -1,7 +1,7 @@
 "use client";
 
+import { SidePanelOpen as PanelLeftIcon } from "@carbon/icons-react";
 import { cn } from "cn";
-import { PanelLeftIcon } from "lucide-react";
 import type * as React from "react";
 import { Button } from "../../action/button";
 import {

@@ -1,5 +1,5 @@
+import { Roadmap as ChartNoAxesGanttIcon } from "@carbon/icons-react";
 import { formatCount, formatMicroUsd, pluralize } from "@locusgraph/utils";
-import { ChartNoAxesGanttIcon } from "lucide-react";
 import { ApprovalPanel, PanelHeader } from "../shared/panel";
 import { PanelEmpty } from "../shared/panel-empty";
 import { type CostStep, isWastedStep, StepCostRow } from "./shared/step-cost-row";

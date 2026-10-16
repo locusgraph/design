@@ -1,4 +1,7 @@
-import { ChevronLeftIcon, ChevronRightIcon } from "lucide-react";
+import {
+  ChevronLeft as ChevronLeftIcon,
+  ChevronRight as ChevronRightIcon,
+} from "@carbon/icons-react";
 import { ActionButton } from "./action-button";
 
 export type MessageBranch = { index: number; count: number };

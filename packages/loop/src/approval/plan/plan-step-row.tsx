@@ -1,5 +1,10 @@
+import {
+  ArrowDown as ArrowDownIcon,
+  ArrowUp as ArrowUpIcon,
+  Edit as PencilIcon,
+  TrashCan as Trash2Icon,
+} from "@carbon/icons-react";
 import { Button, cn } from "@locusgraph/components";
-import { ArrowDownIcon, ArrowUpIcon, PencilIcon, Trash2Icon } from "lucide-react";
 import type { PlanStepDraft } from "../types";
 
 export type StepAction = "up" | "down" | "remove";

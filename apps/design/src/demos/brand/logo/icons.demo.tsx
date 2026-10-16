@@ -1,6 +1,6 @@
+import { Download as DownloadIcon } from "@carbon/icons-react";
 import { LocusGraphIcon, type LocusGraphIconVariant } from "@locusgraph/brand";
 import { Button } from "@locusgraph/components";
-import { DownloadIcon } from "lucide-react";
 import { useRef } from "react";
 import { defineDemo, select } from "../../../registry/define-demo";
 import { CodeBlock } from "../../../shell/preview/code-block";

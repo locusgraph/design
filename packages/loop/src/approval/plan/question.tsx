@@ -1,5 +1,8 @@
+import {
+  ArrowRight as ArrowRightIcon,
+  Help as MessageCircleQuestionIcon,
+} from "@carbon/icons-react";
 import { Button, Input, Textarea } from "@locusgraph/components";
-import { ArrowRightIcon, MessageCircleQuestionIcon } from "lucide-react";
 import { useId, useState } from "react";
 import {
   ApprovalPanel,

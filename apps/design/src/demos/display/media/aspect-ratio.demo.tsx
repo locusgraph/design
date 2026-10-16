@@ -1,5 +1,5 @@
+import { Play as PlayIcon } from "@carbon/icons-react";
 import { AspectRatio } from "@locusgraph/components";
-import { PlayIcon } from "lucide-react";
 import { defineDemo, select } from "../../../registry/define-demo";
 
 const ratios = ["16 / 9", "4 / 3", "1 / 1", "21 / 9"] as const;

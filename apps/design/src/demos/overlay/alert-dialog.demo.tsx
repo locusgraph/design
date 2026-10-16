@@ -1,3 +1,4 @@
+import { Password as KeyRoundIcon } from "@carbon/icons-react";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -11,7 +12,6 @@ import {
   AlertDialogTrigger,
   Button,
 } from "@locusgraph/components";
-import { KeyRoundIcon } from "lucide-react";
 import { formatProp } from "../../registry/control-values";
 import { defineDemo, select, text, toggle } from "../../registry/define-demo";
 

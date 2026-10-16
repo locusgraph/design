@@ -1,16 +1,6 @@
 import { LocusGraphMark } from "@locusgraph/brand";
-import { Badge, Button, Input, Switch } from "@locusgraph/components";
+import { Badge, Button, Input, SkeletonAvatar, SkeletonText, Switch } from "@locusgraph/components";
 import { Pulse } from "@locusgraph/loop";
-
-const swatches = [
-  "bg-s1",
-  "bg-s2",
-  "bg-s3",
-  "bg-good",
-  "bg-warn",
-  "bg-destructive",
-  "bg-foreground",
-];
 
 export function ComponentsPreview() {
   return (
@@ -42,34 +32,63 @@ export function BrandPreview() {
   );
 }
 
-export function ColorsPreview() {
+const sidebarLines = ["w-16", "w-20", "w-14", "w-18"];
+
+export function ShellsPreview() {
   return (
-    <div aria-hidden className="flex h-28 items-end gap-2">
-      {swatches.map((swatch, index) => (
-        <span
-          key={swatch}
-          className={`w-4 ${swatch}`}
-          style={{ height: `${40 + ((index * 23) % 60)}%` }}
-        />
-      ))}
+    <div aria-hidden className="flex h-36 w-full max-w-64 ring-1 ring-border">
+      <div className="flex w-20 flex-col gap-2 border-r p-3">
+        <span className="size-3 rotate-45 bg-foreground" />
+        {sidebarLines.map((width, index) => (
+          <span
+            key={width}
+            className={`h-1.5 ${width} max-w-full ${index === 1 ? "bg-foreground/60" : "bg-skeleton"}`}
+          />
+        ))}
+      </div>
+      <div className="flex flex-1 flex-col">
+        <div className="flex h-7 items-center justify-end gap-1.5 border-b px-3">
+          <span className="size-2.5 rounded-full bg-skeleton" />
+          <span className="h-1.5 w-8 bg-skeleton" />
+        </div>
+        <div className="flex flex-1 flex-col gap-2 p-3">
+          <span className="h-2 w-20 bg-foreground/60" />
+          <span className="h-1.5 w-full bg-skeleton" />
+          <span className="h-1.5 w-3/4 bg-skeleton" />
+        </div>
+      </div>
     </div>
   );
 }
 
-export function TypePreview() {
+export function SkeletonsPreview() {
   return (
-    <div className="flex w-full max-w-xs flex-col gap-1.5">
-      <span className="font-heading text-3xl font-semibold tracking-[-0.03em]">Archivo</span>
-      <span className="text-lg">Inter for every word you read</span>
-      <span className="font-mono text-sm text-muted-foreground">Fira Code · $0.0283</span>
+    <div className="flex w-full max-w-64 items-start gap-3">
+      <SkeletonAvatar />
+      <SkeletonText lines={3} className="flex-1" />
     </div>
   );
 }
 
-export function PatternsPreview() {
+const designIndexLines = [
+  { text: "# Locus Design", tone: "text-foreground" },
+  { text: "## Loop (@locusgraph/loop)", tone: "text-foreground/80" },
+  { text: "- [Approval](…/approval.md)", tone: "text-muted-foreground" },
+  { text: "- [Question](…/question.md)", tone: "text-muted-foreground" },
+  { text: "- [Composer](…/composer.md)", tone: "text-muted-foreground" },
+];
+
+export function AgentsPreview() {
   return (
-    <div className="brand-grid flex h-36 w-full items-center justify-center ring-1 ring-border">
-      <span className="eyebrow bg-background px-2">brand-grid</span>
+    <div aria-hidden className="flex w-full max-w-72 flex-col gap-2 font-mono text-xs">
+      <span className="eyebrow">GET /DESIGN.md</span>
+      <div className="flex flex-col gap-1 bg-muted/40 px-3 py-2.5">
+        {designIndexLines.map((line) => (
+          <span key={line.text} className={`truncate ${line.tone}`}>
+            {line.text}
+          </span>
+        ))}
+      </div>
     </div>
   );
 }

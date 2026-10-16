@@ -44,8 +44,8 @@
     "react-dom": "^19.2.0"
   },
   "dependencies": {
-    "@locusgraph/utils": "workspace:*",
-    "lucide-react": "catalog:"
+    "@carbon/icons-react": "catalog:",
+    "@locusgraph/utils": "workspace:*"
   },
   "devDependencies": {
     "@locusgraph/components": "workspace:*",

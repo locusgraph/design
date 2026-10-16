@@ -1,5 +1,10 @@
+import {
+  Warning as AlertCircleIcon,
+  WarningAlt as AlertTriangleIcon,
+  CheckmarkOutline as CheckCircle2Icon,
+  Information as InfoIcon,
+} from "@carbon/icons-react";
 import { Alert, AlertDescription, AlertTitle, Button } from "@locusgraph/components";
-import { AlertCircleIcon, AlertTriangleIcon, CheckCircle2Icon, InfoIcon } from "lucide-react";
 import { formatProp } from "../../../registry/control-values";
 import { defineDemo, select, text, toggle } from "../../../registry/define-demo";
 
