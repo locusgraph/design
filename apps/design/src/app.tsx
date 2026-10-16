@@ -12,14 +12,13 @@ import { ShellsPage } from "./shell/blocks/shells-page";
 import { InstallationPage, installationSections } from "./shell/guides/installation-page";
 import { HomePage, homeSections } from "./shell/home-page";
 import { HeaderActions } from "./shell/nav/header-actions";
+import { libraries, libraryOfPath } from "./shell/nav/libraries";
 import { PlaygroundLink, playgroundNavGroups } from "./shell/nav/playground-nav";
 import { SearchDialog, useSearchShortcut } from "./shell/nav/search-dialog";
 import { DemoPage } from "./shell/page/demo-page";
 import { usePageDocs } from "./shell/page/page-docs";
 import { useDocumentTheme } from "./shell/theme";
 import { readShellSettings, useLocation } from "./url-state";
-
-const navGroups = playgroundNavGroups();
 
 const brand = {
   name: "locus",
@@ -29,7 +28,7 @@ const brand = {
 };
 
 const headerLinks = [
-  { title: "Components", href: "/" },
+  ...libraries.map(({ title, href }) => ({ title, href })),
   { title: "Shells", href: "/shells" },
 ];
 
@@ -46,8 +45,11 @@ export function App() {
   const activeHref = `/${path}`;
   const isShellsPage = path === "shells";
   const isInstallationPage = path === "installation";
+  const library = libraryOfPath(path);
+  const navGroups = playgroundNavGroups(library);
   const pageSections =
-    docs?.sections ?? (isInstallationPage ? installationSections : isDemoPage ? [] : homeSections);
+    docs?.sections ??
+    (isInstallationPage ? installationSections : isDemoPage ? [] : homeSections(library));
 
   return (
     <>
@@ -56,7 +58,7 @@ export function App() {
           <DocsHeader
             brand={brand}
             links={headerLinks}
-            activeHref={isShellsPage ? "/shells" : "/"}
+            activeHref={isShellsPage ? "/shells" : library.href}
             linkComponent={PlaygroundLink}
             mobileNav={
               <DocsNavList
@@ -79,7 +81,7 @@ export function App() {
           )
         }
         aside={
-          isShellsPage ? undefined : (
+          isShellsPage || pageSections.length === 0 ? undefined : (
             <OnThisPage key={entry?.path ?? path} sections={pageSections} />
           )
         }
@@ -99,7 +101,7 @@ export function App() {
         ) : isDemoPage ? (
           <div aria-busy="true" className="min-h-svh" />
         ) : (
-          <HomePage />
+          <HomePage library={library} />
         )}
       </DocsShell>
       <SearchDialog open={searchOpen} onOpenChange={setSearchOpen} />

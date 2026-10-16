@@ -1,10 +1,10 @@
 import type { DocsNavGroup } from "@locusgraph/components";
 import type * as React from "react";
-import { demoIndexByTitle } from "../../registry/load-demos";
 import { navigate } from "../../url-state";
+import { type Library, libraryEntries } from "./libraries";
 
-export function playgroundNavGroups(): DocsNavGroup[] {
-  const components = demoIndexByTitle.map((entry) => ({
+export function playgroundNavGroups(library: Library): DocsNavGroup[] {
+  const items = libraryEntries(library.id).map((entry) => ({
     title: entry.title,
     href: `/${entry.path}`,
   }));
@@ -17,7 +17,7 @@ export function playgroundNavGroups(): DocsNavGroup[] {
         { title: "Shells", href: "/shells" },
       ],
     },
-    { label: "Components", items: components },
+    { label: library.title, items },
   ];
 }
 
