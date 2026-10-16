@@ -17,8 +17,6 @@ const demoSources = import.meta.glob<string>("../demos/**/*.demo.tsx", {
   import: "default",
 });
 
-// Where the title is not the file name in title case. A test checks every
-// demo's title against demoTitleFromPath, so a new mismatch fails there.
 const titleOverrides: Record<string, string> = {
   "input-otp": "Input OTP",
 };

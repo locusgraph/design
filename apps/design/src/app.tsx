@@ -11,6 +11,7 @@ import { findDemoIndexEntry, useDemoEntry } from "./registry/load-demos";
 import { ShellsPage } from "./shell/blocks/shells-page";
 import { InstallationPage, installationSections } from "./shell/guides/installation-page";
 import { HomePage, homeSections } from "./shell/home-page";
+import { LandingPage } from "./shell/landing/landing-page";
 import { HeaderActions } from "./shell/nav/header-actions";
 import { libraries, libraryOfPath } from "./shell/nav/libraries";
 import { PlaygroundLink, playgroundNavGroups } from "./shell/nav/playground-nav";
@@ -44,6 +45,8 @@ export function App() {
   const docs = usePageDocs(entry);
   const activeHref = `/${path}`;
   const isShellsPage = path === "shells";
+  const isLandingPage = path === "";
+  const isFullWidth = isShellsPage || isLandingPage;
   const isInstallationPage = path === "installation";
   const library = libraryOfPath(path);
   const navGroups = playgroundNavGroups(library);
@@ -58,7 +61,7 @@ export function App() {
           <DocsHeader
             brand={brand}
             links={headerLinks}
-            activeHref={isShellsPage ? "/shells" : library.href}
+            activeHref={isShellsPage ? "/shells" : isLandingPage ? "/" : library.href}
             linkComponent={PlaygroundLink}
             mobileNav={
               <DocsNavList
@@ -72,7 +75,7 @@ export function App() {
           </DocsHeader>
         }
         sidebar={
-          isShellsPage ? undefined : (
+          isFullWidth ? undefined : (
             <DocsSidebar
               groups={navGroups}
               activeHref={activeHref}
@@ -81,14 +84,16 @@ export function App() {
           )
         }
         aside={
-          isShellsPage ? undefined : pageSections.length === 0 ? (
+          isFullWidth ? undefined : pageSections.length === 0 ? (
             <span aria-hidden="true" />
           ) : (
             <OnThisPage key={entry?.path ?? path} sections={pageSections} />
           )
         }
       >
-        {isShellsPage ? (
+        {isLandingPage ? (
+          <LandingPage />
+        ) : isShellsPage ? (
           <ShellsPage theme={settings.theme} />
         ) : isInstallationPage ? (
           <InstallationPage />
