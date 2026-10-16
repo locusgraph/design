@@ -1,7 +1,8 @@
 import { Button } from "@locusgraph/components";
 import { ArrowRightIcon } from "lucide-react";
 import { PlaygroundLink } from "../nav/playground-nav";
-import { CopyCommand } from "./copy-command";
+import { CopyCommand } from "./actions/copy-command";
+import { StartWithAgent } from "./actions/start-with-agent";
 
 export function LandingHero({ packageCount }: { packageCount: number }) {
   return (
@@ -14,17 +15,15 @@ export function LandingHero({ packageCount }: { packageCount: number }) {
         Square, ruled and quiet. Components, product blocks and an agent kit with the human in the
         loop, in light and dark.
       </p>
-      <div className="flex w-full flex-col gap-3 sm:w-auto sm:flex-row sm:items-center">
-        <Button asChild size="lg">
-          <PlaygroundLink href="/installation">
-            Get started
+      <div className="flex w-full flex-col gap-3 sm:w-auto sm:flex-row sm:items-start">
+        <StartWithAgent />
+        <Button asChild size="lg" variant="ghost" className="self-start">
+          <PlaygroundLink href="/components">
+            Browse components
             <ArrowRightIcon aria-hidden />
           </PlaygroundLink>
         </Button>
-        <Button asChild size="lg" variant="ghost">
-          <PlaygroundLink href="/components">Browse components</PlaygroundLink>
-        </Button>
-        <div className="sm:ml-3 sm:w-80">
+        <div className="sm:ml-3 sm:w-80 sm:pt-1">
           <CopyCommand command="pnpm add @locusgraph/components" />
         </div>
       </div>

@@ -1,0 +1,54 @@
+import type { DemoEntry } from "../registry/load-demos";
+import { libraries, libraryOfGroup } from "../shell/nav/libraries";
+
+export const siteOrigin = "https://design.locusgraph.com";
+
+const intro = `# Locus Design
+
+> The interface kit for LocusGraph: components, product blocks (\`@locusgraph/blocks\`), an agent kit with the human in the loop (\`@locusgraph/loop\`) and brand assets. React 19, Tailwind v4, Radix. Light and dark.
+
+Every page below has a Markdown version: add \`.md\` to its path. Fetch the ones you need instead of guessing props.
+
+## Install
+
+\`\`\`bash
+pnpm add @locusgraph/components @locusgraph/blocks @locusgraph/loop @locusgraph/brand
+\`\`\`
+
+\`\`\`css
+@import "tailwindcss";
+@import "@locusgraph/components/theme.css";
+@import "@locusgraph/blocks/sources.css";
+@import "@locusgraph/loop/sources.css";
+@import "@locusgraph/brand/sources.css";
+\`\`\`
+
+## House style
+
+- Containers are square (radius 0). Buttons are pills (\`rounded-full\`).
+- Group with ruled lines (\`RuleGrid\`, \`ring-1 ring-border\`, \`divide-y\`), not cards or shadows.
+- Small labels use the \`eyebrow\` class (mono, 11px, uppercase, muted).
+- One primary action per view. Color only on status: \`text-good\`, \`text-warn\`, \`text-destructive\`.
+- Use tokens (\`bg-card\`, \`bg-muted\`, \`text-muted-foreground\`, \`border-input\`), never raw hex.`;
+
+function firstSentence(text: string) {
+  const match = text.match(/^.*?[.!?](\s|$)/);
+  return (match ? match[0] : text).trim();
+}
+
+function pageLine(entry: DemoEntry) {
+  return `- [${entry.title}](${siteOrigin}/${entry.path}.md): ${firstSentence(entry.demo.description)}`;
+}
+
+function librarySection(id: string, entries: DemoEntry[]) {
+  const library = libraries.find((item) => item.id === id);
+  const own = entries.filter((entry) => libraryOfGroup(entry.group) === id);
+  if (!library || own.length === 0) return "";
+  const lines = own.sort((first, second) => first.path.localeCompare(second.path)).map(pageLine);
+  return [`## ${library.title} (\`${library.packageName}\`)`, ...lines].join("\n");
+}
+
+export function designIndex(entries: DemoEntry[]) {
+  const sections = libraries.map((library) => librarySection(library.id, entries));
+  return [intro, ...sections.filter(Boolean)].join("\n\n").concat("\n");
+}
