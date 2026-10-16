@@ -1,5 +1,5 @@
 import type * as React from "react";
-import { LocusGraphMark } from "./locusgraph-mark.js";
+import { LocusGraphMark } from "./locusgraph-mark";
 
 type LocusGraphWordmarkProps = React.ComponentProps<"span"> & {
   withMark?: boolean;
