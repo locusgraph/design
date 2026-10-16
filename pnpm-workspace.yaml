@@ -11,7 +11,6 @@ catalog:
   "@shadcn/react": ^0.3.1
   "@shikijs/langs": ^4.5.0
   "@shikijs/themes": ^4.5.0
-  "@spendgraph/config": ^0.14.0
   "@tailwindcss/vite": ^4.3.3
   "@types/node": ^22.0.0
   "@types/react": ^19.2.0
@@ -39,5 +38,3 @@ catalog:
   vite: ^8.3.4
   vitest: ^5.0.3
 
-minimumReleaseAgeExclude:
-  - '@spendgraph/config@0.14.0'

@@ -7,7 +7,7 @@
     "prepare": "git config core.hooksPath .githooks || true",
     "build": "pnpm -r --sort build",
     "dev": "pnpm --filter @locusgraph/design dev",
-    "typecheck": "tsc -p tsconfig.json && pnpm --filter @locusgraph/components typecheck && pnpm --filter @locusgraph/design typecheck",
+    "typecheck": "tsc -p tsconfig.json && pnpm -r --filter './packages/*' --filter './apps/*' typecheck",
     "lint": "biome check .",
     "format": "biome check --write .",
     "test": "vitest run",
@@ -15,7 +15,7 @@
   },
   "devDependencies": {
     "@biomejs/biome": "catalog:",
-    "@spendgraph/config": "catalog:",
+    "@locusgraph/config": "workspace:*",
     "@types/node": "catalog:",
     "typescript": "catalog:",
     "vitest": "catalog:"
