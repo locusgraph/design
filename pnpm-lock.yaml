@@ -171,8 +171,8 @@ catalogs:
       specifier: ^2.5.15
       version: 2.5.15
     '@carbon/icons-react':
-      specifier: ^11.89.0
-      version: 11.90.0
+      specifier: 11.89.0
+      version: 11.89.0
     '@cloudflare/vite-plugin':
       specifier: 2.0.0-beta.sha-67fa336fd
       version: 2.0.0-beta.sha-67fa336fd
@@ -309,7 +309,7 @@ importers:
     dependencies:
       '@carbon/icons-react':
         specifier: 'catalog:'
-        version: 11.90.0(react@19.2.8)
+        version: 11.89.0(react@19.2.8)
       '@locusgraph/blocks':
         specifier: workspace:*
         version: link:../../packages/blocks
@@ -394,7 +394,7 @@ importers:
     dependencies:
       '@carbon/icons-react':
         specifier: 'catalog:'
-        version: 11.90.0(react@19.2.8)
+        version: 11.89.0(react@19.2.8)
       '@locusgraph/blocks':
         specifier: workspace:*
         version: link:../../packages/blocks
@@ -452,7 +452,7 @@ importers:
     dependencies:
       '@carbon/icons-react':
         specifier: 'catalog:'
-        version: 11.90.0(react@19.2.8)
+        version: 11.89.0(react@19.2.8)
       '@locusgraph/blocks':
         specifier: workspace:*
         version: link:../../packages/blocks
@@ -513,7 +513,7 @@ importers:
     dependencies:
       '@carbon/icons-react':
         specifier: 'catalog:'
-        version: 11.90.0(react@19.2.8)
+        version: 11.89.0(react@19.2.8)
       '@locusgraph/utils':
         specifier: workspace:*
         version: link:../utils
@@ -580,7 +580,7 @@ importers:
         version: 1.9.0(@date-fns/tz@1.5.0)(@types/react@19.3.0)(date-fns@4.4.0)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
       '@carbon/icons-react':
         specifier: 'catalog:'
-        version: 11.90.0(react@19.2.8)
+        version: 11.89.0(react@19.2.8)
       '@locusgraph/tokens':
         specifier: workspace:*
         version: link:../tokens
@@ -693,7 +693,7 @@ importers:
     dependencies:
       '@carbon/icons-react':
         specifier: 'catalog:'
-        version: 11.90.0(react@19.2.8)
+        version: 11.89.0(react@19.2.8)
       '@locusgraph/brand':
         specifier: workspace:*
         version: link:../brand
@@ -874,8 +874,8 @@ packages:
   '@carbon/icon-helpers@10.84.0':
     resolution: {integrity: sha512-G+LVR42568CbluBzu7uV+ZMmI5tT2ojnWCmRgDB8Z3xKls1D5DU6fQHyiAg10JjLo+zBGUih6eEVSCqq9oXkEw==}
 
-  '@carbon/icons-react@11.90.0':
-    resolution: {integrity: sha512-WcYBnIJNEuLXpNxibe1ltVe1HAsTDuGanRVdzRYK/gN+adayDmHplMnXXDNjNlwB4PjSKesqhvt7UAZlLs7uYg==}
+  '@carbon/icons-react@11.89.0':
+    resolution: {integrity: sha512-2QMzmZje8wsp5Bdy8jgNtVdFxEZfz3V6wNY/zu6c1VU0Esqlex72m34lXKoR8fu9cdxvlYLLspkfzJGKH5ZGuw==}
     peerDependencies:
       react: '>=16'
 
@@ -3561,7 +3561,7 @@ snapshots:
     dependencies:
       '@ibm/telemetry-js': 1.12.0
 
-  '@carbon/icons-react@11.90.0(react@19.2.8)':
+  '@carbon/icons-react@11.89.0(react@19.2.8)':
     dependencies:
       '@carbon/icon-helpers': 10.84.0
       '@ibm/telemetry-js': 1.12.0
