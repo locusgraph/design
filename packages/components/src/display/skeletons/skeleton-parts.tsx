@@ -6,7 +6,7 @@ function SkeletonBar({ className, ...props }: React.ComponentProps<typeof Skelet
   return (
     <Skeleton
       aria-hidden="true"
-      className={cn("rounded-none bg-muted motion-reduce:animate-none", className)}
+      className={cn("rounded-none bg-skeleton motion-reduce:animate-none", className)}
       {...props}
     />
   );
