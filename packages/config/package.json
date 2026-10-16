@@ -1,6 +1,6 @@
 {
   "name": "@locusgraph/config",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "The Biome, TypeScript, Vitest, Cucumber, PostCSS and shadcn configuration LocusGraph projects share.",
   "license": "MIT",
   "repository": {
