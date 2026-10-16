@@ -120,5 +120,4 @@ export default defineDemo({
       { name: "Tooltip", children: [{ name: "TooltipTrigger" }, { name: "TooltipContent" }] },
     ],
   },
-  previewHeight: "tall",
 });

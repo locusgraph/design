@@ -109,6 +109,5 @@ export default defineDemo({
     name: "HoverCard",
     children: [{ name: "HoverCardTrigger" }, { name: "HoverCardContent" }],
   },
-  previewHeight: "tall",
   isNew: true,
 });

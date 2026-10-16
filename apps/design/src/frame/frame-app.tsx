@@ -9,6 +9,7 @@ import {
 import { previewBackgroundClass } from "../shell/preview/preview-toolbar";
 import { useDocumentTheme } from "../shell/theme";
 import type { Theme } from "../url-state";
+import { useReportFrameHeight } from "./use-frame-height";
 
 const themeFromUrl: Theme =
   new URLSearchParams(window.location.search).get("theme") === "dark" ? "dark" : "light";
@@ -28,27 +29,10 @@ function useRenderMessage() {
   return message;
 }
 
-function useReportContentHeight(content: React.RefObject<HTMLDivElement | null>) {
-  useEffect(() => {
-    const element = content.current;
-    if (!element) {
-      return;
-    }
-    const observer = new ResizeObserver(() => {
-      window.parent.postMessage(
-        { type: "frame-height", height: element.offsetHeight },
-        window.location.origin
-      );
-    });
-    observer.observe(element);
-    return () => observer.disconnect();
-  }, [content]);
-}
-
 export function FrameApp() {
   const message = useRenderMessage();
   const content = useRef<HTMLDivElement>(null);
-  useReportContentHeight(content);
+  useReportFrameHeight(content);
   const theme = message?.theme ?? themeFromUrl;
   useDocumentTheme(theme);
   const entry = useDemoEntry(message?.path);

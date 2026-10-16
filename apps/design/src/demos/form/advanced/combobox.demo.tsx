@@ -118,7 +118,6 @@ function WithClear() {
 export default defineDemo({
   title: "Combobox",
   isNew: true,
-  previewHeight: "tall",
   description:
     "A text field that filters a list as you type. Use it to find a member, pick API key scopes or choose a region.",
   controls: {

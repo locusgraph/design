@@ -119,5 +119,4 @@ export default defineDemo({
       { name: "EmptyContent" },
     ],
   },
-  previewHeight: "tall",
 });

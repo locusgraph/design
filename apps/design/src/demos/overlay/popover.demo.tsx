@@ -107,5 +107,4 @@ export default defineDemo({
     name: "Popover",
     children: [{ name: "PopoverTrigger" }, { name: "PopoverContent" }],
   },
-  previewHeight: "tall",
 });

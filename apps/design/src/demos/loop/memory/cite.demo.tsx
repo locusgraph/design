@@ -50,6 +50,5 @@ export default defineDemo({
       component: InAnswer,
     },
   },
-  previewHeight: "tall",
   isNew: true,
 });

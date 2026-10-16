@@ -1,4 +1,5 @@
 import { cn } from "@locusgraph/components";
+import { Pulse } from "@locusgraph/loop";
 import { useEffect, useRef, useState } from "react";
 import type { PreviewHeight } from "../../registry/define-demo";
 import type { Viewport } from "../../url-state";
@@ -37,7 +38,12 @@ function useFrameEvents(frame: React.RefObject<HTMLIFrameElement | null>) {
 export function PreviewFrame({ message, viewport, height }: PreviewFrameProps) {
   const frame = useRef<HTMLIFrameElement>(null);
   const { ready, contentHeight } = useFrameEvents(frame);
-  const frameHeight = Math.max(height === "tall" ? TALL_HEIGHT : AUTO_MIN_HEIGHT, contentHeight);
+  const measured = contentHeight > 0;
+  const frameHeight = !measured
+    ? AUTO_MIN_HEIGHT
+    : height === "tall"
+      ? Math.max(TALL_HEIGHT, contentHeight)
+      : contentHeight;
   const [initialTheme] = useState(message.theme);
 
   useEffect(() => {
@@ -47,7 +53,12 @@ export function PreviewFrame({ message, viewport, height }: PreviewFrameProps) {
   }, [ready, message]);
 
   return (
-    <div className="flex justify-center">
+    <div className="relative flex justify-center">
+      {contentHeight === 0 && (
+        <div className="absolute inset-0 flex items-center justify-center">
+          <Pulse variant="locus" label="Loading preview…" className="text-muted-foreground" />
+        </div>
+      )}
       <iframe
         ref={frame}
         title="Component preview"

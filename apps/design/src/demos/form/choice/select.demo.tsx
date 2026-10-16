@@ -95,7 +95,6 @@ export default defineDemo({
   title: "Select",
   description:
     "A button that opens a list of options to pick one from. Use it for roles, plans and regions.",
-  previewHeight: "tall",
   controls: {
     size: select(sizes),
     position: select(positions),

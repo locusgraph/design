@@ -128,6 +128,5 @@ export default defineDemo({
       },
     ],
   },
-  previewHeight: "tall",
   isNew: true,
 });

@@ -71,7 +71,6 @@ function YearDropdown() {
 export default defineDemo({
   title: "Calendar",
   isNew: true,
-  previewHeight: "tall",
   description:
     "A month grid for picking a date or a range. Use it for renewal dates, billing periods and usage reports.",
   controls: {

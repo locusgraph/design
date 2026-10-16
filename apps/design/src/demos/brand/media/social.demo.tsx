@@ -154,6 +154,5 @@ export default defineDemo({
       component: NextOpenGraphImage,
     },
   },
-  previewHeight: "tall",
   isNew: true,
 });

@@ -63,7 +63,6 @@ function AuditLog() {
 export default defineDemo({
   title: "Scroll Area",
   isNew: true,
-  previewHeight: "tall",
   description:
     "A scrolling region with a styled scrollbar that looks the same in every browser. Good for long invoice and member lists.",
   controls: { height: select(["md", "sm", "lg"]), heading: text("Invoices") },

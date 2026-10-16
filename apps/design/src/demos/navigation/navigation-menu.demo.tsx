@@ -87,7 +87,6 @@ function WithIcons() {
 export default defineDemo({
   title: "Navigation Menu",
   isNew: true,
-  previewHeight: "tall",
   description:
     "Top-level site links where some items open a panel of related pages. Built on Radix with full keyboard support.",
   controls: { viewport: toggle(true), trigger: text("Products") },

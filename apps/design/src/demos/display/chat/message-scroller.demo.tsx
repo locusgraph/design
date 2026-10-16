@@ -168,5 +168,4 @@ export default defineDemo({
       },
     ],
   },
-  previewHeight: "tall",
 });
