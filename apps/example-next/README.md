@@ -11,5 +11,5 @@ What a Next.js app needs:
 - `app/globals.css` imports Tailwind, `tw-animate-css`, `@locusgraph/components/theme.css`, and the `sources.css` of `blocks` and `brand` so Tailwind sees their classes.
 - `postcss.config.mjs` re-exports `@locusgraph/config/postcss`.
 - `next.config.ts` lists the packages in `transpilePackages`. That is only needed inside this workspace, where they point at TypeScript source; installed from npm they are already built.
-- Blocks with callbacks, such as `CreditPacks`, live in a `"use client"` component. Pass Next's `Link` as `linkComponent`.
+- Blocks with callbacks, such as `TopUp`, live in a `"use client"` component. Pass Next's `Link` as `linkComponent`.
 - Next does not allow `react-dom/server` in Server Components or route handlers, so render `@locusgraph/email` templates in your backend or Worker, or in a client component for previews.

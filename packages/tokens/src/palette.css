@@ -21,6 +21,10 @@
   --info: #1f6fd1;
   --warn: #a15c00;
   --popover: var(--surface);
+  --input: color-mix(in oklch, var(--foreground) 26%, var(--surface));
+  --skeleton: color-mix(in oklch, var(--foreground) 9%, var(--surface));
+  --scrim: rgb(0 0 0 / 0.28);
+  --overlay-shadow: 0 1px 2px rgb(0 0 0 / 0.06), 0 10px 28px -6px rgb(0 0 0 / 0.16);
   --popover-foreground: var(--foreground);
   --radius: 0px;
   --sidebar: var(--surface);
@@ -63,4 +67,9 @@
   --bad: #e66767;
   --info: #5b9df0;
   --warn: #e0a400;
+  --input: color-mix(in oklch, var(--foreground) 24%, var(--surface));
+  --skeleton: color-mix(in oklch, var(--foreground) 11%, var(--surface));
+  --popover: #18181a;
+  --scrim: rgb(0 0 0 / 0.62);
+  --overlay-shadow: 0 0 0 1px rgb(255 255 255 / 0.04), 0 16px 40px -8px rgb(0 0 0 / 0.7);
 }

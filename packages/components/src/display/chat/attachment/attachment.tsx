@@ -14,7 +14,7 @@ const attachmentVariants = cva(
       },
       orientation: {
         horizontal: "min-w-40 items-center",
-        vertical: "w-24 flex-col has-data-[slot=attachment-content]:w-30",
+        vertical: "w-28 flex-col has-data-[slot=attachment-content]:w-36",
       },
     },
   }

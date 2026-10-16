@@ -18,13 +18,13 @@ function PlanTabs() {
         <TabsTrigger value="custom">Custom</TabsTrigger>
       </TabsList>
       <TabsContent value="monthly" className="text-sm">
-        Pro plan, $24 per seat.
+        <bdi>Pro plan, $24 per seat.</bdi>
       </TabsContent>
       <TabsContent value="yearly" className="text-sm">
-        Pro plan, $20 per seat.
+        <bdi>Pro plan, $20 per seat.</bdi>
       </TabsContent>
       <TabsContent value="custom" className="text-sm">
-        Talk to sales.
+        <bdi>Talk to sales.</bdi>
       </TabsContent>
     </Tabs>
   );
@@ -34,7 +34,7 @@ function Comparison() {
   return (
     <div className="flex flex-col gap-6">
       <div className="flex flex-col gap-2">
-        <span className="text-xs text-muted-foreground">ltr</span>
+        <span className="eyebrow">ltr</span>
         <DirectionProvider dir="ltr">
           <div dir="ltr">
             <PlanTabs />
@@ -42,7 +42,7 @@ function Comparison() {
         </DirectionProvider>
       </div>
       <div className="flex flex-col gap-2">
-        <span className="text-xs text-muted-foreground">rtl</span>
+        <span className="eyebrow">rtl</span>
         <DirectionProvider dir="rtl">
           <div dir="rtl">
             <PlanTabs />

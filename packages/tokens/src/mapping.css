@@ -18,7 +18,9 @@
   --color-info: var(--info);
   --color-warn: var(--warn);
   --color-border: var(--border);
-  --color-input: var(--border);
+  --color-input: var(--input);
+  --color-skeleton: var(--skeleton);
+  --color-scrim: var(--scrim);
   --color-ring: var(--s1);
   --color-primary: var(--btn);
   --color-primary-foreground: var(--btn-ink);
@@ -28,7 +30,7 @@
   --color-accent-foreground: var(--foreground);
   --color-muted: var(--ghost);
   --color-muted-foreground: var(--muted);
-  --color-popover: var(--surface);
+  --color-popover: var(--popover);
   --color-popover-foreground: var(--foreground);
   --color-card: var(--surface);
   --color-card-foreground: var(--foreground);
@@ -46,6 +48,7 @@
   --font-heading: var(--font-archivo);
   --font-mono: var(--font-fira-code);
   --font-brand: var(--font-archivo);
+  --shadow-overlay: var(--overlay-shadow);
   --radius-xs: 0px;
   --radius-sm: 0px;
   --radius-md: 0px;

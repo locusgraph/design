@@ -10,11 +10,10 @@ export function playgroundNavGroups(library: Library): DocsNavGroup[] {
   }));
   return [
     {
-      label: "Sections",
+      label: "Start",
       items: [
         { title: "Introduction", href: "/" },
         { title: "Installation", href: "/installation" },
-        { title: "Shells", href: "/shells" },
       ],
     },
     { label: library.title, items },

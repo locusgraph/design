@@ -62,7 +62,7 @@ function Reactions() {
       </Bubble>
       <Bubble align="end">
         <BubbleContent>Thanks, that was quick.</BubbleContent>
-        <BubbleReactions side="top" align="start" role="img" aria-label="Reactions: heart">
+        <BubbleReactions align="start" role="img" aria-label="Reactions: heart">
           <span>❤️</span>
         </BubbleReactions>
       </Bubble>

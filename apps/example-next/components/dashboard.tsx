@@ -1,13 +1,6 @@
 "use client";
 
-import {
-  CreditPacks,
-  KeysTable,
-  PlanOptions,
-  UsageAttention,
-  UsageSummary,
-  WalletPanel,
-} from "@locusgraph/blocks";
+import { Keys, Plans, TopUp, Usage, UsageAlert, Wallet } from "@locusgraph/blocks";
 import { Button, RuleGrid, RuleGridCell } from "@locusgraph/components";
 import { formatMicroUsd } from "@locusgraph/utils";
 import Link from "next/link";
@@ -24,7 +17,7 @@ export function Dashboard() {
         title="Overview"
         description={`${formatMicroUsd(wallet.balanceMicroUsd)} in credits. Every section below comes from @locusgraph/blocks.`}
       />
-      <UsageAttention
+      <UsageAlert
         balanceMicroUsd={wallet.balanceMicroUsd}
         quotas={quotas}
         paidPlan={false}
@@ -32,10 +25,10 @@ export function Dashboard() {
         upgradeHref="/#plans"
         linkComponent={Link}
       />
-      <UsageSummary quotas={quotas} />
+      <Usage quotas={quotas} />
       <RuleGrid id="billing" columns={2}>
-        <WalletPanel balanceMicroUsd={wallet.balanceMicroUsd} grants={grants} />
-        <CreditPacks packs={packs} onBuy={setLastPack} />
+        <Wallet balanceMicroUsd={wallet.balanceMicroUsd} grants={grants} />
+        <TopUp packs={packs} onBuy={setLastPack} />
       </RuleGrid>
       {lastPack && (
         <p className="font-mono text-[11.5px] text-muted-foreground">
@@ -43,14 +36,14 @@ export function Dashboard() {
         </p>
       )}
       <div id="plans">
-        <PlanOptions
+        <Plans
           plans={plans}
           actionFor={(plan) => <Button size="sm">Upgrade to {plan.name}</Button>}
         />
       </div>
       <RuleGrid columns={1}>
         <RuleGridCell className="p-0">
-          <KeysTable
+          <Keys
             keys={keys}
             actions={() => (
               <Button size="sm" variant="ghost">

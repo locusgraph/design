@@ -109,7 +109,7 @@ export default defineDemo({
     { name: "shouldFilter", type: "boolean", defaultValue: "true" },
     { name: "CommandItem.onSelect", type: "(value: string) => void" },
     { name: "CommandDialog.title", type: "string", defaultValue: "Command Palette" },
-    { name: "CommandDialog.showCloseButton", type: "boolean", defaultValue: "true" },
+    { name: "CommandDialog.showCloseButton", type: "boolean", defaultValue: "false" },
   ],
   examples: {
     CommandPalette: {

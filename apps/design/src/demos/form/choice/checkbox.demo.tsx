@@ -35,7 +35,7 @@ function WithDescription() {
 
 function Group() {
   return (
-    <FieldSet className="max-w-sm">
+    <FieldSet className="w-full max-w-sm">
       <FieldLegend variant="label">Email me about</FieldLegend>
       <FieldGroup className="gap-3">
         {notifications.map((item) => (

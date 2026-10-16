@@ -39,7 +39,7 @@ function Sizes() {
 
 function MemberStack() {
   return (
-    <div className="flex -space-x-2 *:data-[slot=avatar]:ring-2 *:data-[slot=avatar]:ring-background">
+    <div className="flex -space-x-1.5 *:data-[slot=avatar]:ring-2 *:data-[slot=avatar]:ring-card">
       <Avatar>
         <AvatarImage src={memberPhoto} alt="Jane Doe" />
         <AvatarFallback>JD</AvatarFallback>
@@ -51,7 +51,7 @@ function MemberStack() {
         <AvatarFallback>MK</AvatarFallback>
       </Avatar>
       <Avatar>
-        <AvatarFallback>+9</AvatarFallback>
+        <AvatarFallback className="bg-muted text-muted-foreground">+9</AvatarFallback>
       </Avatar>
     </div>
   );

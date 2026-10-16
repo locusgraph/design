@@ -49,9 +49,9 @@ describe("usageImport", () => {
 
   it("imports from each LocusGraph package the usage code draws on", () => {
     const blocksSource =
-      'import { RuleGrid } from "@locusgraph/components";\nimport { CreditPacks, WalletPanel } from "@locusgraph/blocks";';
-    expect(usageImport(blocksSource, "<RuleGrid><WalletPanel /></RuleGrid>")).toBe(
-      'import { RuleGrid } from "@locusgraph/components";\nimport { WalletPanel } from "@locusgraph/blocks";'
+      'import { RuleGrid } from "@locusgraph/components";\nimport { TopUp, Wallet } from "@locusgraph/blocks";';
+    expect(usageImport(blocksSource, "<RuleGrid><Wallet /></RuleGrid>")).toBe(
+      'import { RuleGrid } from "@locusgraph/components";\nimport { Wallet } from "@locusgraph/blocks";'
     );
   });
 

@@ -43,28 +43,29 @@ export function Playground({ entry, values, settings }: PlaygroundProps) {
     <section className="overflow-hidden border">
       <div
         className={cn(
-          "relative",
           settings.viewport === "mobile"
             ? previewBackgroundClass.checker
             : previewBackgroundClass[settings.background]
         )}
       >
-        <PreviewToolbar
-          background={settings.background}
-          canReset={hasChangedControls(entry, values)}
-          onReset={() => clearParams(Object.keys(entry.demo.controls))}
-        />
         <PreviewFrame
           message={message}
           viewport={settings.viewport}
           height={entry.demo.previewHeight ?? "auto"}
         />
       </div>
-      <ControlsRow
-        controls={entry.demo.controls}
-        values={values}
-        onChange={(name, value) => storeControlValue(entry, name, value)}
-      />
+      <div className="flex flex-col gap-3 border-t px-4 py-3 sm:flex-row sm:items-center">
+        <ControlsRow
+          controls={entry.demo.controls}
+          values={values}
+          onChange={(name, value) => storeControlValue(entry, name, value)}
+        />
+        <PreviewToolbar
+          background={settings.background}
+          canReset={hasChangedControls(entry, values)}
+          onReset={() => clearParams(Object.keys(entry.demo.controls))}
+        />
+      </div>
       <CodeBlock code={entry.demo.code(values as never)} className="border-t bg-surface" />
     </section>
   );

@@ -35,7 +35,7 @@ function Invoices() {
             <TableCell className="font-medium">{invoice.id}</TableCell>
             <TableCell>{invoice.date}</TableCell>
             <TableCell>
-              <Badge variant={invoice.status === "Paid" ? "secondary" : "outline"}>
+              <Badge variant={invoice.status === "Paid" ? "success" : "outline"}>
                 {invoice.status}
               </Badge>
             </TableCell>

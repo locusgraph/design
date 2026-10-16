@@ -28,9 +28,15 @@ export function DocsArticle() {
         </pre>
         <h2 id="scopes">Scopes</h2>
         <ul>
-          <li>usage:read lets a key read usage totals.</li>
-          <li>graphs:write lets a key write to graphs.</li>
-          <li>billing:read lets a key read invoices.</li>
+          <li>
+            <code>usage:read</code> lets a key read usage totals.
+          </li>
+          <li>
+            <code>graphs:write</code> lets a key write to graphs.
+          </li>
+          <li>
+            <code>billing:read</code> lets a key read invoices.
+          </li>
         </ul>
         <h3 id="rotate">Rotate a key</h3>
         <p>

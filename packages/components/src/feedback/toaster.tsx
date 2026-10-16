@@ -10,31 +10,29 @@ import {
 import type * as React from "react";
 import { Toaster as Sonner, type ToasterProps } from "sonner";
 
-function statusColors(type: string, color: string) {
-  return {
-    [`--${type}-bg`]: `color-mix(in srgb, var(${color}) 8%, var(--popover))`,
-    [`--${type}-border`]: `color-mix(in srgb, var(${color}) 30%, var(--popover))`,
-    [`--${type}-text`]: `var(${color})`,
-  };
-}
-
 const toasterColors = {
   "--normal-bg": "var(--popover)",
   "--normal-text": "var(--popover-foreground)",
   "--normal-border": "var(--border)",
   "--border-radius": "var(--radius)",
-  ...statusColors("success", "--good"),
-  ...statusColors("info", "--info"),
-  ...statusColors("warning", "--warn"),
-  ...statusColors("error", "--bad"),
 } as React.CSSProperties;
 
-function Toaster({ theme = "system", ...props }: ToasterProps) {
+const statusRuleClassNames = {
+  success: "border-l-2! border-l-good! [&_[data-icon]]:text-good",
+  info: "border-l-2! border-l-info! [&_[data-icon]]:text-info",
+  warning: "border-l-2! border-l-warn! [&_[data-icon]]:text-warn",
+  error: "border-l-2! border-l-destructive! [&_[data-icon]]:text-destructive",
+};
+
+function Toaster({ theme = "system", toastOptions, ...props }: ToasterProps) {
   return (
     <Sonner
       theme={theme}
-      richColors
       className="toaster group"
+      toastOptions={{
+        ...toastOptions,
+        classNames: { ...statusRuleClassNames, ...toastOptions?.classNames },
+      }}
       icons={{
         success: <CircleCheckIcon className="size-4" />,
         info: <InfoIcon className="size-4" />,

@@ -1,13 +1,13 @@
 import { Alert, AlertDescription, AlertTitle, Button } from "@locusgraph/components";
-import { AlertCircleIcon, CheckCircle2Icon, InfoIcon } from "lucide-react";
+import { AlertCircleIcon, AlertTriangleIcon, CheckCircle2Icon, InfoIcon } from "lucide-react";
 import { formatProp } from "../../../registry/control-values";
 import { defineDemo, select, text, toggle } from "../../../registry/define-demo";
 
-const variants = ["default", "destructive"] as const;
+const variants = ["destructive", "default", "success", "warning"] as const;
 
 function Success() {
   return (
-    <Alert className="max-w-md">
+    <Alert variant="success" className="max-w-md">
       <CheckCircle2Icon />
       <AlertTitle>Plan upgraded</AlertTitle>
       <AlertDescription>Your organization is now on the Team plan.</AlertDescription>
@@ -42,8 +42,8 @@ function TitleOnly() {
 
 function WithAction() {
   return (
-    <Alert className="max-w-md">
-      <InfoIcon />
+    <Alert variant="warning" className="max-w-md">
+      <AlertTriangleIcon />
       <AlertTitle>You have used 90% of your API calls</AlertTitle>
       <AlertDescription>
         <p>Upgrade before the limit to avoid failed requests.</p>
@@ -74,7 +74,7 @@ export default defineDemo({
   code: ({ variant, icon, title }) =>
     `<Alert${formatProp("variant", variant, "default")}>${icon ? "\n  <AlertCircleIcon />" : ""}\n  <AlertTitle>${title}</AlertTitle>\n  <AlertDescription>We could not charge the card ending in 4242.</AlertDescription>\n</Alert>`,
   props: [
-    { name: "variant", type: variants.join(" | "), defaultValue: "default" },
+    { name: "variant", type: "default | success | warning | destructive", defaultValue: "default" },
     { name: "...props", type: 'ComponentProps<"div">' },
   ],
   examples: {

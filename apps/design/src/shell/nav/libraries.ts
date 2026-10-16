@@ -1,6 +1,6 @@
 import { type DemoIndexEntry, demoIndexByTitle } from "../../registry/load-demos";
 
-export type LibraryId = "components" | "blocks" | "brand";
+export type LibraryId = "components" | "blocks" | "loop" | "brand";
 
 export type Library = {
   id: LibraryId;
@@ -26,6 +26,13 @@ export const libraries: Library[] = [
     noun: "blocks",
   },
   {
+    id: "loop",
+    title: "Loop",
+    href: "/loop",
+    packageName: "@locusgraph/loop",
+    noun: "agent components",
+  },
+  {
     id: "brand",
     title: "Brand",
     href: "/brand",
@@ -34,7 +41,11 @@ export const libraries: Library[] = [
   },
 ];
 
-const libraryByGroup: Partial<Record<string, LibraryId>> = { blocks: "blocks", brand: "brand" };
+const libraryByGroup: Partial<Record<string, LibraryId>> = {
+  blocks: "blocks",
+  loop: "loop",
+  brand: "brand",
+};
 
 export function libraryOfGroup(group: string): LibraryId {
   return libraryByGroup[group] ?? "components";

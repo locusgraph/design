@@ -20,7 +20,7 @@ const itemBasis = { full: "basis-full", half: "basis-1/2", third: "basis-1/3" } 
 
 function PlanSlide({ plan }: { plan: (typeof plans)[number] }) {
   return (
-    <div className="flex aspect-square flex-col items-center justify-center gap-1 border bg-card p-6">
+    <div className="flex aspect-[4/3] flex-col items-center justify-center gap-1 border bg-card p-6">
       <span className="text-sm text-muted-foreground">{plan.name}</span>
       <span className="text-3xl font-semibold">{plan.price}</span>
       <span className="text-center text-xs text-muted-foreground">{plan.detail}</span>
@@ -66,7 +66,7 @@ function Vertical() {
       <CarouselContent className="-mt-1 h-48">
         {plans.map((plan) => (
           <CarouselItem key={plan.name} className="basis-1/2 pt-1">
-            <div className="flex items-center justify-between border bg-card p-4">
+            <div className="flex h-full items-center justify-between border bg-card p-4">
               <span className="font-medium">{plan.name}</span>
               <span className="text-muted-foreground">{plan.price}</span>
             </div>

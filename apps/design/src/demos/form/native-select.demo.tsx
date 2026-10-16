@@ -1,6 +1,7 @@
 import {
   Field,
   FieldDescription,
+  FieldError,
   FieldLabel,
   NativeSelect,
   NativeSelectOptGroup,
@@ -42,13 +43,17 @@ function Groups() {
 
 function Invalid() {
   return (
-    <NativeSelect defaultValue="" aria-invalid="true" aria-label="Billing country">
-      <NativeSelectOption value="" disabled>
-        Choose a country
-      </NativeSelectOption>
-      <NativeSelectOption value="us">United States</NativeSelectOption>
-      <NativeSelectOption value="de">Germany</NativeSelectOption>
-    </NativeSelect>
+    <Field className="w-56">
+      <FieldLabel htmlFor="native-billing-country">Billing country</FieldLabel>
+      <NativeSelect id="native-billing-country" defaultValue="" aria-invalid="true">
+        <NativeSelectOption value="" disabled>
+          Choose a country
+        </NativeSelectOption>
+        <NativeSelectOption value="us">United States</NativeSelectOption>
+        <NativeSelectOption value="de">Germany</NativeSelectOption>
+      </NativeSelect>
+      <FieldError>A billing country is required.</FieldError>
+    </Field>
   );
 }
 

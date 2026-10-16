@@ -59,7 +59,7 @@ export function ControlsRow({ controls, values, onChange }: ControlsRowProps) {
     return null;
   }
   return (
-    <div className="flex flex-col gap-3 border-t px-4 py-3 sm:flex-row sm:flex-wrap sm:items-center sm:gap-x-6">
+    <div className="flex min-w-0 flex-1 flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center sm:gap-x-6">
       {entries.map(([name, control]) => (
         <div key={name} className="flex items-center justify-between gap-2 sm:justify-start">
           <Label htmlFor={name} className="font-normal text-muted-foreground">

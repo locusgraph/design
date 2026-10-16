@@ -110,7 +110,7 @@ export default defineDemo({
       component: Multiple,
     },
     Spaced: {
-      description: "spacing separates the items instead of joining them.",
+      description: "Spacing separates the items instead of joining them.",
       component: Spaced,
     },
     Disabled: { description: "A disabled group cannot change.", component: Disabled },

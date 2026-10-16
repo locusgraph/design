@@ -93,7 +93,7 @@ function MenubarLabel({
     <MenubarPrimitive.Label
       data-slot="menubar-label"
       data-inset={inset}
-      className={cn("px-2 py-1.5 text-sm font-medium data-[inset]:pl-8", className)}
+      className={cn("eyebrow px-2 pt-2 pb-1 data-[inset]:pl-8", className)}
       {...props}
     />
   );

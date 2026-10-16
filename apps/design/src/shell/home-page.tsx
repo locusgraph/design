@@ -4,14 +4,22 @@ import { type Library, libraryEntries } from "./nav/libraries";
 import { PlaygroundLink } from "./nav/playground-nav";
 
 function groupTitle(group: string) {
-  return group.charAt(0).toUpperCase() + group.slice(1);
+  return group
+    .split("-")
+    .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+    .join(" ");
+}
+
+function groupKey(library: Library, entry: DemoIndexEntry) {
+  return library.id === "components" ? entry.group : entry.section || entry.group;
 }
 
 function libraryGroups(library: Library) {
   const entries = libraryEntries(library.id);
-  return [...new Set(entries.map((entry) => entry.group))].sort().map((group) => ({
+  const keys = entries.map((entry) => groupKey(library, entry));
+  return [...new Set(keys)].sort().map((group) => ({
     group,
-    entries: entries.filter((entry) => entry.group === group),
+    entries: entries.filter((entry) => groupKey(library, entry) === group),
   }));
 }
 
@@ -37,6 +45,11 @@ function ComponentGrid({ entries }: { entries: DemoIndexEntry[] }) {
   );
 }
 
+function countLabel(count: number, pluralNoun: string) {
+  const noun = count === 1 ? pluralNoun.replace(/s$/, "") : pluralNoun;
+  return `${count} ${noun}`;
+}
+
 export function HomePage({ library }: { library: Library }) {
   const groups = libraryGroups(library);
   const count = groups.reduce((total, { entries }) => total + entries.length, 0);
@@ -45,8 +58,8 @@ export function HomePage({ library }: { library: Library }) {
       <header className="flex flex-col gap-2">
         <h1 className="text-3xl font-semibold tracking-tight">{library.title}</h1>
         <p className="text-balance text-muted-foreground">
-          {count} {library.noun} in {library.packageName}, each with a live playground, usage and
-          props.
+          {countLabel(count, library.noun)} in {library.packageName}, each with a live playground,
+          usage and props.
         </p>
       </header>
       {groups.length === 1 ? (
@@ -54,16 +67,11 @@ export function HomePage({ library }: { library: Library }) {
       ) : (
         groups.map(({ group, entries }) => (
           <section key={group} id={group} className="flex scroll-mt-24 flex-col gap-4">
-            <h2 className="text-sm font-medium text-muted-foreground">{groupTitle(group)}</h2>
+            <h2 className="eyebrow">{groupTitle(group)}</h2>
             <ComponentGrid entries={entries} />
           </section>
         ))
       )}
-      <p className="text-sm text-muted-foreground">
-        Add a demo with a file in{" "}
-        <code className="font-mono text-xs">src/demos/&lt;group&gt;/&lt;name&gt;.demo.tsx</code>. It
-        shows up in the menu and search.
-      </p>
     </article>
   );
 }

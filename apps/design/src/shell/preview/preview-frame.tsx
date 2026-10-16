@@ -11,7 +11,7 @@ import {
 type PreviewFrameProps = { message: FrameRenderMessage; viewport: Viewport; height: PreviewHeight };
 
 const AUTO_MIN_HEIGHT = 200;
-const TALL_HEIGHT = 360;
+const TALL_HEIGHT = 480;
 
 function useFrameEvents(frame: React.RefObject<HTMLIFrameElement | null>) {
   const [ready, setReady] = useState(false);
@@ -37,7 +37,7 @@ function useFrameEvents(frame: React.RefObject<HTMLIFrameElement | null>) {
 export function PreviewFrame({ message, viewport, height }: PreviewFrameProps) {
   const frame = useRef<HTMLIFrameElement>(null);
   const { ready, contentHeight } = useFrameEvents(frame);
-  const frameHeight = height === "tall" ? TALL_HEIGHT : Math.max(AUTO_MIN_HEIGHT, contentHeight);
+  const frameHeight = Math.max(height === "tall" ? TALL_HEIGHT : AUTO_MIN_HEIGHT, contentHeight);
 
   useEffect(() => {
     if (ready) {

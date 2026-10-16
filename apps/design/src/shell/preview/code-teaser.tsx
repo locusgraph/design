@@ -31,17 +31,17 @@ export function CodeTeaser({ code }: { code: string }) {
   }
 
   return (
-    <div className="relative border-t bg-surface">
+    <div className="relative border-t bg-surface pb-12">
       <div
         aria-hidden
-        className="pointer-events-none [mask-image:linear-gradient(to_bottom,black_20%,transparent)]"
+        className="pointer-events-none [mask-image:linear-gradient(to_bottom,black_30%,transparent)]"
       >
         <CodeBlock code={firstLines(code, TEASER_LINES)} showCopy={false} />
       </div>
       <Button
         variant="outline"
         size="sm"
-        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"
+        className="absolute bottom-3 left-1/2 -translate-x-1/2"
         onClick={() => setExpanded(true)}
       >
         View code
