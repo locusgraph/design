@@ -1,10 +1,10 @@
-import { type AttachmentItem, Attachments } from "@locusgraph/agent-ui";
+import { type FileItem, Files } from "@locusgraph/agent-ui";
 import { useState } from "react";
 import { defineDemo, select, toggle } from "../../../registry/define-demo";
 
 const layouts = ["inline", "grid"] as const;
 
-const files: AttachmentItem[] = [
+const files: FileItem[] = [
   {
     id: "file_memory",
     name: "support-agent-memory.json",
@@ -18,7 +18,7 @@ const files: AttachmentItem[] = [
 function Removable() {
   const [items, setItems] = useState(files);
   return (
-    <Attachments
+    <Files
       items={items}
       onRemove={(id) => setItems((current) => current.filter((item) => item.id !== id))}
     />
@@ -26,16 +26,16 @@ function Removable() {
 }
 
 function Grid() {
-  return <Attachments items={files} layout="grid" className="w-full max-w-lg" />;
+  return <Files items={files} layout="grid" className="w-full max-w-lg" />;
 }
 
 export default defineDemo({
-  title: "Attachments",
+  title: "Files",
   description:
     "Files on a message or in the composer: an icon or image thumbnail, the name, and the size when known. Pass onRemove to make each chip removable.",
   controls: { layout: select(layouts), removable: toggle(true) },
   playground: ({ layout, removable }) => (
-    <Attachments
+    <Files
       items={files}
       layout={layout}
       onRemove={removable ? () => {} : undefined}
@@ -43,13 +43,13 @@ export default defineDemo({
     />
   ),
   code: ({ layout, removable }) =>
-    `<Attachments\n  items={files}${layout === "inline" ? "" : `\n  layout="${layout}"`}${removable ? "\n  onRemove={(id) => removeFile(id)}" : ""}\n/>`,
+    `<Files\n  items={files}${layout === "inline" ? "" : `\n  layout="${layout}"`}${removable ? "\n  onRemove={(id) => removeFile(id)}" : ""}\n/>`,
   props: [
-    { name: "items", type: "AttachmentItem[]" },
+    { name: "items", type: "FileItem[]" },
     { name: "layout", type: layouts.join(" | "), defaultValue: "inline" },
     { name: "onRemove", type: "(id: string) => void" },
-    { name: "AttachmentItem", type: "{ id, name, mediaType?, url?, sizeBytes? }" },
-    { name: "attachmentFromFilePart", type: "(part: FilePart, index: number) => AttachmentItem" },
+    { name: "FileItem", type: "{ id, name, mediaType?, url?, sizeBytes? }" },
+    { name: "fileFromFilePart", type: "(part: FilePart, index: number) => FileItem" },
   ],
   examples: {
     Removable: {

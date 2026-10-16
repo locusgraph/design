@@ -1,5 +1,5 @@
 import type { ToolPart } from "@locusgraph/agent-ui";
-import { ToolCall } from "@locusgraph/agent-ui";
+import { Tool } from "@locusgraph/agent-ui";
 import { defineDemo, select, toggle } from "../../../registry/define-demo";
 
 const toolStates = [
@@ -37,7 +37,7 @@ function partFor(state: (typeof toolStates)[number]): ToolPart {
 function WaitingForApproval() {
   return (
     <div className="w-full max-w-xl">
-      <ToolCall
+      <Tool
         defaultOpen
         part={{
           type: "dynamic-tool",
@@ -52,16 +52,16 @@ function WaitingForApproval() {
 }
 
 export default defineDemo({
-  title: "Tool Call",
+  title: "Tool",
   description:
     "One tool call as a single ruled row: the tool name, a status dot and word for each state, and its input and output as JSON when opened. Errors show in red without opening.",
   controls: { state: select(toolStates, "output-available"), open: toggle(true) },
   playground: ({ state, open }) => (
     <div className="w-full max-w-xl">
-      <ToolCall key={`${state}-${open}`} part={partFor(state)} defaultOpen={open} />
+      <Tool key={`${state}-${open}`} part={partFor(state)} defaultOpen={open} />
     </div>
   ),
-  code: ({ open }) => `<ToolCall part={part}${open ? " defaultOpen" : ""} />`,
+  code: ({ open }) => `<Tool part={part}${open ? " defaultOpen" : ""} />`,
   props: [
     { name: "part", type: "ToolPart" },
     { name: "defaultOpen", type: "boolean", defaultValue: "false" },

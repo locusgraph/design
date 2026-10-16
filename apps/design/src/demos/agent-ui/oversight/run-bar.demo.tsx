@@ -1,4 +1,4 @@
-import { RunControls } from "@locusgraph/agent-ui";
+import { RunBar } from "@locusgraph/agent-ui";
 import { defineDemo, select } from "../../../registry/define-demo";
 
 const statusOptions = ["running", "paused", "stopped", "done"] as const;
@@ -6,7 +6,7 @@ const statusOptions = ["running", "paused", "stopped", "done"] as const;
 function WithoutStepping() {
   return (
     <div className="w-full max-w-2xl">
-      <RunControls
+      <RunBar
         status="running"
         runName="Graph cleanup"
         elapsedMs={4_380_000}
@@ -19,13 +19,13 @@ function WithoutStepping() {
 }
 
 export default defineDemo({
-  title: "Run Controls",
+  title: "Run Bar",
   description:
     "A slim status bar for a running agent: status dot, elapsed time, and pause, resume, step once or stop. Only the actions that make sense for the current status are enabled, and the status is announced.",
   controls: { status: select(statusOptions, "running") },
   playground: ({ status }) => (
     <div className="w-full max-w-2xl">
-      <RunControls
+      <RunBar
         status={status}
         runName="Nightly SpendGraph reconcile"
         elapsedMs={252_000}
@@ -37,7 +37,7 @@ export default defineDemo({
     </div>
   ),
   code: ({ status }) =>
-    `<RunControls\n  status="${status}"\n  runName={run.name}\n  elapsedMs={run.elapsedMs}\n  onPause={pause}\n  onResume={resume}\n  onStop={stop}\n  onStep={stepOnce}\n/>`,
+    `<RunBar\n  status="${status}"\n  runName={run.name}\n  elapsedMs={run.elapsedMs}\n  onPause={pause}\n  onResume={resume}\n  onStop={stop}\n  onStep={stepOnce}\n/>`,
   props: [
     { name: "status", type: '"running" | "paused" | "stopped" | "done"' },
     { name: "runName", type: "string" },

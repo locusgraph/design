@@ -1,4 +1,4 @@
-import { ThreadList, type ThreadSummary } from "@locusgraph/agent-ui";
+import { History, type HistoryItem } from "@locusgraph/agent-ui";
 import { useState } from "react";
 import { defineDemo, toggle } from "../../../registry/define-demo";
 
@@ -8,7 +8,7 @@ function localIso(month: number, day: number, hour: number, minute: number) {
 
 const demoNow = localIso(10, 16, 18, 0);
 
-const initialThreads: ThreadSummary[] = [
+const initialThreads: HistoryItem[] = [
   { id: "thr_9g4m", title: "Forecast for the indexer", updatedAt: localIso(10, 16, 15, 12) },
   { id: "thr_8f2k", title: "October spend by model", updatedAt: localIso(10, 16, 9, 30) },
   { id: "thr_7d1a", title: "Support agent cost per ticket", updatedAt: localIso(10, 15, 16, 5) },
@@ -38,7 +38,7 @@ function Playground({ editable }: { editable: boolean }) {
   };
   return (
     <div className="h-72 w-full max-w-xs">
-      <ThreadList
+      <History
         className="h-full"
         threads={threads}
         now={demoNow}
@@ -55,21 +55,21 @@ function Playground({ editable }: { editable: boolean }) {
 function Empty() {
   return (
     <div className="w-full max-w-xs">
-      <ThreadList threads={[]} onSelect={() => {}} onNew={() => {}} />
+      <History threads={[]} onSelect={() => {}} onNew={() => {}} />
     </div>
   );
 }
 
 export default defineDemo({
-  title: "Thread List",
+  title: "History",
   description:
-    "Conversation history grouped by day, with the active thread marked. Rename inline from the menu or by double click; Enter saves, Escape cancels.",
+    "Chat history grouped by day, with the active thread marked. Rename inline from the menu or by double click; Enter saves, Escape cancels.",
   controls: { editable: toggle(true) },
   playground: ({ editable }) => <Playground editable={editable} />,
   code: () =>
-    `<ThreadList\n  threads={threads}\n  activeId={threadId}\n  onSelect={openThread}\n  onNew={startThread}\n  onRename={renameThread}\n  onArchive={archiveThread}\n/>`,
+    `<History\n  threads={threads}\n  activeId={threadId}\n  onSelect={openThread}\n  onNew={startThread}\n  onRename={renameThread}\n  onArchive={archiveThread}\n/>`,
   props: [
-    { name: "threads", type: "ThreadSummary[]" },
+    { name: "threads", type: "HistoryItem[]" },
     { name: "activeId", type: "string | null", defaultValue: "null" },
     { name: "onSelect", type: "(id: string) => void" },
     { name: "onNew", type: "() => void" },

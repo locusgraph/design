@@ -2,13 +2,13 @@
 
 import {
   type AgentMessage,
+  Approval,
   type ApprovalDecision,
-  ChatMessage,
-  Conversation,
-  PromptInput,
-  ToolApproval,
-  ToolCall,
+  Chat,
+  Composer,
+  Tool,
   type ToolPart,
+  Turn,
 } from "@locusgraph/agent-ui";
 import { RuleGrid, RuleGridCell } from "@locusgraph/components";
 import { useState } from "react";
@@ -20,7 +20,7 @@ import {
   userMessage,
 } from "./agent-script";
 
-function promptPlaceholder(awaitingApproval: boolean, decision?: ApprovalDecision) {
+function composerPlaceholder(awaitingApproval: boolean, decision?: ApprovalDecision) {
   if (awaitingApproval) {
     return "Approve or deny the action above";
   }
@@ -56,7 +56,7 @@ export function AgentChat() {
 
   const renderTool = (part: ToolPart) =>
     part.toolCallId === archiveCallId ? (
-      <ToolApproval
+      <Approval
         part={part}
         risk="write"
         actionLabel="Archive 3 accounts"
@@ -65,21 +65,21 @@ export function AgentChat() {
         onDeny={(reason) => decide({ approved: false, by: "You", at: Date.now(), reason })}
       />
     ) : (
-      <ToolCall part={part} />
+      <Tool part={part} />
     );
 
   return (
     <RuleGrid columns={1}>
       <RuleGridCell className="h-[480px] p-0">
-        <Conversation className="h-full">
+        <Chat className="h-full">
           {messages.map((message) => (
-            <ChatMessage key={message.id} message={message} renderTool={renderTool} />
+            <Turn key={message.id} message={message} renderTool={renderTool} />
           ))}
-        </Conversation>
+        </Chat>
       </RuleGridCell>
       <RuleGridCell className="p-3">
-        <PromptInput
-          placeholder={promptPlaceholder(awaitingApproval, decision)}
+        <Composer
+          placeholder={composerPlaceholder(awaitingApproval, decision)}
           disabled={awaitingApproval || decision !== undefined}
           onSubmit={send}
         />

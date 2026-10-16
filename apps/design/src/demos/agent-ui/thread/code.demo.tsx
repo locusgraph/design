@@ -1,4 +1,4 @@
-import { CodeBlock } from "@locusgraph/agent-ui";
+import { Code } from "@locusgraph/agent-ui";
 import { defineDemo, select, toggle } from "../../../registry/define-demo";
 
 const languages = ["ts", "sql", "json"] as const;
@@ -40,19 +40,19 @@ limit 5;`,
 function Command() {
   return (
     <div className="w-full max-w-xl">
-      <CodeBlock language="bash" code="pnpm add @locusgraph/agent-ui @locusgraph/components" />
+      <Code language="bash" code="pnpm add @locusgraph/agent-ui @locusgraph/components" />
     </div>
   );
 }
 
 export default defineDemo({
-  title: "Code Block",
+  title: "Code",
   description:
-    "Code in a message or artifact, highlighted with Shiki in light and dark. Plain code renders first, so it works on the server and before Shiki loads.",
+    "Code in a message or canvas, highlighted with Shiki in light and dark. Plain code renders first, so it works on the server and before Shiki loads.",
   controls: { language: select(languages), filename: toggle(true) },
   playground: ({ language, filename }) => (
     <div className="w-full max-w-xl">
-      <CodeBlock
+      <Code
         language={language}
         code={samples[language].code}
         filename={filename ? samples[language].filename : undefined}
@@ -60,7 +60,7 @@ export default defineDemo({
     </div>
   ),
   code: ({ language, filename }) =>
-    `<CodeBlock language="${language}"${filename ? ` filename="${samples[language].filename}"` : ""} code={code} />`,
+    `<Code language="${language}"${filename ? ` filename="${samples[language].filename}"` : ""} code={code} />`,
   props: [
     { name: "code", type: "string" },
     { name: "language", type: "string", defaultValue: '"text"' },

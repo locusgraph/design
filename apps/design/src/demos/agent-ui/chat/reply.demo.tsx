@@ -1,4 +1,4 @@
-import { Response } from "@locusgraph/agent-ui";
+import { Reply } from "@locusgraph/agent-ui";
 import { useEffect, useState } from "react";
 import { defineDemo, select } from "../../../registry/define-demo";
 
@@ -30,24 +30,23 @@ function Streaming() {
   }, []);
   const isDone = length >= answer.length;
   return (
-    <Response state={isDone ? "done" : "streaming"} className="w-full max-w-xl">
+    <Reply state={isDone ? "done" : "streaming"} className="w-full max-w-xl">
       {answer.slice(0, length)}
-    </Response>
+    </Reply>
   );
 }
 
 export default defineDemo({
-  title: "Response",
+  title: "Reply",
   description:
     "Assistant Markdown with GitHub tables, lists, code and links that open in a new tab. While streaming it is announced politely and an open code fence is closed so the block does not jump.",
   controls: { state: select(states) },
   playground: ({ state }) => (
-    <Response state={state} className="w-full max-w-xl">
+    <Reply state={state} className="w-full max-w-xl">
       {answer}
-    </Response>
+    </Reply>
   ),
-  code: ({ state }) =>
-    `<Response${state === "done" ? "" : ` state="${state}"`}>{part.text}</Response>`,
+  code: ({ state }) => `<Reply${state === "done" ? "" : ` state="${state}"`}>{part.text}</Reply>`,
   props: [
     { name: "children", type: "string" },
     { name: "state", type: states.join(" | "), defaultValue: "done" },

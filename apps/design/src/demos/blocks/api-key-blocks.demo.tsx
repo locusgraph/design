@@ -1,4 +1,4 @@
-import { KeysTable, NoKeys } from "@locusgraph/blocks";
+import { Keys, KeysEmpty } from "@locusgraph/blocks";
 import { Button, RuleGrid, RuleGridCell } from "@locusgraph/components";
 import { defineDemo, toggle } from "../../registry/define-demo";
 
@@ -26,7 +26,7 @@ const keys = [
 function ReadOnlyEmpty() {
   return (
     <div className="w-full max-w-2xl">
-      <NoKeys />
+      <KeysEmpty />
     </div>
   );
 }
@@ -38,11 +38,11 @@ export default defineDemo({
   playground: ({ empty }) => (
     <div className="w-full max-w-3xl">
       {empty ? (
-        <NoKeys newKeyHref="#new-key" />
+        <KeysEmpty newKeyHref="#new-key" />
       ) : (
         <RuleGrid columns={1}>
           <RuleGridCell className="p-0">
-            <KeysTable
+            <Keys
               keys={keys}
               actions={() => (
                 <Button
@@ -61,13 +61,13 @@ export default defineDemo({
   ),
   code: ({ empty }) =>
     empty
-      ? `<NoKeys newKeyHref="/keys/new" linkComponent={Link} />`
-      : `<KeysTable keys={keys} actions={(key) => <RevokeButton keyId={key.id} />} />`,
+      ? `<KeysEmpty newKeyHref="/keys/new" linkComponent={Link} />`
+      : `<Keys keys={keys} actions={(key) => <RevokeButton keyId={key.id} />} />`,
   props: [
-    { name: "KeysTable.keys", type: "ApiKeyRow[]" },
-    { name: "KeysTable.actions", type: "(key: ApiKeyRow) => ReactNode" },
-    { name: "KeysTable.highlightedId", type: "string", defaultValue: "flashes a just-created key" },
-    { name: "NoKeys.newKeyHref", type: "string", defaultValue: "omit for read-only roles" },
+    { name: "Keys.keys", type: "ApiKeyRow[]" },
+    { name: "Keys.actions", type: "(key: ApiKeyRow) => ReactNode" },
+    { name: "Keys.highlightedId", type: "string", defaultValue: "flashes a just-created key" },
+    { name: "KeysEmpty.newKeyHref", type: "string", defaultValue: "omit for read-only roles" },
   ],
   examples: {
     ReadOnlyEmpty: {

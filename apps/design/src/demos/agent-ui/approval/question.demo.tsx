@@ -1,4 +1,4 @@
-import { AgentQuestion } from "@locusgraph/agent-ui";
+import { Question } from "@locusgraph/agent-ui";
 import { defineDemo, select } from "../../../registry/define-demo";
 
 const modeOptions = ["choices", "choices-and-text", "text", "answered"] as const;
@@ -12,7 +12,7 @@ const graphOptions = [
 function FreeText() {
   return (
     <div className="w-full max-w-lg">
-      <AgentQuestion
+      <Question
         question="What should I call the new SpendGraph budget?"
         textPlaceholder="For example, Q4 inference"
         autoFocus={false}
@@ -23,13 +23,13 @@ function FreeText() {
 }
 
 export default defineDemo({
-  title: "Agent Question",
+  title: "Question",
   description:
     "The agent asks something mid-run. Numbered choices you can pick with 1–9, a free answer, or both. The run waits until you send; the answered state shows what was chosen and by whom.",
   controls: { mode: select(modeOptions, "choices-and-text") },
   playground: ({ mode }) => (
     <div className="w-full max-w-lg">
-      <AgentQuestion
+      <Question
         question="Which graph should I merge the duplicates into?"
         options={mode === "text" ? undefined : graphOptions}
         allowText={mode !== "choices"}
@@ -49,7 +49,7 @@ export default defineDemo({
     </div>
   ),
   code: () =>
-    `<AgentQuestion\n  question={question.text}\n  options={question.options}\n  allowText\n  answer={question.answer}\n  onAnswer={(answer) => addToolResult({ toolCallId, output: answer })}\n/>`,
+    `<Question\n  question={question.text}\n  options={question.options}\n  allowText\n  answer={question.answer}\n  onAnswer={(answer) => addToolResult({ toolCallId, output: answer })}\n/>`,
   props: [
     { name: "question", type: "string" },
     { name: "options", type: "{ id: string; label: string; description?: string }[]" },

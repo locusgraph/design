@@ -1,4 +1,4 @@
-import { MemoryRecall } from "@locusgraph/agent-ui";
+import { Recall } from "@locusgraph/agent-ui";
 import { defineDemo, toggle } from "../../../registry/define-demo";
 
 const memories = [
@@ -38,22 +38,17 @@ const memories = [
 ];
 
 export default defineDemo({
-  title: "Memory Recall",
+  title: "Recall",
   description:
     "The memories and graph nodes LocusGraph recalled for this answer, each with its kind and relevance, as ruled rows. Collapsed, it reads as a single line.",
   controls: { open: toggle(true) },
   playground: ({ open }) => (
     <div className="w-full max-w-xl">
-      <MemoryRecall
-        key={String(open)}
-        memories={memories}
-        defaultOpen={open}
-        onOpenMemory={() => {}}
-      />
+      <Recall key={String(open)} memories={memories} defaultOpen={open} onOpenMemory={() => {}} />
     </div>
   ),
   code: ({ open }) =>
-    `<MemoryRecall memories={recall.memories}${open ? " defaultOpen" : ""} onOpenMemory={openMemory} />`,
+    `<Recall memories={recall.memories}${open ? " defaultOpen" : ""} onOpenMemory={openMemory} />`,
   props: [
     { name: "memories", type: "MemoryRef[]" },
     { name: "onOpenMemory", type: "(id: string) => void" },

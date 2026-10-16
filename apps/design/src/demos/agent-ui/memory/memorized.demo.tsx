@@ -1,8 +1,8 @@
-import { MemoryWrite, type MemoryWriteItem } from "@locusgraph/agent-ui";
+import { Memorized, type MemorizedItem } from "@locusgraph/agent-ui";
 import { useState } from "react";
 import { defineDemo } from "../../../registry/define-demo";
 
-const savedThisTurn: MemoryWriteItem[] = [
+const savedThisTurn: MemorizedItem[] = [
   {
     id: "w_1",
     text: "Acme moves billing to the 1st of each month",
@@ -21,20 +21,20 @@ function UndoableWrites() {
     );
   return (
     <div className="w-full max-w-xl">
-      <MemoryWrite items={items} onUndo={undo} />
+      <Memorized items={items} onUndo={undo} />
     </div>
   );
 }
 
 export default defineDemo({
-  title: "Memory Write",
+  title: "Memorized",
   description:
     "What the agent saved to the graph this turn. Each item can be undone; undone items stay in the list, struck through.",
   controls: {},
   playground: () => <UndoableWrites />,
-  code: () => `<MemoryWrite items={turn.memoryWrites} onUndo={undoMemoryWrite} />`,
+  code: () => `<Memorized items={turn.memorized} onUndo={undoMemorized} />`,
   props: [
-    { name: "items", type: "MemoryWriteItem[]" },
+    { name: "items", type: "MemorizedItem[]" },
     { name: "onUndo", type: "(id: string) => void" },
   ],
   examples: {},

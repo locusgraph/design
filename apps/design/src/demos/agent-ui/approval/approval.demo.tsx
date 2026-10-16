@@ -1,4 +1,4 @@
-import { ToolApproval, type ToolPart } from "@locusgraph/agent-ui";
+import { Approval, type ToolPart } from "@locusgraph/agent-ui";
 import { defineDemo, select, toggle } from "../../../registry/define-demo";
 
 const riskOptions = ["read", "write", "destructive"] as const;
@@ -39,7 +39,7 @@ const decidedAt = Date.UTC(2026, 9, 17, 14, 32);
 function Approved() {
   return (
     <div className="w-full max-w-xl">
-      <ToolApproval
+      <Approval
         part={{ ...parts.write, state: "approval-responded" }}
         decision={{ approved: true, by: "Maya Chen", at: decidedAt }}
         onApprove={() => {}}
@@ -52,7 +52,7 @@ function Approved() {
 function DeniedWithReason() {
   return (
     <div className="w-full max-w-xl">
-      <ToolApproval
+      <Approval
         part={{ ...parts.destructive, state: "output-denied" }}
         risk="destructive"
         decision={{
@@ -69,13 +69,13 @@ function DeniedWithReason() {
 }
 
 export default defineDemo({
-  title: "Tool Approval",
+  title: "Approval",
   description:
     "Pauses a tool call that writes, pays, sends or deletes and shows exactly what it will do. The approve button names the action; after a decision it shows who decided and when.",
   controls: { risk: select(riskOptions, "destructive"), decided: toggle(false) },
   playground: ({ risk, decided }) => (
     <div className="w-full max-w-xl">
-      <ToolApproval
+      <Approval
         part={parts[risk]}
         risk={risk}
         actionLabel={actionLabels[risk]}
@@ -87,7 +87,7 @@ export default defineDemo({
     </div>
   ),
   code: ({ risk }) =>
-    `<ToolApproval\n  part={part}\n  risk="${risk}"\n  actionLabel="${actionLabels[risk]}"\n  decision={decision}\n  onApprove={() => addToolApprovalResponse({ id: part.toolCallId, approved: true })}\n  onDeny={(reason) => addToolApprovalResponse({ id: part.toolCallId, approved: false, reason })}\n/>`,
+    `<Approval\n  part={part}\n  risk="${risk}"\n  actionLabel="${actionLabels[risk]}"\n  decision={decision}\n  onApprove={() => addToolApprovalResponse({ id: part.toolCallId, approved: true })}\n  onDeny={(reason) => addToolApprovalResponse({ id: part.toolCallId, approved: false, reason })}\n/>`,
   props: [
     { name: "part", type: "ToolPart" },
     { name: "risk", type: '"read" | "write" | "destructive"', defaultValue: '"write"' },

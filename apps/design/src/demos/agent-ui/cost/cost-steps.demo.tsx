@@ -1,4 +1,4 @@
-import { type CostStep, StepCostTimeline } from "@locusgraph/agent-ui";
+import { type CostStep, CostSteps } from "@locusgraph/agent-ui";
 import { defineDemo, toggle } from "../../../registry/define-demo";
 
 const steps: CostStep[] = [
@@ -40,18 +40,16 @@ const steps: CostStep[] = [
 ];
 
 export default defineDemo({
-  title: "Step Cost Timeline",
+  title: "Cost Steps",
   description:
     "What each step of a run cost, as ruled rows with a bar proportional to cost. The total leads; tokens, time and money wasted on failed steps follow.",
   controls: { withFailure: toggle(true) },
   playground: ({ withFailure }) => (
     <div className="w-[36rem] max-w-full">
-      <StepCostTimeline
-        steps={withFailure ? steps : steps.filter((step) => step.status !== "failed")}
-      />
+      <CostSteps steps={withFailure ? steps : steps.filter((step) => step.status !== "failed")} />
     </div>
   ),
-  code: () => `<StepCostTimeline steps={run.steps} />`,
+  code: () => `<CostSteps steps={run.steps} />`,
   props: [
     { name: "steps", type: "CostStep[]" },
     { name: "label", type: "string", defaultValue: "Cost by step" },

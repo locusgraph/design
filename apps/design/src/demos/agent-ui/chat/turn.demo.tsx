@@ -1,4 +1,4 @@
-import { type AgentMessage, ChatMessage } from "@locusgraph/agent-ui";
+import { type AgentMessage, Turn } from "@locusgraph/agent-ui";
 import { Avatar, AvatarFallback } from "@locusgraph/components";
 import { defineDemo, select } from "../../../registry/define-demo";
 
@@ -51,8 +51,8 @@ const messages = { assistant: assistantMessage, user: userMessage };
 function Pair() {
   return (
     <div className="flex w-full max-w-xl flex-col gap-6">
-      <ChatMessage message={userMessage} />
-      <ChatMessage
+      <Turn message={userMessage} />
+      <Turn
         message={assistantMessage}
         avatar={
           <Avatar className="size-8">
@@ -66,7 +66,7 @@ function Pair() {
 
 function CustomTool() {
   return (
-    <ChatMessage
+    <Turn
       className="w-full max-w-xl"
       message={assistantMessage}
       renderTool={(part) => (
@@ -79,12 +79,12 @@ function CustomTool() {
 }
 
 export default defineDemo({
-  title: "Chat Message",
+  title: "Turn",
   description:
-    "One AgentMessage with its parts in order. User text is a compact muted block on the right; assistant text is unboxed prose at a comfortable reading width. Reasoning, tool calls and sources use the rich components unless you pass a render prop.",
+    "One AgentMessage with its parts in order. User text is a compact muted block on the right; assistant text is unboxed prose at a comfortable reading width. Thinking, tool calls and sources use the rich components unless you pass a render prop.",
   controls: { role: select(roles) },
-  playground: ({ role }) => <ChatMessage className="w-full max-w-xl" message={messages[role]} />,
-  code: () => "<ChatMessage message={message} />",
+  playground: ({ role }) => <Turn className="w-full max-w-xl" message={messages[role]} />,
+  code: () => "<Turn message={message} />",
   props: [
     { name: "message", type: "AgentMessage" },
     { name: "avatar", type: "ReactNode" },

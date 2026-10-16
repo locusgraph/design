@@ -1,4 +1,4 @@
-import { type ModelOption, ModelSelector } from "@locusgraph/agent-ui";
+import { type ModelOption, ModelPicker } from "@locusgraph/agent-ui";
 import { useState } from "react";
 import { defineDemo } from "../../../registry/define-demo";
 
@@ -45,19 +45,19 @@ function ChooseModel() {
   const [value, setValue] = useState("claude-sonnet-4.5");
   return (
     <div className="flex h-[24rem] w-full justify-center">
-      <ModelSelector models={models} value={value} onChange={setValue} />
+      <ModelPicker models={models} value={value} onChange={setValue} />
     </div>
   );
 }
 
 export default defineDemo({
-  title: "Model Selector",
+  title: "Model Picker",
   description:
-    "A quiet trigger with the model and its provider. The menu lists each model with speed, context size and price per million tokens, and checks the one in use. Small enough for a prompt input's model slot.",
+    "A quiet trigger with the model and its provider. The menu lists each model with speed, context size and price per million tokens, and checks the one in use. Small enough for the composer's model slot.",
   previewHeight: "tall",
   controls: {},
   playground: () => <ChooseModel />,
-  code: () => `<ModelSelector models={models} value={modelId} onChange={setModelId} />`,
+  code: () => `<ModelPicker models={models} value={modelId} onChange={setModelId} />`,
   props: [
     { name: "models", type: "ModelOption[]" },
     { name: "value", type: "string" },

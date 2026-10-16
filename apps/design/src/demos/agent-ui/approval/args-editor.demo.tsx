@@ -1,4 +1,4 @@
-import { type ArgField, ToolArgsEditor } from "@locusgraph/agent-ui";
+import { type ArgField, ArgsEditor } from "@locusgraph/agent-ui";
 import { defineDemo, select } from "../../../registry/define-demo";
 
 const fields: ArgField[] = [
@@ -32,7 +32,7 @@ const riskOptions = ["write", "destructive"] as const;
 function GraphRetention() {
   return (
     <div className="w-full max-w-xl">
-      <ToolArgsEditor
+      <ArgsEditor
         toolName="prune_graph"
         risk="destructive"
         actionLabel="Prune acme-events"
@@ -50,13 +50,13 @@ function GraphRetention() {
 }
 
 export default defineDemo({
-  title: "Tool Args Editor",
+  title: "Args Editor",
   description:
     "Lets a person correct a tool's inputs before approving. Fields come from a small schema; validation runs on submit and focus moves to the first field to fix.",
   controls: { risk: select(riskOptions, "write") },
   playground: ({ risk }) => (
     <div className="w-full max-w-xl">
-      <ToolArgsEditor
+      <ArgsEditor
         toolName="send_invoice"
         risk={risk}
         actionLabel="Send INV-2041"
@@ -68,7 +68,7 @@ export default defineDemo({
     </div>
   ),
   code: ({ risk }) =>
-    `<ToolArgsEditor\n  toolName="send_invoice"\n  risk="${risk}"\n  actionLabel="Send INV-2041"\n  fields={fields}\n  initialValues={part.input}\n  onApprove={(input) => approveWithInput(part.toolCallId, input)}\n  onCancel={closeEditor}\n/>`,
+    `<ArgsEditor\n  toolName="send_invoice"\n  risk="${risk}"\n  actionLabel="Send INV-2041"\n  fields={fields}\n  initialValues={part.input}\n  onApprove={(input) => approveWithInput(part.toolCallId, input)}\n  onCancel={closeEditor}\n/>`,
   props: [
     { name: "toolName", type: "string" },
     {

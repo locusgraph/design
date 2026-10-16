@@ -1,4 +1,4 @@
-import { ApprovalInbox, type PendingApproval } from "@locusgraph/agent-ui";
+import { Inbox, type PendingApproval } from "@locusgraph/agent-ui";
 import { defineDemo, toggle } from "../../../registry/define-demo";
 
 const now = Date.UTC(2026, 9, 17, 12, 0);
@@ -41,19 +41,19 @@ const items: PendingApproval[] = [
 function Empty() {
   return (
     <div className="w-full max-w-2xl">
-      <ApprovalInbox items={[]} onApprove={() => {}} onDeny={() => {}} onApproveAll={() => {}} />
+      <Inbox items={[]} onApprove={() => {}} onDeny={() => {}} onApproveAll={() => {}} />
     </div>
   );
 }
 
 export default defineDemo({
-  title: "Approval Inbox",
+  title: "Inbox",
   description:
     "Every approval waiting across runs, with how long each has waited. Select several to approve together; destructive requests are approved one at a time.",
   controls: { empty: toggle(false) },
   playground: ({ empty }) => (
     <div className="w-full max-w-2xl">
-      <ApprovalInbox
+      <Inbox
         items={empty ? [] : items}
         now={now}
         onApprove={() => {}}
@@ -63,7 +63,7 @@ export default defineDemo({
     </div>
   ),
   code: () =>
-    "<ApprovalInbox\n  items={pending}\n  onApprove={(id) => respond(id, true)}\n  onDeny={(id) => respond(id, false)}\n  onApproveAll={(ids) => ids.forEach((id) => respond(id, true))}\n/>",
+    "<Inbox\n  items={pending}\n  onApprove={(id) => respond(id, true)}\n  onDeny={(id) => respond(id, false)}\n  onApproveAll={(ids) => ids.forEach((id) => respond(id, true))}\n/>",
   props: [
     { name: "items", type: "{ id; title; runName; risk; requestedAt; summary? }[]" },
     { name: "now", type: "number", defaultValue: "Date.now()" },

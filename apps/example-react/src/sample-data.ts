@@ -1,8 +1,8 @@
-import type { ApiKeyRow, CreditPack, PlanOffer, Quota, WalletGrant } from "@locusgraph/blocks";
+import type { ApiKeyRow, CreditPack, PlanOffer, QuotaData, WalletGrant } from "@locusgraph/blocks";
 
 export const organization = { name: "Acme Inc", plan: "Free" };
 
-export const quotas: Quota[] = [
+export const quotas: QuotaData[] = [
   { key: "locusgraph.graphs", period: "lifetime", used: 0, included: 1 },
   { key: "spendgraph.events", period: "month", used: 10450, included: 10000 },
 ];

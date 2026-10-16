@@ -1,4 +1,4 @@
-import { RunCost } from "@locusgraph/agent-ui";
+import { Cost } from "@locusgraph/agent-ui";
 import { defineDemo, select, toggle } from "../../../registry/define-demo";
 
 const variants = ["compact", "detailed"] as const;
@@ -22,22 +22,22 @@ function UnderMessage() {
   return (
     <div className="flex max-w-md flex-col gap-2 text-sm">
       <p>Acme's next invoice moves to November 1st, prorated for the 12 extra days.</p>
-      <RunCost usage={[timedOut, answered]} />
+      <Cost usage={[timedOut, answered]} />
     </div>
   );
 }
 
 export default defineDemo({
-  title: "Run Cost",
+  title: "Cost",
   description:
     "Tokens and cost for one message or run. Pass one RunUsage or every attempt; failed attempts are counted and their wasted cost shown in red.",
   controls: { variant: select(variants, "detailed"), withFailure: toggle(true) },
   playground: ({ variant, withFailure }) => (
     <div className="w-[32rem] max-w-full">
-      <RunCost variant={variant} usage={withFailure ? [timedOut, answered] : answered} />
+      <Cost variant={variant} usage={withFailure ? [timedOut, answered] : answered} />
     </div>
   ),
-  code: ({ variant }) => `<RunCost variant="${variant}" usage={run.attempts} />`,
+  code: ({ variant }) => `<Cost variant="${variant}" usage={run.attempts} />`,
   props: [
     { name: "usage", type: "RunUsage | RunUsage[]" },
     { name: "variant", type: variants.join(" | "), defaultValue: "compact" },

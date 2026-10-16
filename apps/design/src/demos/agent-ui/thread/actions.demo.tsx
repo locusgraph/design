@@ -1,4 +1,4 @@
-import { MessageActions, type MessageFeedback } from "@locusgraph/agent-ui";
+import { Actions, type MessageFeedback } from "@locusgraph/agent-ui";
 import { useState } from "react";
 import { defineDemo, toggle } from "../../../registry/define-demo";
 
@@ -14,7 +14,7 @@ function Playground({ withBranches }: { withBranches: boolean }) {
   return (
     <div className="flex w-full max-w-xl flex-col gap-2">
       <p className="text-sm">{answers[branch]}</p>
-      <MessageActions
+      <Actions
         onCopy={() => {}}
         onRetry={() => {}}
         feedback={feedback}
@@ -32,19 +32,19 @@ function CopyOnly() {
       <p className="max-w-[85%] bg-muted px-3.5 py-2 text-sm">
         How much did the support agent spend in September?
       </p>
-      <MessageActions onCopy={() => {}} />
+      <Actions onCopy={() => {}} />
     </div>
   );
 }
 
 export default defineDemo({
-  title: "Message Actions",
+  title: "Actions",
   description:
     "Icon buttons under an assistant message: copy, retry, feedback and a switcher between regenerated versions. Each action shows only when its callback is passed.",
   controls: { branches: toggle(true) },
   playground: ({ branches }) => <Playground withBranches={branches} />,
   code: ({ branches }) =>
-    `<MessageActions\n  onCopy={() => copy(text)}\n  onRetry={regenerate}\n  feedback={feedback}\n  onFeedback={setFeedback}${
+    `<Actions\n  onCopy={() => copy(text)}\n  onRetry={regenerate}\n  feedback={feedback}\n  onFeedback={setFeedback}${
       branches ? "\n  branch={{ index, count }}\n  onBranchChange={setIndex}" : ""
     }\n/>`,
   props: [

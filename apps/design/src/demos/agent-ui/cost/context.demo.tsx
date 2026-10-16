@@ -1,4 +1,4 @@
-import { ContextMeter } from "@locusgraph/agent-ui";
+import { Context } from "@locusgraph/agent-ui";
 import { defineDemo, select } from "../../../registry/define-demo";
 
 const levels = { comfortable: 74_200, near: 168_400, full: 200_000 } as const;
@@ -13,7 +13,7 @@ function breakdownFor(usedTokens: number) {
     { label: "System prompt", tokens: system },
     { label: "Recalled memories", tokens: recalled },
     { label: "Tool results", tokens: tools },
-    { label: "Conversation", tokens: usedTokens - system - recalled - tools },
+    { label: "Chat", tokens: usedTokens - system - recalled - tools },
   ];
 }
 
@@ -21,7 +21,7 @@ function InComposer() {
   return (
     <div className="flex w-[28rem] max-w-full items-center justify-between bg-card py-2 pr-2 pl-4 text-sm text-muted-foreground ring-1 ring-border">
       <span>Ask about Acme's billing…</span>
-      <ContextMeter
+      <Context
         variant="ring"
         usedTokens={levels.near}
         limitTokens={200_000}
@@ -32,14 +32,14 @@ function InComposer() {
 }
 
 export default defineDemo({
-  title: "Context Meter",
+  title: "Context",
   description:
     "Context window used against its limit. Amber from 80%, red when full. With a breakdown, hover or focus shows what fills the window.",
   previewHeight: "tall",
   controls: { level: select(levelOptions, "near"), variant: select(variants) },
   playground: ({ level, variant }) => (
     <div className="h-[20rem] w-[22rem] max-w-full">
-      <ContextMeter
+      <Context
         variant={variant}
         usedTokens={levels[level]}
         limitTokens={200_000}
@@ -48,7 +48,7 @@ export default defineDemo({
     </div>
   ),
   code: ({ variant }) =>
-    `<ContextMeter\n  variant="${variant}"\n  usedTokens={context.usedTokens}\n  limitTokens={model.contextTokens}\n  breakdown={context.breakdown}\n/>`,
+    `<Context\n  variant="${variant}"\n  usedTokens={context.usedTokens}\n  limitTokens={model.contextTokens}\n  breakdown={context.breakdown}\n/>`,
   props: [
     { name: "usedTokens", type: "number" },
     { name: "limitTokens", type: "number" },
@@ -58,7 +58,7 @@ export default defineDemo({
   ],
   examples: {
     InComposer: {
-      description: "The ring variant fits beside a prompt input.",
+      description: "The ring variant fits beside the composer.",
       component: InComposer,
     },
   },

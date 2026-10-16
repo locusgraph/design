@@ -1,7 +1,7 @@
-import { Loader, type LoaderTone, type LoaderVariant, loaderVariants } from "@locusgraph/agent-ui";
+import { Pulse, type PulseTone, type PulseVariant, pulseVariants } from "@locusgraph/agent-ui";
 import { defineDemo, select, text, toggle } from "../../../registry/define-demo";
 
-const galleryLabels: Record<LoaderVariant, string> = {
+const galleryLabels: Record<PulseVariant, string> = {
   dots: "Typing dots",
   shimmer: "Searching memory…",
   glyph: "Pondering…",
@@ -15,12 +15,12 @@ const galleryLabels: Record<LoaderVariant, string> = {
 function Gallery() {
   return (
     <div className="grid w-[36rem] max-w-full grid-cols-1 divide-y ring-1 ring-border sm:grid-cols-2 sm:divide-y-0">
-      {loaderVariants.map((variant) => (
+      {pulseVariants.map((variant) => (
         <div
           key={variant}
           className="flex items-center justify-between gap-4 px-4 py-3.5 sm:border-b sm:odd:border-r"
         >
-          <Loader variant={variant} label={galleryLabels[variant]} showLabel />
+          <Pulse variant={variant} label={galleryLabels[variant]} showLabel />
           <span className="eyebrow">{variant}</span>
         </div>
       ))}
@@ -31,8 +31,8 @@ function Gallery() {
 function LocusGraph() {
   return (
     <div className="flex flex-col items-center gap-3">
-      <Loader variant="locus" showLabel={false} className="text-[40px]" />
-      <Loader variant="shimmer" label="Recalling 18,204 nodes from acme-customers…" />
+      <Pulse variant="locus" showLabel={false} className="text-[40px]" />
+      <Pulse variant="shimmer" label="Recalling 18,204 nodes from acme-customers…" />
     </div>
   );
 }
@@ -40,9 +40,9 @@ function LocusGraph() {
 function Steps() {
   return (
     <div className="flex flex-col items-start gap-3">
-      <Loader variant="glyph" label="Reading the acme-customers graph…" />
-      <Loader variant="spinner" label="Writing to graph_acme…" />
-      <Loader variant="gradient" label="Summing September spend…" />
+      <Pulse variant="glyph" label="Reading the acme-customers graph…" />
+      <Pulse variant="spinner" label="Writing to graph_acme…" />
+      <Pulse variant="gradient" label="Summing September spend…" />
     </div>
   );
 }
@@ -50,29 +50,29 @@ function Steps() {
 function BrandTone() {
   return (
     <div className="flex flex-col items-start gap-3">
-      <Loader variant="glyph" tone="brand" label="Pondering…" />
-      <Loader variant="gradient" tone="brand" label="Thinking…" />
+      <Pulse variant="glyph" tone="brand" label="Pondering…" />
+      <Pulse variant="gradient" tone="brand" label="Thinking…" />
     </div>
   );
 }
 
-const tones: LoaderTone[] = ["neutral", "brand"];
+const tones: PulseTone[] = ["neutral", "brand"];
 
 export default defineDemo({
-  title: "Loader",
+  title: "Pulse",
   description:
     "Shows the agent is working. Eight variants: typing dots, a shimmering label, a cycling star glyph like Claude Code, a breathing orb like ChatGPT, a gradient sparkle like Gemini, equalizer bars, a ring spinner, and the LocusGraph burst whose rays light up in a sweep. Every variant is a status region, scales with font size and holds still under reduced motion.",
   controls: {
-    variant: select(loaderVariants, "locus"),
+    variant: select(pulseVariants, "locus"),
     label: text("Thinking…"),
     showLabel: toggle(true),
     tone: select(tones, "neutral"),
   },
   playground: ({ variant, label, showLabel, tone }) => (
-    <Loader variant={variant} label={label} showLabel={showLabel} tone={tone} />
+    <Pulse variant={variant} label={label} showLabel={showLabel} tone={tone} />
   ),
   code: ({ variant, label, showLabel, tone }) =>
-    `<Loader${variant === "dots" ? "" : ` variant="${variant}"`}${label === "Thinking…" ? "" : ` label="${label}"`}${showLabel ? "" : " showLabel={false}"}${tone === "neutral" ? "" : ` tone="${tone}"`} />`,
+    `<Pulse${variant === "dots" ? "" : ` variant="${variant}"`}${label === "Thinking…" ? "" : ` label="${label}"`}${showLabel ? "" : " showLabel={false}"}${tone === "neutral" ? "" : ` tone="${tone}"`} />`,
   props: [
     {
       name: "variant",

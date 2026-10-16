@@ -1,20 +1,15 @@
-import {
-  type AttachmentItem,
-  Attachments,
-  PromptInput,
-  type PromptStatus,
-} from "@locusgraph/agent-ui";
+import { Composer, type ComposerStatus, type FileItem, Files } from "@locusgraph/agent-ui";
 import { Badge } from "@locusgraph/components";
 import { useState } from "react";
 import { defineDemo, select, toggle } from "../../../registry/define-demo";
 
 const statuses = ["ready", "submitting", "streaming", "error"] as const;
 
-const attached: AttachmentItem[] = [
+const attached: FileItem[] = [
   { id: "file_spend", name: "spend-october.csv", mediaType: "text/csv", sizeBytes: 1_284_000 },
 ];
 
-function itemsFromFiles(files: File[]): AttachmentItem[] {
+function itemsFromFiles(files: File[]): FileItem[] {
   return files.map((file, index) => ({
     id: `${index}:${file.name}`,
     name: file.name,
@@ -25,15 +20,15 @@ function itemsFromFiles(files: File[]): AttachmentItem[] {
 
 function WithFiles() {
   const [files, setFiles] = useState<File[]>([]);
-  const [status, setStatus] = useState<PromptStatus>("ready");
+  const [status, setStatus] = useState<ComposerStatus>("ready");
   return (
-    <PromptInput
+    <Composer
       className="w-full max-w-xl"
       status={status}
       files={files}
       onAttachFiles={(picked) => setFiles((current) => [...current, ...picked])}
       attachments={
-        <Attachments
+        <Files
           items={itemsFromFiles(files)}
           onRemove={(id) =>
             setFiles((current) => current.filter((file, index) => `${index}:${file.name}` !== id))
@@ -51,7 +46,7 @@ function WithFiles() {
 }
 
 export default defineDemo({
-  title: "Prompt Input",
+  title: "Composer",
   description:
     "The composer. Enter sends, Shift+Enter adds a line, and the textarea grows with the text. While a run is submitting or streaming the send button becomes Stop.",
   controls: {
@@ -60,13 +55,13 @@ export default defineDemo({
     disabled: toggle(false),
   },
   playground: ({ status, attachments, disabled }) => (
-    <PromptInput
+    <Composer
       className="w-full max-w-xl"
       status={status}
       disabled={disabled}
       placeholder="Ask what your agents remember or spend…"
       errorMessage="The model did not answer. Try again."
-      attachments={attachments ? <Attachments items={attached} onRemove={() => {}} /> : undefined}
+      attachments={attachments ? <Files items={attached} onRemove={() => {}} /> : undefined}
       modelSlot={<Badge variant="outline">claude-sonnet</Badge>}
       onAttachFiles={() => {}}
       onSubmit={() => {}}
@@ -74,7 +69,7 @@ export default defineDemo({
     />
   ),
   code: ({ status, disabled }) =>
-    `<PromptInput\n  status="${status}"${disabled ? "\n  disabled" : ""}\n  files={files}\n  onAttachFiles={addFiles}\n  attachments={<Attachments items={items} onRemove={removeFile} />}\n  modelSlot={<ModelPicker />}\n  onSubmit={(text, files) => sendMessage({ text, files })}\n  onStop={stop}\n/>`,
+    `<Composer\n  status="${status}"${disabled ? "\n  disabled" : ""}\n  files={files}\n  onAttachFiles={addFiles}\n  attachments={<Files items={items} onRemove={removeFile} />}\n  modelSlot={<ModelPicker />}\n  onSubmit={(text, files) => sendMessage({ text, files })}\n  onStop={stop}\n/>`,
   props: [
     { name: "onSubmit", type: "(text: string, files: File[]) => void" },
     { name: "onStop", type: "() => void" },

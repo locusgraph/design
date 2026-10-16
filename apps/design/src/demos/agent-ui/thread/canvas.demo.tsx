@@ -1,4 +1,4 @@
-import { Artifact, type ArtifactVersion, CodeBlock } from "@locusgraph/agent-ui";
+import { Canvas, type CanvasVersion, Code } from "@locusgraph/agent-ui";
 import { Button } from "@locusgraph/components";
 import { DownloadIcon } from "lucide-react";
 import { useState } from "react";
@@ -6,7 +6,7 @@ import { defineDemo, select } from "../../../registry/define-demo";
 
 const kinds = ["document", "code"] as const;
 
-const versions: ArtifactVersion[] = [
+const versions: CanvasVersion[] = [
   { id: "ver_1", label: "v1", createdAt: "2026-10-14T10:12:00.000Z" },
   { id: "ver_2", label: "v2", createdAt: "2026-10-15T15:40:00.000Z" },
   { id: "ver_3", label: "v3", createdAt: "2026-10-16T09:05:00.000Z" },
@@ -49,7 +49,7 @@ function Playground({ kind }: { kind: (typeof kinds)[number] }) {
   }
   return (
     <div className="h-72 w-full max-w-lg">
-      <Artifact
+      <Canvas
         title={kind === "code" ? "budgets.ts" : "September spend report"}
         kind={kind === "code" ? "Code" : "Document"}
         versions={versions}
@@ -63,11 +63,11 @@ function Playground({ kind }: { kind: (typeof kinds)[number] }) {
         }
       >
         {kind === "code" ? (
-          <CodeBlock language="ts" code={budgetCode} />
+          <Code language="ts" code={budgetCode} />
         ) : (
           <Report versionId={versionId} />
         )}
-      </Artifact>
+      </Canvas>
     </div>
   );
 }
@@ -75,25 +75,25 @@ function Playground({ kind }: { kind: (typeof kinds)[number] }) {
 function SingleVersion() {
   return (
     <div className="h-56 w-full max-w-lg">
-      <Artifact title="Acme account summary" kind="Document" versions={versions.slice(0, 1)}>
+      <Canvas title="Acme account summary" kind="Document" versions={versions.slice(0, 1)}>
         <p className="text-sm">Acme renews in March on the Pro plan, owned by Dana Lee.</p>
-      </Artifact>
+      </Canvas>
     </div>
   );
 }
 
 export default defineDemo({
-  title: "Artifact",
+  title: "Canvas",
   description:
     "A panel for a document or code the agent generated: kind and title up top, actions and close on the right, and the version switcher in the footer.",
   controls: { kind: select(kinds) },
   playground: ({ kind }) => <Playground kind={kind} />,
   code: () =>
-    `<Artifact\n  title="September spend report"\n  kind="Document"\n  versions={versions}\n  versionId={versionId}\n  onVersionChange={setVersionId}\n  actions={<DownloadButton />}\n  onClose={closePanel}\n>\n  {content}\n</Artifact>`,
+    `<Canvas\n  title="September spend report"\n  kind="Document"\n  versions={versions}\n  versionId={versionId}\n  onVersionChange={setVersionId}\n  actions={<DownloadButton />}\n  onClose={closePanel}\n>\n  {content}\n</Canvas>`,
   props: [
     { name: "title", type: "string" },
     { name: "kind", type: "string" },
-    { name: "versions", type: "ArtifactVersion[]", defaultValue: "[]" },
+    { name: "versions", type: "CanvasVersion[]", defaultValue: "[]" },
     { name: "versionId", type: "string", defaultValue: "the latest" },
     { name: "onVersionChange", type: "(id: string) => void" },
     { name: "actions", type: "ReactNode" },

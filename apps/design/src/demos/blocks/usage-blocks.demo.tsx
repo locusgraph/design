@@ -1,4 +1,4 @@
-import { type Quota, UsageAttention, UsageSummary } from "@locusgraph/blocks";
+import { type QuotaData, Usage, UsageAlert } from "@locusgraph/blocks";
 import { defineDemo, select } from "../../registry/define-demo";
 
 const scenarios = ["fine", "near", "over"] as const;
@@ -31,9 +31,9 @@ const quotasFor = {
       included: 10000,
     },
   ],
-} satisfies Record<(typeof scenarios)[number], Quota[]>;
+} satisfies Record<(typeof scenarios)[number], QuotaData[]>;
 
-const graphs: Quota = {
+const graphs: QuotaData = {
   key: "locusgraph.graphs",
   label: "LocusGraph graphs",
   period: "lifetime",
@@ -44,7 +44,7 @@ const graphs: Quota = {
 function LowCredits() {
   return (
     <div className="w-full max-w-2xl">
-      <UsageAttention
+      <UsageAlert
         balanceMicroUsd={1_000_000}
         quotas={quotasFor.over}
         paidPlan={false}
@@ -58,7 +58,7 @@ function LowCredits() {
 function OutOfCredits() {
   return (
     <div className="w-full max-w-2xl">
-      <UsageAttention
+      <UsageAlert
         balanceMicroUsd={0}
         quotas={[]}
         paidPlan
@@ -76,16 +76,16 @@ export default defineDemo({
   controls: { scenario: select(scenarios, "over") },
   playground: ({ scenario }) => (
     <div className="w-full max-w-2xl">
-      <UsageSummary quotas={[graphs, ...quotasFor[scenario]]} />
+      <Usage quotas={[graphs, ...quotasFor[scenario]]} />
     </div>
   ),
-  code: () => "<UsageSummary quotas={quotas} />",
+  code: () => "<Usage quotas={quotas} />",
   props: [
-    { name: "UsageSummary.quotas", type: "Quota[]" },
-    { name: "Quota.label", type: "string", defaultValue: "falls back to key" },
-    { name: "UsageAttention.balanceMicroUsd", type: "number | null" },
-    { name: "UsageAttention.paidPlan", type: "boolean" },
-    { name: "UsageAttention.linkComponent", type: 'LinkComponent | "a"', defaultValue: '"a"' },
+    { name: "Usage.quotas", type: "QuotaData[]" },
+    { name: "QuotaData.label", type: "string", defaultValue: "falls back to key" },
+    { name: "UsageAlert.balanceMicroUsd", type: "number | null" },
+    { name: "UsageAlert.paidPlan", type: "boolean" },
+    { name: "UsageAlert.linkComponent", type: 'LinkComponent | "a"', defaultValue: '"a"' },
   ],
   examples: {
     LowCredits: {

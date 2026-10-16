@@ -1,9 +1,9 @@
 import {
-  CreditPacksSkeleton,
-  KeysTableSkeleton,
-  PlanOptionsSkeleton,
-  UsageSummarySkeleton,
-  WalletPanelSkeleton,
+  KeysSkeleton,
+  PlansSkeleton,
+  TopUpSkeleton,
+  UsageSkeleton,
+  WalletSkeleton,
 } from "@locusgraph/blocks";
 import { RuleGrid, RuleGridCell } from "@locusgraph/components";
 import { defineDemo, select } from "../../registry/define-demo";
@@ -14,18 +14,18 @@ type Block = (typeof blocks)[number];
 
 function renderBlock(block: Block) {
   const skeletons = {
-    usage: <UsageSummarySkeleton quotas={2} />,
+    usage: <UsageSkeleton quotas={2} />,
     wallet: (
       <RuleGrid columns={2}>
-        <WalletPanelSkeleton />
-        <CreditPacksSkeleton />
+        <WalletSkeleton />
+        <TopUpSkeleton />
       </RuleGrid>
     ),
-    plans: <PlanOptionsSkeleton plans={2} />,
+    plans: <PlansSkeleton plans={2} />,
     keys: (
       <RuleGrid columns={1}>
         <RuleGridCell className="p-0">
-          <KeysTableSkeleton rows={3} actions />
+          <KeysSkeleton rows={3} actions />
         </RuleGridCell>
       </RuleGrid>
     ),
@@ -34,17 +34,16 @@ function renderBlock(block: Block) {
 }
 
 const blockCode = {
-  usage: "<UsageSummarySkeleton quotas={2} />",
-  wallet:
-    "<RuleGrid columns={2}>\n  <WalletPanelSkeleton />\n  <CreditPacksSkeleton />\n</RuleGrid>",
-  plans: "<PlanOptionsSkeleton plans={2} />",
-  keys: "<KeysTableSkeleton rows={3} actions />",
+  usage: "<UsageSkeleton quotas={2} />",
+  wallet: "<RuleGrid columns={2}>\n  <WalletSkeleton />\n  <TopUpSkeleton />\n</RuleGrid>",
+  plans: "<PlansSkeleton plans={2} />",
+  keys: "<KeysSkeleton rows={3} actions />",
 } as const;
 
 function Usage() {
   return (
     <div className="w-full max-w-xl">
-      <UsageSummarySkeleton quotas={3} />
+      <UsageSkeleton quotas={3} />
     </div>
   );
 }
@@ -52,8 +51,8 @@ function Usage() {
 function Wallet() {
   return (
     <RuleGrid columns={2} className="w-full max-w-3xl">
-      <WalletPanelSkeleton grants={2} />
-      <CreditPacksSkeleton packs={3} />
+      <WalletSkeleton grants={2} />
+      <TopUpSkeleton packs={3} />
     </RuleGrid>
   );
 }
@@ -61,7 +60,7 @@ function Wallet() {
 function Plans() {
   return (
     <div className="w-full max-w-3xl">
-      <PlanOptionsSkeleton plans={3} points={3} />
+      <PlansSkeleton plans={3} points={3} />
     </div>
   );
 }
@@ -71,7 +70,7 @@ function Keys() {
     <div className="w-full max-w-3xl">
       <RuleGrid columns={1}>
         <RuleGridCell className="p-0">
-          <KeysTableSkeleton rows={4} actions />
+          <KeysSkeleton rows={4} actions />
         </RuleGridCell>
       </RuleGrid>
     </div>
@@ -86,14 +85,14 @@ export default defineDemo({
   playground: ({ block }) => renderBlock(block),
   code: ({ block }) => blockCode[block],
   props: [
-    { name: "UsageSummarySkeleton.quotas", type: "number", defaultValue: "2" },
-    { name: "WalletPanelSkeleton.grants", type: "number", defaultValue: "1" },
-    { name: "CreditPacksSkeleton.packs", type: "number", defaultValue: "3" },
-    { name: "PlanOptionsSkeleton.plans", type: "number", defaultValue: "2" },
-    { name: "PlanOptionsSkeleton.points", type: "number", defaultValue: "2" },
-    { name: "KeysTableSkeleton.rows", type: "number", defaultValue: "3" },
-    { name: "KeysTableSkeleton.actions", type: "boolean", defaultValue: "false" },
-    { name: "PlanOptionsSkeleton.currentIndex", type: "number", defaultValue: "0" },
+    { name: "UsageSkeleton.quotas", type: "number", defaultValue: "2" },
+    { name: "WalletSkeleton.grants", type: "number", defaultValue: "1" },
+    { name: "TopUpSkeleton.packs", type: "number", defaultValue: "3" },
+    { name: "PlansSkeleton.plans", type: "number", defaultValue: "2" },
+    { name: "PlansSkeleton.points", type: "number", defaultValue: "2" },
+    { name: "KeysSkeleton.rows", type: "number", defaultValue: "3" },
+    { name: "KeysSkeleton.actions", type: "boolean", defaultValue: "false" },
+    { name: "PlansSkeleton.currentIndex", type: "number", defaultValue: "0" },
   ],
   examples: {
     Usage: { description: "Three quota meters while usage loads.", component: Usage },

@@ -1,4 +1,4 @@
-import { CreditPacks, PlanOptions, WalletPanel } from "@locusgraph/blocks";
+import { Plans, TopUp, Wallet } from "@locusgraph/blocks";
 import { Button, RuleGrid } from "@locusgraph/components";
 import { defineDemo, select } from "../../registry/define-demo";
 
@@ -13,10 +13,10 @@ const packs = [
 
 const grants = [{ label: "Free start", remainingMicroUsd: 1_000_000, expiresAt: null }];
 
-function Plans() {
+function ChoosePlan() {
   return (
     <div className="w-full max-w-3xl">
-      <PlanOptions
+      <Plans
         plans={[
           {
             name: "Free",
@@ -47,8 +47,8 @@ export default defineDemo({
   controls: { balance: select(balanceOptions, "low") },
   playground: ({ balance }) => (
     <RuleGrid columns={2} className="w-full max-w-3xl">
-      <WalletPanel balanceMicroUsd={balances[balance]} grants={balance === "empty" ? [] : grants} />
-      <CreditPacks
+      <Wallet balanceMicroUsd={balances[balance]} grants={balance === "empty" ? [] : grants} />
+      <TopUp
         packs={packs}
         onBuy={() => {}}
         highlightedPackId={balance === "fine" ? undefined : "credits_200"}
@@ -56,20 +56,20 @@ export default defineDemo({
     </RuleGrid>
   ),
   code: () =>
-    `<RuleGrid columns={2}>\n  <WalletPanel balanceMicroUsd={wallet.balanceMicroUsd} grants={grants} />\n  <CreditPacks packs={wallet.packs} onBuy={openCheckout} pendingPackId={pendingPackId} />\n</RuleGrid>`,
+    `<RuleGrid columns={2}>\n  <Wallet balanceMicroUsd={wallet.balanceMicroUsd} grants={grants} />\n  <TopUp packs={wallet.packs} onBuy={openCheckout} pendingPackId={pendingPackId} />\n</RuleGrid>`,
   props: [
-    { name: "WalletPanel.balanceMicroUsd", type: "number" },
-    { name: "WalletPanel.grants", type: "WalletGrant[]" },
-    { name: "CreditPacks.onBuy", type: "(packId: string) => void" },
-    { name: "CreditPacks.highlightedPackId", type: "string", defaultValue: "pack to suggest" },
-    { name: "CreditPacks.pendingPackId", type: "string", defaultValue: "shows a spinner" },
+    { name: "Wallet.balanceMicroUsd", type: "number" },
+    { name: "Wallet.grants", type: "WalletGrant[]" },
+    { name: "TopUp.onBuy", type: "(packId: string) => void" },
+    { name: "TopUp.highlightedPackId", type: "string", defaultValue: "pack to suggest" },
+    { name: "TopUp.pendingPackId", type: "string", defaultValue: "shows a spinner" },
     { name: "PlanOffer.amountCents", type: "number", defaultValue: "falls back to price" },
-    { name: "PlanOptions.actionFor", type: "(plan: PlanOffer) => ReactNode" },
+    { name: "Plans.actionFor", type: "(plan: PlanOffer) => ReactNode" },
   ],
   examples: {
-    Plans: {
+    ChoosePlan: {
       description: "The current plan gets a badge; the others get an action.",
-      component: Plans,
+      component: ChoosePlan,
     },
   },
   isNew: true,

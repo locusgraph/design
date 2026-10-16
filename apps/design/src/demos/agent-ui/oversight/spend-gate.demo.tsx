@@ -1,4 +1,4 @@
-import { SpendApproval } from "@locusgraph/agent-ui";
+import { SpendGate } from "@locusgraph/agent-ui";
 import { defineDemo, select } from "../../../registry/define-demo";
 
 const situationOptions = ["over-cap", "out-of-credits"] as const;
@@ -8,7 +8,7 @@ const balances = { "over-cap": 18_400_000, "out-of-credits": 210_000 } as const;
 function Allowed() {
   return (
     <div className="w-full max-w-xl">
-      <SpendApproval
+      <SpendGate
         runName="Q4 vendor reconciliation"
         spentMicroUsd={4_120_000}
         estimateMicroUsd={1_350_000}
@@ -24,13 +24,13 @@ function Allowed() {
 }
 
 export default defineDemo({
-  title: "Spend Approval",
+  title: "Spend Gate",
   description:
     "SpendGraph pauses a run that would pass its cost cap (amber) or run out of prepaid credits (red). Allow the next step once, raise the cap, or stop.",
   controls: { situation: select(situationOptions, "over-cap") },
   playground: ({ situation }) => (
     <div className="w-full max-w-xl">
-      <SpendApproval
+      <SpendGate
         runName="Q4 vendor reconciliation"
         spentMicroUsd={4_120_000}
         estimateMicroUsd={1_350_000}
@@ -45,7 +45,7 @@ export default defineDemo({
     </div>
   ),
   code: () =>
-    "<SpendApproval\n  spentMicroUsd={run.spentMicroUsd}\n  estimateMicroUsd={run.nextStepMicroUsd}\n  capMicroUsd={run.capMicroUsd}\n  balanceMicroUsd={wallet.balanceMicroUsd}\n  onAllowOnce={allowOnce}\n  onRaiseCap={(capMicroUsd) => raiseCap(run.id, capMicroUsd)}\n  onStop={stopRun}\n  onBuyCredits={openCheckout}\n/>",
+    "<SpendGate\n  spentMicroUsd={run.spentMicroUsd}\n  estimateMicroUsd={run.nextStepMicroUsd}\n  capMicroUsd={run.capMicroUsd}\n  balanceMicroUsd={wallet.balanceMicroUsd}\n  onAllowOnce={allowOnce}\n  onRaiseCap={(capMicroUsd) => raiseCap(run.id, capMicroUsd)}\n  onStop={stopRun}\n  onBuyCredits={openCheckout}\n/>",
   props: [
     { name: "spentMicroUsd", type: "number" },
     { name: "estimateMicroUsd", type: "number" },

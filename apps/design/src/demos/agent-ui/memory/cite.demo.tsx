@@ -1,4 +1,4 @@
-import { InlineCitation } from "@locusgraph/agent-ui";
+import { Cite } from "@locusgraph/agent-ui";
 import { defineDemo, toggle } from "../../../registry/define-demo";
 
 const recallDoc = {
@@ -19,26 +19,26 @@ function InAnswer() {
   return (
     <p className="max-w-prose text-sm leading-relaxed">
       Recall weighs similarity, recency and confirmations
-      <InlineCitation citation={recallDoc} />, and memories older than 18 months are archived unless
-      an admin pins them
-      <InlineCitation citation={teamNote} onOpen={() => {}} />.
+      <Cite citation={recallDoc} />, and memories older than 18 months are archived unless an admin
+      pins them
+      <Cite citation={teamNote} onOpen={() => {}} />.
     </p>
   );
 }
 
 export default defineDemo({
-  title: "Inline Citation",
+  title: "Cite",
   description:
     "A small numbered chip next to a claim. Hover or focus shows the source title, host and snippet. A citation with a url is a link; without one it is a button that calls onOpen.",
   controls: { withUrl: toggle(true) },
   playground: ({ withUrl }) => (
     <p className="max-w-prose text-sm">
       Recall ranks memories by relevance and recency
-      <InlineCitation citation={withUrl ? recallDoc : teamNote} />.
+      <Cite citation={withUrl ? recallDoc : teamNote} />.
     </p>
   ),
   code: ({ withUrl }) =>
-    `<p>\n  Recall ranks memories by relevance and recency\n  <InlineCitation citation={${withUrl ? "recallDoc" : "teamNote"}} />.\n</p>`,
+    `<p>\n  Recall ranks memories by relevance and recency\n  <Cite citation={${withUrl ? "recallDoc" : "teamNote"}} />.\n</p>`,
   props: [
     { name: "citation", type: "Citation" },
     { name: "onOpen", type: "(citation: Citation) => void" },

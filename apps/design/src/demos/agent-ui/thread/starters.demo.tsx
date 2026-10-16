@@ -1,4 +1,4 @@
-import { Suggestions } from "@locusgraph/agent-ui";
+import { Starters } from "@locusgraph/agent-ui";
 import { useState } from "react";
 import { defineDemo, select } from "../../../registry/define-demo";
 
@@ -22,7 +22,7 @@ function Playground({ product }: { product: (typeof products)[number] }) {
   const [chosen, setChosen] = useState<string | null>(null);
   return (
     <div className="flex w-full max-w-xl flex-col gap-3">
-      <Suggestions suggestions={[...prompts[product]]} onSelect={setChosen} />
+      <Starters suggestions={[...prompts[product]]} onSelect={setChosen} />
       <p className="eyebrow">{chosen ? `Sent: ${chosen}` : "Pick a prompt"}</p>
     </div>
   );
@@ -31,7 +31,7 @@ function Playground({ product }: { product: (typeof products)[number] }) {
 function ShortLabels() {
   return (
     <div className="w-full max-w-xl">
-      <Suggestions
+      <Starters
         onSelect={() => {}}
         suggestions={[
           {
@@ -47,14 +47,14 @@ function ShortLabels() {
 }
 
 export default defineDemo({
-  title: "Suggestions",
+  title: "Starters",
   description:
     "Starter prompts as ruled rows for an empty conversation. Selecting one hands its text to onSelect.",
   controls: { product: select(products) },
   playground: ({ product }) => <Playground product={product} />,
-  code: () => `<Suggestions suggestions={prompts} onSelect={(text) => sendMessage({ text })} />`,
+  code: () => `<Starters suggestions={prompts} onSelect={(text) => sendMessage({ text })} />`,
   props: [
-    { name: "suggestions", type: "Suggestion[]" },
+    { name: "suggestions", type: "Starter[]" },
     { name: "onSelect", type: "(text: string) => void" },
     { name: "disabled", type: "boolean", defaultValue: "false" },
   ],

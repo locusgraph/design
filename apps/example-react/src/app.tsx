@@ -1,11 +1,4 @@
-import {
-  CreditPacks,
-  KeysTable,
-  PlanOptions,
-  UsageAttention,
-  UsageSummary,
-  WalletPanel,
-} from "@locusgraph/blocks";
+import { Keys, Plans, TopUp, Usage, UsageAlert, Wallet } from "@locusgraph/blocks";
 import { LocusGraphWordmark } from "@locusgraph/brand";
 import {
   Button,
@@ -53,24 +46,24 @@ export function App() {
             <TabsTrigger value="agent">Agent</TabsTrigger>
           </TabsList>
           <TabsContent value="billing" className="enter-cascade flex flex-col gap-8 pt-6">
-            <UsageAttention
+            <UsageAlert
               balanceMicroUsd={wallet.balanceMicroUsd}
               quotas={quotas}
               paidPlan={false}
               buyCreditsHref="#billing"
               upgradeHref="#plans"
             />
-            <UsageSummary quotas={quotas} />
+            <Usage quotas={quotas} />
             <RuleGrid columns={2}>
-              <WalletPanel balanceMicroUsd={wallet.balanceMicroUsd} grants={grants} />
-              <CreditPacks packs={packs} onBuy={setLastPack} />
+              <Wallet balanceMicroUsd={wallet.balanceMicroUsd} grants={grants} />
+              <TopUp packs={packs} onBuy={setLastPack} />
             </RuleGrid>
             {lastPack && (
               <p className="font-mono text-[11.5px] text-muted-foreground">
                 onBuy("{lastPack}") would open Stripe Checkout.
               </p>
             )}
-            <PlanOptions
+            <Plans
               plans={plans}
               actionFor={(plan) => <Button size="sm">Upgrade to {plan.name}</Button>}
             />
@@ -78,7 +71,7 @@ export function App() {
           <TabsContent value="keys" className="pt-6">
             <RuleGrid columns={1}>
               <RuleGridCell className="p-0">
-                <KeysTable
+                <Keys
                   keys={keys}
                   actions={() => (
                     <Button size="sm" variant="ghost">

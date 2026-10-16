@@ -1,4 +1,4 @@
-import { PlanApproval } from "@locusgraph/agent-ui";
+import { PlanReview } from "@locusgraph/agent-ui";
 import { defineDemo, toggle } from "../../../registry/define-demo";
 
 const steps = [
@@ -11,7 +11,7 @@ const steps = [
 function Cancelled() {
   return (
     <div className="w-full max-w-xl">
-      <PlanApproval
+      <PlanReview
         steps={steps}
         decision={{ approved: false, by: "Ravi Patel", at: Date.UTC(2026, 9, 17, 9, 5) }}
         onApprove={() => {}}
@@ -22,13 +22,13 @@ function Cancelled() {
 }
 
 export default defineDemo({
-  title: "Plan Approval",
+  title: "Plan Review",
   description:
     "Shows a multi-step plan before the run starts. People can rename, reorder or remove steps, then approve the edited plan.",
   controls: { decided: toggle(false) },
   playground: ({ decided }) => (
     <div className="w-full max-w-xl">
-      <PlanApproval
+      <PlanReview
         steps={steps}
         autoFocus={false}
         decision={
@@ -40,7 +40,7 @@ export default defineDemo({
     </div>
   ),
   code: () =>
-    "<PlanApproval\n  steps={plan.steps}\n  decision={plan.decision}\n  onApprove={(steps) => startRun(steps)}\n  onCancel={cancelRun}\n/>",
+    "<PlanReview\n  steps={plan.steps}\n  decision={plan.decision}\n  onApprove={(steps) => startRun(steps)}\n  onCancel={cancelRun}\n/>",
   props: [
     { name: "steps", type: "{ id: string; title: string; detail?: string }[]" },
     { name: "title", type: "string", defaultValue: '"Review the plan"' },
