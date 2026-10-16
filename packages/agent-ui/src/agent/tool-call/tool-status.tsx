@@ -1,5 +1,5 @@
+import { StatusDot, type StatusTone } from "../../shared/status-dot";
 import type { ToolState } from "../../types";
-import { StatusDot, type StatusTone } from "../shared/status-dot";
 
 export const toolStateLabels: Record<ToolState, string> = {
   "input-streaming": "Preparing",
@@ -31,7 +31,7 @@ export function ToolStatus({ state }: { state: ToolState }) {
       data-slot="tool-status"
       data-state={state}
       aria-live="polite"
-      className="flex shrink-0 items-center gap-1.5 font-mono text-[11px] tracking-wide text-muted-foreground uppercase"
+      className="eyebrow flex shrink-0 items-center gap-1.5"
     >
       <StatusDot tone={toolStateTones[state]} />
       {toolStateLabels[state]}

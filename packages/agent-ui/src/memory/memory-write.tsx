@@ -1,6 +1,7 @@
 import { Button, cn } from "@locusgraph/components";
 import { pluralize } from "@locusgraph/utils";
 import { BookmarkPlusIcon, CheckIcon, Undo2Icon } from "lucide-react";
+import { StatusDot } from "../shared/status-dot";
 import { eyebrowClass, ruledListClass } from "./shared/disclosure";
 
 export type MemoryWriteStatus = "saved" | "undone";
@@ -56,20 +57,17 @@ function MemoryWriteRow({
     <li
       data-slot="memory-write-item"
       data-status={item.status}
-      className="flex min-h-11 items-center gap-3 px-3 py-2"
+      className="flex min-h-11 items-center gap-3 px-3 py-2.5"
     >
       <CheckIcon
         aria-hidden
-        className={cn(
-          "size-3.5 shrink-0",
-          undone ? "text-muted-foreground/40" : "text-emerald-500"
-        )}
+        className={cn("size-3.5 shrink-0", undone ? "text-muted-foreground/40" : "text-good")}
       />
       <span className="flex min-w-0 flex-1 flex-col gap-0.5">
         <span
           className={cn(
-            "text-sm",
-            undone && "text-muted-foreground line-through decoration-muted-foreground"
+            "text-sm font-medium",
+            undone && "font-normal text-muted-foreground line-through decoration-muted-foreground"
           )}
         >
           {item.text}
@@ -77,7 +75,8 @@ function MemoryWriteRow({
         {item.kind && <span className="font-mono text-xs text-muted-foreground">{item.kind}</span>}
       </span>
       {undone ? (
-        <span className="font-mono text-[11px] tracking-wide text-muted-foreground uppercase">
+        <span className="eyebrow flex shrink-0 items-center gap-1.5">
+          <StatusDot tone="idle" />
           Undone
         </span>
       ) : (
@@ -85,6 +84,7 @@ function MemoryWriteRow({
           <Button
             variant="ghost"
             size="xs"
+            className="-mr-2 text-muted-foreground hover:text-foreground"
             aria-label={`Undo saving ${item.text}`}
             onClick={() => onUndo(item.id)}
           >

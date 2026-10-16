@@ -14,7 +14,7 @@ const stepTitleTones: Record<StepStatus, string> = {
   pending: "text-muted-foreground",
   running: "text-foreground font-medium",
   done: "text-foreground",
-  failed: "text-destructive font-medium",
+  failed: "text-foreground font-medium",
   skipped: "text-muted-foreground line-through",
 };
 
@@ -48,9 +48,15 @@ function StepRow({ step, current, last }: { step: AgentStep; current: boolean; l
       {!last && (
         <span aria-hidden className="absolute top-5 bottom-0.5 left-[7.5px] w-px bg-border" />
       )}
-      <StepIcon status={step.status} />
+      <StepIcon status={step.status} current={current} />
       <div className="flex min-w-0 flex-col gap-0.5">
-        <span className={cn("text-sm leading-snug", stepTitleTones[step.status])}>
+        <span
+          className={cn(
+            "text-sm leading-snug",
+            stepTitleTones[step.status],
+            current && step.status === "pending" && "text-foreground"
+          )}
+        >
           {step.title}
           <span className="sr-only"> ({stepStatusLabels[step.status]})</span>
         </span>
@@ -58,7 +64,7 @@ function StepRow({ step, current, last }: { step: AgentStep; current: boolean; l
           <span
             className={cn(
               "font-mono text-xs text-muted-foreground",
-              step.status === "failed" && "text-destructive/80"
+              step.status === "failed" && "font-sans text-destructive"
             )}
           >
             {step.detail}

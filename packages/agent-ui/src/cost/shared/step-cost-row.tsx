@@ -19,8 +19,8 @@ export function isWastedStep(step: CostStep): boolean {
 
 function barTone(step: CostStep): string {
   if (isWastedStep(step)) return "bg-destructive";
-  if (step.status === "retried") return "bg-amber-500";
-  if (step.status === "running") return "bg-amber-500/60 motion-safe:animate-pulse";
+  if (step.status === "retried") return "bg-warn/40";
+  if (step.status === "running") return "bg-warn/60 motion-safe:animate-pulse";
   return "bg-primary/35";
 }
 
@@ -63,13 +63,16 @@ export function StepCostRow({
         </span>
         {mark && (
           <span
-            className={cn("shrink-0 font-mono text-[10px] tracking-wide uppercase", mark.className)}
+            className={cn("shrink-0 font-mono text-[11px] tracking-wide uppercase", mark.className)}
           >
             {mark.text}
           </span>
         )}
       </span>
-      <span aria-hidden className="relative h-1.5 w-full max-sm:col-span-3 max-sm:row-start-2">
+      <span
+        aria-hidden
+        className="relative h-1.5 w-full bg-muted-foreground/10 max-sm:col-span-3 max-sm:row-start-2"
+      >
         <span
           className={cn(
             "absolute inset-y-0 left-0 transition-[width] duration-300 motion-reduce:transition-none",

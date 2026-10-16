@@ -11,8 +11,8 @@ import {
   type PanelTone,
 } from "../../shared/panel";
 import { type RiskLevel, type ToolPart, type ToolState, toolNameOf } from "../../types";
-import { DecisionLine } from "../shared/decision-line";
-import { riskLabels, riskRing, riskTone } from "../shared/risk-badge";
+import { DecisionSummary } from "../shared/decision-line";
+import { riskCopy, riskLabels, riskRing } from "../shared/risk-badge";
 import { useFocusOnMount } from "../shared/use-focus-on-mount";
 import type { ApprovalDecision } from "../types";
 import { DenyForm } from "./deny-form";
@@ -30,12 +30,6 @@ export type ToolApprovalProps = {
   className?: string;
 };
 
-const riskCopy: Record<RiskLevel, (tool: string) => string> = {
-  read: (tool) => `${tool} only reads data. Nothing changes if you approve.`,
-  write: (tool) => `${tool} wants to make a change. Check the inputs before you approve.`,
-  destructive: (tool) => `${tool} will permanently delete or overwrite data. This can't be undone.`,
-};
-
 const settledStateLabels: Partial<Record<ToolState, string>> = {
   "approval-responded": "Response sent. Waiting for the tool to run.",
   "output-available": "Approved and run.",
@@ -48,16 +42,19 @@ function settledLabel(state: ToolState) {
 }
 
 function headerStatus(
-  risk: RiskLevel,
   awaiting: boolean,
   decision?: ApprovalDecision
-): { status: string; tone: PanelTone } {
+): { status?: string; tone: PanelTone } {
   if (decision) {
     return decision.approved
       ? { status: "Approved", tone: "done" }
       : { status: "Denied", tone: "danger" };
   }
-  return { status: riskLabels[risk], tone: awaiting ? riskTone[risk] : "idle" };
+  return awaiting ? { status: "Waiting for you", tone: "waiting" } : { tone: "idle" };
+}
+
+function decidedResult(toolName: string, state: ToolState, decision: ApprovalDecision) {
+  return settledStateLabels[state] ?? `${toolName} ${decision.approved ? "approved" : "denied"}`;
 }
 
 export function ToolApproval({
@@ -77,7 +74,7 @@ export function ToolApproval({
   const approveRef = useFocusOnMount<HTMLButtonElement>(autoFocus && awaiting);
   const destructive = risk === "destructive";
   const Icon = destructive ? ShieldAlertIcon : WrenchIcon;
-  const header = headerStatus(risk, awaiting, decision);
+  const header = headerStatus(awaiting, decision);
   return (
     <ApprovalPanel
       data-slot="tool-approval"
@@ -87,8 +84,9 @@ export function ToolApproval({
       className={cn(awaiting && riskRing[risk], className)}
     >
       <PanelHeader
-        icon={<Icon aria-hidden className={cn(awaiting && destructive && "text-destructive")} />}
+        icon={<Icon aria-hidden />}
         eyebrow={awaiting ? "Approval needed" : "Tool call"}
+        aside={riskLabels[risk]}
         status={header.status}
         tone={header.tone}
       />
@@ -96,12 +94,7 @@ export function ToolApproval({
         {toolName}
       </PanelTitle>
       {awaiting && (
-        <p
-          className={cn(
-            "px-5 pt-1 text-sm",
-            destructive ? "text-destructive" : "text-muted-foreground"
-          )}
-        >
+        <p className="px-5 pt-1 text-sm text-muted-foreground">
           {description ?? riskCopy[risk](toolName)}
         </p>
       )}
@@ -142,7 +135,10 @@ export function ToolApproval({
       {!awaiting && (
         <PanelBody className="pt-3">
           {decision ? (
-            <DecisionLine decision={decision} />
+            <DecisionSummary
+              decision={decision}
+              result={decidedResult(toolName, part.state, decision)}
+            />
           ) : (
             <p className="text-sm text-muted-foreground">{settledLabel(part.state)}</p>
           )}

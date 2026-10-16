@@ -40,7 +40,7 @@ export function Conversation({
         <div
           ref={contentRef}
           data-slot="conversation-content"
-          className="mx-auto flex min-h-full w-full max-w-3xl flex-col gap-8 px-4 py-6"
+          className="mx-auto flex min-h-full w-full max-w-3xl flex-col gap-8 px-4 py-6 [&>[data-role=user]+[data-role=assistant]]:-mt-4"
         >
           {isEmpty ? (
             <div

@@ -7,11 +7,11 @@ const ringCircumference = 2 * Math.PI * ringRadius;
 
 const ringStroke = {
   ok: "stroke-primary",
-  near: "stroke-amber-500",
+  near: "stroke-warn",
   full: "stroke-destructive",
 } as const;
 
-const barFill = { ok: "bg-primary", near: "bg-amber-500", full: "bg-destructive" } as const;
+const barFill = { ok: "bg-primary", near: "bg-warn", full: "bg-destructive" } as const;
 
 export function MeterRing({ percent, status }: { percent: number; status: MeterStatus }) {
   return (
@@ -43,7 +43,7 @@ export function MeterRing({ percent, status }: { percent: number; status: MeterS
 
 export function MeterBar({ percent, status }: { percent: number; status: MeterStatus }) {
   return (
-    <span aria-hidden className="relative block h-1 w-full overflow-hidden bg-muted-foreground/15">
+    <span aria-hidden className="relative block h-1 w-full overflow-hidden bg-muted-foreground/20">
       <span
         className={cn(
           "absolute inset-y-0 left-0 transition-[width] duration-300 motion-reduce:transition-none",

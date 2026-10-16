@@ -38,13 +38,7 @@ export const markdownComponents: Components = {
     <h3 className={cn("mt-5 mb-1.5 text-sm font-semibold first:mt-0", className)} {...props} />
   ),
   h4: ({ node: _node, className, ...props }) => (
-    <h4
-      className={cn(
-        "mt-5 mb-1.5 font-mono text-[11px] tracking-wide text-muted-foreground uppercase first:mt-0",
-        className
-      )}
-      {...props}
-    />
+    <h4 className={cn("eyebrow mt-5 mb-1.5 first:mt-0", className)} {...props} />
   ),
   ul: ({ node: _node, className, ...props }) => (
     <ul
@@ -100,15 +94,18 @@ export const markdownComponents: Components = {
   ),
   table: ({ node: _node, className, ...props }) => (
     <div data-slot="response-table" className={cn("overflow-x-auto ring-1 ring-border", blockGap)}>
-      <table className={cn("w-full border-collapse text-sm tabular-nums", className)} {...props} />
+      <table
+        className={cn(
+          "w-full border-collapse text-sm [&_td:not(:first-child)]:tabular-nums",
+          className
+        )}
+        {...props}
+      />
     </div>
   ),
   th: ({ node: _node, className, ...props }) => (
     <th
-      className={cn(
-        "border-b bg-muted/30 px-3 py-2 text-left font-mono text-[11px] font-normal tracking-wide text-muted-foreground uppercase",
-        className
-      )}
+      className={cn("eyebrow border-b bg-muted/30 px-3 py-2 text-left font-normal", className)}
       {...props}
     />
   ),

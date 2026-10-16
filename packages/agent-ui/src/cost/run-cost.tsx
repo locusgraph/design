@@ -31,10 +31,6 @@ function WastedNote({ totals }: { totals: UsageTotals }) {
   );
 }
 
-function Dot() {
-  return <span aria-hidden>·</span>;
-}
-
 function CompactRunCost({
   attempts,
   totals,
@@ -51,27 +47,16 @@ function CompactRunCost({
       data-variant="compact"
       data-failed={totals.failedAttempts > 0 || undefined}
       className={cn(
-        "inline-flex flex-wrap items-baseline gap-x-1.5 gap-y-0.5 font-mono text-[11px] text-muted-foreground tabular-nums",
+        "inline-flex flex-wrap items-baseline gap-x-3 gap-y-0.5 font-mono text-[11px] text-muted-foreground tabular-nums",
         className
       )}
     >
       <span className="font-medium text-foreground">{formatMicroUsd(totals.costMicroUsd)}</span>
-      <Dot />
-      <span>{formatCount(totals.inputTokens)} in</span>
-      <Dot />
-      <span>{formatCount(totals.outputTokens)} out</span>
-      {model && (
-        <>
-          <Dot />
-          <span>{model}</span>
-        </>
-      )}
-      {totals.failedAttempts > 0 && (
-        <span className="inline-flex gap-x-1.5 text-destructive">
-          <Dot />
-          <WastedNote totals={totals} />
-        </span>
-      )}
+      <span className="whitespace-nowrap">
+        {formatCount(totals.inputTokens)} in · {formatCount(totals.outputTokens)} out
+      </span>
+      {model && <span>{model}</span>}
+      <WastedNote totals={totals} />
     </span>
   );
 }
@@ -84,7 +69,7 @@ function AttemptRow({ attempt, position }: { attempt: RunUsage; position: number
       className="grid grid-cols-[1fr_auto_4.5rem] items-baseline gap-x-4 px-5 py-2.5 text-sm tabular-nums"
     >
       <span className="flex min-w-0 items-baseline gap-2">
-        <span className="font-mono text-[11px] text-muted-foreground">#{position + 1}</span>
+        <span className="eyebrow">#{position + 1}</span>
         <span className={cn("truncate", attempt.failed && "text-muted-foreground")}>
           {attempt.model ?? "Attempt"}
         </span>
@@ -97,7 +82,12 @@ function AttemptRow({ attempt, position }: { attempt: RunUsage; position: number
       <span className="font-mono text-[11px] text-muted-foreground max-sm:hidden">
         {formatCount(attempt.inputTokens)} in · {formatCount(attempt.outputTokens)} out
       </span>
-      <span className={cn("text-right font-mono text-xs", attempt.failed && "text-destructive")}>
+      <span
+        className={cn(
+          "text-right font-mono text-xs",
+          attempt.failed && "text-muted-foreground line-through"
+        )}
+      >
         {formatMicroUsd(attempt.costMicroUsd)}
       </span>
     </li>
@@ -125,10 +115,9 @@ function DetailedRunCost({
       className={className}
     >
       <PanelHeader
-        icon={<CoinsIcon />}
+        icon={<CoinsIcon aria-hidden />}
         eyebrow={label}
-        status={pluralize(attempts.length, "attempt")}
-        tone={failed ? "danger" : "done"}
+        aside={pluralize(attempts.length, "attempt")}
       />
       <div className="flex flex-col gap-1 px-5 pt-2 pb-4">
         <span className="text-2xl font-semibold tracking-tight tabular-nums">
@@ -136,8 +125,7 @@ function DetailedRunCost({
         </span>
         <span className="flex flex-wrap gap-x-3 gap-y-0.5 text-xs text-muted-foreground tabular-nums">
           <span>
-            {formatCount(totals.inputTokens)} input · {formatCount(totals.outputTokens)} output
-            tokens
+            {formatCount(totals.inputTokens)} in · {formatCount(totals.outputTokens)} out
           </span>
           <WastedNote totals={totals} />
         </span>

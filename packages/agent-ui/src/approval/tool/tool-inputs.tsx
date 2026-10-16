@@ -19,13 +19,29 @@ export function readableValue(value: unknown): string {
   return JSON.stringify(value);
 }
 
+const acronyms: Record<string, string> = {
+  api: "API",
+  csv: "CSV",
+  id: "ID",
+  ids: "IDs",
+  json: "JSON",
+  pdf: "PDF",
+  sql: "SQL",
+  url: "URL",
+  urls: "URLs",
+  usd: "USD",
+};
+
 export function humanizeKey(key: string): string {
-  const spaced = key
+  const words = key
     .replace(/([a-z0-9])([A-Z])/g, "$1 $2")
     .replace(/[_-]+/g, " ")
     .trim()
-    .toLowerCase();
-  return spaced.charAt(0).toUpperCase() + spaced.slice(1);
+    .toLowerCase()
+    .split(/\s+/)
+    .map((word) => acronyms[word] ?? word);
+  const sentence = words.join(" ");
+  return sentence.charAt(0).toUpperCase() + sentence.slice(1);
 }
 
 function rawJson(input: unknown) {
@@ -41,21 +57,21 @@ export function ToolInputs({ input, muted = false }: { input: unknown; muted?: b
       {entries && !showRaw && (
         <dl
           className={cn(
-            "flex flex-col divide-y text-sm ring-1 ring-border",
+            "-mx-5 flex flex-col divide-y border-y text-sm",
             muted && "text-muted-foreground"
           )}
         >
           {entries.map(([key, value]) => (
             <div
               key={key}
-              className="grid grid-cols-[minmax(0,8.5rem)_minmax(0,1fr)] items-baseline gap-3 px-3 py-2.5"
+              className="grid grid-cols-[minmax(0,8.5rem)_minmax(0,1fr)] items-baseline gap-3 px-5 py-2.5"
             >
               <dt className="text-xs text-muted-foreground">{humanizeKey(key)}</dt>
-              <dd className="font-mono text-[13px] break-words">{readableValue(value)}</dd>
+              <dd className="font-mono text-sm break-words">{readableValue(value)}</dd>
             </div>
           ))}
           {entries.length === 0 && (
-            <div className="px-3 py-2.5 text-xs text-muted-foreground">No inputs.</div>
+            <div className="px-5 py-2.5 text-xs text-muted-foreground">No inputs.</div>
           )}
         </dl>
       )}
@@ -67,7 +83,7 @@ export function ToolInputs({ input, muted = false }: { input: unknown; muted?: b
       {entries && (
         <button
           type="button"
-          className="self-start font-mono text-[11px] tracking-wide text-muted-foreground uppercase outline-none hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring/70 motion-safe:transition-colors"
+          className="eyebrow self-start outline-none hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring/70 motion-safe:transition-colors"
           aria-expanded={showRaw}
           aria-controls={showRaw ? rawId : undefined}
           onClick={() => setShowRaw((current) => !current)}

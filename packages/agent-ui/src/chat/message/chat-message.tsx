@@ -119,7 +119,7 @@ export function ChatMessage({
           {avatar}
         </MessageAvatar>
       )}
-      <MessageContent className={cn("gap-3", isUser && "items-end gap-2")}>
+      <MessageContent className={cn("gap-4", isUser && "items-end gap-2")}>
         {groupParts(message.parts).map((segment) => (
           <div
             key={segment.key}

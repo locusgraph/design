@@ -131,7 +131,10 @@ export function PromptInput({
           />
         )}
         {modelSlot && (
-          <div data-slot="prompt-input-model" className="min-w-0">
+          <div
+            data-slot="prompt-input-model"
+            className={cn("min-w-0", disabled && "pointer-events-none opacity-50")}
+          >
             {modelSlot}
           </div>
         )}

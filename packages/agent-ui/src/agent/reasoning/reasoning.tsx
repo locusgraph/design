@@ -46,7 +46,7 @@ export function Reasoning({ text, state, durationMs, defaultOpen, className }: R
     >
       <CollapsibleTrigger
         aria-expanded={open}
-        className="group flex w-fit items-center gap-2 transition-colors hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/70"
+        className="group eyebrow flex w-fit items-center gap-2 py-1 transition-colors hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/70"
       >
         <BrainIcon className="size-3.5 shrink-0" aria-hidden />
         <span aria-live="polite" className={cn(streaming && "motion-safe:shimmer")}>

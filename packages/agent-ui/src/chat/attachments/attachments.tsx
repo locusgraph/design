@@ -56,7 +56,7 @@ function AttachmentPreview({ item, isGrid }: Omit<ChipProps, "onRemove">) {
       data-slot="attachments-preview"
       className={cn(
         "grid shrink-0 place-items-center overflow-hidden bg-muted text-muted-foreground",
-        isGrid ? "aspect-[16/10] w-full" : "size-8"
+        isGrid ? "aspect-[16/10] w-full" : "size-10"
       )}
     >
       {isImageAttachment(item) ? (
@@ -91,7 +91,7 @@ function AttachmentChip({ item, isGrid, onRemove }: ChipProps) {
       data-slot="attachments-item"
       className={cn(
         "relative flex min-w-0 bg-card text-card-foreground ring-1 ring-border",
-        isGrid ? "flex-col" : "max-w-64 items-center gap-2.5 p-1",
+        isGrid ? "flex-col" : "w-60 max-w-full items-center gap-2.5 pr-1",
         !isGrid && !onRemove && "pr-3"
       )}
     >
@@ -101,7 +101,7 @@ function AttachmentChip({ item, isGrid, onRemove }: ChipProps) {
           {item.name}
         </span>
         {description && (
-          <span className="truncate font-mono text-[11px] leading-tight text-muted-foreground tabular-nums">
+          <span className="truncate font-mono text-xs leading-tight text-muted-foreground tabular-nums">
             {description}
           </span>
         )}

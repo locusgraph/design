@@ -62,7 +62,11 @@ export function ArgsField(props: ArgsFieldProps) {
   const { id, field, error } = props;
   const inline = field.type === "boolean";
   return (
-    <div data-slot="args-field" data-type={field.type} className="flex flex-col gap-1.5">
+    <div
+      data-slot="args-field"
+      data-type={field.type}
+      className="flex flex-col gap-1.5 [&_[data-slot=native-select-wrapper]]:w-full"
+    >
       <div className={inline ? "flex flex-row-reverse items-center justify-end gap-2" : "contents"}>
         <Label htmlFor={id}>
           {field.label}

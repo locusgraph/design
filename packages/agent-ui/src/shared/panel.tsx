@@ -1,5 +1,6 @@
 import { cn } from "@locusgraph/components";
 import type { ComponentProps, ReactNode } from "react";
+import { StatusDot, type StatusTone } from "./status-dot";
 
 export function ApprovalPanel({ className, ...props }: ComponentProps<"section">) {
   return (
@@ -13,14 +14,7 @@ export function ApprovalPanel({ className, ...props }: ComponentProps<"section">
   );
 }
 
-export type PanelTone = "waiting" | "done" | "danger" | "idle";
-
-const toneDot: Record<PanelTone, string> = {
-  waiting: "bg-amber-500 motion-safe:animate-pulse",
-  done: "bg-emerald-500",
-  danger: "bg-destructive",
-  idle: "bg-muted-foreground/50",
-};
+export type PanelTone = StatusTone;
 
 type PanelHeaderProps = {
   icon: ReactNode;
@@ -34,15 +28,15 @@ export function PanelHeader({ icon, eyebrow, status, tone = "idle", aside }: Pan
   return (
     <header
       data-slot="panel-header"
-      className="flex items-center gap-2 px-5 pt-4 font-mono text-[11px] tracking-wide text-muted-foreground uppercase [&_svg]:size-3.5 [&_svg]:shrink-0"
+      className="eyebrow flex items-center gap-2 px-5 pt-4 [&_svg]:size-3.5 [&_svg]:shrink-0"
     >
       {icon}
-      <span>{eyebrow}</span>
-      <span className="ml-auto flex items-center gap-1.5">
-        {aside}
+      <span className="min-w-0 truncate">{eyebrow}</span>
+      <span className="ml-auto flex shrink-0 items-center gap-1.5">
+        {aside && <span className="mr-2 tabular-nums">{aside}</span>}
         {status && (
           <>
-            <span aria-hidden className={cn("size-1.5 rounded-full", toneDot[tone])} />
+            <StatusDot tone={tone} />
             <span>{status}</span>
           </>
         )}

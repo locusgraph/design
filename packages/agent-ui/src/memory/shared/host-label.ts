@@ -28,7 +28,13 @@ export function sourceKey(item: SourceItem, position: number): string {
   return isSourceUrlPart(item) ? item.sourceId : `${item.index}:${position}`;
 }
 
+function siteNameOf(host: string): string {
+  const labels = host.split(".");
+  return labels.length > 2 ? labels.slice(-2).join(".") : host;
+}
+
 export function sourceInitial(citation: Citation): string {
-  const name = hostLabel(citation.url) ?? citation.title;
+  const host = hostLabel(citation.url);
+  const name = host ? siteNameOf(host) : citation.title;
   return name.trim().charAt(0).toUpperCase() || "?";
 }

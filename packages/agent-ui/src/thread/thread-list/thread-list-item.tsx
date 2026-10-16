@@ -32,7 +32,9 @@ export function ThreadListItem({
       data-active={active || undefined}
       className={cn(
         "group relative flex items-center motion-safe:transition-colors",
-        active ? "bg-accent text-accent-foreground" : "text-foreground/85 hover:bg-accent/50"
+        active
+          ? "bg-accent text-accent-foreground before:absolute before:inset-y-0 before:left-0 before:w-0.5 before:bg-foreground"
+          : "text-foreground/85 hover:bg-accent/40"
       )}
     >
       {editing && onRename ? (

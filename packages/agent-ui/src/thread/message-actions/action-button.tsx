@@ -13,9 +13,9 @@ export function ActionButton({ label, children, ...props }: ActionButtonProps) {
         <Button
           type="button"
           variant="ghost"
-          size="icon-xs"
+          size="icon-sm"
           aria-label={label}
-          className="text-muted-foreground hover:text-foreground"
+          className="text-muted-foreground hover:bg-accent hover:text-foreground [&_svg]:size-4"
           {...props}
         >
           {children}

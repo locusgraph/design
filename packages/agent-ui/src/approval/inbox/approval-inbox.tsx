@@ -2,7 +2,14 @@ import { Button, Checkbox, Label } from "@locusgraph/components";
 import { pluralize } from "@locusgraph/utils";
 import { InboxIcon } from "lucide-react";
 import { useId, useState } from "react";
-import { ApprovalPanel, LiveStatus, PanelFooter, PanelHeader } from "../../shared/panel";
+import {
+  ApprovalPanel,
+  LiveStatus,
+  PanelFooter,
+  PanelHeader,
+  PanelTitle,
+} from "../../shared/panel";
+import { PanelEmpty } from "../../shared/panel-empty";
 import type { PendingApproval } from "../types";
 import { InboxRow } from "./inbox-row";
 import { bulkApprovable, selectAllState, selectedIn, toggled } from "./inbox-selection";
@@ -16,21 +23,6 @@ export type ApprovalInboxProps = {
   onApproveAll: (ids: string[]) => void;
   className?: string;
 };
-
-function InboxEmpty() {
-  return (
-    <div
-      data-slot="approval-inbox-empty"
-      className="flex flex-col items-center gap-1 px-6 pt-8 pb-10 text-center"
-    >
-      <InboxIcon aria-hidden className="mb-1 size-5 text-muted-foreground" />
-      <p className="text-sm font-medium">Nothing waiting for you</p>
-      <p className="max-w-xs text-xs text-muted-foreground">
-        When an agent needs approval to write, pay, send or delete, it shows up here.
-      </p>
-    </div>
-  );
-}
 
 export function ApprovalInbox({
   items,
@@ -52,15 +44,21 @@ export function ApprovalInbox({
     <ApprovalPanel data-slot="approval-inbox" aria-label={title} className={className}>
       <PanelHeader
         icon={<InboxIcon aria-hidden />}
-        eyebrow={title}
+        eyebrow="Approvals"
         status={empty ? "All clear" : `${items.length} waiting`}
         tone={empty ? "done" : "waiting"}
       />
+      <PanelTitle>{title}</PanelTitle>
       {empty ? (
-        <InboxEmpty />
+        <PanelEmpty
+          data-slot="approval-inbox-empty"
+          icon={<InboxIcon aria-hidden />}
+          title="Nothing waiting for you"
+          description="When an agent needs approval to write, pay, send or delete, it shows up here."
+        />
       ) : (
         <>
-          <ul className="mt-3 flex flex-col divide-y border-t">
+          <ul className="mt-4 flex flex-col divide-y border-t">
             {items.map((item) => (
               <InboxRow
                 key={item.id}

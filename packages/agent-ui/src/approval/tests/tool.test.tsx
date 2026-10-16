@@ -51,7 +51,7 @@ describe("ToolApproval", () => {
         onDeny={noop}
       />
     );
-    expect(html).toContain('Denied by <span class="font-medium">Maya Chen</span>');
+    expect(html).toContain("Denied by Maya Chen");
     expect(html).toContain("Oct 17, 2026, 2:32 PM UTC");
     expect(html).toContain("Reason: Wrong folder");
     expect(html).not.toContain("Run delete_files");

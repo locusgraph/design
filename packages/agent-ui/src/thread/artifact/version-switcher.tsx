@@ -21,6 +21,7 @@ export function VersionSwitcher({ versions, current, onVersionChange }: VersionS
   const label = (
     <span className="flex items-center gap-2 font-mono text-[11px] tabular-nums">
       <span data-slot="artifact-current-version">{current.label}</span>
+      {versions.length > 1 && <span className="text-muted-foreground">of {versions.length}</span>}
       <time dateTime={current.createdAt} className="text-muted-foreground">
         {formatDate(current.createdAt)}
       </time>
@@ -43,11 +44,11 @@ export function VersionSwitcher({ versions, current, onVersionChange }: VersionS
           <ChevronDownIcon />
         </Button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent align="start">
+      <DropdownMenuContent align="start" sideOffset={6}>
         <DropdownMenuRadioGroup value={current.id} onValueChange={onVersionChange}>
           {versions.map((version) => (
             <DropdownMenuRadioItem key={version.id} value={version.id}>
-              <span className="font-mono text-[11.5px]">{version.label}</span>
+              <span className="font-mono text-xs">{version.label}</span>
               <span className="ml-auto pl-4 text-xs text-muted-foreground">
                 {formatDate(version.createdAt)}
               </span>

@@ -8,7 +8,7 @@ const noop = () => {};
 describe("SpendApproval", () => {
   const spend = { spentMicroUsd: 4_120_000, estimateMicroUsd: 1_350_000, capMicroUsd: 5_000_000 };
 
-  it("is amber when the run would pass its cap", () => {
+  it("warns when the run would pass its cap", () => {
     const html = renderToStaticMarkup(
       <SpendApproval
         {...spend}
@@ -90,6 +90,6 @@ describe("RunControls", () => {
       "Resume"
     );
     const done = renderToStaticMarkup(<RunControls status="done" {...callbacks} />);
-    expect(done.match(/disabled=""/g)).toHaveLength(3);
+    expect(done).not.toContain("<button");
   });
 });

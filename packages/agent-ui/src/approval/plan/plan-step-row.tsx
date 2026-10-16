@@ -79,11 +79,11 @@ export function PlanStepRow({
   return (
     <li
       data-slot="plan-step"
-      className="group flex items-start gap-3 px-3 py-2.5 focus-within:bg-accent/50 hover:bg-accent/50 motion-safe:transition-colors"
+      className="group flex items-start gap-3 px-5 py-2.5 focus-within:bg-accent/50 hover:bg-accent/50 motion-safe:transition-colors"
     >
       <span
         aria-hidden
-        className="mt-0.5 flex size-5 shrink-0 items-center justify-center font-mono text-[11px] text-muted-foreground tabular-nums ring-1 ring-border"
+        className="mt-0.5 flex size-5 shrink-0 items-center justify-center font-mono text-[11px] text-muted-foreground tabular-nums ring-1 ring-input"
       >
         {number}
       </span>

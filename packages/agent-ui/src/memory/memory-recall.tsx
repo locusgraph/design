@@ -68,7 +68,7 @@ function RelevanceMeter({ memory }: { memory: MemoryRef }) {
           style={{ width: `${percent}%` }}
         />
       </span>
-      <span className="w-8 text-right font-mono text-[11px] text-muted-foreground tabular-nums">
+      <span className="w-8 text-right font-mono text-xs text-muted-foreground tabular-nums">
         {percent}%
       </span>
     </span>

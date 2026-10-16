@@ -59,17 +59,25 @@ export function CodeBlock({
       className={cn("min-w-0 bg-card text-card-foreground ring-1 ring-border", className)}
       {...props}
     >
-      <figcaption className="flex h-8 items-center justify-between gap-2 border-b pr-1 pl-3 font-mono text-[11px]">
-        <span className="flex min-w-0 items-center gap-2">
-          <span className="tracking-wide text-muted-foreground uppercase">{language}</span>
-          {filename && <span className="truncate text-foreground/80">{filename}</span>}
+      <figcaption className="flex h-8 items-center justify-between gap-2 border-b pr-1 pl-3">
+        {filename ? (
+          <span className="min-w-0 truncate font-mono text-xs text-foreground">{filename}</span>
+        ) : (
+          <span className="eyebrow">{language}</span>
+        )}
+        <span className="flex shrink-0 items-center gap-2">
+          {filename && <span className="eyebrow">{language}</span>}
+          {showCopy && <CopyCodeButton code={code} onCopy={onCopy} />}
         </span>
-        {showCopy && <CopyCodeButton code={code} onCopy={onCopy} />}
       </figcaption>
       {html ? (
-        <div className={codeAreaClass} dangerouslySetInnerHTML={{ __html: html }} />
+        <div
+          data-slot="code-area"
+          className={codeAreaClass}
+          dangerouslySetInnerHTML={{ __html: html }}
+        />
       ) : (
-        <pre className={codeAreaClass}>
+        <pre data-slot="code-area" className={codeAreaClass}>
           <code>{code}</code>
         </pre>
       )}

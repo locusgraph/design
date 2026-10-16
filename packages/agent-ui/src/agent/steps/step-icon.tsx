@@ -11,9 +11,9 @@ export const stepStatusLabels: Record<StepStatus, string> = {
 };
 
 const stepIconFrames: Record<StepStatus, string> = {
-  pending: "bg-card ring-1 ring-border ring-inset",
-  running: "bg-card text-amber-500",
-  done: "bg-emerald-500 text-white dark:text-background",
+  pending: "bg-card ring-1 ring-muted-foreground/40 ring-inset",
+  running: "bg-card text-warn",
+  done: "bg-good text-white dark:text-background",
   failed: "bg-destructive text-white",
   skipped: "bg-muted text-muted-foreground",
 };
@@ -26,14 +26,17 @@ function StepGlyph({ status }: { status: StepStatus }) {
   return null;
 }
 
-export function StepIcon({ status }: { status: StepStatus }) {
+type StepIconProps = { status: StepStatus; current?: boolean };
+
+export function StepIcon({ status, current = false }: StepIconProps) {
   return (
     <span
       aria-hidden
       data-slot="step-icon"
       className={cn(
         "relative z-10 mt-0.5 flex size-4 shrink-0 items-center justify-center rounded-full",
-        stepIconFrames[status]
+        stepIconFrames[status],
+        current && status === "pending" && "ring-foreground/60"
       )}
     >
       <StepGlyph status={status} />

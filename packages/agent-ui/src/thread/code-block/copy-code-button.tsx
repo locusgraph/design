@@ -28,7 +28,7 @@ export function CopyCodeButton({ code, onCopy }: CopyCodeButtonProps) {
       className="text-muted-foreground hover:text-foreground"
       onClick={copy}
     >
-      {copied ? <CheckIcon className="text-emerald-500" /> : <CopyIcon />}
+      {copied ? <CheckIcon className="text-good" /> : <CopyIcon />}
     </Button>
   );
 }

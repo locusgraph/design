@@ -10,6 +10,7 @@ import {
   PanelHeader,
   PanelTitle,
 } from "../../shared/panel";
+import { PanelEmpty } from "../../shared/panel-empty";
 import { DecisionSummary } from "../shared/decision-line";
 import { useFocusOnMount } from "../shared/use-focus-on-mount";
 import type { ApprovalDecision, MemoryReviewResult, ProposedMemory } from "../types";
@@ -59,19 +60,15 @@ export function MemoryReview({
         eyebrow="Memory"
         status={status}
         tone={tone}
-        aside={
-          empty ? undefined : (
-            <span className="mr-2 tabular-nums">
-              {pluralize(memories.length, "proposed", "proposed")}
-            </span>
-          )
-        }
+        aside={empty ? undefined : pluralize(memories.length, "proposed", "proposed")}
       />
       <PanelTitle className={decision ? "text-muted-foreground" : undefined}>{title}</PanelTitle>
       {empty ? (
-        <PanelBody>
-          <p className="text-sm text-muted-foreground">No new memories to review.</p>
-        </PanelBody>
+        <PanelEmpty
+          icon={<BrainIcon aria-hidden />}
+          title="No new memories to review."
+          description="When an agent wants to remember something in LocusGraph, it shows up here."
+        />
       ) : decision ? (
         <PanelBody>
           <DecisionSummary
@@ -86,15 +83,15 @@ export function MemoryReview({
           <p className="px-5 pt-1 text-sm text-muted-foreground">
             {description}
             {sensitiveCount > 0 && (
-              <span className="text-amber-600 dark:text-amber-500">
+              <span className="text-warn">
                 {" "}
                 {pluralize(sensitiveCount, "memory", "memories")} flagged as sensitive, set to
                 discard.
               </span>
             )}
           </p>
-          <PanelBody>
-            <ul className="flex flex-col divide-y ring-1 ring-border">
+          <PanelBody className="pb-0">
+            <ul className="-mx-5 flex flex-col divide-y border-t">
               {memories.map((memory) => (
                 <MemoryRow
                   key={memory.id}

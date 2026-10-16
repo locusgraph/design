@@ -1,6 +1,7 @@
 import { formatCount, formatMicroUsd, pluralize } from "@locusgraph/utils";
 import { ChartNoAxesGanttIcon } from "lucide-react";
-import { ApprovalPanel, PanelHeader, type PanelTone } from "../shared/panel";
+import { ApprovalPanel, PanelHeader } from "../shared/panel";
+import { PanelEmpty } from "../shared/panel-empty";
 import { type CostStep, isWastedStep, StepCostRow } from "./shared/step-cost-row";
 import { formatDuration, sumUsage } from "./shared/usage-totals";
 
@@ -24,12 +25,6 @@ export function stepCostTotals(steps: CostStep[]) {
 
 type StepTotals = ReturnType<typeof stepCostTotals>;
 
-function timelineTone(steps: CostStep[], totals: StepTotals): PanelTone {
-  if (steps.some((step) => step.status === "running")) return "waiting";
-  if (totals.wastedMicroUsd > 0) return "danger";
-  return steps.length > 0 ? "done" : "idle";
-}
-
 function Totals({ totals }: { totals: StepTotals }) {
   return (
     <div data-slot="step-cost-totals" className="flex flex-col gap-1 px-5 pt-2 pb-4">
@@ -39,8 +34,8 @@ function Totals({ totals }: { totals: StepTotals }) {
       <span className="flex flex-wrap gap-x-3 gap-y-0.5 text-xs text-muted-foreground tabular-nums">
         <span>
           {formatCount(totals.inputTokens)} in · {formatCount(totals.outputTokens)} out
+          {totals.durationMs > 0 && ` · ${formatDuration(totals.durationMs)}`}
         </span>
-        {totals.durationMs > 0 && <span>{formatDuration(totals.durationMs)}</span>}
         {totals.wastedMicroUsd > 0 && (
           <span className="text-destructive">
             Wasted on failures {formatMicroUsd(totals.wastedMicroUsd)}
@@ -59,16 +54,18 @@ export function StepCostTimeline({
 }: StepCostTimelineProps) {
   const totals = stepCostTotals(steps);
   const maxCost = Math.max(0, ...steps.map((step) => step.usage.costMicroUsd));
+  const running = steps.some((step) => step.status === "running");
   return (
     <ApprovalPanel data-slot="step-cost-timeline" aria-label={label} className={className}>
       <PanelHeader
-        icon={<ChartNoAxesGanttIcon />}
+        icon={<ChartNoAxesGanttIcon aria-hidden />}
         eyebrow={label}
-        status={steps.length > 0 ? pluralize(steps.length, "step") : undefined}
-        tone={timelineTone(steps, totals)}
+        aside={steps.length > 0 ? pluralize(steps.length, "step") : undefined}
+        status={running ? "Running" : undefined}
+        tone="running"
       />
       {steps.length === 0 ? (
-        <p className="px-5 pt-2 pb-5 text-sm text-muted-foreground">{emptyText}</p>
+        <PanelEmpty icon={<ChartNoAxesGanttIcon aria-hidden />} title={emptyText} />
       ) : (
         <>
           <Totals totals={totals} />

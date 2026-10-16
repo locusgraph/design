@@ -58,7 +58,7 @@ export function QuestionChoices({
       role="radiogroup"
       aria-label={label}
       data-slot="question-choices"
-      className="flex flex-col divide-y ring-1 ring-border"
+      className="-mx-5 flex flex-col divide-y border-y"
     >
       {options.map((option, index) => {
         const checked = option.id === selectedId;
@@ -76,7 +76,7 @@ export function QuestionChoices({
             onClick={() => onSelect(option.id)}
             onKeyDown={(event) => handleKeyDown(event, index)}
             className={cn(
-              "group relative flex items-center gap-3 px-3 py-2.5 text-left text-sm outline-none motion-safe:transition-colors focus-visible:z-10 focus-visible:ring-2 focus-visible:ring-ring/70",
+              "group relative flex items-center gap-3 px-5 py-2.5 text-left text-sm outline-none motion-safe:transition-colors focus-visible:z-10 focus-visible:ring-2 focus-visible:ring-ring/70 focus-visible:ring-inset",
               checked ? "bg-accent" : "hover:bg-accent/50"
             )}
           >
@@ -86,7 +86,7 @@ export function QuestionChoices({
                 "flex size-5 shrink-0 items-center justify-center font-mono text-[11px] ring-1",
                 checked
                   ? "bg-primary text-primary-foreground ring-primary"
-                  : "text-muted-foreground ring-border"
+                  : "text-muted-foreground ring-input"
               )}
             >
               {index + 1}
@@ -97,13 +97,6 @@ export function QuestionChoices({
                 <span className="text-xs text-muted-foreground">{option.description}</span>
               )}
             </span>
-            <span
-              aria-hidden
-              className={cn(
-                "size-3.5 shrink-0 rounded-full ring-1 motion-safe:transition-shadow",
-                checked ? "ring-[4px] ring-primary" : "ring-border"
-              )}
-            />
           </button>
         );
       })}

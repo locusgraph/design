@@ -9,7 +9,7 @@ import {
   PanelHeader,
   PanelTitle,
 } from "../../shared/panel";
-import { DecisionLine } from "../shared/decision-line";
+import { DecisionSummary } from "../shared/decision-line";
 import { useFocusOnMount } from "../shared/use-focus-on-mount";
 import type { ApprovalDecision } from "../types";
 import { RaiseCapForm } from "./raise-cap-form";
@@ -34,11 +34,13 @@ export type SpendApprovalProps = {
 const situationCopy = {
   "over-cap": {
     title: "This run would pass its cost cap",
-    body: "The agent paused before the next step. Allow it once, raise the cap, or stop the run.",
+    body: (run: string) =>
+      `${run} paused before the next step. Allow it once, raise the cap, or stop the run.`,
   },
   "out-of-credits": {
     title: "Not enough credits to continue",
-    body: "The next step costs more than your prepaid balance. Add credits or stop the run.",
+    body: (run: string) =>
+      `${run} paused: the next step costs more than your prepaid balance. Add credits or stop the run.`,
   },
 } as const;
 
@@ -73,7 +75,7 @@ export function SpendApproval({
     >
       <PanelHeader
         icon={<CircleDollarSignIcon aria-hidden />}
-        eyebrow={runName ?? "Spend approval"}
+        eyebrow="Spend approval"
         status={decision ? (decision.approved ? "Allowed" : "Stopped") : situationStatus[situation]}
         tone={
           decision ? (decision.approved ? "done" : "danger") : outOfCredits ? "danger" : "waiting"
@@ -82,12 +84,23 @@ export function SpendApproval({
       <PanelTitle className={cn(decision && "text-muted-foreground")}>{copy.title}</PanelTitle>
       {decision ? (
         <PanelBody className="pt-3">
-          <DecisionLine decision={decision} approvedVerb="Allowed" deniedVerb="Stopped" />
+          <DecisionSummary
+            decision={decision}
+            approvedVerb="Allowed"
+            deniedVerb="Stopped"
+            result={
+              decision.approved
+                ? `Allowed ${formatMicroUsd(estimateMicroUsd)} once`
+                : `${runName ?? "The run"} stopped`
+            }
+          />
           <SpendMeter {...meter} muted />
         </PanelBody>
       ) : (
         <>
-          <p className="px-5 pt-1 text-sm text-muted-foreground">{copy.body}</p>
+          <p className="px-5 pt-1 text-sm text-muted-foreground">
+            {copy.body(runName ?? "The agent")}
+          </p>
           <PanelBody className="gap-5">
             <div className="flex flex-col gap-0.5">
               <p className="text-2xl font-semibold tracking-tight tabular-nums">

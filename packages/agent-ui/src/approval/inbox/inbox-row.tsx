@@ -1,5 +1,5 @@
 import { Button, Checkbox, cn } from "@locusgraph/components";
-import { CheckIcon, XIcon } from "lucide-react";
+import { CheckIcon, LockIcon, XIcon } from "lucide-react";
 import type { RiskLevel } from "../../types";
 import { riskLabels } from "../shared/risk-badge";
 import { formatWaiting, isoOf } from "../shared/time";
@@ -16,7 +16,7 @@ type InboxRowProps = {
 
 const riskDot: Record<RiskLevel, string> = {
   read: "bg-muted-foreground/50",
-  write: "bg-amber-500",
+  write: "bg-warn",
   destructive: "bg-destructive",
 };
 
@@ -32,28 +32,35 @@ export function InboxRow({ item, now, selected, onSelect, onApprove, onDeny }: I
         selected ? "bg-accent" : "hover:bg-accent/50"
       )}
     >
-      <Checkbox
-        aria-label={
-          destructive ? `${item.title} must be approved on its own` : `Select ${item.title}`
-        }
-        checked={selected}
-        disabled={destructive}
-        onCheckedChange={(checked) => onSelect(checked === true)}
-      />
-      <span
-        aria-hidden
-        title={riskLabels[item.risk]}
-        className={cn("size-2 shrink-0 rounded-full", riskDot[item.risk])}
-      />
-      <div className="flex min-w-0 flex-1 flex-col">
+      {destructive ? (
+        <span className="flex size-4 shrink-0 items-center justify-center text-muted-foreground">
+          <LockIcon aria-hidden className="size-3.5" />
+          <span className="sr-only">{item.title} must be approved on its own</span>
+        </span>
+      ) : (
+        <Checkbox
+          aria-label={`Select ${item.title}`}
+          checked={selected}
+          onCheckedChange={(checked) => onSelect(checked === true)}
+        />
+      )}
+      <div className="flex min-w-0 flex-1 flex-col gap-0.5">
         <p className="flex min-w-0 items-baseline gap-2 text-sm">
           <span className="truncate font-medium">{item.title}</span>
-          <span className="sr-only">, {riskLabels[item.risk]}</span>
           <span className="hidden shrink-0 truncate text-xs text-muted-foreground sm:inline">
             {item.runName}
           </span>
         </p>
-        {item.summary && <p className="truncate text-xs text-muted-foreground">{item.summary}</p>}
+        <p className="flex min-w-0 items-center gap-1.5 text-xs text-muted-foreground">
+          <span aria-hidden className={cn("size-1.5 shrink-0 rounded-full", riskDot[item.risk])} />
+          <span className="shrink-0">{riskLabels[item.risk]}</span>
+          {item.summary && (
+            <>
+              <span aria-hidden>·</span>
+              <span className="truncate">{item.summary}</span>
+            </>
+          )}
+        </p>
         <p className="truncate text-xs text-muted-foreground sm:hidden">{item.runName}</p>
       </div>
       <time
@@ -66,7 +73,7 @@ export function InboxRow({ item, now, selected, onSelect, onApprove, onDeny }: I
         <Button
           type="button"
           size="icon-xs"
-          variant={destructive ? "destructive" : "outline"}
+          variant="outline"
           aria-label={`Approve ${item.title}`}
           title="Approve"
           onClick={onApprove}

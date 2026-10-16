@@ -58,7 +58,7 @@ export function MessageActions({
               markCopied();
             }}
           >
-            {copied ? <CheckIcon className="text-emerald-500" /> : <CopyIcon />}
+            {copied ? <CheckIcon className="text-good" /> : <CopyIcon />}
           </ActionButton>
         )}
         {onRetry && (

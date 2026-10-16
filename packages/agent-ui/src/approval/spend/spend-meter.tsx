@@ -14,29 +14,102 @@ function percentOf(value: number, scale: number) {
   return scale <= 0 ? 0 : Math.min(100, Math.max(0, (value / scale) * 100));
 }
 
-export function SpendMeter({
+function meterFrame({
   spentMicroUsd,
   estimateMicroUsd,
   capMicroUsd,
   balanceMicroUsd,
   outOfCredits,
-  muted = false,
 }: SpendMeterProps) {
-  const projected = spentMicroUsd + estimateMicroUsd;
-  const scale = Math.max(capMicroUsd, projected);
-  const spentWidth = percentOf(spentMicroUsd, scale);
-  const estimateWidth = percentOf(estimateMicroUsd, scale);
-  const capPosition = percentOf(capMicroUsd, scale);
+  if (outOfCredits) {
+    const limit = Math.max(balanceMicroUsd, 0);
+    return {
+      base: limit,
+      extra: Math.max(estimateMicroUsd - limit, 0),
+      scale: Math.max(limit, estimateMicroUsd),
+      limit,
+      limitLabel: "Credits",
+    };
+  }
+  const scale = Math.max(capMicroUsd, spentMicroUsd + estimateMicroUsd);
+  return {
+    base: spentMicroUsd,
+    extra: estimateMicroUsd,
+    scale,
+    limit: capMicroUsd,
+    limitLabel: "Cap",
+  };
+}
+
+function labelAlignment(position: number) {
+  if (position > 80) return "-translate-x-full";
+  if (position < 20) return "";
+  return "-translate-x-1/2";
+}
+
+function Amount({ value, muted }: { value: number; muted: boolean }) {
   return (
-    <div data-slot="spend-meter" className="flex flex-col gap-2">
+    <span className={cn("font-medium", !muted && "text-foreground")}>{formatMicroUsd(value)}</span>
+  );
+}
+
+function MeterLegend(props: SpendMeterProps & { muted: boolean }) {
+  const { spentMicroUsd, estimateMicroUsd, capMicroUsd, balanceMicroUsd, outOfCredits, muted } =
+    props;
+  return (
+    <div className="flex flex-wrap justify-between gap-x-4 gap-y-1 text-xs text-muted-foreground tabular-nums">
+      {outOfCredits ? (
+        <>
+          <span>
+            Next step needs <Amount value={estimateMicroUsd} muted={muted} />, you have{" "}
+            <span className={cn("font-medium", !muted && "text-destructive")}>
+              {formatMicroUsd(balanceMicroUsd)}
+            </span>{" "}
+            in credits
+          </span>
+          <span>{formatMicroUsd(spentMicroUsd)} spent this run</span>
+        </>
+      ) : (
+        <>
+          <span>
+            <Amount value={spentMicroUsd} muted={muted} /> spent of a{" "}
+            <Amount value={capMicroUsd} muted={muted} /> cap
+          </span>
+          <span>{formatMicroUsd(balanceMicroUsd)} credits left</span>
+        </>
+      )}
+    </div>
+  );
+}
+
+export function SpendMeter(props: SpendMeterProps) {
+  const { outOfCredits, muted = false } = props;
+  const { base, extra, scale, limit, limitLabel } = meterFrame(props);
+  const baseWidth = percentOf(base, scale);
+  const estimateWidth = percentOf(extra, scale);
+  const limitPosition = percentOf(limit, scale);
+  const projected = base + extra;
+  return (
+    <div data-slot="spend-meter" className="flex flex-col gap-1.5">
+      <div aria-hidden className="relative h-4">
+        <span
+          className={cn(
+            "eyebrow absolute bottom-0 whitespace-nowrap",
+            labelAlignment(limitPosition)
+          )}
+          style={{ left: `${limitPosition}%` }}
+        >
+          {limitLabel} {formatMicroUsd(limit)}
+        </span>
+      </div>
       <div
         role="meter"
-        aria-label="Run spend against its cap"
+        aria-label={outOfCredits ? "Next step against your credits" : "Run spend against its cap"}
         aria-valuemin={0}
         aria-valuemax={scale}
         aria-valuenow={projected}
-        aria-valuetext={`${formatMicroUsd(projected)} after the next step, cap ${formatMicroUsd(capMicroUsd)}`}
-        className="relative h-1.5 bg-muted"
+        aria-valuetext={`${formatMicroUsd(projected)} after the next step, ${limitLabel.toLowerCase()} ${formatMicroUsd(limit)}`}
+        className="relative h-1.5 bg-muted-foreground/20"
       >
         <span
           aria-hidden
@@ -44,31 +117,24 @@ export function SpendMeter({
             "absolute inset-y-0 left-0",
             muted ? "bg-muted-foreground/40" : "bg-foreground/70"
           )}
-          style={{ width: `${spentWidth}%` }}
+          style={{ width: `${baseWidth}%` }}
         />
         <span
           aria-hidden
           className={cn(
             "absolute inset-y-0",
-            muted ? "bg-muted-foreground/25" : outOfCredits ? "bg-destructive" : "bg-amber-500"
+            muted ? "bg-muted-foreground/25" : outOfCredits ? "bg-destructive" : "bg-warn"
           )}
-          style={{ left: `${spentWidth}%`, width: `${estimateWidth}%` }}
+          style={{ left: `${baseWidth}%`, width: `${estimateWidth}%` }}
         />
         <span
           aria-hidden
           className="absolute -inset-y-1 -ml-px w-px bg-foreground"
-          style={{ left: `${capPosition}%` }}
+          style={{ left: `${limitPosition}%` }}
         />
       </div>
-      <div className="flex flex-wrap justify-between gap-x-4 gap-y-1 text-xs text-muted-foreground tabular-nums">
-        <span>
-          <span className="font-medium text-foreground">{formatMicroUsd(spentMicroUsd)}</span> spent
-          of a <span className="font-medium text-foreground">{formatMicroUsd(capMicroUsd)}</span>{" "}
-          cap
-        </span>
-        <span className={cn(outOfCredits && !muted && "text-destructive")}>
-          {formatMicroUsd(balanceMicroUsd)} credits left
-        </span>
+      <div className="pt-0.5">
+        <MeterLegend {...props} muted={muted} />
       </div>
     </div>
   );

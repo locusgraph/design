@@ -56,9 +56,10 @@ export function ModelSelector({
       </DropdownMenuTrigger>
       <DropdownMenuContent
         align="start"
-        className="w-80 rounded-none border-0 p-0 shadow-none ring-1 ring-border"
+        sideOffset={6}
+        className="w-80 rounded-none border-0 bg-popover p-0 shadow-overlay ring-1 ring-border"
       >
-        <DropdownMenuLabel className="flex justify-between gap-3 border-b border-border px-3 py-2 font-mono text-[11px] font-normal tracking-wide text-muted-foreground uppercase">
+        <DropdownMenuLabel className="eyebrow flex justify-between gap-3 border-b border-border px-3 py-2 font-normal">
           <span>{label}</span>
           <span className="pr-7">Per 1M tokens</span>
         </DropdownMenuLabel>

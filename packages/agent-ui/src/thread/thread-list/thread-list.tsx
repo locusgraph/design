@@ -18,8 +18,6 @@ type ThreadListProps = Omit<ComponentProps<"nav">, "onSelect"> & {
   now?: Date | string;
 };
 
-const eyebrowClass = "font-mono text-[11px] tracking-wide text-muted-foreground uppercase";
-
 export function ThreadList({
   threads,
   activeId = null,
@@ -42,7 +40,7 @@ export function ThreadList({
       {...props}
     >
       <div className="flex h-7 items-center justify-between gap-2 px-2">
-        <span className={eyebrowClass}>{label}</span>
+        <span className="text-sm font-medium text-foreground">{label}</span>
         {onNew && (
           <Button type="button" variant="outline" size="xs" onClick={onNew}>
             <PlusIcon />
@@ -59,7 +57,7 @@ export function ThreadList({
               <section key={group.key} aria-labelledby={`thread-group-${group.key}`}>
                 <h3
                   id={`thread-group-${group.key}`}
-                  className={cn(eyebrowClass, "px-2 pb-1 text-[10.5px]")}
+                  className="eyebrow px-2 pb-1"
                   suppressHydrationWarning
                 >
                   {group.label}

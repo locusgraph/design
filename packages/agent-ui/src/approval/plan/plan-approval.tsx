@@ -30,10 +30,10 @@ export type PlanApprovalProps = {
 
 function DecidedSteps({ steps }: { steps: PlanStepDraft[] }) {
   return (
-    <ol className="flex flex-col gap-1 text-sm text-muted-foreground">
+    <ol className="flex flex-col gap-1 pl-6.5 text-sm text-muted-foreground">
       {steps.map((step, position) => (
         <li key={step.id} className="flex gap-3">
-          <span className="w-5 shrink-0 text-right font-mono text-xs leading-5 tabular-nums">
+          <span className="w-4 shrink-0 font-mono text-xs leading-5 tabular-nums">
             {position + 1}
           </span>
           <span className="min-w-0">{step.title}</span>
@@ -91,7 +91,7 @@ export function PlanApproval({
         eyebrow="Plan"
         status={decision ? (decision.approved ? "Approved" : "Cancelled") : "Waiting for you"}
         tone={decision ? (decision.approved ? "done" : "danger") : "waiting"}
-        aside={<span className="mr-2 tabular-nums">{pluralize(steps.length, "step")}</span>}
+        aside={pluralize(steps.length, "step")}
       />
       <PanelTitle className={decision ? "text-muted-foreground" : undefined}>{title}</PanelTitle>
       {decision ? (
@@ -110,8 +110,8 @@ export function PlanApproval({
       ) : (
         <>
           <p className="px-5 pt-1 text-sm text-muted-foreground">{description}</p>
-          <PanelBody>
-            <ol className="flex flex-col divide-y ring-1 ring-border">
+          <PanelBody className="pb-0">
+            <ol className="-mx-5 flex flex-col divide-y border-t">
               {steps.map((step, position) => (
                 <PlanStepRow
                   key={step.id}

@@ -7,8 +7,8 @@ export type ContextSegment = { label: string; tokens: number };
 const statusWord = { ok: "Room left", near: "Near limit", full: "Full" } as const;
 
 const statusDot = {
-  ok: "bg-emerald-500",
-  near: "bg-amber-500",
+  ok: "bg-good",
+  near: "bg-warn",
   full: "bg-destructive",
 } as const;
 
@@ -59,7 +59,7 @@ export function ContextBreakdown({
   const freeTokens = Math.max(limitTokens - usedTokens, 0);
   return (
     <div data-slot="context-meter-breakdown" className="flex flex-col">
-      <div className="flex items-center gap-2 px-4 pt-3 font-mono text-[11px] tracking-wide text-muted-foreground uppercase">
+      <div className="eyebrow flex items-center gap-2 px-4 pt-3">
         <span>{label}</span>
         <span className="ml-auto flex items-center gap-1.5">
           <span aria-hidden className={cn("size-1.5 rounded-full", statusDot[status])} />

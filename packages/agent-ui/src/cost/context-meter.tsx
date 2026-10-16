@@ -54,9 +54,9 @@ function BarContent({
   return (
     <>
       <span className="flex items-baseline justify-between gap-4 font-mono text-[11px] tabular-nums">
-        <span className="tracking-wide text-muted-foreground uppercase">{label}</span>
+        <span className="eyebrow">{label}</span>
         <span className={cn(status === "ok" && "text-foreground")}>
-          {formatTokensShort(usedTokens)} / {formatTokensShort(limitTokens)}
+          {percent}% · {formatTokensShort(usedTokens)} / {formatTokensShort(limitTokens)}
         </span>
       </span>
       <MeterBar percent={percent} status={status} />
@@ -117,7 +117,8 @@ export function ContextMeter({
       <HoverCardTrigger asChild>{meter}</HoverCardTrigger>
       <HoverCardContent
         align="end"
-        className="w-72 rounded-none border-0 p-0 shadow-none ring-1 ring-border"
+        sideOffset={6}
+        className="w-72 rounded-none border-0 bg-popover p-0 shadow-overlay ring-1 ring-border"
       >
         <ContextBreakdown
           label={label}

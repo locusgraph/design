@@ -7,6 +7,7 @@ import {
   collapsibleTriggerClass,
   interactiveRowClass,
   ruledListClass,
+  ruledRowClass,
 } from "./shared/disclosure";
 import { hostLabel, type SourceItem, sourceKey, toCitation } from "./shared/host-label";
 import { SourceMark } from "./shared/source-mark";
@@ -68,17 +69,16 @@ function SourceRow({
   const showHost = host !== undefined && host !== citation.title;
   const content = (
     <>
-      <span className="w-4 shrink-0 font-mono text-[11px] text-muted-foreground tabular-nums">
+      <span className="w-4 shrink-0 font-mono text-xs text-muted-foreground tabular-nums">
         {citation.index}
       </span>
-      <SourceMark citation={citation} />
       <span className="min-w-0 flex-1 truncate">{citation.title}</span>
       {showHost && (
         <span className="max-w-[40%] shrink-0 truncate text-xs text-muted-foreground">{host}</span>
       )}
     </>
   );
-  const rowClass = "flex w-full items-center gap-3 px-3 py-2.5 text-left text-sm";
+  const rowClass = ruledRowClass;
   const label = `Open source ${citation.index}: ${citation.title}`;
   return (
     <li data-slot="sources-item" data-index={citation.index}>

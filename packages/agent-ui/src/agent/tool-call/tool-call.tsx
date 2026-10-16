@@ -1,7 +1,7 @@
 "use client";
 
 import { Collapsible, CollapsibleContent, CollapsibleTrigger, cn } from "@locusgraph/components";
-import { ChevronDownIcon, WrenchIcon } from "lucide-react";
+import { ChevronRightIcon, WrenchIcon } from "lucide-react";
 import { useState } from "react";
 import { type ToolPart, toolNameOf } from "../../types";
 import { JsonBlock } from "./json-block";
@@ -35,15 +35,15 @@ export function ToolCall({ part, defaultOpen = false, className }: ToolCallProps
         className="flex w-full items-center gap-2.5 px-3 py-2.5 text-left transition-colors hover:bg-accent/50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/70 focus-visible:ring-inset"
       >
         <WrenchIcon aria-hidden className="size-3.5 shrink-0 text-muted-foreground" />
-        <span className="min-w-0 flex-1 truncate font-mono text-[13px] font-medium">
+        <span className="min-w-0 flex-1 truncate font-mono text-sm font-medium">
           {toolNameOf(part)}
         </span>
         <ToolStatus state={part.state} />
-        <ChevronDownIcon
+        <ChevronRightIcon
           aria-hidden
           className={cn(
             "size-3.5 shrink-0 text-muted-foreground motion-safe:transition-transform",
-            open && "rotate-180"
+            open && "rotate-90"
           )}
         />
       </CollapsibleTrigger>

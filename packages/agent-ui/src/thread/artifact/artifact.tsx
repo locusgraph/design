@@ -20,10 +20,6 @@ function currentVersionOf(versions: ArtifactVersion[], versionId?: string) {
   return versions.find((version) => version.id === versionId) ?? versions.at(-1);
 }
 
-function versionCountLabel(count: number) {
-  return count === 1 ? "1 version" : `${count} versions`;
-}
-
 export function Artifact({
   title,
   kind,
@@ -49,11 +45,7 @@ export function Artifact({
     >
       <header className="flex items-start gap-3 border-b px-5 pt-3.5 pb-3">
         <div className="flex min-w-0 flex-1 flex-col gap-1">
-          {kind && (
-            <span className="font-mono text-[11px] tracking-wide text-muted-foreground uppercase">
-              {kind}
-            </span>
-          )}
+          {kind && <span className="eyebrow">{kind}</span>}
           <h2 className="truncate font-sans text-base leading-snug font-semibold tracking-tight">
             {title}
           </h2>
@@ -75,20 +67,20 @@ export function Artifact({
         </div>
       </header>
       <ScrollArea className="min-h-0 flex-1">
-        <div data-slot="artifact-content" className="px-5 py-4">
+        <div
+          data-slot="artifact-content"
+          className="px-5 py-4 has-[>[data-slot=code-block]:only-child]:p-0 [&>[data-slot=code-block]:only-child]:ring-0"
+        >
           {children}
         </div>
       </ScrollArea>
       {current && (
-        <footer className="flex h-10 items-center justify-between gap-2 border-t bg-muted/30 pr-3 pl-5">
+        <footer className="flex h-10 items-center gap-2 border-t bg-muted/30 pr-3 pl-5">
           <VersionSwitcher
             versions={versions}
             current={current}
             onVersionChange={onVersionChange}
           />
-          <span className="font-mono text-[11px] text-muted-foreground tabular-nums">
-            {versionCountLabel(versions.length)}
-          </span>
         </footer>
       )}
     </aside>

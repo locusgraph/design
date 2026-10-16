@@ -1,5 +1,5 @@
 import { Button, Input, Textarea } from "@locusgraph/components";
-import { ArrowRightIcon, CheckIcon, MessageCircleQuestionIcon } from "lucide-react";
+import { ArrowRightIcon, MessageCircleQuestionIcon } from "lucide-react";
 import { useId, useState } from "react";
 import {
   ApprovalPanel,
@@ -9,7 +9,7 @@ import {
   PanelHeader,
   PanelTitle,
 } from "../../shared/panel";
-import { formatDecidedAt, isoOf } from "../shared/time";
+import { DecisionSummary } from "../shared/decision-line";
 import { useFocusOnMount } from "../shared/use-focus-on-mount";
 import type { DecidedAt, QuestionAnswer, QuestionOption } from "../types";
 import { QuestionChoices } from "./question-choices";
@@ -32,28 +32,6 @@ export type AgentQuestionProps = {
 function answerText(answer: AnsweredQuestion, options: QuestionOption[]) {
   const option = options.find((item) => item.id === answer.optionId);
   return [option?.label, answer.text].filter(Boolean).join(" · ");
-}
-
-function AnswerLine({ answer, options }: { answer: AnsweredQuestion; options: QuestionOption[] }) {
-  return (
-    <div data-slot="question-answer" className="flex items-start gap-2.5 text-sm">
-      <CheckIcon aria-hidden className="mt-0.5 size-4 shrink-0 text-emerald-500" />
-      <div className="flex min-w-0 flex-col gap-0.5">
-        <p className="font-medium">{answerText(answer, options) || "No answer"}</p>
-        {(answer.by || answer.at !== undefined) && (
-          <p className="text-xs text-muted-foreground">
-            Answered{answer.by ? ` by ${answer.by}` : ""}
-            {answer.at !== undefined && (
-              <>
-                {" · "}
-                <time dateTime={isoOf(answer.at)}>{formatDecidedAt(answer.at)}</time>
-              </>
-            )}
-          </p>
-        )}
-      </div>
-    </div>
-  );
 }
 
 export function AgentQuestion({
@@ -94,7 +72,11 @@ export function AgentQuestion({
       <PanelTitle className={answer ? "text-muted-foreground" : undefined}>{question}</PanelTitle>
       {answer ? (
         <PanelBody>
-          <AnswerLine answer={answer} options={options} />
+          <DecisionSummary
+            decision={{ approved: true, by: answer.by, at: answer.at }}
+            approvedVerb="Answered"
+            result={answerText(answer, options) || "No answer"}
+          />
         </PanelBody>
       ) : (
         <form
