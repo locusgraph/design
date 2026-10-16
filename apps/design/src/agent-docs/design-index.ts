@@ -37,6 +37,7 @@ Every item is listed at https://design.locusgraph.com/r/registry.json. Files lan
 - Group with ruled lines (\`RuleGrid\`, \`ring-1 ring-border\`, \`divide-y\`), not cards or shadows.
 - Small labels use the \`eyebrow\` class (mono, 11px, uppercase, muted).
 - One primary action per view. Color only on status: \`text-good\`, \`text-warn\`, \`text-destructive\`.
+- Surfaces: the page is \`bg-background\` (off-white, near-black in dark); cells and panels are a solid \`bg-card\` one step above it. Action strips are \`RuleGridFooter\` (\`border-t bg-muted/40\`), header strips \`RuleGridHeader\` (\`border-b bg-muted/20\`). One tint per strip; never tint content.
 - Use tokens (\`bg-card\`, \`bg-muted\`, \`text-muted-foreground\`, \`border-input\`), never raw hex.`;
 
 function firstSentence(text: string) {

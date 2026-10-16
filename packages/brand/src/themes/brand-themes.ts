@@ -17,14 +17,14 @@ export const brandThemes: Record<BrandTheme, BrandThemeColors> = {
     background: "#101011",
     foreground: "#ededed",
     muted: "#a1a1aa",
-    hairline: "rgba(237, 237, 237, 0.13)",
+    hairline: "rgba(237, 237, 237, 0.1)",
     dot: "rgba(237, 237, 237, 0.14)",
   },
   light: {
     background: "#ffffff",
     foreground: "#09090b",
     muted: "#71717a",
-    hairline: "rgba(9, 9, 11, 0.13)",
+    hairline: "rgba(9, 9, 11, 0.09)",
     dot: "rgba(9, 9, 11, 0.12)",
   },
 };

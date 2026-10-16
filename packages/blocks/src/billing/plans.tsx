@@ -1,4 +1,10 @@
-import { Badge, RuleGrid, RuleGridCell, RuleGridTitle } from "@locusgraph/components";
+import {
+  Badge,
+  RuleGrid,
+  RuleGridCell,
+  RuleGridFooter,
+  RuleGridTitle,
+} from "@locusgraph/components";
 import type * as React from "react";
 import type { PlanOffer } from "../types";
 import { PlanPrice } from "./plan-price";
@@ -27,13 +33,13 @@ export function Plans({ plans, actionFor }: PlansProps) {
                 <li key={point}>{point}</li>
               ))}
             </ul>
-            {plan.current ? (
-              <p className="mt-auto flex min-h-8 items-center text-sm text-muted-foreground">
-                Your plan
-              </p>
-            ) : (
-              action && <div className="mt-auto">{action}</div>
-            )}
+            <RuleGridFooter className="mt-auto">
+              {plan.current ? (
+                <p className="flex min-h-8 items-center text-sm text-muted-foreground">Your plan</p>
+              ) : (
+                action
+              )}
+            </RuleGridFooter>
           </RuleGridCell>
         );
       })}

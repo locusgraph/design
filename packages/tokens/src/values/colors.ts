@@ -1,5 +1,6 @@
 export type ColorName =
   | "surface"
+  | "background"
   | "foreground"
   | "muted"
   | "faint"
@@ -16,6 +17,7 @@ export type Palette = Record<ColorName, string>;
 
 export const lightColors: Palette = {
   surface: "#ffffff",
+  background: "#fafafa",
   foreground: "#09090b",
   muted: "#71717a",
   faint: "#a1a1aa",
@@ -30,7 +32,8 @@ export const lightColors: Palette = {
 };
 
 export const darkColors: Palette = {
-  surface: "#101011",
+  surface: "#111113",
+  background: "#0c0c0d",
   foreground: "#ededed",
   muted: "#a1a1aa",
   faint: "#71717a",
@@ -44,7 +47,7 @@ export const darkColors: Palette = {
   brandGlow: "#0099ff",
 };
 
-export const hairlineMix = 0.13;
+export const hairlineMix = 0.09;
 
 export function hairline(palette: Palette): string {
   return mixHex(palette.foreground, palette.surface, hairlineMix);
