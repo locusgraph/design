@@ -27,11 +27,11 @@ export function History({
   onArchive,
   label = "Conversations",
   emptyText = "No conversations yet.",
-  now = new Date(),
+  now,
   className,
   ...props
 }: HistoryProps) {
-  const groups = groupThreadsByDay(threads, now);
+  const groups = groupThreadsByDay(threads, now ?? new Date());
   return (
     <nav
       data-slot="history"

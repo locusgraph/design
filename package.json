@@ -17,9 +17,13 @@
     "registry:test": "node scripts/registry/install-test/run.mjs"
   },
   "devDependencies": {
+    "@babel/core": "catalog:",
+    "@babel/plugin-transform-react-jsx": "catalog:",
     "@biomejs/biome": "catalog:",
     "@locusgraph/config": "workspace:*",
     "@types/node": "catalog:",
+    "babel-plugin-react-compiler": "catalog:",
+    "happy-dom": "catalog:",
     "typescript": "catalog:",
     "vitest": "catalog:"
   },

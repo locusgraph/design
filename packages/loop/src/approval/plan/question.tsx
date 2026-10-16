@@ -40,15 +40,20 @@ function answerText(answer: AnsweredQuestion, options: QuestionOption[]) {
 export function Question({
   question,
   options = [],
-  allowText = options.length === 0,
-  textLabel = options.length > 0 ? "Something else" : "Your answer",
-  textPlaceholder = options.length > 0 ? "Something else…" : "Type an answer for the agent",
+  allowText: allowTextProp,
+  textLabel: textLabelProp,
+  textPlaceholder: textPlaceholderProp,
   submitLabel = "Send answer",
   answer,
   onAnswer,
   autoFocus = true,
   className,
 }: QuestionProps) {
+  const hasOptions = options.length > 0;
+  const allowText = allowTextProp ?? !hasOptions;
+  const textLabel = textLabelProp ?? (hasOptions ? "Something else" : "Your answer");
+  const textPlaceholder =
+    textPlaceholderProp ?? (hasOptions ? "Something else…" : "Type an answer for the agent");
   const textId = useId();
   const [optionId, setOptionId] = useState<string>();
   const [text, setText] = useState("");
