@@ -30,7 +30,7 @@ type PreviewToolbarProps = {
 
 export function PreviewToolbar({ background, canReset, onReset }: PreviewToolbarProps) {
   return (
-    <div className="absolute top-2 right-2 z-10 flex items-center gap-1 rounded-md border bg-background/80 p-0.5 backdrop-blur">
+    <div className="flex shrink-0 items-center gap-1 self-start rounded-md border bg-background p-0.5 sm:ml-auto sm:self-center">
       <ToggleGroup
         type="single"
         size="sm"
