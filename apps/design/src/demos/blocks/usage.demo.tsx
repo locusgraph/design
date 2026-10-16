@@ -70,9 +70,9 @@ function OutOfCredits() {
 }
 
 export default defineDemo({
-  title: "Usage Blocks",
+  title: "Usage",
   description:
-    "Usage meters and the one alert that says what needs doing about credits and quotas. From @locusgraph/blocks.",
+    "Usage with a Quota meter per metric, and UsageAlert, the one alert that says what to do about credits and quotas. From @locusgraph/blocks.",
   controls: { scenario: select(scenarios, "over") },
   playground: ({ scenario }) => (
     <div className="w-full max-w-2xl">

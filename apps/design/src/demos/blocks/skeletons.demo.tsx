@@ -78,9 +78,9 @@ function Keys() {
 }
 
 export default defineDemo({
-  title: "Block Skeletons",
+  title: "Skeletons",
   description:
-    "Loading placeholders with the same outer shape and spacing as the usage, wallet, credit pack, plan and API key blocks. Wallet and packs skeletons are Rule Grid cells, so they share a row. From @locusgraph/blocks.",
+    "Loading placeholders with the same outer shape and spacing as Usage, Wallet, TopUp, Plans and Keys. WalletSkeleton and TopUpSkeleton are Rule Grid cells, so they share a row. From @locusgraph/blocks.",
   controls: { block: select(blocks) },
   playground: ({ block }) => renderBlock(block),
   code: ({ block }) => blockCode[block],
@@ -97,7 +97,7 @@ export default defineDemo({
   examples: {
     Usage: { description: "Three quota meters while usage loads.", component: Usage },
     Wallet: {
-      description: "The wallet and credit packs side by side in one Rule Grid.",
+      description: "Wallet and TopUp side by side in one Rule Grid.",
       component: Wallet,
     },
     Plans: { description: "Three plan cells use the three-column grid.", component: Plans },

@@ -21,7 +21,6 @@ const demoSources = import.meta.glob<string>("../demos/**/*.demo.tsx", {
 // demo's title against demoTitleFromPath, so a new mismatch fails there.
 const titleOverrides: Record<string, string> = {
   "input-otp": "Input OTP",
-  "api-key-blocks": "API Key Blocks",
 };
 
 export function demoPathFromFile(file: string) {

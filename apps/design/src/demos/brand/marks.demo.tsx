@@ -30,7 +30,7 @@ function Wordmarks() {
 }
 
 export default defineDemo({
-  title: "Brand Marks",
+  title: "Marks",
   description:
     "The LocusGraph mark and wordmark, and the Google and GitHub marks for sign-in. From @locusgraph/brand.",
   controls: { size: select(sizeOptions, "md"), wordmark: toggle(true) },

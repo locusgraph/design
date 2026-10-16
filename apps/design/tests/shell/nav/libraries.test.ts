@@ -12,7 +12,7 @@ describe("libraries", () => {
 
   it("finds the library of a home page, a demo page or any other page", () => {
     expect(libraryOfPath("blocks").href).toBe("/blocks");
-    expect(libraryOfPath("brand/brand-marks").id).toBe("brand");
+    expect(libraryOfPath("brand/marks").id).toBe("brand");
     expect(libraryOfPath("action/button").id).toBe("components");
     expect(libraryOfPath("shells").id).toBe("components");
   });
@@ -26,6 +26,6 @@ describe("libraries", () => {
     ];
     expect(listed).toHaveLength(demoIndex.length);
     expect(libraryEntries("components").some((entry) => entry.group === "blocks")).toBe(false);
-    expect(libraryEntries("blocks").map((entry) => entry.title)).toContain("Billing Blocks");
+    expect(libraryEntries("blocks").map((entry) => entry.title)).toContain("Billing");
   });
 });
