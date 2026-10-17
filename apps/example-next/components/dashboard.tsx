@@ -11,7 +11,7 @@ import { grants, keys, organization, packs, plans, quotas, wallet } from "./samp
 export function Dashboard() {
   const [lastPack, setLastPack] = useState<string | null>(null);
   return (
-    <div className="enter-cascade flex flex-col gap-8">
+    <div className="locus-enter-cascade flex flex-col gap-8">
       <PageHeading
         meta={`${organization.name} · ${organization.plan} plan`}
         title="Overview"

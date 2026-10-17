@@ -38,7 +38,7 @@ function DropdownMenuLabel({
     <DropdownMenuPrimitive.Label
       data-slot="dropdown-menu-label"
       data-inset={inset}
-      className={cn("eyebrow px-2 pt-2 pb-1 data-[inset]:pl-8", className)}
+      className={cn("locus-eyebrow px-2 pt-2 pb-1 data-[inset]:pl-8", className)}
       {...props}
     />
   );

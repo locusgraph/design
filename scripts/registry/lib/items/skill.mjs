@@ -44,11 +44,11 @@ ${patterns}
 - Group with ruled lines (RuleGrid, ring-1 ring-border, divide-y), never cards with shadows.
 - The page is bg-background; cells and panels are bg-card, one step above it.
 - Action strips use RuleGridFooter (border-t bg-muted/70); header strips RuleGridHeader (border-b bg-muted/35). One tint per strip.
-- Small labels use the eyebrow class. Titles are one weight up, not one size up.
+- Small labels use the locus-eyebrow class. Titles are one weight up, not one size up.
 - One primary action per view. Secondary actions are ghost or outline.
 - Color only for status: text-good, text-warn, text-destructive. Body text stays foreground or muted.
 - Name buttons by what they do ("Delete 3 nodes", not "Confirm").
-- Use tokens (bg-card, bg-muted, text-muted-foreground, border-input). Never raw hex.
+- Use tokens (bg-card, bg-muted, text-muted-foreground, border-input). Never raw hex. In CSS the theme variables are --locus-* (var(--locus-surface), var(--locus-border)); classes from the theme are locus-* (locus-eyebrow, locus-shimmer).
 - Every screen works in light and dark.
 
 ## Agents and approvals

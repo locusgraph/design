@@ -28,7 +28,7 @@ export function PanelHeader({ icon, eyebrow, status, tone = "idle", aside }: Pan
   return (
     <header
       data-slot="panel-header"
-      className="eyebrow flex items-center gap-2 px-5 pt-4 [&_svg]:size-3.5 [&_svg]:shrink-0"
+      className="locus-eyebrow flex items-center gap-2 px-5 pt-4 [&_svg]:size-3.5 [&_svg]:shrink-0"
     >
       {icon}
       <span className="min-w-0 truncate">{eyebrow}</span>

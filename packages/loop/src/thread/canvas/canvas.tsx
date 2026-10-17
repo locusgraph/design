@@ -45,7 +45,7 @@ export function Canvas({
     >
       <header className="flex items-start gap-3 border-b px-5 pt-3.5 pb-3">
         <div className="flex min-w-0 flex-1 flex-col gap-1">
-          {kind && <span className="eyebrow">{kind}</span>}
+          {kind && <span className="locus-eyebrow">{kind}</span>}
           <h2 className="truncate font-sans text-base leading-snug font-semibold tracking-tight">
             {title}
           </h2>

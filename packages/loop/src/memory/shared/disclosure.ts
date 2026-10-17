@@ -1,4 +1,4 @@
-export const eyebrowClass = "eyebrow [&_svg]:size-3.5 [&_svg]:shrink-0";
+export const eyebrowClass = "locus-eyebrow [&_svg]:size-3.5 [&_svg]:shrink-0";
 
 export const collapsibleTriggerClass = `group inline-flex w-fit items-center gap-2 py-1 outline-none transition-colors duration-150 hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring/70 motion-reduce:transition-none ${eyebrowClass}`;
 

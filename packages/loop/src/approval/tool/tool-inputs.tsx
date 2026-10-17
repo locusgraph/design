@@ -83,7 +83,7 @@ export function ToolInputs({ input, muted = false }: { input: unknown; muted?: b
       {entries && (
         <button
           type="button"
-          className="eyebrow self-start outline-none hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring/70 motion-safe:transition-colors"
+          className="locus-eyebrow self-start outline-none hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring/70 motion-safe:transition-colors"
           aria-expanded={showRaw}
           aria-controls={showRaw ? rawId : undefined}
           onClick={() => setShowRaw((current) => !current)}

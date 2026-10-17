@@ -41,7 +41,7 @@ export function InstallMeta({ parts }: { parts: string[] }) {
 }
 
 export function InstallLabel({ children }: { children: ReactNode }) {
-  return <span className="eyebrow">{children}</span>;
+  return <span className="locus-eyebrow">{children}</span>;
 }
 
 type InstallStepProps = { number: number; title: string; children: ReactNode };

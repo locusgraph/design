@@ -81,7 +81,7 @@ export function MemoryRow({ memory, draft, onChange }: MemoryRowProps) {
       <div className="flex items-start gap-3">
         <div className="flex min-w-0 flex-1 flex-col gap-1">
           {(memory.kind || memory.sensitive) && (
-            <span className="eyebrow flex items-center gap-2">
+            <span className="locus-eyebrow flex items-center gap-2">
               {memory.kind && <span>{memory.kind}</span>}
               {memory.sensitive && <SensitiveMarker />}
             </span>

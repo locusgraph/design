@@ -37,7 +37,7 @@ const thread: AgentMessage[] = [
 
 const emptyState = (
   <div className="flex flex-col items-center gap-1">
-    <span className="eyebrow">New conversation</span>
+    <span className="locus-eyebrow">New conversation</span>
     <p className="text-sm text-muted-foreground">Ask what your agents remember or spend.</p>
   </div>
 );

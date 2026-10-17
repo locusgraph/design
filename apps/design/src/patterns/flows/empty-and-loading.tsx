@@ -137,7 +137,7 @@ export function EmptyAndLoading({
       className="flex w-full max-w-2xl flex-col bg-card text-card-foreground ring-1 ring-border"
     >
       <header className="flex min-h-11 items-center gap-3 border-b bg-muted/20 px-4 py-2.5">
-        <h2 id="graph-list-title" className="eyebrow">
+        <h2 id="graph-list-title" className="locus-eyebrow">
           Graphs
         </h2>
         {count ? <span className="text-sm text-muted-foreground tabular-nums">{count}</span> : null}

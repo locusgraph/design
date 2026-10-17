@@ -63,10 +63,10 @@ export function Code({
         {filename ? (
           <span className="min-w-0 truncate font-mono text-xs text-foreground">{filename}</span>
         ) : (
-          <span className="eyebrow">{language}</span>
+          <span className="locus-eyebrow">{language}</span>
         )}
         <span className="flex shrink-0 items-center gap-2">
-          {filename && <span className="eyebrow">{language}</span>}
+          {filename && <span className="locus-eyebrow">{language}</span>}
           {showCopy && <CopyCodeButton code={code} onCopy={onCopy} />}
         </span>
       </figcaption>

@@ -30,11 +30,11 @@ html {
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
+  background: var(--locus-background);
+  color: var(--locus-foreground);
 }
 
-.typeset-docs {
+.locus-typeset-docs {
   --typeset-font-body: var(--font-sans);
   --typeset-font-heading: var(--font-heading);
   --typeset-font-mono: var(--font-mono);
@@ -43,7 +43,7 @@ body {
   --typeset-flow: 1.25em;
 }
 
-@utility no-scrollbar {
+@utility locus-no-scrollbar {
   scrollbar-width: none;
   -ms-overflow-style: none;
   &::-webkit-scrollbar {
@@ -60,6 +60,6 @@ body {
 }
 
 [data-rehype-pretty-code-figure] [data-highlighted-line] {
-  background: var(--ghost);
-  box-shadow: inset 2px 0 var(--line);
+  background: var(--locus-ghost);
+  box-shadow: inset 2px 0 var(--locus-border);
 }

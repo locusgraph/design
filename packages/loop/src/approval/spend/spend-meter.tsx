@@ -94,7 +94,7 @@ export function SpendMeter(props: SpendMeterProps) {
       <div aria-hidden className="relative h-4">
         <span
           className={cn(
-            "eyebrow absolute bottom-0 whitespace-nowrap",
+            "locus-eyebrow absolute bottom-0 whitespace-nowrap",
             labelAlignment(limitPosition)
           )}
           style={{ left: `${limitPosition}%` }}

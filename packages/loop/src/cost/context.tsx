@@ -54,7 +54,7 @@ function BarContent({
   return (
     <>
       <span className="flex items-baseline justify-between gap-4 font-mono text-[11px] tabular-nums">
-        <span className="eyebrow">{label}</span>
+        <span className="locus-eyebrow">{label}</span>
         <span className={cn(status === "ok" && "text-foreground")}>
           {percent}% · {formatTokensShort(usedTokens)} / {formatTokensShort(limitTokens)}
         </span>

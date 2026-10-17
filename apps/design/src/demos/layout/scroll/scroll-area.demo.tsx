@@ -8,7 +8,7 @@ const heights = { sm: "h-40", md: "h-56", lg: "h-72" } as const;
 function InvoiceList({ heading }: { heading: string }) {
   return (
     <div className="p-4">
-      <h4 className="eyebrow mb-3">{heading}</h4>
+      <h4 className="locus-eyebrow mb-3">{heading}</h4>
       {invoices.map((invoice) => (
         <div key={invoice}>
           <div className="text-sm tabular-nums">{invoice}</div>
@@ -72,7 +72,7 @@ export default defineDemo({
     </ScrollArea>
   ),
   code: ({ height, heading }) =>
-    `<ScrollArea className="${heights[height]} w-56 rounded-md border">\n  <div className="p-4">\n    <h4 className="eyebrow">${heading}</h4>\n    {invoices.map((invoice) => (\n      <div key={invoice}>{invoice}</div>\n    ))}\n  </div>\n</ScrollArea>`,
+    `<ScrollArea className="${heights[height]} w-56 rounded-md border">\n  <div className="p-4">\n    <h4 className="locus-eyebrow">${heading}</h4>\n    {invoices.map((invoice) => (\n      <div key={invoice}>{invoice}</div>\n    ))}\n  </div>\n</ScrollArea>`,
   props: [
     { name: "type", type: "auto | always | scroll | hover", defaultValue: "auto" },
     { name: "scrollHideDelay", type: "number (ms)", defaultValue: "600" },

@@ -84,7 +84,7 @@ type VisibleLabelProps = { variant: PulseVariant; label: string; tone: PulseTone
 function VisibleLabel({ variant, label, tone }: VisibleLabelProps) {
   if (variant === "gradient") return <GradientLabel label={label} tone={tone} />;
   const shimmers = variant === "shimmer" || variant === "glyph" || variant === "locus";
-  return <span className={cn(shimmers && "motion-safe:shimmer")}>{label}</span>;
+  return <span className={cn(shimmers && "motion-safe:locus-shimmer")}>{label}</span>;
 }
 
 export function Pulse({

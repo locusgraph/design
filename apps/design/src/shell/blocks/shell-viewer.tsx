@@ -33,7 +33,7 @@ export function ShellViewer({ shell, theme }: { shell: ShellEntry; theme: Theme 
       {view !== "code" ? (
         <div
           ref={stage}
-          className="flex justify-center bg-background bg-[radial-gradient(var(--border)_1px,transparent_1px)] [background-size:20px_20px] p-2 [&:fullscreen]:p-0"
+          className="flex justify-center bg-background bg-[radial-gradient(var(--locus-border)_1px,transparent_1px)] [background-size:20px_20px] p-2 [&:fullscreen]:p-0"
         >
           <iframe
             key={`${theme}-${view}-${reloadCount}`}

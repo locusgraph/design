@@ -59,7 +59,7 @@ export function ContextBreakdown({
   const freeTokens = Math.max(limitTokens - usedTokens, 0);
   return (
     <div data-slot="context-breakdown" className="flex flex-col">
-      <div className="eyebrow flex items-center gap-2 px-4 pt-3">
+      <div className="locus-eyebrow flex items-center gap-2 px-4 pt-3">
         <span>{label}</span>
         <span className="ml-auto flex items-center gap-1.5">
           <span aria-hidden className={cn("size-1.5 rounded-full", statusDot[status])} />

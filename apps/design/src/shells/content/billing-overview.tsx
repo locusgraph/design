@@ -38,7 +38,7 @@ export function BillingOverview() {
       <RuleGrid columns={3}>
         {stats.map((stat) => (
           <RuleGridCell key={stat.label} className="p-5">
-            <RuleGridLabel className="eyebrow">{stat.label}</RuleGridLabel>
+            <RuleGridLabel className="locus-eyebrow">{stat.label}</RuleGridLabel>
             <span className="text-2xl font-semibold tracking-[-0.02em]">{stat.value}</span>
             <RuleGridDescription>{stat.detail}</RuleGridDescription>
           </RuleGridCell>
@@ -56,10 +56,10 @@ export function BillingOverview() {
           <Table>
             <TableHeader>
               <TableRow>
-                <TableHead className="eyebrow">Invoice</TableHead>
-                <TableHead className="eyebrow">Date</TableHead>
-                <TableHead className="eyebrow">Amount</TableHead>
-                <TableHead className="eyebrow">Status</TableHead>
+                <TableHead className="locus-eyebrow">Invoice</TableHead>
+                <TableHead className="locus-eyebrow">Date</TableHead>
+                <TableHead className="locus-eyebrow">Amount</TableHead>
+                <TableHead className="locus-eyebrow">Status</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>

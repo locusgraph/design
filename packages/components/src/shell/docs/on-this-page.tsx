@@ -11,7 +11,7 @@ function OnThisPage({ sections, title = "On This Page" }: OnThisPageProps) {
   const [activeId, pinSection] = useActiveSection(sections.map((section) => section.id));
   return (
     <nav aria-label={title} className="flex flex-col gap-2 text-sm">
-      <p className="eyebrow flex h-6 items-center">{title}</p>
+      <p className="locus-eyebrow flex h-6 items-center">{title}</p>
       {sections.map((section) => (
         <button
           key={section.id}

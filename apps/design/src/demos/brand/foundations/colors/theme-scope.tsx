@@ -11,22 +11,22 @@ const inputPercent: Record<Theme, number> = { light: 26, dark: 24 };
 function themeVariables(theme: Theme): CSSProperties {
   const palette = palettes[theme];
   return {
-    "--surface": palette.surface,
-    "--background": palette.surface,
-    "--foreground": palette.foreground,
-    "--muted": palette.muted,
-    "--faint": palette.faint,
-    "--btn": palette.btn,
-    "--btn-ink": palette.btnInk,
-    "--ghost": palette.ghost,
-    "--good": palette.good,
-    "--bad": palette.bad,
-    "--info": palette.info,
-    "--warn": palette.warn,
-    "--border": "color-mix(in oklch, var(--foreground) 13%, var(--surface))",
-    "--input": `color-mix(in oklch, var(--foreground) ${inputPercent[theme]}%, var(--surface))`,
-    "--skeleton": `color-mix(in oklch, var(--foreground) ${skeletonPercent[theme]}%, var(--surface))`,
-    "--popover": theme === "dark" ? "#18181a" : palette.surface,
+    "--locus-surface": palette.surface,
+    "--locus-background": palette.surface,
+    "--locus-foreground": palette.foreground,
+    "--locus-muted": palette.muted,
+    "--locus-faint": palette.faint,
+    "--locus-btn": palette.btn,
+    "--locus-btn-ink": palette.btnInk,
+    "--locus-ghost": palette.ghost,
+    "--locus-good": palette.good,
+    "--locus-bad": palette.bad,
+    "--locus-info": palette.info,
+    "--locus-warn": palette.warn,
+    "--locus-border": "color-mix(in oklch, var(--locus-foreground) 13%, var(--locus-surface))",
+    "--locus-input": `color-mix(in oklch, var(--locus-foreground) ${inputPercent[theme]}%, var(--locus-surface))`,
+    "--locus-skeleton": `color-mix(in oklch, var(--locus-foreground) ${skeletonPercent[theme]}%, var(--locus-surface))`,
+    "--locus-popover": theme === "dark" ? "#18181a" : palette.surface,
   } as CSSProperties;
 }
 

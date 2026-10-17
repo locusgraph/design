@@ -1,6 +1,6 @@
 {
   "name": "@locusgraph/components",
-  "version": "0.2.2",
+  "version": "0.3.0",
   "description": "Radix and shadcn based React components, shells and theme for LocusGraph apps.",
   "license": "MIT",
   "repository": {
@@ -17,7 +17,8 @@
   ],
   "exports": {
     ".": "./src/index.ts",
-    "./theme.css": "./src/styles/theme.css"
+    "./theme.css": "./src/styles/theme.css",
+    "./shadcn.css": "./src/styles/shadcn.css"
   },
   "publishConfig": {
     "registry": "https://registry.npmjs.org",
@@ -28,7 +29,8 @@
         "types": "./dist/index.d.ts",
         "default": "./dist/index.js"
       },
-      "./theme.css": "./dist/styles/theme.css"
+      "./theme.css": "./dist/styles/theme.css",
+      "./shadcn.css": "./dist/styles/shadcn.css"
     }
   },
   "scripts": {

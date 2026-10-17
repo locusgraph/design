@@ -3,7 +3,10 @@ import type * as React from "react";
 
 function Table({ className, ...props }: React.ComponentProps<"table">) {
   return (
-    <div data-slot="table-container" className="relative w-full overflow-x-auto scroll-fade-x">
+    <div
+      data-slot="table-container"
+      className="relative w-full overflow-x-auto locus-scroll-fade-x"
+    >
       <table
         data-slot="table"
         className={cn("w-full caption-bottom text-sm", className)}
@@ -55,7 +58,7 @@ function TableHead({ className, ...props }: React.ComponentProps<"th">) {
     <th
       data-slot="table-head"
       className={cn(
-        "eyebrow h-9 px-3 text-left align-middle font-normal whitespace-nowrap sm:px-4 [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px]",
+        "locus-eyebrow h-9 px-3 text-left align-middle font-normal whitespace-nowrap sm:px-4 [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px]",
         className
       )}
       {...props}

@@ -70,7 +70,7 @@ export function VirtualHistoryList({
             >
               <h3
                 id={`thread-group-${row.groupKey}`}
-                className="eyebrow px-2 pb-1"
+                className="locus-eyebrow px-2 pb-1"
                 suppressHydrationWarning
               >
                 {row.label}
