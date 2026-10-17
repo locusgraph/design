@@ -104,22 +104,14 @@ export function packageNameOf(dependency: string) {
   return versionAt > 0 ? dependency.slice(0, versionAt) : dependency;
 }
 
-function fileName(path: string) {
-  return path.split("/").at(-1) ?? path;
+function plural(count: number, noun: string) {
+  return `${count} ${noun}${count === 1 ? "" : "s"}`;
 }
 
-function filesPhrase(tree: RegistryTree) {
-  const first = tree.rootFiles[0];
-  const otherCount = tree.files.length - (first ? 1 : 0);
-  const others = `${otherCount} ${otherCount === 1 ? "part" : "parts"}`;
-  if (!first) return `Copies ${tree.files.length} files`;
-  return otherCount > 0
-    ? `Copies ${fileName(first.targetPath)} and ${others}`
-    : `Copies ${fileName(first.targetPath)}`;
-}
-
-export function registryTreeSummary(tree: RegistryTree) {
-  const names = tree.dependencies.map(packageNameOf);
-  const adds = names.length > 0 ? ` Adds ${names.join(", ")}.` : "";
-  return `${filesPhrase(tree)} into components/locus.${adds} Needs @locus/theme.`;
+export function registryTreeMeta(tree: RegistryTree) {
+  return [
+    plural(tree.files.length, "file"),
+    plural(tree.dependencies.length, "package"),
+    "needs @locus/theme",
+  ];
 }
