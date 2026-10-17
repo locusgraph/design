@@ -61,7 +61,7 @@ function DocsHeader({
       data-slot="docs-header"
       className="sticky top-0 z-50 w-full bg-background/95 backdrop-blur"
     >
-      <div className="mx-auto flex h-(--docs-header-height) w-full max-w-[1536px] items-center gap-4 px-6 **:data-[slot=separator]:h-4!">
+      <div className="mx-auto flex h-(--locus-docs-header-height) w-full max-w-[1536px] items-center gap-4 px-6 **:data-[slot=separator]:h-4!">
         <MobileNavSheet>{mobileNav}</MobileNavSheet>
         <Link
           href={brand.href}

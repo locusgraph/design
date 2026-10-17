@@ -85,7 +85,7 @@ function RuleGridFooter({ className, ...props }: React.ComponentProps<"div">) {
 }
 
 function RuleGridLabel({ className, ...props }: React.ComponentProps<"span">) {
-  return <span data-slot="rule-grid-label" className={cn("eyebrow", className)} {...props} />;
+  return <span data-slot="rule-grid-label" className={cn("locus-eyebrow", className)} {...props} />;
 }
 
 function RuleGridTitle({ className, ...props }: React.ComponentProps<"div">) {

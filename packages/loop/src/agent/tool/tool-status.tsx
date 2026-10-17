@@ -31,7 +31,7 @@ export function ToolStatus({ state }: { state: ToolState }) {
       data-slot="tool-status"
       data-state={state}
       aria-live="polite"
-      className="eyebrow flex shrink-0 items-center gap-1.5"
+      className="locus-eyebrow flex shrink-0 items-center gap-1.5"
     >
       <StatusDot tone={toolStateTones[state]} />
       {toolStateLabels[state]}

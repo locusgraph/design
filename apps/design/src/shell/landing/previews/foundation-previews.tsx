@@ -81,7 +81,7 @@ const designIndexLines = [
 export function AgentsPreview() {
   return (
     <div aria-hidden className="flex w-full max-w-72 flex-col gap-2 font-mono text-xs">
-      <span className="eyebrow">GET /DESIGN.md</span>
+      <span className="locus-eyebrow">GET /DESIGN.md</span>
       <div className="flex flex-col gap-1 bg-muted/40 px-3 py-2.5">
         {designIndexLines.map((line) => (
           <span key={line.text} className={`truncate ${line.tone}`}>

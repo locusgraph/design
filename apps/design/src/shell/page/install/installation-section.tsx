@@ -60,7 +60,7 @@ export function InstallationSection({
         ) : (
           <>
             <div className="flex items-center justify-between gap-3 border-b border-line px-4 py-1.5 sm:px-5">
-              <span className="eyebrow">npm</span>
+              <span className="locus-eyebrow">npm</span>
               <PackageManagerSwitch />
             </div>
             <div className={tabContentClass}>{packageTab}</div>

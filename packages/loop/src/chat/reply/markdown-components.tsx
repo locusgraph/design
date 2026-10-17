@@ -38,7 +38,7 @@ export const markdownComponents: Components = {
     <h3 className={cn("mt-5 mb-1.5 text-sm font-semibold first:mt-0", className)} {...props} />
   ),
   h4: ({ node: _node, className, ...props }) => (
-    <h4 className={cn("eyebrow mt-5 mb-1.5 first:mt-0", className)} {...props} />
+    <h4 className={cn("locus-eyebrow mt-5 mb-1.5 first:mt-0", className)} {...props} />
   ),
   ul: ({ node: _node, className, ...props }) => (
     <ul
@@ -105,7 +105,10 @@ export const markdownComponents: Components = {
   ),
   th: ({ node: _node, className, ...props }) => (
     <th
-      className={cn("eyebrow border-b bg-muted/30 px-3 py-2 text-left font-normal", className)}
+      className={cn(
+        "locus-eyebrow border-b bg-muted/30 px-3 py-2 text-left font-normal",
+        className
+      )}
       {...props}
     />
   ),

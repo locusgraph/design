@@ -24,14 +24,14 @@ function MinimumSizes() {
     <div className="grid w-[36rem] max-w-full grid-cols-2 divide-x ring-1 ring-border">
       <div className="flex flex-col items-center gap-3 px-4 py-6">
         <LocusGraphMark className="size-4" />
-        <span className="eyebrow">Mark · 16px tall</span>
+        <span className="locus-eyebrow">Mark · 16px tall</span>
       </div>
       <div className="flex flex-col items-center gap-3 px-4 py-6">
         <span className="flex w-20 flex-col gap-1">
           <LocusGraphWordmark className="text-[14.5px] leading-none" />
           <span className="h-px w-20 bg-s1" />
         </span>
-        <span className="eyebrow">Wordmark · 80px wide</span>
+        <span className="locus-eyebrow">Wordmark · 80px wide</span>
       </div>
     </div>
   );
@@ -46,7 +46,7 @@ function WhenToUseEach() {
             <Logo form={row.form} />
           </span>
           <span className="flex flex-col gap-1">
-            <span className="eyebrow">{row.form}</span>
+            <span className="locus-eyebrow">{row.form}</span>
             <span className="text-sm text-muted-foreground">{row.when}</span>
           </span>
         </div>
@@ -60,11 +60,11 @@ function LightAndDark() {
     <div className="grid w-[40rem] max-w-full grid-cols-2 ring-1 ring-border">
       <ThemeScope theme="light" className="flex h-36 flex-col items-center justify-center gap-3">
         <LocusGraphWordmark withMark className="text-2xl" />
-        <span className="eyebrow">On light: near-black #09090b</span>
+        <span className="locus-eyebrow">On light: near-black #09090b</span>
       </ThemeScope>
       <ThemeScope theme="dark" className="flex h-36 flex-col items-center justify-center gap-3">
         <LocusGraphWordmark withMark className="text-2xl" />
-        <span className="eyebrow">On dark: off-white #ededed</span>
+        <span className="locus-eyebrow">On dark: off-white #ededed</span>
       </ThemeScope>
     </div>
   );

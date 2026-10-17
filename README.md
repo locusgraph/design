@@ -29,6 +29,10 @@ pnpm add @locusgraph/components
 @import "@locusgraph/components/theme.css";
 ```
 
+The theme's CSS variables are all `--locus-*`, so they never clash with an app's own. An app that
+also uses its own shadcn components adds `@import "@locusgraph/components/shadcn.css";` after the
+theme to point the shadcn variables (`--background`, `--primary`, `--muted-foreground`, …) at ours.
+
 Or copy the source into your app with the shadcn CLI. Every component, block and Loop part is in the
 registry at [design.locusgraph.com/r/registry.json](https://design.locusgraph.com/r/registry.json):
 

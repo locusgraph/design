@@ -73,7 +73,7 @@ function MemorizedRow({ item, onUndo }: { item: MemorizedItem; onUndo?: (id: str
         {item.kind && <span className="font-mono text-xs text-muted-foreground">{item.kind}</span>}
       </span>
       {undone ? (
-        <span className="eyebrow flex shrink-0 items-center gap-1.5">
+        <span className="locus-eyebrow flex shrink-0 items-center gap-1.5">
           <StatusDot tone="idle" />
           Undone
         </span>

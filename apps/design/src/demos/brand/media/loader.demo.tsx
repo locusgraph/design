@@ -24,7 +24,7 @@ function Sizes() {
       {pulseSizes.map((size) => (
         <div key={size} className="flex flex-col items-center justify-end gap-3 px-3 py-5">
           <Pulse variant="locus" showLabel={false} className={sizeClasses[size]} />
-          <span className="eyebrow">{size}px</span>
+          <span className="locus-eyebrow">{size}px</span>
           <span className="text-center text-xs text-muted-foreground">{sizeUse[size]}</span>
         </div>
       ))}
@@ -56,7 +56,7 @@ function OnDarkAndLight() {
 
 function PageLoading() {
   return (
-    <div className="brand-grid-quiet flex h-80 w-[44rem] max-w-full flex-col items-center justify-center gap-4 overflow-hidden ring-1 ring-border">
+    <div className="locus-brand-grid-quiet flex h-80 w-[44rem] max-w-full flex-col items-center justify-center gap-4 overflow-hidden ring-1 ring-border">
       <Pulse variant="locus" showLabel={false} className="text-[64px]" />
       <span className="text-sm text-muted-foreground">Loading acme-customers…</span>
     </div>

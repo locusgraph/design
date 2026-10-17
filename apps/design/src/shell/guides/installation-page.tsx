@@ -28,7 +28,7 @@ function Step({ id, title, children }: { id: string; title: string; children: Re
 }
 
 function Prose({ children }: { children: React.ReactNode }) {
-  return <div className="typeset typeset-docs">{children}</div>;
+  return <div className="typeset locus-typeset-docs">{children}</div>;
 }
 
 export function InstallationPage() {
@@ -84,6 +84,15 @@ export function InstallationPage() {
           </p>
         </Prose>
         <Code code={snippets.globalsCss} language="css" />
+        <Prose>
+          <p>
+            The theme's variables are all prefixed, such as --locus-surface and --locus-muted, so
+            they never clash with your own. If the app also uses its own shadcn components, import
+            the shadcn aliases after the theme: they set --background, --primary,
+            --muted-foreground, --radius and the rest to the Locus values.
+          </p>
+        </Prose>
+        <Code code={snippets.shadcnAliases} language="css" />
       </Step>
       <Step id="configure-the-bundler" title="Configure the bundler">
         <Tabs defaultValue="vite">

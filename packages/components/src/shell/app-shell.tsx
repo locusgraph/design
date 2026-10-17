@@ -20,7 +20,7 @@ function AppShell({ sidebar, header, children, defaultOpen, bodyClassName }: App
         <div
           data-slot="app-shell-body"
           className={cn(
-            "no-scrollbar flex w-full flex-1 flex-col overflow-y-auto px-6 pt-7 pb-8 lg:px-8",
+            "locus-no-scrollbar flex w-full flex-1 flex-col overflow-y-auto px-6 pt-7 pb-8 lg:px-8",
             bodyClassName
           )}
         >

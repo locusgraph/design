@@ -91,7 +91,7 @@ function TitleOnly() {
 function NextOpenGraphImage() {
   return (
     <div className="w-full ring-1 ring-border">
-      <p className="eyebrow border-border border-b px-4 py-2">app/opengraph-image.tsx</p>
+      <p className="locus-eyebrow border-border border-b px-4 py-2">app/opengraph-image.tsx</p>
       <CodeBlock code={openGraphSource} />
     </div>
   );

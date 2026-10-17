@@ -13,7 +13,7 @@ const agentPrompt = `Build this UI with the LocusGraph design system.
 1. Read https://design.locusgraph.com/DESIGN.md first. It lists every component, block and agent part, how to install them and the house style.
 2. Before using a component, fetch its page by adding .md to its path, for example https://design.locusgraph.com/loop/approval/approval.md, and use the props it documents. Do not guess props.
 3. Install with pnpm add @locusgraph/components (plus @locusgraph/blocks, @locusgraph/loop or @locusgraph/brand when needed) and import the CSS listed in DESIGN.md.
-4. Follow the house style: square containers, pill buttons, ruled lines instead of cards, the eyebrow class for small labels, tokens instead of raw colors.`;
+4. Follow the house style: square containers, pill buttons, ruled lines instead of cards, the locus-eyebrow class for small labels, tokens instead of raw colors.`;
 
 const agentChips: { label: string; icon: React.ReactNode }[] = [
   { label: "Claude Code", icon: <AsteriskIcon className="size-3.5" /> },

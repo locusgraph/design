@@ -69,7 +69,7 @@ function AttemptRow({ attempt, position }: { attempt: RunUsage; position: number
       className="grid grid-cols-[1fr_auto_4.5rem] items-baseline gap-x-4 px-5 py-2.5 text-sm tabular-nums"
     >
       <span className="flex min-w-0 items-baseline gap-2">
-        <span className="eyebrow">#{position + 1}</span>
+        <span className="locus-eyebrow">#{position + 1}</span>
         <span className={cn("truncate", attempt.failed && "text-muted-foreground")}>
           {attempt.model ?? "Attempt"}
         </span>

@@ -13,7 +13,7 @@ describe("Pulse", () => {
   it("renders a shimmer label", () => {
     const html = renderToStaticMarkup(<Pulse variant="shimmer" label="Searching memory…" />);
     expect(html).toContain('role="status"');
-    expect(html).toContain("motion-safe:shimmer");
+    expect(html).toContain("motion-safe:locus-shimmer");
     expect(html).toContain("Searching memory…");
   });
 

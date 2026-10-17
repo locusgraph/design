@@ -73,7 +73,7 @@ export function History({
                 <section key={group.key} aria-labelledby={`thread-group-${group.key}`}>
                   <h3
                     id={`thread-group-${group.key}`}
-                    className="eyebrow px-2 pb-1"
+                    className="locus-eyebrow px-2 pb-1"
                     suppressHydrationWarning
                   >
                     {group.label}

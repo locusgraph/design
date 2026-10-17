@@ -86,7 +86,7 @@ function Sizes() {
           </div>
           <figcaption className="flex items-baseline justify-between gap-2">
             <span className="font-medium font-mono text-sm">{size}px</span>
-            <span className="eyebrow">
+            <span className="locus-eyebrow">
               {use}
               {size > largestShownSize ? ", shown at 64" : ""}
             </span>
@@ -100,7 +100,7 @@ function Sizes() {
 function NextAppIcon() {
   return (
     <div className="w-full ring-1 ring-border">
-      <p className="eyebrow border-border border-b px-4 py-2">app/icon.tsx</p>
+      <p className="locus-eyebrow border-border border-b px-4 py-2">app/icon.tsx</p>
       <CodeBlock code={nextIconSource} />
     </div>
   );
@@ -109,7 +109,7 @@ function NextAppIcon() {
 function HtmlLinkTags() {
   return (
     <div className="w-full ring-1 ring-border">
-      <p className="eyebrow border-border border-b px-4 py-2">
+      <p className="locus-eyebrow border-border border-b px-4 py-2">
         head · svg files in @locusgraph/brand/svg
       </p>
       <CodeBlock code={htmlLinksSource} />

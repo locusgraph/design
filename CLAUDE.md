@@ -34,7 +34,7 @@ These rules apply to every source file. They are not suggestions.
 ## Layout
 
 - `packages/config`: `@locusgraph/config`, Biome, TypeScript, Vitest, Cucumber, PostCSS and shadcn settings. Replaces `@spendgraph/config`
-- `packages/tokens`: `@locusgraph/tokens`, `theme.css` (palette, Tailwind mapping, base, brand effects, motion), `typeset.css`, and the color and type values as TypeScript
+- `packages/tokens`: `@locusgraph/tokens`, `theme.css` (palette, Tailwind mapping, base, brand effects, motion), `typeset.css`, the optional `shadcn.css` aliases, and the color and type values as TypeScript
 - `packages/utils`: `@locusgraph/utils`, money in cents and micro-USD, counts, dates, quota and balance status. No dependencies
 - `packages/brand`: `@locusgraph/brand`, the LocusGraph and SpendGraph marks and wordmarks, `LocusGraphIcon`, `SocialCard` (inline styles, works in Next.js `ImageResponse`) and the Google and GitHub marks, as React and SVG
 - `packages/components`: `@locusgraph/components`, Radix based React components, Rule Grid, the App and Docs shells, and `theme.css` (tokens plus a Tailwind source for the components)
@@ -43,6 +43,8 @@ These rules apply to every source file. They are not suggestions.
 - `packages/email`: `@locusgraph/email`, transactional email templates with inline styles from tokens
 
 Dependencies flow one way: `config` ← every package; `tokens` ← `components`, `email`; `utils` ← `blocks`, `loop`, `email`; `brand` ← `loop`; `components` ← `blocks`, `loop`. Never import upward.
+
+Everything the theme defines is prefixed with `locus` so it never clashes with an app's own CSS: variables are `--locus-*` (`packages/tokens/src/variables/palette.css`, light on `:root`, dark on `.dark`), and our classes, utilities and keyframes are `locus-*` (`locus-eyebrow`, `locus-shimmer`, `.locus-brand-grid`). `theme.css` never defines the unprefixed shadcn names (`--background`, `--muted`, `--primary`); `shadcn.css` (`@locusgraph/tokens/shadcn.css`, re-exported as `@locusgraph/components/shadcn.css`) maps them to ours for apps that also use shadcn components, and components must work without it. The Tailwind keys in `variables/mapping.css` keep their names (`bg-surface`, `text-soft`, `bg-primary`, `text-muted-foreground`) and point at `--locus-*`. `data-slot` attributes stay as shadcn names them.
 
 Icons come from `@carbon/icons-react`, imported under the local name the code uses (`import { Close as XIcon } from "@carbon/icons-react"`). Its install scripts only send telemetry, so `allowBuilds` keeps them off.
 - `apps/design`: playground and docs for every component (Vite), one `src/demos/<group>/<name>.demo.tsx` per component, the landing page at `/`, the shells at `/shells`, `/DESIGN.md` and one `<path>.md` per page for agents (`src/agent-docs`, `plugins/agent-docs.ts`), deployed to design.locusgraph.com as a Cloudflare Worker (`cloudflare.config.ts`)

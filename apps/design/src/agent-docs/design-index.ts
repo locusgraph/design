@@ -23,6 +23,8 @@ pnpm add @locusgraph/components @locusgraph/blocks @locusgraph/loop @locusgraph/
 @import "@locusgraph/brand/sources.css";
 \`\`\`
 
+An app that also uses its own shadcn components adds \`@import "@locusgraph/components/shadcn.css";\` after the theme, so the shadcn variables (\`--background\`, \`--primary\`, \`--muted-foreground\`, \`--radius\`) point at the Locus ones.
+
 ## Copy the source with shadcn
 
 \`\`\`bash
@@ -35,10 +37,11 @@ Every item is listed at https://design.locusgraph.com/r/registry.json. Files lan
 
 - Containers are square (radius 0). Buttons are pills (\`rounded-full\`).
 - Group with ruled lines (\`RuleGrid\`, \`ring-1 ring-border\`, \`divide-y\`), not cards or shadows.
-- Small labels use the \`eyebrow\` class (mono, 11px, uppercase, muted).
+- Small labels use the \`locus-eyebrow\` class (mono, 11px, uppercase, muted).
 - One primary action per view. Color only on status: \`text-good\`, \`text-warn\`, \`text-destructive\`.
 - Surfaces: the page is \`bg-background\` (off-white, near-black in dark); cells and panels are a solid \`bg-card\` one step above it. Action strips are \`RuleGridFooter\` (\`border-t bg-muted/70\`), header strips \`RuleGridHeader\` (\`border-b bg-muted/35\`). One tint per strip; never tint content.
-- Use tokens (\`bg-card\`, \`bg-muted\`, \`text-muted-foreground\`, \`border-input\`), never raw hex.`;
+- Use tokens (\`bg-card\`, \`bg-muted\`, \`text-muted-foreground\`, \`border-input\`), never raw hex.
+- In CSS the theme variables are \`--locus-*\` (\`var(--locus-surface)\`, \`var(--locus-border)\`, \`var(--locus-muted)\`) and the theme's own classes are \`locus-*\`. The shadcn names (\`--background\`, \`--muted-foreground\`) exist only when the app imports \`@locusgraph/components/shadcn.css\`.`;
 
 function firstSentence(text: string) {
   const match = text.match(/^.*?[.!?](\s|$)/);

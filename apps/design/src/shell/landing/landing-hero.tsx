@@ -23,7 +23,7 @@ function NewLoopPill() {
 
 export function LandingHero() {
   return (
-    <header className="brand-grid-quiet relative flex flex-col items-start gap-6 px-6 pt-16 pb-4 sm:px-10 sm:pt-20">
+    <header className="locus-brand-grid-quiet relative flex flex-col items-start gap-6 px-6 pt-16 pb-4 sm:px-10 sm:pt-20">
       <NewLoopPill />
       <h1 className="max-w-3xl font-heading text-4xl leading-[1.05] font-semibold tracking-[-0.03em] text-balance sm:text-6xl">
         Design that keeps humans in the loop.

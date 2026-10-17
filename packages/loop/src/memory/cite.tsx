@@ -57,7 +57,7 @@ export function Cite({ citation, onOpen, className }: CiteProps) {
           sideOffset={6}
           className="flex w-72 flex-col gap-2 rounded-none border-0 p-4 ring-1 ring-border"
         >
-          <span className="eyebrow flex min-w-0 items-center gap-2">
+          <span className="locus-eyebrow flex min-w-0 items-center gap-2">
             <SourceMark citation={citation} />
             <span className="truncate">{host ?? "Source"}</span>
           </span>

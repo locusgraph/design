@@ -70,10 +70,10 @@ export function SwatchRow({ color }: { color: PaletteColor }) {
 export function SwatchHeader() {
   return (
     <div className={`${rowColumns} px-4 py-2`}>
-      <span className="eyebrow">Swatch</span>
-      <span className="eyebrow">Name and token</span>
-      <span className="eyebrow">Light</span>
-      <span className="eyebrow">Dark</span>
+      <span className="locus-eyebrow">Swatch</span>
+      <span className="locus-eyebrow">Name and token</span>
+      <span className="locus-eyebrow">Light</span>
+      <span className="locus-eyebrow">Dark</span>
     </div>
   );
 }

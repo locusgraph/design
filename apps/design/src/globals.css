@@ -6,17 +6,17 @@
 @import "@locusgraph/loop/sources.css";
 
 body {
-  background: var(--background);
-  color: var(--foreground);
+  background: var(--locus-background);
+  color: var(--locus-foreground);
 }
 
 .preview-checker {
-  background-color: var(--background);
+  background-color: var(--locus-background);
   background-image:
-    linear-gradient(45deg, var(--border) 25%, transparent 25%),
-    linear-gradient(-45deg, var(--border) 25%, transparent 25%),
-    linear-gradient(45deg, transparent 75%, var(--border) 75%),
-    linear-gradient(-45deg, transparent 75%, var(--border) 75%);
+    linear-gradient(45deg, var(--locus-border) 25%, transparent 25%),
+    linear-gradient(-45deg, var(--locus-border) 25%, transparent 25%),
+    linear-gradient(45deg, transparent 75%, var(--locus-border) 75%),
+    linear-gradient(-45deg, transparent 75%, var(--locus-border) 75%);
   background-size: 16px 16px;
   background-position: 0 0, 0 8px, 8px -8px, -8px 0;
 }
@@ -42,9 +42,9 @@ body {
     [data-slot="docs-aside"]
   ) {
   position: relative;
-  outline: 1.5px dashed color-mix(in oklch, var(--info) 70%, transparent);
+  outline: 1.5px dashed color-mix(in oklch, var(--locus-info) 70%, transparent);
   outline-offset: -4px;
-  background-color: color-mix(in oklch, var(--info) 6%, var(--background));
+  background-color: color-mix(in oklch, var(--locus-info) 6%, var(--locus-background));
 }
 
 [data-shell-outline]
@@ -77,8 +77,8 @@ body {
   z-index: 10;
   padding: 2px 10px;
   border-radius: 9999px;
-  background: var(--info);
-  color: var(--background);
+  background: var(--locus-info);
+  color: var(--locus-background);
   font-size: 12px;
   font-weight: 500;
   line-height: 1.5;

@@ -28,7 +28,12 @@ export const typeFamilies: TypeFamily[] = [
 export type TypeStep = { name: string; className: string; size: string; use: string };
 
 export const typeScale: TypeStep[] = [
-  { name: "eyebrow", className: "eyebrow", size: "11px", use: "Section labels, column headers" },
+  {
+    name: "locus-eyebrow",
+    className: "locus-eyebrow",
+    size: "11px",
+    use: "Section labels, column headers",
+  },
   { name: "xs", className: "text-xs", size: "12px", use: "Hints, metadata, captions" },
   { name: "sm", className: "text-sm", size: "14px", use: "Default UI text, buttons, tables" },
   { name: "base", className: "text-base", size: "16px", use: "Long-form body copy" },

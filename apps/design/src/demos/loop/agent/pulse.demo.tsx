@@ -21,7 +21,7 @@ function Gallery() {
           className="flex items-center justify-between gap-4 px-4 py-3.5 sm:border-b sm:odd:border-r"
         >
           <Pulse variant={variant} label={galleryLabels[variant]} showLabel />
-          <span className="eyebrow">{variant}</span>
+          <span className="locus-eyebrow">{variant}</span>
         </div>
       ))}
     </div>

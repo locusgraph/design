@@ -74,7 +74,7 @@ export function RunBar({
       <span className="flex min-w-0 flex-1 items-center gap-2.5 text-sm">
         <StatusDot tone={statusTone[status]} className="size-2" />
         {runName && <span className="truncate font-medium">{runName}</span>}
-        <span role="status" aria-live="polite" className="eyebrow shrink-0">
+        <span role="status" aria-live="polite" className="locus-eyebrow shrink-0">
           {statusLabels[status]}
         </span>
         {elapsedMs !== undefined && (

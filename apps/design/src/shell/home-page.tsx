@@ -67,7 +67,7 @@ export function HomePage({ library }: { library: Library }) {
       ) : (
         groups.map(({ group, entries }) => (
           <section key={group} id={group} className="flex scroll-mt-24 flex-col gap-4">
-            <h2 className="eyebrow">{groupTitle(group)}</h2>
+            <h2 className="locus-eyebrow">{groupTitle(group)}</h2>
             <ComponentGrid entries={entries} />
           </section>
         ))
