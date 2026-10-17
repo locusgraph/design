@@ -23,6 +23,7 @@ function describeFailure(file, event) {
 }
 
 const optOutDirective = /^\s*["']use no memo["']/m;
+const clientDirective = /^\s*["']use client["']/;
 const sources = new Map();
 
 function optedOut(file, event) {
@@ -45,6 +46,12 @@ const logger = {
   },
 };
 
+function compilerPlugins(source) {
+  const jsx = [transformReactJsx, { runtime: "automatic" }];
+  if (!clientDirective.test(source)) return [jsx];
+  return [[reactCompiler, { target: "19", panicThreshold: "none", logger }], jsx];
+}
+
 function compile(file) {
   const before = compiledFunctions;
   sources.set(file, readFileSync(file, "utf8"));
@@ -53,10 +60,7 @@ function compile(file) {
     babelrc: false,
     configFile: false,
     sourceType: "module",
-    plugins: [
-      [reactCompiler, { target: "19", panicThreshold: "none", logger }],
-      [transformReactJsx, { runtime: "automatic" }],
-    ],
+    plugins: compilerPlugins(sources.get(file)),
   });
   const output = file.replace(/\.jsx$/, ".js");
   writeFileSync(output, `${result.code}\n`);
@@ -65,6 +69,18 @@ function compile(file) {
 }
 
 for (const file of sourceFiles(dist)) compile(file);
+
+const serverFilesUsingCompiler = sourceFiles(dist).filter((file) => {
+  const code = readFileSync(file, "utf8");
+  return code.includes("react/compiler-runtime") && !clientDirective.test(code);
+});
+if (serverFilesUsingCompiler.length > 0) {
+  console.error(
+    'react-compiler: memoized files without "use client" break in React Server Components:'
+  );
+  for (const file of serverFilesUsingCompiler) console.error(`  ${relative(dist, file)}`);
+  process.exit(1);
+}
 
 console.log(
   `react-compiler: ${compiledFunctions} components and hooks memoized in ${compiledFiles} files in ${dist}`
