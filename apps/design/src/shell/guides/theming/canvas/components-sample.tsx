@@ -24,6 +24,15 @@ function PreviewRow({ label, children }: { label: string; children: React.ReactN
   );
 }
 
+function StateSwatch({ label, color }: { label: string; color: string }) {
+  return (
+    <span className="flex flex-col items-center gap-1.5">
+      <span className="h-8 w-16 rounded-full ring-1 ring-border" style={{ background: color }} />
+      <span className="text-xs text-muted-foreground">{label}</span>
+    </span>
+  );
+}
+
 export function ComponentsSample() {
   return (
     <div className="m-auto w-full max-w-160 divide-y bg-surface ring-1 ring-border">
@@ -32,6 +41,12 @@ export function ComponentsSample() {
         <Button variant="outline">Cancel</Button>
         <Button variant="ghost">Skip</Button>
         <Badge>New</Badge>
+      </PreviewRow>
+      <PreviewRow label="States">
+        <StateSwatch label="Rest" color="var(--btn)" />
+        <StateSwatch label="Hover" color="var(--btn-hover)" />
+        <StateSwatch label="Pressed" color="var(--btn-active)" />
+        <StateSwatch label="Subtle" color="var(--btn-subtle)" />
       </PreviewRow>
       <PreviewRow label="Choice">
         <Label className="gap-2">

@@ -1,10 +1,18 @@
 import { WarningAltFilled as FailIcon, CheckmarkFilled as PassIcon } from "@carbon/icons-react";
-import { contrastRatio, meetsTextContrast } from "../contrast";
+import { apcaLightness, contrastRatio, meetsApcaBodyText, meetsTextContrast } from "../contrast";
 import type { ResolvedTheme } from "../theme-presets";
+
+function Verdict({ passes, label }: { passes: boolean; label: string }) {
+  return passes ? (
+    <PassIcon className="size-4 text-good" aria-label={`${label} passes`} />
+  ) : (
+    <FailIcon className="size-4 text-warn" aria-label={`${label} below target`} />
+  );
+}
 
 function ContrastRow({ label, theme }: { label: string; theme: ResolvedTheme }) {
   const ratio = contrastRatio(theme.primaryInk, theme.primary);
-  const passes = meetsTextContrast(ratio);
+  const lightness = apcaLightness(theme.primaryInk, theme.primary);
   return (
     <div className="flex items-center gap-3 px-3 py-2.5">
       <span
@@ -14,13 +22,11 @@ function ContrastRow({ label, theme }: { label: string; theme: ResolvedTheme }) 
         Aa
       </span>
       <span className="text-sm">{label}</span>
-      <span className="ml-auto flex items-center gap-1.5 text-sm tabular-nums">
-        {ratio.toFixed(1)}:1
-        {passes ? (
-          <PassIcon className="size-4 text-good" aria-label="Passes AA" />
-        ) : (
-          <FailIcon className="size-4 text-warn" aria-label="Below AA" />
-        )}
+      <span className="ml-auto grid grid-cols-[auto_auto] items-center gap-x-1.5 gap-y-1 text-right text-xs tabular-nums">
+        <span>{ratio.toFixed(1)}:1</span>
+        <Verdict passes={meetsTextContrast(ratio)} label="WCAG" />
+        <span>Lc {Math.abs(lightness).toFixed(0)}</span>
+        <Verdict passes={meetsApcaBodyText(lightness)} label="APCA" />
       </span>
     </div>
   );

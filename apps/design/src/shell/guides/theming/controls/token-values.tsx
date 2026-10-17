@@ -1,19 +1,41 @@
 import type { ResolvedTheme } from "../theme-presets";
 
-function tokenRows(theme: ResolvedTheme) {
+function baseRows(theme: ResolvedTheme) {
   return [
-    { token: "--btn", color: theme.primary },
-    { token: "--btn-ink", color: theme.primaryInk },
-    { token: "--s1", color: theme.ring },
+    { token: "--btn", color: theme.primary, value: theme.primary },
+    { token: "--btn-ink", color: theme.primaryInk, value: theme.primaryInk },
+    { token: "--s1", color: theme.ring, value: theme.ring },
   ];
 }
 
-export function TokenValues({ theme }: { theme: ResolvedTheme }) {
+function derivedRows(theme: ResolvedTheme) {
+  return [
+    {
+      token: "--btn-hover",
+      color: `color-mix(in oklch, ${theme.primary} 84%, var(--background))`,
+      value: "84% mix",
+    },
+    {
+      token: "--btn-active",
+      color: `color-mix(in oklch, ${theme.primary} 72%, var(--background))`,
+      value: "72% mix",
+    },
+    {
+      token: "--btn-subtle",
+      color: `color-mix(in oklch, ${theme.primary} 12%, transparent)`,
+      value: "12% alpha",
+    },
+  ];
+}
+
+type TokenRow = { token: string; color: string; value: string };
+
+function TokenList({ label, rows }: { label: string; rows: TokenRow[] }) {
   return (
     <div className="flex flex-col gap-2 px-4 py-3">
-      <span className="eyebrow">Tokens</span>
+      <span className="eyebrow">{label}</span>
       <dl className="flex flex-col gap-1.5">
-        {tokenRows(theme).map((row) => (
+        {rows.map((row) => (
           <div key={row.token} className="flex items-center gap-2 font-mono text-xs">
             <span
               aria-hidden="true"
@@ -21,10 +43,19 @@ export function TokenValues({ theme }: { theme: ResolvedTheme }) {
               style={{ background: row.color }}
             />
             <dt className="text-muted-foreground">{row.token}</dt>
-            <dd className="ml-auto text-foreground">{row.color}</dd>
+            <dd className="ml-auto text-foreground">{row.value}</dd>
           </div>
         ))}
       </dl>
     </div>
+  );
+}
+
+export function TokenValues({ theme }: { theme: ResolvedTheme }) {
+  return (
+    <>
+      <TokenList label="Tokens" rows={baseRows(theme)} />
+      <TokenList label="Derived in CSS" rows={derivedRows(theme)} />
+    </>
   );
 }

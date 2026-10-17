@@ -7,6 +7,8 @@ import { PromptTab } from "./prompt-tab";
 
 type ThemeDocsPanelProps = {
   css: string;
+  tokensJson: string;
+  mode: string;
   prompt: string;
   light: ResolvedTheme;
   dark: ResolvedTheme;
@@ -38,7 +40,14 @@ function StepNote({ children }: { children: React.ReactNode }) {
   return <p className="text-sm text-pretty text-muted-foreground">{children}</p>;
 }
 
-export function ThemeDocsPanel({ css, prompt, light, dark }: ThemeDocsPanelProps) {
+export function ThemeDocsPanel({
+  css,
+  tokensJson,
+  mode,
+  prompt,
+  light,
+  dark,
+}: ThemeDocsPanelProps) {
   return (
     <Tabs
       defaultValue="css"
@@ -47,16 +56,22 @@ export function ThemeDocsPanel({ css, prompt, light, dark }: ThemeDocsPanelProps
       <div className="border-b bg-muted/35 px-4 py-2">
         <TabsList>
           <TabsTrigger value="css">CSS</TabsTrigger>
+          <TabsTrigger value="tokens">Tokens</TabsTrigger>
           <TabsTrigger value="prompt">Prompt</TabsTrigger>
         </TabsList>
       </div>
       <TabsContent value="css" className="flex min-h-0 flex-col gap-8 overflow-y-auto p-4">
         <DocStep number={1} title="Set three variables">
-          <StepNote>Put them in your global CSS, after the theme import.</StepNote>
+          <StepNote>
+            Put them in your global CSS, after the theme import. Hover, pressed and subtle shades
+            derive from --btn, so a brand color gets its states for free.
+          </StepNote>
           <CodeBlock code={css} language="css" className="border bg-background text-xs" />
         </DocStep>
         <DocStep number={2} title="Check the contrast">
-          <StepNote>Text on the brand color needs 4.5:1 to pass WCAG AA.</StepNote>
+          <StepNote>
+            WCAG 2 AA needs 4.5:1 and is the legal bar. APCA Lc 60 is a stricter read for dark mode.
+          </StepNote>
           <ContrastCheck light={light} dark={dark} />
         </DocStep>
         <DocStep number={3} title="Use semantic classes">
@@ -65,6 +80,13 @@ export function ThemeDocsPanel({ css, prompt, light, dark }: ThemeDocsPanelProps
             neutral ghost tint.
           </StepNote>
         </DocStep>
+      </TabsContent>
+      <TabsContent value="tokens" className="flex min-h-0 flex-col gap-4 overflow-y-auto p-4">
+        <StepNote>
+          The same values as {mode}.tokens.json in the W3C Design Tokens format (2025.10), for Figma
+          and other tools.
+        </StepNote>
+        <CodeBlock code={tokensJson} language="json" className="border bg-background text-xs" />
       </TabsContent>
       <TabsContent value="prompt" className="flex min-h-0 flex-col gap-4 overflow-y-auto p-4">
         <PromptTab prompt={prompt} />

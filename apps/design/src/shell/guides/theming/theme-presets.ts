@@ -2,6 +2,7 @@ import type * as React from "react";
 
 export type ThemeMode = "light" | "dark";
 export type RingMode = "blue" | "brand";
+export type ContrastMode = "standard" | "high";
 export type BrandColors = { primary: string; primaryInk: string };
 export type ThemePreset = { id: string; name: string; light: BrandColors; dark: BrandColors };
 export type ResolvedTheme = BrandColors & { ring: string };
@@ -73,12 +74,29 @@ function cssBlock(selector: string, theme: ResolvedTheme) {
   ].join("\n");
 }
 
-export function themeCss(preset: ThemePreset, ring: RingMode) {
+const derivedStatesCss = [
+  ":root {",
+  "  --btn-hover: color-mix(in oklch, var(--btn) 84%, var(--background));",
+  "  --btn-active: color-mix(in oklch, var(--btn) 72%, var(--background));",
+  "  --btn-subtle: color-mix(in oklch, var(--btn) 12%, transparent);",
+  "}",
+].join("\n");
+
+const highContrastCss = [
+  '[data-contrast="high"] {',
+  "  --border: color-mix(in oklch, var(--foreground) 34%, var(--surface));",
+  "  --input: color-mix(in oklch, var(--foreground) 58%, var(--surface));",
+  "  --muted: color-mix(in oklch, var(--foreground) 84%, var(--surface));",
+  "}",
+].join("\n");
+
+export function themeCss(preset: ThemePreset, ring: RingMode, contrast: ContrastMode) {
   return [
     cssBlock(":root", resolveTheme(preset, "light", ring)),
-    "",
     cssBlock(".dark", resolveTheme(preset, "dark", ring)),
-  ].join("\n");
+    derivedStatesCss,
+    ...(contrast === "high" ? [highContrastCss] : []),
+  ].join("\n\n");
 }
 
 export function themeStyle(theme: ResolvedTheme) {

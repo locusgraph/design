@@ -1,30 +1,51 @@
 import { Shuffle as ShuffleIcon } from "@carbon/icons-react";
 import { Button } from "@locusgraph/components";
-import { neutralPreset, type ResolvedTheme, type RingMode, type ThemeMode } from "../theme-presets";
+import {
+  type ContrastMode,
+  neutralPreset,
+  type ResolvedTheme,
+  type RingMode,
+  type ThemeMode,
+} from "../theme-presets";
 import { BrandGrid } from "./brand-grid";
-import { RingToggle } from "./ring-toggle";
+import { SegmentedRow } from "./segmented-row";
 import { TokenValues } from "./token-values";
+
+const ringOptions: { value: RingMode; label: string }[] = [
+  { value: "blue", label: "Blue" },
+  { value: "brand", label: "Brand" },
+];
+
+const contrastOptions: { value: ContrastMode; label: string }[] = [
+  { value: "standard", label: "Standard" },
+  { value: "high", label: "High" },
+];
+
+export type ThemeSettings = { presetId: string; ring: RingMode; contrast: ContrastMode };
+
+export const defaultThemeSettings: ThemeSettings = {
+  presetId: neutralPreset.id,
+  ring: "blue",
+  contrast: "standard",
+};
 
 type ThemeControlsProps = {
   mode: ThemeMode;
-  presetId: string;
-  ring: RingMode;
+  settings: ThemeSettings;
   theme: ResolvedTheme;
-  onPresetChange: (id: string) => void;
-  onRingChange: (ring: RingMode) => void;
+  onChange: (settings: ThemeSettings) => void;
   onShuffle: () => void;
 };
 
-export function ThemeControls({
-  mode,
-  presetId,
-  ring,
-  theme,
-  onPresetChange,
-  onRingChange,
-  onShuffle,
-}: ThemeControlsProps) {
-  const isNeutral = presetId === neutralPreset.id && ring === "blue";
+function isDefault(settings: ThemeSettings) {
+  return (
+    settings.presetId === defaultThemeSettings.presetId &&
+    settings.ring === defaultThemeSettings.ring &&
+    settings.contrast === defaultThemeSettings.contrast
+  );
+}
+
+export function ThemeControls({ mode, settings, theme, onChange, onShuffle }: ThemeControlsProps) {
   return (
     <div className="flex flex-col bg-surface ring-1 ring-border">
       <div className="flex flex-col gap-1 border-b bg-muted/35 px-4 py-3">
@@ -34,8 +55,23 @@ export function ThemeControls({
         </p>
       </div>
       <div className="divide-y">
-        <BrandGrid mode={mode} value={presetId} onValueChange={onPresetChange} />
-        <RingToggle value={ring} onValueChange={onRingChange} />
+        <BrandGrid
+          mode={mode}
+          value={settings.presetId}
+          onValueChange={(presetId) => onChange({ ...settings, presetId })}
+        />
+        <SegmentedRow
+          label="Focus ring"
+          value={settings.ring}
+          options={ringOptions}
+          onValueChange={(ring) => onChange({ ...settings, ring })}
+        />
+        <SegmentedRow
+          label="Contrast"
+          value={settings.contrast}
+          options={contrastOptions}
+          onValueChange={(contrast) => onChange({ ...settings, contrast })}
+        />
         <TokenValues theme={theme} />
       </div>
       <div className="flex gap-2 border-t bg-muted/70 p-3">
@@ -45,11 +81,8 @@ export function ThemeControls({
         </Button>
         <Button
           variant="ghost"
-          disabled={isNeutral}
-          onClick={() => {
-            onPresetChange(neutralPreset.id);
-            onRingChange("blue");
-          }}
+          disabled={isDefault(settings)}
+          onClick={() => onChange(defaultThemeSettings)}
         >
           Reset
         </Button>
