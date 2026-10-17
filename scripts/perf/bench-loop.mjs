@@ -50,6 +50,17 @@ function median(values) {
   return sorted.length % 2 ? sorted[middle] : (sorted[middle - 1] + sorted[middle]) / 2;
 }
 
+const updatesPerMount = 6;
+
+function medianUpdate(root, build, initial, next) {
+  const samples = [];
+  for (let update = 0; update < updatesPerMount; update += 1) {
+    const list = update % 2 === 0 ? next : initial;
+    samples.push(timed(() => root.render(build(list))));
+  }
+  return median(samples.filter((_, update) => update % 2 === 0));
+}
+
 function measure(build, initial, next, runs) {
   const mounts = [];
   const updates = [];
@@ -60,7 +71,7 @@ function measure(build, initial, next, runs) {
     const root = createRoot(container);
     const mountMs = timed(() => root.render(build(initial)));
     domNodes = container.querySelectorAll("*").length;
-    const updateMs = timed(() => root.render(build(next)));
+    const updateMs = medianUpdate(root, build, initial, next);
     React.act(() => root.unmount());
     container.remove();
     if (run === 0) continue;
