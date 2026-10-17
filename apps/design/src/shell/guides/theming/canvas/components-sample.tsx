@@ -14,6 +14,7 @@ import {
   TabsTrigger,
 } from "@locusgraph/components";
 import type * as React from "react";
+import { GreySample } from "./grey-sample";
 
 function PreviewRow({ label, children }: { label: string; children: React.ReactNode }) {
   return (
@@ -47,6 +48,9 @@ export function ComponentsSample() {
         <StateSwatch label="Hover" color="var(--btn-hover)" />
         <StateSwatch label="Pressed" color="var(--btn-active)" />
         <StateSwatch label="Subtle" color="var(--btn-subtle)" />
+      </PreviewRow>
+      <PreviewRow label="Greys">
+        <GreySample />
       </PreviewRow>
       <PreviewRow label="Choice">
         <Label className="gap-2">

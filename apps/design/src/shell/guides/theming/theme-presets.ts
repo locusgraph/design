@@ -82,6 +82,15 @@ const derivedStatesCss = [
   "}",
 ].join("\n");
 
+const seeThroughGreysCss = [
+  ":root {",
+  "  --grey-a1: color-mix(in oklch, var(--foreground) 4%, transparent);",
+  "  --grey-a2: color-mix(in oklch, var(--foreground) 8%, transparent);",
+  "  --grey-a3: color-mix(in oklch, var(--foreground) 14%, transparent);",
+  "  --grey-a4: color-mix(in oklch, var(--foreground) 24%, transparent);",
+  "}",
+].join("\n");
+
 const highContrastCss = [
   '[data-contrast="high"] {',
   "  --border: color-mix(in oklch, var(--foreground) 34%, var(--surface));",
@@ -95,6 +104,7 @@ export function themeCss(preset: ThemePreset, ring: RingMode, contrast: Contrast
     cssBlock(":root", resolveTheme(preset, "light", ring)),
     cssBlock(".dark", resolveTheme(preset, "dark", ring)),
     derivedStatesCss,
+    seeThroughGreysCss,
     ...(contrast === "high" ? [highContrastCss] : []),
   ].join("\n\n");
 }

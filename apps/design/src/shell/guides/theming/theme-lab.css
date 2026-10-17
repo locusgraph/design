@@ -1,6 +1,10 @@
 [data-theme-lab] {
   --btn-hover: color-mix(in oklch, var(--btn) 84%, var(--background));
   --btn-active: color-mix(in oklch, var(--btn) 72%, var(--background));
+  --grey-a1: color-mix(in oklch, var(--foreground) 4%, transparent);
+  --grey-a2: color-mix(in oklch, var(--foreground) 8%, transparent);
+  --grey-a3: color-mix(in oklch, var(--foreground) 14%, transparent);
+  --grey-a4: color-mix(in oklch, var(--foreground) 24%, transparent);
   --btn-subtle: color-mix(in oklch, var(--btn) 12%, transparent);
 }
 

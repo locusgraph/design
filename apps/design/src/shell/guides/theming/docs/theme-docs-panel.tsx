@@ -66,7 +66,11 @@ export function ThemeDocsPanel({
             Put them in your global CSS, after the theme import. Hover, pressed and subtle shades
             derive from --btn, so a brand color gets its states for free.
           </StepNote>
-          <CodeBlock code={css} language="css" className="border bg-background text-xs" />
+          <CodeBlock
+            code={css}
+            language="css"
+            className="border bg-background text-xs [&_pre]:whitespace-pre-wrap"
+          />
         </DocStep>
         <DocStep number={2} title="Check the contrast">
           <StepNote>
@@ -86,7 +90,11 @@ export function ThemeDocsPanel({
           The same values as {mode}.tokens.json in the W3C Design Tokens format (2025.10), for Figma
           and other tools.
         </StepNote>
-        <CodeBlock code={tokensJson} language="json" className="border bg-background text-xs" />
+        <CodeBlock
+          code={tokensJson}
+          language="json"
+          className="border bg-background text-xs [&_pre]:whitespace-pre-wrap"
+        />
       </TabsContent>
       <TabsContent value="prompt" className="flex min-h-0 flex-col gap-4 overflow-y-auto p-4">
         <PromptTab prompt={prompt} />
