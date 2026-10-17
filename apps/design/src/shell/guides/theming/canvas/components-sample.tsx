@@ -24,9 +24,9 @@ function PreviewRow({ label, children }: { label: string; children: React.ReactN
   );
 }
 
-export function ThemePreview({ style }: { style: React.CSSProperties }) {
+export function ComponentsSample() {
   return (
-    <div style={style} className="divide-y bg-surface ring-1 ring-border">
+    <div className="mx-auto w-full max-w-160 divide-y bg-surface ring-1 ring-border">
       <PreviewRow label="Actions">
         <Button>Save changes</Button>
         <Button variant="outline">Cancel</Button>

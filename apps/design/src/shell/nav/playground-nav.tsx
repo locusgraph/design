@@ -15,7 +15,6 @@ export function playgroundNavGroups(library: Library): DocsNavGroup[] {
       items: [
         { title: "Introduction", href: "/" },
         { title: "Installation", href: "/installation" },
-        { title: "Theming", href: "/theming" },
       ],
     },
     { label: library.title, items },

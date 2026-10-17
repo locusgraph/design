@@ -1,19 +1,18 @@
 import type * as React from "react";
 
-export type ThemeColors = { primary: string; primaryInk: string; ring: string };
+export type ThemeMode = "light" | "dark";
+export type RingMode = "blue" | "brand";
+export type BrandColors = { primary: string; primaryInk: string };
+export type ThemePreset = { id: string; name: string; light: BrandColors; dark: BrandColors };
+export type ResolvedTheme = BrandColors & { ring: string };
 
-export type ThemePreset = {
-  id: string;
-  name: string;
-  light: ThemeColors;
-  dark: ThemeColors;
-};
+const blueRing: Record<ThemeMode, string> = { light: "#2a78d6", dark: "#3987e5" };
 
 export const neutralPreset: ThemePreset = {
   id: "neutral",
   name: "Neutral",
-  light: { primary: "#18181b", primaryInk: "#fafafa", ring: "#2a78d6" },
-  dark: { primary: "#ededed", primaryInk: "#0a0a0a", ring: "#3987e5" },
+  light: { primary: "#18181b", primaryInk: "#fafafa" },
+  dark: { primary: "#ededed", primaryInk: "#0a0a0a" },
 };
 
 export const themePresets: ThemePreset[] = [
@@ -21,32 +20,32 @@ export const themePresets: ThemePreset[] = [
   {
     id: "blue",
     name: "Blue",
-    light: { primary: "#1f6fd1", primaryInk: "#ffffff", ring: "#1f6fd1" },
-    dark: { primary: "#2a78d6", primaryInk: "#ffffff", ring: "#3987e5" },
+    light: { primary: "#1f6fd1", primaryInk: "#ffffff" },
+    dark: { primary: "#2a78d6", primaryInk: "#ffffff" },
   },
   {
     id: "violet",
     name: "Violet",
-    light: { primary: "#6d28d9", primaryInk: "#ffffff", ring: "#7c3aed" },
-    dark: { primary: "#7c3aed", primaryInk: "#ffffff", ring: "#9085e9" },
+    light: { primary: "#6d28d9", primaryInk: "#ffffff" },
+    dark: { primary: "#7c3aed", primaryInk: "#ffffff" },
   },
   {
     id: "green",
     name: "Green",
-    light: { primary: "#15803d", primaryInk: "#ffffff", ring: "#16a34a" },
-    dark: { primary: "#22c55e", primaryInk: "#052e16", ring: "#22c55e" },
+    light: { primary: "#15803d", primaryInk: "#ffffff" },
+    dark: { primary: "#22c55e", primaryInk: "#052e16" },
   },
   {
     id: "orange",
     name: "Orange",
-    light: { primary: "#c2410c", primaryInk: "#ffffff", ring: "#ea580c" },
-    dark: { primary: "#f97316", primaryInk: "#1c0a00", ring: "#f97316" },
+    light: { primary: "#c2410c", primaryInk: "#ffffff" },
+    dark: { primary: "#f97316", primaryInk: "#1c0a00" },
   },
   {
     id: "rose",
     name: "Rose",
-    light: { primary: "#e11d48", primaryInk: "#ffffff", ring: "#e11d48" },
-    dark: { primary: "#e11d48", primaryInk: "#ffffff", ring: "#f43f5e" },
+    light: { primary: "#e11d48", primaryInk: "#ffffff" },
+    dark: { primary: "#e11d48", primaryInk: "#ffffff" },
   },
 ];
 
@@ -54,32 +53,41 @@ export function findThemePreset(id: string) {
   return themePresets.find((preset) => preset.id === id) ?? neutralPreset;
 }
 
-function cssBlock(selector: string, colors: ThemeColors) {
+export function pickOtherPreset(currentId: string) {
+  const others = themePresets.filter((preset) => preset.id !== currentId);
+  return others[Math.floor(Math.random() * others.length)] ?? neutralPreset;
+}
+
+export function resolveTheme(preset: ThemePreset, mode: ThemeMode, ring: RingMode): ResolvedTheme {
+  const colors = preset[mode];
+  return { ...colors, ring: ring === "brand" ? colors.primary : blueRing[mode] };
+}
+
+function cssBlock(selector: string, theme: ResolvedTheme) {
   return [
     `${selector} {`,
-    `  --btn: ${colors.primary};`,
-    `  --btn-ink: ${colors.primaryInk};`,
-    `  --s1: ${colors.ring};`,
+    `  --btn: ${theme.primary};`,
+    `  --btn-ink: ${theme.primaryInk};`,
+    `  --s1: ${theme.ring};`,
     "}",
   ].join("\n");
 }
 
-export function themePresetCss(preset: ThemePreset) {
+export function themeCss(preset: ThemePreset, ring: RingMode) {
   return [
     '@import "tailwindcss";',
     '@import "@locusgraph/components/theme.css";',
     "",
-    cssBlock(":root", preset.light),
+    cssBlock(":root", resolveTheme(preset, "light", ring)),
     "",
-    cssBlock(".dark", preset.dark),
+    cssBlock(".dark", resolveTheme(preset, "dark", ring)),
   ].join("\n");
 }
 
-export function themePresetStyle(preset: ThemePreset, mode: "light" | "dark") {
-  const colors = preset[mode];
+export function themeStyle(theme: ResolvedTheme) {
   return {
-    "--btn": colors.primary,
-    "--btn-ink": colors.primaryInk,
-    "--s1": colors.ring,
+    "--btn": theme.primary,
+    "--btn-ink": theme.primaryInk,
+    "--s1": theme.ring,
   } as React.CSSProperties;
 }

@@ -16,7 +16,7 @@ import {
 import { usePageHead } from "./seo/use-page-head";
 import { ShellsPage } from "./shell/blocks/shells-page";
 import { InstallationPage, installationSections } from "./shell/guides/installation-page";
-import { ThemingPage, themingSections } from "./shell/guides/theming/theming-page";
+import { ThemingPage } from "./shell/guides/theming/theming-page";
 import { HomePage, homeSections } from "./shell/home-page";
 import { LandingPage } from "./shell/landing/landing-page";
 import { HeaderActions } from "./shell/nav/header-actions";
@@ -38,6 +38,7 @@ const brand = {
 const headerLinks = [
   ...libraries.map(({ title, href }) => ({ title, href })),
   { title: "Shells", href: "/shells" },
+  { title: "Theming", href: "/theming" },
 ];
 
 function useShownEntry(loaded: DemoEntry | undefined, isDemoPage: boolean) {
@@ -71,21 +72,15 @@ export function App() {
   const activeHref = `/${path}`;
   const isShellsPage = path === "shells";
   const isLandingPage = path === "";
-  const isFullWidth = isShellsPage || isLandingPage;
-  const isInstallationPage = path === "installation";
   const isThemingPage = path === "theming";
+  const isFullWidth = isShellsPage || isLandingPage || isThemingPage;
+  const isInstallationPage = path === "installation";
   const library = libraryOfPath(path);
   usePrefetchLibrary(library.id);
   const navGroups = playgroundNavGroups(library);
   const pageSections =
     docs?.sections ??
-    (isInstallationPage
-      ? installationSections
-      : isThemingPage
-        ? themingSections
-        : isDemoPage
-          ? []
-          : homeSections(library));
+    (isInstallationPage ? installationSections : isDemoPage ? [] : homeSections(library));
 
   return (
     <>
@@ -94,7 +89,15 @@ export function App() {
           <DocsHeader
             brand={brand}
             links={headerLinks}
-            activeHref={isShellsPage ? "/shells" : isLandingPage ? "/" : library.href}
+            activeHref={
+              isShellsPage
+                ? "/shells"
+                : isThemingPage
+                  ? "/theming"
+                  : isLandingPage
+                    ? "/"
+                    : library.href
+            }
             linkComponent={PlaygroundLink}
             mobileNav={
               <DocsNavList
