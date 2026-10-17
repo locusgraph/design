@@ -75,7 +75,9 @@ const serverFilesUsingCompiler = sourceFiles(dist).filter((file) => {
   return code.includes("react/compiler-runtime") && !clientDirective.test(code);
 });
 if (serverFilesUsingCompiler.length > 0) {
-  console.error("react-compiler: memoized files without \"use client\" break in React Server Components:");
+  console.error(
+    'react-compiler: memoized files without "use client" break in React Server Components:'
+  );
   for (const file of serverFilesUsingCompiler) console.error(`  ${relative(dist, file)}`);
   process.exit(1);
 }
