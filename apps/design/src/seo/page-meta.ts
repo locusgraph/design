@@ -31,6 +31,11 @@ const guidePages: Record<string, { title: string; description: string }> = {
     description:
       "Install Locus Design from npm or copy the source with shadcn, add Tailwind, import the theme and render your first component.",
   },
+  theming: {
+    title: "Theming",
+    description:
+      "Monochrome by default. Set one brand color for the primary action and focus ring with three CSS variables; everything else stays grey.",
+  },
   shells: {
     title: "Shells",
     description:

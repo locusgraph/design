@@ -16,6 +16,7 @@ import {
 import { usePageHead } from "./seo/use-page-head";
 import { ShellsPage } from "./shell/blocks/shells-page";
 import { InstallationPage, installationSections } from "./shell/guides/installation-page";
+import { ThemingPage, themingSections } from "./shell/guides/theming/theming-page";
 import { HomePage, homeSections } from "./shell/home-page";
 import { LandingPage } from "./shell/landing/landing-page";
 import { HeaderActions } from "./shell/nav/header-actions";
@@ -72,12 +73,19 @@ export function App() {
   const isLandingPage = path === "";
   const isFullWidth = isShellsPage || isLandingPage;
   const isInstallationPage = path === "installation";
+  const isThemingPage = path === "theming";
   const library = libraryOfPath(path);
   usePrefetchLibrary(library.id);
   const navGroups = playgroundNavGroups(library);
   const pageSections =
     docs?.sections ??
-    (isInstallationPage ? installationSections : isDemoPage ? [] : homeSections(library));
+    (isInstallationPage
+      ? installationSections
+      : isThemingPage
+        ? themingSections
+        : isDemoPage
+          ? []
+          : homeSections(library));
 
   return (
     <>
@@ -122,6 +130,8 @@ export function App() {
           <ShellsPage theme={settings.theme} />
         ) : isInstallationPage ? (
           <InstallationPage />
+        ) : isThemingPage ? (
+          <ThemingPage mode={settings.theme} />
         ) : entry && docs ? (
           <DemoPage entry={entry} docs={docs} params={params} settings={settings} />
         ) : isDemoPage ? (
