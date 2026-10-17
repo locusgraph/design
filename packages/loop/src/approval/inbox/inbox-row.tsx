@@ -1,11 +1,12 @@
 import { Checkmark as CheckIcon, Locked as LockIcon, Close as XIcon } from "@carbon/icons-react";
 import { Button, Checkbox, cn } from "@locusgraph/components";
+import type { ComponentProps } from "react";
 import type { RiskLevel } from "../../types";
 import { riskLabels } from "../shared/risk-badge";
 import { formatWaiting, isoOf } from "../shared/time";
 import type { PendingApproval } from "../types";
 
-type InboxRowProps = {
+type InboxRowProps = Omit<ComponentProps<"li">, "onSelect"> & {
   item: PendingApproval;
   now: number;
   selected: boolean;
@@ -20,7 +21,16 @@ const riskDot: Record<RiskLevel, string> = {
   destructive: "bg-destructive",
 };
 
-export function InboxRow({ item, now, selected, onSelect, onApprove, onDeny }: InboxRowProps) {
+export function InboxRow({
+  item,
+  now,
+  selected,
+  onSelect,
+  onApprove,
+  onDeny,
+  className,
+  ...props
+}: InboxRowProps) {
   const destructive = item.risk === "destructive";
   return (
     <li
@@ -29,8 +39,10 @@ export function InboxRow({ item, now, selected, onSelect, onApprove, onDeny }: I
       data-selected={selected || undefined}
       className={cn(
         "group flex items-center gap-3 px-5 py-2.5 motion-safe:transition-colors",
-        selected ? "bg-accent" : "hover:bg-accent/50"
+        selected ? "bg-accent" : "hover:bg-accent/50",
+        className
       )}
+      {...props}
     >
       {destructive ? (
         <span className="flex size-4 shrink-0 items-center justify-center text-muted-foreground">

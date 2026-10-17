@@ -49,4 +49,32 @@ describe("Inbox", () => {
     expect(formatWaiting(now - 10_000, now)).toBe("just now");
     expect(formatWaiting(now - 2 * 86_400_000, now)).toBe("2 d");
   });
+
+  it("virtualizes a long queue inside its own scroll area", () => {
+    const many = Array.from({ length: 200 }, (_, index) => ({
+      ...items[0],
+      id: `apr_${index}`,
+      title: `Send invoice ${index}`,
+    }));
+    const html = renderToStaticMarkup(
+      <Inbox items={many} now={now} onApprove={noop} onDeny={noop} onApproveAll={noop} />
+    );
+    const rendered = html.match(/data-slot="inbox-item"/g) ?? [];
+    expect(html).toContain('data-slot="inbox-scroll"');
+    expect(html).toContain("200 waiting");
+    expect(rendered.length).toBeGreaterThan(0);
+    expect(rendered.length).toBeLessThan(40);
+    expect(html).toContain('aria-setsize="200"');
+    const plain = renderToStaticMarkup(
+      <Inbox
+        items={many}
+        now={now}
+        virtualize={false}
+        onApprove={noop}
+        onDeny={noop}
+        onApproveAll={noop}
+      />
+    );
+    expect(plain.match(/data-slot="inbox-item"/g)).toHaveLength(200);
+  });
 });

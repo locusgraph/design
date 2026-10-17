@@ -16,7 +16,7 @@ function SidebarMenuSkeleton({
 }: React.ComponentProps<"div"> & {
   showIcon?: boolean;
 }) {
-  const width = React.useMemo(randomSkeletonWidth, []);
+  const [width] = React.useState(randomSkeletonWidth);
 
   return (
     <div

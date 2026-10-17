@@ -13,10 +13,17 @@ function prefersReducedMotion(): boolean {
   );
 }
 
+type ScrollSnapshot = { top: number; height: number };
+
+function scrolledUpByReader(viewport: HTMLElement, previous: ScrollSnapshot): boolean {
+  return viewport.scrollTop < previous.top && viewport.scrollHeight === previous.height;
+}
+
 export function useStickToBottom() {
   const viewportRef = useRef<HTMLDivElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
   const stuckRef = useRef(true);
+  const lastScrollRef = useRef<ScrollSnapshot>({ top: 0, height: 0 });
   const [isAtBottom, setIsAtBottom] = useState(true);
 
   const pinToBottom = useCallback(() => {
@@ -32,9 +39,17 @@ export function useStickToBottom() {
       return;
     }
     const atBottom = distanceFromBottom(viewport) <= bottomThresholdPx;
-    stuckRef.current = atBottom;
-    setIsAtBottom(atBottom);
-  }, []);
+    const readerScrolledUp = scrolledUpByReader(viewport, lastScrollRef.current);
+    lastScrollRef.current = { top: viewport.scrollTop, height: viewport.scrollHeight };
+    if (atBottom) {
+      stuckRef.current = true;
+    } else if (readerScrolledUp) {
+      stuckRef.current = false;
+    } else if (stuckRef.current) {
+      pinToBottom();
+    }
+    setIsAtBottom(stuckRef.current);
+  }, [pinToBottom]);
 
   const scrollToLatest = useCallback(() => {
     const viewport = viewportRef.current;

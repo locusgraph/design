@@ -49,6 +49,8 @@ Icons come from `@carbon/icons-react`, imported under the local name the code us
 - `scripts/registry`: builds the shadcn registry into `apps/design/public/r` (one item per source file, a bundle per docs page without one, and the `theme` item) and `install-test/` installs every item into a fresh `shadcn init` app and builds it
 - `apps/example-next` (port 3100) and `apps/example-react` (port 3200): small apps that use the packages the way a product would, in Next.js App Router and in Vite. Keep them building; they are the check that the packages work outside the docs site
 
+`components`, `blocks` and `loop` build with `tsc` (JSX preserved), then `scripts/react-compiler.mjs` (React Compiler, target React 19), then `scripts/esm-extensions.mjs`. The compiler step fails the build when a component bails out; fix the code, or add a `"use no memo"` directive where a library is known to be incompatible (TanStack Virtual's `useVirtualizer`). `brand` is not compiled: its marks render inside Satori (`ImageResponse`), which calls components without React's hook dispatcher. `node scripts/perf/bench-loop.mjs` times Loop's long lists against the built `dist` in happy-dom.
+
 Components that import Radix use its subpaths (`radix-ui/dialog`), never the `radix-ui` root: the root import hangs the vinext RSC build of apps that use this package.
 
 ## Commands

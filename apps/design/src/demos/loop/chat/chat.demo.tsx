@@ -42,6 +42,27 @@ const emptyState = (
   </div>
 );
 
+function longSession(turns: number): AgentMessage[] {
+  return Array.from({ length: turns }, (_, index) => ({
+    ...thread[index % thread.length],
+    id: `msg_long_${index}`,
+  }));
+}
+
+const longThread = longSession(400);
+
+function LongSession() {
+  return (
+    <div className="flex h-96 w-full max-w-xl flex-col border bg-background">
+      <Chat empty={emptyState}>
+        {longThread.map((message) => (
+          <Turn key={message.id} message={message} />
+        ))}
+      </Chat>
+    </div>
+  );
+}
+
 function Live() {
   const [messages, setMessages] = useState(thread);
   return (
@@ -83,11 +104,17 @@ export default defineDemo({
     { name: "empty", type: "ReactNode" },
     { name: "label", type: "string", defaultValue: "Chat" },
     { name: "jumpLabel", type: "string", defaultValue: "Jump to latest" },
+    { name: "virtualize", type: "boolean", defaultValue: "true" },
   ],
   examples: {
     Live: {
       description: "A thread with a composer; sending pins the view to the new message.",
       component: Live,
+    },
+    LongSession: {
+      description:
+        "400 turns. Above 50 turns only the turns near the viewport are mounted, so long agent sessions stay fast; pass virtualize={false} to mount every turn.",
+      component: LongSession,
     },
   },
   isNew: true,

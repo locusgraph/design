@@ -1,12 +1,12 @@
 import { cn } from "@locusgraph/components";
-import { useState } from "react";
-import { formatTimeOfDay } from "./thread-groups";
+import { type ComponentProps, useState } from "react";
+import { formatTimeOfDay } from "../thread-groups";
 import { ThreadItemMenu } from "./thread-item-menu";
 import { ThreadTitleEditor } from "./thread-title-editor";
 
 export type HistoryItem = { id: string; title: string; updatedAt: string };
 
-type HistoryRowProps = {
+type HistoryRowProps = Omit<ComponentProps<"li">, "onSelect"> & {
   thread: HistoryItem;
   active: boolean;
   onSelect: (id: string) => void;
@@ -17,7 +17,15 @@ type HistoryRowProps = {
 const timeHiddenByMenuClass =
   "max-sm:hidden sm:group-focus-within:invisible sm:group-hover:invisible sm:group-has-[[data-state=open]]:invisible";
 
-export function HistoryRow({ thread, active, onSelect, onRename, onArchive }: HistoryRowProps) {
+export function HistoryRow({
+  thread,
+  active,
+  onSelect,
+  onRename,
+  onArchive,
+  className,
+  ...props
+}: HistoryRowProps) {
   const [editing, setEditing] = useState(false);
   const hasMenu = onRename !== undefined || onArchive !== undefined;
   return (
@@ -28,8 +36,10 @@ export function HistoryRow({ thread, active, onSelect, onRename, onArchive }: Hi
         "group relative flex items-center motion-safe:transition-colors",
         active
           ? "bg-accent text-accent-foreground before:absolute before:inset-y-0 before:left-0 before:w-0.5 before:bg-foreground"
-          : "text-foreground/85 hover:bg-accent/40"
+          : "text-foreground/85 hover:bg-accent/40",
+        className
       )}
+      {...props}
     >
       {editing && onRename ? (
         <div className="flex-1 px-1 py-0.5">

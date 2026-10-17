@@ -22,6 +22,8 @@ import { Chat, Composer, Turn } from "@locusgraph/loop";
 <Composer status={status} onSubmit={(text) => sendMessage({ text })} onStop={stop} />
 ```
 
+`Chat`, `History` and `Inbox` virtualize with TanStack Virtual above 50 items: only the rows near the viewport are mounted, so a long agent session stays fast. Pass `virtualize={false}` to mount every item. The built package is compiled with the React Compiler, so components skip re-rendering when their props have not changed.
+
 | Group | Components |
 |---|---|
 | Chat | `Chat`, `Turn`, `Reply`, `Composer`, `Files` |
