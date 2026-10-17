@@ -1,19 +1,9 @@
 import { Shuffle as ShuffleIcon } from "@carbon/icons-react";
 import { Button } from "@locusgraph/components";
-import {
-  neutralPreset,
-  type ResolvedTheme,
-  type RingMode,
-  type ThemeMode,
-  themePresets,
-} from "../theme-presets";
-import { ControlSelect } from "./control-select";
+import { neutralPreset, type ResolvedTheme, type RingMode, type ThemeMode } from "../theme-presets";
+import { BrandGrid } from "./brand-grid";
+import { RingToggle } from "./ring-toggle";
 import { TokenValues } from "./token-values";
-
-const ringOptions = [
-  { value: "blue", label: "Blue" },
-  { value: "brand", label: "Brand color" },
-];
 
 type ThemeControlsProps = {
   mode: ThemeMode;
@@ -34,11 +24,6 @@ export function ThemeControls({
   onRingChange,
   onShuffle,
 }: ThemeControlsProps) {
-  const presetOptions = themePresets.map((preset) => ({
-    value: preset.id,
-    label: preset.name,
-    swatch: preset[mode].primary,
-  }));
   const isNeutral = presetId === neutralPreset.id && ring === "blue";
   return (
     <div className="flex flex-col bg-surface ring-1 ring-border">
@@ -49,18 +34,8 @@ export function ThemeControls({
         </p>
       </div>
       <div className="divide-y">
-        <ControlSelect
-          label="Brand"
-          value={presetId}
-          options={presetOptions}
-          onValueChange={onPresetChange}
-        />
-        <ControlSelect
-          label="Focus ring"
-          value={ring}
-          options={ringOptions}
-          onValueChange={(value) => onRingChange(value as RingMode)}
-        />
+        <BrandGrid mode={mode} value={presetId} onValueChange={onPresetChange} />
+        <RingToggle value={ring} onValueChange={onRingChange} />
         <TokenValues theme={theme} />
       </div>
       <div className="flex gap-2 border-t bg-muted/70 p-3">
