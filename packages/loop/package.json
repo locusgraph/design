@@ -1,6 +1,6 @@
 {
   "name": "@locusgraph/loop",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Agent components for LocusGraph apps: chat, agent steps, human-in-the-loop approvals, memory and cost. Takes Vercel AI SDK UIMessage parts; never calls a model.",
   "license": "MIT",
   "repository": {
