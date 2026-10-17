@@ -34,7 +34,7 @@ export function ThemeCanvas({ style }: { style: React.CSSProperties }) {
   const sample = findThemeSample(sampleId);
   return (
     <div className="relative flex min-h-[70svh] min-w-0 flex-col bg-background ring-1 ring-border lg:h-full lg:min-h-0">
-      <div style={style} className="flex-1 overflow-auto p-4 pb-20 md:p-10 md:pb-24">
+      <div style={style} className="flex flex-1 flex-col overflow-auto p-4 pb-20 md:p-10 md:pb-24">
         {sample?.render()}
       </div>
       <div className="pointer-events-none absolute inset-x-0 bottom-4 flex justify-center px-4">

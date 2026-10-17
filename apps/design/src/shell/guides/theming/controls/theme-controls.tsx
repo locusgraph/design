@@ -1,8 +1,14 @@
 import { Shuffle as ShuffleIcon } from "@carbon/icons-react";
 import { Button } from "@locusgraph/components";
-import type { RingMode, ThemeMode } from "../theme-presets";
-import { themePresets } from "../theme-presets";
+import {
+  neutralPreset,
+  type ResolvedTheme,
+  type RingMode,
+  type ThemeMode,
+  themePresets,
+} from "../theme-presets";
 import { ControlSelect } from "./control-select";
+import { TokenValues } from "./token-values";
 
 const ringOptions = [
   { value: "blue", label: "Blue" },
@@ -13,6 +19,7 @@ type ThemeControlsProps = {
   mode: ThemeMode;
   presetId: string;
   ring: RingMode;
+  theme: ResolvedTheme;
   onPresetChange: (id: string) => void;
   onRingChange: (ring: RingMode) => void;
   onShuffle: () => void;
@@ -22,6 +29,7 @@ export function ThemeControls({
   mode,
   presetId,
   ring,
+  theme,
   onPresetChange,
   onRingChange,
   onShuffle,
@@ -31,11 +39,14 @@ export function ThemeControls({
     label: preset.name,
     swatch: preset[mode].primary,
   }));
+  const isNeutral = presetId === neutralPreset.id && ring === "blue";
   return (
     <div className="flex flex-col bg-surface ring-1 ring-border">
-      <div className="border-b bg-muted/35 px-4 py-3">
+      <div className="flex flex-col gap-1 border-b bg-muted/35 px-4 py-3">
         <h1 className="text-sm font-semibold">Theming</h1>
-        <p className="text-xs text-muted-foreground">Monochrome until you pick a brand.</p>
+        <p className="text-xs text-muted-foreground">
+          One brand color. Everything else stays grey.
+        </p>
       </div>
       <div className="divide-y">
         <ControlSelect
@@ -50,11 +61,22 @@ export function ThemeControls({
           options={ringOptions}
           onValueChange={(value) => onRingChange(value as RingMode)}
         />
+        <TokenValues theme={theme} />
       </div>
-      <div className="border-t bg-muted/70 p-3">
-        <Button variant="outline" className="w-full" onClick={onShuffle}>
+      <div className="flex gap-2 border-t bg-muted/70 p-3">
+        <Button variant="outline" className="flex-1" onClick={onShuffle}>
           <ShuffleIcon />
           Shuffle
+        </Button>
+        <Button
+          variant="ghost"
+          disabled={isNeutral}
+          onClick={() => {
+            onPresetChange(neutralPreset.id);
+            onRingChange("blue");
+          }}
+        >
+          Reset
         </Button>
       </div>
     </div>

@@ -1,35 +1,44 @@
-import { Copy as CopyIcon } from "@carbon/icons-react";
-import { Button, Tabs, TabsContent, TabsList, TabsTrigger } from "@locusgraph/components";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@locusgraph/components";
 import type * as React from "react";
-import { useState } from "react";
 import { CodeBlock } from "../../../preview/code-block";
+import type { ResolvedTheme } from "../theme-presets";
+import { ContrastCheck } from "./contrast-check";
+import { PromptTab } from "./prompt-tab";
 
-type ThemeDocsPanelProps = { css: string; prompt: string };
+type ThemeDocsPanelProps = {
+  css: string;
+  prompt: string;
+  light: ResolvedTheme;
+  dark: ResolvedTheme;
+};
 
-function DocStep({ title, children }: { title: string; children: React.ReactNode }) {
+function DocStep({
+  number,
+  title,
+  children,
+}: {
+  number: number;
+  title: string;
+  children: React.ReactNode;
+}) {
   return (
     <section className="flex flex-col gap-3">
-      <h2 className="text-sm font-semibold">{title}</h2>
+      <h2 className="flex items-center gap-2.5 text-sm font-medium">
+        <span className="flex size-5 items-center justify-center rounded-full bg-muted text-xs tabular-nums text-muted-foreground">
+          {number}
+        </span>
+        {title}
+      </h2>
       {children}
     </section>
   );
 }
 
-function CopyPromptButton({ prompt }: { prompt: string }) {
-  const [copied, setCopied] = useState(false);
-  const copy = () => {
-    void navigator.clipboard.writeText(prompt).then(() => setCopied(true));
-    globalThis.setTimeout(() => setCopied(false), 1500);
-  };
-  return (
-    <Button variant="outline" size="sm" className="self-start" onClick={copy}>
-      <CopyIcon />
-      {copied ? "Copied" : "Copy prompt"}
-    </Button>
-  );
+function StepNote({ children }: { children: React.ReactNode }) {
+  return <p className="text-sm text-pretty text-muted-foreground">{children}</p>;
 }
 
-export function ThemeDocsPanel({ css, prompt }: ThemeDocsPanelProps) {
+export function ThemeDocsPanel({ css, prompt, light, dark }: ThemeDocsPanelProps) {
   return (
     <Tabs
       defaultValue="css"
@@ -41,26 +50,24 @@ export function ThemeDocsPanel({ css, prompt }: ThemeDocsPanelProps) {
           <TabsTrigger value="prompt">Prompt</TabsTrigger>
         </TabsList>
       </div>
-      <TabsContent value="css" className="flex min-h-0 flex-col gap-6 overflow-y-auto p-4">
-        <DocStep title="1. Set three variables">
-          <p className="text-sm text-muted-foreground">
-            Add them to your global CSS after the theme import.
-          </p>
+      <TabsContent value="css" className="flex min-h-0 flex-col gap-8 overflow-y-auto p-4">
+        <DocStep number={1} title="Set three variables">
+          <StepNote>Put them in your global CSS, after the theme import.</StepNote>
           <CodeBlock code={css} language="css" className="border bg-background text-xs" />
         </DocStep>
-        <DocStep title="2. Use semantic classes">
-          <p className="text-sm text-muted-foreground">
-            Components read bg-primary and ring-ring, so they follow. Hover and selected states stay
-            on the neutral --ghost tint.
-          </p>
+        <DocStep number={2} title="Check the contrast">
+          <StepNote>Text on the brand color needs 4.5:1 to pass WCAG AA.</StepNote>
+          <ContrastCheck light={light} dark={dark} />
+        </DocStep>
+        <DocStep number={3} title="Use semantic classes">
+          <StepNote>
+            Write bg-primary and ring-ring, never a raw color. Hover and selected states stay on the
+            neutral ghost tint.
+          </StepNote>
         </DocStep>
       </TabsContent>
       <TabsContent value="prompt" className="flex min-h-0 flex-col gap-4 overflow-y-auto p-4">
-        <p className="text-sm text-muted-foreground">Paste this into your coding agent.</p>
-        <pre className="border bg-background p-3 font-mono text-xs whitespace-pre-wrap">
-          {prompt}
-        </pre>
-        <CopyPromptButton prompt={prompt} />
+        <PromptTab prompt={prompt} />
       </TabsContent>
     </Tabs>
   );

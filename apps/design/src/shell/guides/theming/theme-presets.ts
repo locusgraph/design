@@ -75,9 +75,6 @@ function cssBlock(selector: string, theme: ResolvedTheme) {
 
 export function themeCss(preset: ThemePreset, ring: RingMode) {
   return [
-    '@import "tailwindcss";',
-    '@import "@locusgraph/components/theme.css";',
-    "",
     cssBlock(":root", resolveTheme(preset, "light", ring)),
     "",
     cssBlock(".dark", resolveTheme(preset, "dark", ring)),

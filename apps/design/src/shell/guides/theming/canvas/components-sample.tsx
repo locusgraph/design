@@ -26,7 +26,7 @@ function PreviewRow({ label, children }: { label: string; children: React.ReactN
 
 export function ComponentsSample() {
   return (
-    <div className="mx-auto w-full max-w-160 divide-y bg-surface ring-1 ring-border">
+    <div className="m-auto w-full max-w-160 divide-y bg-surface ring-1 ring-border">
       <PreviewRow label="Actions">
         <Button>Save changes</Button>
         <Button variant="outline">Cancel</Button>

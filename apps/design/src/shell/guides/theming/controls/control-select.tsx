@@ -27,15 +27,21 @@ function Swatch({ color }: { color: string }) {
 }
 
 export function ControlSelect({ label, value, options, onValueChange }: ControlSelectProps) {
+  const selected = options.find((option) => option.value === value);
   return (
     <Select value={value} onValueChange={onValueChange}>
       <SelectTrigger
         aria-label={label}
         className="h-auto! w-full rounded-none border-0 bg-transparent px-4 py-3 shadow-none hover:bg-muted/50 dark:bg-transparent"
       >
-        <span className="flex min-w-0 flex-col items-start gap-1">
+        <span className="flex min-w-0 flex-col items-start gap-1.5">
           <span className="eyebrow">{label}</span>
-          <SelectValue />
+          <SelectValue>
+            <span className="flex items-center gap-2 font-medium text-foreground">
+              {selected?.swatch && <Swatch color={selected.swatch} />}
+              {selected?.label}
+            </span>
+          </SelectValue>
         </span>
       </SelectTrigger>
       <SelectContent position="popper" side="right" align="start">
