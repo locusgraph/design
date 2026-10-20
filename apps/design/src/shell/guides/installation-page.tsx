@@ -105,6 +105,14 @@ export function InstallationPage() {
               <p>Add the Tailwind plugin.</p>
             </Prose>
             <Code code={snippets.viteConfig} />
+            <Prose>
+              <p>
+                With React Server Components on Vite, such as vinext, also pre-bundle the React
+                Compiler runtime. The packages are compiled with it, and without this the browser
+                fails with “does not provide an export named 'c'”.
+              </p>
+            </Prose>
+            <Code code={snippets.viteServerComponentsConfig} />
           </TabsContent>
           <TabsContent value="next" className="flex flex-col gap-4 pt-2">
             <Prose>
