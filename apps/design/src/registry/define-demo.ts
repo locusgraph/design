@@ -38,6 +38,7 @@ export type Demo<C extends Controls = Controls> = {
   examples: Record<string, ExampleDefinition>;
   composition?: CompositionNode;
   previewHeight?: PreviewHeight;
+  expectedPreviewHeight?: number;
   isNew?: boolean;
 };
 

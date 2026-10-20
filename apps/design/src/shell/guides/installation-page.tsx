@@ -1,6 +1,6 @@
 import { type PageSection, Tabs, TabsContent, TabsList, TabsTrigger } from "@locusgraph/components";
 import type * as React from "react";
-import { CodeBlock, type CodeLanguage } from "../preview/code-block";
+import { CodeBlock, type CodeLanguage } from "../preview/code/code-block";
 import * as snippets from "./installation-snippets";
 
 export const installationSections: PageSection[] = [

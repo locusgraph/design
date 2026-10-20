@@ -3,7 +3,7 @@ import { LocusGraphIcon, type LocusGraphIconVariant } from "@locusgraph/brand";
 import { Button } from "@locusgraph/components";
 import { useRef } from "react";
 import { defineDemo, select } from "../../../registry/define-demo";
-import { CodeBlock } from "../../../shell/preview/code-block";
+import { CodeBlock } from "../../../shell/preview/code/code-block";
 
 const variants = ["dark", "light", "brand"] as const;
 const sizeOptions = ["16", "32", "48", "64", "180", "192", "512"] as const;

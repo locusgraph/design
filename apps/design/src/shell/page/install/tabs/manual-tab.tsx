@@ -1,7 +1,7 @@
 import { ChevronRight as ChevronRightIcon } from "@carbon/icons-react";
 import { useState } from "react";
 import { CopyCommand } from "../../../landing/actions/copy-command";
-import { CodeBlock, type CodeLanguage } from "../../../preview/code-block";
+import { CodeBlock, type CodeLanguage } from "../../../preview/code/code-block";
 import { InstallNote, InstallStep } from "../install-parts";
 import { addPackagesCommand, usePackageManager } from "../package-manager";
 import type { InstallFile, RegistryTree } from "../registry-tree";
