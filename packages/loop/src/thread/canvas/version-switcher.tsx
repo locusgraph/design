@@ -1,3 +1,5 @@
+"use client";
+
 import { ChevronDown as ChevronDownIcon } from "@carbon/icons-react";
 import {
   Button,

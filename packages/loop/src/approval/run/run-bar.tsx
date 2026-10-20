@@ -1,3 +1,5 @@
+"use client";
+
 import {
   Pause as PauseIcon,
   Play as PlayIcon,

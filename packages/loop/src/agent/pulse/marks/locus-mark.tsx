@@ -1,3 +1,5 @@
+"use client";
+
 import { LocusGraphMark } from "@locusgraph/brand";
 import { useEffect, useRef } from "react";
 import { prefersReducedMotion } from "../use-loop-animation";

@@ -1,3 +1,5 @@
+"use client";
+
 import { ChevronRight as ChevronRightIcon } from "@carbon/icons-react";
 import { Collapsible, CollapsibleContent, CollapsibleTrigger, cn } from "@locusgraph/components";
 import { pluralize } from "@locusgraph/utils";

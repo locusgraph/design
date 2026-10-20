@@ -1,3 +1,5 @@
+"use client";
+
 import { cn } from "@locusgraph/components";
 import { type KeyboardEvent, useEffect, useRef } from "react";
 import type { QuestionOption } from "../types";

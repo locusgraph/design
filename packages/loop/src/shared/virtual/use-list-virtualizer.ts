@@ -1,3 +1,5 @@
+"use client";
+
 import { defaultRangeExtractor, type Range, useVirtualizer } from "@tanstack/react-virtual";
 import { type CSSProperties, type FocusEvent, useCallback, useState } from "react";
 

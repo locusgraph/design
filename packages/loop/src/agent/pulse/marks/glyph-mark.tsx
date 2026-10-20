@@ -1,3 +1,5 @@
+"use client";
+
 import { cn } from "@locusgraph/components";
 import { useEffect, useState } from "react";
 import type { PulseTone } from "../pulse-tone";

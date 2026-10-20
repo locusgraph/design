@@ -1,3 +1,5 @@
+"use client";
+
 import { Button, Label, Textarea } from "@locusgraph/components";
 import { useId, useState } from "react";
 import { PanelBody, PanelFooter } from "../../shared/panel";

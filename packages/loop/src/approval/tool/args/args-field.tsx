@@ -1,3 +1,5 @@
+"use client";
+
 import { Checkbox, Input, Label, NativeSelect, NativeSelectOption } from "@locusgraph/components";
 import type { ArgField } from "../../types";
 import type { ArgDraft } from "./args-validation";

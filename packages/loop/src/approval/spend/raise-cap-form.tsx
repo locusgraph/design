@@ -1,3 +1,5 @@
+"use client";
+
 import { Button, Input, Label } from "@locusgraph/components";
 import { formatMicroUsd } from "@locusgraph/utils";
 import { useId, useState } from "react";

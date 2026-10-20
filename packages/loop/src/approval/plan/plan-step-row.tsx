@@ -1,3 +1,5 @@
+"use client";
+
 import {
   ArrowDown as ArrowDownIcon,
   ArrowUp as ArrowUpIcon,

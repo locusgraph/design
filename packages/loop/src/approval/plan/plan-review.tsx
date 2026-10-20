@@ -1,3 +1,5 @@
+"use client";
+
 import { ArrowRight as ArrowRightIcon, ListChecked as ListChecksIcon } from "@carbon/icons-react";
 import { Button } from "@locusgraph/components";
 import { pluralize } from "@locusgraph/utils";

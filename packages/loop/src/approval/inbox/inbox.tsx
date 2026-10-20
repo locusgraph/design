@@ -1,3 +1,5 @@
+"use client";
+
 import { MailAll as InboxIcon } from "@carbon/icons-react";
 import { Button, Checkbox, Label } from "@locusgraph/components";
 import { pluralize } from "@locusgraph/utils";

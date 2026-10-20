@@ -1,3 +1,5 @@
+"use client";
+
 import { Checkmark as CheckIcon, Copy as CopyIcon } from "@carbon/icons-react";
 import { Button } from "@locusgraph/components";
 import { useCopied, writeToClipboard } from "../use-copied";

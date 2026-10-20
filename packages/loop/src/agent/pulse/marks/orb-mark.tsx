@@ -1,3 +1,5 @@
+"use client";
+
 import { useLoopAnimation } from "../use-loop-animation";
 
 const breathe: Keyframe[] = [

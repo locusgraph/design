@@ -1,3 +1,5 @@
+"use client";
+
 import { cn, HoverCard, HoverCardContent, HoverCardTrigger } from "@locusgraph/components";
 import type { MouseEvent } from "react";
 import type { Citation } from "../types";

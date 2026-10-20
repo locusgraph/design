@@ -1,3 +1,5 @@
+"use client";
+
 import { ArrowUpRight as ArrowUpRightIcon } from "@carbon/icons-react";
 import { cn } from "@locusgraph/components";
 import type { ComponentProps } from "react";
