@@ -7,6 +7,9 @@ allowBuilds:
   '@carbon/icons-react': false
   workerd: true
 
+overrides:
+  "fflate@<0.7.5": 0.7.5
+
 catalog:
   "@babel/core": 7.29.7
   "@babel/plugin-transform-react-jsx": 7.29.7
