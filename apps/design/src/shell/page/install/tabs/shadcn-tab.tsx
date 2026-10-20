@@ -1,7 +1,7 @@
 import { ChevronRight as ChevronRightIcon } from "@carbon/icons-react";
 import { shadcnRegistry } from "../../../guides/installation-snippets";
 import { CopyCommand } from "../../../landing/actions/copy-command";
-import { CodeBlock } from "../../../preview/code-block";
+import { CodeBlock } from "../../../preview/code/code-block";
 import { InstallLabel, InstallMeta, InstallNote } from "../install-parts";
 import { shadcnAddCommand, usePackageManager } from "../package-manager";
 import { packageNameOf, type RegistryTree, registryTreeMeta } from "../registry-tree";

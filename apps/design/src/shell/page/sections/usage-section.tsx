@@ -1,4 +1,4 @@
-import { CodeBlock } from "../../preview/code-block";
+import { CodeBlock } from "../../preview/code/code-block";
 
 type UsageSectionProps = { importLine: string; usageCode: string };
 

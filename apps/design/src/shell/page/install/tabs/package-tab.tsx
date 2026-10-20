@@ -1,5 +1,5 @@
 import { CopyCommand } from "../../../landing/actions/copy-command";
-import { CodeBlock } from "../../../preview/code-block";
+import { CodeBlock } from "../../../preview/code/code-block";
 import { InstallLabel } from "../install-parts";
 import { addPackagesCommand, usePackageManager } from "../package-manager";
 

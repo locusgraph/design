@@ -1,7 +1,7 @@
 import { SocialCard, type SocialCardProps, socialCardSize } from "@locusgraph/brand";
 import { useEffect, useRef, useState } from "react";
 import { defineDemo, select, text } from "../../../registry/define-demo";
-import { CodeBlock } from "../../../shell/preview/code-block";
+import { CodeBlock } from "../../../shell/preview/code/code-block";
 
 const themes = ["dark", "light"] as const;
 

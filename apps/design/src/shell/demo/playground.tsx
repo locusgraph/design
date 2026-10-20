@@ -3,7 +3,7 @@ import { useMemo } from "react";
 import type { ControlValue } from "../../registry/define-demo";
 import type { DemoEntry } from "../../registry/load-demos";
 import { clearParams, type ShellSettings, setParam } from "../../url-state";
-import { CodeBlock } from "../preview/code-block";
+import { CodeBlock } from "../preview/code/code-block";
 import type { FrameRenderMessage } from "../preview/frame-messages";
 import { PreviewFrame } from "../preview/preview-frame";
 import { PreviewToolbar, previewBackgroundClass } from "../preview/preview-toolbar";
@@ -52,6 +52,7 @@ export function Playground({ entry, values, settings }: PlaygroundProps) {
           message={message}
           viewport={settings.viewport}
           height={entry.demo.previewHeight ?? "auto"}
+          expectedHeight={entry.demo.expectedPreviewHeight}
         />
       </div>
       <div className="flex flex-col gap-3 border-t px-4 py-3 sm:flex-row sm:items-center">

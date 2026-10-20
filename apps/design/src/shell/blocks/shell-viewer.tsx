@@ -1,7 +1,7 @@
 import { useRef, useState } from "react";
 import type { ShellEntry } from "../../shells/load-shells";
 import type { Theme } from "../../url-state";
-import { CodeBlock } from "../preview/code-block";
+import { CodeBlock } from "../preview/code/code-block";
 import { ShellToolbar, type ShellView, type ShellViewport } from "./shell-toolbar";
 
 const viewportWidth: Record<ShellViewport, string> = {

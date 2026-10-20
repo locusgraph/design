@@ -1,5 +1,3 @@
-import { Checkmark as CheckIcon, Copy as CopyIcon } from "@carbon/icons-react";
-import { Button, cn } from "@locusgraph/components";
 import { useEffect, useState } from "react";
 import type { HighlighterCore, LanguageRegistration } from "shiki/core";
 
@@ -41,7 +39,7 @@ async function highlighterFor(language: CodeLanguage) {
   return loaded;
 }
 
-function useHighlightedHtml(code: string, language: CodeLanguage) {
+export function useHighlightedHtml(code: string, language: CodeLanguage) {
   const [html, setHtml] = useState("");
   useEffect(() => {
     let current = true;
@@ -60,46 +58,4 @@ function useHighlightedHtml(code: string, language: CodeLanguage) {
     };
   }, [code, language]);
   return html;
-}
-
-function CopyButton({ text }: { text: string }) {
-  const [copied, setCopied] = useState(false);
-  const copy = async () => {
-    await navigator.clipboard.writeText(text);
-    setCopied(true);
-    setTimeout(() => setCopied(false), 1500);
-  };
-  return (
-    <Button
-      variant="ghost"
-      size="icon-sm"
-      aria-label="Copy code"
-      onClick={copy}
-      className="absolute top-2 right-2 bg-surface hover:bg-accent"
-    >
-      {copied ? <CheckIcon /> : <CopyIcon />}
-    </Button>
-  );
-}
-
-type CodeBlockProps = {
-  code: string;
-  className?: string;
-  showCopy?: boolean;
-  language?: CodeLanguage;
-};
-
-export function CodeBlock({ code, className, showCopy = true, language = "tsx" }: CodeBlockProps) {
-  const html = useHighlightedHtml(code, language);
-  const codeClass = "overflow-x-auto p-4 pr-12 font-mono text-sm [&_pre]:outline-none";
-  return (
-    <div className={cn("relative", className)}>
-      {showCopy && <CopyButton text={code} />}
-      {html ? (
-        <div className={codeClass} dangerouslySetInnerHTML={{ __html: html }} />
-      ) : (
-        <pre className={codeClass}>{code}</pre>
-      )}
-    </div>
-  );
 }

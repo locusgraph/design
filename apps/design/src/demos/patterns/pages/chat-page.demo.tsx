@@ -20,6 +20,7 @@ export default defineDemo({
   description:
     "An agent chat screen from @locusgraph/loop: turns with thinking, a finished read tool and a write tool waiting for approval, a pinned composer and a cost rail. Approve or deny to see the run finish.",
   controls: { rail: toggle(true) },
+  expectedPreviewHeight: 765,
   playground: ({ rail }) => (
     <div className="w-[56rem] max-w-full">
       <ChatPage showRail={rail} />
