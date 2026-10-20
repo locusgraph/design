@@ -1,3 +1,5 @@
+"use client";
+
 import { Idea as BrainIcon } from "@carbon/icons-react";
 import { Button } from "@locusgraph/components";
 import { pluralize } from "@locusgraph/utils";

@@ -15,6 +15,12 @@ export default defineConfig({
   plugins: [react(), tailwindcss()],
 });`;
 
+export const viteServerComponentsConfig = `export default defineConfig({
+  optimizeDeps: {
+    include: ["react/compiler-runtime"],
+  },
+});`;
+
 export const nextConfig = `import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {

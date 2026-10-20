@@ -1,3 +1,5 @@
+"use client";
+
 import { ShieldAlert as ShieldAlertIcon } from "@carbon/icons-react";
 import { cn, Textarea } from "@locusgraph/components";
 import type { ProposedMemory } from "../types";

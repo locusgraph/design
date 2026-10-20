@@ -1,3 +1,5 @@
+"use client";
+
 import { type RefObject, useLayoutEffect } from "react";
 
 function supportsFieldSizing(): boolean {

@@ -1,3 +1,5 @@
+"use client";
+
 import { AiGenerate as SparkleIcon } from "@carbon/icons-react";
 import { cn } from "@locusgraph/components";
 import type { PulseTone } from "./pulse-tone";

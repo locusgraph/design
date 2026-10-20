@@ -1,3 +1,5 @@
+"use client";
+
 import { Checkmark as CheckIcon, Locked as LockIcon, Close as XIcon } from "@carbon/icons-react";
 import { Button, Checkbox, cn } from "@locusgraph/components";
 import type { ComponentProps } from "react";

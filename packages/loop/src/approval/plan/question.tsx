@@ -1,3 +1,5 @@
+"use client";
+
 import {
   ArrowRight as ArrowRightIcon,
   Help as MessageCircleQuestionIcon,

@@ -1,3 +1,5 @@
+"use client";
+
 import { cn } from "@locusgraph/components";
 import { type ComponentProps, useState } from "react";
 import { formatTimeOfDay } from "../thread-groups";

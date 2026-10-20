@@ -1,3 +1,5 @@
+"use client";
+
 import { CurrencyDollar as CircleDollarSignIcon } from "@carbon/icons-react";
 import { Button, cn } from "@locusgraph/components";
 import { formatMicroUsd } from "@locusgraph/utils";

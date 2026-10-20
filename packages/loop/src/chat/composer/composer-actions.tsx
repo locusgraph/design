@@ -1,3 +1,5 @@
+"use client";
+
 import {
   ArrowUp as ArrowUpIcon,
   Attachment as PaperclipIcon,
@@ -5,12 +7,7 @@ import {
 } from "@carbon/icons-react";
 import { Button } from "@locusgraph/components";
 import { useRef } from "react";
-
-export type ComposerStatus = "ready" | "submitting" | "streaming" | "error";
-
-export function isComposerBusy(status: ComposerStatus): boolean {
-  return status === "submitting" || status === "streaming";
-}
+import { type ComposerStatus, isComposerBusy } from "./composer-status";
 
 type ComposerSubmitProps = {
   status: ComposerStatus;

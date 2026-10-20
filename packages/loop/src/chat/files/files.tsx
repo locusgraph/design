@@ -1,3 +1,5 @@
+"use client";
+
 import {
   type CarbonIconType as CarbonIcon,
   Code as FileCodeIcon,

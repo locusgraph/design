@@ -1,3 +1,5 @@
+"use client";
+
 import {
   BookmarkAdd as BookmarkPlusIcon,
   Checkmark as CheckIcon,

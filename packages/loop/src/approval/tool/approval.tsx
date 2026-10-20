@@ -1,3 +1,5 @@
+"use client";
+
 import { ShieldAlert as ShieldAlertIcon, Tools as WrenchIcon } from "@carbon/icons-react";
 import { Button, cn } from "@locusgraph/components";
 import { useState } from "react";

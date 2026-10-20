@@ -37,6 +37,18 @@ Then:
 import { Button, AppShell, AppSidebar, AppHeader } from "@locusgraph/components";
 ```
 
+The built packages (`components`, `blocks` and `loop`) are compiled with the React Compiler, so
+they import `react/compiler-runtime`. A Vite app with React Server Components, such as one on
+vinext, must pre-bundle it, or the browser fails with "does not provide an export named 'c'":
+
+```ts
+export default defineConfig({
+  optimizeDeps: {
+    include: ["react/compiler-runtime"],
+  },
+});
+```
+
 Moving an app from its own shadcn copies: replace `@/components/ui/<name>` imports with
 `@locusgraph/components` one component at a time, and delete the local copy once nothing imports
 it. Keep app-specific components in the app; move one here only when a second app needs it.

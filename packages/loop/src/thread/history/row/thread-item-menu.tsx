@@ -1,3 +1,5 @@
+"use client";
+
 import {
   Archive as ArchiveIcon,
   OverflowMenuHorizontal as EllipsisIcon,

@@ -1,3 +1,5 @@
+"use client";
+
 import { Edit as SquarePenIcon } from "@carbon/icons-react";
 import { Button, cn } from "@locusgraph/components";
 import { useId, useMemo, useState } from "react";

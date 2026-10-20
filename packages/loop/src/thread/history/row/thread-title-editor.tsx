@@ -1,3 +1,5 @@
+"use client";
+
 import { Input } from "@locusgraph/components";
 import { useState } from "react";
 
