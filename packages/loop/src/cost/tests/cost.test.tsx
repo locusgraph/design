@@ -66,6 +66,7 @@ describe("Cost", () => {
     expect(html).toContain("text-destructive");
     expect(html).toContain("Failed");
     expect(html).toContain("line-through");
+    expect(html).toContain('data-slot="cost-wasted"');
     expect(renderToStaticMarkup(<Cost usage={attempts} />)).toContain("1 failed attempt · $0.0036");
   });
 });

@@ -119,13 +119,14 @@ function DetailedCost({
         </span>
         <span className="truncate">{label}</span>
       </header>
-      <div className="flex items-baseline gap-3 pb-2 pl-6 tabular-nums">
+      <div className="flex flex-wrap items-baseline gap-x-3 gap-y-0.5 pb-2 pl-6 text-xs tabular-nums">
         <span className="text-xl font-semibold tracking-tight text-foreground">
           {formatMicroUsd(totals.costMicroUsd)}
         </span>
-        <span className="text-xs text-faint">
+        <span className="text-faint">
           {formatTokensShort(totals.inputTokens)} in · {formatTokensShort(totals.outputTokens)} out
         </span>
+        <WastedNote totals={totals} />
       </div>
       {attempts.length > 1 && (
         <ol className="flex max-w-sm flex-col pl-6">
