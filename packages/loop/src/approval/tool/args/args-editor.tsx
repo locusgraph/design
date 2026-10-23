@@ -1,13 +1,12 @@
 import { Button, cn } from "@locusgraph/components";
 import { PencilSimple as SquarePenIcon } from "@phosphor-icons/react/ssr";
-import { useId, useMemo, useState } from "react";
+import { useEffect, useId, useMemo, useRef, useState } from "react";
 import { humanToolName } from "../../../agent/tool/tool-status";
 import { LiveStatus } from "../../../shared/live-status";
 import type { RiskLevel } from "../../../types";
 import { ApprovalHeadline, SettledLine } from "../../shared/approval-line";
 import { DecisionSummary } from "../../shared/decision-line";
 import { riskCopy } from "../../shared/risk-badge";
-import { useFocusOnMount } from "../../shared/use-focus-on-mount";
 import type { ApprovalDecision, ArgField, ArgValues } from "../../types";
 import { ArgsField } from "./args-field";
 import { draftsFrom, validateDrafts, valuesFromDrafts } from "./args-validation";
@@ -26,6 +25,11 @@ export type ArgsEditorProps = {
   className?: string;
 };
 
+function firstControl(form: HTMLFormElement | null) {
+  const control = form?.elements[0];
+  return control instanceof HTMLElement ? control : undefined;
+}
+
 function errorSummary(count: number) {
   return count === 1 ? "1 field needs a fix." : `${count} fields need a fix.`;
 }
@@ -40,7 +44,7 @@ export function ArgsEditor({
   decision,
   onApprove,
   onCancel,
-  autoFocus = false,
+  autoFocus = true,
   className,
 }: ArgsEditorProps) {
   const baseId = useId();
@@ -51,7 +55,11 @@ export function ArgsEditor({
   const visibleErrors = showErrors ? errors : {};
   const destructive = risk === "destructive";
   const name = humanToolName(toolName);
-  const submitRef = useFocusOnMount<HTMLButtonElement>(autoFocus && !decision);
+  const formRef = useRef<HTMLFormElement>(null);
+  const editing = !decision;
+  useEffect(() => {
+    if (autoFocus && editing) firstControl(formRef.current)?.focus({ preventScroll: true });
+  }, [autoFocus, editing]);
   const hasErrorSummary = showErrors && errorCount > 0;
   return (
     <section
@@ -80,6 +88,7 @@ export function ArgsEditor({
           />
           <p className="-mt-2 text-sm text-faint">{description ?? riskCopy[risk]()}</p>
           <form
+            ref={formRef}
             noValidate
             className="flex flex-col gap-2"
             onSubmit={(event) => {
@@ -104,13 +113,8 @@ export function ArgsEditor({
                 onChange={(draft) => setDrafts((current) => ({ ...current, [field.name]: draft }))}
               />
             ))}
-            <div className="flex flex-wrap items-center gap-2 pt-3">
-              <Button
-                ref={submitRef}
-                type="submit"
-                size="sm"
-                variant={destructive ? "destructive" : "default"}
-              >
+            <div className="flex flex-wrap items-center gap-2 pt-2">
+              <Button type="submit" size="sm" variant={destructive ? "destructive" : "default"}>
                 {actionLabel ?? `Run ${name} with these inputs`}
               </Button>
               <Button type="button" size="sm" variant="ghost" onClick={onCancel}>

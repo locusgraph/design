@@ -44,6 +44,7 @@ function GraphRetention() {
         initialValues={{ graph: "acme-events", olderThanDays: 90, dryRun: true }}
         onApprove={() => {}}
         onCancel={() => {}}
+        autoFocus={false}
       />
     </div>
   );
@@ -64,6 +65,7 @@ export default defineDemo({
         initialValues={initialValues}
         onApprove={() => {}}
         onCancel={() => {}}
+        autoFocus={false}
       />
     </div>
   ),
@@ -84,6 +86,7 @@ export default defineDemo({
     { name: "actionLabel", type: "string" },
     { name: "onApprove", type: "(editedInput: ArgValues) => void" },
     { name: "onCancel", type: "() => void" },
+    { name: "autoFocus", type: "boolean", defaultValue: "true" },
   ],
   examples: {
     GraphRetention: {
