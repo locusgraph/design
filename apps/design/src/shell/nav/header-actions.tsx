@@ -39,10 +39,10 @@ export function HeaderActions({ settings, onSearch }: HeaderActionsProps) {
         }
         className="hidden sm:flex"
       >
-        <ToggleGroupItem value="desktop" aria-label="Desktop preview" className="size-8">
+        <ToggleGroupItem value="desktop" aria-label="Desktop preview" className="size-control-sm">
           <MonitorIcon weight="bold" aria-hidden />
         </ToggleGroupItem>
-        <ToggleGroupItem value="mobile" aria-label="Mobile preview" className="size-8">
+        <ToggleGroupItem value="mobile" aria-label="Mobile preview" className="size-control-sm">
           <SmartphoneIcon weight="bold" aria-hidden />
         </ToggleGroupItem>
       </ToggleGroup>
