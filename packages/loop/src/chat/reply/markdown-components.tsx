@@ -16,7 +16,7 @@ export const markdownComponents: Components = {
       target="_blank"
       rel="noopener noreferrer"
       className={cn(
-        "font-medium text-foreground underline decoration-muted-foreground/50 underline-offset-3 transition-colors hover:decoration-foreground",
+        "font-medium text-foreground underline decoration-faint underline-offset-3 transition-colors hover:text-s1 hover:decoration-s1",
         className
       )}
       {...props}
@@ -38,7 +38,10 @@ export const markdownComponents: Components = {
     <h3 className={cn("mt-5 mb-1.5 text-sm font-semibold first:mt-0", className)} {...props} />
   ),
   h4: ({ node: _node, className, ...props }) => (
-    <h4 className={cn("eyebrow mt-5 mb-1.5 first:mt-0", className)} {...props} />
+    <h4
+      className={cn("mt-5 mb-1.5 text-sm font-medium text-muted-foreground first:mt-0", className)}
+      {...props}
+    />
   ),
   ul: ({ node: _node, className, ...props }) => (
     <ul
@@ -93,7 +96,7 @@ export const markdownComponents: Components = {
     />
   ),
   table: ({ node: _node, className, ...props }) => (
-    <div data-slot="reply-table" className={cn("overflow-x-auto ring-1 ring-border", blockGap)}>
+    <div data-slot="reply-table" className={cn("overflow-x-auto", blockGap)}>
       <table
         className={cn(
           "w-full border-collapse text-sm [&_td:not(:first-child)]:tabular-nums",
@@ -105,14 +108,14 @@ export const markdownComponents: Components = {
   ),
   th: ({ node: _node, className, ...props }) => (
     <th
-      className={cn("eyebrow border-b bg-muted/30 px-3 py-2 text-left font-normal", className)}
+      className={cn(
+        "border-b px-3 py-1.5 text-left text-xs font-medium text-faint first:pl-0 last:pr-0",
+        className
+      )}
       {...props}
     />
   ),
   td: ({ node: _node, className, ...props }) => (
-    <td
-      className={cn("border-b px-3 py-2 align-top [tr:last-child_&]:border-b-0", className)}
-      {...props}
-    />
+    <td className={cn("px-3 py-1.5 align-top first:pl-0 last:pr-0", className)} {...props} />
   ),
 };

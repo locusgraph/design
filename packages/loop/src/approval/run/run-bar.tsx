@@ -5,7 +5,6 @@ import {
   SkipForward as SkipForwardIcon,
   Stop as SquareIcon,
 } from "@phosphor-icons/react/ssr";
-import { StatusDot, type StatusTone } from "../../shared/status-dot";
 import type { RunBarStatus } from "../types";
 
 export type RunBarProps = {
@@ -27,12 +26,14 @@ const statusLabels: Record<RunBarStatus, string> = {
   done: "Done",
 };
 
-const statusTone: Record<RunBarStatus, StatusTone> = {
-  running: "running",
-  paused: "waiting",
-  stopped: "danger",
-  done: "done",
+const statusTone: Record<RunBarStatus, string> = {
+  running: "text-muted-foreground motion-safe:shimmer",
+  paused: "font-medium text-warn",
+  stopped: "font-medium text-destructive",
+  done: "font-medium text-good",
 };
+
+const quietButtonClass = "text-faint hover:bg-transparent hover:text-s1";
 
 function twoDigits(value: number) {
   return String(value).padStart(2, "0");
@@ -66,30 +67,27 @@ export function RunBar({
       aria-label={runName ? `Controls for ${runName}` : "Run controls"}
       data-slot="run-bar"
       data-status={status}
-      className={cn(
-        "flex min-h-10 min-w-0 flex-wrap items-center gap-x-3 gap-y-2 bg-card py-2 pr-2 pl-3 text-card-foreground ring-1 ring-border",
-        className
-      )}
+      className={cn("flex min-h-8 min-w-0 flex-wrap items-center gap-x-3 gap-y-1", className)}
     >
       <span className="flex min-w-0 flex-1 items-center gap-2.5 text-sm">
-        <StatusDot tone={statusTone[status]} className="size-2" />
-        {runName && <span className="truncate font-medium">{runName}</span>}
-        <span role="status" aria-live="polite" className="eyebrow shrink-0">
+        {runName && <span className="truncate font-medium text-foreground">{runName}</span>}
+        <span role="status" aria-live="polite" className={cn("shrink-0", statusTone[status])}>
           {statusLabels[status]}
         </span>
         {elapsedMs !== undefined && (
-          <span className="shrink-0 font-mono text-xs text-muted-foreground tabular-nums">
+          <span className="shrink-0 text-faint tabular-nums">
             <span className="sr-only">Elapsed </span>
             {formatElapsed(elapsedMs)}
           </span>
         )}
       </span>
       {live && (
-        <span className="ml-auto flex shrink-0 items-center gap-1">
+        <span className="flex shrink-0 items-center gap-1">
           <Button
             type="button"
             size="xs"
-            variant={paused ? "default" : "outline"}
+            variant={paused ? "default" : "ghost"}
+            className={paused ? undefined : quietButtonClass}
             disabled={pending}
             onClick={paused ? onResume : onPause}
           >
@@ -107,6 +105,7 @@ export function RunBar({
               variant="ghost"
               aria-label="Run one step"
               title="Run one step"
+              className={quietButtonClass}
               disabled={!paused || pending}
               onClick={onStep}
             >
@@ -118,7 +117,7 @@ export function RunBar({
             type="button"
             size="xs"
             variant="ghost"
-            className="text-muted-foreground hover:bg-destructive/10 hover:text-destructive dark:hover:bg-destructive/15"
+            className="text-faint hover:bg-transparent hover:text-destructive"
             disabled={pending}
             onClick={onStop}
           >
