@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import type { PreviewHeight } from "../../registry/define-demo";
 import type { Viewport } from "../../url-state";
 import {
+  autoPreviewMinHeight,
   type FrameRenderMessage,
   isFrameHeightMessage,
   isFrameReadyMessage,
@@ -11,7 +12,6 @@ import {
 
 type PreviewFrameProps = { message: FrameRenderMessage; viewport: Viewport; height: PreviewHeight };
 
-const AUTO_MIN_HEIGHT = 200;
 const TALL_HEIGHT = 480;
 
 function useFrameEvents(frame: React.RefObject<HTMLIFrameElement | null>) {
@@ -50,10 +50,10 @@ export function PreviewFrame({ message, viewport, height }: PreviewFrameProps) {
   const waitedTooLong = useWaitedTooLong(2000);
   const measured = contentHeight > 0 || waitedTooLong;
   const frameHeight = !measured
-    ? AUTO_MIN_HEIGHT
+    ? autoPreviewMinHeight
     : height === "tall"
       ? Math.max(TALL_HEIGHT, contentHeight)
-      : contentHeight;
+      : Math.max(autoPreviewMinHeight, contentHeight);
   const [initialTheme] = useState(message.theme);
 
   useEffect(() => {

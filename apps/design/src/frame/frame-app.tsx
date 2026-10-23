@@ -2,6 +2,7 @@ import { cn, Toaster } from "@locusgraph/components";
 import { useEffect, useRef, useState } from "react";
 import { useDemoEntry } from "../registry/load-demos";
 import {
+  autoPreviewMinHeight,
   type FrameRenderMessage,
   frameReadyMessage,
   isFrameRenderMessage,
@@ -44,7 +45,11 @@ export function FrameApp() {
         previewBackgroundClass[message?.background ?? "surface"]
       )}
     >
-      <div ref={content} className="flex w-full max-w-full items-center justify-center p-10">
+      <div
+        ref={content}
+        style={{ minHeight: autoPreviewMinHeight }}
+        className="flex w-full max-w-full items-center justify-center p-10"
+      >
         {entry?.demo.playground(message?.values as never)}
       </div>
       <Toaster theme={theme} position="bottom-right" />

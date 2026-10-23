@@ -11,6 +11,8 @@ export type FrameRenderMessage = {
 
 export type FrameHeightMessage = { type: "frame-height"; height: number };
 
+export const autoPreviewMinHeight = 200;
+
 export const frameReadyMessage = { type: "frame-ready" } as const;
 
 function hasType(data: unknown, type: string) {
