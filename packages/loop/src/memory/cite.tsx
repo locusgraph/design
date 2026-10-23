@@ -11,7 +11,7 @@ export type CiteProps = {
 };
 
 const pillClass =
-  "inline-flex h-4 min-w-4 items-center justify-center bg-muted px-1 font-mono text-[11px] leading-none font-medium text-foreground/80 tabular-nums no-underline ring-1 ring-border transition-colors duration-150 outline-none hover:bg-accent hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring/70 motion-reduce:transition-none";
+  "inline-flex h-4 min-w-4 items-center justify-center rounded-full bg-muted px-1 text-[10px] leading-none font-medium text-muted-foreground tabular-nums no-underline transition-colors duration-150 outline-none hover:bg-s1/15 hover:text-s1 focus-visible:ring-2 focus-visible:ring-ring/70 data-[state=open]:bg-s1/15 data-[state=open]:text-s1 motion-reduce:transition-none";
 
 export function citationLabel(citation: Citation): string {
   return `Source ${citation.index}: ${citation.title}`;
@@ -55,9 +55,10 @@ export function Cite({ citation, onOpen, className }: CiteProps) {
           side="bottom"
           align="start"
           sideOffset={6}
+          collisionPadding={12}
           className="flex w-72 flex-col gap-2 rounded-none border-0 p-4 ring-1 ring-border"
         >
-          <span className="eyebrow flex min-w-0 items-center gap-2">
+          <span className="flex min-w-0 items-center gap-2 text-xs text-faint">
             <SourceMark citation={citation} />
             <span className="truncate">{host ?? "Source"}</span>
           </span>
