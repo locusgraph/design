@@ -41,7 +41,7 @@ export function ModelPicker({
         disabled={disabled}
         aria-label={`${label}: ${selected?.name ?? "none selected"}`}
         className={cn(
-          "group inline-flex h-7 max-w-full items-center gap-1.5 rounded-full px-2.5 text-xs focus-ring transition-colors duration-150 hover:bg-accent disabled:pointer-events-none disabled:opacity-50 data-[state=open]:bg-accent motion-reduce:transition-none",
+          "group inline-flex h-control-sm max-w-full items-center gap-1.5 rounded-full px-2.5 text-xs focus-ring transition-colors duration-150 hover:bg-accent disabled:pointer-events-none disabled:opacity-50 data-[state=open]:bg-accent motion-reduce:transition-none",
           className
         )}
       >

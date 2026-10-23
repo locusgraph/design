@@ -92,7 +92,7 @@ export function Context({
         "focus-ring",
         statusTone[status],
         variant === "ring"
-          ? "inline-flex h-6 items-center gap-1.5 rounded-full px-2 transition-colors duration-150 motion-reduce:transition-none"
+          ? "inline-flex h-control-xs items-center gap-1.5 rounded-full px-2 transition-colors duration-150 motion-reduce:transition-none"
           : "flex w-full flex-col gap-2",
         variant === "ring" && hasBreakdown && "cursor-default hover:bg-accent",
         className

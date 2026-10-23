@@ -70,7 +70,7 @@ function RemoveButton({ item, isGrid, onRemove }: Required<ChipProps>) {
       aria-label={`Remove ${item.name}`}
       onClick={() => onRemove(item.id)}
       className={cn(
-        "grid size-6 shrink-0 place-items-center text-faint opacity-0 focus-ring transition-[color,opacity] group-hover/file:opacity-100 hover:text-interactive focus-visible:opacity-100 [@media(hover:none)]:opacity-100 motion-reduce:transition-none",
+        "grid size-control-xs shrink-0 place-items-center text-faint opacity-0 focus-ring transition-[color,opacity] group-hover/file:opacity-100 hover:text-interactive focus-visible:opacity-100 [@media(hover:none)]:opacity-100 motion-reduce:transition-none",
         isGrid && "absolute top-1 right-1 bg-background/80"
       )}
     >
