@@ -3,12 +3,22 @@ import type * as React from "react";
 import { loadDemoEntry } from "../../registry/load-demos";
 import { navigate } from "../../url-state";
 import { type Library, libraryEntries } from "./libraries";
+import { loopSections } from "./loop-sections";
 
-export function playgroundNavGroups(library: Library): DocsNavGroup[] {
-  const items = libraryEntries(library.id).map((entry) => ({
+function libraryNavGroups(library: Library): DocsNavGroup[] {
+  const entries = libraryEntries(library.id);
+  const itemOf = (entry: (typeof entries)[number]) => ({
     title: entry.title,
     href: `/${entry.path}`,
+  });
+  if (library.id !== "loop") return [{ label: library.title, items: entries.map(itemOf) }];
+  return loopSections.map((section) => ({
+    label: section.label,
+    items: entries.filter((entry) => section.paths.includes(entry.path)).map(itemOf),
   }));
+}
+
+export function playgroundNavGroups(library: Library): DocsNavGroup[] {
   return [
     {
       label: "Start",
@@ -17,7 +27,7 @@ export function playgroundNavGroups(library: Library): DocsNavGroup[] {
         { title: "Installation", href: "/installation" },
       ],
     },
-    { label: library.title, items },
+    ...libraryNavGroups(library),
   ];
 }
 

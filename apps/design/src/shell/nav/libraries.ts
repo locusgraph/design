@@ -1,4 +1,5 @@
 import { type DemoIndexEntry, demoIndexByTitle } from "../../registry/load-demos";
+import { loopPathOrder } from "./loop-sections";
 
 export type LibraryId = "components" | "blocks" | "loop" | "patterns" | "brand";
 
@@ -64,6 +65,13 @@ export function libraryOfPath(path: string): Library {
   return libraries.find((library) => library.id === id) ?? (libraries[0] as Library);
 }
 
+function loopRank(entry: DemoIndexEntry) {
+  const rank = loopPathOrder.indexOf(entry.path);
+  return rank === -1 ? loopPathOrder.length : rank;
+}
+
 export function libraryEntries(id: LibraryId): DemoIndexEntry[] {
-  return demoIndexByTitle.filter((entry) => libraryOfGroup(entry.group) === id);
+  const entries = demoIndexByTitle.filter((entry) => libraryOfGroup(entry.group) === id);
+  if (id !== "loop") return entries;
+  return [...entries].sort((first, second) => loopRank(first) - loopRank(second));
 }

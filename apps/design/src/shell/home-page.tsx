@@ -1,6 +1,7 @@
 import type { PageSection } from "@locusgraph/components";
 import type { DemoIndexEntry } from "../registry/load-demos";
 import { type Library, libraryEntries } from "./nav/libraries";
+import { loopSections } from "./nav/loop-sections";
 import { PlaygroundLink } from "./nav/playground-nav";
 
 function groupTitle(group: string) {
@@ -14,8 +15,16 @@ function groupKey(library: Library, entry: DemoIndexEntry) {
   return library.id === "components" ? entry.group : entry.section || entry.group;
 }
 
+function loopGroups(entries: DemoIndexEntry[]) {
+  return loopSections.map((section) => ({
+    group: section.label.toLowerCase(),
+    entries: entries.filter((entry) => section.paths.includes(entry.path)),
+  }));
+}
+
 function libraryGroups(library: Library) {
   const entries = libraryEntries(library.id);
+  if (library.id === "loop") return loopGroups(entries);
   const keys = entries.map((entry) => groupKey(library, entry));
   return [...new Set(keys)].sort().map((group) => ({
     group,
