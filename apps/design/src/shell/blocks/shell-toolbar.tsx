@@ -55,7 +55,7 @@ export function ShellToolbar(props: ShellToolbarProps) {
   return (
     <div className="flex flex-wrap items-center gap-2">
       <Tabs value={props.view} onValueChange={(value) => props.onViewChange(value as ShellView)}>
-        <TabsList className="h-8">
+        <TabsList className="h-control-sm">
           <TabsTrigger value="preview" className="text-xs">
             Preview
           </TabsTrigger>
@@ -70,10 +70,11 @@ export function ShellToolbar(props: ShellToolbarProps) {
       <Separator orientation="vertical" className="mx-1 h-4" />
       <p className="text-sm font-medium">{props.title}</p>
       <p className="hidden text-sm text-muted-foreground xl:block">{props.description}</p>
-      <div className="ml-auto flex h-8 items-center gap-1 border p-0.5">
+      <div className="ml-auto flex h-control-sm items-center gap-1 border p-0.5">
         <ToggleGroup
           type="single"
           size="sm"
+          spacing={1}
           value={props.viewport}
           onValueChange={(value) => value && props.onViewportChange(value as ShellViewport)}
         >
@@ -82,7 +83,7 @@ export function ShellToolbar(props: ShellToolbarProps) {
               key={viewport.value}
               value={viewport.value}
               aria-label={viewport.label}
-              className="size-6"
+              className="size-control-xs! min-w-0! px-0"
             >
               <viewport.icon weight="bold" aria-hidden />
             </ToggleGroupItem>
