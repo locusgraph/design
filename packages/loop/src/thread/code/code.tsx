@@ -59,7 +59,7 @@ export function Code({
       className={cn("min-w-0 bg-muted/40 text-foreground", className)}
       {...props}
     >
-      <figcaption className="flex h-9 items-center justify-between gap-2 pr-1.5 pl-4 text-xs text-faint">
+      <figcaption className="flex h-control items-center justify-between gap-2 pr-1.5 pl-4 text-xs text-faint">
         {filename ? (
           <span className="min-w-0 truncate font-medium text-muted-foreground">{filename}</span>
         ) : (

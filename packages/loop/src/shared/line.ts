@@ -1,5 +1,5 @@
 export const lineRowClass =
-  "flex min-h-8 w-fit max-w-full items-center gap-2 text-left text-sm text-muted-foreground";
+  "flex min-h-control-sm w-fit max-w-full items-center gap-2 text-left text-sm text-muted-foreground";
 
 export const lineTriggerClass = `group ${lineRowClass} focus-ring transition-colors duration-150 hover:text-foreground motion-reduce:transition-none`;
 
