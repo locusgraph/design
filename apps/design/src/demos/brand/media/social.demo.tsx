@@ -14,10 +14,19 @@ export const alt = "SpendGraph: know where every dollar of LLM spend goes";
 export const size = socialCardSize;
 export const contentType = "image/png";
 
+function loadFont(file: string) {
+  return fetch(new URL(\`./fonts/\${file}\`, import.meta.url)).then((response) =>
+    response.arrayBuffer()
+  );
+}
+
 export default async function OpenGraphImage() {
-  const archivo = await fetch(
-    new URL("./fonts/Archivo-Bold.ttf", import.meta.url)
-  ).then((response) => response.arrayBuffer());
+  const [archivo, archivoBold, inter, firaCode] = await Promise.all([
+    loadFont("Archivo-Regular.ttf"),
+    loadFont("Archivo-Bold.ttf"),
+    loadFont("Inter-Regular.ttf"),
+    loadFont("FiraCode-Regular.ttf"),
+  ]);
   return new ImageResponse(
     <SocialCard
       title="Know where every dollar of LLM spend goes"
@@ -25,7 +34,15 @@ export default async function OpenGraphImage() {
       product="SpendGraph"
       url="spendgraph.com"
     />,
-    { ...size, fonts: [{ name: "Archivo", data: archivo, weight: 700 }] }
+    {
+      ...size,
+      fonts: [
+        { name: "Archivo", data: archivo, weight: 400 },
+        { name: "Archivo", data: archivoBold, weight: 700 },
+        { name: "Inter", data: inter, weight: 400 },
+        { name: "Fira Code", data: firaCode, weight: 400 },
+      ],
+    }
   );
 }`;
 
@@ -150,7 +167,7 @@ export default defineDemo({
     },
     NextOpenGraphImage: {
       description:
-        "In Next.js, return it from app/opengraph-image.tsx. Satori only has the fonts you pass, so load Archivo.",
+        "In Next.js, return it from app/opengraph-image.tsx. Satori only has the fonts you pass, so load Archivo, Inter and Fira Code.",
       component: NextOpenGraphImage,
     },
   },
