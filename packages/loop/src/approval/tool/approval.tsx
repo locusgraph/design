@@ -51,7 +51,7 @@ function ApprovalHeadline({ name, risk }: { name: string; risk: RiskLevel }) {
         <span className="font-medium text-warn">Waiting</span> to run{" "}
         <span className={lineObjectClass}>{name}</span>
       </span>
-      <RiskBadge risk={risk} className="ml-auto" />
+      <RiskBadge risk={risk} className="ml-1" />
     </div>
   );
 }
