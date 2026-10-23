@@ -112,7 +112,7 @@ export default defineDemo({
       description: "Shortcut hints next to the action they trigger.",
       component: Shortcuts,
     },
-    WithIcons: { description: "Lucide icons work as modifier keys.", component: WithIcons },
+    WithIcons: { description: "Phosphor icons work as modifier keys.", component: WithIcons },
     InButton: { description: "A single key hint inside a button.", component: InButton },
     InTooltip: {
       description: "Keys restyle themselves to match tooltip colors.",
