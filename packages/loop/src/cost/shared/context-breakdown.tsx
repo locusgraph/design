@@ -35,7 +35,7 @@ function SegmentRow({
   return (
     <li
       className={cn(
-        "grid grid-cols-[1fr_auto_3rem] items-baseline gap-x-3 px-4 py-2 text-xs tabular-nums",
+        "grid grid-cols-[1fr_auto_3rem] items-baseline gap-x-3 px-4 py-1.5 text-xs tabular-nums",
         muted && "text-muted-foreground"
       )}
     >
@@ -75,7 +75,7 @@ export function ContextBreakdown({
         </span>
         <MeterBar percent={percent} status={status} />
       </div>
-      <ul className="flex flex-col divide-y divide-border border-t border-border">
+      <ul className="flex flex-col pb-2">
         {breakdown.map((segment) => (
           <SegmentRow
             key={segment.label}

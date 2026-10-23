@@ -3,7 +3,7 @@ import { pluralize } from "@locusgraph/utils";
 import { Tray as InboxIcon } from "@phosphor-icons/react/ssr";
 import { useId, useState } from "react";
 import { lineIconClass } from "../../shared/line";
-import { LiveStatus } from "../../shared/panel";
+import { LiveStatus } from "../../shared/live-status";
 import { PanelEmpty } from "../../shared/panel-empty";
 import type { PendingApproval } from "../types";
 import { InboxRow } from "./inbox-row";

@@ -3,7 +3,7 @@ import { pluralize } from "@locusgraph/utils";
 import { Lightbulb as BrainIcon } from "@phosphor-icons/react/ssr";
 import { useMemo, useState } from "react";
 import { lineMemoryIconClass, lineMemoryObjectClass, lineRowClass } from "../../shared/line";
-import { LiveStatus } from "../../shared/panel";
+import { LiveStatus } from "../../shared/live-status";
 import { DecisionSummary } from "../shared/decision-line";
 import { useFocusOnMount } from "../shared/use-focus-on-mount";
 import type { ApprovalDecision, MemoryReviewResult, ProposedMemory } from "../types";

@@ -5,7 +5,7 @@ import {
 } from "@phosphor-icons/react/ssr";
 import { useId, useState } from "react";
 import { lineIconClass, lineRowClass } from "../../shared/line";
-import { LiveStatus } from "../../shared/panel";
+import { LiveStatus } from "../../shared/live-status";
 import { SettledLine } from "../shared/approval-line";
 import { DecisionSummary } from "../shared/decision-line";
 import { useFocusOnMount } from "../shared/use-focus-on-mount";

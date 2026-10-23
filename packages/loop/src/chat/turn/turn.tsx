@@ -48,7 +48,7 @@ function partClassName(role: AgentMessage["role"], kind: PartSegment["kind"]) {
     return "w-full items-end";
   }
   if (role === "system") {
-    return "border-l-2 border-border pl-3 *:data-[slot=reply]:text-xs *:data-[slot=reply]:text-muted-foreground";
+    return "*:data-[slot=reply]:text-xs *:data-[slot=reply]:text-faint";
   }
   return cn(kind === "text" && "*:data-[slot=reply]:max-w-[68ch]");
 }

@@ -1,7 +1,7 @@
 import { Button, cn } from "@locusgraph/components";
 import { useState } from "react";
 import { humanToolName } from "../../agent/tool/tool-status";
-import { LiveStatus } from "../../shared/panel";
+import { LiveStatus } from "../../shared/live-status";
 import { type RiskLevel, type ToolPart, type ToolState, toolNameOf } from "../../types";
 import { ApprovalHeadline, SettledLine } from "../shared/approval-line";
 import { DecisionSummary } from "../shared/decision-line";

@@ -5,7 +5,7 @@ import {
   ListChecks as ListChecksIcon,
 } from "@phosphor-icons/react/ssr";
 import { useEffect, useId, useState } from "react";
-import { LiveStatus } from "../../shared/panel";
+import { LiveStatus } from "../../shared/live-status";
 import { ApprovalHeadline, SettledLine } from "../shared/approval-line";
 import { DecisionSummary } from "../shared/decision-line";
 import { useFocusOnMount } from "../shared/use-focus-on-mount";
