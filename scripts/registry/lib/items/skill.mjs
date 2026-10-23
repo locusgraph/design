@@ -46,7 +46,7 @@ ${patterns}
 - Action strips use RuleGridFooter (border-t bg-muted/70); header strips RuleGridHeader (border-b bg-muted/35). One tint per strip.
 - Small labels use the eyebrow class. Titles are one weight up, not one size up.
 - One primary action per view. Secondary actions are ghost or outline.
-- Color only for status: text-good, text-warn, text-destructive. Body text stays foreground or muted.
+- Color means state: text-interactive (hover on clickable), text-memory (remembered), text-good, text-warn (waiting), text-destructive. Body text stays text-foreground, text-muted-foreground or text-faint.
 - Name buttons by what they do ("Delete 3 nodes", not "Confirm").
 - Use tokens (bg-card, bg-muted, text-muted-foreground, border-input). Never raw hex.
 - Every screen works in light and dark.

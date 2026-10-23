@@ -52,7 +52,7 @@ export function App() {
               upgradeHref="#plans"
             />
             <Usage quotas={quotas} />
-            <RuleGrid columns={2}>
+            <RuleGrid id="billing" columns={2}>
               <Wallet balanceMicroUsd={wallet.balanceMicroUsd} grants={grants} />
               <TopUp packs={packs} onBuy={setLastPack} />
             </RuleGrid>
@@ -61,10 +61,12 @@ export function App() {
                 onBuy("{lastPack}") would open Stripe Checkout.
               </p>
             )}
-            <Plans
-              plans={plans}
-              actionFor={(plan) => <Button size="sm">Upgrade to {plan.name}</Button>}
-            />
+            <div id="plans">
+              <Plans
+                plans={plans}
+                actionFor={(plan) => <Button size="sm">Upgrade to {plan.name}</Button>}
+              />
+            </div>
           </TabsContent>
           <TabsContent value="keys" className="pt-6">
             <RuleGrid columns={1}>

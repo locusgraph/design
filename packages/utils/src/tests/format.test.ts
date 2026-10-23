@@ -13,6 +13,8 @@ describe("money", () => {
     expect(formatMicroUsd(1_000_000)).toBe("$1.00");
     expect(formatMicroUsd(1_234_500)).toBe("$1.2345");
     expect(formatMicroUsd(-300_000)).toBe("-$0.30");
+    expect(formatMicroUsd(40)).toBe("<$0.0001");
+    expect(formatMicroUsd(-0)).toBe("$0.00");
   });
 
   it("converts cents to micro-USD", () => {
