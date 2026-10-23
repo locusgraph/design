@@ -74,31 +74,39 @@ function cssBlock(selector: string, theme: ResolvedTheme) {
   ].join("\n");
 }
 
-const derivedStatesCss = [
-  ":root {",
-  "  --btn-hover: color-mix(in oklch, var(--btn) 84%, var(--background));",
-  "  --btn-active: color-mix(in oklch, var(--btn) 72%, var(--background));",
-  "  --btn-subtle: color-mix(in oklch, var(--btn) 12%, transparent);",
-  "}",
-].join("\n");
+function mixDeclaration(name: string, color: string, amount: number, base: string) {
+  return [
+    `  ${name}: color-mix(`,
+    "    in oklch,",
+    `    var(${color}) ${amount}%,`,
+    `    ${base}`,
+    "  );",
+  ];
+}
 
-const seeThroughGreysCss = [
-  ":root {",
-  "  --grey-a1: color-mix(in oklch, var(--foreground) 4%, transparent);",
-  "  --grey-a2: color-mix(in oklch, var(--foreground) 8%, transparent);",
-  "  --grey-a3: color-mix(in oklch, var(--foreground) 14%, transparent);",
-  "  --grey-a4: color-mix(in oklch, var(--foreground) 24%, transparent);",
-  "}",
-].join("\n");
+function ruleBlock(selector: string, declarations: string[][]) {
+  return [`${selector} {`, ...declarations.flat(), "}"].join("\n");
+}
 
-const highContrastCss = [
-  '[data-contrast="high"] {',
-  "  --border: color-mix(in oklch, var(--foreground) 34%, var(--surface));",
-  "  --input: color-mix(in oklch, var(--foreground) 58%, var(--surface));",
-  "  --muted-foreground: color-mix(in oklch, var(--foreground) 84%, var(--surface));",
-  "  --faint: color-mix(in oklch, var(--foreground) 66%, var(--surface));",
-  "}",
-].join("\n");
+const derivedStatesCss = ruleBlock(":root", [
+  mixDeclaration("--btn-hover", "--btn", 84, "var(--background)"),
+  mixDeclaration("--btn-active", "--btn", 72, "var(--background)"),
+  mixDeclaration("--btn-subtle", "--btn", 12, "transparent"),
+]);
+
+const seeThroughGreysCss = ruleBlock(":root", [
+  mixDeclaration("--grey-a1", "--foreground", 4, "transparent"),
+  mixDeclaration("--grey-a2", "--foreground", 8, "transparent"),
+  mixDeclaration("--grey-a3", "--foreground", 14, "transparent"),
+  mixDeclaration("--grey-a4", "--foreground", 24, "transparent"),
+]);
+
+const highContrastCss = ruleBlock('[data-contrast="high"]', [
+  mixDeclaration("--border", "--foreground", 34, "var(--surface)"),
+  mixDeclaration("--input", "--foreground", 58, "var(--surface)"),
+  mixDeclaration("--muted-foreground", "--foreground", 84, "var(--surface)"),
+  mixDeclaration("--faint", "--foreground", 66, "var(--surface)"),
+]);
 
 export function themeCss(preset: ThemePreset, ring: RingMode, contrast: ContrastMode) {
   return [

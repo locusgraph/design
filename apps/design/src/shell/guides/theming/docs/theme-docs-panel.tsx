@@ -69,7 +69,7 @@ export function ThemeDocsPanel({
           <CodeBlock
             code={css}
             language="css"
-            className="border bg-background text-xs [&_pre]:whitespace-pre-wrap"
+            className="border bg-background [&_pre]:text-xs [&_pre]:whitespace-pre-wrap"
           />
         </DocStep>
         <DocStep number={2} title="Check the contrast">
@@ -94,7 +94,7 @@ export function ThemeDocsPanel({
         <CodeBlock
           code={tokensJson}
           language="json"
-          className="border bg-background text-xs [&_pre]:whitespace-pre-wrap"
+          className="border bg-background [&_pre]:text-xs [&_pre]:whitespace-pre-wrap"
         />
       </TabsContent>
       <TabsContent value="prompt" className="flex min-h-0 flex-col gap-4 overflow-y-auto p-4">
