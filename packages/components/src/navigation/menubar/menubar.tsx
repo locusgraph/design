@@ -1,8 +1,8 @@
 "use client";
 
-import { cn } from "cn";
 import * as MenubarPrimitive from "radix-ui/menubar";
 import * as React from "react";
+import { cn } from "../../cn";
 
 function Menubar({ className, ...props }: React.ComponentProps<typeof MenubarPrimitive.Root>) {
   return (

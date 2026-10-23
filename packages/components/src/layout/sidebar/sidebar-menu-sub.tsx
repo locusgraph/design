@@ -1,8 +1,8 @@
 "use client";
 
-import { cn } from "cn";
 import * as Slot from "radix-ui/slot";
 import * as React from "react";
+import { cn } from "../../cn";
 import { Skeleton } from "../../display/status/skeleton";
 
 function randomSkeletonWidth() {

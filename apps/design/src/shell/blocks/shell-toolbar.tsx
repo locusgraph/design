@@ -83,7 +83,7 @@ export function ShellToolbar(props: ShellToolbarProps) {
               key={viewport.value}
               value={viewport.value}
               aria-label={viewport.label}
-              className="size-control-xs! min-w-0! px-0"
+              className="size-control-xs px-0"
             >
               <viewport.icon weight="bold" aria-hidden />
             </ToggleGroupItem>

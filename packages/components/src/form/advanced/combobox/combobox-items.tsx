@@ -2,7 +2,7 @@
 
 import { Combobox as ComboboxPrimitive } from "@base-ui/react";
 import { Check as CheckIcon } from "@phosphor-icons/react/ssr";
-import { cn } from "cn";
+import { cn } from "../../../cn";
 
 function ComboboxItem({ className, children, ...props }: ComboboxPrimitive.Item.Props) {
   return (

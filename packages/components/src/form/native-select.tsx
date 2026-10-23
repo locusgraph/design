@@ -1,6 +1,6 @@
 import { CaretDown as ChevronDownIcon } from "@phosphor-icons/react/ssr";
-import { cn } from "cn";
 import * as React from "react";
+import { cn } from "../cn";
 
 function NativeSelect({
   className,

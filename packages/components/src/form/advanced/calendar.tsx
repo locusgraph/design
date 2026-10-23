@@ -5,11 +5,10 @@ import {
   CaretLeft as ChevronLeftIcon,
   CaretRight as ChevronRightIcon,
 } from "@phosphor-icons/react/ssr";
-import { cn } from "cn";
 import * as React from "react";
 import { DayPicker, getDefaultClassNames } from "react-day-picker";
-
 import { Button, buttonVariants } from "../../action/button";
+import { cn } from "../../cn";
 import { CalendarDayButton } from "./calendar-day-button";
 
 function Calendar({

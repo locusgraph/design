@@ -1,7 +1,7 @@
 import { CaretRight as ChevronRight, DotsThree as MoreHorizontal } from "@phosphor-icons/react/ssr";
-import { cn } from "cn";
 import * as Slot from "radix-ui/slot";
 import * as React from "react";
+import { cn } from "../cn";
 
 function Breadcrumb({ ...props }: React.ComponentProps<"nav">) {
   return <nav aria-label="breadcrumb" data-slot="breadcrumb" {...props} />;

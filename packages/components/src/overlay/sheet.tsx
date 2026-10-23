@@ -1,9 +1,9 @@
 "use client";
 
 import { X as XIcon } from "@phosphor-icons/react/ssr";
-import { cn } from "cn";
 import * as SheetPrimitive from "radix-ui/dialog";
 import * as React from "react";
+import { cn } from "../cn";
 
 function Sheet({ ...props }: React.ComponentProps<typeof SheetPrimitive.Root>) {
   return <SheetPrimitive.Root data-slot="sheet" {...props} />;

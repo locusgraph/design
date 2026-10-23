@@ -1,6 +1,6 @@
 "use client";
 
-import { cn } from "cn";
+import { cn } from "../../cn";
 import { useActiveSection } from "./use-active-section";
 
 type PageSection = { id: string; title: string; nested?: boolean };

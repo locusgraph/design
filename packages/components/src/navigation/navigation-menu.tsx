@@ -1,8 +1,8 @@
 import { CaretDown as ChevronDownIcon } from "@phosphor-icons/react/ssr";
 import { cva } from "class-variance-authority";
-import { cn } from "cn";
 import * as NavigationMenuPrimitive from "radix-ui/navigation-menu";
 import * as React from "react";
+import { cn } from "../cn";
 
 function NavigationMenu({
   className,

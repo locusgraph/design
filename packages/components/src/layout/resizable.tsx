@@ -1,8 +1,8 @@
 "use client";
 
 import { DotsSixVertical as GripVerticalIcon } from "@phosphor-icons/react/ssr";
-import { cn } from "cn";
 import * as ResizablePrimitive from "react-resizable-panels";
+import { cn } from "../cn";
 
 function ResizablePanelGroup({ className, ...props }: ResizablePrimitive.GroupProps) {
   return (

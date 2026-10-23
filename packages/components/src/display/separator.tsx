@@ -1,8 +1,8 @@
 "use client";
 
-import { cn } from "cn";
 import * as SeparatorPrimitive from "radix-ui/separator";
 import * as React from "react";
+import { cn } from "../cn";
 
 function Separator({
   className,

@@ -2,7 +2,7 @@
 
 import { Combobox as ComboboxPrimitive } from "@base-ui/react";
 import { CaretDown as ChevronDownIcon, X as XIcon } from "@phosphor-icons/react/ssr";
-import { cn } from "cn";
+import { cn } from "../../../cn";
 import { InputGroup, InputGroupAddon, InputGroupButton, InputGroupInput } from "../../input-group";
 
 const Combobox = ComboboxPrimitive.Root;

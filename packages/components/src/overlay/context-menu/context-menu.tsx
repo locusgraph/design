@@ -1,8 +1,8 @@
 "use client";
 
-import { cn } from "cn";
 import * as ContextMenuPrimitive from "radix-ui/context-menu";
 import * as React from "react";
+import { cn } from "../../cn";
 
 function ContextMenu({ ...props }: React.ComponentProps<typeof ContextMenuPrimitive.Root>) {
   return <ContextMenuPrimitive.Root data-slot="context-menu" {...props} />;

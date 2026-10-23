@@ -1,9 +1,9 @@
 "use client";
 
 import { Check as CheckIcon, Circle as CircleIcon } from "@phosphor-icons/react/ssr";
-import { cn } from "cn";
 import * as ContextMenuPrimitive from "radix-ui/context-menu";
 import * as React from "react";
+import { cn } from "../../cn";
 
 function ContextMenuItem({
   className,

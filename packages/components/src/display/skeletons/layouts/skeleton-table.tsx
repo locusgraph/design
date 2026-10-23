@@ -1,5 +1,5 @@
-import { cn } from "cn";
 import type * as React from "react";
+import { cn } from "../../../cn";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "../../table";
 import { SkeletonBar, SkeletonLoadingLabel, skeletonRootProps } from "../skeleton-parts";
 

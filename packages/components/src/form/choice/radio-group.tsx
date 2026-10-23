@@ -1,9 +1,9 @@
 "use client";
 
 import { Circle as CircleIcon } from "@phosphor-icons/react/ssr";
-import { cn } from "cn";
 import * as RadioGroupPrimitive from "radix-ui/radio-group";
 import * as React from "react";
+import { cn } from "../../cn";
 
 function RadioGroup({
   className,

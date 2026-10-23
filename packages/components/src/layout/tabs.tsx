@@ -1,9 +1,9 @@
 "use client";
 
 import { cva, type VariantProps } from "class-variance-authority";
-import { cn } from "cn";
 import * as TabsPrimitive from "radix-ui/tabs";
 import * as React from "react";
+import { cn } from "../cn";
 
 function Tabs({
   className,

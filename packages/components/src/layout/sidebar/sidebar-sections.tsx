@@ -1,8 +1,8 @@
 "use client";
 
-import { cn } from "cn";
 import * as Slot from "radix-ui/slot";
 import type * as React from "react";
+import { cn } from "../../cn";
 import { Separator } from "../../display/separator";
 import { Input } from "../../form/input";
 import { sidebarMobileHitArea } from "./sidebar-context";

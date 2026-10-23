@@ -1,4 +1,4 @@
-import { cn } from "cn";
+import { cn } from "../../cn";
 import type { LinkComponent } from "../link";
 
 type DocsNavItem = { title: string; href: string };

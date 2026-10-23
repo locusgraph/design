@@ -2,8 +2,8 @@
 
 import { MagnifyingGlass as SearchIcon } from "@phosphor-icons/react/ssr";
 import { Command as CommandPrimitive } from "cmdk";
-import { cn } from "cn";
 import * as React from "react";
+import { cn } from "../../cn";
 
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "../dialog";
 

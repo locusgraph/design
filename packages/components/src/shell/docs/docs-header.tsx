@@ -1,10 +1,10 @@
 "use client";
 
 import { List as MenuIcon } from "@phosphor-icons/react/ssr";
-import { cn } from "cn";
 import type * as React from "react";
 import { useState } from "react";
 import { Button } from "../../action/button";
+import { cn } from "../../cn";
 import { Sheet, SheetContent, SheetTitle } from "../../overlay/sheet";
 import type { LinkComponent } from "../link";
 

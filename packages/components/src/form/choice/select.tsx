@@ -5,9 +5,9 @@ import {
   CaretDown as ChevronDownIcon,
   CaretUp as ChevronUpIcon,
 } from "@phosphor-icons/react/ssr";
-import { cn } from "cn";
 import * as SelectPrimitive from "radix-ui/select";
 import * as React from "react";
+import { cn } from "../../cn";
 
 function Select({ ...props }: React.ComponentProps<typeof SelectPrimitive.Root>) {
   return <SelectPrimitive.Root data-slot="select" {...props} />;

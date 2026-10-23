@@ -1,9 +1,9 @@
 "use client";
 
 import { X as XIcon } from "@phosphor-icons/react/ssr";
-import { cn } from "cn";
 import * as DialogPrimitive from "radix-ui/dialog";
 import * as React from "react";
+import { cn } from "../cn";
 
 function Dialog({ ...props }: React.ComponentProps<typeof DialogPrimitive.Root>) {
   return <DialogPrimitive.Root data-slot="dialog" {...props} />;

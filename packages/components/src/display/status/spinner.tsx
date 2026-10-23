@@ -1,5 +1,5 @@
 import { CircleNotch as Loader2Icon } from "@phosphor-icons/react/ssr";
-import { cn } from "cn";
+import { cn } from "../../cn";
 
 function Spinner({ className, ...props }: React.ComponentProps<"svg">) {
   return (

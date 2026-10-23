@@ -1,5 +1,5 @@
-import { cn } from "cn";
 import type * as React from "react";
+import { cn } from "../../cn";
 import { TooltipProvider } from "../../overlay/tooltip";
 import { SkipLink, shellContentId } from "../navigation/skip-link";
 

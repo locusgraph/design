@@ -1,9 +1,9 @@
 "use client";
 
 import { CaretRight as ChevronRightIcon } from "@phosphor-icons/react/ssr";
-import { cn } from "cn";
 import * as MenubarPrimitive from "radix-ui/menubar";
 import * as React from "react";
+import { cn } from "../../cn";
 
 function MenubarSub({ ...props }: React.ComponentProps<typeof MenubarPrimitive.Sub>) {
   return <MenubarPrimitive.Sub data-slot="menubar-sub" {...props} />;

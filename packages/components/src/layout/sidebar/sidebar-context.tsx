@@ -1,7 +1,7 @@
 "use client";
 
-import { cn } from "cn";
 import * as React from "react";
+import { cn } from "../../cn";
 import { TooltipProvider } from "../../overlay/tooltip";
 import { useIsMobile } from "../use-mobile";
 

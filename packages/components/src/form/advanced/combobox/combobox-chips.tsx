@@ -2,10 +2,9 @@
 
 import { Combobox as ComboboxPrimitive } from "@base-ui/react";
 import { X as XIcon } from "@phosphor-icons/react/ssr";
-import { cn } from "cn";
 import * as React from "react";
-
 import { Button } from "../../../action/button";
+import { cn } from "../../../cn";
 
 function ComboboxChips({
   className,

@@ -1,9 +1,9 @@
 "use client";
 
 import { cva, type VariantProps } from "class-variance-authority";
-import { cn } from "cn";
 import * as Slot from "radix-ui/slot";
 import type * as React from "react";
+import { cn } from "../../cn";
 import { Tooltip, TooltipContent, TooltipTrigger } from "../../overlay/tooltip";
 import { sidebarMobileHitArea, useSidebar } from "./sidebar-context";
 

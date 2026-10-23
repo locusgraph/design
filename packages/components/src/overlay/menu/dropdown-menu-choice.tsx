@@ -1,9 +1,9 @@
 "use client";
 
 import { Check as CheckIcon, Circle as CircleIcon } from "@phosphor-icons/react/ssr";
-import { cn } from "cn";
 import * as DropdownMenuPrimitive from "radix-ui/dropdown-menu";
 import type * as React from "react";
+import { cn } from "../../cn";
 
 function DropdownMenuCheckboxItem({
   className,

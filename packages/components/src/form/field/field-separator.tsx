@@ -1,5 +1,5 @@
-import { cn } from "cn";
 import type * as React from "react";
+import { cn } from "../../cn";
 import { Separator } from "../../display/separator";
 
 function FieldSeparator({ children, className, ...props }: React.ComponentProps<"div">) {

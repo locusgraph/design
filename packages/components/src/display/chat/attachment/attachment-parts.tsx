@@ -1,8 +1,7 @@
-import { cn } from "cn";
 import * as Slot from "radix-ui/slot";
 import * as React from "react";
-
 import { Button } from "../../../action/button";
+import { cn } from "../../../cn";
 
 function AttachmentTitle({ className, ...props }: React.ComponentProps<"span">) {
   return (

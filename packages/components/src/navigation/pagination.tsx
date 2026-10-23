@@ -3,10 +3,9 @@ import {
   CaretRight as ChevronRightIcon,
   DotsThree as MoreHorizontalIcon,
 } from "@phosphor-icons/react/ssr";
-import { cn } from "cn";
 import * as React from "react";
-
 import { type Button, buttonVariants } from "../action/button";
+import { cn } from "../cn";
 
 function Pagination({ className, ...props }: React.ComponentProps<"nav">) {
   return (

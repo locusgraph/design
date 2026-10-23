@@ -1,8 +1,8 @@
 "use client";
 
-import { cn } from "cn";
 import * as React from "react";
 import * as RechartsPrimitive from "recharts";
+import { cn } from "../../cn";
 import { getPayloadConfigFromPayload, useChart } from "./chart-container";
 
 const ChartLegend = RechartsPrimitive.Legend;

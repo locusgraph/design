@@ -1,8 +1,8 @@
 "use client";
 
-import { cn } from "cn";
 import * as DropdownMenuPrimitive from "radix-ui/dropdown-menu";
 import type * as React from "react";
+import { cn } from "../../cn";
 
 function DropdownMenuItem({
   className,

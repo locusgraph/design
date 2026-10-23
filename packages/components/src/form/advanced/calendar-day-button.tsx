@@ -1,10 +1,9 @@
 "use client";
 
-import { cn } from "cn";
 import * as React from "react";
 import { type DayButton, getDefaultClassNames } from "react-day-picker";
-
 import { Button } from "../../action/button";
+import { cn } from "../../cn";
 
 function CalendarDayButton({
   className,

@@ -1,9 +1,9 @@
 "use client";
 
 import { SidebarSimple as PanelLeftIcon } from "@phosphor-icons/react/ssr";
-import { cn } from "cn";
 import type * as React from "react";
 import { Button } from "../../action/button";
+import { cn } from "../../cn";
 import {
   Sheet,
   SheetContent,

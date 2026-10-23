@@ -1,5 +1,5 @@
-import { cn } from "cn";
 import type * as React from "react";
+import { cn } from "../../cn";
 import { Label } from "../label";
 
 function FieldLabel({ className, ...props }: React.ComponentProps<typeof Label>) {

@@ -1,5 +1,5 @@
-import { cn } from "cn";
 import type * as React from "react";
+import { cn } from "../cn";
 import { SidebarInset } from "../layout/sidebar/sidebar";
 import { SidebarProvider } from "../layout/sidebar/sidebar-context";
 import { SkipLink, shellContentId } from "./navigation/skip-link";
