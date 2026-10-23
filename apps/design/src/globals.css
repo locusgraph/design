@@ -30,7 +30,6 @@ body {
   color: var(--shiki-dark) !important;
 }
 
-/* Layout view of a shell (/frame.html?outline=1): each region dashed, named, its content faded. */
 [data-shell-outline]
   :is(
     [data-slot="sidebar-inner"],
