@@ -11,7 +11,7 @@ const turn: Keyframe[] = [
 ];
 
 const toneIcon: Record<PulseTone, string> = {
-  neutral: "fill-foreground/70 text-foreground/70",
+  neutral: "fill-muted-foreground text-muted-foreground",
   brand: "fill-memory text-memory",
 };
 

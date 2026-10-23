@@ -23,7 +23,7 @@ export function BarsMark() {
     <span
       aria-hidden
       data-slot="pulse-bars"
-      className="inline-flex h-[1em] items-center gap-[0.14em] text-foreground/70"
+      className="inline-flex h-[1em] items-center gap-[0.14em] text-muted-foreground"
     >
       {barDelays.map((delay) => (
         <Bar key={delay} delay={delay} />

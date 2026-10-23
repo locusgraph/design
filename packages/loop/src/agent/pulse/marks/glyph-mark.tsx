@@ -23,7 +23,7 @@ export function GlyphMark({ tone = "neutral" }: { tone?: PulseTone }) {
       data-slot="pulse-glyph"
       className={cn(
         "inline-flex w-[1.1em] justify-center font-mono text-[1.15em] leading-none",
-        tone === "brand" ? "text-[var(--s2)]" : "text-foreground/70"
+        tone === "brand" ? "text-[var(--s2)]" : "text-muted-foreground"
       )}
     >
       {index === undefined ? restingGlyph : glyphs[index]}
