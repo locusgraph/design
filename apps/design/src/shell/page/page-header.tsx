@@ -25,9 +25,9 @@ function CopyPageButton({ markdown }: { markdown: string }) {
     setTimeout(() => setCopied(false), 1500);
   };
   return (
-    <Button variant="secondary" size="sm" onClick={copy} className="h-7 shadow-none">
+    <Button variant="secondary" size="sm" onClick={copy}>
       {copied ? <CheckIcon weight="bold" aria-hidden /> : <CopyIcon weight="bold" aria-hidden />}
-      {copied ? "Copied" : "Copy page"}
+      <span className="sr-only sm:not-sr-only">{copied ? "Copied" : "Copy page"}</span>
     </Button>
   );
 }
@@ -42,13 +42,7 @@ function NeighborButton({
   const Icon = direction === "previous" ? ArrowLeftIcon : ArrowRightIcon;
   if (!entry) {
     return (
-      <Button
-        variant="secondary"
-        size="icon-sm"
-        className="size-7 shadow-none"
-        disabled
-        aria-label={`No ${direction} component`}
-      >
+      <Button variant="secondary" size="icon-sm" disabled aria-label={`No ${direction} component`}>
         <Icon weight="bold" aria-hidden />
       </Button>
     );
@@ -56,7 +50,7 @@ function NeighborButton({
   return (
     <Tooltip>
       <TooltipTrigger asChild>
-        <Button asChild variant="secondary" size="icon-sm" className="size-7 shadow-none">
+        <Button asChild variant="secondary" size="icon-sm">
           <PlaygroundLink href={`/${entry.path}`} aria-label={`${direction}: ${entry.title}`}>
             <Icon weight="bold" aria-hidden />
           </PlaygroundLink>
