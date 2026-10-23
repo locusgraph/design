@@ -64,7 +64,7 @@ export function PlanReview({
 
   function handleAction(stepId: string, position: number, action: StepAction) {
     const next = applyStepAction(steps, stepId, action);
-    const focus = focusAfterAction(next, stepId, action);
+    const focus = focusAfterAction(next, stepId, action, position);
     setSteps(next);
     setAnnouncement(describeStepAction(position, action));
     setPendingFocus(focus ? { id: stepControlId(idPrefix, focus.stepId, focus.control) } : null);
