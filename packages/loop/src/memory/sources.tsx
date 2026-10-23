@@ -1,16 +1,17 @@
-import { ChevronRight as ChevronRightIcon } from "@carbon/icons-react";
+import { ChevronRight as ChevronRightIcon, Document as DocumentIcon } from "@carbon/icons-react";
 import { Collapsible, CollapsibleContent, CollapsibleTrigger, cn } from "@locusgraph/components";
 import { pluralize } from "@locusgraph/utils";
-import type { Citation } from "../types";
 import {
-  chevronClass,
-  collapsibleTriggerClass,
-  interactiveRowClass,
-  ruledListClass,
-  ruledRowClass,
-} from "./shared/disclosure";
+  lineChevronClass,
+  lineDetailClass,
+  lineDetailLinkClass,
+  lineDetailRowClass,
+  lineIconClass,
+  lineObjectClass,
+  lineTriggerClass,
+} from "../shared/line";
+import type { Citation } from "../types";
 import { hostLabel, type SourceItem, sourceKey, toCitation } from "./shared/host-label";
-import { SourceMark } from "./shared/source-mark";
 
 export type SourcesProps = {
   sources: SourceItem[];
@@ -19,7 +20,7 @@ export type SourcesProps = {
   className?: string;
 };
 
-const stackedMarkLimit = 3;
+const sourceRowClass = cn(lineDetailRowClass, "items-baseline gap-3");
 
 export function Sources({ sources, onOpen, defaultOpen = false, className }: SourcesProps) {
   if (sources.length === 0) return null;
@@ -28,23 +29,19 @@ export function Sources({ sources, onOpen, defaultOpen = false, className }: Sou
     <Collapsible
       data-slot="sources"
       defaultOpen={defaultOpen}
-      className={cn("flex min-w-0 flex-col gap-2", className)}
+      className={cn("flex min-w-0 flex-col", className)}
     >
-      <CollapsibleTrigger className={collapsibleTriggerClass}>
-        <span aria-hidden className="flex -space-x-1">
-          {citations.slice(0, stackedMarkLimit).map((citation, position) => (
-            <SourceMark
-              key={sourceKey(sources[position] as SourceItem, position)}
-              citation={citation}
-              className="ring-card"
-            />
-          ))}
+      <CollapsibleTrigger className={lineTriggerClass}>
+        <span aria-hidden className={lineIconClass}>
+          <DocumentIcon />
         </span>
-        Used {pluralize(sources.length, "source")}
-        <ChevronRightIcon aria-hidden className={chevronClass} />
+        <span className="truncate">
+          Used <span className={lineObjectClass}>{pluralize(sources.length, "source")}</span>
+        </span>
+        <ChevronRightIcon aria-hidden className={lineChevronClass} />
       </CollapsibleTrigger>
       <CollapsibleContent>
-        <ol className={ruledListClass}>
+        <ol className={cn(lineDetailClass, "flex flex-col pb-2 text-muted-foreground")}>
           {citations.map((citation, position) => (
             <SourceRow
               key={sourceKey(sources[position] as SourceItem, position)}
@@ -69,16 +66,11 @@ function SourceRow({
   const showHost = host !== undefined && host !== citation.title;
   const content = (
     <>
-      <span className="w-4 shrink-0 font-mono text-xs text-muted-foreground tabular-nums">
-        {citation.index}
-      </span>
-      <span className="min-w-0 flex-1 truncate">{citation.title}</span>
-      {showHost && (
-        <span className="max-w-[40%] shrink-0 truncate text-xs text-muted-foreground">{host}</span>
-      )}
+      <span className="w-3 shrink-0 text-xs text-faint tabular-nums">{citation.index}</span>
+      <span className="min-w-0 truncate">{citation.title}</span>
+      {showHost && <span className="max-w-[40%] shrink-0 truncate text-xs text-faint">{host}</span>}
     </>
   );
-  const rowClass = ruledRowClass;
   const label = `Open source ${citation.index}: ${citation.title}`;
   return (
     <li data-slot="sources-item" data-index={citation.index}>
@@ -87,7 +79,7 @@ function SourceRow({
           type="button"
           aria-label={label}
           onClick={() => onOpen(citation)}
-          className={cn(rowClass, interactiveRowClass)}
+          className={cn(sourceRowClass, lineDetailLinkClass)}
         >
           {content}
         </button>
@@ -97,12 +89,12 @@ function SourceRow({
           target="_blank"
           rel="noreferrer"
           aria-label={label}
-          className={cn(rowClass, interactiveRowClass)}
+          className={cn(sourceRowClass, lineDetailLinkClass)}
         >
           {content}
         </a>
       ) : (
-        <div className={rowClass}>{content}</div>
+        <div className={sourceRowClass}>{content}</div>
       )}
     </li>
   );

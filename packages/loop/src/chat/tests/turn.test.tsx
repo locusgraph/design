@@ -53,13 +53,20 @@ describe("Turn", () => {
     const html = renderToStaticMarkup(<Turn message={assistantMessage} />);
     expect(html).toContain('data-align="start"');
     expect(html).toContain("<strong>planner</strong>");
-    expect(html).toContain("query_spend");
+    expect(html).toContain("query spend");
     expect(html).toContain("Timed out");
-    expect(html).toContain("Used 2 sources");
+    expect(html).toMatch(/Used <span[^>]*>2 sources<\/span>/);
     expect(html.indexOf('data-slot="thinking"')).toBeLessThan(html.indexOf('data-slot="tool"'));
     expect(html.indexOf('data-slot="tool"')).toBeLessThan(html.indexOf("planner"));
     expect(html.match(/data-kind="sources"/g)).toHaveLength(1);
     expect(html).toContain('data-slot="sources"');
+  });
+
+  it("pulls consecutive step lines together and keeps prose apart", () => {
+    const html = renderToStaticMarkup(<Turn message={assistantMessage} />);
+    expect(html).toMatch(/data-kind="tool" data-follows-line="true"/);
+    expect(html).not.toMatch(/data-kind="reasoning" data-follows-line/);
+    expect(html).not.toMatch(/data-kind="text" data-follows-line/);
   });
 
   it("uses render props for reasoning, tools and sources when given", () => {

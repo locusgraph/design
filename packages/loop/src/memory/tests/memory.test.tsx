@@ -34,7 +34,7 @@ describe("Sources", () => {
 
   it("counts the sources while collapsed", () => {
     const html = renderToStaticMarkup(<Sources sources={sources} />);
-    expect(html).toContain("Used 2 sources");
+    expect(html).toMatch(/Used <span[^>]*>2 sources<\/span>/);
     expect(html).not.toContain("stripe.com");
   });
 
@@ -57,7 +57,14 @@ describe("Recall", () => {
   ];
 
   it("counts recalled memories", () => {
-    expect(renderToStaticMarkup(<Recall memories={memories} />)).toContain("Recalled 2 memories");
+    expect(renderToStaticMarkup(<Recall memories={memories} />)).toMatch(
+      /Recalled <span[^>]*>2 memories<\/span>/
+    );
+  });
+
+  it("marks memory work in the memory color", () => {
+    const html = renderToStaticMarkup(<Recall memories={memories} />);
+    expect(html).toMatch(/text-memory[^>]*>2 memories/);
   });
 
   it("exposes relevance as a meter", () => {

@@ -53,6 +53,15 @@ function partClassName(role: AgentMessage["role"], kind: PartSegment["kind"]) {
   return cn(kind === "text" && "*:data-[slot=reply]:max-w-[68ch]");
 }
 
+const lineKinds: ReadonlySet<PartSegment["kind"]> = new Set(["reasoning", "tool", "sources"]);
+
+function followsLine(segments: PartSegment[], position: number) {
+  const previous = segments[position - 1];
+  const current = segments[position];
+  if (!previous || !current) return false;
+  return lineKinds.has(previous.kind) && lineKinds.has(current.kind);
+}
+
 function renderSegment(segment: PartSegment, isUser: boolean, renderers: PartRenderers) {
   switch (segment.kind) {
     case "text":
@@ -120,12 +129,16 @@ export function Turn({
         </MessageAvatar>
       )}
       <MessageContent className={cn("gap-4", isUser && "items-end gap-2")}>
-        {groupParts(message.parts).map((segment) => (
+        {groupParts(message.parts).map((segment, position, segments) => (
           <div
             key={segment.key}
             data-slot="message-part"
             data-kind={segment.kind}
-            className={cn("flex min-w-0 flex-col", partClassName(message.role, segment.kind))}
+            data-follows-line={followsLine(segments, position) || undefined}
+            className={cn(
+              "flex min-w-0 flex-col data-follows-line:-mt-3",
+              partClassName(message.role, segment.kind)
+            )}
           >
             {renderSegment(segment, isUser, renderers)}
           </div>

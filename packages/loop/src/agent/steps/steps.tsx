@@ -1,6 +1,6 @@
 import { ListChecked as ListChecksIcon } from "@carbon/icons-react";
 import { cn } from "@locusgraph/components";
-import { ApprovalPanel, PanelHeader, type PanelTone } from "../../shared/panel";
+import { lineIconClass, lineRowClass } from "../../shared/line";
 import type { AgentStep, StepStatus } from "../../types";
 import { StepIcon, stepStatusLabels } from "./step-icon";
 
@@ -11,11 +11,11 @@ export type StepsProps = {
 };
 
 const stepTitleTones: Record<StepStatus, string> = {
-  pending: "text-muted-foreground",
-  running: "text-foreground font-medium",
-  done: "text-foreground",
-  failed: "text-foreground font-medium",
-  skipped: "text-muted-foreground line-through",
+  pending: "text-faint",
+  running: "font-medium text-foreground",
+  done: "text-muted-foreground",
+  failed: "font-medium text-foreground",
+  skipped: "text-faint line-through decoration-faint",
 };
 
 function currentStepId(steps: AgentStep[]) {
@@ -30,29 +30,21 @@ function progressLabel(steps: AgentStep[]) {
   return `${done} of ${steps.length} done`;
 }
 
-function progressTone(steps: AgentStep[]): PanelTone {
-  if (steps.some((step) => step.status === "failed")) return "danger";
-  if (steps.some((step) => step.status === "running")) return "waiting";
-  const settled = steps.every((step) => step.status === "done" || step.status === "skipped");
-  return steps.length > 0 && settled ? "done" : "idle";
-}
-
-function StepRow({ step, current, last }: { step: AgentStep; current: boolean; last: boolean }) {
+function StepRow({ step, current }: { step: AgentStep; current: boolean }) {
   return (
     <li
       data-slot="step"
       data-status={step.status}
       aria-current={current ? "step" : undefined}
-      className="relative flex gap-3 pb-4 last:pb-0"
+      className="flex gap-2 py-1"
     >
-      {!last && (
-        <span aria-hidden className="absolute top-5 bottom-0.5 left-[7.5px] w-px bg-border" />
-      )}
-      <StepIcon status={step.status} current={current} />
+      <span className="flex h-5 items-center">
+        <StepIcon status={step.status} current={current} />
+      </span>
       <div className="flex min-w-0 flex-col gap-0.5">
         <span
           className={cn(
-            "text-sm leading-snug",
+            "leading-5",
             stepTitleTones[step.status],
             current && step.status === "pending" && "text-foreground"
           )}
@@ -62,10 +54,7 @@ function StepRow({ step, current, last }: { step: AgentStep; current: boolean; l
         </span>
         {step.detail && (
           <span
-            className={cn(
-              "font-mono text-xs text-muted-foreground",
-              step.status === "failed" && "font-sans text-destructive"
-            )}
+            className={cn("text-xs text-faint", step.status === "failed" && "text-destructive")}
           >
             {step.detail}
           </span>
@@ -78,23 +67,23 @@ function StepRow({ step, current, last }: { step: AgentStep; current: boolean; l
 export function Steps({ steps, title = "Plan", className }: StepsProps) {
   const currentId = currentStepId(steps);
   return (
-    <ApprovalPanel data-slot="steps" aria-label={title} className={className}>
-      <PanelHeader
-        icon={<ListChecksIcon aria-hidden />}
-        eyebrow={title}
-        status={progressLabel(steps)}
-        tone={progressTone(steps)}
-      />
-      <ol className="flex flex-col px-5 pt-4 pb-5">
-        {steps.map((step, position) => (
-          <StepRow
-            key={step.id}
-            step={step}
-            current={step.id === currentId}
-            last={position === steps.length - 1}
-          />
+    <section
+      data-slot="steps"
+      aria-label={title}
+      className={cn("flex min-w-0 flex-col", className)}
+    >
+      <header className={lineRowClass}>
+        <span aria-hidden className={lineIconClass}>
+          <ListChecksIcon />
+        </span>
+        <span className="truncate">{title}</span>
+        <span className="shrink-0 text-faint tabular-nums">{progressLabel(steps)}</span>
+      </header>
+      <ol className="flex min-w-0 flex-col text-sm">
+        {steps.map((step) => (
+          <StepRow key={step.id} step={step} current={step.id === currentId} />
         ))}
       </ol>
-    </ApprovalPanel>
+    </section>
   );
 }

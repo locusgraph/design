@@ -22,11 +22,22 @@ type ActionsProps = ComponentProps<"div"> & {
   onFeedback?: (feedback: MessageFeedback) => void;
   branch?: MessageBranch;
   onBranchChange?: (index: number) => void;
+  align?: "start" | "end";
+  reveal?: "always" | "hover";
 };
 
 function toggledFeedback(current: MessageFeedback, chosen: "up" | "down"): MessageFeedback {
   return current === chosen ? null : chosen;
 }
+
+function showsThumb(feedback: MessageFeedback, thumb: "up" | "down") {
+  return feedback === null || feedback === thumb;
+}
+
+const alignClasses = { start: "-ml-2", end: "-mr-2 justify-end" };
+
+const revealOnMessageHover =
+  "opacity-0 transition-opacity duration-150 group-hover/message:opacity-100 focus-within:opacity-100 has-[[aria-pressed=true]]:opacity-100 motion-reduce:transition-none [@media(hover:none)]:opacity-100";
 
 export function Actions({
   onCopy,
@@ -35,6 +46,8 @@ export function Actions({
   onFeedback,
   branch,
   onBranchChange,
+  align = "start",
+  reveal = "always",
   className,
   ...props
 }: ActionsProps) {
@@ -49,13 +62,16 @@ export function Actions({
         data-slot="actions"
         role="toolbar"
         aria-label="Message actions"
-        className={cn("flex items-center gap-0.5", className)}
+        data-reveal={reveal}
+        className={cn(
+          "flex items-center",
+          alignClasses[align],
+          reveal === "hover" && revealOnMessageHover,
+          className
+        )}
         {...props}
       >
         {showBranch && <BranchSwitcher branch={branch} onBranchChange={onBranchChange} />}
-        {showBranch && (onCopy || onRetry || onFeedback) && (
-          <span aria-hidden className="mx-1 h-3.5 w-px bg-border" />
-        )}
         {onCopy && (
           <ActionButton
             label={copied ? "Copied" : "Copy"}
@@ -74,22 +90,24 @@ export function Actions({
         )}
         {onFeedback && (
           <>
-            <ActionButton
-              label="Good response"
-              aria-pressed={feedback === "up"}
-              className={cn(feedback === "up" && "text-foreground")}
-              onClick={() => onFeedback(toggledFeedback(feedback, "up"))}
-            >
-              <ThumbsUpIcon className={cn(feedback === "up" && "fill-current")} />
-            </ActionButton>
-            <ActionButton
-              label="Bad response"
-              aria-pressed={feedback === "down"}
-              className={cn(feedback === "down" && "text-foreground")}
-              onClick={() => onFeedback(toggledFeedback(feedback, "down"))}
-            >
-              <ThumbsDownIcon className={cn(feedback === "down" && "fill-current")} />
-            </ActionButton>
+            {showsThumb(feedback, "up") && (
+              <ActionButton
+                label="Good response"
+                aria-pressed={feedback === "up"}
+                onClick={() => onFeedback(toggledFeedback(feedback, "up"))}
+              >
+                <ThumbsUpIcon className={cn(feedback === "up" && "fill-current text-good")} />
+              </ActionButton>
+            )}
+            {showsThumb(feedback, "down") && (
+              <ActionButton
+                label="Bad response"
+                aria-pressed={feedback === "down"}
+                onClick={() => onFeedback(toggledFeedback(feedback, "down"))}
+              >
+                <ThumbsDownIcon className={cn(feedback === "down" && "fill-current text-bad")} />
+              </ActionButton>
+            )}
           </>
         )}
         {copied && (

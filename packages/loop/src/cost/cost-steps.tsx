@@ -69,7 +69,7 @@ export function CostSteps({
       ) : (
         <>
           <Totals totals={totals} />
-          <ol className="flex flex-col divide-y divide-border border-t border-border">
+          <ol className="flex flex-col pb-3">
             {steps.map((step) => (
               <StepCostRow
                 key={step.id}

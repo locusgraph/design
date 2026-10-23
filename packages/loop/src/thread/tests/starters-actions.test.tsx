@@ -52,7 +52,20 @@ describe("Actions", () => {
     expect(html).toMatch(
       /aria-label="Good response"[^>]*aria-pressed="true"|aria-pressed="true"[^>]*aria-label="Good response"/
     );
-    expect(html).toMatch(/aria-pressed="false"/);
+    expect(html).not.toContain('aria-label="Bad response"');
+    expect(html).toContain("text-good");
+  });
+
+  it("shows both thumbs before feedback is given", () => {
+    const html = renderToStaticMarkup(<Actions onFeedback={() => {}} />);
+    expect(html).toContain('aria-label="Good response"');
+    expect(html).toContain('aria-label="Bad response"');
+  });
+
+  it("hides until the message is hovered when reveal is hover", () => {
+    const html = renderToStaticMarkup(<Actions onCopy={() => {}} reveal="hover" />);
+    expect(html).toContain('data-reveal="hover"');
+    expect(html).toContain("group-hover/message:opacity-100");
   });
 
   it("disables previous on the first branch", () => {
