@@ -1,8 +1,9 @@
 import { Checkbox, cn } from "@locusgraph/components";
 import { Lock as LockIcon } from "@phosphor-icons/react/ssr";
+import { isoOf } from "../../shared/decision-summary";
 import type { RiskLevel } from "../../types";
 import { riskLabels } from "../shared/risk-badge";
-import { formatWaiting, isoOf } from "../shared/time";
+import { formatWaiting } from "../shared/time";
 import type { PendingApproval } from "../types";
 
 type InboxRowProps = {

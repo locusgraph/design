@@ -1,10 +1,10 @@
 import { Button, cn } from "@locusgraph/components";
 import { useState } from "react";
 import { humanToolName } from "../../agent/tool/tool-status";
+import { DecisionSummary } from "../../shared/decision-summary";
 import { LiveStatus } from "../../shared/live-status";
 import { type RiskLevel, type ToolPart, type ToolState, toolNameOf } from "../../types";
 import { ApprovalHeadline, SettledLine } from "../shared/approval-line";
-import { DecisionSummary } from "../shared/decision-line";
 import { riskCopy } from "../shared/risk-badge";
 import { useFocusOnMount } from "../shared/use-focus-on-mount";
 import type { ApprovalDecision } from "../types";

@@ -1,8 +1,6 @@
 import { toDate } from "../../shared/decision-summary";
 import type { DecidedAt } from "../types";
 
-export { formatDecidedAt, isoOf, toDate } from "../../shared/decision-summary";
-
 const minuteMs = 60_000;
 const hourMs = 60 * minuteMs;
 const dayMs = 24 * hourMs;

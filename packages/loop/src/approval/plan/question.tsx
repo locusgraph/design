@@ -4,10 +4,10 @@ import {
   Question as MessageCircleQuestionIcon,
 } from "@phosphor-icons/react/ssr";
 import { useId, useState } from "react";
+import { DecisionSummary } from "../../shared/decision-summary";
 import { lineObjectClass } from "../../shared/line";
 import { LiveStatus } from "../../shared/live-status";
 import { PendingLine, SettledLine } from "../shared/approval-line";
-import { DecisionSummary } from "../shared/decision-line";
 import { useFocusOnMount } from "../shared/use-focus-on-mount";
 import type { DecidedAt, QuestionAnswer, QuestionOption } from "../types";
 import { QuestionChoices } from "./question-choices";
