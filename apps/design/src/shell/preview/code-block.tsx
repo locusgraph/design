@@ -91,7 +91,8 @@ type CodeBlockProps = {
 
 export function CodeBlock({ code, className, showCopy = true, language = "tsx" }: CodeBlockProps) {
   const html = useHighlightedHtml(code, language);
-  const codeClass = "overflow-x-auto p-4 pr-12 font-mono text-sm [&_pre]:outline-none";
+  const codeClass =
+    "overflow-x-auto p-4 pr-12 font-mono text-sm [&_pre]:outline-none has-[pre:focus-visible]:outline-2 has-[pre:focus-visible]:-outline-offset-2 has-[pre:focus-visible]:outline-ring/70";
   return (
     <div className={cn("relative", className)}>
       {showCopy && <CopyButton text={code} />}

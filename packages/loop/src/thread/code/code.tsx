@@ -15,7 +15,7 @@ type CodeProps = Omit<ComponentProps<"figure">, "children"> & {
 
 const codeAreaClass = cn(
   "overflow-x-auto px-4 pb-3 font-mono text-xs leading-relaxed",
-  "[&_pre]:bg-transparent! [&_pre]:outline-none",
+  "[&_pre]:bg-transparent! [&_pre]:outline-none has-[pre:focus-visible]:outline-2 has-[pre:focus-visible]:-outline-offset-2 has-[pre:focus-visible]:outline-ring/70",
   "[&_.shiki_span]:text-(--shiki-light) dark:[&_.shiki_span]:text-(--shiki-dark)"
 );
 
