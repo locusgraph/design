@@ -20,14 +20,21 @@ export type SourcesProps = {
   sources: SourceItem[];
   onOpen?: (citation: Citation) => void;
   defaultOpen?: boolean;
+  firstIndex?: number;
   className?: string;
 };
 
 const sourceRowClass = cn(lineDetailRowClass, "items-baseline gap-3");
 
-export function Sources({ sources, onOpen, defaultOpen = false, className }: SourcesProps) {
+export function Sources({
+  sources,
+  onOpen,
+  defaultOpen = false,
+  firstIndex = 1,
+  className,
+}: SourcesProps) {
   if (sources.length === 0) return null;
-  const citations = sources.map(toCitation);
+  const citations = sources.map((source, position) => toCitation(source, position, firstIndex));
   return (
     <Collapsible
       data-slot="sources"

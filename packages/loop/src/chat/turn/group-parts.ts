@@ -12,7 +12,7 @@ export type PartSegment =
   | { kind: "reasoning"; key: string; part: ReasoningPart }
   | { kind: "tool"; key: string; part: ToolPart }
   | { kind: "files"; key: string; parts: FilePart[] }
-  | { kind: "sources"; key: string; parts: SourceUrlPart[] };
+  | { kind: "sources"; key: string; parts: SourceUrlPart[]; firstIndex: number };
 
 export function isToolPart(part: MessagePart): part is ToolPart {
   return part.type === "dynamic-tool" || part.type.startsWith("tool-");
@@ -22,7 +22,8 @@ function appendToRun(
   segments: PartSegment[],
   kind: "files" | "sources",
   part: FilePart | SourceUrlPart,
-  key: string
+  key: string,
+  firstIndex = 1
 ) {
   const previous = segments.at(-1);
   if (previous?.kind === kind) {
@@ -32,12 +33,13 @@ function appendToRun(
   segments.push(
     kind === "files"
       ? { kind, key, parts: [part as FilePart] }
-      : { kind, key, parts: [part as SourceUrlPart] }
+      : { kind, key, parts: [part as SourceUrlPart], firstIndex }
   );
 }
 
 export function groupParts(parts: MessagePart[]): PartSegment[] {
   const segments: PartSegment[] = [];
+  let sourcesSeen = 0;
   parts.forEach((part, index) => {
     const key = `${part.type}:${index}`;
     if (part.type === "text") {
@@ -47,7 +49,8 @@ export function groupParts(parts: MessagePart[]): PartSegment[] {
     } else if (part.type === "file") {
       appendToRun(segments, "files", part, key);
     } else if (part.type === "source-url") {
-      appendToRun(segments, "sources", part, key);
+      sourcesSeen += 1;
+      appendToRun(segments, "sources", part, key, sourcesSeen);
     } else if (isToolPart(part)) {
       segments.push({ kind: "tool", key: part.toolCallId, part });
     }

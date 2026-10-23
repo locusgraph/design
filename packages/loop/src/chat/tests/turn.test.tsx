@@ -2,6 +2,7 @@ import { renderToStaticMarkup } from "react-dom/server";
 import { describe, expect, it } from "vitest";
 import type { AgentMessage } from "../../types";
 import { Turn } from "../index";
+import { groupParts } from "../turn/group-parts";
 
 const userMessage: AgentMessage = {
   id: "msg_1",
@@ -82,5 +83,25 @@ describe("Turn", () => {
     expect(html).toContain("rich call_1");
     expect(html).toContain("rich 2 sources");
     expect(html).not.toContain('data-slot="message-tool"');
+  });
+});
+
+describe("groupParts", () => {
+  it("numbers a later run of sources after the earlier ones", () => {
+    const source = (sourceId: string) => ({
+      type: "source-url" as const,
+      sourceId,
+      url: `https://${sourceId}.example`,
+    });
+    const segments = groupParts([
+      source("a"),
+      source("b"),
+      { type: "text", text: "Two sources so far." },
+      source("c"),
+    ]);
+    const firstIndexes = segments.flatMap((segment) =>
+      segment.kind === "sources" ? [segment.firstIndex] : []
+    );
+    expect(firstIndexes).toEqual([1, 3]);
   });
 });

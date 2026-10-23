@@ -33,6 +33,7 @@ export default defineDemo({
     { name: "sources", type: "Array<Citation | SourceUrlPart>" },
     { name: "onOpen", type: "(citation: Citation) => void" },
     { name: "defaultOpen", type: "boolean", defaultValue: "false" },
+    { name: "firstIndex", type: "number", defaultValue: "1" },
   ],
   examples: {},
   isNew: true,

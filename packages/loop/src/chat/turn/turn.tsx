@@ -90,7 +90,7 @@ function renderSegment(segment: PartSegment, isUser: boolean, renderers: PartRen
       return renderers.renderSources ? (
         renderers.renderSources(segment.parts)
       ) : (
-        <Sources sources={segment.parts} />
+        <Sources sources={segment.parts} firstIndex={segment.firstIndex} />
       );
     case "files":
       return (
