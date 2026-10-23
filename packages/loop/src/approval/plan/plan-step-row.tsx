@@ -85,7 +85,7 @@ export function PlanStepRow({
     <li data-slot="plan-step" className="group flex items-start gap-3 py-1">
       <span
         aria-hidden
-        className="flex h-6 w-5 shrink-0 items-center text-xs text-faint tabular-nums"
+        className="flex h-control-xs w-5 shrink-0 items-center text-xs text-faint tabular-nums"
       >
         {number}
       </span>
@@ -98,7 +98,7 @@ export function PlanStepRow({
           aria-invalid={blank || undefined}
           onChange={(event) => onRename(event.target.value)}
           className={cn(
-            "-mx-1.5 h-6 min-w-0 bg-transparent px-1.5 text-sm text-foreground outline-none placeholder:text-faint hover:bg-muted/50 focus-visible:bg-muted focus-visible:ring-1 focus-visible:ring-ring",
+            "-mx-1.5 h-control-xs min-w-0 bg-transparent px-1.5 text-sm text-foreground outline-none placeholder:text-faint hover:bg-muted/50 focus-visible:bg-muted focus-visible:ring-1 focus-visible:ring-ring",
             blank && "ring-1 ring-destructive/70"
           )}
         />
