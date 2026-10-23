@@ -81,7 +81,7 @@ function BreadcrumbEllipsis({ className, ...props }: React.ComponentProps<"span"
       data-slot="breadcrumb-ellipsis"
       role="presentation"
       aria-hidden="true"
-      className={cn("flex size-9 items-center justify-center", className)}
+      className={cn("flex size-5 items-center justify-center", className)}
       {...props}
     >
       <MoreHorizontal weight="bold" aria-hidden className="size-4" />
