@@ -72,7 +72,10 @@ function AttemptRow({ attempt }: { attempt: RunUsage }) {
     >
       <span className="flex min-w-0 items-baseline gap-2">
         <span
-          className={cn("truncate", attempt.failed ? "text-muted-foreground" : "text-foreground")}
+          className={cn(
+            "truncate normal-nums",
+            attempt.failed ? "text-muted-foreground" : "text-foreground"
+          )}
         >
           {attempt.model ?? "Attempt"}
         </span>

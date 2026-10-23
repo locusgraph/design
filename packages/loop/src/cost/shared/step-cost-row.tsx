@@ -58,7 +58,12 @@ export function StepCostRow({
       className="grid grid-cols-[minmax(0,11rem)_1fr_3.5rem_4.5rem] items-center gap-x-4 gap-y-1.5 py-1 text-sm tabular-nums max-sm:grid-cols-[1fr_auto_auto]"
     >
       <span className="flex min-w-0 items-baseline gap-2">
-        <span className={cn("truncate text-foreground", step.status === "skipped" && "text-faint")}>
+        <span
+          className={cn(
+            "truncate text-foreground normal-nums",
+            step.status === "skipped" && "text-faint"
+          )}
+        >
           {step.title}
         </span>
         {mark && (
