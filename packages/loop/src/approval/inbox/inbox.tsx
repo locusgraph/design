@@ -13,8 +13,8 @@ export type InboxProps = {
   items: PendingApproval[];
   now?: number;
   title?: string;
-  onApprove: (id: string) => void;
-  onDeny: (id: string) => void;
+  openId?: string | null;
+  onOpen: (id: string) => void;
   onApproveAll: (ids: string[]) => void;
   className?: string;
 };
@@ -23,8 +23,8 @@ export function Inbox({
   items,
   now = Date.now(),
   title = "Waiting for approval",
-  onApprove,
-  onDeny,
+  openId = null,
+  onOpen,
   onApproveAll,
   className,
 }: InboxProps) {
@@ -70,8 +70,8 @@ export function Inbox({
                 now={now}
                 selected={selected.has(item.id)}
                 onSelect={(on) => setSelected((current) => toggled(current, item.id, on))}
-                onApprove={() => onApprove(item.id)}
-                onDeny={() => onDeny(item.id)}
+                open={item.id === openId}
+                onOpen={() => onOpen(item.id)}
               />
             ))}
           </ul>
