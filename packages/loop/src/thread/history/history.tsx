@@ -57,7 +57,7 @@ export function History({
               <section key={group.key} aria-labelledby={`thread-group-${group.key}`}>
                 <h3
                   id={`thread-group-${group.key}`}
-                  className="px-2 pb-1 text-xs text-faint"
+                  className="px-2 pb-1 font-sans text-xs text-faint"
                   suppressHydrationWarning
                 >
                   {group.label}

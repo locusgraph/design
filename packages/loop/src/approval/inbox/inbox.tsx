@@ -47,7 +47,7 @@ export function Inbox({
         <span aria-hidden className={lineIconClass}>
           <InboxIcon weight="bold" aria-hidden />
         </span>
-        <h3 className="min-w-0 truncate font-medium text-foreground">{title}</h3>
+        <h3 className="min-w-0 truncate font-sans font-medium text-foreground">{title}</h3>
         <span
           data-slot="inbox-count"
           className={cn("ml-auto shrink-0 text-xs", empty ? "text-good" : "font-medium text-warn")}
