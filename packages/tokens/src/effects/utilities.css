@@ -61,5 +61,5 @@
   line-height: 1rem;
   letter-spacing: 0.05em;
   text-transform: uppercase;
-  color: var(--muted);
+  color: var(--muted-foreground);
 }

@@ -48,7 +48,7 @@ export function Starters({
           <ArrowUpRightIcon
             weight="bold"
             aria-hidden
-            className="size-3.5 shrink-0 text-s1 opacity-0 group-hover:opacity-100 group-focus-visible:opacity-100 motion-safe:transition-opacity"
+            className="size-3.5 shrink-0 text-interactive opacity-0 group-hover:opacity-100 group-focus-visible:opacity-100 motion-safe:transition-opacity"
           />
         </button>
       ))}

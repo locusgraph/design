@@ -67,7 +67,7 @@ export function RaiseCapForm({
             type="submit"
             size="sm"
             variant="ghost"
-            className="text-muted-foreground hover:bg-transparent hover:text-s1"
+            className="text-muted-foreground hover:bg-transparent hover:text-interactive"
             disabled={disabled}
           >
             {next !== null && !error ? `Raise cap to ${formatMicroUsd(next)}` : "Raise cap"}

@@ -19,7 +19,7 @@ function OneTimeSetup() {
         />
         One-time setup
       </summary>
-      <div className="flex flex-col gap-3 border-t border-line p-3">
+      <div className="flex flex-col gap-3 border-t border-border p-3">
         <InstallNote>
           Add the registry to <code className="font-mono text-foreground">components.json</code>:
         </InstallNote>

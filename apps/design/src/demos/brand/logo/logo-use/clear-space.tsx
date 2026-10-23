@@ -12,7 +12,7 @@ export function Logo({ form }: { form: LogoForm }) {
 
 function GuideLabel({ className, children }: { className: string; children: ReactNode }) {
   return (
-    <span className={`absolute font-mono text-[10px] leading-none text-s1 ${className}`}>
+    <span className={`absolute font-mono text-[10px] leading-none text-interactive ${className}`}>
       {children}
     </span>
   );
@@ -22,8 +22,8 @@ export function ClearSpace({ form }: { form: LogoForm }) {
   return (
     <div className="flex flex-col items-center gap-6">
       <div className="relative text-[64px]">
-        <div className="border border-dashed border-s1 p-[0.25em]">
-          <div className="flex outline-1 outline-s1/50 outline-dashed">
+        <div className="border border-dashed border-interactive p-[0.25em]">
+          <div className="flex outline-1 outline-interactive/50 outline-dashed">
             <Logo form={form} />
           </div>
         </div>

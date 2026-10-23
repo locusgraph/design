@@ -21,4 +21,5 @@ export const lineDetailClass = "min-w-0 pl-6 text-sm";
 export const lineDetailRowClass =
   "flex w-full min-w-0 py-1 text-left outline-none transition-colors duration-150 motion-reduce:transition-none";
 
-export const lineDetailLinkClass = "hover:text-s1 focus-visible:ring-2 focus-visible:ring-ring/70";
+export const lineDetailLinkClass =
+  "hover:text-interactive focus-visible:ring-2 focus-visible:ring-ring/70";

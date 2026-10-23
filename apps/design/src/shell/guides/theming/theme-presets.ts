@@ -7,7 +7,7 @@ export type BrandColors = { primary: string; primaryInk: string };
 export type ThemePreset = { id: string; name: string; light: BrandColors; dark: BrandColors };
 export type ResolvedTheme = BrandColors & { ring: string };
 
-const blueRing: Record<ThemeMode, string> = { light: "#2a78d6", dark: "#3987e5" };
+const blueRing: Record<ThemeMode, string> = { light: "#1b66c4", dark: "#5b9df0" };
 
 export const neutralPreset: ThemePreset = {
   id: "neutral",
@@ -69,7 +69,7 @@ function cssBlock(selector: string, theme: ResolvedTheme) {
     `${selector} {`,
     `  --btn: ${theme.primary};`,
     `  --btn-ink: ${theme.primaryInk};`,
-    `  --s1: ${theme.ring};`,
+    `  --interactive: ${theme.ring};`,
     "}",
   ].join("\n");
 }
@@ -113,6 +113,6 @@ export function themeStyle(theme: ResolvedTheme) {
   return {
     "--btn": theme.primary,
     "--btn-ink": theme.primaryInk,
-    "--s1": theme.ring,
+    "--interactive": theme.ring,
   } as React.CSSProperties;
 }

@@ -29,7 +29,7 @@ function SourceFile({ file, language = "tsx" }: SourceFileProps) {
         <CodeBlock
           code={file.content}
           language={language}
-          className="border-t border-line bg-muted/40 [&>div:last-child]:max-h-120 [&>div:last-child]:overflow-y-auto"
+          className="border-t border-border bg-muted/40 [&>div:last-child]:max-h-120 [&>div:last-child]:overflow-y-auto"
         />
       )}
     </details>

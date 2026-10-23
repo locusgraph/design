@@ -117,7 +117,7 @@ export function PlanStepRow({
             disabled={disabled}
             onClick={onClick}
             className={cn(
-              "text-faint hover:bg-transparent hover:text-s1",
+              "text-faint hover:bg-transparent hover:text-interactive",
               danger && "hover:text-destructive"
             )}
           >

@@ -30,10 +30,9 @@ function fromPalettes(name: string, token: string, usage: string, key: keyof Pal
 }
 
 function chartSeries(index: number, light: string, dark: string): PaletteColor {
-  const token = index <= 3 ? `bg-s${index}` : `var(--s${index})`;
   return {
     name: `s${index}`,
-    token,
+    token: `var(--s${index})`,
     usage: `Chart series ${index}`,
     light: solid(light),
     dark: solid(dark),
@@ -44,8 +43,13 @@ export const paletteColors: Record<ColorGroup, PaletteColor[]> = {
   base: [
     fromPalettes("surface", "bg-background", "Page and card background", "surface"),
     fromPalettes("foreground", "text-foreground", "Body text and headings", "foreground"),
-    fromPalettes("muted", "text-muted-foreground", "Secondary text, labels", "muted"),
-    fromPalettes("faint", "text-faint", "Placeholders, disabled text", "faint"),
+    fromPalettes(
+      "muted-foreground",
+      "text-muted-foreground",
+      "Secondary text, labels",
+      "mutedForeground"
+    ),
+    fromPalettes("faint", "text-faint", "Hints, meta, timestamps, placeholders", "faint"),
     {
       name: "border",
       token: "border-border",
@@ -62,10 +66,21 @@ export const paletteColors: Record<ColorGroup, PaletteColor[]> = {
     },
   ],
   status: [
+    fromPalettes(
+      "interactive",
+      "text-interactive",
+      "Hover on clickable text, links, focus ring",
+      "interactive"
+    ),
+    fromPalettes("memory", "text-memory", "Anything the agent remembers or recalls", "memory"),
     fromPalettes("good", "text-good", "Success, healthy quota, paid", "good"),
-    fromPalettes("bad", "text-destructive", "Errors, destructive actions", "bad"),
-    fromPalettes("info", "text-info", "Neutral notices, links in copy", "info"),
-    fromPalettes("warn", "text-warn", "Low balance, nearing a limit", "warn"),
+    fromPalettes("warn", "text-warn", "Waiting, low balance, nearing a limit", "warn"),
+    fromPalettes(
+      "destructive",
+      "text-destructive",
+      "Errors, failures, destructive actions",
+      "destructive"
+    ),
   ],
   chart: [
     chartSeries(1, "#2a78d6", "#3987e5"),
@@ -73,14 +88,14 @@ export const paletteColors: Record<ColorGroup, PaletteColor[]> = {
     chartSeries(3, "#1baf7a", "#199e70"),
     chartSeries(4, "#eda100", "#c98500"),
     chartSeries(5, "#e87ba4", "#d55181"),
-    chartSeries(6, "#008300", "#008300"),
+    chartSeries(6, "#008300", "#2a9d2a"),
     chartSeries(7, "#4a3aa7", "#9085e9"),
     chartSeries(8, "#e34948", "#e66767"),
   ],
   surfaces: [
     fromPalettes("btn", "bg-primary", "Primary button fill", "btn"),
     fromPalettes("btn-ink", "text-primary-foreground", "Text on a primary button", "btnInk"),
-    fromPalettes("ghost", "bg-muted", "Hover rows, secondary buttons", "ghost"),
+    fromPalettes("muted", "bg-muted", "Hover rows, fills, secondary buttons", "muted"),
     {
       name: "popover",
       token: "bg-popover",

@@ -26,7 +26,7 @@ export function CopyCodeButton({ code, onCopy, size = "icon-xs" }: CopyCodeButto
       variant="ghost"
       size={size}
       aria-label={copied ? "Copied" : "Copy code"}
-      className="text-faint hover:bg-transparent hover:text-s1"
+      className="text-faint hover:bg-transparent hover:text-interactive"
       onClick={copy}
     >
       {copied ? (

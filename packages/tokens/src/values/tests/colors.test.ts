@@ -17,15 +17,16 @@ const cssNames = {
   surface: "surface",
   background: "background",
   foreground: "foreground",
-  muted: "muted",
+  mutedForeground: "muted-foreground",
   faint: "faint",
   btn: "btn",
   btnInk: "btn-ink",
-  ghost: "ghost",
+  muted: "muted",
+  interactive: "interactive",
+  memory: "memory",
   good: "good",
-  bad: "bad",
-  info: "info",
   warn: "warn",
+  destructive: "destructive",
 } as const;
 
 describe("color values", () => {

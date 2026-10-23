@@ -19,7 +19,7 @@ const toasterColors = {
 
 const statusRuleClassNames = {
   success: "border-l-2! border-l-good! [&_[data-icon]]:text-good",
-  info: "border-l-2! border-l-info! [&_[data-icon]]:text-info",
+  info: "border-l-2! border-l-interactive! [&_[data-icon]]:text-interactive",
   warning: "border-l-2! border-l-warn! [&_[data-icon]]:text-warn",
   error: "border-l-2! border-l-destructive! [&_[data-icon]]:text-destructive",
 };

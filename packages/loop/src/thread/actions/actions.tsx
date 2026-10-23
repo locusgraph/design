@@ -116,7 +116,7 @@ export function Actions({
                 <ThumbsDownIcon
                   weight={feedback === "down" ? "fill" : "bold"}
                   aria-hidden
-                  className={cn(feedback === "down" && "text-bad")}
+                  className={cn(feedback === "down" && "text-destructive")}
                 />
               </ActionButton>
             )}

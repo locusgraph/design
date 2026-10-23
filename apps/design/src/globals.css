@@ -42,9 +42,9 @@ body {
     [data-slot="docs-aside"]
   ) {
   position: relative;
-  outline: 1.5px dashed color-mix(in oklch, var(--info) 70%, transparent);
+  outline: 1.5px dashed color-mix(in oklch, var(--interactive) 70%, transparent);
   outline-offset: -4px;
-  background-color: color-mix(in oklch, var(--info) 6%, var(--background));
+  background-color: color-mix(in oklch, var(--interactive) 6%, var(--background));
 }
 
 [data-shell-outline]
@@ -77,7 +77,7 @@ body {
   z-index: 10;
   padding: 2px 10px;
   border-radius: 9999px;
-  background: var(--info);
+  background: var(--interactive);
   color: var(--background);
   font-size: 12px;
   font-weight: 500;

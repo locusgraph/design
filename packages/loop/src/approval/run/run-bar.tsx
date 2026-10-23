@@ -33,7 +33,7 @@ const statusTone: Record<RunBarStatus, string> = {
   done: "font-medium text-good",
 };
 
-const quietButtonClass = "text-faint hover:bg-transparent hover:text-s1";
+const quietButtonClass = "text-faint hover:bg-transparent hover:text-interactive";
 
 function twoDigits(value: number) {
   return String(value).padStart(2, "0");

@@ -11,7 +11,7 @@ export type CiteProps = {
 };
 
 const pillClass =
-  "inline-flex h-4 min-w-4 items-center justify-center rounded-full bg-muted px-1 text-[10px] leading-none font-medium text-muted-foreground tabular-nums no-underline transition-colors duration-150 outline-none hover:bg-s1/15 hover:text-s1 focus-visible:ring-2 focus-visible:ring-ring/70 data-[state=open]:bg-s1/15 data-[state=open]:text-s1 motion-reduce:transition-none";
+  "inline-flex h-4 min-w-4 items-center justify-center rounded-full bg-muted px-1 text-[10px] leading-none font-medium text-muted-foreground tabular-nums no-underline transition-colors duration-150 outline-none hover:bg-interactive/15 hover:text-interactive focus-visible:ring-2 focus-visible:ring-ring/70 data-[state=open]:bg-interactive/15 data-[state=open]:text-interactive motion-reduce:transition-none";
 
 export function citationLabel(citation: Citation): string {
   return `Source ${citation.index}: ${citation.title}`;

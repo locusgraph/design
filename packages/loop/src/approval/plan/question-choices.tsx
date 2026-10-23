@@ -84,7 +84,7 @@ export function QuestionChoices({
               aria-hidden
               className={cn(
                 "flex h-5 w-4 shrink-0 items-center text-xs tabular-nums",
-                checked ? "font-medium text-s1" : "text-faint"
+                checked ? "font-medium text-interactive" : "text-faint"
               )}
             >
               {index + 1}

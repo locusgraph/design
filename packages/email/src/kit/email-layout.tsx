@@ -69,7 +69,7 @@ export function EmailLayout({ preview, children, footer }: EmailLayoutProps) {
                             paddingTop: 16,
                             fontSize: 12,
                             lineHeight: "18px",
-                            color: emailColors.muted,
+                            color: emailColors.mutedForeground,
                           }}
                         >
                           {footer}

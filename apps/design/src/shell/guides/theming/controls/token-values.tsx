@@ -4,7 +4,7 @@ function baseRows(theme: ResolvedTheme) {
   return [
     { token: "--btn", color: theme.primary, value: theme.primary },
     { token: "--btn-ink", color: theme.primaryInk, value: theme.primaryInk },
-    { token: "--s1", color: theme.ring, value: theme.ring },
+    { token: "--interactive", color: theme.ring, value: theme.ring },
   ];
 }
 

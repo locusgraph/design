@@ -15,7 +15,7 @@ export function ActionButton({ label, children, ...props }: ActionButtonProps) {
           variant="ghost"
           size="icon-sm"
           aria-label={label}
-          className="text-faint hover:bg-transparent hover:text-s1 disabled:opacity-40 aria-pressed:text-foreground dark:hover:bg-transparent [&_svg]:size-4"
+          className="text-faint hover:bg-transparent hover:text-interactive disabled:opacity-40 aria-pressed:text-foreground dark:hover:bg-transparent [&_svg]:size-4"
           {...props}
         >
           {children}

@@ -18,7 +18,7 @@ export const logoRules: LogoRule[] = [
   {
     label: "Don't recolor it",
     correct: false,
-    logo: <LocusGraphWordmark withMark className="text-base text-s2" />,
+    logo: <LocusGraphWordmark withMark className="text-base text-[var(--s2)]" />,
   },
   {
     label: "Don't rotate it",

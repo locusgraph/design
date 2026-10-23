@@ -20,7 +20,7 @@ export function dtcgTokens(theme: ResolvedTheme) {
     {
       btn: colorToken(theme.primary, "Primary action, checked controls, progress"),
       "btn-ink": colorToken(theme.primaryInk, "Text and icons on the primary color"),
-      s1: colorToken(theme.ring, "Focus ring and the first chart series"),
+      interactive: colorToken(theme.ring, "Focus ring, links and hover on clickable text"),
     },
     null,
     2

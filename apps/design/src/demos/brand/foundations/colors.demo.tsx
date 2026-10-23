@@ -23,7 +23,7 @@ function StatusInUse() {
       </div>
       <div className="flex items-center justify-between px-4 py-3 text-sm">
         <span>Plan</span>
-        <Badge variant="outline" className="text-info">
+        <Badge variant="outline" className="text-interactive">
           Changes on Nov 1
         </Badge>
       </div>

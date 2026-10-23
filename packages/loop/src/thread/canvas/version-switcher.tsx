@@ -17,7 +17,7 @@ type VersionSwitcherProps = {
 };
 
 export const metaLinkClass =
-  "inline-flex items-center gap-1 outline-none transition-colors duration-150 hover:text-s1 focus-visible:ring-2 focus-visible:ring-ring/70 motion-reduce:transition-none";
+  "inline-flex items-center gap-1 outline-none transition-colors duration-150 hover:text-interactive focus-visible:ring-2 focus-visible:ring-ring/70 motion-reduce:transition-none";
 
 function VersionLabel({ versions, current }: Omit<VersionSwitcherProps, "onVersionChange">) {
   return (

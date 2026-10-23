@@ -23,10 +23,13 @@ function CrumbLabel({
     );
   }
   if (crumb.href === undefined) {
-    return <span className="truncate text-soft">{crumb.label}</span>;
+    return <span className="truncate text-muted-foreground">{crumb.label}</span>;
   }
   return (
-    <Link href={crumb.href} className="truncate text-soft transition-colors hover:text-foreground">
+    <Link
+      href={crumb.href}
+      className="truncate text-muted-foreground transition-colors hover:text-foreground"
+    >
       {crumb.label}
     </Link>
   );

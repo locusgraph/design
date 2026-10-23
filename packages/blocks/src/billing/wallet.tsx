@@ -19,7 +19,7 @@ const levelHint = {
 
 function GrantList({ grants }: { grants: WalletGrant[] }) {
   return (
-    <ul className="flex flex-col divide-y divide-line">
+    <ul className="flex flex-col divide-y divide-border">
       {grants.map((grant) => (
         <li key={`${grant.label}:${grant.expiresAt}`} className="flex justify-between gap-4 py-2">
           <span>{grant.label}</span>

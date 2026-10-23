@@ -16,7 +16,7 @@ export const markdownComponents: Components = {
       target="_blank"
       rel="noopener noreferrer"
       className={cn(
-        "font-medium text-foreground underline decoration-faint underline-offset-3 transition-colors hover:text-s1 hover:decoration-s1",
+        "font-medium text-foreground underline decoration-faint underline-offset-3 transition-colors hover:text-interactive hover:decoration-interactive",
         className
       )}
       {...props}

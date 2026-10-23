@@ -12,14 +12,14 @@ const turn: Keyframe[] = [
 
 const toneIcon: Record<PulseTone, string> = {
   neutral: "fill-foreground/70 text-foreground/70",
-  brand: "fill-violet-500 text-violet-500",
+  brand: "fill-memory text-memory",
 };
 
 const toneText: Record<PulseTone, string> = {
   neutral:
     "bg-[linear-gradient(90deg,var(--color-faint)_25%,var(--color-foreground)_50%,var(--color-faint)_75%)]",
   brand:
-    "bg-[linear-gradient(90deg,var(--color-sky-500),var(--color-violet-500),var(--color-pink-500),var(--color-sky-500))]",
+    "bg-[linear-gradient(90deg,var(--color-interactive),var(--color-memory),var(--s5),var(--color-interactive))]",
 };
 
 type GradientLabelProps = { label: string; tone?: PulseTone };

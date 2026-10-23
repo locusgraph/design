@@ -51,7 +51,7 @@ export function Canvas({
             onVersionChange={onVersionChange}
           />
         </div>
-        <div className="-mr-2 flex shrink-0 items-center gap-0.5 text-faint [&_button:hover]:text-s1">
+        <div className="-mr-2 flex shrink-0 items-center gap-0.5 text-faint [&_button:hover]:text-interactive">
           {actions}
           {onClose && (
             <Button
@@ -59,7 +59,7 @@ export function Canvas({
               variant="ghost"
               size="icon-sm"
               aria-label="Close panel"
-              className="text-faint hover:bg-transparent hover:text-s1"
+              className="text-faint hover:bg-transparent hover:text-interactive"
               onClick={onClose}
             >
               <XIcon weight="bold" aria-hidden />

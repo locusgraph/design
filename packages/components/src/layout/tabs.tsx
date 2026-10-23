@@ -30,7 +30,7 @@ const tabsListVariants = cva(
     variants: {
       variant: {
         default: "bg-muted",
-        line: "gap-1 bg-transparent group-data-[orientation=horizontal]/tabs:border-b group-data-[orientation=horizontal]/tabs:border-line group-data-[orientation=vertical]/tabs:border-r group-data-[orientation=vertical]/tabs:border-line",
+        line: "gap-1 bg-transparent group-data-[orientation=horizontal]/tabs:border-b group-data-[orientation=horizontal]/tabs:border-border group-data-[orientation=vertical]/tabs:border-r group-data-[orientation=vertical]/tabs:border-border",
       },
     },
     defaultVariants: {

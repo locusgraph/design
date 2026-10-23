@@ -60,6 +60,6 @@ body {
 }
 
 [data-rehype-pretty-code-figure] [data-highlighted-line] {
-  background: var(--ghost);
-  box-shadow: inset 2px 0 var(--line);
+  background: var(--muted);
+  box-shadow: inset 2px 0 var(--border);
 }
