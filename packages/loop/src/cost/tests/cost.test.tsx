@@ -8,7 +8,7 @@ describe("Context", () => {
     expect(html).toContain('role="meter"');
     expect(html).toContain('aria-valuenow="25"');
     expect(html).toContain('data-status="ok"');
-    expect(html).toContain("50K / 200K");
+    expect(html).toContain("50k / 200k");
   });
 
   it("turns amber near the limit and red when full", () => {
@@ -54,7 +54,7 @@ describe("Cost", () => {
 
   it("shows tokens, model and cost compactly", () => {
     const html = renderToStaticMarkup(<Cost usage={succeeded} />);
-    expect(html).toContain("1,250 in");
+    expect(html).toContain("1.3k in");
     expect(html).toContain("420 out");
     expect(html).toContain("$0.0101");
     expect(html).toContain("claude-sonnet");

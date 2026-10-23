@@ -1,9 +1,9 @@
 import { cn } from "@locusgraph/components";
-import { formatCount, formatMicroUsd, pluralize } from "@locusgraph/utils";
+import { formatMicroUsd, pluralize } from "@locusgraph/utils";
 import { Coins as CoinsIcon } from "@phosphor-icons/react/ssr";
 import { lineIconClass, lineRowClass } from "../shared/line";
 import type { RunUsage } from "../types";
-import { sumUsage, type UsageTotals } from "./shared/usage-totals";
+import { formatTokensShort, sumUsage, type UsageTotals } from "./shared/usage-totals";
 
 export type CostProps = {
   usage: RunUsage | RunUsage[];
@@ -55,7 +55,7 @@ function CompactCost({
         {formatMicroUsd(totals.costMicroUsd)}
       </span>
       <span className="whitespace-nowrap">
-        {formatCount(totals.inputTokens)} in · {formatCount(totals.outputTokens)} out
+        {formatTokensShort(totals.inputTokens)} in · {formatTokensShort(totals.outputTokens)} out
       </span>
       {model && <span>{model}</span>}
       <WastedNote totals={totals} />
@@ -77,6 +77,9 @@ function AttemptRow({ attempt }: { attempt: RunUsage }) {
           {attempt.model ?? "Attempt"}
         </span>
         {attempt.failed && <span className="text-xs font-medium text-destructive">Failed</span>}
+      </span>
+      <span className="ml-auto text-xs text-faint">
+        {formatTokensShort(attempt.inputTokens)} in · {formatTokensShort(attempt.outputTokens)} out
       </span>
       <span
         className={cn(
@@ -121,7 +124,7 @@ function DetailedCost({
           {formatMicroUsd(totals.costMicroUsd)}
         </span>
         <span className="text-xs text-faint">
-          {formatCount(totals.inputTokens)} in · {formatCount(totals.outputTokens)} out
+          {formatTokensShort(totals.inputTokens)} in · {formatTokensShort(totals.outputTokens)} out
         </span>
       </div>
       {attempts.length > 1 && (

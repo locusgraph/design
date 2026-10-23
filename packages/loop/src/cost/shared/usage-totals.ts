@@ -27,7 +27,7 @@ const compactCount = new Intl.NumberFormat("en-US", {
 });
 
 export function formatTokensShort(tokens: number): string {
-  return compactCount.format(tokens);
+  return compactCount.format(tokens).replace("K", "k");
 }
 
 export function formatDuration(durationMs: number): string {
