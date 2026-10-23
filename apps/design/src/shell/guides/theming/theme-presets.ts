@@ -95,7 +95,8 @@ const highContrastCss = [
   '[data-contrast="high"] {',
   "  --border: color-mix(in oklch, var(--foreground) 34%, var(--surface));",
   "  --input: color-mix(in oklch, var(--foreground) 58%, var(--surface));",
-  "  --muted: color-mix(in oklch, var(--foreground) 84%, var(--surface));",
+  "  --muted-foreground: color-mix(in oklch, var(--foreground) 84%, var(--surface));",
+  "  --faint: color-mix(in oklch, var(--foreground) 66%, var(--surface));",
   "}",
 ].join("\n");
 

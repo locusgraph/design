@@ -80,8 +80,9 @@ export function ThemeDocsPanel({
         </DocStep>
         <DocStep number={3} title="Use semantic classes">
           <StepNote>
-            Write bg-primary and ring-ring, never a raw color. Hover and selected states stay on the
-            neutral ghost tint.
+            Write bg-primary for the primary action and the focus-ring utility for focus, never a
+            raw color. Hover and selected states stay on the neutral muted fill (bg-muted). High
+            contrast applies when the html element has data-contrast="high".
           </StepNote>
         </DocStep>
       </TabsContent>

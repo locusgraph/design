@@ -9,7 +9,7 @@ export function themePrompt(light: ResolvedTheme, dark: ResolvedTheme, brandName
     `- .dark { --btn: ${dark.primary}; --btn-ink: ${dark.primaryInk}; --interactive: ${dark.ring}; }`,
     "",
     "Change nothing else. Hover and selected states, surfaces, borders, text and status colors stay as they are.",
-    "Use bg-primary and ring-ring in new code, never a raw color.",
+    "Use bg-primary for the primary action and the focus-ring utility for focus, never a raw color.",
     "Keep one primary action per view.",
   ].join("\n");
 }
