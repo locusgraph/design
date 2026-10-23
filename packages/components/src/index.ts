@@ -99,4 +99,5 @@ export * from "./shell/docs/on-this-page";
 export * from "./shell/link";
 export * from "./shell/navigation/app-sidebar";
 export type { AppNavGroup, AppNavItem } from "./shell/navigation/nav-group";
+export * from "./shell/navigation/skip-link";
 export * from "./shell/theme-toggle";

@@ -1,6 +1,7 @@
 import { cn } from "cn";
 import type * as React from "react";
 import { TooltipProvider } from "../../overlay/tooltip";
+import { SkipLink, shellContentId } from "../navigation/skip-link";
 
 type DocsShellProps = {
   header: React.ReactNode;
@@ -16,6 +17,7 @@ function DocsShell({ header, sidebar, aside, children }: DocsShellProps) {
         data-slot="docs-shell"
         className="flex min-h-svh flex-col bg-background [--docs-header-height:3.5rem] lg:[--docs-header-height:4rem]"
       >
+        <SkipLink />
         {header}
         <div
           className={cn(
@@ -32,7 +34,12 @@ function DocsShell({ header, sidebar, aside, children }: DocsShellProps) {
             </aside>
           )}
           <div className="flex min-w-0 items-stretch">
-            <main data-slot="docs-body" className="min-w-0 flex-1 px-4 pt-6 pb-16 md:px-6 lg:pt-10">
+            <main
+              id={shellContentId}
+              tabIndex={-1}
+              data-slot="docs-body"
+              className="min-w-0 flex-1 px-4 pt-6 outline-none pb-16 md:px-6 lg:pt-10"
+            >
               {children}
             </main>
             {aside && (

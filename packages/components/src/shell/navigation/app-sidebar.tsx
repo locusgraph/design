@@ -59,17 +59,24 @@ function AppSidebar({
         <BrandLink brand={brand} Link={linkComponent} />
       </SidebarHeader>
       <SidebarContent>
-        {groups.map((group) => (
-          <NavGroup key={group.label} group={group} activeHref={activeHref} Link={linkComponent} />
-        ))}
-        {bottomItems && bottomItems.length > 0 && (
-          <NavGroup
-            group={{ label: "", items: bottomItems }}
-            activeHref={activeHref}
-            Link={linkComponent}
-            className="mt-auto"
-          />
-        )}
+        <nav aria-label="Main" className="flex flex-1 flex-col gap-2">
+          {groups.map((group) => (
+            <NavGroup
+              key={group.label}
+              group={group}
+              activeHref={activeHref}
+              Link={linkComponent}
+            />
+          ))}
+          {bottomItems && bottomItems.length > 0 && (
+            <NavGroup
+              group={{ label: "", items: bottomItems }}
+              activeHref={activeHref}
+              Link={linkComponent}
+              className="mt-auto"
+            />
+          )}
+        </nav>
       </SidebarContent>
       {footer && <SidebarFooter className="border-t border-border">{footer}</SidebarFooter>}
       <SidebarRail />

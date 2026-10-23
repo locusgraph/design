@@ -52,6 +52,14 @@ describe("AppShell", () => {
     expect(html).not.toMatch(/data-active="true"[^>]*href="\/overview"/);
   });
 
+  it("starts with a skip link to the body and names the sidebar nav", () => {
+    const html = renderShell("/overview");
+    expect(html.indexOf('data-slot="skip-link"')).toBeLessThan(html.indexOf('data-slot="sidebar"'));
+    expect(html).toContain('href="#content"');
+    expect(html).toMatch(/id="content"[^>]*data-slot="app-shell-body"/);
+    expect(html).toContain('<nav aria-label="Main"');
+  });
+
   it("renders nav links through the given link component", () => {
     expect(renderShell("/overview")).toMatch(/data-tracked=""[^>]*href="\/keys"/);
   });
