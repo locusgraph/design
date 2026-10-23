@@ -171,15 +171,15 @@ export function ProfileForm({
           </Field>
         </FieldGroup>
       </FieldSet>
-      <RuleGridFooter className="mx-0 mb-0 justify-end">
-        <FooterStatus saving={isSaving} savedName={savedName} hint={missingFieldsHint(errors)} />
-        <Button type="button" variant="ghost" onClick={onCancel} disabled={isSaving}>
-          Cancel
-        </Button>
+      <RuleGridFooter className="mx-0 mb-0">
         <Button type="submit" disabled={!isValid} aria-disabled={isSaving} aria-busy={isSaving}>
           {isSaving ? <Spinner /> : null}
           {isSaving ? "Saving…" : "Save profile"}
         </Button>
+        <Button type="button" variant="ghost" onClick={onCancel} disabled={isSaving}>
+          Cancel
+        </Button>
+        <FooterStatus saving={isSaving} savedName={savedName} hint={missingFieldsHint(errors)} />
       </RuleGridFooter>
     </form>
   );

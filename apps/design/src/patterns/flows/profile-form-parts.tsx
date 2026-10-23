@@ -25,7 +25,7 @@ export function FooterStatus(props: FooterStatusProps) {
   return (
     <p
       role="status"
-      className="flex w-full items-center gap-2 text-sm text-muted-foreground sm:mr-auto sm:w-auto"
+      className="flex w-full items-center gap-2 text-sm text-muted-foreground sm:ml-2 sm:w-auto"
     >
       {saved ? <span aria-hidden="true" className="size-1.5 rounded-full bg-good" /> : null}
       {footerStatusText(props)}
