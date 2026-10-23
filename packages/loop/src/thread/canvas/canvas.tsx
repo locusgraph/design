@@ -2,8 +2,9 @@
 
 import { Close as XIcon } from "@carbon/icons-react";
 import { Button, cn, ScrollArea } from "@locusgraph/components";
-import type { ComponentProps, ReactNode } from "react";
-import { type CanvasVersion, VersionSwitcher } from "./version-switcher";
+import { type ComponentProps, type ReactNode, useState } from "react";
+import { CanvasMeta } from "./canvas-meta";
+import type { CanvasVersion } from "./version-switcher";
 
 type CanvasProps = Omit<ComponentProps<"aside">, "title"> & {
   title: string;
@@ -33,24 +34,31 @@ export function Canvas({
   ...props
 }: CanvasProps) {
   const current = currentVersionOf(versions, versionId);
+  const [scrolled, setScrolled] = useState(false);
   return (
     <aside
       data-slot="canvas"
       aria-label={title}
       className={cn(
-        "flex h-full min-h-0 min-w-0 flex-col bg-card text-card-foreground ring-1 ring-border",
+        "flex h-full min-h-0 min-w-0 flex-col border-l bg-background text-foreground",
         className
       )}
       {...props}
     >
-      <header className="flex items-start gap-3 border-b px-5 pt-3.5 pb-3">
-        <div className="flex min-w-0 flex-1 flex-col gap-1">
-          {kind && <span className="eyebrow">{kind}</span>}
-          <h2 className="truncate font-sans text-base leading-snug font-semibold tracking-tight">
-            {title}
-          </h2>
+      <header
+        data-scrolled={scrolled || undefined}
+        className="flex items-start gap-3 border-b border-transparent px-6 pt-4 pb-3 transition-colors duration-150 data-scrolled:border-border motion-reduce:transition-none"
+      >
+        <div className="flex min-w-0 flex-1 flex-col gap-0.5">
+          <h2 className="truncate text-base leading-snug font-semibold tracking-tight">{title}</h2>
+          <CanvasMeta
+            kind={kind}
+            versions={versions}
+            current={current}
+            onVersionChange={onVersionChange}
+          />
         </div>
-        <div className="-mr-2 flex shrink-0 items-center gap-0.5 text-muted-foreground">
+        <div className="-mr-2 flex shrink-0 items-center gap-0.5 text-faint [&_button:hover]:text-s1">
           {actions}
           {onClose && (
             <Button
@@ -58,7 +66,7 @@ export function Canvas({
               variant="ghost"
               size="icon-sm"
               aria-label="Close panel"
-              className="text-muted-foreground hover:text-foreground"
+              className="text-faint hover:bg-transparent hover:text-s1"
               onClick={onClose}
             >
               <XIcon />
@@ -66,23 +74,17 @@ export function Canvas({
           )}
         </div>
       </header>
-      <ScrollArea className="min-h-0 flex-1">
+      <ScrollArea
+        className="min-h-0 flex-1"
+        onScrollCapture={(event) => setScrolled((event.target as HTMLElement).scrollTop > 0)}
+      >
         <div
           data-slot="canvas-content"
-          className="px-5 py-4 has-[>[data-slot=code]:only-child]:p-0 [&>[data-slot=code]:only-child]:ring-0"
+          className="px-6 pt-1 pb-6 has-[>[data-slot=code]:only-child]:p-0 [&>[data-slot=code]:only-child]:ring-0"
         >
           {children}
         </div>
       </ScrollArea>
-      {current && (
-        <footer className="flex h-10 items-center gap-2 border-t bg-muted/30 pr-3 pl-5">
-          <VersionSwitcher
-            versions={versions}
-            current={current}
-            onVersionChange={onVersionChange}
-          />
-        </footer>
-      )}
     </aside>
   );
 }

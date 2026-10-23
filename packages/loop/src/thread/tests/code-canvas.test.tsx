@@ -47,6 +47,7 @@ describe("Canvas", () => {
     expect(html).toContain("Document");
     expect(html).toContain('aria-label="Close panel"');
     expect(html).toContain("<p>Body</p>");
+    expect(html).toContain("Back to latest");
   });
 
   it("falls back to the latest version and omits the close button", () => {
@@ -57,5 +58,6 @@ describe("Canvas", () => {
     );
     expect(html).toContain('<span data-slot="canvas-current-version">v3</span>');
     expect(html).not.toContain("Close panel");
+    expect(html).not.toContain("Back to latest");
   });
 });
