@@ -43,6 +43,7 @@ function NavItemLink({
     return (
       <a {...props} href={item.href} target="_blank" rel="noreferrer">
         {content}
+        <span className="sr-only">, opens in a new tab</span>
       </a>
     );
   }
