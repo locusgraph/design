@@ -66,7 +66,8 @@ export function ApprovalHeadline({ name, risk, action = "to run", icon }: Approv
     <PendingLine
       icon={icon ?? <RiskIcon weight="bold" aria-hidden />}
       iconClassName={destructive ? "text-destructive" : undefined}
-      after={risk && <RiskBadge risk={risk} className="ml-1" />}
+      after={risk && <RiskBadge risk={risk} className="mt-1.5 ml-1" />}
+      wrap
     >
       {action} <span className={lineObjectClass}>{name}</span>
     </PendingLine>

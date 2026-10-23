@@ -57,7 +57,7 @@ export function ToolInputs({ input, muted = false }: { input: unknown; muted?: b
       {entries && !showRaw && (
         <dl
           className={cn(
-            "grid grid-cols-[8rem_minmax(0,1fr)] gap-x-4 gap-y-2 text-sm",
+            "grid grid-cols-[6rem_minmax(0,1fr)] gap-x-4 sm:grid-cols-[8rem_minmax(0,1fr)] gap-y-2 text-sm",
             muted ? "text-faint" : "text-foreground"
           )}
         >
@@ -82,7 +82,7 @@ export function ToolInputs({ input, muted = false }: { input: unknown; muted?: b
       {entries && (
         <button
           type="button"
-          className="ml-36 self-start text-xs text-faint focus-ring hover:text-interactive motion-safe:transition-colors"
+          className="ml-28 self-start text-xs sm:ml-36 text-faint focus-ring hover:text-interactive motion-safe:transition-colors"
           aria-expanded={showRaw}
           aria-controls={showRaw ? rawId : undefined}
           onClick={() => setShowRaw((current) => !current)}
