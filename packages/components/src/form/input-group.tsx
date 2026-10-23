@@ -27,7 +27,7 @@ function InputGroup({ className, ...props }: React.ComponentProps<"div">) {
       role="group"
       className={cn(
         "group/input-group relative flex w-full items-center border border-input shadow-xs transition-[color,box-shadow] outline-none dark:bg-input/30",
-        "h-control min-w-0 has-[>textarea]:h-auto",
+        "h-control min-w-0 has-[>textarea]:h-auto has-[[data-slot=input-group-control]:disabled]:cursor-not-allowed",
         inputGroupAlignmentClasses,
         inputGroupFocusClasses,
         inputGroupErrorClasses,
@@ -39,7 +39,7 @@ function InputGroup({ className, ...props }: React.ComponentProps<"div">) {
 }
 
 const inputGroupAddonVariants = cva(
-  "flex h-auto cursor-text items-center justify-center gap-2 py-1.5 text-sm font-medium text-muted-foreground select-none group-data-[disabled=true]/input-group:opacity-50 [&>kbd]:rounded-[calc(var(--radius)-5px)] [&>svg:not([class*='size-'])]:size-4",
+  "flex h-auto cursor-text items-center justify-center gap-2 py-1.5 text-sm font-medium text-muted-foreground select-none group-has-[[data-slot=input-group-control]:disabled]/input-group:cursor-not-allowed group-has-[[data-slot=input-group-control]:disabled]/input-group:opacity-50 group-data-[disabled=true]/input-group:opacity-50 [&>kbd]:rounded-[calc(var(--radius)-5px)] [&>svg:not([class*='size-'])]:size-4",
   {
     variants: {
       align: {
@@ -72,7 +72,9 @@ function InputGroupAddon({
         if ((e.target as HTMLElement).closest("button")) {
           return;
         }
-        e.currentTarget.parentElement?.querySelector("input")?.focus();
+        e.currentTarget.parentElement
+          ?.querySelector<HTMLElement>("[data-slot=input-group-control]")
+          ?.focus();
       }}
       {...props}
     />
