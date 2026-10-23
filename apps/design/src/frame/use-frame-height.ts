@@ -9,26 +9,20 @@ const popupSelector = [
 ].join(",");
 const popupMargin = 16;
 
-function popupOverflow() {
-  let overflow = 0;
+function lowestPopupBottom() {
+  let bottom = 0;
   for (const popup of document.querySelectorAll(popupSelector)) {
     const rect = popup.getBoundingClientRect();
     if (rect.height === 0) continue;
-    const above = popupMargin - rect.top;
-    const below = rect.bottom + popupMargin - window.innerHeight;
-    overflow = Math.max(overflow, above, below);
+    const clippedAbove = rect.top < popupMargin;
+    const roomToFlipBelow = window.innerHeight + rect.height + popupMargin;
+    bottom = Math.max(bottom, clippedAbove ? roomToFlipBelow : rect.bottom + popupMargin);
   }
-  return overflow;
-}
-
-function hasOpenPopup() {
-  return document.querySelector(popupSelector) !== null;
+  return bottom;
 }
 
 function neededHeight(content: HTMLElement) {
-  const contentHeight = content.offsetHeight;
-  if (!hasOpenPopup()) return contentHeight;
-  return Math.max(contentHeight, window.innerHeight + 2 * Math.max(0, popupOverflow()));
+  return Math.max(content.offsetHeight, lowestPopupBottom());
 }
 
 export function useReportFrameHeight(content: React.RefObject<HTMLDivElement | null>) {

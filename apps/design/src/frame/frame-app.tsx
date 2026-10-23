@@ -39,7 +39,8 @@ export function FrameApp() {
   return (
     <main
       className={cn(
-        "flex min-h-svh items-center justify-center",
+        "flex min-h-svh justify-center",
+        entry?.demo.previewHeight === "tall" ? "items-center" : "items-start",
         previewBackgroundClass[message?.background ?? "surface"]
       )}
     >
