@@ -16,11 +16,12 @@ const baseUrl = (process.env.REGISTRY_BASE_URL ?? "https://design.locusgraph.com
 );
 const schema = "https://ui.shadcn.com/schema/registry-item.json";
 
-const titleOf = (name) =>
-  name
-    .split("-")
-    .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-    .join(" ");
+const minorWords = new Set(["and", "or", "of", "to", "in", "on", "for", "with"]);
+
+const titleWord = (word, position) =>
+  position > 0 && minorWords.has(word) ? word : word.charAt(0).toUpperCase() + word.slice(1);
+
+const titleOf = (name) => name.split("-").map(titleWord).join(" ");
 
 function buildItems() {
   const files = collectSourceFiles(root);

@@ -25,15 +25,16 @@ export function demoPathFromFile(file: string) {
   return file.replace(/^\.\.\/demos\//, "").replace(/\.demo\.tsx$/, "");
 }
 
+const minorWords = new Set(["and", "or", "of", "to", "in", "on", "for", "with"]);
+
+function titleWord(word: string, position: number) {
+  if (position > 0 && minorWords.has(word)) return word;
+  return word.charAt(0).toUpperCase() + word.slice(1);
+}
+
 export function demoTitleFromPath(path: string) {
   const name = path.split("/").at(-1) ?? "";
-  return (
-    titleOverrides[name] ??
-    name
-      .split("-")
-      .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-      .join(" ")
-  );
+  return titleOverrides[name] ?? name.split("-").map(titleWord).join(" ");
 }
 
 export function demoIndexEntryFromPath(path: string): DemoIndexEntry {

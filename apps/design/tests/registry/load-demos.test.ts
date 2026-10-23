@@ -19,6 +19,7 @@ describe("demoTitleFromPath", () => {
   it("title-cases the file name, with the overrides", () => {
     expect(demoTitleFromPath("action/button-group")).toBe("Button Group");
     expect(demoTitleFromPath("form/advanced/input-otp")).toBe("Input OTP");
+    expect(demoTitleFromPath("patterns/flows/empty-and-loading")).toBe("Empty and Loading");
   });
 
   it("matches the title every demo declares", async () => {
