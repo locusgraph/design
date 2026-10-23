@@ -14,7 +14,7 @@ export const brandGlow = "#0099ff";
 
 export const brandThemes: Record<BrandTheme, BrandThemeColors> = {
   dark: {
-    background: "#101011",
+    background: "#111113",
     foreground: "#ededed",
     muted: "#a1a1aa",
     hairline: "rgba(237, 237, 237, 0.1)",
@@ -23,7 +23,7 @@ export const brandThemes: Record<BrandTheme, BrandThemeColors> = {
   light: {
     background: "#ffffff",
     foreground: "#09090b",
-    muted: "#71717a",
+    muted: "#52525b",
     hairline: "rgba(9, 9, 11, 0.09)",
     dot: "rgba(9, 9, 11, 0.12)",
   },
