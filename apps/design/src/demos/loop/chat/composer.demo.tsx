@@ -1,5 +1,11 @@
-import { Badge } from "@locusgraph/components";
-import { Composer, type ComposerStatus, type FileItem, Files } from "@locusgraph/loop";
+import {
+  Composer,
+  type ComposerStatus,
+  type FileItem,
+  Files,
+  type ModelOption,
+  ModelPicker,
+} from "@locusgraph/loop";
 import { useState } from "react";
 import { defineDemo, select, toggle } from "../../../registry/define-demo";
 
@@ -8,6 +14,32 @@ const statuses = ["ready", "submitting", "streaming", "error"] as const;
 const attached: FileItem[] = [
   { id: "file_spend", name: "spend-october.csv", mediaType: "text/csv", sizeBytes: 1_284_000 },
 ];
+
+const models: ModelOption[] = [
+  {
+    id: "claude-sonnet-4.5",
+    name: "Claude Sonnet 4.5",
+    provider: "Anthropic",
+    inputPerMillionMicroUsd: 3_000_000,
+    outputPerMillionMicroUsd: 15_000_000,
+    speed: "balanced",
+    contextTokens: 1_000_000,
+  },
+  {
+    id: "claude-haiku-4.5",
+    name: "Claude Haiku 4.5",
+    provider: "Anthropic",
+    inputPerMillionMicroUsd: 1_000_000,
+    outputPerMillionMicroUsd: 5_000_000,
+    speed: "fast",
+    contextTokens: 200_000,
+  },
+];
+
+function ComposerModel({ disabled }: { disabled?: boolean }) {
+  const [modelId, setModelId] = useState("claude-sonnet-4.5");
+  return <ModelPicker models={models} value={modelId} onChange={setModelId} disabled={disabled} />;
+}
 
 function itemsFromFiles(files: File[]): FileItem[] {
   return files.map((file, index) => ({
@@ -35,7 +67,7 @@ function WithFiles() {
           }
         />
       }
-      modelSlot={<Badge variant="outline">claude-sonnet</Badge>}
+      modelSlot={<ComposerModel />}
       onSubmit={() => {
         setFiles([]);
         setStatus("streaming");
@@ -62,7 +94,7 @@ export default defineDemo({
       placeholder="Ask what your agents remember or spend…"
       errorMessage="The model did not answer. Try again."
       attachments={attachments ? <Files items={attached} onRemove={() => {}} /> : undefined}
-      modelSlot={<Badge variant="outline">claude-sonnet</Badge>}
+      modelSlot={<ComposerModel disabled={disabled} />}
       onAttachFiles={() => {}}
       onSubmit={() => {}}
       onStop={() => {}}
