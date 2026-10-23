@@ -43,8 +43,11 @@ function ApprovalHeadline({ name, risk }: { name: string; risk: RiskLevel }) {
   const destructive = risk === "destructive";
   const Icon = destructive ? ShieldAlertIcon : WrenchIcon;
   return (
-    <div className={cn(lineRowClass, "w-full")}>
-      <span aria-hidden className={cn(lineIconClass, destructive && "text-destructive")}>
+    <div className={cn(lineRowClass, "w-full text-base")}>
+      <span
+        aria-hidden
+        className={cn(lineIconClass, "size-5 [&_svg]:size-4", destructive && "text-destructive")}
+      >
         <Icon />
       </span>
       <span className="min-w-0 truncate">
