@@ -7,6 +7,7 @@ import { type RiskLevel, type ToolPart, type ToolState, toolNameOf } from "../..
 import { ApprovalHeadline, SettledLine } from "../shared/approval-line";
 import { riskCopy } from "../shared/risk-badge";
 import { useFocusOnMount } from "../shared/use-focus-on-mount";
+import { useFocusWhenSettled } from "../shared/use-focus-when-settled";
 import type { ApprovalDecision } from "../types";
 import { DenyForm } from "./deny-form";
 import { ToolInputs } from "./tool-inputs";
@@ -54,15 +55,18 @@ export function Approval({
   const name = humanToolName(toolName);
   const awaiting = !decision && part.state === "approval-requested";
   const approveRef = useFocusOnMount<HTMLButtonElement>(autoFocus && awaiting);
+  const sectionRef = useFocusWhenSettled<HTMLElement>(awaiting);
   const destructive = risk === "destructive";
   return (
     <section
+      ref={sectionRef}
+      tabIndex={-1}
       data-slot="approval"
       data-risk={risk}
       data-state={decision ? (decision.approved ? "approved" : "denied") : part.state}
       data-tool-name={toolName}
       aria-label={`Approve ${name}`}
-      className={cn("flex min-w-0 flex-col", awaiting && "gap-3", className)}
+      className={cn("flex min-w-0 flex-col outline-none", awaiting && "gap-3", className)}
     >
       {awaiting && (
         <>
