@@ -70,7 +70,7 @@ export function ShellToolbar(props: ShellToolbarProps) {
       <Separator orientation="vertical" className="mx-1 h-4" />
       <p className="text-sm font-medium">{props.title}</p>
       <p className="hidden text-sm text-muted-foreground xl:block">{props.description}</p>
-      <div className="ml-auto flex h-8 items-center gap-1 rounded-md border p-0.5">
+      <div className="ml-auto flex h-8 items-center gap-1 border p-0.5">
         <ToggleGroup
           type="single"
           size="sm"

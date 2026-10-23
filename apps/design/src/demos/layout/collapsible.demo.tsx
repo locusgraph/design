@@ -24,10 +24,10 @@ function Basic() {
           </Button>
         </CollapsibleTrigger>
       </div>
-      <div className="rounded-md border px-4 py-2 font-mono text-sm">{keys[0]}</div>
+      <div className="border px-4 py-2 font-mono text-sm">{keys[0]}</div>
       <CollapsibleContent className="flex flex-col gap-2">
         {keys.slice(1).map((key) => (
-          <div key={key} className="rounded-md border px-4 py-2 font-mono text-sm">
+          <div key={key} className="border px-4 py-2 font-mono text-sm">
             {key}
           </div>
         ))}
@@ -38,7 +38,7 @@ function Basic() {
 
 function OpenByDefault() {
   return (
-    <Collapsible defaultOpen className="w-full max-w-sm rounded-lg border">
+    <Collapsible defaultOpen className="w-full max-w-sm border">
       <CollapsibleTrigger className="group flex w-full items-center justify-between p-4 text-sm font-medium">
         Invoice details
         <ChevronDownIcon
@@ -56,7 +56,7 @@ function OpenByDefault() {
 
 function Disabled() {
   return (
-    <Collapsible disabled className="w-full max-w-sm rounded-lg border">
+    <Collapsible disabled className="w-full max-w-sm border">
       <CollapsibleTrigger className="flex w-full items-center justify-between p-4 text-sm font-medium disabled:opacity-50">
         Audit log (Enterprise only)
         <ChevronDownIcon weight="bold" aria-hidden className="size-4" />
@@ -77,7 +77,7 @@ export default defineDemo({
       key={String(defaultOpen)}
       defaultOpen={defaultOpen}
       disabled={disabled}
-      className="w-80 rounded-lg border"
+      className="w-80 border"
     >
       <CollapsibleTrigger className="group flex w-full items-center justify-between p-4 text-sm font-medium disabled:opacity-50">
         {label}

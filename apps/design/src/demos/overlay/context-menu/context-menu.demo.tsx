@@ -18,7 +18,7 @@ import { defineDemo, text, toggle } from "../../../registry/define-demo";
 
 function TriggerArea({ label }: { label: string }) {
   return (
-    <ContextMenuTrigger className="flex h-36 w-72 items-center justify-center rounded-md border border-dashed text-sm text-muted-foreground">
+    <ContextMenuTrigger className="flex h-36 w-72 items-center justify-center border border-dashed text-sm text-muted-foreground">
       {label}
     </ContextMenuTrigger>
   );
@@ -90,7 +90,7 @@ export default defineDemo({
   controls: { label: text("Right click here"), destructive: toggle(true) },
   playground: ({ label, destructive }) => <InvoiceMenu label={label} destructive={destructive} />,
   code: ({ label, destructive }) =>
-    `<ContextMenu>\n  <ContextMenuTrigger className="flex h-36 w-72 items-center justify-center rounded-md border border-dashed">\n    ${label}\n  </ContextMenuTrigger>\n  <ContextMenuContent className="w-56">\n    <ContextMenuItem>\n      Download PDF\n      <ContextMenuShortcut>⌘D</ContextMenuShortcut>\n    </ContextMenuItem>\n    <ContextMenuItem>Copy invoice link</ContextMenuItem>\n    <ContextMenuItem>Email to billing contact</ContextMenuItem>\n    <ContextMenuSeparator />\n    <ContextMenuItem${formatProp("variant", destructive ? "destructive" : "default", "default")}>Void invoice</ContextMenuItem>\n  </ContextMenuContent>\n</ContextMenu>`,
+    `<ContextMenu>\n  <ContextMenuTrigger className="flex h-36 w-72 items-center justify-center border border-dashed">\n    ${label}\n  </ContextMenuTrigger>\n  <ContextMenuContent className="w-56">\n    <ContextMenuItem>\n      Download PDF\n      <ContextMenuShortcut>⌘D</ContextMenuShortcut>\n    </ContextMenuItem>\n    <ContextMenuItem>Copy invoice link</ContextMenuItem>\n    <ContextMenuItem>Email to billing contact</ContextMenuItem>\n    <ContextMenuSeparator />\n    <ContextMenuItem${formatProp("variant", destructive ? "destructive" : "default", "default")}>Void invoice</ContextMenuItem>\n  </ContextMenuContent>\n</ContextMenu>`,
   props: [
     { name: "onOpenChange", type: "(open: boolean) => void" },
     { name: "modal", type: "boolean", defaultValue: "true" },

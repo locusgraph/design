@@ -11,7 +11,7 @@ const themeImport = '@import "../styles/locus.css";';
 function OneTimeSetup() {
   return (
     <details className="group/setup ring-1 ring-border">
-      <summary className="flex cursor-pointer list-none items-center gap-2 px-3 py-2 text-sm font-medium outline-none select-none hover:bg-accent focus-visible:ring-2 focus-visible:ring-ring [&::-webkit-details-marker]:hidden">
+      <summary className="flex cursor-pointer list-none items-center gap-2 px-3 py-2 text-sm font-medium focus-ring select-none hover:bg-accent [&::-webkit-details-marker]:hidden">
         <ChevronRightIcon
           weight="bold"
           aria-hidden

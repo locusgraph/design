@@ -7,7 +7,7 @@ function NewLoopPill() {
   return (
     <PlaygroundLink
       href="/loop"
-      className="group flex items-center gap-2 rounded-full bg-card py-1 pr-3 pl-1 text-xs ring-1 ring-border outline-none hover:bg-accent focus-visible:ring-2 focus-visible:ring-ring"
+      className="group flex items-center gap-2 rounded-full bg-card py-1 pr-3 pl-1 text-xs ring-1 ring-border focus-ring hover:bg-accent"
     >
       <span className="rounded-full bg-foreground px-2 py-0.5 font-medium text-background">
         New
@@ -49,7 +49,7 @@ export function LandingHero() {
         </span>
         <PlaygroundLink
           href="/installation#copy-with-shadcn"
-          className="underline-offset-4 outline-none hover:text-foreground hover:underline focus-visible:ring-2 focus-visible:ring-ring"
+          className="underline-offset-4 focus-ring hover:text-foreground hover:underline"
         >
           Registry →
         </PlaygroundLink>

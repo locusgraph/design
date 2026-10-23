@@ -14,7 +14,7 @@ export function PackageManagerSwitch() {
           aria-checked={packageManager === active}
           onClick={() => selectPackageManager(packageManager)}
           className={cn(
-            "px-2 py-0.5 font-mono text-xs outline-none focus-visible:ring-2 focus-visible:ring-ring",
+            "px-2 py-0.5 font-mono text-xs focus-ring",
             packageManager === active
               ? "bg-muted text-foreground ring-1 ring-border"
               : "text-muted-foreground hover:text-foreground"

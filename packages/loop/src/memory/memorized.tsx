@@ -81,7 +81,7 @@ function MemorizedRow({ item, onUndo }: { item: MemorizedItem; onUndo?: (id: str
             type="button"
             aria-label={`Undo saving ${item.text}`}
             onClick={() => onUndo(item.id)}
-            className="shrink-0 text-xs text-faint outline-none transition-colors hover:text-interactive focus-visible:ring-2 focus-visible:ring-ring/70"
+            className="shrink-0 text-xs text-faint focus-ring transition-colors hover:text-interactive"
           >
             Undo
           </button>

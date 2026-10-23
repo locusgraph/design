@@ -42,7 +42,7 @@ export function Starters({
           type="button"
           disabled={disabled}
           onClick={() => onSelect(textOf(suggestion))}
-          className="group -mx-2 flex w-[calc(100%+1rem)] items-center gap-3 px-2 py-1.5 text-left text-sm text-muted-foreground outline-none hover:bg-muted/50 hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring/70 disabled:pointer-events-none disabled:opacity-50 motion-safe:transition-colors"
+          className="group -mx-2 flex w-[calc(100%+1rem)] items-center gap-3 px-2 py-1.5 text-left text-sm text-muted-foreground focus-ring hover:bg-muted/50 hover:text-foreground disabled:pointer-events-none disabled:opacity-50 motion-safe:transition-colors"
         >
           <span className="min-w-0 flex-1 text-pretty">{labelOf(suggestion)}</span>
           <ArrowUpRightIcon

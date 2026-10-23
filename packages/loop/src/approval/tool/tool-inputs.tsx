@@ -82,7 +82,7 @@ export function ToolInputs({ input, muted = false }: { input: unknown; muted?: b
       {entries && (
         <button
           type="button"
-          className="ml-36 self-start text-xs text-faint outline-none hover:text-interactive focus-visible:ring-2 focus-visible:ring-ring/70 motion-safe:transition-colors"
+          className="ml-36 self-start text-xs text-faint focus-ring hover:text-interactive motion-safe:transition-colors"
           aria-expanded={showRaw}
           aria-controls={showRaw ? rawId : undefined}
           onClick={() => setShowRaw((current) => !current)}

@@ -54,7 +54,7 @@ export function StartWithAgent({ className }: { className?: string }) {
       <button
         type="button"
         onClick={copy}
-        className="flex h-11 items-center gap-3 rounded-full bg-primary py-1.5 pr-4 pl-2 text-sm font-medium text-primary-foreground shadow-[0_1px_2px_rgb(0_0_0/0.12),inset_0_1px_0_rgb(255_255_255/0.14)] outline-none motion-safe:transition-colors hover:bg-primary/90 focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+        className="flex h-11 items-center gap-3 rounded-full bg-primary py-1.5 pr-4 pl-2 text-sm font-medium text-primary-foreground shadow-[0_1px_2px_rgb(0_0_0/0.12),inset_0_1px_0_rgb(255_255_255/0.14)] focus-ring motion-safe:transition-colors hover:bg-primary/90"
       >
         <AgentChips />
         <span>{copied ? "Prompt copied" : "Start with an agent"}</span>

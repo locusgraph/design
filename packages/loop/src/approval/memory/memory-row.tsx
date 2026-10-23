@@ -42,7 +42,7 @@ function ChoiceSegments({
             aria-pressed={pressed}
             onClick={() => onChange(choice)}
             className={cn(
-              "text-xs outline-none motion-safe:transition-colors focus-visible:ring-2 focus-visible:ring-ring/70",
+              "text-xs focus-ring motion-safe:transition-colors",
               pressed
                 ? cn("font-medium", selectedChoiceClass[choice])
                 : "text-faint hover:text-interactive"

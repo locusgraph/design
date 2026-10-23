@@ -89,7 +89,7 @@ export function Context({
       aria-valuetext={`${percent}%, ${summary}`}
       tabIndex={hasBreakdown ? 0 : undefined}
       className={cn(
-        "outline-none focus-visible:ring-2 focus-visible:ring-ring/70",
+        "focus-ring",
         statusTone[status],
         variant === "ring"
           ? "inline-flex h-6 items-center gap-1.5 rounded-full px-2 transition-colors duration-150 motion-reduce:transition-none"

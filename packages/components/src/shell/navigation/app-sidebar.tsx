@@ -28,7 +28,7 @@ function BrandLink({ brand, Link }: { brand: AppBrand; Link: LinkComponent | "a"
           <Link href={brand.href}>
             <span
               data-slot="app-brand-icon"
-              className="flex aspect-square size-8 shrink-0 items-center justify-center rounded-lg border border-border bg-muted"
+              className="flex aspect-square size-8 shrink-0 items-center justify-center border border-border bg-muted"
             >
               {brand.icon}
             </span>

@@ -18,7 +18,7 @@ function Single() {
         selected={renewal}
         onSelect={setRenewal}
         defaultMonth={shownMonth}
-        className="rounded-lg border"
+        className="border"
       />
       <p className="text-sm text-muted-foreground">
         Renews on {renewal ? renewal.toLocaleDateString("en-US", { dateStyle: "medium" }) : "-"}
@@ -39,7 +39,7 @@ function BillingRange() {
       onSelect={setPeriod}
       defaultMonth={new Date(2026, 8, 1)}
       numberOfMonths={2}
-      className="rounded-lg border"
+      className="border"
     />
   );
 }
@@ -50,7 +50,7 @@ function DisabledDays() {
       mode="single"
       defaultMonth={shownMonth}
       disabled={[{ before: new Date(2026, 9, 10) }, { dayOfWeek: [0, 6] }]}
-      className="rounded-lg border"
+      className="border"
     />
   );
 }
@@ -63,7 +63,7 @@ function YearDropdown() {
       defaultMonth={shownMonth}
       startMonth={new Date(2024, 0)}
       endMonth={new Date(2028, 11)}
-      className="rounded-lg border"
+      className="border"
     />
   );
 }
@@ -88,7 +88,7 @@ export default defineDemo({
         captionLayout={captionLayout}
         showOutsideDays={showOutsideDays}
         showWeekNumber={showWeekNumber}
-        className="rounded-lg border"
+        className="border"
       />
     ) : (
       <Calendar
@@ -98,11 +98,11 @@ export default defineDemo({
         captionLayout={captionLayout}
         showOutsideDays={showOutsideDays}
         showWeekNumber={showWeekNumber}
-        className="rounded-lg border"
+        className="border"
       />
     ),
   code: ({ mode, captionLayout, showOutsideDays, showWeekNumber }) =>
-    `<Calendar\n  mode="${mode}"\n  selected={${mode === "single" ? "date" : "period"}}\n  onSelect={${mode === "single" ? "setDate" : "setPeriod"}}\n  defaultMonth={new Date(2026, 9, 1)}${formatProp("captionLayout", captionLayout, "label")}${formatProp("showOutsideDays", showOutsideDays, true)}${formatProp("showWeekNumber", showWeekNumber, false)}\n  className="rounded-lg border"\n/>`,
+    `<Calendar\n  mode="${mode}"\n  selected={${mode === "single" ? "date" : "period"}}\n  onSelect={${mode === "single" ? "setDate" : "setPeriod"}}\n  defaultMonth={new Date(2026, 9, 1)}${formatProp("captionLayout", captionLayout, "label")}${formatProp("showOutsideDays", showOutsideDays, true)}${formatProp("showWeekNumber", showWeekNumber, false)}\n  className="border"\n/>`,
   props: [
     { name: "mode", type: "single | multiple | range" },
     { name: "selected / onSelect", type: "Date | Date[] | DateRange, by mode" },

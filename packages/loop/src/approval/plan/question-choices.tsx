@@ -76,7 +76,7 @@ export function QuestionChoices({
             onClick={() => onSelect(option.id)}
             onKeyDown={(event) => handleKeyDown(event, index)}
             className={cn(
-              "group relative -mx-2 flex items-start gap-3 px-2 py-1.5 text-left text-sm outline-none motion-safe:transition-colors focus-visible:ring-2 focus-visible:ring-ring/70",
+              "group relative -mx-2 flex items-start gap-3 px-2 py-1.5 text-left text-sm focus-ring motion-safe:transition-colors",
               checked ? "bg-muted" : "hover:bg-muted/50"
             )}
           >

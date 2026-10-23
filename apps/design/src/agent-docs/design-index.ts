@@ -33,10 +33,12 @@ Every item is listed at https://design.locusgraph.com/r/registry.json. Files lan
 
 ## House style
 
-- Containers are square (radius 0). Buttons are pills (\`rounded-full\`).
+- Containers, fields, menus and code are square: never add a radius class. Buttons, chips, badges, dots, avatars and bars are pills (\`rounded-full\`). Nothing in between.
+- Every clickable element shows focus with \`focus-ring\` (a 2px ring, offset 2px). Text fields use \`focus-visible:border-ring\` with \`ring-1\`.
 - Group with ruled lines (\`RuleGrid\`, \`ring-1 ring-border\`, \`divide-y\`), not cards or shadows.
 - Small labels use the \`eyebrow\` class (mono, 11px, uppercase, muted).
-- One primary action per view. Color only on status: \`text-good\`, \`text-warn\`, \`text-destructive\`.
+- One primary action per view. Color means state: \`text-interactive\` (clickable, on hover), \`text-memory\` (remembered), \`text-good\`, \`text-warn\` (waiting), \`text-destructive\`. Chart series use \`--s1\` to \`--s8\` and never carry meaning.
+- Text tones: \`text-foreground\` for values, \`text-muted-foreground\` for labels, \`text-faint\` for meta and hints. All three pass WCAG AA.
 - Surfaces: the page is \`bg-background\` (off-white, near-black in dark); cells and panels are a solid \`bg-card\` one step above it. Action strips are \`RuleGridFooter\` (\`border-t bg-muted/70\`), header strips \`RuleGridHeader\` (\`border-b bg-muted/35\`). One tint per strip; never tint content.
 - Use tokens (\`bg-card\`, \`bg-muted\`, \`text-muted-foreground\`, \`border-input\`), never raw hex.`;
 

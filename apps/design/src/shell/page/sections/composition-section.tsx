@@ -18,7 +18,7 @@ export function CompositionSection({ title, tree }: { title: string; tree: strin
       <h2 className="text-xl font-semibold tracking-tight">Composition</h2>
       <p className="text-muted-foreground">
         Use the following composition to build {articleFor(title)}{" "}
-        <code className="rounded bg-muted px-1 py-0.5 font-mono text-sm">{title}</code>:
+        <code className="bg-muted px-1 py-0.5 font-mono text-sm">{title}</code>:
       </p>
       <div className="relative border bg-surface">
         <Button
