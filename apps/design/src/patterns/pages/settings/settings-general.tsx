@@ -83,7 +83,7 @@ export function SettingsGeneral({ workspace, timezones, onSave }: SettingsGenera
             <SelectContent>
               {timezones.map((timezone) => (
                 <SelectItem key={timezone} value={timezone}>
-                  {timezone.replace("_", " ")}
+                  {timezone.replaceAll("_", " ")}
                 </SelectItem>
               ))}
             </SelectContent>
