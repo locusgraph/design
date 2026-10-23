@@ -90,7 +90,6 @@ function PaginationNext({ className, ...props }: React.ComponentProps<typeof Pag
 function PaginationEllipsis({ className, ...props }: React.ComponentProps<"span">) {
   return (
     <span
-      aria-hidden
       data-slot="pagination-ellipsis"
       className={cn("flex size-control items-center justify-center", className)}
       {...props}
