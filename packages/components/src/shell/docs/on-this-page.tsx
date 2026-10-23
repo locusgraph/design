@@ -22,7 +22,7 @@ function OnThisPage({ sections, title = "On This Page" }: OnThisPageProps) {
           }}
           aria-current={activeId === section.id ? "location" : undefined}
           className={cn(
-            "text-left text-[0.8rem] text-muted-foreground transition-colors hover:text-foreground",
+            "text-left text-xs text-muted-foreground transition-colors hover:text-foreground",
             section.nested && "pl-4",
             activeId === section.id && "font-medium text-foreground"
           )}

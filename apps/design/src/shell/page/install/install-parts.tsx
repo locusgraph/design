@@ -37,7 +37,7 @@ export function InstallStep({ number, title, children }: InstallStepProps) {
   return (
     <li className="flex flex-col gap-3">
       <span className="flex items-center gap-2.5 text-sm font-medium">
-        <span className="flex size-5 items-center justify-center font-mono text-[11px] text-muted-foreground ring-1 ring-border">
+        <span className="flex size-5 items-center justify-center font-mono text-2xs text-muted-foreground ring-1 ring-border">
           {number}
         </span>
         {title}

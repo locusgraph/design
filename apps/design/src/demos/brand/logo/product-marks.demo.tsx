@@ -19,9 +19,7 @@ function ThemePanel({ theme, children }: { theme: BrandTheme; children: ReactNod
       className="flex min-h-36 flex-col items-start justify-center gap-5 p-8 ring-1 ring-border"
       style={dotGridStyle(theme)}
     >
-      <span className="font-mono text-[11px] uppercase tracking-[0.05em] opacity-60">
-        On {theme}
-      </span>
+      <span className="font-mono text-2xs uppercase tracking-[0.05em] opacity-60">On {theme}</span>
       {children}
     </div>
   );

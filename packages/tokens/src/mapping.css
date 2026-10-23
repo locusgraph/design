@@ -27,7 +27,7 @@
   --color-card: var(--surface);
   --color-card-foreground: var(--foreground);
   --color-destructive: var(--destructive);
-  --color-destructive-foreground: #ffffff;
+  --color-destructive-foreground: var(--destructive-foreground);
   --color-sidebar: var(--sidebar);
   --color-sidebar-foreground: var(--sidebar-foreground);
   --color-sidebar-primary: var(--sidebar-primary);
@@ -41,6 +41,14 @@
   --font-mono: var(--font-fira-code);
   --font-brand: var(--font-archivo);
   --shadow-overlay: var(--overlay-shadow);
+  --text-2xs: 0.6875rem;
+  --text-2xs--line-height: 1rem;
+  --text-code: 0.8125rem;
+  --text-code--line-height: 1.25rem;
+  --spacing-control-xs: 1.5rem;
+  --spacing-control-sm: 2rem;
+  --spacing-control: 2.25rem;
+  --spacing-control-lg: 2.5rem;
   --radius-xs: 0px;
   --radius-sm: 0px;
   --radius-md: 0px;

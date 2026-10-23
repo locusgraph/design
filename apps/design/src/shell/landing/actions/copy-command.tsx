@@ -14,7 +14,7 @@ export function CopyCommand({ command, prompt = true }: { command: string; promp
     }
   };
   return (
-    <div className="flex h-9 min-w-0 items-center gap-2 bg-muted/40 pr-1 pl-4 font-mono text-[13px]">
+    <div className="flex h-9 min-w-0 items-center gap-2 bg-muted/40 pr-1 pl-4 font-mono text-code">
       {prompt && (
         <span aria-hidden className="text-muted-foreground">
           $

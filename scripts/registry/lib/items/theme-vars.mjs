@@ -37,6 +37,7 @@ const shadcnToLocus = {
   accent: "muted",
   "accent-foreground": "foreground",
   destructive: "destructive",
+  "destructive-foreground": "destructive-foreground",
   border: "border",
   input: "input",
   ring: "interactive",

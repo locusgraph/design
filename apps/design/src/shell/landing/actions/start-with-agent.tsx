@@ -29,7 +29,7 @@ function AgentChips() {
         <span
           key={chip.label}
           title={chip.label}
-          className="flex size-6 items-center justify-center rounded-full bg-primary-foreground/15 font-mono text-[9px] font-semibold text-primary-foreground ring-2 ring-primary"
+          className="flex size-6 items-center justify-center rounded-full bg-primary-foreground/15 font-mono text-2xs font-semibold text-primary-foreground ring-2 ring-primary"
         >
           {chip.icon}
         </span>

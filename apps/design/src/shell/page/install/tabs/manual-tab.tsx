@@ -17,7 +17,7 @@ function SourceFile({ file, language = "tsx" }: SourceFileProps) {
       className="group/file ring-1 ring-border"
       onToggle={(event) => setOpen(event.currentTarget.open)}
     >
-      <summary className="flex cursor-pointer list-none items-center gap-2 px-3 py-2 font-mono text-[13px] focus-ring select-none hover:bg-accent [&::-webkit-details-marker]:hidden">
+      <summary className="flex cursor-pointer list-none items-center gap-2 px-3 py-2 font-mono text-code focus-ring select-none hover:bg-accent [&::-webkit-details-marker]:hidden">
         <ChevronRightIcon
           weight="bold"
           aria-hidden

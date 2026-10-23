@@ -12,7 +12,7 @@ type ArgsFieldProps = {
 };
 
 const valueWellClass =
-  "flex h-9 min-w-0 flex-1 items-center gap-2 bg-muted px-3 transition-shadow focus-within:ring-1 focus-within:ring-ring has-[[aria-invalid=true]]:ring-1 has-[[aria-invalid=true]]:ring-destructive motion-reduce:transition-none";
+  "flex h-control min-w-0 flex-1 items-center gap-2 bg-muted px-3 transition-shadow focus-within:ring-1 focus-within:ring-ring has-[[aria-invalid=true]]:ring-1 has-[[aria-invalid=true]]:ring-destructive motion-reduce:transition-none";
 
 const bareControlClass =
   "h-full min-w-0 flex-1 bg-transparent text-foreground outline-none placeholder:text-faint";
@@ -84,7 +84,7 @@ function FieldControl({ id, field, draft, error, onChange }: ArgsFieldProps) {
 function FieldValue(props: ArgsFieldProps) {
   if (props.field.type === "boolean") {
     return (
-      <div className="flex h-9 flex-1 items-center px-3">
+      <div className="flex h-control flex-1 items-center px-3">
         <FieldControl {...props} />
       </div>
     );

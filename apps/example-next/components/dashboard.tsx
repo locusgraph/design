@@ -31,7 +31,7 @@ export function Dashboard() {
         <TopUp packs={packs} onBuy={setLastPack} />
       </RuleGrid>
       {lastPack && (
-        <p className="font-mono text-[11.5px] text-muted-foreground">
+        <p className="font-mono text-2xs text-muted-foreground">
           onBuy("{lastPack}") would open Stripe Checkout.
         </p>
       )}

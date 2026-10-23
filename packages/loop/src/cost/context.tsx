@@ -33,7 +33,7 @@ function RingContent({ percent, status }: { percent: number; status: ContextStat
   return (
     <>
       <MeterRing percent={percent} status={status} />
-      <span className="font-mono text-[11px] tabular-nums">{percent}%</span>
+      <span className="font-mono text-2xs tabular-nums">{percent}%</span>
     </>
   );
 }
@@ -53,7 +53,7 @@ function BarContent({
 }) {
   return (
     <>
-      <span className="flex items-baseline justify-between gap-4 font-mono text-[11px] tabular-nums">
+      <span className="flex items-baseline justify-between gap-4 font-mono text-2xs tabular-nums">
         <span className="eyebrow">{label}</span>
         <span className={cn(status === "ok" && "text-foreground")}>
           {percent}% · {formatTokensShort(usedTokens)} / {formatTokensShort(limitTokens)}

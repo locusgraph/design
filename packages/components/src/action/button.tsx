@@ -11,7 +11,7 @@ const buttonVariants = cva(
         default:
           "bg-primary text-primary-foreground shadow-[0_1px_2px_rgb(0_0_0/0.12),inset_0_1px_0_rgb(255_255_255/0.14)] hover:bg-primary/90 disabled:bg-transparent disabled:text-muted-foreground disabled:opacity-100 disabled:shadow-none disabled:ring-1 disabled:ring-input disabled:ring-inset",
         destructive:
-          "bg-destructive text-white hover:bg-destructive/90 focus-visible:ring-destructive/20 dark:focus-visible:ring-destructive/40 disabled:bg-transparent disabled:text-muted-foreground disabled:opacity-100 disabled:ring-1 disabled:ring-input disabled:ring-inset",
+          "bg-destructive text-destructive-foreground hover:bg-destructive/90 disabled:bg-transparent disabled:text-muted-foreground disabled:opacity-100 disabled:ring-1 disabled:ring-input disabled:ring-inset",
         outline:
           "border bg-transparent shadow-xs hover:bg-accent hover:text-accent-foreground dark:border-input dark:bg-input/30 dark:hover:bg-input/50",
         secondary: "bg-secondary text-secondary-foreground hover:bg-secondary/80",
@@ -19,14 +19,14 @@ const buttonVariants = cva(
         link: "text-primary underline-offset-4 hover:underline",
       },
       size: {
-        default: "h-9 px-4 py-2 has-[>svg]:px-3",
-        xs: "h-6 gap-1 px-2 text-xs has-[>svg]:px-1.5 [&_svg:not([class*='size-'])]:size-3",
-        sm: "h-8 gap-1.5 px-3 has-[>svg]:px-2.5",
-        lg: "h-10 px-6 has-[>svg]:px-4",
-        icon: "size-9",
-        "icon-xs": "size-6 [&_svg:not([class*='size-'])]:size-3",
-        "icon-sm": "size-8",
-        "icon-lg": "size-10",
+        default: "h-control px-4 py-2 has-[>svg]:px-3",
+        xs: "h-control-xs gap-1 px-2 text-xs has-[>svg]:px-1.5 [&_svg:not([class*='size-'])]:size-3",
+        sm: "h-control-sm gap-1.5 px-3 has-[>svg]:px-2.5",
+        lg: "h-control-lg px-6 has-[>svg]:px-4",
+        icon: "size-control",
+        "icon-xs": "size-control-xs [&_svg:not([class*='size-'])]:size-3",
+        "icon-sm": "size-control-sm",
+        "icon-lg": "size-control-lg",
       },
     },
     defaultVariants: {

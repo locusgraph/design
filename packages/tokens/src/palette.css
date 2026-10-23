@@ -21,6 +21,7 @@
   --good: #006300;
   --warn: #a15c00;
   --destructive: #c53030;
+  --destructive-foreground: #ffffff;
   --popover: var(--surface);
   --input: color-mix(in oklch, var(--foreground) 26%, var(--surface));
   --skeleton: color-mix(in oklch, var(--foreground) 9%, var(--surface));
@@ -69,6 +70,7 @@
   --good: #0ca30c;
   --warn: #e0a400;
   --destructive: #e66767;
+  --destructive-foreground: #0a0a0a;
   --input: color-mix(in oklch, var(--foreground) 24%, var(--surface));
   --skeleton: color-mix(in oklch, var(--foreground) 11%, var(--surface));
   --popover: #18181a;

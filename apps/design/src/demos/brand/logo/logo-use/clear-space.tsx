@@ -12,7 +12,7 @@ export function Logo({ form }: { form: LogoForm }) {
 
 function GuideLabel({ className, children }: { className: string; children: ReactNode }) {
   return (
-    <span className={`absolute font-mono text-[10px] leading-none text-interactive ${className}`}>
+    <span className={`absolute font-mono text-2xs leading-none text-interactive ${className}`}>
       {children}
     </span>
   );

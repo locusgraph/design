@@ -57,8 +57,8 @@
 
 @utility eyebrow {
   font-family: var(--font-mono);
-  font-size: 11px;
-  line-height: 1rem;
+  font-size: var(--text-2xs);
+  line-height: var(--text-2xs--line-height);
   letter-spacing: 0.05em;
   text-transform: uppercase;
   color: var(--muted-foreground);

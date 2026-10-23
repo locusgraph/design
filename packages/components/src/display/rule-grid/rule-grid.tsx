@@ -92,7 +92,7 @@ function RuleGridTitle({ className, ...props }: React.ComponentProps<"div">) {
   return (
     <div
       data-slot="rule-grid-title"
-      className={cn("text-[15px] font-medium tracking-[-0.01em]", className)}
+      className={cn("text-base font-medium tracking-[-0.01em]", className)}
       {...props}
     />
   );

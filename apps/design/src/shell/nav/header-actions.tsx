@@ -25,7 +25,7 @@ export function HeaderActions({ settings, onSearch }: HeaderActionsProps) {
       >
         <SearchIcon weight="bold" aria-hidden />
         <span className="hidden sm:inline">Search components…</span>
-        <kbd className="ml-auto hidden border bg-background px-1.5 font-mono text-[11px] sm:inline">
+        <kbd className="ml-auto hidden border bg-background px-1.5 font-mono text-2xs sm:inline">
           ⌘K
         </kbd>
       </Button>

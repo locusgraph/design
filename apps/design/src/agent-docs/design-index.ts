@@ -37,7 +37,9 @@ Every item is listed at https://design.locusgraph.com/r/registry.json. Files lan
 - Every clickable element shows focus with \`focus-ring\` (a 2px ring, offset 2px). Text fields use \`focus-visible:border-ring\` with \`ring-1\`.
 - App pages (components, blocks, shells): group with ruled lines (\`RuleGrid\`, \`ring-1 ring-border\`, \`divide-y\`), not cards or shadows.
 - The chat area (\`@locusgraph/loop\`): no rules, frames or panels. Hierarchy comes from text weight and tone, spacing and color that means state. Only fields (the composer) and overlays (menus, popovers) keep a frame.
-- Small labels use the \`eyebrow\` class (mono, 11px, uppercase, muted).
+- Small labels use the \`eyebrow\` class (mono, \`text-2xs\`, uppercase, muted).
+- Type sizes come from the scale only: \`text-2xs\` (11px, mono meta and tiny counts), \`text-xs\`, \`text-code\` (13px, mono names and commands), \`text-sm\` (UI and chat), \`text-base\` and up. No \`text-[13px]\`.
+- Controls share four heights: \`h-control-xs\` (24px), \`h-control-sm\` (32px), \`h-control\` (36px), \`h-control-lg\` (40px), with matching \`size-control-*\` for icon buttons.
 - One primary action per view. Color means state: \`text-interactive\` (clickable, on hover), \`text-memory\` (remembered), \`text-good\`, \`text-warn\` (waiting), \`text-destructive\`. Chart series use \`--s1\` to \`--s8\` and never carry meaning.
 - Text tones: \`text-foreground\` for values, \`text-muted-foreground\` for labels, \`text-faint\` for meta and hints. All three pass WCAG AA.
 - Surfaces: the page is \`bg-background\` (off-white, near-black in dark); cells and panels are a solid \`bg-card\` one step above it. Action strips are \`RuleGridFooter\` (\`border-t bg-muted/70\`), header strips \`RuleGridHeader\` (\`border-b bg-muted/35\`). One tint per strip; never tint content.

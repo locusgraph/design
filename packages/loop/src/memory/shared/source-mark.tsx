@@ -8,7 +8,7 @@ export function SourceMark({ citation, className }: { citation: Citation; classN
       aria-hidden
       data-slot="source-mark"
       className={cn(
-        "flex size-4 shrink-0 items-center justify-center rounded-full bg-muted text-[10px] leading-none font-medium text-muted-foreground uppercase",
+        "flex size-4 shrink-0 items-center justify-center rounded-full bg-muted text-2xs leading-none font-medium text-muted-foreground uppercase",
         className
       )}
     >
