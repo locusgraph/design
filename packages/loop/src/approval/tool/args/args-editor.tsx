@@ -104,7 +104,7 @@ export function ArgsEditor({
                 onChange={(draft) => setDrafts((current) => ({ ...current, [field.name]: draft }))}
               />
             ))}
-            <div className="flex flex-wrap items-center gap-2 pt-3 pl-36">
+            <div className="flex flex-wrap items-center gap-2 pt-3">
               <Button
                 ref={submitRef}
                 type="submit"

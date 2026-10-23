@@ -74,7 +74,7 @@ export function Approval({
           {denying ? (
             <DenyForm onDeny={onDeny} onBack={() => setDenying(false)} />
           ) : (
-            <div className="flex flex-wrap gap-2 pt-1 pl-36">
+            <div className="flex flex-wrap gap-2 pt-1">
               <Button
                 ref={approveRef}
                 type="button"

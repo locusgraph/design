@@ -15,7 +15,7 @@ export function DenyForm({ onDeny, onBack }: DenyFormProps) {
   return (
     <form
       data-slot="deny-form"
-      className="flex flex-col gap-2 pt-1 pl-36"
+      className="flex flex-col gap-2 pt-1"
       onSubmit={(event) => {
         event.preventDefault();
         onDeny(trimmed === "" ? undefined : trimmed);
