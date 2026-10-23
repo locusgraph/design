@@ -66,7 +66,7 @@ export function KeysSkeleton({ rows = 3, actions = false }: KeysSkeletonProps) {
               ))}
               {actions && (
                 <TableCell className="w-0 pr-2 text-right">
-                  <SkeletonBar className="ml-auto h-8 w-16 rounded-full" />
+                  <SkeletonBar className="ml-auto h-control-sm w-16 rounded-full" />
                 </TableCell>
               )}
             </TableRow>

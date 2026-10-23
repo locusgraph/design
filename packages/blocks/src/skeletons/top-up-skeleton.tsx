@@ -27,7 +27,7 @@ export function TopUpSkeleton({ packs = 3 }: TopUpSkeletonProps) {
             // biome-ignore lint/suspicious/noArrayIndexKey: placeholder packs have no identity
             key={index}
             data-slot="credit-pack-skeleton"
-            className="h-9 w-24 rounded-full"
+            className="h-control w-24 rounded-full"
           />
         ))}
       </div>

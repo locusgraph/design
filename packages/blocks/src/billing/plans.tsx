@@ -35,7 +35,9 @@ export function Plans({ plans, actionFor }: PlansProps) {
             </ul>
             <RuleGridFooter className="mt-auto">
               {plan.current ? (
-                <p className="flex min-h-8 items-center text-sm text-muted-foreground">Your plan</p>
+                <p className="flex min-h-control-sm items-center text-sm text-muted-foreground">
+                  Your plan
+                </p>
               ) : (
                 action
               )}
