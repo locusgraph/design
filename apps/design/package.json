@@ -19,6 +19,7 @@
     "@locusgraph/email": "workspace:*",
     "@locusgraph/loop": "workspace:*",
     "@locusgraph/tokens": "workspace:*",
+    "@locusgraph/utils": "workspace:*",
     "@shikijs/langs": "catalog:",
     "@shikijs/themes": "catalog:",
     "react": "catalog:",
