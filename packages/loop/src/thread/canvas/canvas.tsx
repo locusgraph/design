@@ -2,7 +2,7 @@
 
 import { Button, cn, ScrollArea } from "@locusgraph/components";
 import { X as XIcon } from "@phosphor-icons/react/ssr";
-import { type ComponentProps, type ReactNode, useState } from "react";
+import type { ComponentProps, ReactNode } from "react";
 import { CanvasMeta } from "./canvas-meta";
 import type { CanvasVersion } from "./version-switcher";
 
@@ -34,21 +34,14 @@ export function Canvas({
   ...props
 }: CanvasProps) {
   const current = currentVersionOf(versions, versionId);
-  const [scrolled, setScrolled] = useState(false);
   return (
     <aside
       data-slot="canvas"
       aria-label={title}
-      className={cn(
-        "flex h-full min-h-0 min-w-0 flex-col border-l bg-background text-foreground",
-        className
-      )}
+      className={cn("flex h-full min-h-0 min-w-0 flex-col bg-muted/40 text-foreground", className)}
       {...props}
     >
-      <header
-        data-scrolled={scrolled || undefined}
-        className="flex items-start gap-3 border-b border-transparent px-6 pt-4 pb-3 transition-colors duration-150 data-scrolled:border-border motion-reduce:transition-none"
-      >
+      <header className="flex items-start gap-3 px-6 pt-4 pb-3">
         <div className="flex min-w-0 flex-1 flex-col gap-0.5">
           <h2 className="truncate text-base leading-snug font-semibold tracking-tight">{title}</h2>
           <CanvasMeta
@@ -74,10 +67,7 @@ export function Canvas({
           )}
         </div>
       </header>
-      <ScrollArea
-        className="min-h-0 flex-1"
-        onScrollCapture={(event) => setScrolled((event.target as HTMLElement).scrollTop > 0)}
-      >
+      <ScrollArea className="min-h-0 flex-1">
         <div
           data-slot="canvas-content"
           className="px-6 pt-1 pb-6 has-[>[data-slot=code]:only-child]:p-0 [&>[data-slot=code]:only-child]:ring-0"

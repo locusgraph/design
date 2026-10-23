@@ -85,7 +85,7 @@ function SingleVersion() {
 export default defineDemo({
   title: "Canvas",
   description:
-    "A panel for a document or code the agent generated. The title leads; a faint line under it holds the kind and the version switcher, with Back to latest on older versions. A rule appears under the header only once the content scrolls.",
+    "A panel for a document or code the agent generated. The title leads; a faint line under it holds the kind and the version switcher, with Back to latest on older versions. A light tint, not a rule, sets it apart from the chat.",
   controls: { kind: select(kinds) },
   playground: ({ kind }) => <Playground kind={kind} />,
   code: () =>
