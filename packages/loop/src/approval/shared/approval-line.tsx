@@ -7,7 +7,7 @@ import { RiskBadge } from "./risk-badge";
 
 type ApprovalHeadlineProps = {
   name: string;
-  risk: RiskLevel;
+  risk?: RiskLevel;
   action?: string;
   icon?: ReactNode;
 };
@@ -27,7 +27,7 @@ export function ApprovalHeadline({ name, risk, action = "to run", icon }: Approv
         <span className="font-medium text-warn">Waiting</span> {action}{" "}
         <span className={lineObjectClass}>{name}</span>
       </span>
-      <RiskBadge risk={risk} className="ml-1" />
+      {risk && <RiskBadge risk={risk} className="ml-1" />}
     </div>
   );
 }
