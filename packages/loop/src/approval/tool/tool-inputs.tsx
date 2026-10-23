@@ -57,17 +57,21 @@ export function ToolInputs({ input, muted = false }: { input: unknown; muted?: b
       {entries && !showRaw && (
         <dl
           className={cn(
-            "grid grid-cols-[minmax(0,8rem)_minmax(0,1fr)] gap-x-4 gap-y-1 text-sm",
-            muted ? "text-muted-foreground" : "text-foreground"
+            "grid grid-cols-[8rem_minmax(0,1fr)] gap-x-4 gap-y-2 text-sm",
+            muted ? "text-faint" : "text-foreground"
           )}
         >
           {entries.map(([key, value]) => (
             <div key={key} className="contents">
-              <dt className="text-faint">{humanizeKey(key)}</dt>
-              <dd className="min-w-0 break-words">{readableValue(value)}</dd>
+              <dt className="truncate text-muted-foreground">{humanizeKey(key)}</dt>
+              <dd className={cn("min-w-0 break-words", !muted && "font-medium")}>
+                {readableValue(value)}
+              </dd>
             </div>
           ))}
-          {entries.length === 0 && <div className="col-span-2 text-faint">No inputs.</div>}
+          {entries.length === 0 && (
+            <div className="col-span-2 text-muted-foreground">No inputs.</div>
+          )}
         </dl>
       )}
       {(showRaw || !entries) && (
@@ -78,7 +82,7 @@ export function ToolInputs({ input, muted = false }: { input: unknown; muted?: b
       {entries && (
         <button
           type="button"
-          className="self-start text-xs text-faint outline-none hover:text-s1 focus-visible:ring-2 focus-visible:ring-ring/70 motion-safe:transition-colors"
+          className="ml-36 self-start text-xs text-faint outline-none hover:text-s1 focus-visible:ring-2 focus-visible:ring-ring/70 motion-safe:transition-colors"
           aria-expanded={showRaw}
           aria-controls={showRaw ? rawId : undefined}
           onClick={() => setShowRaw((current) => !current)}

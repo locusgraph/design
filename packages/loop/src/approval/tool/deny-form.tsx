@@ -15,23 +15,24 @@ export function DenyForm({ onDeny, onBack }: DenyFormProps) {
   return (
     <form
       data-slot="deny-form"
-      className="flex flex-col gap-2"
+      className="flex flex-col gap-2 pt-1 pl-36"
       onSubmit={(event) => {
         event.preventDefault();
         onDeny(trimmed === "" ? undefined : trimmed);
       }}
     >
-      <Label htmlFor={reasonId} className="text-xs font-normal text-faint">
-        Reason for the agent (optional)
+      <Label htmlFor={reasonId} className="text-sm font-normal text-muted-foreground">
+        Why deny? <span className="text-xs text-faint">Optional</span>
       </Label>
       <Textarea
         id={reasonId}
         ref={reasonRef}
         value={reason}
+        className="border-transparent bg-muted shadow-none placeholder:text-faint dark:bg-muted"
         placeholder="Tell the agent what to do instead"
         onChange={(event) => setReason(event.target.value)}
       />
-      <div className="flex flex-wrap gap-2 pt-1">
+      <div className="flex flex-wrap gap-2">
         <Button type="submit" variant="destructive" size="sm">
           Send denial
         </Button>
