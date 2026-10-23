@@ -83,7 +83,7 @@ export function ArgsEditor({
           </p>
           <form
             noValidate
-            className="flex flex-col gap-4 pt-1"
+            className="flex flex-col gap-2 pt-1"
             onSubmit={(event) => {
               event.preventDefault();
               const firstInvalid = fields.find((field) => errors[field.name]);
@@ -106,7 +106,7 @@ export function ArgsEditor({
                 onChange={(draft) => setDrafts((current) => ({ ...current, [field.name]: draft }))}
               />
             ))}
-            <div className="flex flex-wrap items-center gap-2 pt-1">
+            <div className="flex flex-wrap items-center gap-2 pt-2">
               <Button
                 ref={submitRef}
                 type="submit"
