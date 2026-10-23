@@ -26,7 +26,7 @@ function LongThought() {
 export default defineDemo({
   title: "Thinking",
   description:
-    "The agent's thinking behind a quiet trigger line. Open with a shimmering label while it streams, then closes to how long it took and the first line, unless the user opened it.",
+    "The agent's thinking as one quiet line of text. Open with a shimmering label while it streams, then closes to how long it took with the first line in faint text beside it, unless the user opened it.",
   controls: { state: select(states) },
   playground: ({ state }) => (
     <div className="w-full max-w-xl">

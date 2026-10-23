@@ -40,7 +40,7 @@ const memories = [
 export default defineDemo({
   title: "Recall",
   description:
-    "The memories and graph nodes LocusGraph recalled for this answer, each with its kind and relevance, as ruled rows. Collapsed, it reads as a single line.",
+    "The memories and graph nodes LocusGraph recalled for this answer, as one quiet line of text that opens to an indented list with each kind and relevance in faint text.",
   controls: { open: toggle(true) },
   playground: ({ open }) => (
     <div className="w-full max-w-xl">

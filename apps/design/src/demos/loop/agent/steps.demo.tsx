@@ -45,7 +45,7 @@ function Pending() {
 export default defineDemo({
   title: "Steps",
   description:
-    "The agent's plan as a vertical timeline. Each step has a status mark (hollow pending with the next one outlined, amber spinner, green check, red cross) and the header counts what is done.",
+    "The agent's plan as lines of text. Each step leads with a colored mark in the icon column (faint dot pending, amber spinner, green check, red cross); done steps go quiet, the running step is strong, and the header counts what is done in faint text.",
   controls: { progress: select(progress) },
   playground: ({ progress: stage }) => (
     <div className="w-full max-w-xl">
