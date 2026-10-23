@@ -39,7 +39,7 @@ export function History({
       className={cn("flex min-h-0 flex-col gap-2", className)}
       {...props}
     >
-      <div className="flex h-7 items-center justify-between gap-2 px-2">
+      <div className="flex h-control-sm items-center justify-between gap-2 px-2">
         <span className="text-sm font-medium text-foreground">{label}</span>
         {onNew && (
           <Button type="button" variant="ghost" size="xs" onClick={onNew}>
