@@ -27,8 +27,8 @@ export function HistoryRow({ thread, active, onSelect, onRename, onArchive }: Hi
       className={cn(
         "group relative flex items-center motion-safe:transition-colors",
         active
-          ? "bg-accent text-accent-foreground before:absolute before:inset-y-0 before:left-0 before:w-0.5 before:bg-foreground"
-          : "text-foreground/85 hover:bg-accent/40"
+          ? "bg-muted text-foreground"
+          : "text-muted-foreground hover:bg-muted/50 hover:text-foreground"
       )}
     >
       {editing && onRename ? (
@@ -59,7 +59,7 @@ export function HistoryRow({ thread, active, onSelect, onRename, onArchive }: Hi
             dateTime={thread.updatedAt}
             suppressHydrationWarning
             className={cn(
-              "shrink-0 font-mono text-[11px] font-normal text-muted-foreground tabular-nums",
+              "shrink-0 text-xs font-normal text-faint tabular-nums",
               hasMenu && timeHiddenByMenuClass
             )}
           >

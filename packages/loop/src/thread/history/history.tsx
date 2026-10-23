@@ -42,7 +42,7 @@ export function History({
       <div className="flex h-7 items-center justify-between gap-2 px-2">
         <span className="text-sm font-medium text-foreground">{label}</span>
         {onNew && (
-          <Button type="button" variant="outline" size="xs" onClick={onNew}>
+          <Button type="button" variant="ghost" size="xs" onClick={onNew}>
             <PlusIcon weight="bold" aria-hidden />
             New chat
           </Button>
@@ -57,7 +57,7 @@ export function History({
               <section key={group.key} aria-labelledby={`thread-group-${group.key}`}>
                 <h3
                   id={`thread-group-${group.key}`}
-                  className="eyebrow px-2 pb-1"
+                  className="px-2 pb-1 text-xs text-faint"
                   suppressHydrationWarning
                 >
                   {group.label}
