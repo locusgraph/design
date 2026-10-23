@@ -11,8 +11,8 @@ type ArgsFieldProps = {
   onChange: (draft: ArgDraft) => void;
 };
 
-const fieldBoxClass =
-  "-mx-2 flex h-9 min-w-0 items-center gap-4 border border-transparent px-2 text-sm transition-colors hover:bg-muted focus-within:border-ring focus-within:bg-transparent has-[[aria-invalid=true]]:border-destructive motion-reduce:transition-none";
+const valueWellClass =
+  "flex h-9 min-w-0 flex-1 items-center gap-2 bg-muted px-3 transition-shadow focus-within:ring-1 focus-within:ring-ring has-[[aria-invalid=true]]:ring-1 has-[[aria-invalid=true]]:ring-destructive motion-reduce:transition-none";
 
 const bareControlClass =
   "h-full min-w-0 flex-1 bg-transparent text-foreground outline-none placeholder:text-faint";
@@ -34,7 +34,6 @@ function FieldControl({ id, field, draft, error, onChange }: ArgsFieldProps) {
     return (
       <Checkbox
         {...shared}
-        className="ml-auto"
         checked={draft === true}
         onCheckedChange={(checked) => onChange(checked === true)}
       />
@@ -78,29 +77,44 @@ function FieldControl({ id, field, draft, error, onChange }: ArgsFieldProps) {
   );
 }
 
-export function ArgsField(props: ArgsFieldProps) {
-  const { id, field, error } = props;
-  return (
-    <div data-slot="args-field" data-type={field.type} className="flex flex-col">
-      <div className={fieldBoxClass}>
-        <label htmlFor={id} className="w-32 shrink-0 cursor-pointer truncate text-faint">
-          {field.label}
-          {field.required && (
-            <span className="text-faint">
-              <span aria-hidden> *</span>
-              <span className="sr-only"> (required)</span>
-            </span>
-          )}
-        </label>
+function FieldValue(props: ArgsFieldProps) {
+  if (props.field.type === "boolean") {
+    return (
+      <div className="flex h-9 flex-1 items-center px-3">
         <FieldControl {...props} />
       </div>
+    );
+  }
+  return (
+    <div className={valueWellClass}>
+      <FieldControl {...props} />
+    </div>
+  );
+}
+
+export function ArgsField(props: ArgsFieldProps) {
+  const { id, field, error } = props;
+  const optional = !field.required && field.type !== "boolean";
+  return (
+    <div data-slot="args-field" data-type={field.type} className="flex flex-col gap-1">
+      <div className="flex min-w-0 items-center gap-4 text-sm">
+        <label
+          htmlFor={id}
+          className="flex w-32 shrink-0 cursor-pointer flex-col text-muted-foreground"
+        >
+          <span className="truncate">{field.label}</span>
+          {optional && <span className="text-xs text-faint">Optional</span>}
+          {field.required && <span className="sr-only"> (required)</span>}
+        </label>
+        <FieldValue {...props} />
+      </div>
       {field.description && (
-        <p id={`${id}-hint`} className="pb-1 pl-36 text-xs text-faint">
+        <p id={`${id}-hint`} className="pl-39 text-xs text-faint">
           {field.description}
         </p>
       )}
       {error && (
-        <p id={`${id}-error`} className="pb-1 pl-36 text-xs text-destructive">
+        <p id={`${id}-error`} className="pl-39 text-xs text-destructive">
           {error}
         </p>
       )}

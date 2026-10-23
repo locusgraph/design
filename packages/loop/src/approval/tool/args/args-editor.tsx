@@ -78,10 +78,10 @@ export function ArgsEditor({
             action="to run"
             icon={destructive ? undefined : <SquarePenIcon />}
           />
-          <p className="-mt-2 text-sm text-muted-foreground">{description ?? riskCopy[risk]()}</p>
+          <p className="-mt-2 text-sm text-faint">{description ?? riskCopy[risk]()}</p>
           <form
             noValidate
-            className="flex flex-col"
+            className="flex flex-col gap-2"
             onSubmit={(event) => {
               event.preventDefault();
               const firstInvalid = fields.find((field) => errors[field.name]);
@@ -104,7 +104,7 @@ export function ArgsEditor({
                 onChange={(draft) => setDrafts((current) => ({ ...current, [field.name]: draft }))}
               />
             ))}
-            <div className="flex flex-wrap items-center gap-2 pt-2">
+            <div className="flex flex-wrap items-center gap-2 pt-3 pl-36">
               <Button
                 ref={submitRef}
                 type="submit"

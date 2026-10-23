@@ -91,7 +91,8 @@ describe("ArgsEditor", () => {
     );
     expect(html).toContain('value="ops@acme.dev"');
     expect(html).toContain('value="120"');
-    expect(html).toContain("Recipient<span");
+    expect(html).toContain("Recipient</span><span class=\"sr-only\"> (required)");
+    expect(html).toContain(">Optional<");
     expect(html).toContain("Run send invoice with these inputs");
   });
 

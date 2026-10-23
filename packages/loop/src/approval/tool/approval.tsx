@@ -67,7 +67,7 @@ export function Approval({
       {awaiting && (
         <>
           <ApprovalHeadline name={name} risk={risk} />
-          <p className="-mt-2 text-sm text-muted-foreground">{description ?? riskCopy[risk]()}</p>
+          <p className="-mt-2 text-sm text-faint">{description ?? riskCopy[risk]()}</p>
           <div>
             <ToolInputs input={part.input} muted={denying} />
           </div>
