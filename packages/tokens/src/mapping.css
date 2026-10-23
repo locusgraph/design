@@ -13,6 +13,7 @@
   --color-s1: var(--s1);
   --color-s2: var(--s2);
   --color-s3: var(--s3);
+  --color-memory: var(--s7);
   --color-good: var(--good);
   --color-bad: var(--bad);
   --color-info: var(--info);
