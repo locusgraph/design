@@ -61,7 +61,7 @@ export function ChatPage({
     );
 
   return (
-    <div className={cn("flex h-[40rem] w-full bg-background ring-1 ring-border", className)}>
+    <div className={cn("flex h-[40rem] w-full bg-background", className)}>
       <div className="flex min-w-0 flex-1 flex-col">
         <Chat>
           {session.messages.map((message) => (
@@ -69,7 +69,7 @@ export function ChatPage({
           ))}
           {session.status === "streaming" && <Pulse label="Working…" />}
         </Chat>
-        <div className="border-t bg-card p-3">
+        <div className="px-3 pt-1 pb-3">
           <Composer
             className="mx-auto max-w-3xl"
             status={session.status}
