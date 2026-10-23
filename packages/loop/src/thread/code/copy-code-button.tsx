@@ -1,5 +1,6 @@
 import { Button } from "@locusgraph/components";
 import { Check as CheckIcon, Copy as CopyIcon } from "@phosphor-icons/react/ssr";
+import { LiveStatus } from "../../shared/live-status";
 import { useCopied, writeToClipboard } from "../use-copied";
 
 type CopyCodeButtonProps = {
@@ -21,19 +22,22 @@ export function CopyCodeButton({ code, onCopy, size = "icon-xs" }: CopyCodeButto
     }
   };
   return (
-    <Button
-      type="button"
-      variant="ghost"
-      size={size}
-      aria-label={copied ? "Copied" : "Copy code"}
-      className="text-faint hover:bg-transparent hover:text-interactive"
-      onClick={copy}
-    >
-      {copied ? (
-        <CheckIcon weight="bold" aria-hidden className="text-good" />
-      ) : (
-        <CopyIcon weight="bold" aria-hidden />
-      )}
-    </Button>
+    <>
+      <Button
+        type="button"
+        variant="ghost"
+        size={size}
+        aria-label={copied ? "Copied" : "Copy code"}
+        className="text-faint hover:bg-transparent hover:text-interactive"
+        onClick={copy}
+      >
+        {copied ? (
+          <CheckIcon weight="bold" aria-hidden className="text-good" />
+        ) : (
+          <CopyIcon weight="bold" aria-hidden />
+        )}
+      </Button>
+      <LiveStatus message={copied ? "Code copied" : ""} />
+    </>
   );
 }
