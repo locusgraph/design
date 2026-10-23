@@ -1,5 +1,5 @@
-import { Copy as CopyIcon } from "@carbon/icons-react";
 import { Button } from "@locusgraph/components";
+import { Copy as CopyIcon } from "@phosphor-icons/react/ssr";
 import { useState } from "react";
 
 export function PromptTab({ prompt }: { prompt: string }) {
@@ -17,7 +17,7 @@ export function PromptTab({ prompt }: { prompt: string }) {
         {prompt}
       </pre>
       <Button variant="outline" size="sm" className="self-start" onClick={copy}>
-        <CopyIcon />
+        <CopyIcon weight="bold" aria-hidden />
         {copied ? "Copied" : "Copy prompt"}
       </Button>
     </>

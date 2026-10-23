@@ -1,5 +1,5 @@
-import { Edit as SquarePenIcon } from "@carbon/icons-react";
 import { Button, cn } from "@locusgraph/components";
+import { PencilSimple as SquarePenIcon } from "@phosphor-icons/react/ssr";
 import { useId, useMemo, useState } from "react";
 import { humanToolName } from "../../../agent/tool/tool-status";
 import { LiveStatus } from "../../../shared/panel";
@@ -63,7 +63,7 @@ export function ArgsEditor({
       className={cn("flex min-w-0 flex-col", !decision && "gap-3", className)}
     >
       {decision ? (
-        <SettledLine name={name} icon={<SquarePenIcon />}>
+        <SettledLine name={name} icon={<SquarePenIcon weight="bold" aria-hidden />}>
           <DecisionSummary
             decision={decision}
             deniedVerb="Cancelled"
@@ -76,7 +76,7 @@ export function ArgsEditor({
             name={name}
             risk={risk}
             action="to run"
-            icon={destructive ? undefined : <SquarePenIcon />}
+            icon={destructive ? undefined : <SquarePenIcon weight="bold" aria-hidden />}
           />
           <p className="-mt-2 text-sm text-faint">{description ?? riskCopy[risk]()}</p>
           <form

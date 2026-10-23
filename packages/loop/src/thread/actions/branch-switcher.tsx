@@ -1,7 +1,7 @@
 import {
-  ChevronLeft as ChevronLeftIcon,
-  ChevronRight as ChevronRightIcon,
-} from "@carbon/icons-react";
+  CaretLeft as ChevronLeftIcon,
+  CaretRight as ChevronRightIcon,
+} from "@phosphor-icons/react/ssr";
 import { ActionButton } from "./action-button";
 
 export type MessageBranch = { index: number; count: number };
@@ -25,7 +25,7 @@ export function BranchSwitcher({ branch, onBranchChange }: BranchSwitcherProps) 
         disabled={branch.index <= 0}
         onClick={() => onBranchChange(branch.index - 1)}
       >
-        <ChevronLeftIcon />
+        <ChevronLeftIcon weight="bold" aria-hidden />
       </ActionButton>
       <span
         aria-live="polite"
@@ -38,7 +38,7 @@ export function BranchSwitcher({ branch, onBranchChange }: BranchSwitcherProps) 
         disabled={position >= branch.count}
         onClick={() => onBranchChange(branch.index + 1)}
       >
-        <ChevronRightIcon />
+        <ChevronRightIcon weight="bold" aria-hidden />
       </ActionButton>
     </div>
   );

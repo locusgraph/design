@@ -1,4 +1,4 @@
-import { Home as HomeIcon, Password as KeyRoundIcon } from "@carbon/icons-react";
+import { House as HomeIcon, Key as KeyRoundIcon } from "@phosphor-icons/react/ssr";
 import type * as React from "react";
 import { renderToStaticMarkup } from "react-dom/server";
 import { describe, expect, it } from "vitest";

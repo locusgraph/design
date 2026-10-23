@@ -1,6 +1,6 @@
-import { BookmarkAdd as BookmarkPlusIcon } from "@carbon/icons-react";
 import { cn } from "@locusgraph/components";
 import { pluralize } from "@locusgraph/utils";
+import { BookmarkSimple as BookmarkPlusIcon } from "@phosphor-icons/react/ssr";
 import {
   lineDetailClass,
   lineMemoryIconClass,
@@ -41,7 +41,7 @@ export function Memorized({ items, onUndo, className }: MemorizedProps) {
     >
       <header aria-live="polite" aria-label={memorizedSummary(items)} className={lineRowClass}>
         <span aria-hidden className={lineMemoryIconClass}>
-          <BookmarkPlusIcon />
+          <BookmarkPlusIcon weight="bold" aria-hidden />
         </span>
         <span aria-hidden className="truncate">
           Saved{" "}

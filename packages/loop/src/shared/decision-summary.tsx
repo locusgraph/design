@@ -1,4 +1,4 @@
-import { Checkmark as CheckIcon, Close as XIcon } from "@carbon/icons-react";
+import { Check as CheckIcon, X as XIcon } from "@phosphor-icons/react/ssr";
 import type { ReactNode } from "react";
 import type { DecidedAt } from "../approval/types";
 
@@ -67,6 +67,7 @@ export function DecisionSummary({
       className="flex items-start gap-2.5 text-sm"
     >
       <Icon
+        weight="bold"
         aria-hidden
         className={`mt-0.5 size-4 shrink-0 ${decision.approved ? "text-good" : "text-destructive"}`}
       />

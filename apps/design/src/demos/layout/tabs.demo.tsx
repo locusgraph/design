@@ -1,9 +1,9 @@
-import {
-  Purchase as CreditCardIcon,
-  Password as KeyRoundIcon,
-  UserMultiple as UsersIcon,
-} from "@carbon/icons-react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@locusgraph/components";
+import {
+  CreditCard as CreditCardIcon,
+  Key as KeyRoundIcon,
+  Users as UsersIcon,
+} from "@phosphor-icons/react/ssr";
 import { formatProp } from "../../registry/control-values";
 import { defineDemo, select, toggle } from "../../registry/define-demo";
 
@@ -54,15 +54,15 @@ function Vertical() {
     <Tabs defaultValue="members" orientation="vertical" className="w-full max-w-md">
       <TabsList>
         <TabsTrigger value="members">
-          <UsersIcon />
+          <UsersIcon weight="bold" aria-hidden />
           Members
         </TabsTrigger>
         <TabsTrigger value="billing">
-          <CreditCardIcon />
+          <CreditCardIcon weight="bold" aria-hidden />
           Billing
         </TabsTrigger>
         <TabsTrigger value="keys">
-          <KeyRoundIcon />
+          <KeyRoundIcon weight="bold" aria-hidden />
           API keys
         </TabsTrigger>
       </TabsList>

@@ -1,9 +1,4 @@
 import {
-  Network_3 as NodesIcon,
-  TrashCan as TrashIcon,
-  Undo as UndoIcon,
-} from "@carbon/icons-react";
-import {
   AlertDialog,
   AlertDialogAction,
   AlertDialogCancel,
@@ -18,6 +13,11 @@ import {
   FieldLabel,
   Input,
 } from "@locusgraph/components";
+import {
+  Graph as NodesIcon,
+  Trash as TrashIcon,
+  ArrowUUpLeft as UndoIcon,
+} from "@phosphor-icons/react/ssr";
 import { useEffect, useState } from "react";
 
 export type DeleteRemoval = { label: string; count: number };
@@ -81,7 +81,7 @@ function DeletedNotice({
       </span>
       {canUndo ? (
         <Button variant="outline" size="sm" onClick={onUndo}>
-          <UndoIcon aria-hidden="true" />
+          <UndoIcon weight="bold" aria-hidden="true" />
           Undo
           <span className="text-muted-foreground tabular-nums">{secondsLeft}s</span>
         </Button>
@@ -127,7 +127,11 @@ export function DeleteConfirm({
 
   return (
     <div className="flex w-full max-w-xl flex-wrap items-center gap-x-4 gap-y-3 bg-card px-4 py-3 text-card-foreground ring-1 ring-border">
-      <NodesIcon aria-hidden="true" className="size-5 shrink-0 text-muted-foreground" />
+      <NodesIcon
+        weight="bold"
+        aria-hidden="true"
+        className="size-5 shrink-0 text-muted-foreground"
+      />
       <div className="flex min-w-0 flex-1 flex-col">
         <span className="truncate font-mono text-sm">{target.name}</span>
         <span className="truncate text-sm text-muted-foreground">{target.meta}</span>
@@ -139,7 +143,7 @@ export function DeleteConfirm({
             size="sm"
             className="text-destructive hover:bg-destructive/10 hover:text-destructive"
           >
-            <TrashIcon aria-hidden="true" />
+            <TrashIcon weight="bold" aria-hidden="true" />
             Delete
           </Button>
         </AlertDialogTrigger>

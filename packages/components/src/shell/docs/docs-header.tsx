@@ -1,6 +1,6 @@
 "use client";
 
-import { Menu as MenuIcon } from "@carbon/icons-react";
+import { List as MenuIcon } from "@phosphor-icons/react/ssr";
 import { cn } from "cn";
 import type * as React from "react";
 import { useState } from "react";
@@ -36,7 +36,7 @@ function MobileNavSheet({ children }: { children: React.ReactNode }) {
         aria-label="Open menu"
         onClick={() => setOpen(true)}
       >
-        <MenuIcon />
+        <MenuIcon weight="bold" aria-hidden />
       </Button>
       <Sheet open={open} onOpenChange={setOpen}>
         <SheetContent side="left" className="w-72 overflow-y-auto p-4">

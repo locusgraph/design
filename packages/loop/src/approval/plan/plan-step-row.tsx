@@ -1,10 +1,10 @@
+import { Button, cn } from "@locusgraph/components";
 import {
   ArrowDown as ArrowDownIcon,
   ArrowUp as ArrowUpIcon,
-  Edit as PencilIcon,
-  TrashCan as Trash2Icon,
-} from "@carbon/icons-react";
-import { Button, cn } from "@locusgraph/components";
+  PencilSimple as PencilIcon,
+  Trash as Trash2Icon,
+} from "@phosphor-icons/react/ssr";
 import type { PlanStepDraft } from "../types";
 
 export type StepAction = "up" | "down" | "remove";
@@ -124,7 +124,7 @@ export function PlanStepRow({
               danger && "hover:text-destructive"
             )}
           >
-            <Icon aria-hidden />
+            <Icon weight="bold" aria-hidden />
           </Button>
         ))}
       </div>

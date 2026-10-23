@@ -1,4 +1,3 @@
-import { ArrowUp as ArrowUpIcon, MacCommand as CommandIcon } from "@carbon/icons-react";
 import {
   Button,
   Kbd,
@@ -8,6 +7,7 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@locusgraph/components";
+import { ArrowUp as ArrowUpIcon, Command as CommandIcon } from "@phosphor-icons/react/ssr";
 import { defineDemo, text, toggle } from "../../../registry/define-demo";
 
 function splitKeys(keys: string) {
@@ -43,10 +43,10 @@ function WithIcons() {
   return (
     <KbdGroup>
       <Kbd>
-        <CommandIcon />
+        <CommandIcon weight="bold" aria-hidden />
       </Kbd>
       <Kbd>
-        <ArrowUpIcon />
+        <ArrowUpIcon weight="bold" aria-hidden />
       </Kbd>
       <Kbd>Enter</Kbd>
     </KbdGroup>

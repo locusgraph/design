@@ -1,5 +1,8 @@
-import { Warning as CircleAlert, CheckmarkOutline as CircleCheck } from "@carbon/icons-react";
 import { Alert, AlertDescription, AlertTitle, Button } from "@locusgraph/components";
+import {
+  WarningCircle as CircleAlert,
+  CheckCircle as CircleCheck,
+} from "@phosphor-icons/react/ssr";
 import type { ReactNode } from "react";
 
 export type VoiceRule = {
@@ -12,7 +15,7 @@ export type VoiceRule = {
 function Notice({ title, children }: { title: string; children?: ReactNode }) {
   return (
     <Alert variant="success">
-      <CircleCheck />
+      <CircleCheck weight="bold" aria-hidden />
       <AlertTitle className="line-clamp-none">{title}</AlertTitle>
       {children && <AlertDescription>{children}</AlertDescription>}
     </Alert>
@@ -22,7 +25,7 @@ function Notice({ title, children }: { title: string; children?: ReactNode }) {
 function ErrorNotice({ title, children }: { title: string; children?: ReactNode }) {
   return (
     <Alert variant="destructive">
-      <CircleAlert />
+      <CircleAlert weight="bold" aria-hidden />
       <AlertTitle className="line-clamp-none">{title}</AlertTitle>
       {children && <AlertDescription>{children}</AlertDescription>}
     </Alert>

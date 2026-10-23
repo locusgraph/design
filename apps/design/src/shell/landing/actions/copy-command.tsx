@@ -1,5 +1,5 @@
-import { Checkmark as CheckIcon, Copy as CopyIcon } from "@carbon/icons-react";
 import { Button } from "@locusgraph/components";
+import { Check as CheckIcon, Copy as CopyIcon } from "@phosphor-icons/react/ssr";
 import { useState } from "react";
 
 export function CopyCommand({ command, prompt = true }: { command: string; prompt?: boolean }) {
@@ -28,7 +28,11 @@ export function CopyCommand({ command, prompt = true }: { command: string; promp
         onClick={copy}
         className="ml-auto"
       >
-        {copied ? <CheckIcon className="text-good" /> : <CopyIcon />}
+        {copied ? (
+          <CheckIcon weight="bold" aria-hidden className="text-good" />
+        ) : (
+          <CopyIcon weight="bold" aria-hidden />
+        )}
       </Button>
     </div>
   );

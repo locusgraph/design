@@ -1,9 +1,9 @@
+import { Button } from "@locusgraph/components";
 import {
   ArrowRight as ArrowRightIcon,
-  Add as PlusIcon,
-  TrashCan as TrashIcon,
-} from "@carbon/icons-react";
-import { Button } from "@locusgraph/components";
+  Plus as PlusIcon,
+  Trash as TrashIcon,
+} from "@phosphor-icons/react/ssr";
 import { formatProp } from "../../registry/control-values";
 import { defineDemo, select, text, toggle } from "../../registry/define-demo";
 
@@ -31,13 +31,13 @@ function Sizes() {
       <Button>default</Button>
       <Button size="lg">lg</Button>
       <Button size="icon-sm" variant="outline" aria-label="Add">
-        <PlusIcon />
+        <PlusIcon weight="bold" aria-hidden />
       </Button>
       <Button size="icon" variant="outline" aria-label="Add">
-        <PlusIcon />
+        <PlusIcon weight="bold" aria-hidden />
       </Button>
       <Button size="icon-lg" variant="outline" aria-label="Add">
-        <PlusIcon />
+        <PlusIcon weight="bold" aria-hidden />
       </Button>
     </div>
   );
@@ -47,11 +47,11 @@ function WithIcon() {
   return (
     <div className="flex flex-wrap items-center gap-3">
       <Button>
-        <PlusIcon />
+        <PlusIcon weight="bold" aria-hidden />
         New key
       </Button>
       <Button variant="outline" className="text-destructive hover:text-destructive">
-        <TrashIcon />
+        <TrashIcon weight="bold" aria-hidden />
         Remove member
       </Button>
     </div>
@@ -63,7 +63,7 @@ function AsLink() {
     <Button asChild variant="outline">
       <a href="#billing">
         Billing
-        <ArrowRightIcon />
+        <ArrowRightIcon weight="bold" aria-hidden />
       </a>
     </Button>
   );

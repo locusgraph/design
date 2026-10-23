@@ -1,5 +1,5 @@
-import { Checkmark as CheckIcon } from "@carbon/icons-react";
 import { cn } from "@locusgraph/components";
+import { Check as CheckIcon } from "@phosphor-icons/react/ssr";
 import { type ThemeMode, type ThemePreset, themePresets } from "../theme-presets";
 
 type BrandGridProps = {
@@ -34,7 +34,7 @@ function BrandSwatch({
       )}
       style={{ background: colors.primary, color: colors.primaryInk }}
     >
-      {selected && <CheckIcon className="size-4" aria-hidden="true" />}
+      {selected && <CheckIcon weight="bold" className="size-4" aria-hidden="true" />}
     </button>
   );
 }

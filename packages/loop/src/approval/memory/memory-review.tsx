@@ -1,6 +1,6 @@
-import { Idea as BrainIcon } from "@carbon/icons-react";
 import { Button } from "@locusgraph/components";
 import { pluralize } from "@locusgraph/utils";
+import { Lightbulb as BrainIcon } from "@phosphor-icons/react/ssr";
 import { useMemo, useState } from "react";
 import {
   ApprovalPanel,
@@ -56,7 +56,7 @@ export function MemoryReview({
   return (
     <ApprovalPanel data-slot="memory-review" aria-label={title} className={className}>
       <PanelHeader
-        icon={<BrainIcon aria-hidden />}
+        icon={<BrainIcon weight="bold" aria-hidden />}
         eyebrow="Memory"
         status={status}
         tone={tone}
@@ -65,7 +65,7 @@ export function MemoryReview({
       <PanelTitle className={decision ? "text-muted-foreground" : undefined}>{title}</PanelTitle>
       {empty ? (
         <PanelEmpty
-          icon={<BrainIcon aria-hidden />}
+          icon={<BrainIcon weight="bold" aria-hidden />}
           title="No new memories to review."
           description="When an agent wants to remember something in LocusGraph, it shows up here."
         />

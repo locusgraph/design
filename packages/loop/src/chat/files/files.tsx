@@ -1,12 +1,12 @@
-import {
-  type CarbonIconType as CarbonIcon,
-  Code as FileCodeIcon,
-  DocumentBlank as FileIcon,
-  DataTable as FileSpreadsheetIcon,
-  Document as FileTextIcon,
-  Close as XIcon,
-} from "@carbon/icons-react";
 import { cn } from "@locusgraph/components";
+import type { Icon as IconType } from "@phosphor-icons/react";
+import {
+  FileCode as FileCodeIcon,
+  File as FileIcon,
+  Table as FileSpreadsheetIcon,
+  FileText as FileTextIcon,
+  X as XIcon,
+} from "@phosphor-icons/react/ssr";
 import type * as React from "react";
 import { type FileItem, fileExtensionLabel, formatBytes, isImageFile } from "./file-meta";
 
@@ -24,13 +24,13 @@ type ChipProps = {
   onRemove?: (id: string) => void;
 };
 
-const iconsByMediaType: [RegExp, CarbonIcon][] = [
+const iconsByMediaType: [RegExp, IconType][] = [
   [/csv|spreadsheet|excel/, FileSpreadsheetIcon],
   [/json|javascript|typescript|xml|x-python/, FileCodeIcon],
   [/text|pdf|markdown|word/, FileTextIcon],
 ];
 
-function iconForMediaType(mediaType: string | undefined): CarbonIcon {
+function iconForMediaType(mediaType: string | undefined): IconType {
   const match = iconsByMediaType.find(([pattern]) => mediaType && pattern.test(mediaType));
   return match ? match[1] : FileIcon;
 }
@@ -57,7 +57,7 @@ function FilePreview({ item, isGrid }: Omit<ChipProps, "onRemove">) {
       {isImageFile(item) ? (
         <img src={item.url} alt="" loading="lazy" className="size-full object-cover" />
       ) : (
-        <Icon aria-hidden="true" className={isGrid ? "size-6" : "size-4"} />
+        <Icon weight="bold" aria-hidden="true" className={isGrid ? "size-6" : "size-4"} />
       )}
     </span>
   );
@@ -74,7 +74,7 @@ function RemoveButton({ item, isGrid, onRemove }: Required<ChipProps>) {
         isGrid && "absolute top-1 right-1 bg-card/90"
       )}
     >
-      <XIcon aria-hidden="true" className="size-3.5" />
+      <XIcon weight="bold" aria-hidden="true" className="size-3.5" />
     </button>
   );
 }

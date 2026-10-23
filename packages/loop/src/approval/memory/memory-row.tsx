@@ -1,5 +1,5 @@
-import { ShieldAlert as ShieldAlertIcon } from "@carbon/icons-react";
 import { cn, Textarea } from "@locusgraph/components";
+import { ShieldWarning as ShieldAlertIcon } from "@phosphor-icons/react/ssr";
 import type { ProposedMemory } from "../types";
 import type { MemoryChoice, MemoryDraft } from "./memory-choices";
 
@@ -59,7 +59,7 @@ function ChoiceSegments({
 function SensitiveMarker() {
   return (
     <span className="flex items-center gap-1 text-warn">
-      <ShieldAlertIcon aria-hidden className="size-3" />
+      <ShieldAlertIcon weight="bold" aria-hidden className="size-3" />
       Sensitive
     </span>
   );

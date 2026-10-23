@@ -1,6 +1,9 @@
-import { ArrowRight as ArrowRightIcon, ListChecked as ListChecksIcon } from "@carbon/icons-react";
 import { Button } from "@locusgraph/components";
 import { pluralize } from "@locusgraph/utils";
+import {
+  ArrowRight as ArrowRightIcon,
+  ListChecks as ListChecksIcon,
+} from "@phosphor-icons/react/ssr";
 import { useEffect, useId, useState } from "react";
 import {
   ApprovalPanel,
@@ -87,7 +90,7 @@ export function PlanReview({
       className={className}
     >
       <PanelHeader
-        icon={<ListChecksIcon aria-hidden />}
+        icon={<ListChecksIcon weight="bold" aria-hidden />}
         eyebrow="Plan"
         status={decision ? (decision.approved ? "Approved" : "Cancelled") : "Waiting for you"}
         tone={decision ? (decision.approved ? "done" : "danger") : "waiting"}
@@ -147,7 +150,7 @@ export function PlanReview({
                 }
               >
                 {actionLabel ?? `Run ${pluralize(steps.length, "step")}`}
-                <ArrowRightIcon aria-hidden />
+                <ArrowRightIcon weight="bold" aria-hidden />
               </Button>
             </span>
           </PanelFooter>

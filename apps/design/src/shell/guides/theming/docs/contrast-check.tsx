@@ -1,12 +1,12 @@
-import { WarningAltFilled as FailIcon, CheckmarkFilled as PassIcon } from "@carbon/icons-react";
+import { Warning as FailIcon, CheckCircle as PassIcon } from "@phosphor-icons/react/ssr";
 import { apcaLightness, contrastRatio, meetsApcaBodyText, meetsTextContrast } from "../contrast";
 import type { ResolvedTheme } from "../theme-presets";
 
 function Verdict({ passes, label }: { passes: boolean; label: string }) {
   return passes ? (
-    <PassIcon className="size-4 text-good" aria-label={`${label} passes`} />
+    <PassIcon weight="fill" className="size-4 text-good" aria-label={`${label} passes`} />
   ) : (
-    <FailIcon className="size-4 text-warn" aria-label={`${label} below target`} />
+    <FailIcon weight="fill" className="size-4 text-warn" aria-label={`${label} below target`} />
   );
 }
 

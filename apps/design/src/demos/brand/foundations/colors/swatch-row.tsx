@@ -1,5 +1,5 @@
-import { Checkmark as Check, Copy } from "@carbon/icons-react";
 import { Button } from "@locusgraph/components";
+import { Check, Copy } from "@phosphor-icons/react/ssr";
 import { useState } from "react";
 import type { ColorValue, PaletteColor } from "./palette";
 
@@ -18,7 +18,11 @@ export function CopyButton({ value, label }: { value: string; label: string }) {
   };
   return (
     <Button variant="ghost" size="icon-sm" aria-label={`Copy ${label}`} onClick={copy}>
-      {copied ? <Check className="text-good" /> : <Copy />}
+      {copied ? (
+        <Check weight="bold" aria-hidden className="text-good" />
+      ) : (
+        <Copy weight="bold" aria-hidden />
+      )}
     </Button>
   );
 }

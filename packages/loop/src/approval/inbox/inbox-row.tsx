@@ -1,5 +1,5 @@
-import { Checkmark as CheckIcon, Locked as LockIcon, Close as XIcon } from "@carbon/icons-react";
 import { Button, Checkbox, cn } from "@locusgraph/components";
+import { Check as CheckIcon, Lock as LockIcon, X as XIcon } from "@phosphor-icons/react/ssr";
 import type { RiskLevel } from "../../types";
 import { riskLabels } from "../shared/risk-badge";
 import { formatWaiting, isoOf } from "../shared/time";
@@ -34,7 +34,7 @@ export function InboxRow({ item, now, selected, onSelect, onApprove, onDeny }: I
     >
       {destructive ? (
         <span className="flex size-4 shrink-0 items-center justify-center text-muted-foreground">
-          <LockIcon aria-hidden className="size-3.5" />
+          <LockIcon weight="bold" aria-hidden className="size-3.5" />
           <span className="sr-only">{item.title} must be approved on its own</span>
         </span>
       ) : (
@@ -78,7 +78,7 @@ export function InboxRow({ item, now, selected, onSelect, onApprove, onDeny }: I
           title="Approve"
           onClick={onApprove}
         >
-          <CheckIcon aria-hidden />
+          <CheckIcon weight="bold" aria-hidden />
         </Button>
         <Button
           type="button"
@@ -89,7 +89,7 @@ export function InboxRow({ item, now, selected, onSelect, onApprove, onDeny }: I
           className="text-muted-foreground hover:text-foreground"
           onClick={onDeny}
         >
-          <XIcon aria-hidden />
+          <XIcon weight="bold" aria-hidden />
         </Button>
       </span>
     </li>

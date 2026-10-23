@@ -1,10 +1,10 @@
-import {
-  Checkmark as CheckIcon,
-  InProgress as LoaderCircleIcon,
-  Subtract as MinusIcon,
-  Close as XIcon,
-} from "@carbon/icons-react";
 import { cn } from "@locusgraph/components";
+import {
+  Check as CheckIcon,
+  CircleNotch as LoaderCircleIcon,
+  Minus as MinusIcon,
+  X as XIcon,
+} from "@phosphor-icons/react/ssr";
 import type { StepStatus } from "../../types";
 
 export const stepStatusLabels: Record<StepStatus, string> = {
@@ -24,10 +24,11 @@ const stepIconTones: Record<StepStatus, string> = {
 };
 
 function StepGlyph({ status }: { status: StepStatus }) {
-  if (status === "running") return <LoaderCircleIcon className="motion-safe:animate-spin" />;
-  if (status === "done") return <CheckIcon />;
-  if (status === "failed") return <XIcon />;
-  if (status === "skipped") return <MinusIcon />;
+  if (status === "running")
+    return <LoaderCircleIcon weight="bold" aria-hidden className="motion-safe:animate-spin" />;
+  if (status === "done") return <CheckIcon weight="bold" aria-hidden />;
+  if (status === "failed") return <XIcon weight="bold" aria-hidden />;
+  if (status === "skipped") return <MinusIcon weight="bold" aria-hidden />;
   return <span className="size-1.5 rounded-full bg-current" />;
 }
 

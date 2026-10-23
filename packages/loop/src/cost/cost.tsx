@@ -1,6 +1,6 @@
-import { Money as CoinsIcon } from "@carbon/icons-react";
 import { cn } from "@locusgraph/components";
 import { formatCount, formatMicroUsd, pluralize } from "@locusgraph/utils";
+import { Coins as CoinsIcon } from "@phosphor-icons/react/ssr";
 import { ApprovalPanel, PanelHeader } from "../shared/panel";
 import type { RunUsage } from "../types";
 import { sumUsage, type UsageTotals } from "./shared/usage-totals";
@@ -115,7 +115,7 @@ function DetailedCost({
       className={className}
     >
       <PanelHeader
-        icon={<CoinsIcon aria-hidden />}
+        icon={<CoinsIcon weight="bold" aria-hidden />}
         eyebrow={label}
         aside={pluralize(attempts.length, "attempt")}
       />

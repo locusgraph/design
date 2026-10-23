@@ -1,7 +1,7 @@
 "use client";
 
 import { Combobox as ComboboxPrimitive } from "@base-ui/react";
-import { ChevronDown as ChevronDownIcon, Close as XIcon } from "@carbon/icons-react";
+import { CaretDown as ChevronDownIcon, X as XIcon } from "@phosphor-icons/react/ssr";
 import { cn } from "cn";
 import { InputGroup, InputGroupAddon, InputGroupButton, InputGroupInput } from "../../input-group";
 
@@ -20,6 +20,8 @@ function ComboboxTrigger({ className, children, ...props }: ComboboxPrimitive.Tr
     >
       {children}
       <ChevronDownIcon
+        weight="bold"
+        aria-hidden
         data-slot="combobox-trigger-icon"
         className="pointer-events-none size-4 text-muted-foreground"
       />
@@ -35,7 +37,7 @@ function ComboboxClear({ className, ...props }: ComboboxPrimitive.Clear.Props) {
       className={cn(className)}
       {...props}
     >
-      <XIcon className="pointer-events-none" />
+      <XIcon weight="bold" aria-hidden className="pointer-events-none" />
     </ComboboxPrimitive.Clear>
   );
 }

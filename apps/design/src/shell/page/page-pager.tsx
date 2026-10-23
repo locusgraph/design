@@ -1,5 +1,8 @@
-import { ArrowLeft as ArrowLeftIcon, ArrowRight as ArrowRightIcon } from "@carbon/icons-react";
 import { Button } from "@locusgraph/components";
+import {
+  ArrowLeft as ArrowLeftIcon,
+  ArrowRight as ArrowRightIcon,
+} from "@phosphor-icons/react/ssr";
 import type { DemoIndexEntry } from "../../registry/load-demos";
 import { PlaygroundLink } from "../nav/playground-nav";
 
@@ -15,7 +18,7 @@ export function PagePager({
       {previous ? (
         <Button asChild variant="secondary" size="sm" className="shadow-none">
           <PlaygroundLink href={`/${previous.path}`}>
-            <ArrowLeftIcon />
+            <ArrowLeftIcon weight="bold" aria-hidden />
             {previous.title}
           </PlaygroundLink>
         </Button>
@@ -26,7 +29,7 @@ export function PagePager({
         <Button asChild variant="secondary" size="sm" className="shadow-none">
           <PlaygroundLink href={`/${next.path}`}>
             {next.title}
-            <ArrowRightIcon />
+            <ArrowRightIcon weight="bold" aria-hidden />
           </PlaygroundLink>
         </Button>
       )}

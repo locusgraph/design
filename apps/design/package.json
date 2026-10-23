@@ -12,7 +12,7 @@
     "registry": "node ../../scripts/registry/build.mjs"
   },
   "dependencies": {
-    "@carbon/icons-react": "catalog:",
+    "@phosphor-icons/react": "catalog:",
     "@locusgraph/blocks": "workspace:*",
     "@locusgraph/brand": "workspace:*",
     "@locusgraph/components": "workspace:*",

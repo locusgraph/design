@@ -1,6 +1,6 @@
 "use client";
 
-import { Close as XIcon } from "@carbon/icons-react";
+import { X as XIcon } from "@phosphor-icons/react/ssr";
 import { cn } from "cn";
 import * as DialogPrimitive from "radix-ui/dialog";
 import * as React from "react";
@@ -62,7 +62,7 @@ function DialogContent({
             data-slot="dialog-close"
             className="absolute top-4 right-4 rounded-sm text-soft opacity-70 transition-opacity hover:text-foreground hover:opacity-100 focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-hidden"
           >
-            <XIcon className="size-4" />
+            <XIcon weight="bold" aria-hidden className="size-4" />
             <span className="sr-only">Close</span>
           </DialogPrimitive.Close>
         ) : null}

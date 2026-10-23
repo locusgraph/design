@@ -1,4 +1,4 @@
-import { ChevronDown as ChevronDownIcon } from "@carbon/icons-react";
+import { CaretDown as ChevronDownIcon } from "@phosphor-icons/react/ssr";
 import { cva } from "class-variance-authority";
 import { cn } from "cn";
 import * as NavigationMenuPrimitive from "radix-ui/navigation-menu";
@@ -71,6 +71,7 @@ function NavigationMenuTrigger({
     >
       {children}{" "}
       <ChevronDownIcon
+        weight="bold"
         className="relative top-[1px] ml-1 size-3 transition duration-300 group-data-[state=open]:rotate-180"
         aria-hidden="true"
       />

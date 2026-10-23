@@ -1,4 +1,4 @@
-import { ChevronRight as ChevronRightIcon } from "@carbon/icons-react";
+import { CaretRight as ChevronRightIcon } from "@phosphor-icons/react/ssr";
 import { useState } from "react";
 import { CopyCommand } from "../../../landing/actions/copy-command";
 import { CodeBlock, type CodeLanguage } from "../../../preview/code-block";
@@ -19,6 +19,7 @@ function SourceFile({ file, language = "tsx" }: SourceFileProps) {
     >
       <summary className="flex cursor-pointer list-none items-center gap-2 px-3 py-2 font-mono text-[13px] outline-none select-none hover:bg-accent focus-visible:ring-2 focus-visible:ring-ring [&::-webkit-details-marker]:hidden">
         <ChevronRightIcon
+          weight="bold"
           aria-hidden
           className="size-4 shrink-0 text-muted-foreground motion-safe:transition-transform group-open/file:rotate-90"
         />

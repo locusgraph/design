@@ -1,6 +1,6 @@
 "use client";
 
-import { Draggable as GripVerticalIcon } from "@carbon/icons-react";
+import { DotsSixVertical as GripVerticalIcon } from "@phosphor-icons/react/ssr";
 import { cn } from "cn";
 import * as ResizablePrimitive from "react-resizable-panels";
 
@@ -36,7 +36,7 @@ function ResizableHandle({
     >
       {withHandle && (
         <div className="z-10 flex h-4 w-3 items-center justify-center rounded-xs border bg-border">
-          <GripVerticalIcon className="size-2.5" />
+          <GripVerticalIcon weight="bold" aria-hidden className="size-2.5" />
         </div>
       )}
     </ResizablePrimitive.Separator>

@@ -1,5 +1,5 @@
-import { ArrowRight as ArrowRightIcon } from "@carbon/icons-react";
 import { Button } from "@locusgraph/components";
+import { ArrowRight as ArrowRightIcon } from "@phosphor-icons/react/ssr";
 import { PlaygroundLink } from "../nav/playground-nav";
 import { StartWithAgent } from "./actions/start-with-agent";
 
@@ -14,6 +14,7 @@ function NewLoopPill() {
       </span>
       <span>Loop, the agent kit</span>
       <ArrowRightIcon
+        weight="bold"
         aria-hidden
         className="size-3 text-muted-foreground motion-safe:transition-transform group-hover:translate-x-0.5"
       />
@@ -37,7 +38,7 @@ export function LandingHero() {
         <Button asChild size="lg" variant="ghost">
           <PlaygroundLink href="/components">
             Browse components
-            <ArrowRightIcon aria-hidden />
+            <ArrowRightIcon weight="bold" aria-hidden />
           </PlaygroundLink>
         </Button>
       </div>

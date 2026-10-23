@@ -1,8 +1,8 @@
+import { Button, Input, Textarea } from "@locusgraph/components";
 import {
   ArrowRight as ArrowRightIcon,
-  Help as MessageCircleQuestionIcon,
-} from "@carbon/icons-react";
-import { Button, Input, Textarea } from "@locusgraph/components";
+  Question as MessageCircleQuestionIcon,
+} from "@phosphor-icons/react/ssr";
 import { useId, useState } from "react";
 import {
   ApprovalPanel,
@@ -67,7 +67,7 @@ export function Question({
       className={className}
     >
       <PanelHeader
-        icon={<MessageCircleQuestionIcon aria-hidden />}
+        icon={<MessageCircleQuestionIcon weight="bold" aria-hidden />}
         eyebrow="Agent question"
         status={answer ? "Answered" : "Waiting for you"}
         tone={answer ? "done" : "waiting"}
@@ -128,7 +128,7 @@ export function Question({
             </span>
             <Button type="submit" size="sm" disabled={!canSubmit}>
               {submitLabel}
-              <ArrowRightIcon aria-hidden />
+              <ArrowRightIcon weight="bold" aria-hidden />
             </Button>
           </PanelFooter>
         </form>

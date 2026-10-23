@@ -1,12 +1,4 @@
 import {
-  Launch as ExternalLinkIcon,
-  Maximize as MaximizeIcon,
-  Screen as MonitorIcon,
-  Restart as RotateCwIcon,
-  Mobile as SmartphoneIcon,
-  Tablet as TabletIcon,
-} from "@carbon/icons-react";
-import {
   Button,
   Separator,
   Tabs,
@@ -18,6 +10,15 @@ import {
   TooltipContent,
   TooltipTrigger,
 } from "@locusgraph/components";
+import type { Icon as IconType } from "@phosphor-icons/react";
+import {
+  ArrowSquareOut as ExternalLinkIcon,
+  ArrowsOut as MaximizeIcon,
+  Monitor as MonitorIcon,
+  ArrowClockwise as RotateCwIcon,
+  DeviceMobile as SmartphoneIcon,
+  DeviceTablet as TabletIcon,
+} from "@phosphor-icons/react/ssr";
 import type * as React from "react";
 
 export type ShellView = "preview" | "layout" | "code";
@@ -35,7 +36,7 @@ type ShellToolbarProps = {
   onFullscreen: () => void;
 };
 
-const viewports: { value: ShellViewport; label: string; icon: React.ComponentType }[] = [
+const viewports: { value: ShellViewport; label: string; icon: IconType }[] = [
   { value: "desktop", label: "Desktop", icon: MonitorIcon },
   { value: "tablet", label: "Tablet", icon: TabletIcon },
   { value: "mobile", label: "Mobile", icon: SmartphoneIcon },
@@ -83,7 +84,7 @@ export function ShellToolbar(props: ShellToolbarProps) {
               aria-label={viewport.label}
               className="size-6"
             >
-              <viewport.icon />
+              <viewport.icon weight="bold" aria-hidden />
             </ToggleGroupItem>
           ))}
         </ToggleGroup>
@@ -96,13 +97,13 @@ export function ShellToolbar(props: ShellToolbarProps) {
             disabled={props.view === "code"}
             onClick={props.onFullscreen}
           >
-            <MaximizeIcon />
+            <MaximizeIcon weight="bold" aria-hidden />
           </Button>
         </IconAction>
         <IconAction label="Open in new tab">
           <Button asChild variant="ghost" size="icon-xs">
             <a href={props.frameUrl} target="_blank" rel="noreferrer" aria-label="Open in new tab">
-              <ExternalLinkIcon />
+              <ExternalLinkIcon weight="bold" aria-hidden />
             </a>
           </Button>
         </IconAction>
@@ -113,7 +114,7 @@ export function ShellToolbar(props: ShellToolbarProps) {
             aria-label="Reload preview"
             onClick={props.onReload}
           >
-            <RotateCwIcon />
+            <RotateCwIcon weight="bold" aria-hidden />
           </Button>
         </IconAction>
       </div>

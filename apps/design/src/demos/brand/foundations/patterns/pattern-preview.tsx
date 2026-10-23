@@ -1,6 +1,6 @@
-import { Reset as RotateCcw } from "@carbon/icons-react";
 import { LocusGraphMark, LocusGraphWordmark } from "@locusgraph/brand";
 import { Button } from "@locusgraph/components";
+import { ArrowCounterClockwise as RotateCcw } from "@phosphor-icons/react/ssr";
 import { useState } from "react";
 
 export const brandPatterns = [
@@ -27,7 +27,7 @@ function IgnitingMark() {
     <div className="flex flex-col items-center gap-4">
       <LocusGraphMark key={run} className="ignites size-16" />
       <Button variant="outline" size="sm" onClick={() => setRun((current) => current + 1)}>
-        <RotateCcw />
+        <RotateCcw weight="bold" aria-hidden />
         Replay
       </Button>
     </div>

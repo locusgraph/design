@@ -1,15 +1,15 @@
 import {
-  Screen as MonitorIcon,
-  Search as SearchIcon,
-  Mobile as SmartphoneIcon,
-} from "@carbon/icons-react";
-import {
   Button,
   Separator,
   ThemeToggle,
   ToggleGroup,
   ToggleGroupItem,
 } from "@locusgraph/components";
+import {
+  Monitor as MonitorIcon,
+  MagnifyingGlass as SearchIcon,
+  DeviceMobile as SmartphoneIcon,
+} from "@phosphor-icons/react/ssr";
 import { type ShellSettings, setParam } from "../../url-state";
 
 type HeaderActionsProps = { settings: ShellSettings; onSearch: () => void };
@@ -23,7 +23,7 @@ export function HeaderActions({ settings, onSearch }: HeaderActionsProps) {
         onClick={onSearch}
         className="w-8 justify-start bg-surface font-normal text-muted-foreground shadow-none hover:bg-surface/80 sm:w-64"
       >
-        <SearchIcon />
+        <SearchIcon weight="bold" aria-hidden />
         <span className="hidden sm:inline">Search components…</span>
         <kbd className="ml-auto hidden rounded border bg-background px-1.5 font-mono text-[11px] sm:inline">
           ⌘K
@@ -40,10 +40,10 @@ export function HeaderActions({ settings, onSearch }: HeaderActionsProps) {
         className="hidden sm:flex"
       >
         <ToggleGroupItem value="desktop" aria-label="Desktop preview" className="size-8">
-          <MonitorIcon />
+          <MonitorIcon weight="bold" aria-hidden />
         </ToggleGroupItem>
         <ToggleGroupItem value="mobile" aria-label="Mobile preview" className="size-8">
-          <SmartphoneIcon />
+          <SmartphoneIcon weight="bold" aria-hidden />
         </ToggleGroupItem>
       </ToggleGroup>
       <Separator orientation="vertical" />

@@ -1,13 +1,13 @@
 "use client";
 
+import { cn, TooltipProvider } from "@locusgraph/components";
 import {
-  Checkmark as CheckIcon,
+  Check as CheckIcon,
   Copy as CopyIcon,
-  Renew as RefreshCwIcon,
+  ArrowsClockwise as RefreshCwIcon,
   ThumbsDown as ThumbsDownIcon,
   ThumbsUp as ThumbsUpIcon,
-} from "@carbon/icons-react";
-import { cn, TooltipProvider } from "@locusgraph/components";
+} from "@phosphor-icons/react/ssr";
 import type { ComponentProps } from "react";
 import { useCopied } from "../use-copied";
 import { ActionButton } from "./action-button";
@@ -80,12 +80,16 @@ export function Actions({
               markCopied();
             }}
           >
-            {copied ? <CheckIcon className="text-good" /> : <CopyIcon />}
+            {copied ? (
+              <CheckIcon weight="bold" aria-hidden className="text-good" />
+            ) : (
+              <CopyIcon weight="bold" aria-hidden />
+            )}
           </ActionButton>
         )}
         {onRetry && (
           <ActionButton label="Retry" onClick={onRetry}>
-            <RefreshCwIcon />
+            <RefreshCwIcon weight="bold" aria-hidden />
           </ActionButton>
         )}
         {onFeedback && (
@@ -96,7 +100,11 @@ export function Actions({
                 aria-pressed={feedback === "up"}
                 onClick={() => onFeedback(toggledFeedback(feedback, "up"))}
               >
-                <ThumbsUpIcon className={cn(feedback === "up" && "fill-current text-good")} />
+                <ThumbsUpIcon
+                  weight={feedback === "up" ? "fill" : "bold"}
+                  aria-hidden
+                  className={cn(feedback === "up" && "text-good")}
+                />
               </ActionButton>
             )}
             {showsThumb(feedback, "down") && (
@@ -105,7 +113,11 @@ export function Actions({
                 aria-pressed={feedback === "down"}
                 onClick={() => onFeedback(toggledFeedback(feedback, "down"))}
               >
-                <ThumbsDownIcon className={cn(feedback === "down" && "fill-current text-bad")} />
+                <ThumbsDownIcon
+                  weight={feedback === "down" ? "fill" : "bold"}
+                  aria-hidden
+                  className={cn(feedback === "down" && "text-bad")}
+                />
               </ActionButton>
             )}
           </>

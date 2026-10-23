@@ -1,4 +1,3 @@
-import { Copy as CopyIcon, Search as SearchIcon } from "@carbon/icons-react";
 import {
   InputGroup,
   InputGroupAddon,
@@ -7,6 +6,7 @@ import {
   InputGroupText,
   InputGroupTextarea,
 } from "@locusgraph/components";
+import { Copy as CopyIcon, MagnifyingGlass as SearchIcon } from "@phosphor-icons/react/ssr";
 import { defineDemo, select, text, toggle } from "../../registry/define-demo";
 
 const aligns = ["inline-start", "inline-end"] as const;
@@ -16,7 +16,7 @@ function Search() {
     <InputGroup className="max-w-sm">
       <InputGroupInput placeholder="Search members" />
       <InputGroupAddon>
-        <SearchIcon />
+        <SearchIcon weight="bold" aria-hidden />
       </InputGroupAddon>
       <InputGroupAddon align="inline-end">12 results</InputGroupAddon>
     </InputGroup>
@@ -43,7 +43,7 @@ function CopyKey() {
       <InputGroupInput readOnly defaultValue="lg_live_4f9a2c7e1b" className="font-mono" />
       <InputGroupAddon align="inline-end">
         <InputGroupButton size="icon-xs" aria-label="Copy API key">
-          <CopyIcon />
+          <CopyIcon weight="bold" aria-hidden />
         </InputGroupButton>
       </InputGroupAddon>
     </InputGroup>
@@ -77,7 +77,7 @@ export default defineDemo({
     <InputGroup className="w-80">
       <InputGroupInput placeholder={placeholder} />
       <InputGroupAddon align={align}>
-        <SearchIcon />
+        <SearchIcon weight="bold" aria-hidden />
       </InputGroupAddon>
       {button && (
         <InputGroupAddon align="inline-end">

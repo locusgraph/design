@@ -1,5 +1,5 @@
-import { Checkmark as CheckIcon, Copy as CopyIcon } from "@carbon/icons-react";
 import { Button, cn } from "@locusgraph/components";
+import { Check as CheckIcon, Copy as CopyIcon } from "@phosphor-icons/react/ssr";
 import { useEffect, useState } from "react";
 import type { HighlighterCore, LanguageRegistration } from "shiki/core";
 
@@ -77,7 +77,7 @@ function CopyButton({ text }: { text: string }) {
       onClick={copy}
       className="absolute top-2 right-2 bg-surface hover:bg-accent"
     >
-      {copied ? <CheckIcon /> : <CopyIcon />}
+      {copied ? <CheckIcon weight="bold" aria-hidden /> : <CopyIcon weight="bold" aria-hidden />}
     </Button>
   );
 }

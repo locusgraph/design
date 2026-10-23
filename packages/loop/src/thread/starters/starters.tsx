@@ -1,5 +1,5 @@
-import { ArrowUpRight as ArrowUpRightIcon } from "@carbon/icons-react";
 import { cn } from "@locusgraph/components";
+import { ArrowUpRight as ArrowUpRightIcon } from "@phosphor-icons/react/ssr";
 import type { ComponentProps } from "react";
 
 export type Starter = string | { text: string; label?: string };
@@ -46,6 +46,7 @@ export function Starters({
         >
           <span className="min-w-0 flex-1 text-pretty">{labelOf(suggestion)}</span>
           <ArrowUpRightIcon
+            weight="bold"
             aria-hidden
             className="size-3.5 shrink-0 text-muted-foreground opacity-0 group-hover:opacity-100 group-focus-visible:opacity-100 motion-safe:transition-opacity"
           />

@@ -1,10 +1,10 @@
-import {
-  Warning as AlertCircleIcon,
-  WarningAlt as AlertTriangleIcon,
-  CheckmarkOutline as CheckCircle2Icon,
-  Information as InfoIcon,
-} from "@carbon/icons-react";
 import { Alert, AlertDescription, AlertTitle, Button } from "@locusgraph/components";
+import {
+  WarningCircle as AlertCircleIcon,
+  Warning as AlertTriangleIcon,
+  CheckCircle as CheckCircle2Icon,
+  Info as InfoIcon,
+} from "@phosphor-icons/react/ssr";
 import { formatProp } from "../../../registry/control-values";
 import { defineDemo, select, text, toggle } from "../../../registry/define-demo";
 
@@ -13,7 +13,7 @@ const variants = ["destructive", "default", "success", "warning"] as const;
 function Success() {
   return (
     <Alert variant="success" className="max-w-md">
-      <CheckCircle2Icon />
+      <CheckCircle2Icon weight="bold" aria-hidden />
       <AlertTitle>Plan upgraded</AlertTitle>
       <AlertDescription>Your organization is now on the Team plan.</AlertDescription>
     </Alert>
@@ -23,7 +23,7 @@ function Success() {
 function PaymentFailed() {
   return (
     <Alert variant="destructive" className="max-w-md">
-      <AlertCircleIcon />
+      <AlertCircleIcon weight="bold" aria-hidden />
       <AlertTitle>Payment failed</AlertTitle>
       <AlertDescription>
         <p>We could not charge the card ending in 4242.</p>
@@ -39,7 +39,7 @@ function PaymentFailed() {
 function TitleOnly() {
   return (
     <Alert className="max-w-md">
-      <InfoIcon />
+      <InfoIcon weight="bold" aria-hidden />
       <AlertTitle>Usage resets on the 1st of each month.</AlertTitle>
     </Alert>
   );
@@ -48,7 +48,7 @@ function TitleOnly() {
 function WithAction() {
   return (
     <Alert variant="warning" className="max-w-md">
-      <AlertTriangleIcon />
+      <AlertTriangleIcon weight="bold" aria-hidden />
       <AlertTitle>You have used 90% of your API calls</AlertTitle>
       <AlertDescription>
         <p>Upgrade before the limit to avoid failed requests.</p>
@@ -71,7 +71,7 @@ export default defineDemo({
   },
   playground: ({ variant, icon, title }) => (
     <Alert variant={variant} className="max-w-md">
-      {icon ? <AlertCircleIcon /> : null}
+      {icon ? <AlertCircleIcon weight="bold" aria-hidden /> : null}
       <AlertTitle>{title}</AlertTitle>
       <AlertDescription>We could not charge the card ending in 4242.</AlertDescription>
     </Alert>

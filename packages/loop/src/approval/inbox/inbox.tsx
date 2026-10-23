@@ -1,6 +1,6 @@
-import { MailAll as InboxIcon } from "@carbon/icons-react";
 import { Button, Checkbox, Label } from "@locusgraph/components";
 import { pluralize } from "@locusgraph/utils";
+import { Tray as InboxIcon } from "@phosphor-icons/react/ssr";
 import { useId, useState } from "react";
 import {
   ApprovalPanel,
@@ -43,7 +43,7 @@ export function Inbox({
   return (
     <ApprovalPanel data-slot="inbox" aria-label={title} className={className}>
       <PanelHeader
-        icon={<InboxIcon aria-hidden />}
+        icon={<InboxIcon weight="bold" aria-hidden />}
         eyebrow="Approvals"
         status={empty ? "All clear" : `${items.length} waiting`}
         tone={empty ? "done" : "waiting"}
@@ -52,7 +52,7 @@ export function Inbox({
       {empty ? (
         <PanelEmpty
           data-slot="inbox-empty"
-          icon={<InboxIcon aria-hidden />}
+          icon={<InboxIcon weight="bold" aria-hidden />}
           title="Nothing waiting for you"
           description="When an agent needs approval to write, pay, send or delete, it shows up here."
         />

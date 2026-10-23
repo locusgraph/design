@@ -1,13 +1,13 @@
 import {
-  ChevronDown as ChevronDownIcon,
-  ChevronSort as ChevronsUpDownIcon,
-} from "@carbon/icons-react";
-import {
   Button,
   Collapsible,
   CollapsibleContent,
   CollapsibleTrigger,
 } from "@locusgraph/components";
+import {
+  CaretDown as ChevronDownIcon,
+  CaretUpDown as ChevronsUpDownIcon,
+} from "@phosphor-icons/react/ssr";
 import { formatProp } from "../../registry/control-values";
 import { defineDemo, text, toggle } from "../../registry/define-demo";
 
@@ -20,7 +20,7 @@ function Basic() {
         <span className="text-sm font-semibold">3 API keys</span>
         <CollapsibleTrigger asChild>
           <Button variant="ghost" size="icon-sm" aria-label="Show keys">
-            <ChevronsUpDownIcon />
+            <ChevronsUpDownIcon weight="bold" aria-hidden />
           </Button>
         </CollapsibleTrigger>
       </div>
@@ -41,7 +41,11 @@ function OpenByDefault() {
     <Collapsible defaultOpen className="w-full max-w-sm rounded-lg border">
       <CollapsibleTrigger className="group flex w-full items-center justify-between p-4 text-sm font-medium">
         Invoice details
-        <ChevronDownIcon className="size-4 transition-transform group-data-[state=open]:rotate-180" />
+        <ChevronDownIcon
+          weight="bold"
+          aria-hidden
+          className="size-4 transition-transform group-data-[state=open]:rotate-180"
+        />
       </CollapsibleTrigger>
       <CollapsibleContent className="border-t p-4 text-sm text-muted-foreground">
         Pro plan, 20 seats, billed monthly. Total $480.00.
@@ -55,7 +59,7 @@ function Disabled() {
     <Collapsible disabled className="w-full max-w-sm rounded-lg border">
       <CollapsibleTrigger className="flex w-full items-center justify-between p-4 text-sm font-medium disabled:opacity-50">
         Audit log (Enterprise only)
-        <ChevronDownIcon className="size-4" />
+        <ChevronDownIcon weight="bold" aria-hidden className="size-4" />
       </CollapsibleTrigger>
       <CollapsibleContent className="border-t p-4 text-sm">Audit events.</CollapsibleContent>
     </Collapsible>
@@ -77,7 +81,11 @@ export default defineDemo({
     >
       <CollapsibleTrigger className="group flex w-full items-center justify-between p-4 text-sm font-medium disabled:opacity-50">
         {label}
-        <ChevronDownIcon className="size-4 transition-transform group-data-[state=open]:rotate-180" />
+        <ChevronDownIcon
+          weight="bold"
+          aria-hidden
+          className="size-4 transition-transform group-data-[state=open]:rotate-180"
+        />
       </CollapsibleTrigger>
       <CollapsibleContent className="border-t p-4 text-sm text-muted-foreground">
         Next charge of $480.00 on Nov 1 to Visa ending 4242.

@@ -1,11 +1,4 @@
 import {
-  Purchase as CreditCardIcon,
-  Document as FileTextIcon,
-  Password as KeyRoundIcon,
-  Settings as SettingsIcon,
-  UserMultiple as UsersIcon,
-} from "@carbon/icons-react";
-import {
   Button,
   Command,
   CommandDialog,
@@ -17,6 +10,13 @@ import {
   CommandSeparator,
   CommandShortcut,
 } from "@locusgraph/components";
+import {
+  CreditCard as CreditCardIcon,
+  FileText as FileTextIcon,
+  Key as KeyRoundIcon,
+  Gear as SettingsIcon,
+  Users as UsersIcon,
+} from "@phosphor-icons/react/ssr";
 import { useState } from "react";
 import { defineDemo, text, toggle } from "../../../registry/define-demo";
 
@@ -28,12 +28,12 @@ function CommandMenu({ placeholder, shortcuts }: { placeholder: string; shortcut
         <CommandEmpty>No results found.</CommandEmpty>
         <CommandGroup heading="Billing">
           <CommandItem>
-            <CreditCardIcon />
+            <CreditCardIcon weight="bold" aria-hidden />
             Change plan
             {shortcuts && <CommandShortcut>⌘P</CommandShortcut>}
           </CommandItem>
           <CommandItem>
-            <FileTextIcon />
+            <FileTextIcon weight="bold" aria-hidden />
             View invoices
             {shortcuts && <CommandShortcut>⌘I</CommandShortcut>}
           </CommandItem>
@@ -41,15 +41,15 @@ function CommandMenu({ placeholder, shortcuts }: { placeholder: string; shortcut
         <CommandSeparator />
         <CommandGroup heading="Organization">
           <CommandItem>
-            <UsersIcon />
+            <UsersIcon weight="bold" aria-hidden />
             Invite member
           </CommandItem>
           <CommandItem>
-            <KeyRoundIcon />
+            <KeyRoundIcon weight="bold" aria-hidden />
             Create API key
           </CommandItem>
           <CommandItem>
-            <SettingsIcon />
+            <SettingsIcon weight="bold" aria-hidden />
             Settings
             {shortcuts && <CommandShortcut>⌘,</CommandShortcut>}
           </CommandItem>

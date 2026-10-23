@@ -1,10 +1,10 @@
 "use client";
 
 import {
-  ChevronDown as ChevronDownIcon,
-  ChevronLeft as ChevronLeftIcon,
-  ChevronRight as ChevronRightIcon,
-} from "@carbon/icons-react";
+  CaretDown as ChevronDownIcon,
+  CaretLeft as ChevronLeftIcon,
+  CaretRight as ChevronRightIcon,
+} from "@phosphor-icons/react/ssr";
 import { cn } from "cn";
 import * as React from "react";
 import { DayPicker, getDefaultClassNames } from "react-day-picker";
@@ -115,14 +115,35 @@ function Calendar({
         },
         Chevron: ({ className, orientation, ...props }) => {
           if (orientation === "left") {
-            return <ChevronLeftIcon className={cn("size-4", className)} {...props} />;
+            return (
+              <ChevronLeftIcon
+                weight="bold"
+                aria-hidden
+                className={cn("size-4", className)}
+                {...props}
+              />
+            );
           }
 
           if (orientation === "right") {
-            return <ChevronRightIcon className={cn("size-4", className)} {...props} />;
+            return (
+              <ChevronRightIcon
+                weight="bold"
+                aria-hidden
+                className={cn("size-4", className)}
+                {...props}
+              />
+            );
           }
 
-          return <ChevronDownIcon className={cn("size-4", className)} {...props} />;
+          return (
+            <ChevronDownIcon
+              weight="bold"
+              aria-hidden
+              className={cn("size-4", className)}
+              {...props}
+            />
+          );
         },
         DayButton: CalendarDayButton,
         WeekNumber: ({ children, ...props }) => {

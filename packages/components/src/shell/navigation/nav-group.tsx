@@ -1,3 +1,4 @@
+import type { Icon as IconType } from "@phosphor-icons/react";
 import type * as React from "react";
 import { SidebarMenu, SidebarMenuButton, SidebarMenuItem } from "../../layout/sidebar/sidebar-menu";
 import {
@@ -10,7 +11,7 @@ import type { LinkComponent } from "../link";
 type AppNavItem = {
   title: string;
   href: string;
-  icon: React.ComponentType<{ className?: string }>;
+  icon: IconType;
   external?: boolean;
 };
 
@@ -34,7 +35,7 @@ function NavItemLink({
 }: React.ComponentProps<"a"> & { item: AppNavItem; Link: LinkComponent | "a" }) {
   const content = (
     <>
-      <item.icon />
+      <item.icon weight="bold" aria-hidden />
       <span>{item.title}</span>
     </>
   );

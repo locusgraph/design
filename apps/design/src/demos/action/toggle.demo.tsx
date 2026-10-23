@@ -1,11 +1,11 @@
+import { Toggle } from "@locusgraph/components";
 import {
-  Notification as BellIcon,
-  TextBold as BoldIcon,
+  Bell as BellIcon,
+  TextB as BoldIcon,
   TextItalic as ItalicIcon,
   Star as StarIcon,
   TextUnderline as UnderlineIcon,
-} from "@carbon/icons-react";
-import { Toggle } from "@locusgraph/components";
+} from "@phosphor-icons/react/ssr";
 import { formatProp } from "../../registry/control-values";
 import { defineDemo, select, text, toggle } from "../../registry/define-demo";
 
@@ -16,13 +16,13 @@ function Outline() {
   return (
     <div className="flex items-center gap-2">
       <Toggle variant="outline" aria-label="Bold">
-        <BoldIcon />
+        <BoldIcon weight="bold" aria-hidden />
       </Toggle>
       <Toggle variant="outline" aria-label="Italic">
-        <ItalicIcon />
+        <ItalicIcon weight="bold" aria-hidden />
       </Toggle>
       <Toggle variant="outline" aria-label="Underline">
-        <UnderlineIcon />
+        <UnderlineIcon weight="bold" aria-hidden />
       </Toggle>
     </div>
   );
@@ -31,7 +31,7 @@ function Outline() {
 function WithText() {
   return (
     <Toggle variant="outline" defaultPressed aria-label="Usage alerts">
-      <BellIcon />
+      <BellIcon weight="bold" aria-hidden />
       Usage alerts
     </Toggle>
   );
@@ -41,13 +41,13 @@ function Sizes() {
   return (
     <div className="flex items-center gap-2">
       <Toggle size="sm" variant="outline" aria-label="Favorite">
-        <StarIcon />
+        <StarIcon weight="bold" aria-hidden />
       </Toggle>
       <Toggle variant="outline" aria-label="Favorite">
-        <StarIcon />
+        <StarIcon weight="bold" aria-hidden />
       </Toggle>
       <Toggle size="lg" variant="outline" aria-label="Favorite">
-        <StarIcon />
+        <StarIcon weight="bold" aria-hidden />
       </Toggle>
     </div>
   );
@@ -56,7 +56,7 @@ function Sizes() {
 function Disabled() {
   return (
     <Toggle disabled aria-label="Pin organization">
-      <StarIcon />
+      <StarIcon weight="bold" aria-hidden />
       Pinned
     </Toggle>
   );
@@ -74,7 +74,7 @@ export default defineDemo({
   },
   playground: ({ variant, size, disabled, label }) => (
     <Toggle variant={variant} size={size} disabled={disabled} aria-label={label}>
-      <BellIcon />
+      <BellIcon weight="bold" aria-hidden />
       {label}
     </Toggle>
   ),

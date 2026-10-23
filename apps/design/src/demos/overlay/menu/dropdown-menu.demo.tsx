@@ -1,11 +1,4 @@
 import {
-  Purchase as CreditCardIcon,
-  Password as KeyRoundIcon,
-  Logout as LogOutIcon,
-  OverflowMenuHorizontal as MoreHorizontalIcon,
-  User as UserIcon,
-} from "@carbon/icons-react";
-import {
   Button,
   DropdownMenu,
   DropdownMenuCheckboxItem,
@@ -22,6 +15,13 @@ import {
   DropdownMenuSubTrigger,
   DropdownMenuTrigger,
 } from "@locusgraph/components";
+import {
+  CreditCard as CreditCardIcon,
+  Key as KeyRoundIcon,
+  SignOut as LogOutIcon,
+  DotsThree as MoreHorizontalIcon,
+  User as UserIcon,
+} from "@phosphor-icons/react/ssr";
 import { formatProp } from "../../../registry/control-values";
 import { defineDemo, select, toggle } from "../../../registry/define-demo";
 
@@ -38,23 +38,23 @@ function AccountMenu({ align, open }: { align: (typeof aligns)[number]; open?: b
         <DropdownMenuSeparator />
         <DropdownMenuGroup>
           <DropdownMenuItem>
-            <UserIcon />
+            <UserIcon weight="bold" aria-hidden />
             Profile
             <DropdownMenuShortcut>⇧⌘P</DropdownMenuShortcut>
           </DropdownMenuItem>
           <DropdownMenuItem>
-            <CreditCardIcon />
+            <CreditCardIcon weight="bold" aria-hidden />
             Billing
             <DropdownMenuShortcut>⌘B</DropdownMenuShortcut>
           </DropdownMenuItem>
           <DropdownMenuItem>
-            <KeyRoundIcon />
+            <KeyRoundIcon weight="bold" aria-hidden />
             API keys
           </DropdownMenuItem>
         </DropdownMenuGroup>
         <DropdownMenuSeparator />
         <DropdownMenuItem variant="destructive">
-          <LogOutIcon />
+          <LogOutIcon weight="bold" aria-hidden />
           Sign out
         </DropdownMenuItem>
       </DropdownMenuContent>
@@ -67,7 +67,7 @@ function RowActions() {
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <Button variant="ghost" size="icon" aria-label="Member actions">
-          <MoreHorizontalIcon />
+          <MoreHorizontalIcon weight="bold" aria-hidden />
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end">

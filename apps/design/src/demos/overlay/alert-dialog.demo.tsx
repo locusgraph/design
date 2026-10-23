@@ -1,4 +1,3 @@
-import { Password as KeyRoundIcon } from "@carbon/icons-react";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -12,6 +11,7 @@ import {
   AlertDialogTrigger,
   Button,
 } from "@locusgraph/components";
+import { Key as KeyRoundIcon } from "@phosphor-icons/react/ssr";
 import { formatProp } from "../../registry/control-values";
 import { defineDemo, select, text, toggle } from "../../registry/define-demo";
 
@@ -78,7 +78,7 @@ function WithMedia() {
       <AlertDialogContent size="sm">
         <AlertDialogHeader>
           <AlertDialogMedia>
-            <KeyRoundIcon />
+            <KeyRoundIcon weight="bold" aria-hidden />
           </AlertDialogMedia>
           <AlertDialogTitle>Rotate API key?</AlertDialogTitle>
           <AlertDialogDescription>The old key stops working in 24 hours.</AlertDialogDescription>

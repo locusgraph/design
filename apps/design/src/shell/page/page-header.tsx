@@ -1,10 +1,10 @@
+import { Button, Tooltip, TooltipContent, TooltipTrigger } from "@locusgraph/components";
 import {
   ArrowLeft as ArrowLeftIcon,
   ArrowRight as ArrowRightIcon,
-  Checkmark as CheckIcon,
+  Check as CheckIcon,
   Copy as CopyIcon,
-} from "@carbon/icons-react";
-import { Button, Tooltip, TooltipContent, TooltipTrigger } from "@locusgraph/components";
+} from "@phosphor-icons/react/ssr";
 import { useState } from "react";
 import type { DemoIndexEntry } from "../../registry/load-demos";
 import { PlaygroundLink } from "../nav/playground-nav";
@@ -26,7 +26,7 @@ function CopyPageButton({ markdown }: { markdown: string }) {
   };
   return (
     <Button variant="secondary" size="sm" onClick={copy} className="h-7 shadow-none">
-      {copied ? <CheckIcon /> : <CopyIcon />}
+      {copied ? <CheckIcon weight="bold" aria-hidden /> : <CopyIcon weight="bold" aria-hidden />}
       {copied ? "Copied" : "Copy page"}
     </Button>
   );
@@ -49,7 +49,7 @@ function NeighborButton({
         disabled
         aria-label={`No ${direction} component`}
       >
-        <Icon />
+        <Icon weight="bold" aria-hidden />
       </Button>
     );
   }
@@ -58,7 +58,7 @@ function NeighborButton({
       <TooltipTrigger asChild>
         <Button asChild variant="secondary" size="icon-sm" className="size-7 shadow-none">
           <PlaygroundLink href={`/${entry.path}`} aria-label={`${direction}: ${entry.title}`}>
-            <Icon />
+            <Icon weight="bold" aria-hidden />
           </PlaygroundLink>
         </Button>
       </TooltipTrigger>

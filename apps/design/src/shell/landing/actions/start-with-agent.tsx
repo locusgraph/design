@@ -1,10 +1,10 @@
+import { cn } from "@locusgraph/components";
 import {
   Asterisk as AsteriskIcon,
   Cube as BoxIcon,
-  Checkmark as CheckIcon,
+  Check as CheckIcon,
   Copy as CopyIcon,
-} from "@carbon/icons-react";
-import { cn } from "@locusgraph/components";
+} from "@phosphor-icons/react/ssr";
 import type * as React from "react";
 import { useState } from "react";
 
@@ -16,8 +16,8 @@ const agentPrompt = `Build this UI with the LocusGraph design system.
 4. Follow the house style: square containers, pill buttons, ruled lines instead of cards, the eyebrow class for small labels, tokens instead of raw colors.`;
 
 const agentChips: { label: string; icon: React.ReactNode }[] = [
-  { label: "Claude Code", icon: <AsteriskIcon className="size-3.5" /> },
-  { label: "Cursor", icon: <BoxIcon className="size-3" /> },
+  { label: "Claude Code", icon: <AsteriskIcon weight="bold" aria-hidden className="size-3.5" /> },
+  { label: "Cursor", icon: <BoxIcon weight="bold" aria-hidden className="size-3" /> },
   { label: "VS Code", icon: <span>VS</span> },
   { label: "Codex", icon: <span>CX</span> },
 ];
@@ -59,9 +59,9 @@ export function StartWithAgent({ className }: { className?: string }) {
         <AgentChips />
         <span>{copied ? "Prompt copied" : "Start with an agent"}</span>
         {copied ? (
-          <CheckIcon aria-hidden className="size-4" />
+          <CheckIcon weight="bold" aria-hidden className="size-4" />
         ) : (
-          <CopyIcon aria-hidden className="size-4 opacity-70" />
+          <CopyIcon weight="bold" aria-hidden className="size-4 opacity-70" />
         )}
       </button>
       <span role="status" aria-live="polite" className="sr-only">

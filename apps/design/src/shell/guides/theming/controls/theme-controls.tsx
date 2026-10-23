@@ -1,5 +1,5 @@
-import { Shuffle as ShuffleIcon } from "@carbon/icons-react";
 import { Button } from "@locusgraph/components";
+import { Shuffle as ShuffleIcon } from "@phosphor-icons/react/ssr";
 import {
   type ContrastMode,
   neutralPreset,
@@ -76,7 +76,7 @@ export function ThemeControls({ mode, settings, theme, onChange, onShuffle }: Th
       </div>
       <div className="flex gap-2 border-t bg-muted/70 p-3">
         <Button variant="outline" className="flex-1" onClick={onShuffle}>
-          <ShuffleIcon />
+          <ShuffleIcon weight="bold" aria-hidden />
           Shuffle
         </Button>
         <Button

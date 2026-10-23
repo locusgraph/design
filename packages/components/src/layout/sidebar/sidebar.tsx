@@ -1,6 +1,6 @@
 "use client";
 
-import { SidePanelOpen as PanelLeftIcon } from "@carbon/icons-react";
+import { SidebarSimple as PanelLeftIcon } from "@phosphor-icons/react/ssr";
 import { cn } from "cn";
 import type * as React from "react";
 import { Button } from "../../action/button";
@@ -129,7 +129,7 @@ function SidebarTrigger({ className, onClick, ...props }: React.ComponentProps<t
       }}
       {...props}
     >
-      <PanelLeftIcon />
+      <PanelLeftIcon weight="bold" aria-hidden />
       <span className="sr-only">Toggle Sidebar</span>
     </Button>
   );

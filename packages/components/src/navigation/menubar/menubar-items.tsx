@@ -1,6 +1,6 @@
 "use client";
 
-import { Checkmark as CheckIcon, CircleSolid as CircleIcon } from "@carbon/icons-react";
+import { Check as CheckIcon, Circle as CircleIcon } from "@phosphor-icons/react/ssr";
 import { cn } from "cn";
 import * as MenubarPrimitive from "radix-ui/menubar";
 import * as React from "react";
@@ -46,7 +46,7 @@ function MenubarCheckboxItem({
     >
       <span className="pointer-events-none absolute left-2 flex size-3.5 items-center justify-center">
         <MenubarPrimitive.ItemIndicator>
-          <CheckIcon className="size-4" />
+          <CheckIcon weight="bold" aria-hidden className="size-4" />
         </MenubarPrimitive.ItemIndicator>
       </span>
       {children}
@@ -74,7 +74,7 @@ function MenubarRadioItem({
     >
       <span className="pointer-events-none absolute left-2 flex size-3.5 items-center justify-center">
         <MenubarPrimitive.ItemIndicator>
-          <CircleIcon className="size-2 fill-current" />
+          <CircleIcon weight="fill" aria-hidden className="size-2 fill-current" />
         </MenubarPrimitive.ItemIndicator>
       </span>
       {children}

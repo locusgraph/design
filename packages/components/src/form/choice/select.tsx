@@ -1,10 +1,10 @@
 "use client";
 
 import {
-  Checkmark as CheckIcon,
-  ChevronDown as ChevronDownIcon,
-  ChevronUp as ChevronUpIcon,
-} from "@carbon/icons-react";
+  Check as CheckIcon,
+  CaretDown as ChevronDownIcon,
+  CaretUp as ChevronUpIcon,
+} from "@phosphor-icons/react/ssr";
 import { cn } from "cn";
 import * as SelectPrimitive from "radix-ui/select";
 import * as React from "react";
@@ -41,7 +41,7 @@ function SelectTrigger({
     >
       {children}
       <SelectPrimitive.Icon asChild>
-        <ChevronDownIcon className="size-4 text-muted-foreground" />
+        <ChevronDownIcon weight="bold" aria-hidden className="size-4 text-muted-foreground" />
       </SelectPrimitive.Icon>
     </SelectPrimitive.Trigger>
   );
@@ -113,7 +113,7 @@ function SelectItem({
         className="absolute right-2 flex size-3.5 items-center justify-center"
       >
         <SelectPrimitive.ItemIndicator>
-          <CheckIcon className="size-4" />
+          <CheckIcon weight="bold" aria-hidden className="size-4" />
         </SelectPrimitive.ItemIndicator>
       </span>
       <SelectPrimitive.ItemText>{children}</SelectPrimitive.ItemText>
@@ -144,7 +144,7 @@ function SelectScrollUpButton({
       className={cn("flex cursor-default items-center justify-center py-1", className)}
       {...props}
     >
-      <ChevronUpIcon className="size-4" />
+      <ChevronUpIcon weight="bold" aria-hidden className="size-4" />
     </SelectPrimitive.ScrollUpButton>
   );
 }
@@ -159,7 +159,7 @@ function SelectScrollDownButton({
       className={cn("flex cursor-default items-center justify-center py-1", className)}
       {...props}
     >
-      <ChevronDownIcon className="size-4" />
+      <ChevronDownIcon weight="bold" aria-hidden className="size-4" />
     </SelectPrimitive.ScrollDownButton>
   );
 }

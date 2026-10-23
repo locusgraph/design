@@ -1,5 +1,5 @@
-import { ListChecked as ListChecksIcon } from "@carbon/icons-react";
 import { cn } from "@locusgraph/components";
+import { ListChecks as ListChecksIcon } from "@phosphor-icons/react/ssr";
 import { lineIconClass, lineRowClass } from "../../shared/line";
 import type { AgentStep, StepStatus } from "../../types";
 import { StepIcon, stepStatusLabels } from "./step-icon";
@@ -74,7 +74,7 @@ export function Steps({ steps, title = "Plan", className }: StepsProps) {
     >
       <header className={lineRowClass}>
         <span aria-hidden className={lineIconClass}>
-          <ListChecksIcon />
+          <ListChecksIcon weight="bold" aria-hidden />
         </span>
         <span className="truncate">{title}</span>
         <span className="shrink-0 text-faint tabular-nums">{progressLabel(steps)}</span>

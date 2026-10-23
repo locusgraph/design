@@ -1,5 +1,5 @@
-import { Checkmark as CheckIcon, Copy as CopyIcon } from "@carbon/icons-react";
 import { Button } from "@locusgraph/components";
+import { Check as CheckIcon, Copy as CopyIcon } from "@phosphor-icons/react/ssr";
 import { useCopied, writeToClipboard } from "../use-copied";
 
 type CopyCodeButtonProps = {
@@ -28,7 +28,11 @@ export function CopyCodeButton({ code, onCopy }: CopyCodeButtonProps) {
       className="text-muted-foreground hover:text-foreground"
       onClick={copy}
     >
-      {copied ? <CheckIcon className="text-good" /> : <CopyIcon />}
+      {copied ? (
+        <CheckIcon weight="bold" aria-hidden className="text-good" />
+      ) : (
+        <CopyIcon weight="bold" aria-hidden />
+      )}
     </Button>
   );
 }

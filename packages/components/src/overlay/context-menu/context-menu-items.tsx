@@ -1,6 +1,6 @@
 "use client";
 
-import { Checkmark as CheckIcon, CircleSolid as CircleIcon } from "@carbon/icons-react";
+import { Check as CheckIcon, Circle as CircleIcon } from "@phosphor-icons/react/ssr";
 import { cn } from "cn";
 import * as ContextMenuPrimitive from "radix-ui/context-menu";
 import * as React from "react";
@@ -46,7 +46,7 @@ function ContextMenuCheckboxItem({
     >
       <span className="pointer-events-none absolute left-2 flex size-3.5 items-center justify-center">
         <ContextMenuPrimitive.ItemIndicator>
-          <CheckIcon className="size-4" />
+          <CheckIcon weight="bold" aria-hidden className="size-4" />
         </ContextMenuPrimitive.ItemIndicator>
       </span>
       {children}
@@ -76,7 +76,7 @@ function ContextMenuRadioItem({
     >
       <span className="pointer-events-none absolute left-2 flex size-3.5 items-center justify-center">
         <ContextMenuPrimitive.ItemIndicator>
-          <CircleIcon className="size-2 fill-current" />
+          <CircleIcon weight="fill" aria-hidden className="size-2 fill-current" />
         </ContextMenuPrimitive.ItemIndicator>
       </span>
       {children}

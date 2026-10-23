@@ -1,6 +1,6 @@
 "use client";
 
-import { Search as SearchIcon } from "@carbon/icons-react";
+import { MagnifyingGlass as SearchIcon } from "@phosphor-icons/react/ssr";
 import { Command as CommandPrimitive } from "cmdk";
 import { cn } from "cn";
 import * as React from "react";
@@ -57,7 +57,7 @@ function CommandInput({
 }: React.ComponentProps<typeof CommandPrimitive.Input>) {
   return (
     <div data-slot="command-input-wrapper" className="flex h-10 items-center gap-2 border-b px-3">
-      <SearchIcon className="size-4 shrink-0 opacity-50" />
+      <SearchIcon weight="bold" aria-hidden className="size-4 shrink-0 opacity-50" />
       <CommandPrimitive.Input
         data-slot="command-input"
         className={cn(

@@ -1,6 +1,6 @@
 "use client";
 
-import { ChevronRight as ChevronRightIcon } from "@carbon/icons-react";
+import { CaretRight as ChevronRightIcon } from "@phosphor-icons/react/ssr";
 import { cn } from "cn";
 import * as DropdownMenuPrimitive from "radix-ui/dropdown-menu";
 import type * as React from "react";
@@ -28,7 +28,7 @@ function DropdownMenuSubTrigger({
       {...props}
     >
       {children}
-      <ChevronRightIcon className="ml-auto size-4" />
+      <ChevronRightIcon weight="bold" aria-hidden className="ml-auto size-4" />
     </DropdownMenuPrimitive.SubTrigger>
   );
 }

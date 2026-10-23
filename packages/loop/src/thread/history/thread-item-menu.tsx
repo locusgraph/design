@@ -1,15 +1,15 @@
 import {
-  Archive as ArchiveIcon,
-  OverflowMenuHorizontal as EllipsisIcon,
-  Edit as PencilIcon,
-} from "@carbon/icons-react";
-import {
   Button,
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@locusgraph/components";
+import {
+  Archive as ArchiveIcon,
+  DotsThree as EllipsisIcon,
+  PencilSimple as PencilIcon,
+} from "@phosphor-icons/react/ssr";
 
 type ThreadItemMenuProps = {
   title: string;
@@ -28,19 +28,19 @@ export function ThreadItemMenu({ title, onRename, onArchive }: ThreadItemMenuPro
           aria-label={`Options for ${title}`}
           className="shrink-0 text-muted-foreground sm:opacity-0 sm:group-focus-within:opacity-100 sm:group-hover:opacity-100 sm:data-[state=open]:opacity-100"
         >
-          <EllipsisIcon />
+          <EllipsisIcon weight="bold" aria-hidden />
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end">
         {onRename && (
           <DropdownMenuItem onSelect={onRename}>
-            <PencilIcon />
+            <PencilIcon weight="bold" aria-hidden />
             Rename
           </DropdownMenuItem>
         )}
         {onArchive && (
           <DropdownMenuItem onSelect={onArchive}>
-            <ArchiveIcon />
+            <ArchiveIcon weight="bold" aria-hidden />
             Archive
           </DropdownMenuItem>
         )}

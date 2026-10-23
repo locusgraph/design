@@ -1,6 +1,6 @@
 "use client";
 
-import { Checkmark as CheckIcon, CircleSolid as CircleIcon } from "@carbon/icons-react";
+import { Check as CheckIcon, Circle as CircleIcon } from "@phosphor-icons/react/ssr";
 import { cn } from "cn";
 import * as DropdownMenuPrimitive from "radix-ui/dropdown-menu";
 import type * as React from "react";
@@ -23,7 +23,7 @@ function DropdownMenuCheckboxItem({
     >
       <span className="pointer-events-none absolute left-2 flex size-3.5 items-center justify-center">
         <DropdownMenuPrimitive.ItemIndicator>
-          <CheckIcon className="size-4" />
+          <CheckIcon weight="bold" aria-hidden className="size-4" />
         </DropdownMenuPrimitive.ItemIndicator>
       </span>
       {children}
@@ -53,7 +53,7 @@ function DropdownMenuRadioItem({
     >
       <span className="pointer-events-none absolute left-2 flex size-3.5 items-center justify-center">
         <DropdownMenuPrimitive.ItemIndicator>
-          <CircleIcon className="size-2 fill-current" />
+          <CircleIcon weight="fill" aria-hidden className="size-2 fill-current" />
         </DropdownMenuPrimitive.ItemIndicator>
       </span>
       {children}

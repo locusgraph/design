@@ -1,6 +1,6 @@
-import { Checkmark as CheckIcon } from "@carbon/icons-react";
 import { DropdownMenuRadioItem } from "@locusgraph/components";
 import { formatMicroUsd } from "@locusgraph/utils";
+import { Check as CheckIcon } from "@phosphor-icons/react/ssr";
 import { formatTokensShort } from "./usage-totals";
 
 export type ModelSpeed = "fast" | "balanced" | "deep";
@@ -65,6 +65,7 @@ export function ModelOptionRow({ model }: { model: ModelOption }) {
       </span>
       <PriceColumn model={model} />
       <CheckIcon
+        weight="bold"
         aria-hidden
         className="size-4 text-foreground opacity-0 group-data-[state=checked]:opacity-100"
       />

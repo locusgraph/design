@@ -1,9 +1,4 @@
 import {
-  ChevronRight as ChevronRightIcon,
-  Password as KeyRoundIcon,
-  Security as ShieldCheckIcon,
-} from "@carbon/icons-react";
-import {
   Avatar,
   AvatarFallback,
   Button,
@@ -16,6 +11,11 @@ import {
   ItemSeparator,
   ItemTitle,
 } from "@locusgraph/components";
+import {
+  CaretRight as ChevronRightIcon,
+  Key as KeyRoundIcon,
+  ShieldCheck as ShieldCheckIcon,
+} from "@phosphor-icons/react/ssr";
 import { Fragment } from "react";
 import { formatProp } from "../../../registry/control-values";
 import { defineDemo, select, text } from "../../../registry/define-demo";
@@ -67,14 +67,14 @@ function AsLink() {
     <Item variant="outline" asChild className="w-full max-w-md">
       <a href="#security">
         <ItemMedia variant="icon">
-          <ShieldCheckIcon />
+          <ShieldCheckIcon weight="bold" aria-hidden />
         </ItemMedia>
         <ItemContent>
           <ItemTitle>Two-factor authentication</ItemTitle>
           <ItemDescription>Required for every member of this organization.</ItemDescription>
         </ItemContent>
         <ItemActions>
-          <ChevronRightIcon className="size-4" />
+          <ChevronRightIcon weight="bold" aria-hidden className="size-4" />
         </ItemActions>
       </a>
     </Item>
@@ -108,7 +108,7 @@ export default defineDemo({
   playground: ({ variant, size, title }) => (
     <Item variant={variant} size={size} className="w-full max-w-md">
       <ItemMedia variant="icon">
-        <KeyRoundIcon />
+        <KeyRoundIcon weight="bold" aria-hidden />
       </ItemMedia>
       <ItemContent>
         <ItemTitle>{title}</ItemTitle>

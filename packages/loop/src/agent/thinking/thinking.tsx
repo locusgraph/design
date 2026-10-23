@@ -1,7 +1,7 @@
 "use client";
 
-import { Idea as BrainIcon, ChevronRight as ChevronRightIcon } from "@carbon/icons-react";
 import { Collapsible, CollapsibleContent, CollapsibleTrigger, cn } from "@locusgraph/components";
+import { Lightbulb as BrainIcon, CaretRight as ChevronRightIcon } from "@phosphor-icons/react/ssr";
 import { useEffect, useRef, useState } from "react";
 import {
   lineChevronClass,
@@ -52,7 +52,7 @@ export function Thinking({ text, state, durationMs, defaultOpen, className }: Th
     >
       <CollapsibleTrigger aria-expanded={open} className={lineTriggerClass}>
         <span aria-hidden className={lineIconClass}>
-          <BrainIcon />
+          <BrainIcon weight="bold" aria-hidden />
         </span>
         <span aria-live="polite" className={cn("shrink-0", streaming && "motion-safe:shimmer")}>
           {streaming ? "Thinking…" : thoughtDurationLabel(durationMs)}
@@ -62,7 +62,7 @@ export function Thinking({ text, state, durationMs, defaultOpen, className }: Th
             {summary}
           </span>
         )}
-        <ChevronRightIcon aria-hidden className={lineChevronClass} />
+        <ChevronRightIcon weight="bold" aria-hidden className={lineChevronClass} />
       </CollapsibleTrigger>
       <CollapsibleContent
         data-slot="thinking-content"

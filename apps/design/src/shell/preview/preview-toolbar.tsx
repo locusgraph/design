@@ -1,4 +1,3 @@
-import { Reset as RotateCcwIcon } from "@carbon/icons-react";
 import {
   Button,
   cn,
@@ -8,6 +7,7 @@ import {
   TooltipContent,
   TooltipTrigger,
 } from "@locusgraph/components";
+import { ArrowCounterClockwise as RotateCcwIcon } from "@phosphor-icons/react/ssr";
 import { type PreviewBackground, setParam } from "../../url-state";
 
 export const previewBackgroundClass: Record<PreviewBackground, string> = {
@@ -59,7 +59,7 @@ export function PreviewToolbar({ background, canReset, onReset }: PreviewToolbar
       </ToggleGroup>
       {canReset && (
         <Button variant="ghost" size="xs" onClick={onReset}>
-          <RotateCcwIcon />
+          <RotateCcwIcon weight="bold" aria-hidden />
           Reset
         </Button>
       )}

@@ -1,7 +1,7 @@
 "use client";
 
-import { Close as XIcon } from "@carbon/icons-react";
 import { Button, cn, ScrollArea } from "@locusgraph/components";
+import { X as XIcon } from "@phosphor-icons/react/ssr";
 import { type ComponentProps, type ReactNode, useState } from "react";
 import { CanvasMeta } from "./canvas-meta";
 import type { CanvasVersion } from "./version-switcher";
@@ -69,7 +69,7 @@ export function Canvas({
               className="text-faint hover:bg-transparent hover:text-s1"
               onClick={onClose}
             >
-              <XIcon />
+              <XIcon weight="bold" aria-hidden />
             </Button>
           )}
         </div>

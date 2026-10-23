@@ -1,9 +1,9 @@
+import { ToggleGroup, ToggleGroupItem } from "@locusgraph/components";
 import {
-  TextBold as BoldIcon,
+  TextB as BoldIcon,
   TextItalic as ItalicIcon,
   TextUnderline as UnderlineIcon,
-} from "@carbon/icons-react";
-import { ToggleGroup, ToggleGroupItem } from "@locusgraph/components";
+} from "@phosphor-icons/react/ssr";
 import { formatProp } from "../../registry/control-values";
 import { defineDemo, select, toggle } from "../../registry/define-demo";
 
@@ -23,13 +23,13 @@ function Multiple() {
   return (
     <ToggleGroup type="multiple" variant="outline" defaultValue={["bold"]}>
       <ToggleGroupItem value="bold" aria-label="Bold">
-        <BoldIcon />
+        <BoldIcon weight="bold" aria-hidden />
       </ToggleGroupItem>
       <ToggleGroupItem value="italic" aria-label="Italic">
-        <ItalicIcon />
+        <ItalicIcon weight="bold" aria-hidden />
       </ToggleGroupItem>
       <ToggleGroupItem value="underline" aria-label="Underline">
-        <UnderlineIcon />
+        <UnderlineIcon weight="bold" aria-hidden />
       </ToggleGroupItem>
     </ToggleGroup>
   );

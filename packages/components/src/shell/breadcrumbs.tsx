@@ -1,4 +1,4 @@
-import { ChevronRight as ChevronRightIcon } from "@carbon/icons-react";
+import { CaretRight as ChevronRightIcon } from "@phosphor-icons/react/ssr";
 import type * as React from "react";
 import type { LinkComponent } from "./link";
 
@@ -46,7 +46,11 @@ function Breadcrumbs({ items, linkComponent = "a" }: BreadcrumbsProps) {
           >
             <CrumbLabel crumb={crumb} last={last} Link={linkComponent} />
             {last ? null : (
-              <ChevronRightIcon className="size-3.5 shrink-0 text-faint" aria-hidden />
+              <ChevronRightIcon
+                weight="bold"
+                className="size-3.5 shrink-0 text-faint"
+                aria-hidden
+              />
             )}
           </span>
         );

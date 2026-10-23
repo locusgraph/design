@@ -1,17 +1,17 @@
 import {
-  ChevronDown as ChevronDownIcon,
-  Copy as CopyIcon,
-  Subtract as MinusIcon,
-  Add as PlusIcon,
-  Renew as RefreshCwIcon,
-} from "@carbon/icons-react";
-import {
   Button,
   ButtonGroup,
   ButtonGroupSeparator,
   ButtonGroupText,
   Input,
 } from "@locusgraph/components";
+import {
+  CaretDown as ChevronDownIcon,
+  Copy as CopyIcon,
+  Minus as MinusIcon,
+  Plus as PlusIcon,
+  ArrowsClockwise as RefreshCwIcon,
+} from "@phosphor-icons/react/ssr";
 import { formatProp } from "../../registry/control-values";
 import { defineDemo, select } from "../../registry/define-demo";
 
@@ -23,7 +23,7 @@ function SplitButton() {
       <Button>Upgrade plan</Button>
       <ButtonGroupSeparator />
       <Button size="icon" aria-label="More plans">
-        <ChevronDownIcon />
+        <ChevronDownIcon weight="bold" aria-hidden />
       </Button>
     </ButtonGroup>
   );
@@ -33,11 +33,11 @@ function SeatStepper() {
   return (
     <ButtonGroup>
       <Button variant="outline" size="icon" aria-label="Remove seat">
-        <MinusIcon />
+        <MinusIcon weight="bold" aria-hidden />
       </Button>
       <ButtonGroupText>12 seats</ButtonGroupText>
       <Button variant="outline" size="icon" aria-label="Add seat">
-        <PlusIcon />
+        <PlusIcon weight="bold" aria-hidden />
       </Button>
     </ButtonGroup>
   );
@@ -48,10 +48,10 @@ function WithInput() {
     <ButtonGroup className="w-80">
       <Input readOnly value="lg_live_4f9a2c81" aria-label="API key" />
       <Button variant="outline" size="icon" aria-label="Copy key">
-        <CopyIcon />
+        <CopyIcon weight="bold" aria-hidden />
       </Button>
       <Button variant="outline" size="icon" aria-label="Rotate key">
-        <RefreshCwIcon />
+        <RefreshCwIcon weight="bold" aria-hidden />
       </Button>
     </ButtonGroup>
   );

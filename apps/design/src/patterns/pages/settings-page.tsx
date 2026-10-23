@@ -1,5 +1,5 @@
-import { UserFollow as InviteIcon } from "@carbon/icons-react";
 import { Avatar, AvatarFallback, AvatarImage, Button } from "@locusgraph/components";
+import { UserPlus as InviteIcon } from "@phosphor-icons/react/ssr";
 import { SettingsDanger } from "./settings/settings-danger";
 import {
   type NotificationSetting,
@@ -77,7 +77,7 @@ export function SettingsPage({
         description="People who can sign in to this workspace."
         footer={
           <Button size="sm" variant="outline" onClick={onInvite}>
-            <InviteIcon aria-hidden="true" />
+            <InviteIcon weight="bold" aria-hidden="true" />
             Invite
           </Button>
         }

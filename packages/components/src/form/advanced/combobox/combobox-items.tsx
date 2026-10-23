@@ -1,7 +1,7 @@
 "use client";
 
 import { Combobox as ComboboxPrimitive } from "@base-ui/react";
-import { Checkmark as CheckIcon } from "@carbon/icons-react";
+import { Check as CheckIcon } from "@phosphor-icons/react/ssr";
 import { cn } from "cn";
 
 function ComboboxItem({ className, children, ...props }: ComboboxPrimitive.Item.Props) {
@@ -21,7 +21,11 @@ function ComboboxItem({ className, children, ...props }: ComboboxPrimitive.Item.
           <span className="pointer-events-none absolute right-2 flex size-4 items-center justify-center" />
         }
       >
-        <CheckIcon className="pointer-events-none size-4 pointer-coarse:size-5" />
+        <CheckIcon
+          weight="bold"
+          aria-hidden
+          className="pointer-events-none size-4 pointer-coarse:size-5"
+        />
       </ComboboxPrimitive.ItemIndicator>
     </ComboboxPrimitive.Item>
   );

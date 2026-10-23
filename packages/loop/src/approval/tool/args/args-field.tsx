@@ -1,5 +1,5 @@
-import { ChevronDown as ChevronDownIcon } from "@carbon/icons-react";
 import { Checkbox, cn } from "@locusgraph/components";
+import { CaretDown as ChevronDownIcon } from "@phosphor-icons/react/ssr";
 import type { ArgField } from "../../types";
 import type { ArgDraft } from "./args-validation";
 
@@ -59,7 +59,11 @@ function FieldControl({ id, field, draft, error, onChange }: ArgsFieldProps) {
             </option>
           ))}
         </select>
-        <ChevronDownIcon aria-hidden className="pointer-events-none size-3.5 shrink-0 text-faint" />
+        <ChevronDownIcon
+          weight="bold"
+          aria-hidden
+          className="pointer-events-none size-3.5 shrink-0 text-faint"
+        />
       </>
     );
   }

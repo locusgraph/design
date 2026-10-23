@@ -1,9 +1,9 @@
-import {
-  ChevronRight as ChevronRightIcon,
-  RecentlyViewed as HistoryIcon,
-} from "@carbon/icons-react";
 import { Collapsible, CollapsibleContent, CollapsibleTrigger, cn } from "@locusgraph/components";
 import { pluralize } from "@locusgraph/utils";
+import {
+  CaretRight as ChevronRightIcon,
+  ClockCounterClockwise as HistoryIcon,
+} from "@phosphor-icons/react/ssr";
 import {
   lineChevronClass,
   lineDetailClass,
@@ -36,7 +36,7 @@ export function Recall({ memories, onOpenMemory, defaultOpen = false, className 
     >
       <CollapsibleTrigger className={lineTriggerClass}>
         <span aria-hidden className={lineMemoryIconClass}>
-          <HistoryIcon />
+          <HistoryIcon weight="bold" aria-hidden />
         </span>
         <span className="truncate">
           Recalled{" "}
@@ -44,7 +44,7 @@ export function Recall({ memories, onOpenMemory, defaultOpen = false, className 
             {pluralize(memories.length, "memory", "memories")}
           </span>
         </span>
-        <ChevronRightIcon aria-hidden className={lineChevronClass} />
+        <ChevronRightIcon weight="bold" aria-hidden className={lineChevronClass} />
       </CollapsibleTrigger>
       <CollapsibleContent>
         <ul className={cn(lineDetailClass, "flex flex-col pb-2 text-muted-foreground")}>

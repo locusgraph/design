@@ -1,5 +1,5 @@
-import { AiGenerate as SparkleIcon } from "@carbon/icons-react";
 import { cn } from "@locusgraph/components";
+import { Sparkle as SparkleIcon } from "@phosphor-icons/react/ssr";
 import type { PulseTone } from "./pulse-tone";
 import { useLoopAnimation } from "./use-loop-animation";
 
@@ -29,7 +29,12 @@ export function GradientLabel({ label, tone = "neutral" }: GradientLabelProps) {
   const icon = useLoopAnimation<SVGSVGElement>(turn, 2600);
   return (
     <span className="inline-flex items-center gap-1.5">
-      <SparkleIcon ref={icon} aria-hidden className={cn("size-[1.05em]", toneIcon[tone])} />
+      <SparkleIcon
+        weight="bold"
+        ref={icon}
+        aria-hidden
+        className={cn("size-[1.05em]", toneIcon[tone])}
+      />
       <span
         ref={text}
         data-slot="pulse-gradient"

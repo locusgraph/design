@@ -1,7 +1,7 @@
 "use client";
 
-import { ChevronRight as ChevronRightIcon, Tools as WrenchIcon } from "@carbon/icons-react";
 import { Collapsible, CollapsibleContent, CollapsibleTrigger, cn } from "@locusgraph/components";
+import { CaretRight as ChevronRightIcon, Wrench as WrenchIcon } from "@phosphor-icons/react/ssr";
 import { type ReactNode, useState } from "react";
 import {
   lineChevronClass,
@@ -81,13 +81,13 @@ export function Tool({
     >
       <CollapsibleTrigger aria-expanded={open} className={lineTriggerClass}>
         <span aria-hidden className={toneClasses[tone].icon}>
-          {icon ?? <WrenchIcon />}
+          {icon ?? <WrenchIcon weight="bold" aria-hidden />}
         </span>
         <span className="flex min-w-0 items-baseline gap-1.5 truncate">
           <ToolStatus state={part.state} />
           <ToolLabel part={part} tone={tone} verb={verb} activeVerb={activeVerb} target={target} />
         </span>
-        <ChevronRightIcon aria-hidden className={lineChevronClass} />
+        <ChevronRightIcon weight="bold" aria-hidden className={lineChevronClass} />
       </CollapsibleTrigger>
       {part.errorText && (
         <p

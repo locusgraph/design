@@ -2,7 +2,7 @@
 
 Design that keeps humans in the loop. The design system behind LocusGraph apps: React components
 on Radix, product blocks, Loop (agent UI with the human in the loop), brand assets, and one theme
-with light and dark modes. Icons are IBM Carbon (`@carbon/icons-react`).
+with light and dark modes. Icons are Phosphor (`@phosphor-icons/react`), bold weight.
 
 | Package | What it is |
 |---|---|

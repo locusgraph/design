@@ -1,7 +1,7 @@
 "use client";
 
-import { Add as PlusIcon } from "@carbon/icons-react";
 import { Button, cn, ScrollArea } from "@locusgraph/components";
+import { Plus as PlusIcon } from "@phosphor-icons/react/ssr";
 import type { ComponentProps } from "react";
 import { type HistoryItem, HistoryRow } from "./history-row";
 import { groupThreadsByDay } from "./thread-groups";
@@ -43,7 +43,7 @@ export function History({
         <span className="text-sm font-medium text-foreground">{label}</span>
         {onNew && (
           <Button type="button" variant="outline" size="xs" onClick={onNew}>
-            <PlusIcon />
+            <PlusIcon weight="bold" aria-hidden />
             New chat
           </Button>
         )}

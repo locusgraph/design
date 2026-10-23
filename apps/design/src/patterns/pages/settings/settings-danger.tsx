@@ -1,6 +1,5 @@
 "use client";
 
-import { TrashCan as TrashIcon } from "@carbon/icons-react";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -16,6 +15,7 @@ import {
   FieldLabel,
   Input,
 } from "@locusgraph/components";
+import { Trash as TrashIcon } from "@phosphor-icons/react/ssr";
 import { useRef, useState } from "react";
 import { SettingsSection } from "./settings-section";
 
@@ -44,7 +44,7 @@ export function SettingsDanger({ workspaceSlug, onDelete }: SettingsDangerProps)
               variant="outline"
               className="text-destructive hover:bg-destructive/10 hover:text-destructive"
             >
-              <TrashIcon aria-hidden="true" />
+              <TrashIcon weight="bold" aria-hidden="true" />
               Delete workspace
             </Button>
           </AlertDialogTrigger>

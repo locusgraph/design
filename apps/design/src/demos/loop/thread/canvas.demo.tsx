@@ -1,6 +1,6 @@
-import { Download as DownloadIcon } from "@carbon/icons-react";
 import { Button } from "@locusgraph/components";
 import { Canvas, type CanvasVersion, Code } from "@locusgraph/loop";
+import { DownloadSimple as DownloadIcon } from "@phosphor-icons/react/ssr";
 import { useState } from "react";
 import { defineDemo, select } from "../../../registry/define-demo";
 
@@ -58,7 +58,7 @@ function Playground({ kind }: { kind: (typeof kinds)[number] }) {
         onClose={() => setOpen(false)}
         actions={
           <Button variant="ghost" size="icon-sm" aria-label="Download">
-            <DownloadIcon />
+            <DownloadIcon weight="bold" aria-hidden />
           </Button>
         }
       >

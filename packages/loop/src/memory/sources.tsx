@@ -1,6 +1,9 @@
-import { ChevronRight as ChevronRightIcon, Document as DocumentIcon } from "@carbon/icons-react";
 import { Collapsible, CollapsibleContent, CollapsibleTrigger, cn } from "@locusgraph/components";
 import { pluralize } from "@locusgraph/utils";
+import {
+  CaretRight as ChevronRightIcon,
+  FileText as DocumentIcon,
+} from "@phosphor-icons/react/ssr";
 import {
   lineChevronClass,
   lineDetailClass,
@@ -33,12 +36,12 @@ export function Sources({ sources, onOpen, defaultOpen = false, className }: Sou
     >
       <CollapsibleTrigger className={lineTriggerClass}>
         <span aria-hidden className={lineIconClass}>
-          <DocumentIcon />
+          <DocumentIcon weight="bold" aria-hidden />
         </span>
         <span className="truncate">
           Used <span className={lineObjectClass}>{pluralize(sources.length, "source")}</span>
         </span>
-        <ChevronRightIcon aria-hidden className={lineChevronClass} />
+        <ChevronRightIcon weight="bold" aria-hidden className={lineChevronClass} />
       </CollapsibleTrigger>
       <CollapsibleContent>
         <ol className={cn(lineDetailClass, "flex flex-col pb-2 text-muted-foreground")}>

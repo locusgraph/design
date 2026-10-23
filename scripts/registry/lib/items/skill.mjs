@@ -60,7 +60,7 @@ ${patterns}
 
 - Don't add rounded corners, gradients or drop shadows to containers.
 - Don't nest boxes inside boxes; use spacing or a ruled row.
-- Don't use lucide or another icon set; icons come from @carbon/icons-react.
+- Don't use lucide or another icon set; icons come from @phosphor-icons/react, imported from @phosphor-icons/react/ssr with weight="bold".
 - Don't guess props. Fetch the component's .md page.
 `;
   return {

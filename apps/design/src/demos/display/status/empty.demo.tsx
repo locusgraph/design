@@ -1,9 +1,4 @@
 import {
-  Password as KeyRoundIcon,
-  Add as PlusIcon,
-  Receipt as ReceiptIcon,
-} from "@carbon/icons-react";
-import {
   Avatar,
   AvatarFallback,
   Button,
@@ -14,6 +9,11 @@ import {
   EmptyMedia,
   EmptyTitle,
 } from "@locusgraph/components";
+import {
+  Key as KeyRoundIcon,
+  Plus as PlusIcon,
+  Receipt as ReceiptIcon,
+} from "@phosphor-icons/react/ssr";
 import { defineDemo, text, toggle } from "../../../registry/define-demo";
 
 function NoInvoices() {
@@ -21,7 +21,7 @@ function NoInvoices() {
     <Empty className="border">
       <EmptyHeader>
         <EmptyMedia variant="icon">
-          <ReceiptIcon />
+          <ReceiptIcon weight="bold" aria-hidden />
         </EmptyMedia>
         <EmptyTitle>No invoices yet</EmptyTitle>
         <EmptyDescription>
@@ -73,7 +73,7 @@ export default defineDemo({
     <Empty className="border">
       <EmptyHeader>
         <EmptyMedia variant="icon">
-          <KeyRoundIcon />
+          <KeyRoundIcon weight="bold" aria-hidden />
         </EmptyMedia>
         <EmptyTitle>{title}</EmptyTitle>
         <EmptyDescription>Create a key to call the API from your app.</EmptyDescription>
@@ -81,7 +81,7 @@ export default defineDemo({
       {action ? (
         <EmptyContent>
           <Button>
-            <PlusIcon />
+            <PlusIcon weight="bold" aria-hidden />
             New key
           </Button>
         </EmptyContent>

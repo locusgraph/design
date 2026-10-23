@@ -1,6 +1,6 @@
 "use client";
 
-import { ChevronRight as ChevronRightIcon } from "@carbon/icons-react";
+import { CaretRight as ChevronRightIcon } from "@phosphor-icons/react/ssr";
 import { cn } from "cn";
 import * as ContextMenuPrimitive from "radix-ui/context-menu";
 import * as React from "react";
@@ -28,7 +28,7 @@ function ContextMenuSubTrigger({
       {...props}
     >
       {children}
-      <ChevronRightIcon className="ml-auto" />
+      <ChevronRightIcon weight="bold" aria-hidden className="ml-auto" />
     </ContextMenuPrimitive.SubTrigger>
   );
 }

@@ -1,6 +1,6 @@
-import { CurrencyDollar as CircleDollarSignIcon } from "@carbon/icons-react";
 import { Button, cn } from "@locusgraph/components";
 import { formatMicroUsd } from "@locusgraph/utils";
+import { CurrencyCircleDollar as CircleDollarSignIcon } from "@phosphor-icons/react/ssr";
 import {
   ApprovalPanel,
   LiveStatus,
@@ -74,7 +74,7 @@ export function SpendGate({
       className={cn(!decision && outOfCredits && "ring-destructive/60", className)}
     >
       <PanelHeader
-        icon={<CircleDollarSignIcon aria-hidden />}
+        icon={<CircleDollarSignIcon weight="bold" aria-hidden />}
         eyebrow="Spend approval"
         status={decision ? (decision.approved ? "Allowed" : "Stopped") : situationStatus[situation]}
         tone={

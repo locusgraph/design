@@ -1,4 +1,3 @@
-import { Password as KeyRoundIcon, Add as PlusIcon } from "@carbon/icons-react";
 import {
   Button,
   RuleGrid,
@@ -6,6 +5,7 @@ import {
   RuleGridDescription,
   RuleGridTitle,
 } from "@locusgraph/components";
+import { Key as KeyRoundIcon, Plus as PlusIcon } from "@phosphor-icons/react/ssr";
 import type { LinkComponent } from "../types";
 
 type KeysEmptyProps = {
@@ -24,13 +24,13 @@ export function KeysEmpty({
   return (
     <RuleGrid columns={1}>
       <RuleGridCell className="items-center gap-2 py-12 text-center">
-        <KeyRoundIcon className="mb-1 size-5 text-muted-foreground" />
+        <KeyRoundIcon weight="bold" aria-hidden className="mb-1 size-5 text-muted-foreground" />
         <RuleGridTitle>No API keys yet</RuleGridTitle>
         <RuleGridDescription className="max-w-sm">{description}</RuleGridDescription>
         {newKeyHref && (
           <Button asChild size="sm" className="mt-2">
             <Link href={newKeyHref}>
-              <PlusIcon />
+              <PlusIcon weight="bold" aria-hidden />
               New key
             </Link>
           </Button>

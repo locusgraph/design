@@ -1,6 +1,6 @@
 "use client";
 
-import { Checkmark as CheckIcon, Subtract as MinusIcon } from "@carbon/icons-react";
+import { Check as CheckIcon, Minus as MinusIcon } from "@phosphor-icons/react/ssr";
 import { cn } from "cn";
 import * as CheckboxPrimitive from "radix-ui/checkbox";
 import * as React from "react";
@@ -22,8 +22,16 @@ function Checkbox({ className, ...props }: React.ComponentProps<typeof CheckboxP
         data-slot="checkbox-indicator"
         className="group/indicator flex items-center justify-center text-current"
       >
-        <CheckIcon className="size-3.5 group-data-[state=indeterminate]/indicator:hidden" />
-        <MinusIcon className="hidden size-3.5 group-data-[state=indeterminate]/indicator:block" />
+        <CheckIcon
+          weight="bold"
+          aria-hidden
+          className="size-3.5 group-data-[state=indeterminate]/indicator:hidden"
+        />
+        <MinusIcon
+          weight="bold"
+          aria-hidden
+          className="hidden size-3.5 group-data-[state=indeterminate]/indicator:block"
+        />
       </CheckboxPrimitive.Indicator>
     </CheckboxPrimitive.Root>
   );

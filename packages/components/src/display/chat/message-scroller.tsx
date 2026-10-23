@@ -1,6 +1,6 @@
 "use client";
 
-import { ArrowDown as ArrowDownIcon } from "@carbon/icons-react";
+import { ArrowDown as ArrowDownIcon } from "@phosphor-icons/react/ssr";
 import {
   MessageScroller as MessageScrollerPrimitive,
   useMessageScroller,
@@ -107,7 +107,7 @@ function MessageScrollerButton({
     >
       {children ?? (
         <>
-          <ArrowDownIcon />
+          <ArrowDownIcon weight="bold" aria-hidden />
           <span className="sr-only">
             {direction === "end" ? "Scroll to end" : "Scroll to start"}
           </span>

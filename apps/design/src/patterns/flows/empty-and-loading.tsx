@@ -1,10 +1,4 @@
 import {
-  Add as AddIcon,
-  Network_3 as GraphIcon,
-  Renew as RetryIcon,
-  WarningAlt as WarningIcon,
-} from "@carbon/icons-react";
-import {
   Alert,
   AlertDescription,
   AlertTitle,
@@ -19,6 +13,12 @@ import {
   SkeletonLoadingLabel,
   skeletonRootProps,
 } from "@locusgraph/components";
+import {
+  Plus as AddIcon,
+  Graph as GraphIcon,
+  ArrowsClockwise as RetryIcon,
+  Warning as WarningIcon,
+} from "@phosphor-icons/react/ssr";
 
 export type ListState = "loading" | "empty" | "ready" | "error";
 
@@ -83,14 +83,14 @@ function EmptyList({ onCreate }: { onCreate?: () => void }) {
     <Empty>
       <EmptyHeader>
         <EmptyMedia variant="icon">
-          <GraphIcon aria-hidden="true" />
+          <GraphIcon weight="bold" aria-hidden="true" />
         </EmptyMedia>
         <EmptyTitle>No graphs yet</EmptyTitle>
         <EmptyDescription>A graph stores what your agents learn, one per product.</EmptyDescription>
       </EmptyHeader>
       <EmptyContent>
         <Button onClick={onCreate}>
-          <AddIcon aria-hidden="true" />
+          <AddIcon weight="bold" aria-hidden="true" />
           Create graph
         </Button>
       </EmptyContent>
@@ -102,12 +102,12 @@ function ErrorNotice({ message, onRetry }: { message: string; onRetry?: () => vo
   return (
     <div className="p-4">
       <Alert variant="destructive">
-        <WarningIcon aria-hidden="true" />
+        <WarningIcon weight="bold" aria-hidden="true" />
         <AlertTitle>Graphs did not load</AlertTitle>
         <AlertDescription>
           <p>{message}</p>
           <Button variant="outline" size="sm" className="mt-2" onClick={onRetry}>
-            <RetryIcon aria-hidden="true" />
+            <RetryIcon weight="bold" aria-hidden="true" />
             Retry
           </Button>
         </AlertDescription>

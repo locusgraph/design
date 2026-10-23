@@ -43,7 +43,7 @@
   },
   "dependencies": {
     "@base-ui/react": "catalog:",
-    "@carbon/icons-react": "catalog:",
+    "@phosphor-icons/react": "catalog:",
     "@locusgraph/tokens": "workspace:*",
     "@shadcn/react": "catalog:",
     "class-variance-authority": "catalog:",

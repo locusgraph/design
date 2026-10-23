@@ -1,4 +1,4 @@
-import { ChevronDown as ChevronDownIcon } from "@carbon/icons-react";
+import { CaretDown as ChevronDownIcon } from "@phosphor-icons/react/ssr";
 import { cn } from "cn";
 import * as React from "react";
 
@@ -24,6 +24,7 @@ function NativeSelect({
         {...props}
       />
       <ChevronDownIcon
+        weight="bold"
         className="pointer-events-none absolute top-1/2 right-3.5 size-4 -translate-y-1/2 text-muted-foreground select-none"
         aria-hidden="true"
         data-slot="native-select-icon"

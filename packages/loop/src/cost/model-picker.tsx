@@ -1,4 +1,3 @@
-import { ChevronDown as ChevronDownIcon } from "@carbon/icons-react";
 import {
   cn,
   DropdownMenu,
@@ -7,6 +6,7 @@ import {
   DropdownMenuRadioGroup,
   DropdownMenuTrigger,
 } from "@locusgraph/components";
+import { CaretDown as ChevronDownIcon } from "@phosphor-icons/react/ssr";
 import { type ModelOption, ModelOptionRow } from "./shared/model-option-row";
 
 export {
@@ -50,6 +50,7 @@ export function ModelPicker({
           <span className="truncate text-muted-foreground max-sm:hidden">{selected.provider}</span>
         )}
         <ChevronDownIcon
+          weight="bold"
           aria-hidden
           className="size-3 shrink-0 text-muted-foreground transition-transform duration-150 group-data-[state=open]:rotate-180 motion-reduce:transition-none"
         />

@@ -1,5 +1,5 @@
-import { Roadmap as ChartNoAxesGanttIcon } from "@carbon/icons-react";
 import { formatCount, formatMicroUsd, pluralize } from "@locusgraph/utils";
+import { ChartBarHorizontal as ChartNoAxesGanttIcon } from "@phosphor-icons/react/ssr";
 import { ApprovalPanel, PanelHeader } from "../shared/panel";
 import { PanelEmpty } from "../shared/panel-empty";
 import { type CostStep, isWastedStep, StepCostRow } from "./shared/step-cost-row";
@@ -58,14 +58,14 @@ export function CostSteps({
   return (
     <ApprovalPanel data-slot="cost-steps" aria-label={label} className={className}>
       <PanelHeader
-        icon={<ChartNoAxesGanttIcon aria-hidden />}
+        icon={<ChartNoAxesGanttIcon weight="bold" aria-hidden />}
         eyebrow={label}
         aside={steps.length > 0 ? pluralize(steps.length, "step") : undefined}
         status={running ? "Running" : undefined}
         tone="running"
       />
       {steps.length === 0 ? (
-        <PanelEmpty icon={<ChartNoAxesGanttIcon aria-hidden />} title={emptyText} />
+        <PanelEmpty icon={<ChartNoAxesGanttIcon weight="bold" aria-hidden />} title={emptyText} />
       ) : (
         <>
           <Totals totals={totals} />

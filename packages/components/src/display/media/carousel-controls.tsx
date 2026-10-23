@@ -1,6 +1,6 @@
 "use client";
 
-import { ArrowLeft, ArrowRight } from "@carbon/icons-react";
+import { ArrowLeft, ArrowRight } from "@phosphor-icons/react/ssr";
 import { cn } from "cn";
 import * as React from "react";
 
@@ -31,7 +31,7 @@ function CarouselPrevious({
       onClick={scrollPrev}
       {...props}
     >
-      <ArrowLeft />
+      <ArrowLeft weight="bold" aria-hidden />
       <span className="sr-only">Previous slide</span>
     </Button>
   );
@@ -61,7 +61,7 @@ function CarouselNext({
       onClick={scrollNext}
       {...props}
     >
-      <ArrowRight />
+      <ArrowRight weight="bold" aria-hidden />
       <span className="sr-only">Next slide</span>
     </Button>
   );

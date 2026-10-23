@@ -1,4 +1,4 @@
-import { ChevronRight as ChevronRightIcon } from "@carbon/icons-react";
+import { CaretRight as ChevronRightIcon } from "@phosphor-icons/react/ssr";
 import { shadcnRegistry } from "../../../guides/installation-snippets";
 import { CopyCommand } from "../../../landing/actions/copy-command";
 import { CodeBlock } from "../../../preview/code-block";
@@ -13,6 +13,7 @@ function OneTimeSetup() {
     <details className="group/setup ring-1 ring-border">
       <summary className="flex cursor-pointer list-none items-center gap-2 px-3 py-2 text-sm font-medium outline-none select-none hover:bg-accent focus-visible:ring-2 focus-visible:ring-ring [&::-webkit-details-marker]:hidden">
         <ChevronRightIcon
+          weight="bold"
           aria-hidden
           className="size-4 text-muted-foreground motion-safe:transition-transform group-open/setup:rotate-90"
         />

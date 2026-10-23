@@ -1,6 +1,6 @@
 "use client";
 
-import { CircleSolid as CircleIcon } from "@carbon/icons-react";
+import { Circle as CircleIcon } from "@phosphor-icons/react/ssr";
 import { cn } from "cn";
 import * as RadioGroupPrimitive from "radix-ui/radio-group";
 import * as React from "react";
@@ -35,7 +35,11 @@ function RadioGroupItem({
         data-slot="radio-group-indicator"
         className="relative flex items-center justify-center"
       >
-        <CircleIcon className="absolute top-1/2 left-1/2 size-2 -translate-x-1/2 -translate-y-1/2 fill-primary" />
+        <CircleIcon
+          weight="fill"
+          aria-hidden
+          className="absolute top-1/2 left-1/2 size-2 -translate-x-1/2 -translate-y-1/2 fill-primary"
+        />
       </RadioGroupPrimitive.Indicator>
     </RadioGroupPrimitive.Item>
   );

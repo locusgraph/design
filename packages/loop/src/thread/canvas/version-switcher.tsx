@@ -1,4 +1,3 @@
-import { ChevronDown as ChevronDownIcon } from "@carbon/icons-react";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -7,6 +6,7 @@ import {
   DropdownMenuTrigger,
 } from "@locusgraph/components";
 import { formatDate } from "@locusgraph/utils";
+import { CaretDown as ChevronDownIcon } from "@phosphor-icons/react/ssr";
 
 export type CanvasVersion = { id: string; label: string; createdAt: string };
 
@@ -41,7 +41,7 @@ export function VersionSwitcher({ versions, current, onVersionChange }: VersionS
         aria-label={`Version ${current.label}, choose another version`}
       >
         <VersionLabel versions={versions} current={current} />
-        <ChevronDownIcon aria-hidden className="size-3" />
+        <ChevronDownIcon weight="bold" aria-hidden className="size-3" />
       </DropdownMenuTrigger>
       <DropdownMenuContent align="start" sideOffset={6}>
         <DropdownMenuRadioGroup value={current.id} onValueChange={onVersionChange}>

@@ -1,5 +1,5 @@
-import { ArrowRight as ArrowRightIcon } from "@carbon/icons-react";
 import { cn, RuleGridCell } from "@locusgraph/components";
+import { ArrowRight as ArrowRightIcon } from "@phosphor-icons/react/ssr";
 import type * as React from "react";
 import { PlaygroundLink } from "../nav/playground-nav";
 
@@ -46,6 +46,7 @@ export function LandingTile({
         <span className="flex shrink-0 items-center gap-1.5 font-mono text-xs text-muted-foreground tabular-nums group-hover:text-foreground">
           {meta}
           <ArrowRightIcon
+            weight="bold"
             aria-hidden
             className="size-3.5 motion-safe:transition-transform group-hover:translate-x-0.5"
           />

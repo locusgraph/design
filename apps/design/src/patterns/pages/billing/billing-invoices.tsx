@@ -1,4 +1,3 @@
-import { Download as DownloadIcon } from "@carbon/icons-react";
 import {
   Badge,
   Button,
@@ -13,6 +12,7 @@ import {
   TableHeader,
   TableRow,
 } from "@locusgraph/components";
+import { DownloadSimple as DownloadIcon } from "@phosphor-icons/react/ssr";
 import type { Invoice } from "./billing-data";
 
 type BillingInvoicesProps = {
@@ -87,7 +87,7 @@ export function BillingInvoices({ invoices, onDownload }: BillingInvoicesProps) 
                       aria-label={`Download invoice from ${formatInvoiceDate(invoice.issuedAt)}`}
                       onClick={() => onDownload(invoice.id)}
                     >
-                      <DownloadIcon aria-hidden="true" />
+                      <DownloadIcon weight="bold" aria-hidden="true" />
                     </Button>
                   </TableCell>
                 </TableRow>

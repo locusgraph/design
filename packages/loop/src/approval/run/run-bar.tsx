@@ -1,10 +1,10 @@
+import { Button, cn } from "@locusgraph/components";
 import {
   Pause as PauseIcon,
   Play as PlayIcon,
   SkipForward as SkipForwardIcon,
-  StopFilledAlt as SquareIcon,
-} from "@carbon/icons-react";
-import { Button, cn } from "@locusgraph/components";
+  Stop as SquareIcon,
+} from "@phosphor-icons/react/ssr";
 import { StatusDot, type StatusTone } from "../../shared/status-dot";
 import type { RunBarStatus } from "../types";
 
@@ -93,7 +93,11 @@ export function RunBar({
             disabled={pending}
             onClick={paused ? onResume : onPause}
           >
-            {paused ? <PlayIcon aria-hidden /> : <PauseIcon aria-hidden />}
+            {paused ? (
+              <PlayIcon weight="bold" aria-hidden />
+            ) : (
+              <PauseIcon weight="bold" aria-hidden />
+            )}
             {paused ? "Resume" : "Pause"}
           </Button>
           {onStep && (
@@ -106,7 +110,7 @@ export function RunBar({
               disabled={!paused || pending}
               onClick={onStep}
             >
-              <SkipForwardIcon aria-hidden />
+              <SkipForwardIcon weight="bold" aria-hidden />
               Step
             </Button>
           )}
@@ -118,7 +122,7 @@ export function RunBar({
             disabled={pending}
             onClick={onStop}
           >
-            <SquareIcon aria-hidden className="size-2.5 fill-current" />
+            <SquareIcon weight="fill" aria-hidden className="size-2.5 fill-current" />
             Stop
           </Button>
         </span>
