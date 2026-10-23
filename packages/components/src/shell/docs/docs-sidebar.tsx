@@ -25,7 +25,7 @@ function DocsNavList({ groups, activeHref, linkComponent: Link = "a" }: DocsNavL
                     href={item.href}
                     aria-current={active ? "page" : undefined}
                     className={cn(
-                      "flex h-[30px] w-fit items-center border border-transparent px-2 text-sm font-medium transition-colors hover:bg-accent",
+                      "flex h-control-sm w-fit items-center border border-transparent px-2 text-sm font-medium transition-colors focus-ring hover:bg-accent",
                       active && "border-accent bg-accent"
                     )}
                   >

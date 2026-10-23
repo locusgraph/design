@@ -57,7 +57,7 @@ export function SearchDialog({ open, onOpenChange }: SearchDialogProps) {
               <button
                 type="button"
                 onClick={() => choose(entry.path)}
-                className="flex w-full justify-between px-3 py-2 text-left text-sm hover:bg-accent"
+                className="flex w-full justify-between px-3 py-2 text-left text-sm focus-ring hover:bg-accent"
               >
                 {entry.title}
                 <span className="text-muted-foreground">{entry.path}</span>

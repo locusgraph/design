@@ -45,7 +45,7 @@ function ComponentGrid({ entries }: { entries: DemoIndexEntry[] }) {
         <PlaygroundLink
           key={entry.path}
           href={`/${entry.path}`}
-          className="text-base underline-offset-4 hover:underline"
+          className="text-base underline-offset-4 focus-ring hover:underline"
         >
           {entry.title}
         </PlaygroundLink>

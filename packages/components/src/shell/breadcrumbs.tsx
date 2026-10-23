@@ -28,7 +28,7 @@ function CrumbLabel({
   return (
     <Link
       href={crumb.href}
-      className="truncate text-muted-foreground transition-colors hover:text-foreground"
+      className="truncate text-muted-foreground transition-colors focus-ring hover:text-foreground"
     >
       {crumb.label}
     </Link>

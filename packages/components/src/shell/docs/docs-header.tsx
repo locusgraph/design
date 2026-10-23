@@ -80,7 +80,7 @@ function DocsHeader({
               href={link.href}
               aria-current={link.href === activeHref ? "page" : undefined}
               className={cn(
-                "px-2.5 py-1.5 text-sm font-medium text-foreground/80 transition-colors hover:text-foreground",
+                "px-2.5 py-1.5 text-sm font-medium text-muted-foreground transition-colors focus-ring hover:text-foreground",
                 link.href === activeHref && "text-foreground"
               )}
             >
