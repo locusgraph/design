@@ -32,14 +32,14 @@ function InvoiceStatusBadge({ status }: { status: Invoice["status"] }) {
 export function BillingInvoices({ invoices, onDownload }: BillingInvoicesProps) {
   return (
     <RuleGrid columns={1}>
-      <RuleGridCell className="gap-0 px-4 pb-2 sm:px-6">
-        <RuleGridHeader className="-mx-4 mb-0 px-4 sm:-mx-6 sm:px-6">
+      <RuleGridCell className="gap-0 pb-2">
+        <RuleGridHeader className="mb-0">
           <RuleGridLabel>Invoices</RuleGridLabel>
         </RuleGridHeader>
         {invoices.length === 0 ? (
           <p className="py-4 text-sm text-muted-foreground">No invoices yet.</p>
         ) : (
-          <Table>
+          <Table className="[&_tr>*:first-child]:pl-0 [&_tr>*:last-child]:pr-0">
             <TableHeader>
               <TableRow>
                 <TableHead>Date</TableHead>
