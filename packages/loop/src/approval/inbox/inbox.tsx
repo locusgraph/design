@@ -81,9 +81,10 @@ export function Inbox({
             <p className="px-2 pt-2 text-xs text-faint">{oneAtATimeNote}</p>
           ) : (
             <div className="flex flex-wrap items-center gap-x-6 gap-y-3 px-2 pt-2">
-              <span className="flex min-w-0 items-center gap-3">
+              <span className="flex min-w-0 items-start gap-3">
                 <Checkbox
                   id={selectAllId}
+                  className="mt-0.5"
                   checked={allState}
                   onCheckedChange={(checked) =>
                     setSelected(

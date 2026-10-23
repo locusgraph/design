@@ -30,12 +30,12 @@ export function InboxRow({ item, now, selected, open, onSelect, onOpen }: InboxR
       data-selected={selected || undefined}
       data-open={open || undefined}
       className={cn(
-        "group relative flex items-center gap-3 px-2 py-2 has-[[data-slot=inbox-open]:focus-visible]:ring-2 has-[[data-slot=inbox-open]:focus-visible]:ring-ring/70 motion-safe:transition-colors",
+        "group relative flex items-start gap-3 px-2 py-2 has-[[data-slot=inbox-open]:focus-visible]:ring-2 has-[[data-slot=inbox-open]:focus-visible]:ring-ring/70 motion-safe:transition-colors",
         selected || open ? "bg-muted" : "hover:bg-muted/50"
       )}
     >
       {destructive ? (
-        <span className="relative z-10 flex size-4 shrink-0 items-center justify-center text-faint">
+        <span className="relative z-10 mt-0.5 flex size-4 shrink-0 items-center justify-center text-faint">
           <LockIcon weight="bold" aria-hidden className="size-3.5" />
           <span className="sr-only">{item.title} must be approved on its own</span>
         </span>
@@ -43,7 +43,7 @@ export function InboxRow({ item, now, selected, open, onSelect, onOpen }: InboxR
         <Checkbox
           aria-label={`Select ${item.title}`}
           checked={selected}
-          className="relative z-10"
+          className="relative z-10 mt-0.5"
           onCheckedChange={(checked) => onSelect(checked === true)}
         />
       )}
@@ -77,7 +77,7 @@ export function InboxRow({ item, now, selected, open, onSelect, onOpen }: InboxR
       </div>
       <time
         dateTime={isoOf(item.requestedAt)}
-        className="w-12 shrink-0 text-right text-xs text-faint tabular-nums"
+        className="mt-0.5 w-12 shrink-0 text-right text-xs text-faint tabular-nums"
       >
         {formatWaiting(item.requestedAt, now)}
       </time>
