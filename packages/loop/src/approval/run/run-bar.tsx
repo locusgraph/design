@@ -67,7 +67,7 @@ export function RunBar({
       aria-label={runName ? `Controls for ${runName}` : "Run controls"}
       data-slot="run-bar"
       data-status={status}
-      className={cn("flex min-h-8 min-w-0 flex-wrap items-center gap-x-3 gap-y-1", className)}
+      className={cn("flex min-h-control-sm min-w-0 flex-wrap items-center gap-x-3 gap-y-1", className)}
     >
       <span className="flex min-w-0 flex-1 items-center gap-2.5 text-sm">
         {runName && <span className="truncate font-medium text-foreground">{runName}</span>}
