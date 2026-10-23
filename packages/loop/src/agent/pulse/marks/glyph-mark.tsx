@@ -1,7 +1,7 @@
 import { cn } from "@locusgraph/components";
 import { useEffect, useState } from "react";
+import { prefersReducedMotion } from "../../../shared/reduced-motion";
 import type { PulseTone } from "../pulse-tone";
-import { prefersReducedMotion } from "../use-loop-animation";
 
 const glyphs = ["·", "✢", "✳", "✶", "✻", "✽", "✻", "✶", "✳", "✢"];
 const restingGlyph = "✻";

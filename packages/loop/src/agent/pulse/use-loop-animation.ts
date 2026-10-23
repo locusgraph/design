@@ -1,11 +1,5 @@
 import { useEffect, useRef } from "react";
-
-export function prefersReducedMotion() {
-  return (
-    typeof window !== "undefined" &&
-    window.matchMedia?.("(prefers-reduced-motion: reduce)").matches === true
-  );
-}
+import { prefersReducedMotion } from "../../shared/reduced-motion";
 
 export function useLoopAnimation<T extends Element>(
   keyframes: Keyframe[],

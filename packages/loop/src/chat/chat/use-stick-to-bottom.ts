@@ -1,16 +1,10 @@
 import { useCallback, useEffect, useRef, useState } from "react";
+import { prefersReducedMotion } from "../../shared/reduced-motion";
 
 const bottomThresholdPx = 48;
 
 function distanceFromBottom(element: HTMLElement): number {
   return element.scrollHeight - element.scrollTop - element.clientHeight;
-}
-
-function prefersReducedMotion(): boolean {
-  return (
-    typeof window !== "undefined" &&
-    window.matchMedia?.("(prefers-reduced-motion: reduce)").matches === true
-  );
 }
 
 export function useStickToBottom() {

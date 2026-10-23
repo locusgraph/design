@@ -62,6 +62,7 @@ export function Question({
   return (
     <section
       data-slot="question"
+      aria-label={question}
       data-answered={answer ? true : undefined}
       className={cn("flex min-w-0 flex-col", !answer && "gap-3", className)}
     >
