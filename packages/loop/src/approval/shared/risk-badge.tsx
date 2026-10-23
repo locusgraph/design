@@ -32,11 +32,20 @@ export const riskCopy: Record<RiskLevel, () => ReactNode> = {
   ),
 };
 
-const riskVariant = { read: "outline", write: "secondary", destructive: "destructive" } as const;
+const riskVariant = {
+  read: "secondary",
+  write: "warning",
+  destructive: "destructive-soft",
+} as const;
 
-export function RiskBadge({ risk }: { risk: RiskLevel }) {
+export function RiskBadge({ risk, className }: { risk: RiskLevel; className?: string }) {
   return (
-    <Badge data-slot="risk-badge" data-risk={risk} variant={riskVariant[risk]}>
+    <Badge
+      data-slot="risk-badge"
+      data-risk={risk}
+      variant={riskVariant[risk]}
+      className={className}
+    >
       {riskLabels[risk]}
     </Badge>
   );

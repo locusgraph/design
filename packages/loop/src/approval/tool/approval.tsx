@@ -6,7 +6,7 @@ import { lineIconClass, lineObjectClass, lineRowClass } from "../../shared/line"
 import { LiveStatus } from "../../shared/panel";
 import { type RiskLevel, type ToolPart, type ToolState, toolNameOf } from "../../types";
 import { DecisionSummary } from "../shared/decision-line";
-import { riskCopy, riskLabels } from "../shared/risk-badge";
+import { RiskBadge, riskCopy } from "../shared/risk-badge";
 import { useFocusOnMount } from "../shared/use-focus-on-mount";
 import type { ApprovalDecision } from "../types";
 import { DenyForm } from "./deny-form";
@@ -39,12 +39,6 @@ function decidedResult(toolName: string, state: ToolState, decision: ApprovalDec
   return settledStateLabels[state] ?? `${toolName} ${decision.approved ? "approved" : "denied"}`;
 }
 
-const riskLabelTones: Record<RiskLevel, string> = {
-  read: "text-faint",
-  write: "text-faint",
-  destructive: "font-medium text-destructive",
-};
-
 function ApprovalHeadline({ name, risk }: { name: string; risk: RiskLevel }) {
   const destructive = risk === "destructive";
   const Icon = destructive ? ShieldAlertIcon : WrenchIcon;
@@ -57,9 +51,7 @@ function ApprovalHeadline({ name, risk }: { name: string; risk: RiskLevel }) {
         <span className="font-medium text-warn">Waiting</span> to run{" "}
         <span className={lineObjectClass}>{name}</span>
       </span>
-      <span className={cn("ml-auto shrink-0 text-xs", riskLabelTones[risk])}>
-        {riskLabels[risk]}
-      </span>
+      <RiskBadge risk={risk} className="ml-auto" />
     </div>
   );
 }
