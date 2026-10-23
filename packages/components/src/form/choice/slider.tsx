@@ -10,8 +10,9 @@ function Slider({
   value,
   min = 0,
   max = 100,
+  thumbLabels,
   ...props
-}: React.ComponentProps<typeof SliderPrimitive.Root>) {
+}: React.ComponentProps<typeof SliderPrimitive.Root> & { thumbLabels?: string[] }) {
   const _values = React.useMemo(
     () => (Array.isArray(value) ? value : Array.isArray(defaultValue) ? defaultValue : [min, max]),
     [value, defaultValue, min, max]
@@ -48,6 +49,8 @@ function Slider({
           data-slot="slider-thumb"
           // biome-ignore lint/suspicious/noArrayIndexKey: each thumb is identified by its position in the value array
           key={index}
+          aria-label={thumbLabels?.[index] ?? props["aria-label"]}
+          aria-labelledby={thumbLabels?.[index] ? undefined : props["aria-labelledby"]}
           className="block size-4 shrink-0 rounded-full border border-primary bg-background shadow-sm transition-[color,box-shadow] focus-ring disabled:pointer-events-none disabled:opacity-50"
         />
       ))}

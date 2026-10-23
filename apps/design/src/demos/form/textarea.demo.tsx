@@ -31,7 +31,7 @@ function Invalid() {
 function WithButton() {
   return (
     <div className="grid w-full max-w-sm gap-3">
-      <Textarea placeholder="Describe the billing issue" />
+      <Textarea aria-label="Billing issue" placeholder="Describe the billing issue" />
       <Button className="justify-self-end">Send to support</Button>
     </div>
   );
@@ -49,6 +49,7 @@ export default defineDemo({
   playground: ({ placeholder, disabled, invalid }) => (
     <Textarea
       className="w-80"
+      aria-label="Invoice note"
       placeholder={placeholder}
       disabled={disabled}
       aria-invalid={invalid || undefined}

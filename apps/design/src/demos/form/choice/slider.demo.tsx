@@ -18,7 +18,14 @@ function SeatCount() {
           {seats[0]} seats, ${(seats[0] ?? 0) * 8}/mo
         </span>
       </div>
-      <Slider id="seats" value={seats} onValueChange={setSeats} min={1} max={50} />
+      <Slider
+        id="seats"
+        aria-label="Seats"
+        value={seats}
+        onValueChange={setSeats}
+        min={1}
+        max={50}
+      />
     </div>
   );
 }
@@ -33,7 +40,13 @@ function Range() {
           {range[0]}% and {range[1]}% of quota
         </span>
       </div>
-      <Slider value={range} onValueChange={setRange} step={5} minStepsBetweenThumbs={2} />
+      <Slider
+        value={range}
+        onValueChange={setRange}
+        step={5}
+        minStepsBetweenThumbs={2}
+        thumbLabels={["Alert from", "Alert up to"]}
+      />
     </div>
   );
 }

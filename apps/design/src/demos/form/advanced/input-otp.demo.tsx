@@ -16,7 +16,7 @@ const lengths = ["6", "4", "8"] as const;
 
 function Separated() {
   return (
-    <InputOTP maxLength={6}>
+    <InputOTP maxLength={6} aria-label="Verification code">
       <InputOTPGroup>
         <InputOTPSlot index={0} />
         <InputOTPSlot index={1} />
@@ -36,7 +36,13 @@ function Controlled() {
   const [code, setCode] = useState("");
   return (
     <div className="flex flex-col gap-2">
-      <InputOTP maxLength={6} value={code} onChange={setCode} pattern="^\d+$">
+      <InputOTP
+        maxLength={6}
+        value={code}
+        onChange={setCode}
+        pattern="^\d+$"
+        aria-label="Verification code"
+      >
         <InputOTPGroup>
           {[0, 1, 2, 3, 4, 5].map((index) => (
             <InputOTPSlot key={index} index={index} />
@@ -96,7 +102,12 @@ export default defineDemo({
     const slots = Array.from({ length: Number(length) }, (_, index) => index);
     const half = slots.length / 2;
     return (
-      <InputOTP key={length} maxLength={Number(length)} disabled={disabled}>
+      <InputOTP
+        key={length}
+        maxLength={Number(length)}
+        disabled={disabled}
+        aria-label="Verification code"
+      >
         <InputOTPGroup>
           {(separator ? slots.slice(0, half) : slots).map((index) => (
             <InputOTPSlot key={index} index={index} />

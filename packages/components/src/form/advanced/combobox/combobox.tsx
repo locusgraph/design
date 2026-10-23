@@ -15,6 +15,7 @@ function ComboboxTrigger({ className, children, ...props }: ComboboxPrimitive.Tr
   return (
     <ComboboxPrimitive.Trigger
       data-slot="combobox-trigger"
+      aria-label={children ? undefined : "Show options"}
       className={cn("[&_svg:not([class*='size-'])]:size-4", className)}
       {...props}
     >
