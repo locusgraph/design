@@ -80,7 +80,7 @@ export function Inbox({
           {selectable.length === 0 ? (
             <p className="px-2 pt-2 text-xs text-faint">{oneAtATimeNote}</p>
           ) : (
-            <div className="flex flex-wrap items-center justify-between gap-3 px-2 pt-2">
+            <div className="flex flex-wrap items-center gap-x-6 gap-y-3 px-2 pt-2">
               <span className="flex min-w-0 items-center gap-3">
                 <Checkbox
                   id={selectAllId}
