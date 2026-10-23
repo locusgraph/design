@@ -15,7 +15,7 @@ export function DenyForm({ onDeny, onBack }: DenyFormProps) {
   return (
     <form
       data-slot="deny-form"
-      className="flex flex-col gap-2 pl-6"
+      className="flex flex-col gap-2"
       onSubmit={(event) => {
         event.preventDefault();
         onDeny(trimmed === "" ? undefined : trimmed);
@@ -29,7 +29,6 @@ export function DenyForm({ onDeny, onBack }: DenyFormProps) {
         ref={reasonRef}
         value={reason}
         placeholder="Tell the agent what to do instead"
-        className="bg-background"
         onChange={(event) => setReason(event.target.value)}
       />
       <div className="flex flex-wrap gap-2 pt-1">

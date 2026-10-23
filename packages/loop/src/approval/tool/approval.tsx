@@ -75,7 +75,7 @@ function SettledLine({ name, children }: { name: string; children: ReactNode }) 
           Asked to run <span className={lineObjectClass}>{name}</span>
         </span>
       </div>
-      <div className="pl-6">{children}</div>
+      <div>{children}</div>
     </div>
   );
 }
@@ -104,26 +104,19 @@ export function Approval({
       data-state={decision ? (decision.approved ? "approved" : "denied") : part.state}
       data-tool-name={toolName}
       aria-label={`Approve ${name}`}
-      className={cn(
-        "flex min-w-0 flex-col",
-        awaiting && "gap-3 bg-muted px-4 pt-2 pb-4",
-        awaiting && destructive && "bg-destructive/6",
-        className
-      )}
+      className={cn("flex min-w-0 flex-col", awaiting && "gap-3", className)}
     >
       {awaiting && (
         <>
           <ApprovalHeadline name={name} risk={risk} />
-          <p className="-mt-2 pl-6 text-sm text-muted-foreground">
-            {description ?? riskCopy[risk]()}
-          </p>
-          <div className="pl-6">
+          <p className="-mt-2 text-sm text-muted-foreground">{description ?? riskCopy[risk]()}</p>
+          <div>
             <ToolInputs input={part.input} muted={denying} />
           </div>
           {denying ? (
             <DenyForm onDeny={onDeny} onBack={() => setDenying(false)} />
           ) : (
-            <div className="flex flex-wrap gap-2 pl-6">
+            <div className="flex flex-wrap gap-2">
               <Button
                 ref={approveRef}
                 type="button"
