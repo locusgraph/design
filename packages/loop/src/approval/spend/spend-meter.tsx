@@ -57,7 +57,7 @@ function MeterLegend(props: SpendMeterProps & { muted: boolean }) {
   const { spentMicroUsd, estimateMicroUsd, capMicroUsd, balanceMicroUsd, outOfCredits, muted } =
     props;
   return (
-    <div className="flex flex-wrap justify-between gap-x-4 gap-y-1 text-xs text-muted-foreground tabular-nums">
+    <div className="flex flex-wrap justify-between gap-x-4 gap-y-1 text-xs text-faint tabular-nums">
       {outOfCredits ? (
         <>
           <span>
@@ -94,7 +94,7 @@ export function SpendMeter(props: SpendMeterProps) {
       <div aria-hidden className="relative h-4">
         <span
           className={cn(
-            "eyebrow absolute bottom-0 whitespace-nowrap",
+            "absolute bottom-0 text-xs whitespace-nowrap text-faint tabular-nums",
             labelAlignment(limitPosition)
           )}
           style={{ left: `${limitPosition}%` }}
@@ -109,13 +109,13 @@ export function SpendMeter(props: SpendMeterProps) {
         aria-valuemax={scale}
         aria-valuenow={projected}
         aria-valuetext={`${formatMicroUsd(projected)} after the next step, ${limitLabel.toLowerCase()} ${formatMicroUsd(limit)}`}
-        className="relative h-1.5 bg-muted-foreground/20"
+        className="relative h-1 rounded-full bg-muted-foreground/15"
       >
         <span
           aria-hidden
           className={cn(
-            "absolute inset-y-0 left-0",
-            muted ? "bg-muted-foreground/40" : "bg-foreground/70"
+            "absolute inset-y-0 left-0 rounded-l-full",
+            muted ? "bg-muted-foreground/30" : "bg-muted-foreground/60"
           )}
           style={{ width: `${baseWidth}%` }}
         />
@@ -129,7 +129,7 @@ export function SpendMeter(props: SpendMeterProps) {
         />
         <span
           aria-hidden
-          className="absolute -inset-y-1 -ml-px w-px bg-foreground"
+          className="absolute -inset-y-1 -ml-px w-px bg-foreground/70"
           style={{ left: `${limitPosition}%` }}
         />
       </div>

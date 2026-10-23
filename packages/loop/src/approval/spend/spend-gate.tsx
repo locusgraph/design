@@ -1,14 +1,9 @@
 import { Button, cn } from "@locusgraph/components";
 import { formatMicroUsd } from "@locusgraph/utils";
 import { CurrencyCircleDollar as CircleDollarSignIcon } from "@phosphor-icons/react/ssr";
-import {
-  ApprovalPanel,
-  LiveStatus,
-  PanelBody,
-  PanelFooter,
-  PanelHeader,
-  PanelTitle,
-} from "../../shared/panel";
+import { lineIconClass, lineObjectClass, lineRowClass } from "../../shared/line";
+import { LiveStatus } from "../../shared/panel";
+import { SettledLine } from "../shared/approval-line";
 import { DecisionSummary } from "../shared/decision-line";
 import { useFocusOnMount } from "../shared/use-focus-on-mount";
 import type { ApprovalDecision } from "../types";
@@ -66,92 +61,93 @@ export function SpendGate({
   const copy = situationCopy[situation];
   const primaryRef = useFocusOnMount<HTMLButtonElement>(autoFocus && !decision);
   const meter = { spentMicroUsd, estimateMicroUsd, capMicroUsd, balanceMicroUsd, outOfCredits };
+  const icon = <CircleDollarSignIcon weight="bold" aria-hidden />;
+  const estimate = formatMicroUsd(estimateMicroUsd);
   return (
-    <ApprovalPanel
+    <section
       data-slot="spend-gate"
       data-situation={situation}
       aria-label={copy.title}
-      className={cn(!decision && outOfCredits && "ring-destructive/60", className)}
+      className={cn("flex min-w-0 flex-col", !decision && "gap-3", className)}
     >
-      <PanelHeader
-        icon={<CircleDollarSignIcon weight="bold" aria-hidden />}
-        eyebrow="Spend approval"
-        status={decision ? (decision.approved ? "Allowed" : "Stopped") : situationStatus[situation]}
-        tone={
-          decision ? (decision.approved ? "done" : "danger") : outOfCredits ? "danger" : "waiting"
-        }
-      />
-      <PanelTitle className={cn(decision && "text-muted-foreground")}>{copy.title}</PanelTitle>
       {decision ? (
-        <PanelBody className="pt-3">
-          <DecisionSummary
-            decision={decision}
-            approvedVerb="Allowed"
-            deniedVerb="Stopped"
-            result={
-              decision.approved
-                ? `Allowed ${formatMicroUsd(estimateMicroUsd)} once`
-                : `${runName ?? "The run"} stopped`
-            }
-          />
-          <SpendMeter {...meter} muted />
-        </PanelBody>
+        <SettledLine name={estimate} verb="Asked to spend" icon={icon}>
+          <div className="flex flex-col gap-3">
+            <DecisionSummary
+              decision={decision}
+              approvedVerb="Allowed"
+              deniedVerb="Stopped"
+              result={
+                decision.approved ? `Allowed ${estimate} once` : `${runName ?? "The run"} stopped`
+              }
+            />
+            <SpendMeter {...meter} muted />
+          </div>
+        </SettledLine>
       ) : (
         <>
-          <p className="px-5 pt-1 text-sm text-muted-foreground">
-            {copy.body(runName ?? "The agent")}
-          </p>
-          <PanelBody className="gap-5">
-            <div className="flex flex-col gap-0.5">
-              <p className="text-2xl font-semibold tracking-tight tabular-nums">
-                {formatMicroUsd(estimateMicroUsd)}
-              </p>
-              <p className="text-xs text-muted-foreground">
-                Next step, estimated. The run would reach{" "}
-                <span className="tabular-nums">{formatMicroUsd(projected)}</span>.
-              </p>
-            </div>
-            <SpendMeter {...meter} />
-            {!outOfCredits && (
-              <RaiseCapForm
-                capMicroUsd={capMicroUsd}
-                suggestedMicroUsd={suggestedCapMicroUsd(projected, capMicroUsd)}
-                onRaiseCap={onRaiseCap}
-              />
-            )}
-          </PanelBody>
-          <PanelFooter className="justify-between">
-            <span className="hidden font-mono text-[11px] text-muted-foreground sm:inline">
-              The run is paused
-            </span>
-            <span className="flex flex-wrap gap-2">
-              <Button
-                ref={outOfCredits && !onBuyCredits ? primaryRef : undefined}
-                type="button"
-                size="sm"
-                variant={outOfCredits && !onBuyCredits ? "destructive" : "ghost"}
-                onClick={onStop}
-              >
-                Stop the run
-              </Button>
-              {outOfCredits ? (
-                onBuyCredits && (
-                  <Button ref={primaryRef} type="button" size="sm" onClick={onBuyCredits}>
-                    Buy credits
-                  </Button>
-                )
-              ) : (
-                <Button ref={primaryRef} type="button" size="sm" onClick={onAllowOnce}>
-                  Allow {formatMicroUsd(estimateMicroUsd)} once
-                </Button>
+          <div className={cn(lineRowClass, "w-full text-base")}>
+            <span
+              aria-hidden
+              className={cn(
+                lineIconClass,
+                "size-5 [&_svg]:size-4",
+                outOfCredits && "text-destructive"
               )}
+            >
+              {icon}
             </span>
-          </PanelFooter>
+            <span className="min-w-0 truncate">
+              <span className={cn("font-medium", outOfCredits ? "text-destructive" : "text-warn")}>
+                {situationStatus[situation]}
+              </span>{" "}
+              · next step costs <span className={lineObjectClass}>{estimate}</span>
+            </span>
+          </div>
+          <p className="-mt-2 text-sm text-faint">
+            {copy.body(runName ?? "The agent")} The run would reach{" "}
+            <span className="tabular-nums">{formatMicroUsd(projected)}</span>.
+          </p>
+          <SpendMeter {...meter} />
+          {!outOfCredits && (
+            <RaiseCapForm
+              capMicroUsd={capMicroUsd}
+              suggestedMicroUsd={suggestedCapMicroUsd(projected, capMicroUsd)}
+              onRaiseCap={onRaiseCap}
+            />
+          )}
+          <div className="flex flex-wrap items-center gap-2 pt-1">
+            {outOfCredits ? (
+              onBuyCredits && (
+                <Button ref={primaryRef} type="button" size="sm" onClick={onBuyCredits}>
+                  Buy credits
+                </Button>
+              )
+            ) : (
+              <Button ref={primaryRef} type="button" size="sm" onClick={onAllowOnce}>
+                Allow {estimate} once
+              </Button>
+            )}
+            <Button
+              ref={outOfCredits && !onBuyCredits ? primaryRef : undefined}
+              type="button"
+              size="sm"
+              variant={outOfCredits && !onBuyCredits ? "destructive" : "ghost"}
+              className={
+                outOfCredits && !onBuyCredits
+                  ? undefined
+                  : "hover:bg-transparent hover:text-destructive"
+              }
+              onClick={onStop}
+            >
+              Stop the run
+            </Button>
+          </div>
         </>
       )}
       <LiveStatus
         message={decision ? (decision.approved ? "Spend allowed" : "Run stopped") : copy.title}
       />
-    </ApprovalPanel>
+    </section>
   );
 }

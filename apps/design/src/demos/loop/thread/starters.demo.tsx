@@ -23,7 +23,7 @@ function Playground({ product }: { product: (typeof products)[number] }) {
   return (
     <div className="flex w-full max-w-xl flex-col gap-3">
       <Starters suggestions={[...prompts[product]]} onSelect={setChosen} />
-      <p className="eyebrow">{chosen ? `Sent: ${chosen}` : "Pick a prompt"}</p>
+      <p className="text-xs text-faint">{chosen ? `Sent: ${chosen}` : "Pick a prompt"}</p>
     </div>
   );
 }
