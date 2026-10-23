@@ -7,6 +7,7 @@ import { lineMemoryIconClass, lineMemoryObjectClass, lineRowClass } from "../../
 import { LiveStatus } from "../../shared/live-status";
 import { PendingLine } from "../shared/approval-line";
 import { useFocusOnMount } from "../shared/use-focus-on-mount";
+import { useFocusWhenSettled } from "../shared/use-focus-when-settled";
 import type { ApprovalDecision, MemoryReviewResult, ProposedMemory } from "../types";
 import { hasBlankEdit, initialDrafts, reviewResult, submitLabel } from "./memory-choices";
 import { MemoryRow } from "./memory-row";
@@ -53,11 +54,14 @@ export function MemoryReview({
   const empty = memories.length === 0;
   const sensitiveCount = memories.filter((memory) => memory.sensitive).length;
   const submitRef = useFocusOnMount<HTMLButtonElement>(autoFocus && !decision && !empty);
+  const settleRef = useFocusWhenSettled<HTMLElement>(!decision);
   return (
     <section
+      ref={settleRef}
+      tabIndex={-1}
       data-slot="memory-review"
       aria-label={title}
-      className={cn("flex min-w-0 flex-col gap-3", className)}
+      className={cn("flex min-w-0 flex-col outline-none gap-3", className)}
     >
       {empty ? (
         <div className={lineRowClass}>

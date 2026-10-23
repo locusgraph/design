@@ -9,6 +9,7 @@ import { lineObjectClass } from "../../shared/line";
 import { LiveStatus } from "../../shared/live-status";
 import { PendingLine, SettledLine } from "../shared/approval-line";
 import { useFocusOnMount } from "../shared/use-focus-on-mount";
+import { useFocusWhenSettled } from "../shared/use-focus-when-settled";
 import type { DecidedAt, QuestionAnswer, QuestionOption } from "../types";
 import { QuestionChoices } from "./question-choices";
 
@@ -54,6 +55,7 @@ export function Question({
   const canSubmit = optionId !== undefined || trimmed !== "";
   const textOnly = options.length === 0;
   const textRef = useFocusOnMount<HTMLTextAreaElement>(autoFocus && !answer && textOnly);
+  const settleRef = useFocusWhenSettled<HTMLElement>(!answer);
   const changeText = (value: string) => {
     setText(value);
     if (value.trim() !== "") setOptionId(undefined);
@@ -61,10 +63,12 @@ export function Question({
   const icon = <MessageCircleQuestionIcon weight="bold" aria-hidden />;
   return (
     <section
+      ref={settleRef}
+      tabIndex={-1}
       data-slot="question"
       aria-label={question}
       data-answered={answer ? true : undefined}
-      className={cn("flex min-w-0 flex-col", !answer && "gap-3", className)}
+      className={cn("flex min-w-0 flex-col outline-none", !answer && "gap-3", className)}
     >
       {answer ? (
         <SettledLine name={question} verb="Asked" icon={icon}>

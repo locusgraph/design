@@ -9,6 +9,7 @@ import { DecisionSummary } from "../../shared/decision-summary";
 import { LiveStatus } from "../../shared/live-status";
 import { ApprovalHeadline, SettledLine } from "../shared/approval-line";
 import { useFocusOnMount } from "../shared/use-focus-on-mount";
+import { useFocusWhenSettled } from "../shared/use-focus-when-settled";
 import type { ApprovalDecision, PlanStepDraft } from "../types";
 import { PlanStepRow, type StepAction, stepControlId } from "./plan-step-row";
 import { applyStepAction, describeStepAction, focusAfterAction } from "./plan-steps";
@@ -56,6 +57,7 @@ export function PlanReview({
   const [announcement, setAnnouncement] = useState("");
   const [pendingFocus, setPendingFocus] = useState<{ id: string } | null>(null);
   const approveRef = useFocusOnMount<HTMLButtonElement>(autoFocus && !decision);
+  const settleRef = useFocusWhenSettled<HTMLElement>(!decision);
   const hasBlankTitle = steps.some((step) => step.title.trim() === "");
 
   useEffect(() => {
@@ -79,10 +81,12 @@ export function PlanReview({
   const stepCount = pluralize(steps.length, "step");
   return (
     <section
+      ref={settleRef}
+      tabIndex={-1}
       data-slot="plan-review"
       data-decided={decision ? true : undefined}
       aria-label={title}
-      className={cn("flex min-w-0 flex-col", !decision && "gap-3", className)}
+      className={cn("flex min-w-0 flex-col outline-none", !decision && "gap-3", className)}
     >
       {decision ? (
         <SettledLine

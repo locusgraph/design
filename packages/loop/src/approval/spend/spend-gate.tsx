@@ -6,6 +6,7 @@ import { lineObjectClass } from "../../shared/line";
 import { LiveStatus } from "../../shared/live-status";
 import { PendingLine, SettledLine } from "../shared/approval-line";
 import { useFocusOnMount } from "../shared/use-focus-on-mount";
+import { useFocusWhenSettled } from "../shared/use-focus-when-settled";
 import type { ApprovalDecision } from "../types";
 import { RaiseCapForm } from "./raise-cap-form";
 import { spendSituation, suggestedCapMicroUsd } from "./spend-math";
@@ -60,15 +61,18 @@ export function SpendGate({
   const projected = spentMicroUsd + estimateMicroUsd;
   const copy = situationCopy[situation];
   const primaryRef = useFocusOnMount<HTMLButtonElement>(autoFocus && !decision);
+  const settleRef = useFocusWhenSettled<HTMLElement>(!decision);
   const meter = { spentMicroUsd, estimateMicroUsd, capMicroUsd, balanceMicroUsd, outOfCredits };
   const icon = <CircleDollarSignIcon weight="bold" aria-hidden />;
   const estimate = formatMicroUsd(estimateMicroUsd);
   return (
     <section
+      ref={settleRef}
+      tabIndex={-1}
       data-slot="spend-gate"
       data-situation={situation}
       aria-label={copy.title}
-      className={cn("flex min-w-0 flex-col", !decision && "gap-3", className)}
+      className={cn("flex min-w-0 flex-col outline-none", !decision && "gap-3", className)}
     >
       {decision ? (
         <SettledLine name={estimate} verb="Asked to spend" icon={icon}>
