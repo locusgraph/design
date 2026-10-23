@@ -16,7 +16,7 @@ import {
   Input,
 } from "@locusgraph/components";
 import { Trash as TrashIcon } from "@phosphor-icons/react/ssr";
-import { useRef, useState } from "react";
+import { useId, useRef, useState } from "react";
 import { SettingsSection } from "./settings-section";
 
 type SettingsDangerProps = {
@@ -25,6 +25,7 @@ type SettingsDangerProps = {
 };
 
 export function SettingsDanger({ workspaceSlug, onDelete }: SettingsDangerProps) {
+  const fieldId = useId();
   const [confirmation, setConfirmation] = useState("");
   const confirmed = confirmation === workspaceSlug;
   const confirmationInput = useRef<HTMLInputElement>(null);
@@ -57,12 +58,12 @@ export function SettingsDanger({ workspaceSlug, onDelete }: SettingsDangerProps)
               </AlertDialogDescription>
             </AlertDialogHeader>
             <Field>
-              <FieldLabel htmlFor="delete-confirmation">
+              <FieldLabel htmlFor={`${fieldId}-confirmation`}>
                 Type <span className="font-mono">{workspaceSlug}</span> to confirm
               </FieldLabel>
               <Input
                 ref={confirmationInput}
-                id="delete-confirmation"
+                id={`${fieldId}-confirmation`}
                 autoComplete="off"
                 spellCheck={false}
                 value={confirmation}

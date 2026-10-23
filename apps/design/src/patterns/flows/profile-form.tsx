@@ -17,7 +17,7 @@ import {
   Spinner,
   Textarea,
 } from "@locusgraph/components";
-import { type FormEvent, useState } from "react";
+import { type FormEvent, useId, useState } from "react";
 import {
   bioLimit,
   missingFieldsHint,
@@ -49,6 +49,7 @@ export function ProfileForm({
   onSave = waitForSave,
   onCancel,
 }: ProfileFormProps) {
+  const fieldId = useId();
   const [values, setValues] = useState(defaultValues);
   const [touched, setTouched] = useState<ProfileField[]>(showErrors ? allFields : []);
   const [pending, setPending] = useState(false);
@@ -94,9 +95,9 @@ export function ProfileForm({
         <FieldDescription>How you appear to people in your organization.</FieldDescription>
         <FieldGroup className="gap-6">
           <Field data-invalid={!!visibleError("name") || undefined}>
-            <RequiredLabel htmlFor="profile-name">Full name</RequiredLabel>
+            <RequiredLabel htmlFor={`${fieldId}-name`}>Full name</RequiredLabel>
             <Input
-              id="profile-name"
+              id={`${fieldId}-name`}
               autoComplete="name"
               aria-required="true"
               aria-invalid={!!visibleError("name")}
@@ -107,9 +108,9 @@ export function ProfileForm({
             <FieldError>{visibleError("name")}</FieldError>
           </Field>
           <Field data-invalid={!!visibleError("email") || undefined}>
-            <RequiredLabel htmlFor="profile-email">Email</RequiredLabel>
+            <RequiredLabel htmlFor={`${fieldId}-email`}>Email</RequiredLabel>
             <Input
-              id="profile-email"
+              id={`${fieldId}-email`}
               type="email"
               autoComplete="email"
               aria-required="true"
@@ -122,7 +123,7 @@ export function ProfileForm({
             <FieldError>{visibleError("email")}</FieldError>
           </Field>
           <Field data-invalid={!!visibleError("role") || undefined}>
-            <RequiredLabel htmlFor="profile-role">Role</RequiredLabel>
+            <RequiredLabel htmlFor={`${fieldId}-role`}>Role</RequiredLabel>
             <Select
               value={values.role}
               onValueChange={(role) => {
@@ -132,7 +133,7 @@ export function ProfileForm({
               onOpenChange={(open) => open || markTouched("role")}
             >
               <SelectTrigger
-                id="profile-role"
+                id={`${fieldId}-role`}
                 aria-required="true"
                 aria-invalid={!!visibleError("role")}
                 className="w-full"
@@ -152,13 +153,13 @@ export function ProfileForm({
           </Field>
           <Field data-invalid={!!visibleError("bio") || undefined}>
             <div className="flex items-baseline justify-between gap-3">
-              <FieldLabel htmlFor="profile-bio">Bio</FieldLabel>
+              <FieldLabel htmlFor={`${fieldId}-bio`}>Bio</FieldLabel>
               <span className="text-xs text-muted-foreground tabular-nums" aria-live="polite">
                 {values.bio.length}/{bioLimit}
               </span>
             </div>
             <Textarea
-              id="profile-bio"
+              id={`${fieldId}-bio`}
               rows={3}
               aria-invalid={!!visibleError("bio")}
               value={values.bio}

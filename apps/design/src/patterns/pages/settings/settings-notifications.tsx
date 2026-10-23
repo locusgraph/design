@@ -1,7 +1,7 @@
 "use client";
 
 import { Button, Label, Switch } from "@locusgraph/components";
-import { useState } from "react";
+import { useId, useState } from "react";
 import type { NotificationSetting } from "./settings-data";
 import { SettingsSection } from "./settings-section";
 
@@ -18,6 +18,7 @@ function enabledIds(notifications: NotificationSetting[]) {
 }
 
 export function SettingsNotifications({ notifications, onSave }: SettingsNotificationsProps) {
+  const fieldId = useId();
   const [saved, setSaved] = useState(notifications);
   const [draft, setDraft] = useState(notifications);
   const toggle = (id: string, enabled: boolean) =>
@@ -44,11 +45,11 @@ export function SettingsNotifications({ notifications, onSave }: SettingsNotific
         {draft.map((notification) => (
           <li key={notification.id} className="flex items-start justify-between gap-4 py-3">
             <div className="flex min-w-0 flex-col gap-0.5">
-              <Label htmlFor={`notify-${notification.id}`}>{notification.label}</Label>
+              <Label htmlFor={`${fieldId}-${notification.id}`}>{notification.label}</Label>
               <p className="text-sm text-muted-foreground">{notification.description}</p>
             </div>
             <Switch
-              id={`notify-${notification.id}`}
+              id={`${fieldId}-${notification.id}`}
               checked={notification.enabled}
               onCheckedChange={(enabled) => toggle(notification.id, enabled)}
             />

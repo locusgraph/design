@@ -18,7 +18,7 @@ import {
   Trash as TrashIcon,
   ArrowUUpLeft as UndoIcon,
 } from "@phosphor-icons/react/ssr";
-import { useEffect, useState } from "react";
+import { useEffect, useId, useState } from "react";
 
 export type DeleteRemoval = { label: string; count: number };
 
@@ -98,6 +98,7 @@ export function DeleteConfirm({
   onDelete,
   onUndo,
 }: DeleteConfirmProps) {
+  const fieldId = useId();
   const [deleted, setDeleted] = useState(false);
   const [typedName, setTypedName] = useState("");
   const actionLabel = `Delete ${countedNoun(target.count, target.noun)}`;
@@ -166,11 +167,11 @@ export function DeleteConfirm({
           </ul>
           {requireTyping ? (
             <Field>
-              <FieldLabel htmlFor="delete-confirm-name">
+              <FieldLabel htmlFor={`${fieldId}-confirmation`}>
                 Type <span className="font-mono">{target.name}</span> to confirm
               </FieldLabel>
               <Input
-                id="delete-confirm-name"
+                id={`${fieldId}-confirmation`}
                 autoComplete="off"
                 spellCheck={false}
                 value={typedName}
