@@ -62,7 +62,7 @@ export default defineDemo({
   code: ({ empty }) =>
     empty
       ? `<KeysEmpty newKeyHref="/keys/new" linkComponent={Link} />`
-      : `<Keys keys={keys} actions={(key) => <RevokeButton keyId={key.id} />} />`,
+      : `<Keys\n  keys={keys}\n  actions={(key) => <RevokeButton keyId={key.id} />}\n/>`,
   props: [
     { name: "Keys.keys", type: "ApiKeyRow[]" },
     { name: "Keys.actions", type: "(key: ApiKeyRow) => ReactNode" },

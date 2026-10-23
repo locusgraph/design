@@ -48,7 +48,7 @@ export default defineDemo({
     </div>
   ),
   code: ({ open }) =>
-    `<Recall memories={recall.memories}${open ? " defaultOpen" : ""} onOpenMemory={openMemory} />`,
+    `<Recall\n  memories={recall.memories}${open ? "\n  defaultOpen" : ""}\n  onOpenMemory={openMemory}\n/>`,
   props: [
     { name: "memories", type: "MemoryRef[]" },
     { name: "onOpenMemory", type: "(id: string) => void" },

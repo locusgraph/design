@@ -28,7 +28,7 @@ export default defineDemo({
     </div>
   ),
   code: ({ open }) =>
-    `<Sources sources={message.sources}${open ? " defaultOpen" : ""} onOpen={openSource} />`,
+    `<Sources\n  sources={message.sources}${open ? "\n  defaultOpen" : ""}\n  onOpen={openSource}\n/>`,
   props: [
     { name: "sources", type: "Array<Citation | SourceUrlPart>" },
     { name: "onOpen", type: "(citation: Citation) => void" },

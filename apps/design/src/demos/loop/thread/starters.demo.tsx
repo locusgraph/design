@@ -52,7 +52,8 @@ export default defineDemo({
     "Starter prompts as ruled rows for an empty conversation. Selecting one hands its text to onSelect.",
   controls: { product: select(products) },
   playground: ({ product }) => <Playground product={product} />,
-  code: () => `<Starters suggestions={prompts} onSelect={(text) => sendMessage({ text })} />`,
+  code: () =>
+    `<Starters\n  suggestions={prompts}\n  onSelect={(text) => sendMessage({ text })}\n/>`,
   props: [
     { name: "suggestions", type: "Starter[]" },
     { name: "onSelect", type: "(text: string) => void" },
