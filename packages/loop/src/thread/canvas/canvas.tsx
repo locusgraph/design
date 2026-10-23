@@ -70,7 +70,7 @@ export function Canvas({
       <ScrollArea className="min-h-0 flex-1">
         <div
           data-slot="canvas-content"
-          className="px-6 pt-1 pb-6 has-[>[data-slot=code]:only-child]:p-0 [&>[data-slot=code]:only-child]:ring-0"
+          className="px-6 pt-1 pb-6 [&>[data-slot=code]:only-child]:bg-transparent [&>[data-slot=code]:only-child>figcaption]:hidden [&>[data-slot=code]:only-child_[data-slot=code-area]]:p-0"
         >
           {children}
         </div>

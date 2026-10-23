@@ -5,9 +5,10 @@ import { useCopied, writeToClipboard } from "../use-copied";
 type CopyCodeButtonProps = {
   code: string;
   onCopy?: (code: string) => void;
+  size?: "icon-xs" | "icon-sm";
 };
 
-export function CopyCodeButton({ code, onCopy }: CopyCodeButtonProps) {
+export function CopyCodeButton({ code, onCopy, size = "icon-xs" }: CopyCodeButtonProps) {
   const { copied, markCopied } = useCopied();
   const copy = async () => {
     if (onCopy) {
@@ -23,9 +24,9 @@ export function CopyCodeButton({ code, onCopy }: CopyCodeButtonProps) {
     <Button
       type="button"
       variant="ghost"
-      size="icon-xs"
+      size={size}
       aria-label={copied ? "Copied" : "Copy code"}
-      className="text-muted-foreground hover:text-foreground"
+      className="text-faint hover:bg-transparent hover:text-s1"
       onClick={copy}
     >
       {copied ? (

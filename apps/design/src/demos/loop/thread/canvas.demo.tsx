@@ -1,5 +1,5 @@
 import { Button } from "@locusgraph/components";
-import { Canvas, type CanvasVersion, Code } from "@locusgraph/loop";
+import { Canvas, type CanvasVersion, Code, CopyCodeButton } from "@locusgraph/loop";
 import { DownloadSimple as DownloadIcon } from "@phosphor-icons/react/ssr";
 import { useState } from "react";
 import { defineDemo, select } from "../../../registry/define-demo";
@@ -57,9 +57,12 @@ function Playground({ kind }: { kind: (typeof kinds)[number] }) {
         onVersionChange={setVersionId}
         onClose={() => setOpen(false)}
         actions={
-          <Button variant="ghost" size="icon-sm" aria-label="Download">
-            <DownloadIcon weight="bold" aria-hidden />
-          </Button>
+          <>
+            {kind === "code" && <CopyCodeButton code={budgetCode} size="icon-sm" />}
+            <Button variant="ghost" size="icon-sm" aria-label="Download">
+              <DownloadIcon weight="bold" aria-hidden />
+            </Button>
+          </>
         }
       >
         {kind === "code" ? (
