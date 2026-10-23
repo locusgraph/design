@@ -44,10 +44,14 @@ export function Cite({ citation, onOpen, className }: CiteProps) {
             >
               {citation.index}
             </a>
-          ) : (
+          ) : onOpen ? (
             <button type="button" aria-label={label} onClick={open} className={pillClass}>
               {citation.index}
             </button>
+          ) : (
+            <span role="note" tabIndex={0} aria-label={label} className={pillClass}>
+              {citation.index}
+            </span>
           )}
         </HoverCardTrigger>
         <HoverCardContent

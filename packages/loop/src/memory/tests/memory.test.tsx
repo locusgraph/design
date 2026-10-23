@@ -24,6 +24,12 @@ describe("Cite", () => {
     );
     expect(html).toContain('<button type="button" aria-label="Source 1: Team notes"');
   });
+
+  it("renders a focusable note when the citation has nothing to open", () => {
+    const html = renderToStaticMarkup(<Cite citation={{ index: 3, title: "Team notes" }} />);
+    expect(html).toContain('role="note" tabindex="0" aria-label="Source 3: Team notes"');
+    expect(html).not.toContain("<button");
+  });
 });
 
 describe("Sources", () => {
