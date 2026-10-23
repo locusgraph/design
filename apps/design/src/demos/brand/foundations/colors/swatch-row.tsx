@@ -37,11 +37,13 @@ function Swatch({ value, theme }: { value: ColorValue; theme: string }) {
   );
 }
 
-const rowColumns = "grid grid-cols-[4rem_minmax(0,1fr)_7.5rem_7.5rem] items-center gap-x-4";
+const rowColumns =
+  "grid grid-cols-[4rem_minmax(0,1fr)] items-center gap-x-4 gap-y-1 sm:grid-cols-[4rem_minmax(0,1fr)_7.5rem_7.5rem]";
 
 function ThemeValue({ value, theme }: { value: ColorValue; theme: string }) {
   return (
-    <span className="flex items-center gap-0.5">
+    <span className="col-start-2 flex items-center gap-0.5 sm:col-start-auto">
+      <span className="w-9 text-2xs text-faint sm:hidden">{theme}</span>
       <span className="font-mono text-xs">{value.label}</span>
       <CopyButton value={value.css} label={`${theme} value`} />
     </span>
@@ -76,8 +78,8 @@ export function SwatchHeader() {
     <div className={`${rowColumns} px-4 py-2`}>
       <span className="eyebrow">Swatch</span>
       <span className="eyebrow">Name and token</span>
-      <span className="eyebrow">Light</span>
-      <span className="eyebrow">Dark</span>
+      <span className="eyebrow hidden sm:block">Light</span>
+      <span className="eyebrow hidden sm:block">Dark</span>
     </div>
   );
 }

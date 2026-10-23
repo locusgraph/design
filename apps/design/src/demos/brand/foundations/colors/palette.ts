@@ -41,7 +41,8 @@ function chartSeries(index: number, light: string, dark: string): PaletteColor {
 
 export const paletteColors: Record<ColorGroup, PaletteColor[]> = {
   base: [
-    fromPalettes("surface", "bg-background", "Page and card background", "surface"),
+    fromPalettes("background", "bg-background", "Page background", "background"),
+    fromPalettes("surface", "bg-card", "Cards, panels and grid cells", "surface"),
     fromPalettes("foreground", "text-foreground", "Body text and headings", "foreground"),
     fromPalettes(
       "muted-foreground",
@@ -54,8 +55,8 @@ export const paletteColors: Record<ColorGroup, PaletteColor[]> = {
       name: "border",
       token: "border-border",
       usage: "Rules, dividers, container rings",
-      light: foregroundMix(lightColors, 13),
-      dark: foregroundMix(darkColors, 13),
+      light: foregroundMix(lightColors, 9),
+      dark: foregroundMix(darkColors, 10),
     },
     {
       name: "input",
