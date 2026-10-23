@@ -10,7 +10,7 @@ type OnThisPageProps = { sections: PageSection[]; title?: string };
 function OnThisPage({ sections, title = "On This Page" }: OnThisPageProps) {
   const [activeId, pinSection] = useActiveSection(sections.map((section) => section.id));
   return (
-    <nav aria-label={title} className="flex flex-col gap-2 text-sm">
+    <nav aria-label={title} className="-m-1 flex flex-col gap-2 p-1 text-sm">
       <p className="eyebrow flex h-6 items-center">{title}</p>
       {sections.map((section) => (
         <button
@@ -22,7 +22,7 @@ function OnThisPage({ sections, title = "On This Page" }: OnThisPageProps) {
           }}
           aria-current={activeId === section.id ? "location" : undefined}
           className={cn(
-            "text-left text-xs text-muted-foreground transition-colors hover:text-foreground",
+            "w-fit text-left text-xs text-muted-foreground transition-colors focus-ring hover:text-foreground",
             section.nested && "pl-4",
             activeId === section.id && "font-medium text-foreground"
           )}
