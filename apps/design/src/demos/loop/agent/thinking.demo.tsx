@@ -34,7 +34,7 @@ export default defineDemo({
     </div>
   ),
   code: ({ state }) =>
-    `<Thinking text={part.text} state="${state}"${state === "done" ? " durationMs={4000}" : ""} />`,
+    `<Thinking\n  text={part.text}\n  state="${state}"${state === "done" ? "\n  durationMs={4000}" : ""}\n/>`,
   props: [
     { name: "text", type: "string" },
     { name: "state", type: '"streaming" | "done"' },

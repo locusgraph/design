@@ -76,7 +76,7 @@ export default defineDemo({
     <Pulse variant="locus" label={label} showLabel={showLabel} className={sizeClasses[size]} />
   ),
   code: ({ size, showLabel, label }) =>
-    `<Pulse variant="locus" label="${label}"${showLabel ? "" : " showLabel={false}"} className="${sizeClasses[size]}" />`,
+    `<Pulse\n  variant="locus"\n  label="${label}"${showLabel ? "" : "\n  showLabel={false}"}\n  className="${sizeClasses[size]}"\n/>`,
   props: [
     { name: "variant", type: '"locus"', defaultValue: '"dots"' },
     { name: "label", type: "string", defaultValue: '"Thinking…"' },

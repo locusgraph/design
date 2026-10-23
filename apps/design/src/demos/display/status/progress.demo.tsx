@@ -59,7 +59,7 @@ export default defineDemo({
     <Progress value={Number(value)} tone={tone} aria-label="API calls used" className="w-72" />
   ),
   code: ({ value, tone }) =>
-    `<Progress value={${value}}${formatProp("tone", tone, "default")} aria-label="API calls used" />`,
+    `<Progress\n  value={${value}}${formatProp("tone", tone, "default").replace(" ", "\n  ")}\n  aria-label="API calls used"\n/>`,
   props: [
     { name: "value", type: "number | null" },
     { name: "max", type: "number", defaultValue: "100" },
