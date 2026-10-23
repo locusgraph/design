@@ -50,8 +50,8 @@ function FilePreview({ item, isGrid }: Omit<ChipProps, "onRemove">) {
     <span
       data-slot="files-preview"
       className={cn(
-        "grid shrink-0 place-items-center overflow-hidden bg-muted text-muted-foreground",
-        isGrid ? "aspect-[16/10] w-full" : "size-10"
+        "grid shrink-0 place-items-center overflow-hidden bg-muted text-faint",
+        isGrid ? "aspect-[16/10] w-full" : "size-9"
       )}
     >
       {isImageFile(item) ? (
@@ -70,8 +70,8 @@ function RemoveButton({ item, isGrid, onRemove }: Required<ChipProps>) {
       aria-label={`Remove ${item.name}`}
       onClick={() => onRemove(item.id)}
       className={cn(
-        "grid size-6 shrink-0 place-items-center text-muted-foreground outline-none transition-colors hover:bg-accent hover:text-foreground focus-visible:ring-1 focus-visible:ring-ring",
-        isGrid && "absolute top-1 right-1 bg-card/90"
+        "grid size-6 shrink-0 place-items-center text-faint opacity-0 outline-none transition-[color,opacity] group-hover/file:opacity-100 hover:text-s1 focus-visible:opacity-100 focus-visible:ring-2 focus-visible:ring-ring/70 [@media(hover:none)]:opacity-100 motion-reduce:transition-none",
+        isGrid && "absolute top-1 right-1 bg-background/80"
       )}
     >
       <XIcon weight="bold" aria-hidden="true" className="size-3.5" />
@@ -85,18 +85,18 @@ function FileChip({ item, isGrid, onRemove }: ChipProps) {
     <li
       data-slot="files-item"
       className={cn(
-        "relative flex min-w-0 bg-card text-card-foreground ring-1 ring-border",
-        isGrid ? "flex-col" : "w-60 max-w-full items-center gap-2.5 pr-1",
+        "group/file relative flex min-w-0 bg-muted/50 text-foreground",
+        isGrid ? "flex-col" : "max-w-60 items-center gap-2.5 pr-1",
         !isGrid && !onRemove && "pr-3"
       )}
     >
       <FilePreview item={item} isGrid={isGrid} />
       <span className={cn("flex min-w-0 flex-1 flex-col gap-0.5", isGrid && "px-2.5 py-2")}>
-        <span title={item.name} className="truncate text-xs leading-tight font-medium">
+        <span title={item.name} className="truncate text-sm leading-tight font-medium">
           {item.name}
         </span>
         {description && (
-          <span className="truncate font-mono text-xs leading-tight text-muted-foreground tabular-nums">
+          <span className="truncate text-xs leading-tight text-faint tabular-nums">
             {description}
           </span>
         )}
