@@ -1,6 +1,6 @@
 import { cn } from "@locusgraph/components";
 import type { ComponentProps, ReactNode } from "react";
-import { StatusDot, type StatusTone } from "./status-dot";
+import type { StatusTone } from "./status-dot";
 
 export function ApprovalPanel({ className, ...props }: ComponentProps<"section">) {
   return (
@@ -16,6 +16,14 @@ export function ApprovalPanel({ className, ...props }: ComponentProps<"section">
 
 export type PanelTone = StatusTone;
 
+const panelStatusTones: Record<PanelTone, string> = {
+  running: "text-muted-foreground motion-safe:shimmer",
+  waiting: "font-medium text-warn",
+  done: "font-medium text-good",
+  danger: "font-medium text-destructive",
+  idle: "text-faint",
+};
+
 type PanelHeaderProps = {
   icon: ReactNode;
   eyebrow: string;
@@ -28,17 +36,21 @@ export function PanelHeader({ icon, eyebrow, status, tone = "idle", aside }: Pan
   return (
     <header
       data-slot="panel-header"
-      className="eyebrow flex items-center gap-2 px-5 pt-4 [&_svg]:size-3.5 [&_svg]:shrink-0"
+      className="flex items-center gap-2 px-5 pt-4 text-sm text-muted-foreground"
     >
-      {icon}
+      <span
+        aria-hidden
+        className="flex size-4 shrink-0 items-center justify-center text-faint [&_svg]:size-3.5"
+      >
+        {icon}
+      </span>
       <span className="min-w-0 truncate">{eyebrow}</span>
-      <span className="ml-auto flex shrink-0 items-center gap-1.5">
-        {aside && <span className="mr-2 tabular-nums">{aside}</span>}
+      <span className="ml-auto flex shrink-0 items-baseline gap-3 text-xs">
+        {aside && <span className="text-faint tabular-nums">{aside}</span>}
         {status && (
-          <>
-            <StatusDot tone={tone} />
-            <span>{status}</span>
-          </>
+          <span data-slot="panel-status" data-tone={tone} className={panelStatusTones[tone]}>
+            {status}
+          </span>
         )}
       </span>
     </header>
