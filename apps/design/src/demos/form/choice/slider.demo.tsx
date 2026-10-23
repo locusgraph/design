@@ -103,6 +103,8 @@ export default defineDemo({
     { name: "orientation", type: "horizontal | vertical", defaultValue: "horizontal" },
     { name: "minStepsBetweenThumbs", type: "number", defaultValue: "0" },
     { name: "disabled", type: "boolean", defaultValue: "false" },
+    { name: "aria-label", type: "string" },
+    { name: "thumbLabels", type: "string[]" },
   ],
   examples: {
     SeatCount: {
