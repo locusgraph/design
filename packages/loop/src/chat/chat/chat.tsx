@@ -35,7 +35,7 @@ export function Chat({
         aria-label={label}
         tabIndex={0}
         onScroll={handleScroll}
-        className="min-h-0 flex-1 overflow-y-auto overscroll-contain outline-none focus-visible:ring-1 focus-visible:ring-ring focus-visible:ring-inset"
+        className="min-h-0 flex-1 overflow-y-auto overscroll-contain focus-ring-inset"
       >
         <div
           ref={contentRef}

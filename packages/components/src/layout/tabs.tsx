@@ -70,14 +70,11 @@ function TabsTrigger({ className, ...props }: React.ComponentProps<typeof TabsPr
   );
 }
 
-const visibleKeyboardFocusOutline =
-  "focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-solid focus-visible:outline-ring/70";
-
 function TabsContent({ className, ...props }: React.ComponentProps<typeof TabsPrimitive.Content>) {
   return (
     <TabsPrimitive.Content
       data-slot="tabs-content"
-      className={cn("flex-1 outline-none", visibleKeyboardFocusOutline, className)}
+      className={cn("flex-1 focus-ring-inset", className)}
       {...props}
     />
   );

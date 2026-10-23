@@ -50,7 +50,7 @@ function RuleGridCell({
       className={cn(
         "flex min-w-0 flex-col gap-2 bg-card p-6 text-card-foreground ring-1 ring-border",
         interactive &&
-          "transition-colors duration-150 ease-out outline-none hover:bg-accent/60 focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-ring active:bg-accent",
+          "transition-colors duration-150 ease-out focus-ring-inset hover:bg-accent/60 active:bg-accent",
         className
       )}
       {...props}

@@ -49,7 +49,7 @@ export function HistoryRow({ thread, active, onSelect, onRename, onArchive }: Hi
           onClick={() => onSelect(thread.id)}
           onDoubleClick={onRename ? () => setEditing(true) : undefined}
           className={cn(
-            "flex min-w-0 flex-1 items-center gap-3 py-1.5 pl-2 text-left text-sm outline-none focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-ring",
+            "flex min-w-0 flex-1 items-center gap-3 py-1.5 pl-2 text-left text-sm focus-ring-inset",
             hasMenu ? "pr-8 sm:pr-2" : "pr-2",
             active && "font-medium"
           )}
