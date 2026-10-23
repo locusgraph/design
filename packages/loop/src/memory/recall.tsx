@@ -89,10 +89,10 @@ function RecallRow({
         <Relevance memory={memory} />
       </span>
       {(memory.kind || memory.snippet) && (
-        <span className="flex w-full gap-1.5 text-xs text-faint">
-          {memory.kind && <span className="shrink-0">{memory.kind}</span>}
-          {memory.kind && memory.snippet && <span aria-hidden>·</span>}
-          {memory.snippet && <span className="line-clamp-2 min-w-0">{memory.snippet}</span>}
+        <span className="line-clamp-2 w-full text-xs text-faint">
+          {memory.kind && <span className="whitespace-nowrap">{memory.kind}</span>}
+          {memory.kind && memory.snippet && <span aria-hidden> · </span>}
+          {memory.snippet}
         </span>
       )}
     </>
