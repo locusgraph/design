@@ -98,7 +98,7 @@ function SourceRow({
           href={citation.url}
           target="_blank"
           rel="noreferrer"
-          aria-label={label}
+          aria-label={`${label}, opens in a new tab`}
           className={cn(sourceRowClass, lineDetailLinkClass)}
         >
           {content}

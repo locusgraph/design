@@ -38,7 +38,7 @@ export function Cite({ citation, onOpen, className }: CiteProps) {
               href={citation.url}
               target="_blank"
               rel="noreferrer"
-              aria-label={label}
+              aria-label={onOpen ? label : `${label}, opens in a new tab`}
               onClick={open}
               className={pillClass}
             >

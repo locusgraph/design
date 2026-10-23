@@ -13,7 +13,7 @@ describe("Cite", () => {
   it("renders the number as a link labelled with the source", () => {
     const html = renderToStaticMarkup(<Cite citation={citation} />);
     expect(html).toContain('data-slot="cite"');
-    expect(html).toContain('aria-label="Source 2: Recall ranking in LocusGraph"');
+    expect(html).toContain('aria-label="Source 2: Recall ranking in LocusGraph, opens in a new tab"');
     expect(html).toContain('href="https://www.docs.locusgraph.com/recall"');
     expect(html).toContain(">2</a>");
   });
