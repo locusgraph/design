@@ -1,14 +1,9 @@
-import { Button, Checkbox, Label } from "@locusgraph/components";
+import { Button, Checkbox, cn, Label } from "@locusgraph/components";
 import { pluralize } from "@locusgraph/utils";
 import { Tray as InboxIcon } from "@phosphor-icons/react/ssr";
 import { useId, useState } from "react";
-import {
-  ApprovalPanel,
-  LiveStatus,
-  PanelFooter,
-  PanelHeader,
-  PanelTitle,
-} from "../../shared/panel";
+import { lineIconClass } from "../../shared/line";
+import { LiveStatus } from "../../shared/panel";
 import { PanelEmpty } from "../../shared/panel-empty";
 import type { PendingApproval } from "../types";
 import { InboxRow } from "./inbox-row";
@@ -41,14 +36,23 @@ export function Inbox({
   const hasDestructive = selectable.length < items.length;
   const empty = items.length === 0;
   return (
-    <ApprovalPanel data-slot="inbox" aria-label={title} className={className}>
-      <PanelHeader
-        icon={<InboxIcon weight="bold" aria-hidden />}
-        eyebrow="Approvals"
-        status={empty ? "All clear" : `${items.length} waiting`}
-        tone={empty ? "done" : "waiting"}
-      />
-      <PanelTitle>{title}</PanelTitle>
+    <section
+      data-slot="inbox"
+      aria-label={title}
+      className={cn("flex min-w-0 flex-col gap-2", className)}
+    >
+      <header className="flex items-center gap-2 px-2 text-sm">
+        <span aria-hidden className={lineIconClass}>
+          <InboxIcon weight="bold" aria-hidden />
+        </span>
+        <h3 className="min-w-0 truncate font-medium text-foreground">{title}</h3>
+        <span
+          data-slot="inbox-count"
+          className={cn("ml-auto shrink-0 text-xs", empty ? "text-good" : "font-medium text-warn")}
+        >
+          {empty ? "All clear" : `${items.length} waiting`}
+        </span>
+      </header>
       {empty ? (
         <PanelEmpty
           data-slot="inbox-empty"
@@ -58,7 +62,7 @@ export function Inbox({
         />
       ) : (
         <>
-          <ul className="mt-4 flex flex-col divide-y border-t">
+          <ul className="flex flex-col">
             {items.map((item) => (
               <InboxRow
                 key={item.id}
@@ -71,7 +75,7 @@ export function Inbox({
               />
             ))}
           </ul>
-          <PanelFooter className="justify-between gap-3">
+          <div className="flex flex-wrap items-center justify-between gap-3 px-2 pt-2">
             <span className="flex min-w-0 items-center gap-3">
               {selectable.length > 0 && (
                 <Checkbox
@@ -93,7 +97,7 @@ export function Inbox({
                   {selectedIds.length > 0 ? `${selectedIds.length} selected` : "Select all"}
                 </span>
                 {hasDestructive && (
-                  <span className="text-xs text-muted-foreground">
+                  <span className="text-xs text-faint">
                     Destructive requests are approved one at a time.
                   </span>
                 )}
@@ -112,7 +116,7 @@ export function Inbox({
                 ? `Approve ${selectedIds.length} selected`
                 : "Approve selected"}
             </Button>
-          </PanelFooter>
+          </div>
         </>
       )}
       <LiveStatus
@@ -122,6 +126,6 @@ export function Inbox({
             : `${pluralize(items.length, "approval")} waiting, ${selectedIds.length} selected`
         }
       />
-    </ApprovalPanel>
+    </section>
   );
 }
