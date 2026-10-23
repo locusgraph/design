@@ -91,9 +91,8 @@ describe("CostSteps", () => {
   it("totals cost, tokens, time and waste", () => {
     const html = renderToStaticMarkup(<CostSteps steps={steps} />);
     expect(html).toContain("$2.50");
-    expect(html).toContain("1,300 in · 300 out");
+    expect(html).toContain("1.3k in · 300 out");
     expect(html).toContain("2.0s");
-    expect(html).toContain("Wasted on failures");
     expect(html).toContain('data-wasted="true"');
     expect(html).toContain("width:100%");
   });

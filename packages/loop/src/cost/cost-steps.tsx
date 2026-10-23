@@ -1,9 +1,9 @@
-import { formatCount, formatMicroUsd, pluralize } from "@locusgraph/utils";
+import { cn } from "@locusgraph/components";
+import { formatMicroUsd } from "@locusgraph/utils";
 import { ChartBarHorizontal as ChartNoAxesGanttIcon } from "@phosphor-icons/react/ssr";
-import { ApprovalPanel, PanelHeader } from "../shared/panel";
-import { PanelEmpty } from "../shared/panel-empty";
+import { lineIconClass, lineRowClass } from "../shared/line";
 import { type CostStep, isWastedStep, StepCostRow } from "./shared/step-cost-row";
-import { formatDuration, sumUsage } from "./shared/usage-totals";
+import { formatDuration, formatTokensShort, sumUsage } from "./shared/usage-totals";
 
 export type { CostStep, CostStepStatus } from "./shared/step-cost-row";
 
@@ -27,20 +27,13 @@ type StepTotals = ReturnType<typeof stepCostTotals>;
 
 function Totals({ totals }: { totals: StepTotals }) {
   return (
-    <div data-slot="step-cost-totals" className="flex flex-col gap-1 px-5 pt-2 pb-4">
-      <span className="text-2xl font-semibold tracking-tight tabular-nums">
+    <div data-slot="step-cost-totals" className="flex items-baseline gap-3 pb-2 pl-6 tabular-nums">
+      <span className="text-xl font-semibold tracking-tight text-foreground">
         {formatMicroUsd(totals.costMicroUsd)}
       </span>
-      <span className="flex flex-wrap gap-x-3 gap-y-0.5 text-xs text-muted-foreground tabular-nums">
-        <span>
-          {formatCount(totals.inputTokens)} in · {formatCount(totals.outputTokens)} out
-          {totals.durationMs > 0 && ` · ${formatDuration(totals.durationMs)}`}
-        </span>
-        {totals.wastedMicroUsd > 0 && (
-          <span className="text-destructive">
-            Wasted on failures {formatMicroUsd(totals.wastedMicroUsd)}
-          </span>
-        )}
+      <span className="text-xs text-faint">
+        {formatTokensShort(totals.inputTokens)} in · {formatTokensShort(totals.outputTokens)} out
+        {totals.durationMs > 0 && ` · ${formatDuration(totals.durationMs)}`}
       </span>
     </div>
   );
@@ -56,20 +49,24 @@ export function CostSteps({
   const maxCost = Math.max(0, ...steps.map((step) => step.usage.costMicroUsd));
   const running = steps.some((step) => step.status === "running");
   return (
-    <ApprovalPanel data-slot="cost-steps" aria-label={label} className={className}>
-      <PanelHeader
-        icon={<ChartNoAxesGanttIcon weight="bold" aria-hidden />}
-        eyebrow={label}
-        aside={steps.length > 0 ? pluralize(steps.length, "step") : undefined}
-        status={running ? "Running" : undefined}
-        tone="running"
-      />
+    <section
+      data-slot="cost-steps"
+      aria-label={label}
+      className={cn("flex min-w-0 flex-col", className)}
+    >
+      <header className={lineRowClass}>
+        <span aria-hidden className={lineIconClass}>
+          <ChartNoAxesGanttIcon weight="bold" aria-hidden />
+        </span>
+        <span className="truncate">{label}</span>
+        {running && <span className="shrink-0 text-warn motion-safe:shimmer">Running</span>}
+      </header>
       {steps.length === 0 ? (
-        <PanelEmpty icon={<ChartNoAxesGanttIcon weight="bold" aria-hidden />} title={emptyText} />
+        <p className="pl-6 text-sm text-faint">{emptyText}</p>
       ) : (
         <>
           <Totals totals={totals} />
-          <ol className="flex flex-col pb-3">
+          <ol className="flex flex-col pl-6">
             {steps.map((step) => (
               <StepCostRow
                 key={step.id}
@@ -81,6 +78,6 @@ export function CostSteps({
           </ol>
         </>
       )}
-    </ApprovalPanel>
+    </section>
   );
 }
