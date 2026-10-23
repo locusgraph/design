@@ -78,12 +78,10 @@ export function ArgsEditor({
             action="to run"
             icon={destructive ? undefined : <SquarePenIcon />}
           />
-          <p className="-mt-2 text-sm text-muted-foreground">
-            {description ?? riskCopy[risk]()} The tool runs with what you send.
-          </p>
+          <p className="-mt-2 text-sm text-muted-foreground">{description ?? riskCopy[risk]()}</p>
           <form
             noValidate
-            className="flex flex-col gap-2 pt-1"
+            className="flex flex-col"
             onSubmit={(event) => {
               event.preventDefault();
               const firstInvalid = fields.find((field) => errors[field.name]);

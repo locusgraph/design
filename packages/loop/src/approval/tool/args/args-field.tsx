@@ -12,7 +12,7 @@ type ArgsFieldProps = {
 };
 
 const fieldBoxClass =
-  "flex h-9 w-full min-w-0 items-center gap-3 border border-input px-3 text-sm transition-[color,box-shadow] focus-within:border-ring focus-within:ring-1 focus-within:ring-ring has-[[aria-invalid=true]]:border-destructive dark:bg-input/30";
+  "-mx-2 flex h-9 min-w-0 items-center gap-4 border border-transparent px-2 text-sm transition-colors hover:bg-muted focus-within:border-ring focus-within:bg-transparent has-[[aria-invalid=true]]:border-destructive motion-reduce:transition-none";
 
 const bareControlClass =
   "h-full min-w-0 flex-1 bg-transparent text-foreground outline-none placeholder:text-faint";
@@ -81,9 +81,9 @@ function FieldControl({ id, field, draft, error, onChange }: ArgsFieldProps) {
 export function ArgsField(props: ArgsFieldProps) {
   const { id, field, error } = props;
   return (
-    <div data-slot="args-field" data-type={field.type} className="flex flex-col gap-1">
+    <div data-slot="args-field" data-type={field.type} className="flex flex-col">
       <div className={fieldBoxClass}>
-        <label htmlFor={id} className="w-32 shrink-0 cursor-pointer truncate text-muted-foreground">
+        <label htmlFor={id} className="w-32 shrink-0 cursor-pointer truncate text-faint">
           {field.label}
           {field.required && (
             <span className="text-faint">
@@ -95,12 +95,12 @@ export function ArgsField(props: ArgsFieldProps) {
         <FieldControl {...props} />
       </div>
       {field.description && (
-        <p id={`${id}-hint`} className="text-xs text-faint">
+        <p id={`${id}-hint`} className="pb-1 pl-36 text-xs text-faint">
           {field.description}
         </p>
       )}
       {error && (
-        <p id={`${id}-error`} className="text-xs text-destructive">
+        <p id={`${id}-error`} className="pb-1 pl-36 text-xs text-destructive">
           {error}
         </p>
       )}
