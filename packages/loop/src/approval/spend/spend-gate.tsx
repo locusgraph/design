@@ -99,13 +99,6 @@ export function SpendGate({
             <span className="tabular-nums">{formatMicroUsd(projected)}</span>.
           </p>
           <SpendMeter {...meter} />
-          {!outOfCredits && (
-            <RaiseCapForm
-              capMicroUsd={capMicroUsd}
-              suggestedMicroUsd={suggestedCapMicroUsd(projected, capMicroUsd)}
-              onRaiseCap={onRaiseCap}
-            />
-          )}
           <div className="flex flex-wrap items-center gap-2 pt-1">
             {outOfCredits ? (
               onBuyCredits && (
@@ -133,6 +126,13 @@ export function SpendGate({
               Stop the run
             </Button>
           </div>
+          {!outOfCredits && (
+            <RaiseCapForm
+              capMicroUsd={capMicroUsd}
+              suggestedMicroUsd={suggestedCapMicroUsd(projected, capMicroUsd)}
+              onRaiseCap={onRaiseCap}
+            />
+          )}
         </>
       )}
       <LiveStatus
