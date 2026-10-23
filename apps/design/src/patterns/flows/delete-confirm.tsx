@@ -180,10 +180,10 @@ export function DeleteConfirm({
             </Field>
           ) : null}
           <AlertDialogFooter>
-            <AlertDialogCancel>Cancel</AlertDialogCancel>
             <AlertDialogAction variant="destructive" disabled={!canConfirm} onClick={confirmDelete}>
               {actionLabel}
             </AlertDialogAction>
+            <AlertDialogCancel>Cancel</AlertDialogCancel>
           </AlertDialogFooter>
         </AlertDialogContent>
       </AlertDialog>

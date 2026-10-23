@@ -71,10 +71,10 @@ export function SettingsDanger({ workspaceSlug, onDelete }: SettingsDangerProps)
               />
             </Field>
             <AlertDialogFooter>
-              <AlertDialogCancel>Cancel</AlertDialogCancel>
               <AlertDialogAction variant="destructive" disabled={!confirmed} onClick={onDelete}>
                 Delete {workspaceSlug}
               </AlertDialogAction>
+              <AlertDialogCancel>Cancel</AlertDialogCancel>
             </AlertDialogFooter>
           </AlertDialogContent>
         </AlertDialog>
