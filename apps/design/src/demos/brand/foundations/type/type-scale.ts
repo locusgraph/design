@@ -29,7 +29,14 @@ export type TypeStep = { name: string; className: string; size: string; use: str
 
 export const typeScale: TypeStep[] = [
   { name: "eyebrow", className: "eyebrow", size: "11px", use: "Section labels, column headers" },
+  { name: "2xs", className: "text-2xs", size: "11px", use: "Badges, chips, counters, timestamps" },
   { name: "xs", className: "text-xs", size: "12px", use: "Hints, metadata, captions" },
+  {
+    name: "code",
+    className: "text-code font-mono",
+    size: "13px",
+    use: "Fenced code and code panels",
+  },
   { name: "sm", className: "text-sm", size: "14px", use: "Default UI text, buttons, tables" },
   { name: "base", className: "text-base", size: "16px", use: "Long-form body copy" },
   { name: "lg", className: "text-lg", size: "18px", use: "Card and dialog titles" },
