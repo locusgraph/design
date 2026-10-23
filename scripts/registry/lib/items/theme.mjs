@@ -1,6 +1,11 @@
 import { readFileSync } from "node:fs";
 import { dirname, join, resolve } from "node:path";
-import { paletteVariables, prefixVariables, shadcnCssVars } from "./theme-vars.mjs";
+import {
+  assertShadcnMapping,
+  paletteVariables,
+  prefixVariables,
+  shadcnCssVars,
+} from "./theme-vars.mjs";
 
 const localImport = /^@import\s+"(\.[^"]+)";\s*$/gm;
 
@@ -14,7 +19,9 @@ export function themeItem(root, versionOf) {
   const css = [inlineImports(join(tokens, "theme.css")), inlineImports(join(tokens, "typeset.css"))]
     .join("\n")
     .trim();
-  const content = prefixVariables(css, paletteVariables(join(tokens, "palette.css")));
+  const palette = paletteVariables(join(tokens, "palette.css"));
+  assertShadcnMapping(palette);
+  const content = prefixVariables(css, palette);
   return {
     name: "theme",
     type: "registry:theme",

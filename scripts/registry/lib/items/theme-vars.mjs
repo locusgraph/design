@@ -30,25 +30,36 @@ const shadcnToLocus = {
   "popover-foreground": "foreground",
   primary: "btn",
   "primary-foreground": "btn-ink",
-  secondary: "ghost",
+  secondary: "muted",
   "secondary-foreground": "foreground",
-  muted: "ghost",
-  "muted-foreground": "muted",
-  accent: "ghost",
+  muted: "muted",
+  "muted-foreground": "muted-foreground",
+  accent: "muted",
   "accent-foreground": "foreground",
-  destructive: "bad",
+  destructive: "destructive",
   border: "border",
   input: "input",
-  ring: "s1",
+  ring: "interactive",
   sidebar: "surface",
   "sidebar-foreground": "foreground",
   "sidebar-primary": "btn",
   "sidebar-primary-foreground": "btn-ink",
-  "sidebar-accent": "ghost",
+  "sidebar-accent": "muted",
   "sidebar-accent-foreground": "foreground",
   "sidebar-border": "border",
-  "sidebar-ring": "s1",
+  "sidebar-ring": "interactive",
 };
+
+export function assertShadcnMapping(paletteNames) {
+  const missing = Object.values(shadcnToLocus).filter(
+    (locus) => !paletteNames.includes(`--${locus}`)
+  );
+  if (missing.length > 0) {
+    throw new Error(
+      `Theme maps shadcn variables to missing palette variables: ${missing.join(", ")}`
+    );
+  }
+}
 
 const sharedVariables = Object.fromEntries(
   Object.entries(shadcnToLocus).map(([name, locus]) => [name, `var(--locus-${locus})`])
