@@ -70,14 +70,12 @@ export function ArgsField(props: ArgsFieldProps) {
       <div className={inline ? "flex flex-row-reverse items-center justify-end gap-2" : "contents"}>
         <Label htmlFor={id}>
           {field.label}
-          {field.required && (
-            <span className="text-xs font-normal text-muted-foreground">required</span>
-          )}
+          {field.required && <span className="text-xs font-normal text-faint">required</span>}
         </Label>
         <FieldControl {...props} />
       </div>
       {field.description && (
-        <p id={`${id}-hint`} className="text-xs text-muted-foreground">
+        <p id={`${id}-hint`} className="text-xs text-faint">
           {field.description}
         </p>
       )}

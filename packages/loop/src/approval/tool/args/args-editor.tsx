@@ -1,17 +1,12 @@
 import { Edit as SquarePenIcon } from "@carbon/icons-react";
 import { Button, cn } from "@locusgraph/components";
 import { useId, useMemo, useState } from "react";
-import {
-  ApprovalPanel,
-  LiveStatus,
-  PanelBody,
-  PanelFooter,
-  PanelHeader,
-  PanelTitle,
-} from "../../../shared/panel";
+import { humanToolName } from "../../../agent/tool/tool-status";
+import { LiveStatus } from "../../../shared/panel";
 import type { RiskLevel } from "../../../types";
+import { ApprovalHeadline, SettledLine } from "../../shared/approval-line";
 import { DecisionSummary } from "../../shared/decision-line";
-import { riskCopy, riskLabels, riskRing } from "../../shared/risk-badge";
+import { riskCopy } from "../../shared/risk-badge";
 import { useFocusOnMount } from "../../shared/use-focus-on-mount";
 import type { ApprovalDecision, ArgField, ArgValues } from "../../types";
 import { ArgsField } from "./args-field";
@@ -55,44 +50,40 @@ export function ArgsEditor({
   const errorCount = Object.keys(errors).length;
   const visibleErrors = showErrors ? errors : {};
   const destructive = risk === "destructive";
+  const name = humanToolName(toolName);
   const submitRef = useFocusOnMount<HTMLButtonElement>(autoFocus && !decision);
+  const hasErrorSummary = showErrors && errorCount > 0;
   return (
-    <ApprovalPanel
+    <section
       data-slot="args-editor"
       data-risk={risk}
-      aria-label={`Edit ${toolName} inputs`}
+      data-tool-name={toolName}
+      aria-label={`Edit ${name} inputs`}
       data-state={decision ? (decision.approved ? "approved" : "denied") : "editing"}
-      className={cn(!decision && riskRing[risk], className)}
+      className={cn("flex min-w-0 flex-col", !decision && "gap-3", className)}
     >
-      <PanelHeader
-        icon={<SquarePenIcon aria-hidden />}
-        eyebrow={decision ? "Tool call" : "Edit before approving"}
-        aside={riskLabels[risk]}
-        status={decision ? (decision.approved ? "Approved" : "Cancelled") : "Waiting for you"}
-        tone={decision ? (decision.approved ? "done" : "danger") : "waiting"}
-      />
-      <PanelTitle className={cn("truncate font-mono", decision && "text-muted-foreground")}>
-        {toolName}
-      </PanelTitle>
       {decision ? (
-        <PanelBody className="pt-3">
+        <SettledLine name={name} icon={<SquarePenIcon />}>
           <DecisionSummary
             decision={decision}
             deniedVerb="Cancelled"
-            result={
-              decision.approved
-                ? `${toolName} approved with edited inputs`
-                : `${toolName} cancelled`
-            }
+            result={decision.approved ? `${name} approved with edited inputs` : `${name} cancelled`}
           />
-        </PanelBody>
+        </SettledLine>
       ) : (
         <>
-          <p className="px-5 pt-1 text-sm text-muted-foreground">
+          <ApprovalHeadline
+            name={name}
+            risk={risk}
+            action="to run"
+            icon={destructive ? undefined : <SquarePenIcon />}
+          />
+          <p className="-mt-2 text-sm text-muted-foreground">
             {description ?? riskCopy[risk]()} The tool runs with what you send.
           </p>
           <form
             noValidate
+            className="flex flex-col gap-4 pt-1"
             onSubmit={(event) => {
               event.preventDefault();
               const firstInvalid = fields.find((field) => errors[field.name]);
@@ -105,47 +96,36 @@ export function ArgsEditor({
               onApprove(valuesFromDrafts(fields, drafts));
             }}
           >
-            <PanelBody className="gap-5 pt-5">
-              {fields.map((field) => (
-                <ArgsField
-                  key={field.name}
-                  id={`${baseId}-${field.name}`}
-                  field={field}
-                  draft={drafts[field.name]}
-                  error={visibleErrors[field.name]}
-                  onChange={(draft) =>
-                    setDrafts((current) => ({ ...current, [field.name]: draft }))
-                  }
-                />
-              ))}
-            </PanelBody>
-            <PanelFooter className="justify-between">
-              <span
-                className={cn(
-                  "hidden font-mono text-[11px] sm:inline",
-                  showErrors && errorCount > 0 ? "text-destructive" : "text-muted-foreground"
-                )}
+            {fields.map((field) => (
+              <ArgsField
+                key={field.name}
+                id={`${baseId}-${field.name}`}
+                field={field}
+                draft={drafts[field.name]}
+                error={visibleErrors[field.name]}
+                onChange={(draft) => setDrafts((current) => ({ ...current, [field.name]: draft }))}
+              />
+            ))}
+            <div className="flex flex-wrap items-center gap-2 pt-1">
+              <Button
+                ref={submitRef}
+                type="submit"
+                size="sm"
+                variant={destructive ? "destructive" : "default"}
               >
-                {showErrors && errorCount > 0 ? errorSummary(errorCount) : "The run is paused"}
-              </span>
-              <span className="flex flex-wrap gap-2">
-                <Button type="button" size="sm" variant="ghost" onClick={onCancel}>
-                  Cancel
-                </Button>
-                <Button
-                  ref={submitRef}
-                  type="submit"
-                  size="sm"
-                  variant={destructive ? "destructive" : "default"}
-                >
-                  {actionLabel ?? `Run ${toolName} with these inputs`}
-                </Button>
-              </span>
-            </PanelFooter>
+                {actionLabel ?? `Run ${name} with these inputs`}
+              </Button>
+              <Button type="button" size="sm" variant="ghost" onClick={onCancel}>
+                Cancel
+              </Button>
+              {hasErrorSummary && (
+                <span className="text-xs text-destructive">{errorSummary(errorCount)}</span>
+              )}
+            </div>
           </form>
         </>
       )}
-      <LiveStatus message={showErrors && errorCount > 0 ? errorSummary(errorCount) : ""} />
-    </ApprovalPanel>
+      <LiveStatus message={hasErrorSummary ? errorSummary(errorCount) : ""} />
+    </section>
   );
 }

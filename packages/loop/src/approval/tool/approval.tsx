@@ -1,12 +1,11 @@
-import { ShieldAlert as ShieldAlertIcon, Tools as WrenchIcon } from "@carbon/icons-react";
 import { Button, cn } from "@locusgraph/components";
-import { type ReactNode, useState } from "react";
+import { useState } from "react";
 import { humanToolName } from "../../agent/tool/tool-status";
-import { lineIconClass, lineObjectClass, lineRowClass } from "../../shared/line";
 import { LiveStatus } from "../../shared/panel";
 import { type RiskLevel, type ToolPart, type ToolState, toolNameOf } from "../../types";
+import { ApprovalHeadline, SettledLine } from "../shared/approval-line";
 import { DecisionSummary } from "../shared/decision-line";
-import { RiskBadge, riskCopy } from "../shared/risk-badge";
+import { riskCopy } from "../shared/risk-badge";
 import { useFocusOnMount } from "../shared/use-focus-on-mount";
 import type { ApprovalDecision } from "../types";
 import { DenyForm } from "./deny-form";
@@ -37,42 +36,6 @@ function settledLabel(state: ToolState) {
 
 function decidedResult(toolName: string, state: ToolState, decision: ApprovalDecision) {
   return settledStateLabels[state] ?? `${toolName} ${decision.approved ? "approved" : "denied"}`;
-}
-
-function ApprovalHeadline({ name, risk }: { name: string; risk: RiskLevel }) {
-  const destructive = risk === "destructive";
-  const Icon = destructive ? ShieldAlertIcon : WrenchIcon;
-  return (
-    <div className={cn(lineRowClass, "w-full text-base")}>
-      <span
-        aria-hidden
-        className={cn(lineIconClass, "size-5 [&_svg]:size-4", destructive && "text-destructive")}
-      >
-        <Icon />
-      </span>
-      <span className="min-w-0 truncate">
-        <span className="font-medium text-warn">Waiting</span> to run{" "}
-        <span className={lineObjectClass}>{name}</span>
-      </span>
-      <RiskBadge risk={risk} className="ml-1" />
-    </div>
-  );
-}
-
-function SettledLine({ name, children }: { name: string; children: ReactNode }) {
-  return (
-    <div className="flex min-w-0 flex-col gap-1">
-      <div className={lineRowClass}>
-        <span aria-hidden className={lineIconClass}>
-          <WrenchIcon />
-        </span>
-        <span className="truncate">
-          Asked to run <span className={lineObjectClass}>{name}</span>
-        </span>
-      </div>
-      <div>{children}</div>
-    </div>
-  );
 }
 
 export function Approval({

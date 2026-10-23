@@ -92,7 +92,7 @@ describe("ArgsEditor", () => {
     expect(html).toContain('value="ops@acme.dev"');
     expect(html).toContain('value="120"');
     expect(html).toContain("Recipient<span");
-    expect(html).toContain("Run send_invoice with these inputs");
+    expect(html).toContain("Run send invoice with these inputs");
   });
 
   it("validates required, number range and select values", () => {
