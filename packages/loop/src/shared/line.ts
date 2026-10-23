@@ -14,7 +14,7 @@ export const lineObjectClass = "font-medium text-foreground";
 export const lineMemoryObjectClass = "font-medium text-memory";
 
 export const lineChevronClass =
-  "size-3 shrink-0 text-faint opacity-0 transition-[opacity,transform] duration-150 group-hover:opacity-100 group-focus-visible:opacity-100 group-data-[state=open]:rotate-90 group-data-[state=open]:opacity-100 motion-reduce:transition-none";
+  "size-3 shrink-0 text-faint opacity-0 transition-[opacity,transform] duration-150 group-hover:opacity-100 group-focus-visible:opacity-100 group-data-[state=open]:rotate-90 group-data-[state=open]:opacity-100 [@media(hover:none)]:opacity-100 motion-reduce:transition-none";
 
 export const lineDetailClass = "min-w-0 pl-6 text-sm";
 

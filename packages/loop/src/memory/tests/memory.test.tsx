@@ -90,7 +90,7 @@ describe("Memorized", () => {
         onUndo={() => {}}
       />
     );
-    expect(html).toContain("Saved 1 memory");
+    expect(html).toMatch(/Saved <span[^>]*>1 memory<\/span>/);
     expect(html).toContain('data-status="undone"');
     expect(html).toContain("line-through");
     expect(html).toContain("Undone");

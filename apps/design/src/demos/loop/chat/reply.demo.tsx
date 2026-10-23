@@ -39,7 +39,7 @@ function Streaming() {
 export default defineDemo({
   title: "Reply",
   description:
-    "Assistant Markdown with GitHub tables, lists, code and links that open in a new tab. While streaming it is announced politely and an open code fence is closed so the block does not jump.",
+    "Assistant Markdown with GitHub tables, lists, code and links that open in a new tab. While streaming it is marked busy so screen readers read the finished reply once, and an open code fence is closed so the block does not jump.",
   controls: { state: select(states) },
   playground: ({ state }) => (
     <Reply state={state} className="w-full max-w-xl">

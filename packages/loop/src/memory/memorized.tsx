@@ -39,11 +39,11 @@ export function Memorized({ items, onUndo, className }: MemorizedProps) {
       aria-label="Saved to memory"
       className={cn("flex min-w-0 flex-col", className)}
     >
-      <header aria-live="polite" aria-label={memorizedSummary(items)} className={lineRowClass}>
+      <header aria-live="polite" className={lineRowClass}>
         <span aria-hidden className={lineMemoryIconClass}>
           <BookmarkPlusIcon weight="bold" aria-hidden />
         </span>
-        <span aria-hidden className="truncate">
+        <span className="truncate">
           Saved{" "}
           <span className={lineMemoryObjectClass}>
             {pluralize(savedCount(items), "memory", "memories")}

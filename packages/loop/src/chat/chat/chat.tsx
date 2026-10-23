@@ -58,10 +58,10 @@ export function Chat({
         <Button
           type="button"
           variant="outline"
-          size="sm"
+          size="xs"
           data-slot="chat-jump"
           onClick={scrollToLatest}
-          className="absolute bottom-3 left-1/2 h-7 -translate-x-1/2 bg-card px-3 text-xs text-muted-foreground shadow-none hover:text-foreground motion-safe:animate-in motion-safe:fade-in-0 dark:bg-card"
+          className="absolute bottom-3 left-1/2 -translate-x-1/2 bg-card px-3 text-muted-foreground shadow-none hover:text-foreground motion-safe:animate-in motion-safe:fade-in-0 dark:bg-card"
         >
           <ArrowDownIcon weight="bold" aria-hidden="true" className="size-3.5" />
           {jumpLabel}

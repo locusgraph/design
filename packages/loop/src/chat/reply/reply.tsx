@@ -37,7 +37,7 @@ export function Reply({ children, state = "done", className, ...props }: ReplyPr
     <div
       data-slot="reply"
       data-state={state}
-      aria-live={isStreaming ? "polite" : undefined}
+      aria-busy={isStreaming || undefined}
       className={cn("typeset typeset-chat min-w-0 text-pretty", streamingCaret, className)}
       {...props}
     >
