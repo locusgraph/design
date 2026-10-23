@@ -86,12 +86,12 @@ function FileChip({ item, isGrid, onRemove }: ChipProps) {
       data-slot="files-item"
       className={cn(
         "group/file relative flex min-w-0 bg-muted/50 text-foreground",
-        isGrid ? "flex-col" : "max-w-60 items-center gap-2.5 pr-1",
+        isGrid ? "flex-col" : "max-w-60 items-center gap-2.5 py-1.5 pr-1.5 pl-1.5",
         !isGrid && !onRemove && "pr-3"
       )}
     >
       <FilePreview item={item} isGrid={isGrid} />
-      <span className={cn("flex min-w-0 flex-1 flex-col gap-0.5", isGrid && "px-2.5 py-2")}>
+      <span className={cn("flex min-w-0 flex-1 flex-col gap-0.5", isGrid && "px-3 py-2.5")}>
         <span title={item.name} className="truncate text-sm leading-tight font-medium">
           {item.name}
         </span>
