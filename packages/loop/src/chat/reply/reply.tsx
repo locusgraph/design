@@ -38,11 +38,7 @@ export function Reply({ children, state = "done", className, ...props }: ReplyPr
       data-slot="reply"
       data-state={state}
       aria-live={isStreaming ? "polite" : undefined}
-      className={cn(
-        "min-w-0 text-sm leading-relaxed wrap-break-word text-foreground",
-        streamingCaret,
-        className
-      )}
+      className={cn("typeset typeset-chat min-w-0 text-pretty", streamingCaret, className)}
       {...props}
     >
       <Markdown markdown={markdown} />

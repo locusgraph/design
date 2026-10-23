@@ -31,5 +31,11 @@ export function fencedCode(node: HastNode | undefined) {
 export function FencedCode({ node }: ExtraProps) {
   const fenced = fencedCode(node);
   if (!fenced) return null;
-  return <Code code={fenced.code} language={fenced.language} className="mt-4 first:mt-0" />;
+  return (
+    <Code
+      code={fenced.code}
+      language={fenced.language}
+      className="not-typeset mt-(--typeset-flow) first:mt-0"
+    />
+  );
 }
