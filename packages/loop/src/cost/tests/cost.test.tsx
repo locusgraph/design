@@ -63,9 +63,10 @@ describe("Cost", () => {
   it("marks failed attempts and their wasted cost in red", () => {
     const html = renderToStaticMarkup(<Cost usage={attempts} variant="detailed" />);
     expect(html).toContain("$0.0137");
-    expect(html).toContain("1 failed attempt · $0.0036");
     expect(html).toContain("text-destructive");
     expect(html).toContain("Failed");
+    expect(html).toContain("line-through");
+    expect(renderToStaticMarkup(<Cost usage={attempts} />)).toContain("1 failed attempt · $0.0036");
   });
 });
 

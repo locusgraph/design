@@ -63,15 +63,14 @@ function CompactCost({
   );
 }
 
-function AttemptRow({ attempt, position }: { attempt: RunUsage; position: number }) {
+function AttemptRow({ attempt }: { attempt: RunUsage }) {
   return (
     <li
       data-slot="cost-attempt"
       data-failed={attempt.failed || undefined}
-      className="grid grid-cols-[1fr_auto_4.5rem] items-baseline gap-x-4 py-1 text-sm tabular-nums"
+      className="flex items-baseline justify-between gap-4 py-0.5 text-sm tabular-nums"
     >
       <span className="flex min-w-0 items-baseline gap-2">
-        <span className="w-4 shrink-0 text-xs text-faint">{position + 1}</span>
         <span
           className={cn("truncate", attempt.failed ? "text-muted-foreground" : "text-foreground")}
         >
@@ -79,12 +78,9 @@ function AttemptRow({ attempt, position }: { attempt: RunUsage; position: number
         </span>
         {attempt.failed && <span className="text-xs font-medium text-destructive">Failed</span>}
       </span>
-      <span className="text-xs text-faint max-sm:hidden">
-        {formatCount(attempt.inputTokens)} in · {formatCount(attempt.outputTokens)} out
-      </span>
       <span
         className={cn(
-          "text-right",
+          "shrink-0",
           attempt.failed ? "text-faint line-through decoration-faint" : "text-foreground"
         )}
       >
@@ -119,26 +115,20 @@ function DetailedCost({
           <CoinsIcon weight="bold" aria-hidden />
         </span>
         <span className="truncate">{label}</span>
-        <span className="shrink-0 text-faint tabular-nums">
-          {pluralize(attempts.length, "attempt")}
-        </span>
       </header>
-      <div className="flex flex-col gap-0.5 pb-2 pl-6">
-        <span className="text-2xl font-semibold tracking-tight text-foreground tabular-nums">
+      <div className="flex items-baseline gap-3 pb-2 pl-6 tabular-nums">
+        <span className="text-xl font-semibold tracking-tight text-foreground">
           {formatMicroUsd(totals.costMicroUsd)}
         </span>
-        <span className="flex flex-wrap gap-x-3 gap-y-0.5 text-xs text-faint tabular-nums">
-          <span>
-            {formatCount(totals.inputTokens)} in · {formatCount(totals.outputTokens)} out
-          </span>
-          <WastedNote totals={totals} />
+        <span className="text-xs text-faint">
+          {formatCount(totals.inputTokens)} in · {formatCount(totals.outputTokens)} out
         </span>
       </div>
       {attempts.length > 1 && (
-        <ol className="flex flex-col pl-6">
+        <ol className="flex max-w-sm flex-col pl-6">
           {attempts.map((attempt, position) => (
             // biome-ignore lint/suspicious/noArrayIndexKey: attempts carry no id and keep their order
-            <AttemptRow key={position} attempt={attempt} position={position} />
+            <AttemptRow key={position} attempt={attempt} />
           ))}
         </ol>
       )}
