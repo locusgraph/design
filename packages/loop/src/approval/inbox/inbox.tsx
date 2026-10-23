@@ -19,6 +19,8 @@ export type InboxProps = {
   className?: string;
 };
 
+const oneAtATimeNote = "Destructive requests are approved one at a time.";
+
 export function Inbox({
   items,
   now = Date.now(),
@@ -75,9 +77,11 @@ export function Inbox({
               />
             ))}
           </ul>
-          <div className="flex flex-wrap items-center justify-between gap-3 px-2 pt-2">
-            <span className="flex min-w-0 items-center gap-3">
-              {selectable.length > 0 && (
+          {selectable.length === 0 ? (
+            <p className="px-2 pt-2 text-xs text-faint">{oneAtATimeNote}</p>
+          ) : (
+            <div className="flex flex-wrap items-center justify-between gap-3 px-2 pt-2">
+              <span className="flex min-w-0 items-center gap-3">
                 <Checkbox
                   id={selectAllId}
                   checked={allState}
@@ -87,36 +91,32 @@ export function Inbox({
                     )
                   }
                 />
-              )}
-              <Label
-                htmlFor={selectAllId}
-                className="flex min-w-0 flex-col items-start gap-0 font-normal"
-              >
-                <span className="text-sm tabular-nums">
-                  <span className="sr-only">Select all that can be approved together. </span>
-                  {selectedIds.length > 0 ? `${selectedIds.length} selected` : "Select all"}
-                </span>
-                {hasDestructive && (
-                  <span className="text-xs text-faint">
-                    Destructive requests are approved one at a time.
+                <Label
+                  htmlFor={selectAllId}
+                  className="flex min-w-0 flex-col items-start gap-0 font-normal"
+                >
+                  <span className="text-sm tabular-nums">
+                    <span className="sr-only">Select all that can be approved together. </span>
+                    {selectedIds.length > 0 ? `${selectedIds.length} selected` : "Select all"}
                   </span>
-                )}
-              </Label>
-            </span>
-            <Button
-              type="button"
-              size="sm"
-              disabled={selectedIds.length === 0}
-              onClick={() => {
-                onApproveAll(selectedIds);
-                setSelected(new Set());
-              }}
-            >
-              {selectedIds.length > 0
-                ? `Approve ${selectedIds.length} selected`
-                : "Approve selected"}
-            </Button>
-          </div>
+                  {hasDestructive && <span className="text-xs text-faint">{oneAtATimeNote}</span>}
+                </Label>
+              </span>
+              <Button
+                type="button"
+                size="sm"
+                disabled={selectedIds.length === 0}
+                onClick={() => {
+                  onApproveAll(selectedIds);
+                  setSelected(new Set());
+                }}
+              >
+                {selectedIds.length > 0
+                  ? `Approve ${selectedIds.length} selected`
+                  : "Approve selected"}
+              </Button>
+            </div>
+          )}
         </>
       )}
       <LiveStatus

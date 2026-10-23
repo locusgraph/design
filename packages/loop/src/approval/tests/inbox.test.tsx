@@ -38,6 +38,15 @@ describe("Inbox", () => {
     expect(html).toContain("Destructive requests are approved one at a time.");
   });
 
+  it("drops the bulk controls when every request is destructive", () => {
+    const html = renderToStaticMarkup(
+      <Inbox items={[items[1]]} now={now} onOpen={noop} onApproveAll={noop} />
+    );
+    expect(html).not.toContain("Approve selected");
+    expect(html).not.toContain("Select all");
+    expect(html).toContain("Destructive requests are approved one at a time.");
+  });
+
   it("shows an empty state", () => {
     const html = renderToStaticMarkup(<Inbox items={[]} onOpen={noop} onApproveAll={noop} />);
     expect(html).toContain('data-slot="inbox-empty"');
