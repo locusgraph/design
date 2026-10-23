@@ -1,6 +1,9 @@
+"use client";
+
 import { cn } from "@locusgraph/components";
 import { pluralize } from "@locusgraph/utils";
 import { BookmarkSimple as BookmarkPlusIcon } from "@phosphor-icons/react/ssr";
+import { useEffect, useRef } from "react";
 import {
   lineDetailClass,
   lineMemoryIconClass,
@@ -61,6 +64,14 @@ export function Memorized({ items, onUndo, className }: MemorizedProps) {
 
 function MemorizedRow({ item, onUndo }: { item: MemorizedItem; onUndo?: (id: string) => void }) {
   const undone = item.status === "undone";
+  const undoneLabel = useRef<HTMLSpanElement>(null);
+  const undoWasPressed = useRef(false);
+  useEffect(() => {
+    if (undone && undoWasPressed.current) {
+      undoWasPressed.current = false;
+      undoneLabel.current?.focus();
+    }
+  }, [undone]);
   return (
     <li
       data-slot="memorized-item"
@@ -74,13 +85,18 @@ function MemorizedRow({ item, onUndo }: { item: MemorizedItem; onUndo?: (id: str
         {item.kind && <span className="text-xs text-faint">{item.kind}</span>}
       </span>
       {undone ? (
-        <span className="shrink-0 text-xs text-faint">Undone</span>
+        <span ref={undoneLabel} tabIndex={-1} className="shrink-0 text-xs text-faint focus-ring">
+          Undone
+        </span>
       ) : (
         onUndo && (
           <button
             type="button"
             aria-label={`Undo saving ${item.text}`}
-            onClick={() => onUndo(item.id)}
+            onClick={() => {
+              undoWasPressed.current = true;
+              onUndo(item.id);
+            }}
             className="shrink-0 text-xs text-faint focus-ring transition-colors hover:text-interactive"
           >
             Undo
