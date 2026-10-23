@@ -57,33 +57,28 @@ export function ToolInputs({ input, muted = false }: { input: unknown; muted?: b
       {entries && !showRaw && (
         <dl
           className={cn(
-            "-mx-5 flex flex-col divide-y border-y text-sm",
-            muted && "text-muted-foreground"
+            "grid grid-cols-[minmax(0,8rem)_minmax(0,1fr)] gap-x-4 gap-y-1 text-sm",
+            muted ? "text-muted-foreground" : "text-foreground"
           )}
         >
           {entries.map(([key, value]) => (
-            <div
-              key={key}
-              className="grid grid-cols-[minmax(0,8.5rem)_minmax(0,1fr)] items-baseline gap-3 px-5 py-2.5"
-            >
-              <dt className="text-xs text-muted-foreground">{humanizeKey(key)}</dt>
-              <dd className="font-mono text-sm break-words">{readableValue(value)}</dd>
+            <div key={key} className="contents">
+              <dt className="text-faint">{humanizeKey(key)}</dt>
+              <dd className="min-w-0 break-words">{readableValue(value)}</dd>
             </div>
           ))}
-          {entries.length === 0 && (
-            <div className="px-5 py-2.5 text-xs text-muted-foreground">No inputs.</div>
-          )}
+          {entries.length === 0 && <div className="col-span-2 text-faint">No inputs.</div>}
         </dl>
       )}
       {(showRaw || !entries) && (
-        <pre id={rawId} className="overflow-x-auto bg-muted/40 p-3 font-mono text-xs">
+        <pre id={rawId} className="overflow-x-auto font-mono text-xs text-muted-foreground">
           {rawJson(input)}
         </pre>
       )}
       {entries && (
         <button
           type="button"
-          className="eyebrow self-start outline-none hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring/70 motion-safe:transition-colors"
+          className="self-start text-xs text-faint outline-none hover:text-s1 focus-visible:ring-2 focus-visible:ring-ring/70 motion-safe:transition-colors"
           aria-expanded={showRaw}
           aria-controls={showRaw ? rawId : undefined}
           onClick={() => setShowRaw((current) => !current)}

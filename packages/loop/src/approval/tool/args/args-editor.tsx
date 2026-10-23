@@ -89,7 +89,7 @@ export function ArgsEditor({
       ) : (
         <>
           <p className="px-5 pt-1 text-sm text-muted-foreground">
-            {description ?? riskCopy[risk](toolName)} The tool runs with what you send.
+            {description ?? riskCopy[risk]()} The tool runs with what you send.
           </p>
           <form
             noValidate

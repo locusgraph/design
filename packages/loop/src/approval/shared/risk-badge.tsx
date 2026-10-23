@@ -21,12 +21,12 @@ export const riskTone: Record<RiskLevel, PanelTone> = {
   destructive: "danger",
 };
 
-export const riskCopy: Record<RiskLevel, (tool: string) => ReactNode> = {
-  read: (tool) => `${tool} only reads data. Nothing changes if you approve.`,
-  write: (tool) => `${tool} wants to make a change. Check the inputs before you approve.`,
-  destructive: (tool) => (
+export const riskCopy: Record<RiskLevel, () => ReactNode> = {
+  read: () => "Only reads data. Nothing changes if you approve.",
+  write: () => "Makes a change. Check the inputs before you approve.",
+  destructive: () => (
     <>
-      {tool} will permanently delete or overwrite data.{" "}
+      Permanently deletes or overwrites data.{" "}
       <span className="font-medium text-destructive">This can't be undone.</span>
     </>
   ),

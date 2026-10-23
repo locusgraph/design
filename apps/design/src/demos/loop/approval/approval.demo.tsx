@@ -71,7 +71,7 @@ function DeniedWithReason() {
 export default defineDemo({
   title: "Approval",
   description:
-    "Pauses a tool call that writes, pays, sends or deletes and shows exactly what it will do. The approve button names the action; after a decision it shows who decided and when.",
+    "Pauses a tool call that writes, pays, sends or deletes. While it waits it is the one filled block in the chat: a line saying what will run, the inputs as plain text and a button that names the action. Once decided it shrinks back to a line with who decided and when.",
   controls: { risk: select(riskOptions, "destructive"), decided: toggle(false) },
   playground: ({ risk, decided }) => (
     <div className="w-full max-w-xl">

@@ -1,6 +1,5 @@
 import { Button, Label, Textarea } from "@locusgraph/components";
 import { useId, useState } from "react";
-import { PanelBody, PanelFooter } from "../../shared/panel";
 import { useFocusOnMount } from "../shared/use-focus-on-mount";
 
 type DenyFormProps = {
@@ -16,31 +15,31 @@ export function DenyForm({ onDeny, onBack }: DenyFormProps) {
   return (
     <form
       data-slot="deny-form"
+      className="flex flex-col gap-2 pl-6"
       onSubmit={(event) => {
         event.preventDefault();
         onDeny(trimmed === "" ? undefined : trimmed);
       }}
     >
-      <PanelBody className="gap-2 pt-0">
-        <Label htmlFor={reasonId} className="text-xs font-normal text-muted-foreground">
-          Reason for the agent (optional)
-        </Label>
-        <Textarea
-          id={reasonId}
-          ref={reasonRef}
-          value={reason}
-          placeholder="Tell the agent what to do instead"
-          onChange={(event) => setReason(event.target.value)}
-        />
-      </PanelBody>
-      <PanelFooter>
-        <Button type="button" variant="ghost" size="sm" onClick={onBack}>
-          Back
-        </Button>
+      <Label htmlFor={reasonId} className="text-xs font-normal text-faint">
+        Reason for the agent (optional)
+      </Label>
+      <Textarea
+        id={reasonId}
+        ref={reasonRef}
+        value={reason}
+        placeholder="Tell the agent what to do instead"
+        className="bg-background"
+        onChange={(event) => setReason(event.target.value)}
+      />
+      <div className="flex flex-wrap gap-2 pt-1">
         <Button type="submit" variant="destructive" size="sm">
           Send denial
         </Button>
-      </PanelFooter>
+        <Button type="button" variant="ghost" size="sm" onClick={onBack}>
+          Back
+        </Button>
+      </div>
     </form>
   );
 }
