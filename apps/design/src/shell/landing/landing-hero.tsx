@@ -35,7 +35,7 @@ export function LandingHero() {
       </p>
       <div className="flex flex-col items-start gap-2 sm:flex-row sm:items-center sm:gap-4">
         <StartWithAgent />
-        <Button asChild size="lg" variant="ghost">
+        <Button asChild size="lg" variant="ghost" className="-ml-4 sm:ml-0">
           <PlaygroundLink href="/components">
             Browse components
             <ArrowRightIcon weight="bold" aria-hidden />
