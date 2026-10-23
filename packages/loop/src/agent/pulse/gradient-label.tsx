@@ -1,5 +1,5 @@
 import { cn } from "@locusgraph/components";
-import { Sparkle as SparkleIcon } from "@phosphor-icons/react/ssr";
+import { StarFour as SparkleIcon } from "@phosphor-icons/react/ssr";
 import type { PulseTone } from "./pulse-tone";
 import { useLoopAnimation } from "./use-loop-animation";
 
@@ -17,7 +17,7 @@ const toneIcon: Record<PulseTone, string> = {
 
 const toneText: Record<PulseTone, string> = {
   neutral:
-    "bg-[linear-gradient(90deg,var(--color-muted-foreground),var(--color-foreground),var(--color-muted-foreground))]",
+    "bg-[linear-gradient(90deg,var(--color-faint)_25%,var(--color-foreground)_50%,var(--color-faint)_75%)]",
   brand:
     "bg-[linear-gradient(90deg,var(--color-sky-500),var(--color-violet-500),var(--color-pink-500),var(--color-sky-500))]",
 };
@@ -30,7 +30,7 @@ export function GradientLabel({ label, tone = "neutral" }: GradientLabelProps) {
   return (
     <span className="inline-flex items-center gap-1.5">
       <SparkleIcon
-        weight="bold"
+        weight="fill"
         ref={icon}
         aria-hidden
         className={cn("size-[1.05em]", toneIcon[tone])}
