@@ -4,9 +4,9 @@ import {
   Question as MessageCircleQuestionIcon,
 } from "@phosphor-icons/react/ssr";
 import { useId, useState } from "react";
-import { lineIconClass, lineRowClass } from "../../shared/line";
+import { lineObjectClass } from "../../shared/line";
 import { LiveStatus } from "../../shared/live-status";
-import { SettledLine } from "../shared/approval-line";
+import { PendingLine, SettledLine } from "../shared/approval-line";
 import { DecisionSummary } from "../shared/decision-line";
 import { useFocusOnMount } from "../shared/use-focus-on-mount";
 import type { DecidedAt, QuestionAnswer, QuestionOption } from "../types";
@@ -75,15 +75,9 @@ export function Question({
         </SettledLine>
       ) : (
         <>
-          <div className={cn(lineRowClass, "w-full items-start text-base")}>
-            <span aria-hidden className={cn(lineIconClass, "mt-1.5 size-5 [&_svg]:size-4")}>
-              {icon}
-            </span>
-            <span className="min-w-0 py-1">
-              <span className="font-medium text-warn">Waiting</span> for your answer:{" "}
-              <span className="font-medium text-foreground">{question}</span>
-            </span>
-          </div>
+          <PendingLine icon={icon} wrap>
+            for your answer: <span className={lineObjectClass}>{question}</span>
+          </PendingLine>
           <form
             className="flex flex-col gap-3"
             onSubmit={(event) => {

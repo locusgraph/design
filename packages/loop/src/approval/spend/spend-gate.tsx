@@ -1,9 +1,9 @@
 import { Button, cn } from "@locusgraph/components";
 import { formatMicroUsd } from "@locusgraph/utils";
 import { CurrencyCircleDollar as CircleDollarSignIcon } from "@phosphor-icons/react/ssr";
-import { lineIconClass, lineObjectClass, lineRowClass } from "../../shared/line";
+import { lineObjectClass } from "../../shared/line";
 import { LiveStatus } from "../../shared/live-status";
-import { SettledLine } from "../shared/approval-line";
+import { PendingLine, SettledLine } from "../shared/approval-line";
 import { DecisionSummary } from "../shared/decision-line";
 import { useFocusOnMount } from "../shared/use-focus-on-mount";
 import type { ApprovalDecision } from "../types";
@@ -86,24 +86,14 @@ export function SpendGate({
         </SettledLine>
       ) : (
         <>
-          <div className={cn(lineRowClass, "w-full text-base")}>
-            <span
-              aria-hidden
-              className={cn(
-                lineIconClass,
-                "size-5 [&_svg]:size-4",
-                outOfCredits && "text-destructive"
-              )}
-            >
-              {icon}
-            </span>
-            <span className="min-w-0 truncate">
-              <span className={cn("font-medium", outOfCredits ? "text-destructive" : "text-warn")}>
-                {situationStatus[situation]}
-              </span>{" "}
-              · next step costs <span className={lineObjectClass}>{estimate}</span>
-            </span>
-          </div>
+          <PendingLine
+            icon={icon}
+            status={situationStatus[situation]}
+            tone={outOfCredits ? "destructive" : "warn"}
+            iconClassName={outOfCredits ? "text-destructive" : undefined}
+          >
+            · next step costs <span className={lineObjectClass}>{estimate}</span>
+          </PendingLine>
           <p className="-mt-2 text-sm text-faint">
             {copy.body(runName ?? "The agent")} The run would reach{" "}
             <span className="tabular-nums">{formatMicroUsd(projected)}</span>.

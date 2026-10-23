@@ -5,6 +5,53 @@ import { lineIconClass, lineObjectClass, lineRowClass } from "../../shared/line"
 import type { RiskLevel } from "../../types";
 import { RiskBadge } from "./risk-badge";
 
+type PendingLineProps = {
+  icon: ReactNode;
+  status?: ReactNode;
+  tone?: "warn" | "destructive";
+  iconClassName?: string;
+  wrap?: boolean;
+  after?: ReactNode;
+  children: ReactNode;
+};
+
+export function PendingLine({
+  icon,
+  status = "Waiting",
+  tone = "warn",
+  iconClassName,
+  wrap = false,
+  after,
+  children,
+}: PendingLineProps) {
+  return (
+    <div className={cn(lineRowClass, "w-full text-base", wrap && "items-start")}>
+      <span
+        aria-hidden
+        className={cn(lineIconClass, "size-5 [&_svg]:size-4", wrap && "mt-1.5", iconClassName)}
+      >
+        {icon}
+      </span>
+      <span className={wrap ? "min-w-0 py-1" : "min-w-0 truncate"}>
+        {status && (
+          <>
+            <span
+              className={cn(
+                "font-medium",
+                tone === "destructive" ? "text-destructive" : "text-warn"
+              )}
+            >
+              {status}
+            </span>{" "}
+          </>
+        )}
+        {children}
+      </span>
+      {after}
+    </div>
+  );
+}
+
 type ApprovalHeadlineProps = {
   name: string;
   risk?: RiskLevel;
@@ -16,19 +63,13 @@ export function ApprovalHeadline({ name, risk, action = "to run", icon }: Approv
   const destructive = risk === "destructive";
   const RiskIcon = destructive ? ShieldAlertIcon : WrenchIcon;
   return (
-    <div className={cn(lineRowClass, "w-full text-base")}>
-      <span
-        aria-hidden
-        className={cn(lineIconClass, "size-5 [&_svg]:size-4", destructive && "text-destructive")}
-      >
-        {icon ?? <RiskIcon weight="bold" aria-hidden />}
-      </span>
-      <span className="min-w-0 truncate">
-        <span className="font-medium text-warn">Waiting</span> {action}{" "}
-        <span className={lineObjectClass}>{name}</span>
-      </span>
-      {risk && <RiskBadge risk={risk} className="ml-1" />}
-    </div>
+    <PendingLine
+      icon={icon ?? <RiskIcon weight="bold" aria-hidden />}
+      iconClassName={destructive ? "text-destructive" : undefined}
+      after={risk && <RiskBadge risk={risk} className="ml-1" />}
+    >
+      {action} <span className={lineObjectClass}>{name}</span>
+    </PendingLine>
   );
 }
 

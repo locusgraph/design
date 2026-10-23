@@ -4,6 +4,7 @@ import { Lightbulb as BrainIcon } from "@phosphor-icons/react/ssr";
 import { useMemo, useState } from "react";
 import { lineMemoryIconClass, lineMemoryObjectClass, lineRowClass } from "../../shared/line";
 import { LiveStatus } from "../../shared/live-status";
+import { PendingLine } from "../shared/approval-line";
 import { DecisionSummary } from "../shared/decision-line";
 import { useFocusOnMount } from "../shared/use-focus-on-mount";
 import type { ApprovalDecision, MemoryReviewResult, ProposedMemory } from "../types";
@@ -27,21 +28,13 @@ function resultSummary(result: MemoryReviewResult) {
 function Headline({ count, decided }: { count: number; decided: boolean }) {
   const object = pluralize(count, "memory", "memories");
   return (
-    <div className={cn(lineRowClass, "w-full text-base")}>
-      <span aria-hidden className={cn(lineMemoryIconClass, "size-5 [&_svg]:size-4")}>
-        <BrainIcon weight="bold" aria-hidden />
-      </span>
-      <span className="min-w-0 truncate">
-        {decided ? (
-          "Reviewed "
-        ) : (
-          <>
-            <span className="font-medium text-warn">Waiting</span> to remember{" "}
-          </>
-        )}
-        <span className={lineMemoryObjectClass}>{object}</span>
-      </span>
-    </div>
+    <PendingLine
+      icon={<BrainIcon weight="bold" aria-hidden />}
+      iconClassName="text-memory"
+      status={decided ? null : undefined}
+    >
+      {decided ? "Reviewed" : "to remember"} <span className={lineMemoryObjectClass}>{object}</span>
+    </PendingLine>
   );
 }
 
