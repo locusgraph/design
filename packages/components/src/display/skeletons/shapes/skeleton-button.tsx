@@ -6,9 +6,9 @@ import { SkeletonBar, SkeletonLoadingLabel, skeletonRootProps } from "../skeleto
 const skeletonButtonVariants = cva("rounded-full", {
   variants: {
     size: {
-      sm: "h-8 w-20",
-      default: "h-9 w-24",
-      lg: "h-10 w-28",
+      sm: "h-control-sm w-20",
+      default: "h-control w-24",
+      lg: "h-control-lg w-28",
     },
   },
   defaultVariants: {

@@ -47,7 +47,7 @@ describe("SkeletonAvatar and SkeletonButton", () => {
     const html = renderToStaticMarkup(<SkeletonButton size="sm" />);
     expectAnnouncedOnce(html, "skeleton-button");
     expect(html).toContain("rounded-full");
-    expect(html).toContain("h-8");
+    expect(html).toContain("h-control-sm");
   });
 });
 
