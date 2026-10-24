@@ -6,17 +6,33 @@ const popupSelector = [
   "[data-slot=popover-content]",
   "[data-slot=hover-card-content]",
   "[data-slot=tooltip-content]",
+  "[data-slot=combobox-content]",
 ].join(",");
 const popupMargin = 16;
+
+function hiddenScrollHeight(popup: Element) {
+  let hidden = 0;
+  for (const element of [popup, ...popup.querySelectorAll("*")]) {
+    hidden = Math.max(hidden, element.scrollHeight - element.clientHeight);
+  }
+  return hidden;
+}
+
+function naturalPopupHeight(popup: Element, renderedHeight: number) {
+  const maxHeight = Number.parseFloat(getComputedStyle(popup).maxHeight);
+  const natural = renderedHeight + hiddenScrollHeight(popup);
+  return Number.isNaN(maxHeight) ? natural : Math.min(natural, maxHeight);
+}
 
 function lowestPopupBottom() {
   let bottom = 0;
   for (const popup of document.querySelectorAll(popupSelector)) {
-    const rect = popup.getBoundingClientRect();
-    if (rect.height === 0) continue;
-    const clippedAbove = rect.top < popupMargin;
-    const roomToFlipBelow = window.innerHeight + rect.height + popupMargin;
-    bottom = Math.max(bottom, clippedAbove ? roomToFlipBelow : rect.bottom + popupMargin);
+    const rendered = popup.getBoundingClientRect();
+    if (rendered.height === 0) continue;
+    const height = naturalPopupHeight(popup, rendered.height);
+    const clippedAbove = rendered.top < popupMargin;
+    const roomToFlipBelow = window.innerHeight + height + popupMargin;
+    bottom = Math.max(bottom, clippedAbove ? roomToFlipBelow : rendered.top + height + popupMargin);
   }
   return bottom;
 }
