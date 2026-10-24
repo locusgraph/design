@@ -9,7 +9,7 @@ import { useFocusOnMount } from "../shared/use-focus-on-mount";
 import { useFocusWhenSettled } from "../shared/use-focus-when-settled";
 import type { ApprovalDecision } from "../types";
 import { RaiseCapForm } from "./raise-cap-form";
-import { spendSituation, suggestedCapMicroUsd } from "./spend-math";
+import { minimumCapMicroUsd, spendSituation, suggestedCapMicroUsd } from "./spend-math";
 import { SpendMeter } from "./spend-meter";
 
 export type SpendGateProps = {
@@ -132,7 +132,7 @@ export function SpendGate({
           </div>
           {!outOfCredits && (
             <RaiseCapForm
-              capMicroUsd={capMicroUsd}
+              minimumMicroUsd={minimumCapMicroUsd(projected, capMicroUsd)}
               suggestedMicroUsd={suggestedCapMicroUsd(projected, capMicroUsd)}
               onRaiseCap={onRaiseCap}
             />

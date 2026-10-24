@@ -4,20 +4,22 @@ import { useId, useState } from "react";
 import { dollarsToMicroUsd, microUsdToDollarsInput } from "./spend-math";
 
 type RaiseCapFormProps = {
-  capMicroUsd: number;
+  minimumMicroUsd: number;
   suggestedMicroUsd: number;
   disabled?: boolean;
   onRaiseCap: (newCapMicroUsd: number) => void;
 };
 
-function capError(next: number | null, capMicroUsd: number) {
+function capError(next: number | null, minimumMicroUsd: number) {
   if (next === null) return "Enter an amount in dollars.";
-  if (next <= capMicroUsd) return `The new cap must be above ${formatMicroUsd(capMicroUsd)}.`;
+  if (next < minimumMicroUsd) {
+    return `The new cap must be at least ${formatMicroUsd(minimumMicroUsd)} to cover the next step.`;
+  }
   return undefined;
 }
 
 export function RaiseCapForm({
-  capMicroUsd,
+  minimumMicroUsd,
   suggestedMicroUsd,
   disabled = false,
   onRaiseCap,
@@ -26,7 +28,7 @@ export function RaiseCapForm({
   const [dollars, setDollars] = useState(() => microUsdToDollarsInput(suggestedMicroUsd));
   const [touched, setTouched] = useState(false);
   const next = dollarsToMicroUsd(dollars);
-  const error = capError(next, capMicroUsd);
+  const error = capError(next, minimumMicroUsd);
   const visibleError = touched ? error : undefined;
   return (
     <form
