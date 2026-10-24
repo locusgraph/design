@@ -75,3 +75,7 @@ export function libraryEntries(id: LibraryId): DemoIndexEntry[] {
   if (id !== "loop") return entries;
   return [...entries].sort((first, second) => loopRank(first) - loopRank(second));
 }
+
+export const entriesInLibraryOrder: DemoIndexEntry[] = libraries.flatMap((library) =>
+  libraryEntries(library.id)
+);

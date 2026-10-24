@@ -14,7 +14,7 @@ export function PagePager({
   next?: DemoIndexEntry;
 }) {
   return (
-    <nav aria-label="Component pages" className="flex items-center justify-between pt-4">
+    <nav aria-label="Docs pages" className="flex items-center justify-between pt-4">
       {previous ? (
         <Button asChild variant="secondary" size="sm" className="shadow-none">
           <PlaygroundLink href={`/${previous.path}`}>
