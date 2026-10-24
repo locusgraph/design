@@ -15,6 +15,18 @@ describe("email templates", () => {
     expect(email.html).toContain('href="https://accounts.locusgraph.com/invite/abc"');
     expect(email.text).toContain("Accept invitation: https://accounts.locusgraph.com/invite/abc");
     expect(email.text).not.toContain("<");
+    expect(email.text).toContain("Dana invited you to Acme Inc as a member.");
+  });
+
+  it("puts an before a role that starts with a vowel", () => {
+    const email = invitationEmail({
+      organizationName: "Acme Inc",
+      inviterName: "Dana",
+      role: "admin",
+      acceptUrl: "https://accounts.locusgraph.com/invite/abc",
+      expiresOn: "Oct 24, 2026",
+    });
+    expect(email.text).toContain("as an admin.");
   });
 
   it("formats money in receipts and credit emails", () => {

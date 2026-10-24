@@ -10,6 +10,10 @@ export type InvitationEmailProps = {
   expiresOn: string;
 };
 
+function withIndefiniteArticle(word: string) {
+  return /^[aeiou]/i.test(word) ? `an ${word}` : `a ${word}`;
+}
+
 export function InvitationEmail({
   organizationName,
   inviterName,
@@ -25,8 +29,8 @@ export function InvitationEmail({
       <EmailLabel>Invitation</EmailLabel>
       <EmailHeading>Join {organizationName} on LocusGraph</EmailHeading>
       <EmailText>
-        {inviterName} invited you to {organizationName} as {role}. Sign in with Google or GitHub to
-        accept.
+        {inviterName} invited you to {organizationName} as {withIndefiniteArticle(role)}. Sign in
+        with Google or GitHub to accept.
       </EmailText>
       <EmailButton href={acceptUrl}>Accept invitation</EmailButton>
     </EmailLayout>
