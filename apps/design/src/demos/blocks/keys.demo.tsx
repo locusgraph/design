@@ -44,10 +44,11 @@ export default defineDemo({
           <RuleGridCell className="p-0">
             <Keys
               keys={keys}
-              actions={() => (
+              actions={(key) => (
                 <Button
                   size="sm"
                   variant="ghost"
+                  aria-label={`Revoke ${key.name}`}
                   className="text-muted-foreground hover:text-destructive"
                 >
                   Revoke
