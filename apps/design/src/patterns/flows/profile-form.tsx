@@ -1,5 +1,4 @@
 import {
-  Button,
   Field,
   FieldDescription,
   FieldError,
@@ -8,17 +7,16 @@ import {
   FieldLegend,
   FieldSet,
   Input,
-  RuleGridFooter,
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-  Spinner,
   Textarea,
 } from "@locusgraph/components";
 import { type FormEvent, useId, useState } from "react";
 import {
+  allFields,
   bioLimit,
   missingFieldsHint,
   type ProfileField,
@@ -28,7 +26,7 @@ import {
   validateProfile,
   waitForSave,
 } from "./profile-form-data";
-import { FooterStatus, RequiredLabel } from "./profile-form-parts";
+import { describedByIds, ProfileFooter, RequiredLabel } from "./profile-form-parts";
 
 export type ProfileFormProps = {
   defaultValues?: ProfileValues;
@@ -38,8 +36,6 @@ export type ProfileFormProps = {
   onSave?: (values: ProfileValues) => Promise<void> | void;
   onCancel?: () => void;
 };
-
-const allFields: ProfileField[] = ["name", "email", "role", "bio"];
 
 export function ProfileForm({
   defaultValues = sampleProfile,
@@ -60,6 +56,13 @@ export function ProfileForm({
 
   function visibleError(field: ProfileField) {
     return touched.includes(field) ? errors[field] : undefined;
+  }
+
+  function describedBy(field: ProfileField, hasDescription: boolean) {
+    return describedByIds(
+      hasDescription && `${fieldId}-${field}-description`,
+      !!visibleError(field) && `${fieldId}-${field}-error`
+    );
   }
 
   function markTouched(field: ProfileField) {
@@ -101,11 +104,12 @@ export function ProfileForm({
               autoComplete="name"
               aria-required="true"
               aria-invalid={!!visibleError("name")}
+              aria-describedby={describedBy("name", false)}
               value={values.name}
               onChange={(event) => update("name", event.target.value)}
               onBlur={() => markTouched("name")}
             />
-            <FieldError>{visibleError("name")}</FieldError>
+            <FieldError id={`${fieldId}-name-error`}>{visibleError("name")}</FieldError>
           </Field>
           <Field data-invalid={!!visibleError("email") || undefined}>
             <RequiredLabel htmlFor={`${fieldId}-email`}>Email</RequiredLabel>
@@ -115,12 +119,15 @@ export function ProfileForm({
               autoComplete="email"
               aria-required="true"
               aria-invalid={!!visibleError("email")}
+              aria-describedby={describedBy("email", true)}
               value={values.email}
               onChange={(event) => update("email", event.target.value)}
               onBlur={() => markTouched("email")}
             />
-            <FieldDescription>Sign-in links and invoices go here.</FieldDescription>
-            <FieldError>{visibleError("email")}</FieldError>
+            <FieldDescription id={`${fieldId}-email-description`}>
+              Sign-in links and invoices go here.
+            </FieldDescription>
+            <FieldError id={`${fieldId}-email-error`}>{visibleError("email")}</FieldError>
           </Field>
           <Field data-invalid={!!visibleError("role") || undefined}>
             <RequiredLabel htmlFor={`${fieldId}-role`}>Role</RequiredLabel>
@@ -136,6 +143,7 @@ export function ProfileForm({
                 id={`${fieldId}-role`}
                 aria-required="true"
                 aria-invalid={!!visibleError("role")}
+                aria-describedby={describedBy("role", true)}
                 className="w-full"
               >
                 <SelectValue placeholder="Choose a role" />
@@ -148,8 +156,10 @@ export function ProfileForm({
                 ))}
               </SelectContent>
             </Select>
-            <FieldDescription>Decides what you can change in billing and keys.</FieldDescription>
-            <FieldError>{visibleError("role")}</FieldError>
+            <FieldDescription id={`${fieldId}-role-description`}>
+              Decides what you can change in billing and keys.
+            </FieldDescription>
+            <FieldError id={`${fieldId}-role-error`}>{visibleError("role")}</FieldError>
           </Field>
           <Field data-invalid={!!visibleError("bio") || undefined}>
             <div className="flex items-baseline justify-between gap-3">
@@ -162,25 +172,25 @@ export function ProfileForm({
               id={`${fieldId}-bio`}
               rows={3}
               aria-invalid={!!visibleError("bio")}
+              aria-describedby={describedBy("bio", true)}
               value={values.bio}
               onChange={(event) => update("bio", event.target.value)}
               onBlur={() => markTouched("bio")}
             />
-            <FieldDescription>Optional. One or two lines about what you work on.</FieldDescription>
-            <FieldError>{visibleError("bio")}</FieldError>
+            <FieldDescription id={`${fieldId}-bio-description`}>
+              Optional. One or two lines about what you work on.
+            </FieldDescription>
+            <FieldError id={`${fieldId}-bio-error`}>{visibleError("bio")}</FieldError>
           </Field>
         </FieldGroup>
       </FieldSet>
-      <RuleGridFooter className="mx-0 mb-0">
-        <Button type="submit" disabled={!isValid} aria-disabled={isSaving} aria-busy={isSaving}>
-          {isSaving ? <Spinner /> : null}
-          {isSaving ? "Saving…" : "Save profile"}
-        </Button>
-        <Button type="button" variant="ghost" onClick={onCancel} disabled={isSaving}>
-          Cancel
-        </Button>
-        <FooterStatus saving={isSaving} savedName={savedName} hint={missingFieldsHint(errors)} />
-      </RuleGridFooter>
+      <ProfileFooter
+        canSave={isValid}
+        saving={isSaving}
+        savedName={savedName}
+        hint={missingFieldsHint(errors)}
+        onCancel={onCancel}
+      />
     </form>
   );
 }
