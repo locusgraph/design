@@ -30,7 +30,7 @@ function UnderMessage() {
 export default defineDemo({
   title: "Cost",
   description:
-    "Tokens and cost for one message or run. Pass one RunUsage or every attempt; failed attempts are counted and their wasted cost shown in red.",
+    "Tokens and cost for one message or run. Pass one `RunUsage` or every attempt; failed attempts are counted and their wasted cost shown in red.",
   controls: { variant: select(variants, "detailed"), withFailure: toggle(true) },
   playground: ({ variant, withFailure }) => (
     <div className="w-[32rem] max-w-full">
