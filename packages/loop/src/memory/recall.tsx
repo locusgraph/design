@@ -4,6 +4,7 @@ import {
   CaretRight as ChevronRightIcon,
   ClockCounterClockwise as HistoryIcon,
 } from "@phosphor-icons/react/ssr";
+import { useId } from "react";
 import {
   lineChevronClass,
   lineDetailClass,
@@ -75,6 +76,12 @@ function Relevance({ memory }: { memory: MemoryRef }) {
   );
 }
 
+function openMemoryLabel(memory: MemoryRef) {
+  const relevance =
+    memory.relevance === undefined ? "" : `, ${relevancePercent(memory.relevance)}% relevant`;
+  return `Open memory ${memory.label}${relevance}`;
+}
+
 function RecallRow({
   memory,
   onOpenMemory,
@@ -82,14 +89,16 @@ function RecallRow({
   memory: MemoryRef;
   onOpenMemory?: (id: string) => void;
 }) {
+  const detailId = useId();
+  const hasDetail = Boolean(memory.kind || memory.snippet);
   const content = (
     <>
       <span className="flex w-full items-baseline gap-3">
         <span className="min-w-0 truncate">{memory.label}</span>
         <Relevance memory={memory} />
       </span>
-      {(memory.kind || memory.snippet) && (
-        <span className="line-clamp-2 w-full text-xs text-faint">
+      {hasDetail && (
+        <span id={detailId} className="line-clamp-2 w-full text-xs text-faint">
           {memory.kind && <span className="whitespace-nowrap">{memory.kind}</span>}
           {memory.kind && memory.snippet && <span aria-hidden> · </span>}
           {memory.snippet}
@@ -103,7 +112,8 @@ function RecallRow({
       {onOpenMemory ? (
         <button
           type="button"
-          aria-label={`Open memory ${memory.label}`}
+          aria-label={openMemoryLabel(memory)}
+          aria-describedby={hasDetail ? detailId : undefined}
           onClick={() => onOpenMemory(memory.id)}
           className={cn(rowClass, lineDetailLinkClass)}
         >

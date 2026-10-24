@@ -83,7 +83,8 @@ describe("Recall", () => {
     expect(html).toContain('aria-valuenow="92"');
     expect(html).toContain('aria-valuenow="46"');
     expect(html).toContain("preference");
-    expect(html).toContain('aria-label="Open memory Prefers weekly invoices"');
+    expect(html).toContain('aria-label="Open memory Prefers weekly invoices, 92% relevant"');
+    expect(html).toContain("aria-describedby=");
   });
 });
 
