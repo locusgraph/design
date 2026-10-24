@@ -65,19 +65,27 @@ function useHighlightedHtml(code: string, language: CodeLanguage) {
 function CopyButton({ text }: { text: string }) {
   const [copied, setCopied] = useState(false);
   const copy = async () => {
-    await navigator.clipboard.writeText(text);
-    setCopied(true);
-    setTimeout(() => setCopied(false), 1500);
+    try {
+      await navigator.clipboard.writeText(text);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 1500);
+    } catch {
+      setCopied(false);
+    }
   };
   return (
     <Button
       variant="ghost"
       size="icon-sm"
-      aria-label="Copy code"
+      aria-label={copied ? "Copied" : "Copy code"}
       onClick={copy}
       className="absolute top-2 right-2 bg-surface hover:bg-accent"
     >
-      {copied ? <CheckIcon weight="bold" aria-hidden /> : <CopyIcon weight="bold" aria-hidden />}
+      {copied ? (
+        <CheckIcon weight="bold" aria-hidden className="text-good" />
+      ) : (
+        <CopyIcon weight="bold" aria-hidden />
+      )}
     </Button>
   );
 }

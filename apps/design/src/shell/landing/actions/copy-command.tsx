@@ -14,7 +14,7 @@ export function CopyCommand({ command, prompt = true }: { command: string; promp
     }
   };
   return (
-    <div className="flex h-control min-w-0 items-center gap-2 bg-muted/40 pr-1 pl-4 font-mono text-code">
+    <div className="flex h-control min-w-0 items-center gap-2 bg-muted/40 pr-2 pl-4 font-mono text-code">
       {prompt && (
         <span aria-hidden className="text-muted-foreground">
           $
@@ -22,7 +22,7 @@ export function CopyCommand({ command, prompt = true }: { command: string; promp
       )}
       <span className="min-w-0 overflow-x-auto whitespace-nowrap">{command}</span>
       <Button
-        size="icon-xs"
+        size="icon-sm"
         variant="ghost"
         aria-label={copied ? "Copied" : "Copy command"}
         onClick={copy}
