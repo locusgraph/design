@@ -54,7 +54,7 @@ function useActiveLinkInView(nav: RefObject<HTMLElement | null>, activeHref: str
     const top = link.offsetTop - container.scrollTop;
     const hidden =
       top < fadeAllowance || top + link.offsetHeight > container.clientHeight - fadeAllowance;
-    if (hidden) container.scrollTop = link.offsetTop - container.clientHeight / 2;
+    if (hidden) container.scrollTo({ top: link.offsetTop - container.clientHeight / 2 });
   }, [nav, activeHref]);
 }
 
