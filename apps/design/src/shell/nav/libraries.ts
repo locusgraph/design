@@ -1,5 +1,5 @@
 import { type DemoIndexEntry, demoIndexByTitle } from "../../registry/load-demos";
-import { loopPathOrder } from "./loop-sections";
+import { loopPathOrder, loopSections } from "./loop-sections";
 
 export type LibraryId = "components" | "blocks" | "loop" | "patterns" | "brand";
 
@@ -76,6 +76,36 @@ export function libraryEntries(id: LibraryId): DemoIndexEntry[] {
   return [...entries].sort((first, second) => loopRank(first) - loopRank(second));
 }
 
+export type LibraryGroup = { group: string; entries: DemoIndexEntry[] };
+
+export function groupTitle(group: string) {
+  return group
+    .split("-")
+    .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+    .join(" ");
+}
+
+function groupKey(library: Library, entry: DemoIndexEntry) {
+  return library.id === "components" ? entry.group : entry.section || entry.group;
+}
+
+function loopGroups(entries: DemoIndexEntry[]): LibraryGroup[] {
+  return loopSections.map((section) => ({
+    group: section.label.toLowerCase(),
+    entries: entries.filter((entry) => section.paths.includes(entry.path)),
+  }));
+}
+
+export function libraryGroups(library: Library): LibraryGroup[] {
+  const entries = libraryEntries(library.id);
+  if (library.id === "loop") return loopGroups(entries);
+  const keys = entries.map((entry) => groupKey(library, entry));
+  return [...new Set(keys)].sort().map((group) => ({
+    group,
+    entries: entries.filter((entry) => groupKey(library, entry) === group),
+  }));
+}
+
 export const entriesInLibraryOrder: DemoIndexEntry[] = libraries.flatMap((library) =>
-  libraryEntries(library.id)
+  libraryGroups(library).flatMap((group) => group.entries)
 );

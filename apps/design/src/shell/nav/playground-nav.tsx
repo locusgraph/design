@@ -2,19 +2,18 @@ import type { DocsNavGroup } from "@locusgraph/components";
 import type * as React from "react";
 import { loadDemoEntry } from "../../registry/load-demos";
 import { navigate } from "../../url-state";
-import { type Library, libraryEntries } from "./libraries";
-import { loopSections } from "./loop-sections";
+import { groupTitle, type Library, type LibraryGroup, libraryGroups } from "./libraries";
 
 function libraryNavGroups(library: Library): DocsNavGroup[] {
-  const entries = libraryEntries(library.id);
-  const itemOf = (entry: (typeof entries)[number]) => ({
-    title: entry.title,
-    href: `/${entry.path}`,
-  });
-  if (library.id !== "loop") return [{ label: library.title, items: entries.map(itemOf) }];
-  return loopSections.map((section) => ({
-    label: section.label,
-    items: entries.filter((entry) => section.paths.includes(entry.path)).map(itemOf),
+  const groups = libraryGroups(library);
+  const itemsOf = (entries: LibraryGroup["entries"]) =>
+    entries.map((entry) => ({ title: entry.title, href: `/${entry.path}` }));
+  if (groups.length < 2) {
+    return [{ label: library.title, items: itemsOf(groups[0]?.entries ?? []) }];
+  }
+  return groups.map(({ group, entries }) => ({
+    label: groupTitle(group),
+    items: itemsOf(entries),
   }));
 }
 
