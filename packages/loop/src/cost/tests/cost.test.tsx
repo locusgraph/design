@@ -1,6 +1,7 @@
 import { renderToStaticMarkup } from "react-dom/server";
 import { describe, expect, it } from "vitest";
 import { Context, Cost, CostSteps, ModelPicker } from "../index";
+import { wholePercentsOf } from "../shared/usage-totals";
 
 describe("Context", () => {
   it("is a meter with its percent", () => {
@@ -125,5 +126,17 @@ describe("ModelPicker", () => {
     expect(html).toContain('aria-label="Model: Claude Sonnet"');
     expect(html).toContain("Anthropic");
     expect(html).not.toContain("Claude Haiku");
+  });
+});
+
+describe("wholePercentsOf", () => {
+  it("rounds shares of a whole so they add up to 100", () => {
+    const shares = wholePercentsOf([3_100, 37_048, 52_204, 76_048, 31_600], 200_000);
+    expect(shares).toEqual([2, 18, 26, 38, 16]);
+  });
+
+  it("rounds each share when the parts do not fill the whole", () => {
+    expect(wholePercentsOf([150, 100], 200)).toEqual([75, 50]);
+    expect(wholePercentsOf([10], 0)).toEqual([0]);
   });
 });

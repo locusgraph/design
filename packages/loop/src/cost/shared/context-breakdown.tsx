@@ -1,6 +1,7 @@
 import { cn } from "@locusgraph/components";
-import { formatCount, quotaPercent } from "@locusgraph/utils";
+import { formatCount } from "@locusgraph/utils";
 import { MeterBar, type MeterStatus } from "./meter-marks";
+import { wholePercentsOf } from "./usage-totals";
 
 export type ContextSegment = { label: string; tokens: number };
 
@@ -24,12 +25,12 @@ type ContextBreakdownProps = {
 function SegmentRow({
   label,
   tokens,
-  limitTokens,
+  percent,
   muted = false,
 }: {
   label: string;
   tokens: number;
-  limitTokens: number;
+  percent: number;
   muted?: boolean;
 }) {
   return (
@@ -41,9 +42,7 @@ function SegmentRow({
     >
       <span className="truncate">{label}</span>
       <span className="font-mono">{formatCount(tokens)}</span>
-      <span className="text-right font-mono text-muted-foreground">
-        {quotaPercent({ used: tokens, included: limitTokens })}%
-      </span>
+      <span className="text-right font-mono text-muted-foreground">{percent}%</span>
     </li>
   );
 }
@@ -57,6 +56,10 @@ export function ContextBreakdown({
   breakdown,
 }: ContextBreakdownProps) {
   const freeTokens = Math.max(limitTokens - usedTokens, 0);
+  const shares = wholePercentsOf(
+    [...breakdown.map((segment) => segment.tokens), freeTokens],
+    limitTokens
+  );
   return (
     <div data-slot="context-breakdown" className="flex flex-col">
       <div className="eyebrow flex items-center gap-2 px-4 pt-3">
@@ -76,15 +79,15 @@ export function ContextBreakdown({
         <MeterBar percent={percent} status={status} />
       </div>
       <ul className="flex flex-col pb-2">
-        {breakdown.map((segment) => (
+        {breakdown.map((segment, index) => (
           <SegmentRow
             key={segment.label}
             label={segment.label}
             tokens={segment.tokens}
-            limitTokens={limitTokens}
+            percent={shares[index] ?? 0}
           />
         ))}
-        <SegmentRow label="Free" tokens={freeTokens} limitTokens={limitTokens} muted />
+        <SegmentRow label="Free" tokens={freeTokens} percent={shares.at(-1) ?? 0} muted />
       </ul>
     </div>
   );
