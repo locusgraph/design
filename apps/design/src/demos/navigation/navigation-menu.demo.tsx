@@ -130,7 +130,7 @@ export default defineDemo({
       component: Basic,
     },
     WithIcons: {
-      description: "viewport={false} anchors the panel under its own trigger.",
+      description: "With the viewport off, each panel opens right under its own trigger.",
       component: WithIcons,
     },
   },
