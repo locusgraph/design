@@ -38,7 +38,9 @@ function Toaster({ theme = "system", toastOptions, ...props }: ToasterProps) {
         info: <InfoIcon weight="bold" aria-hidden className="size-4" />,
         warning: <TriangleAlertIcon weight="bold" aria-hidden className="size-4" />,
         error: <OctagonXIcon weight="bold" aria-hidden className="size-4" />,
-        loading: <Loader2Icon weight="bold" aria-hidden className="size-4 animate-spin" />,
+        loading: (
+          <Loader2Icon weight="bold" aria-hidden className="size-4 motion-safe:animate-spin" />
+        ),
       }}
       style={toasterColors}
       {...props}
