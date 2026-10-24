@@ -57,10 +57,10 @@ export function StepCostRow({
       aria-label={`${step.title}: ${formatMicroUsd(cost)}, ${share}% of run${mark ? `, ${mark.text.toLowerCase()}` : ""}`}
       className="grid grid-cols-[minmax(0,11rem)_1fr_3.5rem_4.5rem] items-center gap-x-4 gap-y-1.5 py-1 text-sm tabular-nums max-sm:grid-cols-[1fr_auto_auto]"
     >
-      <span className="flex min-w-0 items-baseline gap-2">
+      <span className="flex min-w-0 items-baseline gap-x-2 max-sm:flex-wrap">
         <span
           className={cn(
-            "truncate text-foreground normal-nums",
+            "text-foreground normal-nums sm:truncate",
             step.status === "skipped" && "text-faint"
           )}
         >
