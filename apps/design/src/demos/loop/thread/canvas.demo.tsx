@@ -37,6 +37,36 @@ function Report({ versionId }: { versionId: string }) {
   );
 }
 
+const canvasCode = {
+  document: `<Canvas
+  title="September spend report"
+  kind="Document"
+  versions={versions}
+  versionId={versionId}
+  onVersionChange={setVersionId}
+  actions={<DownloadButton />}
+  onClose={closePanel}
+>
+  {content}
+</Canvas>`,
+  code: `<Canvas
+  title="budgets.ts"
+  kind="Code"
+  versions={versions}
+  versionId={versionId}
+  onVersionChange={setVersionId}
+  actions={
+    <>
+      <CopyCodeButton code={source} size="icon-sm" />
+      <DownloadButton />
+    </>
+  }
+  onClose={closePanel}
+>
+  <Code language="ts" code={source} />
+</Canvas>`,
+} satisfies Record<(typeof kinds)[number], string>;
+
 function Playground({ kind }: { kind: (typeof kinds)[number] }) {
   const [versionId, setVersionId] = useState("ver_3");
   const [open, setOpen] = useState(true);
@@ -91,8 +121,7 @@ export default defineDemo({
     "A panel for a document or code the agent generated. The title leads; a faint line under it holds the kind and the version switcher, with Back to latest on older versions. A light tint, not a rule, sets it apart from the chat.",
   controls: { kind: select(kinds) },
   playground: ({ kind }) => <Playground kind={kind} />,
-  code: () =>
-    `<Canvas\n  title="September spend report"\n  kind="Document"\n  versions={versions}\n  versionId={versionId}\n  onVersionChange={setVersionId}\n  actions={<DownloadButton />}\n  onClose={closePanel}\n>\n  {content}\n</Canvas>`,
+  code: ({ kind }) => canvasCode[kind],
   props: [
     { name: "title", type: "string" },
     { name: "kind", type: "string" },
