@@ -37,6 +37,7 @@ export default defineDemo({
   playground: ({ type, placeholder, disabled, invalid }) => (
     <Input
       className="w-72"
+      aria-label="Email"
       type={type}
       placeholder={placeholder}
       disabled={disabled}
@@ -44,7 +45,7 @@ export default defineDemo({
     />
   ),
   code: ({ type, placeholder, disabled, invalid }) =>
-    `<Input${formatProp("type", type, "text")} placeholder="${placeholder}"${formatProp("disabled", disabled, false)}${invalid ? " aria-invalid" : ""} />`,
+    `<Input${formatProp("type", type, "text")} aria-label="Email" placeholder="${placeholder}"${formatProp("disabled", disabled, false)}${invalid ? " aria-invalid" : ""} />`,
   props: [
     { name: "type", type: "HTML input type", defaultValue: "text" },
     { name: "aria-invalid", type: "boolean", defaultValue: "false" },
