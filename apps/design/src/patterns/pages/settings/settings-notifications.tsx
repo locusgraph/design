@@ -46,10 +46,16 @@ export function SettingsNotifications({ notifications, onSave }: SettingsNotific
           <li key={notification.id} className="flex items-start justify-between gap-4 py-3">
             <div className="flex min-w-0 flex-col gap-0.5">
               <Label htmlFor={`${fieldId}-${notification.id}`}>{notification.label}</Label>
-              <p className="text-sm text-muted-foreground">{notification.description}</p>
+              <p
+                id={`${fieldId}-${notification.id}-description`}
+                className="text-sm text-muted-foreground"
+              >
+                {notification.description}
+              </p>
             </div>
             <Switch
               id={`${fieldId}-${notification.id}`}
+              aria-describedby={`${fieldId}-${notification.id}-description`}
               checked={notification.enabled}
               onCheckedChange={(enabled) => toggle(notification.id, enabled)}
             />

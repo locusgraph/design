@@ -65,10 +65,11 @@ export function SettingsGeneral({ workspace, timezones, onSave }: SettingsGenera
           <FieldLabel htmlFor={`${fieldId}-slug`}>URL</FieldLabel>
           <InputGroup>
             <InputGroupAddon>
-              <InputGroupText>{workspaceUrlPrefix}</InputGroupText>
+              <InputGroupText id={`${fieldId}-slug-prefix`}>{workspaceUrlPrefix}</InputGroupText>
             </InputGroupAddon>
             <InputGroupInput
               id={`${fieldId}-slug`}
+              aria-describedby={`${fieldId}-slug-prefix`}
               value={draft.slug}
               onChange={(event) => update("slug", event.target.value)}
             />
