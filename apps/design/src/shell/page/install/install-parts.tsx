@@ -1,17 +1,24 @@
 import { cn } from "@locusgraph/components";
 import type { ReactNode } from "react";
+import { selectRadioWithArrowKeys } from "../../radio-arrow-keys";
 import { packageManagers, selectPackageManager, usePackageManager } from "./package-manager";
 
 export function PackageManagerSwitch() {
   const active = usePackageManager();
   return (
-    <div role="radiogroup" aria-label="Package manager" className="flex items-center gap-1">
+    <div
+      role="radiogroup"
+      aria-label="Package manager"
+      onKeyDown={selectRadioWithArrowKeys(packageManagers, active, selectPackageManager)}
+      className="flex items-center gap-1"
+    >
       {packageManagers.map((packageManager) => (
         <button
           key={packageManager}
           type="button"
           role="radio"
           aria-checked={packageManager === active}
+          tabIndex={packageManager === active ? 0 : -1}
           onClick={() => selectPackageManager(packageManager)}
           className={cn(
             "px-2 py-0.5 font-mono text-xs focus-ring",
