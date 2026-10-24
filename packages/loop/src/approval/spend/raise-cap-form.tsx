@@ -54,7 +54,7 @@ export function RaiseCapForm({
             <Input
               id={inputId}
               inputMode="decimal"
-              className="border-transparent bg-muted pl-6 tabular-nums shadow-none dark:bg-muted"
+              className="h-control-sm border-transparent bg-muted pl-6 tabular-nums shadow-none dark:bg-muted"
               value={dollars}
               disabled={disabled}
               aria-invalid={visibleError ? true : undefined}
