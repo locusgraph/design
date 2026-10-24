@@ -115,14 +115,18 @@ export default defineDemo({
         <ItemDescription>Created Mar 3 · last used 2 hours ago</ItemDescription>
       </ItemContent>
       <ItemActions>
-        <Button variant="outline" size="sm">
+        <Button
+          variant="ghost"
+          size="sm"
+          className="text-muted-foreground hover:bg-destructive/10 hover:text-destructive"
+        >
           Revoke
         </Button>
       </ItemActions>
     </Item>
   ),
   code: ({ variant, size, title }) =>
-    `<Item${formatProp("variant", variant, "default")}${formatProp("size", size, "default")}>\n  <ItemMedia variant="icon">\n    <KeyRoundIcon weight="bold" aria-hidden />\n  </ItemMedia>\n  <ItemContent>\n    <ItemTitle>${title}</ItemTitle>\n    <ItemDescription>Created Mar 3 · last used 2 hours ago</ItemDescription>\n  </ItemContent>\n  <ItemActions>\n    <Button variant="outline" size="sm">Revoke</Button>\n  </ItemActions>\n</Item>`,
+    `<Item${formatProp("variant", variant, "default")}${formatProp("size", size, "default")}>\n  <ItemMedia variant="icon">\n    <KeyRoundIcon weight="bold" aria-hidden />\n  </ItemMedia>\n  <ItemContent>\n    <ItemTitle>${title}</ItemTitle>\n    <ItemDescription>Created Mar 3 · last used 2 hours ago</ItemDescription>\n  </ItemContent>\n  <ItemActions>\n    <Button\n      variant="ghost"\n      size="sm"\n      className="text-muted-foreground hover:bg-destructive/10 hover:text-destructive"\n    >\n      Revoke\n    </Button>\n  </ItemActions>\n</Item>`,
   props: [
     { name: "variant", type: variants.join(" | "), defaultValue: "default" },
     { name: "size", type: sizes.join(" | "), defaultValue: "default" },
