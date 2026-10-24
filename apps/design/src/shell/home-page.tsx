@@ -38,8 +38,8 @@ export function HomePage({ library }: { library: Library }) {
       <header className="flex flex-col gap-2">
         <h1 className="text-3xl font-semibold tracking-tight">{library.title}</h1>
         <p className="text-balance text-muted-foreground">
-          {countLabel(count, library.noun)} in {library.packageName}, each with a live playground,
-          usage and props.
+          {countLabel(count, library.noun)} {library.packageRelation} {library.packageName}, each
+          with a live playground, usage and API.
         </p>
       </header>
       {groups.length === 1 ? (

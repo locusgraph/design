@@ -8,6 +8,7 @@ export type Library = {
   title: string;
   href: string;
   packageName: string;
+  packageRelation: "in" | "built from";
   noun: string;
 };
 
@@ -17,6 +18,7 @@ export const libraries: Library[] = [
     title: "Components",
     href: "/components",
     packageName: "@locusgraph/components",
+    packageRelation: "in",
     noun: "components",
   },
   {
@@ -24,6 +26,7 @@ export const libraries: Library[] = [
     title: "Blocks",
     href: "/blocks",
     packageName: "@locusgraph/blocks",
+    packageRelation: "in",
     noun: "blocks",
   },
   {
@@ -31,6 +34,7 @@ export const libraries: Library[] = [
     title: "Loop",
     href: "/loop",
     packageName: "@locusgraph/loop",
+    packageRelation: "in",
     noun: "agent components",
   },
   {
@@ -38,6 +42,7 @@ export const libraries: Library[] = [
     title: "Patterns",
     href: "/patterns",
     packageName: "@locusgraph/components",
+    packageRelation: "built from",
     noun: "patterns",
   },
   {
@@ -45,6 +50,7 @@ export const libraries: Library[] = [
     title: "Brand",
     href: "/brand",
     packageName: "@locusgraph/brand",
+    packageRelation: "in",
     noun: "brand assets",
   },
 ];
