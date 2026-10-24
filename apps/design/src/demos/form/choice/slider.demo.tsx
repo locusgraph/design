@@ -88,12 +88,12 @@ export default defineDemo({
         step={Number(step)}
         orientation={orientation}
         disabled={disabled}
-        aria-label="Spend cap"
+        aria-label={range ? "Usage window" : "Spend cap"}
       />
     </div>
   ),
   code: ({ step, orientation, range, disabled }) =>
-    `<Slider defaultValue={${range ? "[25, 75]" : "[50]"}} max={100}${step === "1" ? "" : ` step={${step}}`}${formatProp("orientation", orientation, "horizontal")}${formatProp("disabled", disabled, false)} />`,
+    `<Slider defaultValue={${range ? "[25, 75]" : "[50]"}} max={100}${step === "1" ? "" : ` step={${step}}`}${formatProp("orientation", orientation, "horizontal")}${formatProp("disabled", disabled, false)} aria-label="${range ? "Usage window" : "Spend cap"}" />`,
   props: [
     { name: "value / onValueChange", type: "controlled number[]" },
     { name: "defaultValue", type: "number[]" },
