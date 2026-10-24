@@ -103,7 +103,7 @@ export default defineDemo({
   },
   playground: ({ size, position, placeholder, disabled }) => (
     <Select disabled={disabled}>
-      <SelectTrigger size={size} className="w-48">
+      <SelectTrigger size={size} className="w-48" aria-label="Role">
         <SelectValue placeholder={placeholder} />
       </SelectTrigger>
       <SelectContent position={position}>
@@ -116,7 +116,7 @@ export default defineDemo({
     </Select>
   ),
   code: ({ size, position, placeholder, disabled }) =>
-    `<Select${formatProp("disabled", disabled, false)}>\n  <SelectTrigger${formatProp("size", size, "default")} className="w-48">\n    <SelectValue placeholder="${placeholder}" />\n  </SelectTrigger>\n  <SelectContent${formatProp("position", position, "item-aligned")}>\n    <SelectItem value="owner">Owner</SelectItem>\n    <SelectItem value="admin">Admin</SelectItem>\n    <SelectItem value="member">Member</SelectItem>\n  </SelectContent>\n</Select>`,
+    `<Select${formatProp("disabled", disabled, false)}>\n  <SelectTrigger${formatProp("size", size, "default")} className="w-48" aria-label="Role">\n    <SelectValue placeholder="${placeholder}" />\n  </SelectTrigger>\n  <SelectContent${formatProp("position", position, "item-aligned")}>\n    <SelectItem value="owner">Owner</SelectItem>\n    <SelectItem value="admin">Admin</SelectItem>\n    <SelectItem value="member">Member</SelectItem>\n    <SelectItem value="billing">Billing</SelectItem>\n  </SelectContent>\n</Select>`,
   props: [
     { name: "value / onValueChange", type: "controlled selected value" },
     { name: "defaultValue", type: "string" },
