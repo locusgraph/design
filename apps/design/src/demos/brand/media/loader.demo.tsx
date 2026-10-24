@@ -66,7 +66,7 @@ function PageLoading() {
 export default defineDemo({
   title: "Loader",
   description:
-    'The LocusGraph burst loader: the mark\'s rays light up in a sweep. It sizes with font size, is a status region, and holds still under reduced motion. `<Pulse variant="locus">` from @locusgraph/loop.',
+    'The LocusGraph burst loader: the mark\'s rays light up in a sweep. It sizes with font size, is a status region, and holds still under reduced motion. `<Pulse variant="locus">` from `@locusgraph/loop`.',
   controls: {
     size: select(pulseSizes, "40"),
     showLabel: toggle(false),

@@ -33,7 +33,8 @@ function ReadOnlyEmpty() {
 
 export default defineDemo({
   title: "Keys",
-  description: "Keys, the API key table, and KeysEmpty, its empty state. From @locusgraph/blocks.",
+  description:
+    "Keys, the API key table, and KeysEmpty, its empty state. From `@locusgraph/blocks`.",
   controls: { empty: toggle(false) },
   playground: ({ empty }) => (
     <div className="w-full max-w-3xl">

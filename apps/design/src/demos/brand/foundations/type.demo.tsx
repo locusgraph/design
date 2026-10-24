@@ -48,7 +48,7 @@ function Eyebrow() {
 export default defineDemo({
   title: "Type",
   description:
-    "Three families: Archivo for headings and the wordmark, Inter for everything you read, Fira Code for code and ids. One short size scale, three weights, and the eyebrow label. From @locusgraph/tokens.",
+    "Three families: Archivo for headings and the wordmark, Inter for everything you read, Fira Code for code and ids. One short size scale, three weights, and the eyebrow label. From `@locusgraph/tokens`.",
   controls: { sample: text(defaultSample) },
   playground: ({ sample }) => (
     <div className="w-full max-w-3xl divide-y ring-1 ring-border">

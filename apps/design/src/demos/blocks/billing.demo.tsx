@@ -43,7 +43,7 @@ function ChoosePlan() {
 export default defineDemo({
   title: "Billing",
   description:
-    "Wallet, TopUp and Plans. Wallet and TopUp are Rule Grid cells, so they share a row. From @locusgraph/blocks.",
+    "Wallet, TopUp and Plans. Wallet and TopUp are Rule Grid cells, so they share a row. From `@locusgraph/blocks`.",
   controls: { balance: select(balanceOptions, "low") },
   playground: ({ balance }) => (
     <RuleGrid columns={2} className="w-full max-w-3xl">
