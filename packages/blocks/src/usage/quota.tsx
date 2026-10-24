@@ -14,7 +14,7 @@ function QuotaStatusNote({ quota }: { quota: QuotaData }) {
   const status = quotaStatus(quota);
   if (status === "over") {
     return (
-      <span className="font-medium text-destructive">
+      <span className="font-medium whitespace-nowrap text-destructive">
         {formatCount(quota.used - quota.included)} over
       </span>
     );
@@ -34,7 +34,7 @@ export function Quota({ quota }: { quota: QuotaData }) {
         <span className={quota.label ? "text-muted-foreground" : "font-mono text-muted-foreground"}>
           {name}
         </span>
-        <span className="flex items-baseline gap-2 tabular-nums">
+        <span className="flex flex-wrap items-baseline gap-x-2 tabular-nums">
           <span className="font-medium text-foreground">
             {formatCount(quota.used)} of {formatCount(quota.included)} {periodLabel(quota.period)}
           </span>
