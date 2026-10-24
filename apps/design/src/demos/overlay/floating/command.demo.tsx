@@ -108,7 +108,7 @@ export default defineDemo({
     <CommandMenu placeholder={placeholder} shortcuts={shortcuts} />
   ),
   code: ({ placeholder, shortcuts }) =>
-    `<Command className="border shadow-md">\n  <CommandInput placeholder="${placeholder}" />\n  <CommandList>\n    <CommandEmpty>No results found.</CommandEmpty>\n    <CommandGroup heading="Billing">\n      <CommandItem>\n        <CreditCardIcon />\n        Change plan${shortcuts ? "\n        <CommandShortcut>⌘P</CommandShortcut>" : ""}\n      </CommandItem>\n    </CommandGroup>\n    <CommandSeparator />\n    <CommandGroup heading="Organization">\n      <CommandItem>\n        <UsersIcon />\n        Invite member\n      </CommandItem>\n    </CommandGroup>\n  </CommandList>\n</Command>`,
+    `<Command className="border shadow-md">\n  <CommandInput placeholder="${placeholder}" />\n  <CommandList>\n    <CommandEmpty>No results found.</CommandEmpty>\n    <CommandGroup heading="Billing">\n      <CommandItem>\n        <CreditCardIcon weight="bold" aria-hidden />\n        Change plan${shortcuts ? "\n        <CommandShortcut>⌘P</CommandShortcut>" : ""}\n      </CommandItem>\n    </CommandGroup>\n    <CommandSeparator />\n    <CommandGroup heading="Organization">\n      <CommandItem>\n        <UsersIcon weight="bold" aria-hidden />\n        Invite member\n      </CommandItem>\n    </CommandGroup>\n  </CommandList>\n</Command>`,
   props: [
     { name: "value", type: "string" },
     { name: "onValueChange", type: "(value: string) => void" },

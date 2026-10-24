@@ -151,7 +151,7 @@ export default defineDemo({
     </Attachment>
   ),
   code: ({ state, size, orientation }) =>
-    `<Attachment${formatProp("state", state, "done")}${formatProp("size", size, "default")}${formatProp("orientation", orientation, "horizontal")}>\n  <AttachmentMedia>\n    <FileTextIcon />\n  </AttachmentMedia>\n  <AttachmentContent>\n    <AttachmentTitle>invoice-0042.pdf</AttachmentTitle>\n    <AttachmentDescription>${descriptions[state]}</AttachmentDescription>\n  </AttachmentContent>\n  <AttachmentActions>\n    <AttachmentAction aria-label="Remove invoice-0042.pdf">\n      <XIcon />\n    </AttachmentAction>\n  </AttachmentActions>\n</Attachment>`,
+    `<Attachment${formatProp("state", state, "done")}${formatProp("size", size, "default")}${formatProp("orientation", orientation, "horizontal")}>\n  <AttachmentMedia>\n    <FileTextIcon weight="bold" aria-hidden />\n  </AttachmentMedia>\n  <AttachmentContent>\n    <AttachmentTitle>invoice-0042.pdf</AttachmentTitle>\n    <AttachmentDescription>${descriptions[state]}</AttachmentDescription>\n  </AttachmentContent>\n  <AttachmentActions>\n    <AttachmentAction aria-label="Remove invoice-0042.pdf">\n      <XIcon weight="bold" aria-hidden />\n    </AttachmentAction>\n  </AttachmentActions>\n</Attachment>`,
   props: [
     { name: "state", type: states.join(" | "), defaultValue: "done" },
     { name: "size", type: sizes.join(" | "), defaultValue: "default" },

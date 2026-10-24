@@ -122,7 +122,7 @@ export default defineDemo({
     </Item>
   ),
   code: ({ variant, size, title }) =>
-    `<Item${formatProp("variant", variant, "default")}${formatProp("size", size, "default")}>\n  <ItemMedia variant="icon">\n    <KeyRoundIcon />\n  </ItemMedia>\n  <ItemContent>\n    <ItemTitle>${title}</ItemTitle>\n    <ItemDescription>Created Mar 3 · last used 2 hours ago</ItemDescription>\n  </ItemContent>\n  <ItemActions>\n    <Button variant="outline" size="sm">Revoke</Button>\n  </ItemActions>\n</Item>`,
+    `<Item${formatProp("variant", variant, "default")}${formatProp("size", size, "default")}>\n  <ItemMedia variant="icon">\n    <KeyRoundIcon weight="bold" aria-hidden />\n  </ItemMedia>\n  <ItemContent>\n    <ItemTitle>${title}</ItemTitle>\n    <ItemDescription>Created Mar 3 · last used 2 hours ago</ItemDescription>\n  </ItemContent>\n  <ItemActions>\n    <Button variant="outline" size="sm">Revoke</Button>\n  </ItemActions>\n</Item>`,
   props: [
     { name: "variant", type: variants.join(" | "), defaultValue: "default" },
     { name: "size", type: sizes.join(" | "), defaultValue: "default" },

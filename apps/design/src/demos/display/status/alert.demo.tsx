@@ -77,7 +77,7 @@ export default defineDemo({
     </Alert>
   ),
   code: ({ variant, icon, title }) =>
-    `<Alert${formatProp("variant", variant, "default")}>${icon ? "\n  <AlertCircleIcon />" : ""}\n  <AlertTitle>${title}</AlertTitle>\n  <AlertDescription>We could not charge the card ending in 4242.</AlertDescription>\n</Alert>`,
+    `<Alert${formatProp("variant", variant, "default")}>${icon ? '\n  <AlertCircleIcon weight="bold" aria-hidden />' : ""}\n  <AlertTitle>${title}</AlertTitle>\n  <AlertDescription>We could not charge the card ending in 4242.</AlertDescription>\n</Alert>`,
   props: [
     { name: "variant", type: "default | success | warning | destructive", defaultValue: "default" },
     { name: "...props", type: 'ComponentProps<"div">' },

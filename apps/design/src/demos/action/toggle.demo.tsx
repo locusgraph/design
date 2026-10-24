@@ -79,7 +79,7 @@ export default defineDemo({
     </Toggle>
   ),
   code: ({ variant, size, disabled, label }) =>
-    `<Toggle${formatProp("variant", variant, "default")}${formatProp("size", size, "default")}${formatProp("disabled", disabled, false)} aria-label="${label}">\n  <BellIcon />\n  ${label}\n</Toggle>`,
+    `<Toggle${formatProp("variant", variant, "default")}${formatProp("size", size, "default")}${formatProp("disabled", disabled, false)} aria-label="${label}">\n  <BellIcon weight="bold" aria-hidden />\n  ${label}\n</Toggle>`,
   props: [
     { name: "variant", type: variants.join(" | "), defaultValue: "default" },
     { name: "size", type: sizes.join(" | "), defaultValue: "default" },

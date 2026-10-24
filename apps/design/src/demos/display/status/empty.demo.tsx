@@ -89,7 +89,7 @@ export default defineDemo({
     </Empty>
   ),
   code: ({ title, action }) =>
-    `<Empty className="border">\n  <EmptyHeader>\n    <EmptyMedia variant="icon">\n      <KeyRoundIcon />\n    </EmptyMedia>\n    <EmptyTitle>${title}</EmptyTitle>\n    <EmptyDescription>Create a key to call the API from your app.</EmptyDescription>\n  </EmptyHeader>${action ? "\n  <EmptyContent>\n    <Button>\n      <PlusIcon />\n      New key\n    </Button>\n  </EmptyContent>" : ""}\n</Empty>`,
+    `<Empty className="border">\n  <EmptyHeader>\n    <EmptyMedia variant="icon">\n      <KeyRoundIcon weight="bold" aria-hidden />\n    </EmptyMedia>\n    <EmptyTitle>${title}</EmptyTitle>\n    <EmptyDescription>Create a key to call the API from your app.</EmptyDescription>\n  </EmptyHeader>${action ? '\n  <EmptyContent>\n    <Button>\n      <PlusIcon weight="bold" aria-hidden />\n      New key\n    </Button>\n  </EmptyContent>' : ""}\n</Empty>`,
   props: [
     { name: "className", type: "string" },
     { name: "EmptyMedia.variant", type: "default | icon", defaultValue: "default" },

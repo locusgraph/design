@@ -98,7 +98,7 @@ export default defineDemo({
     </Marker>
   ),
   code: ({ variant, icon, label }) =>
-    `<Marker${formatProp("variant", variant, "default")}>${icon ? "\n  <MarkerIcon>\n    <UserPlusIcon />\n  </MarkerIcon>" : ""}\n  <MarkerContent>${label}</MarkerContent>\n</Marker>`,
+    `<Marker${formatProp("variant", variant, "default")}>${icon ? '\n  <MarkerIcon>\n    <UserPlusIcon weight="bold" aria-hidden />\n  </MarkerIcon>' : ""}\n  <MarkerContent>${label}</MarkerContent>\n</Marker>`,
   props: [
     { name: "variant", type: variants.join(" | "), defaultValue: "default" },
     { name: "asChild", type: "boolean", defaultValue: "false" },
