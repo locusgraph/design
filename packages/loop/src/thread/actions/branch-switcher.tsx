@@ -31,7 +31,8 @@ export function BranchSwitcher({ branch, onBranchChange }: BranchSwitcherProps) 
         aria-live="polite"
         className="min-w-8 text-center text-xs text-muted-foreground tabular-nums"
       >
-        {`${position} / ${branch.count}`}
+        <span aria-hidden>{`${position} / ${branch.count}`}</span>
+        <span className="sr-only">{`Version ${position} of ${branch.count}`}</span>
       </span>
       <ActionButton
         label="Next version"

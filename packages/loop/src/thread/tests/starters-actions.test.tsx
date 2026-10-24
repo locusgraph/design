@@ -48,6 +48,7 @@ describe("Actions", () => {
       />
     );
     expect(html).toContain("2 / 3");
+    expect(html).toContain("Version 2 of 3");
     expect(html).toContain('aria-label="Retry"');
     expect(html).toMatch(
       /aria-label="Good response"[^>]*aria-pressed="true"|aria-pressed="true"[^>]*aria-label="Good response"/
