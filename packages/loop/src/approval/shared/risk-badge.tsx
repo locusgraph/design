@@ -3,7 +3,7 @@ import type { ReactNode } from "react";
 import type { RiskLevel } from "../../types";
 
 export const riskLabels: Record<RiskLevel, string> = {
-  read: "Read only",
+  read: "Read-only",
   write: "Writes data",
   destructive: "Destructive",
 };
