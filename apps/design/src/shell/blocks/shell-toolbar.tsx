@@ -68,8 +68,13 @@ export function ShellToolbar(props: ShellToolbarProps) {
         </TabsList>
       </Tabs>
       <Separator orientation="vertical" className="mx-1 h-4" />
-      <p className="text-sm font-medium">{props.title}</p>
-      <p className="hidden text-sm text-muted-foreground xl:block">{props.description}</p>
+      <p className="shrink-0 text-sm font-medium">{props.title}</p>
+      <p
+        title={props.description}
+        className="hidden min-w-0 flex-1 basis-0 truncate text-sm text-muted-foreground xl:block"
+      >
+        {props.description}
+      </p>
       <div className="ml-auto flex h-control-sm items-center gap-1 border p-0.5">
         <ToggleGroup
           type="single"
