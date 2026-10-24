@@ -7,8 +7,8 @@ function Scale() {
   return (
     <div className="w-[36rem] max-w-full divide-y ring-1 ring-border">
       {typeScale.map((step) => (
-        <div key={step.name} className="grid grid-cols-[5rem_1fr] items-baseline gap-4 px-4 py-3">
-          <span className="font-mono text-xs text-muted-foreground">
+        <div key={step.name} className="grid grid-cols-[7rem_1fr] items-baseline gap-4 px-4 py-3">
+          <span className="font-mono text-xs whitespace-nowrap text-muted-foreground">
             {step.name} · {step.size}
           </span>
           <span className={step.className}>{step.use}</span>
