@@ -57,8 +57,15 @@ function ArabicLabels() {
   return (
     <DirectionProvider dir="rtl">
       <div dir="rtl" className="flex flex-col gap-2">
-        <span className="text-sm font-medium">الفوترة</span>
-        <ToggleGroup type="single" variant="outline" defaultValue="month">
+        <span id="rtl-billing-label" className="text-sm font-medium">
+          الفوترة
+        </span>
+        <ToggleGroup
+          type="single"
+          variant="outline"
+          defaultValue="month"
+          aria-labelledby="rtl-billing-label"
+        >
           <ToggleGroupItem value="month">شهري</ToggleGroupItem>
           <ToggleGroupItem value="year">سنوي</ToggleGroupItem>
         </ToggleGroup>
