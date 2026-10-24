@@ -88,7 +88,7 @@ export default defineDemo({
     <Pagination>
       <PaginationContent>
         <PaginationItem>
-          <PaginationPrevious href="#previous" />
+          <PaginationPrevious href={active === pages[0] ? undefined : "#previous"} />
         </PaginationItem>
         {pages.map((page) => (
           <PaginationItem key={page}>
@@ -118,10 +118,17 @@ export default defineDemo({
     const ellipsisItem = ellipsis
       ? "\n    <PaginationItem>\n      <PaginationEllipsis />\n    </PaginationItem>"
       : "";
-    return `<Pagination>\n  <PaginationContent>\n    <PaginationItem>\n      <PaginationPrevious href="#previous" />\n    </PaginationItem>\n${links}${ellipsisItem}\n    <PaginationItem>\n      <PaginationNext href="#next" />\n    </PaginationItem>\n  </PaginationContent>\n</Pagination>`;
+    const previous =
+      active === pages[0] ? "<PaginationPrevious />" : '<PaginationPrevious href="#previous" />';
+    return `<Pagination>\n  <PaginationContent>\n    <PaginationItem>\n      ${previous}\n    </PaginationItem>\n${links}${ellipsisItem}\n    <PaginationItem>\n      <PaginationNext href="#next" />\n    </PaginationItem>\n  </PaginationContent>\n</Pagination>`;
   },
   props: [
     { name: "PaginationLink.isActive", type: "boolean", defaultValue: "false" },
+    {
+      name: "PaginationLink.href",
+      type: "string",
+      defaultValue: "unavailable when left out",
+    },
     { name: "PaginationLink.size", type: "Button size", defaultValue: "icon" },
     { name: "PaginationLink.href", type: "string" },
     { name: "...props", type: 'ComponentProps<"nav">' },
