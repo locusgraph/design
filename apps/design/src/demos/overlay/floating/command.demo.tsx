@@ -67,7 +67,7 @@ function CommandPalette() {
         Search
       </Button>
       <CommandDialog open={open} onOpenChange={setOpen} title="Search">
-        <CommandInput placeholder="Search invoices, members, keys..." />
+        <CommandInput placeholder="Search invoices, members, keys…" />
         <CommandList>
           <CommandEmpty>No results found.</CommandEmpty>
           <CommandGroup heading="Invoices">
@@ -87,7 +87,7 @@ function CommandPalette() {
 function EmptyResults() {
   return (
     <Command className="w-80 border">
-      <CommandInput placeholder="Search members..." value="zz" readOnly />
+      <CommandInput placeholder="Search members…" value="zz" readOnly />
       <CommandList>
         <CommandEmpty>No members match.</CommandEmpty>
         <CommandGroup heading="Members">
@@ -103,7 +103,7 @@ export default defineDemo({
   title: "Command",
   description:
     "A searchable list of commands with keyboard navigation. Render it inline, or in a dialog as a command palette.",
-  controls: { placeholder: text("Type a command or search..."), shortcuts: toggle(true) },
+  controls: { placeholder: text("Type a command or search…"), shortcuts: toggle(true) },
   playground: ({ placeholder, shortcuts }) => (
     <CommandMenu placeholder={placeholder} shortcuts={shortcuts} />
   ),
@@ -114,7 +114,7 @@ export default defineDemo({
     { name: "onValueChange", type: "(value: string) => void" },
     { name: "shouldFilter", type: "boolean", defaultValue: "true" },
     { name: "CommandItem.onSelect", type: "(value: string) => void" },
-    { name: "CommandDialog.title", type: "string", defaultValue: "Command Palette" },
+    { name: "CommandDialog.title", type: "string", defaultValue: "Command palette" },
     { name: "CommandDialog.showCloseButton", type: "boolean", defaultValue: "false" },
   ],
   examples: {
