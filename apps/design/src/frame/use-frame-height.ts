@@ -7,6 +7,8 @@ const popupSelector = [
   "[data-slot=hover-card-content]",
   "[data-slot=tooltip-content]",
   "[data-slot=combobox-content]",
+  "[data-slot=navigation-menu-viewport]",
+  "[data-slot=navigation-menu-content]",
 ].join(",");
 const popupMargin = 16;
 const viewportPinnedSelector = "[data-sonner-toaster]";
