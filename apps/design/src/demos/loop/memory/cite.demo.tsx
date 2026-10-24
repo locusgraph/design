@@ -34,11 +34,11 @@ export default defineDemo({
   playground: ({ withUrl }) => (
     <p className="max-w-prose text-sm">
       Recall ranks memories by relevance and recency
-      <Cite citation={withUrl ? recallDoc : teamNote} />.
+      {withUrl ? <Cite citation={recallDoc} /> : <Cite citation={teamNote} onOpen={() => {}} />}.
     </p>
   ),
   code: ({ withUrl }) =>
-    `<p>\n  Recall ranks memories by relevance and recency\n  <Cite citation={${withUrl ? "recallDoc" : "teamNote"}} />.\n</p>`,
+    `<p>\n  Recall ranks memories by relevance and recency\n  ${withUrl ? "<Cite citation={recallDoc} />" : "<Cite citation={teamNote} onOpen={openNote} />"}.\n</p>`,
   props: [
     { name: "citation", type: "Citation" },
     { name: "onOpen", type: "(citation: Citation) => void" },
