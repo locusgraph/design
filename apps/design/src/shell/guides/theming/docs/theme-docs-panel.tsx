@@ -1,6 +1,6 @@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@locusgraph/components";
 import type * as React from "react";
-import { CodeBlock } from "../../../preview/code-block";
+import { CodeBlock } from "../../../preview/code/code-block";
 import type { ResolvedTheme } from "../theme-presets";
 import { ContrastCheck } from "./contrast-check";
 import { PromptTab } from "./prompt-tab";
@@ -64,7 +64,7 @@ export function ThemeDocsPanel({
         <DocStep number={1} title="Set three variables">
           <StepNote>
             Put them in your global CSS, after the theme import. Hover, pressed and subtle shades
-            derive from --btn, so a brand color gets its states for free.
+            derive from --locus-btn, so a brand color gets its states for free.
           </StepNote>
           <CodeBlock
             code={css}
@@ -80,9 +80,9 @@ export function ThemeDocsPanel({
         </DocStep>
         <DocStep number={3} title="Use semantic classes">
           <StepNote>
-            Write bg-primary for the primary action and the focus-ring utility for focus, never a
-            raw color. Hover and selected states stay on the neutral muted fill (bg-muted). High
-            contrast applies when the html element has data-contrast="high".
+            Write bg-primary for the primary action and the locus-focus-ring utility for focus,
+            never a raw color. Hover and selected states stay on the neutral muted fill (bg-muted).
+            High contrast applies when the html element has data-contrast="high".
           </StepNote>
         </DocStep>
       </TabsContent>

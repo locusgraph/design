@@ -49,7 +49,7 @@ function ToolLabel({
   );
   if (showsStateWord(part.state)) return object;
   return (
-    <span className={cn(busy && "motion-safe:shimmer")}>
+    <span className={cn(busy && "motion-safe:locus-shimmer")}>
       {busy ? (activeVerb ?? "Running") : (verb ?? "Ran")} {object}
     </span>
   );

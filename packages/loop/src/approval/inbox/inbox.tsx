@@ -1,3 +1,5 @@
+"use client";
+
 import { Button, Checkbox, cn, Label } from "@locusgraph/components";
 import { pluralize } from "@locusgraph/utils";
 import { Tray as InboxIcon } from "@phosphor-icons/react/ssr";
@@ -5,9 +7,11 @@ import { useId, useState } from "react";
 import { lineIconClass } from "../../shared/line";
 import { LiveStatus } from "../../shared/live-status";
 import { PanelEmpty } from "../../shared/panel-empty";
+import { shouldVirtualize } from "../../shared/virtual/use-list-virtualizer";
 import type { PendingApproval } from "../types";
 import { InboxRow } from "./inbox-row";
 import { bulkApprovable, selectAllState, selectedIn, toggled } from "./inbox-selection";
+import { type InboxRowHandlers, VirtualInboxList } from "./virtual-inbox-list";
 
 export type InboxProps = {
   items: PendingApproval[];
@@ -16,6 +20,7 @@ export type InboxProps = {
   openId?: string | null;
   onOpen: (id: string) => void;
   onApproveAll: (ids: string[]) => void;
+  virtualize?: boolean;
   className?: string;
 };
 
@@ -28,6 +33,7 @@ export function Inbox({
   openId = null,
   onOpen,
   onApproveAll,
+  virtualize = true,
   className,
 }: InboxProps) {
   const selectAllId = useId();
@@ -37,6 +43,12 @@ export function Inbox({
   const allState = selectAllState(selectable.length, selectedIds.length);
   const hasDestructive = selectable.length < items.length;
   const empty = items.length === 0;
+  const rowHandlers: InboxRowHandlers = {
+    isSelected: (id) => selected.has(id),
+    onSelect: (id, on) => setSelected((current) => toggled(current, id, on)),
+    isOpen: (id) => id === openId,
+    onOpen,
+  };
   return (
     <section
       data-slot="inbox"
@@ -64,19 +76,23 @@ export function Inbox({
         />
       ) : (
         <>
-          <ul className="flex flex-col">
-            {items.map((item) => (
-              <InboxRow
-                key={item.id}
-                item={item}
-                now={now}
-                selected={selected.has(item.id)}
-                onSelect={(on) => setSelected((current) => toggled(current, item.id, on))}
-                open={item.id === openId}
-                onOpen={() => onOpen(item.id)}
-              />
-            ))}
-          </ul>
+          {shouldVirtualize(items.length, virtualize) ? (
+            <VirtualInboxList items={items} now={now} {...rowHandlers} />
+          ) : (
+            <ul className="flex flex-col">
+              {items.map((item) => (
+                <InboxRow
+                  key={item.id}
+                  item={item}
+                  now={now}
+                  selected={rowHandlers.isSelected(item.id)}
+                  onSelect={(on) => rowHandlers.onSelect(item.id, on)}
+                  open={rowHandlers.isOpen(item.id)}
+                  onOpen={() => onOpen(item.id)}
+                />
+              ))}
+            </ul>
+          )}
           {selectable.length === 0 ? (
             <p className="px-2 pt-2 text-xs text-faint">{oneAtATimeNote}</p>
           ) : (

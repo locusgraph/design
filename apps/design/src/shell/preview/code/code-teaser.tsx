@@ -15,7 +15,7 @@ export function CodeTeaser({ code }: { code: string }) {
   if (expanded || fitsInTeaser) {
     return (
       <div className="relative border-t bg-surface">
-        <CodeBlock code={code} />
+        <CodeBlock code={code} collapsible={false} />
         {expanded && (
           <Button
             variant="ghost"

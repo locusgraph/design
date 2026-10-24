@@ -1,6 +1,6 @@
 {
   "name": "@locusgraph/blocks",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "description": "Product sections built from @locusgraph/components: usage meters and alerts, wallet, credit packs, plan options and API keys.",
   "license": "MIT",
   "repository": {
@@ -33,7 +33,7 @@
     }
   },
   "scripts": {
-    "build": "rm -rf dist && tsc -p tsconfig.build.json && cp src/sources.css dist/sources.css && node ../../scripts/esm-extensions.mjs dist",
+    "build": "rm -rf dist && tsc -p tsconfig.build.json && cp src/sources.css dist/sources.css && node ../../scripts/react-compiler.mjs dist && node ../../scripts/esm-extensions.mjs dist",
     "prepack": "pnpm run build",
     "typecheck": "tsc -p tsconfig.json --noEmit",
     "test": "vitest run"

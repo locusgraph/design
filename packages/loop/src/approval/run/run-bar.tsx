@@ -1,3 +1,5 @@
+"use client";
+
 import { Button, cn } from "@locusgraph/components";
 import {
   Pause as PauseIcon,
@@ -27,7 +29,7 @@ const statusLabels: Record<RunBarStatus, string> = {
 };
 
 const statusTone: Record<RunBarStatus, string> = {
-  running: "text-muted-foreground motion-safe:shimmer",
+  running: "text-muted-foreground motion-safe:locus-shimmer",
   paused: "font-medium text-warn",
   stopped: "font-medium text-destructive",
   done: "font-medium text-good",

@@ -34,7 +34,7 @@ These rules apply to every source file. They are not suggestions.
 ## Layout
 
 - `packages/config`: `@locusgraph/config`, Biome, TypeScript, Vitest, Cucumber, PostCSS and shadcn settings. Replaces `@spendgraph/config`
-- `packages/tokens`: `@locusgraph/tokens`, `theme.css` (palette, Tailwind mapping, base, brand effects, motion), `typeset.css`, and the color and type values as TypeScript
+- `packages/tokens`: `@locusgraph/tokens`, `theme.css` (palette, Tailwind mapping, base, brand effects, motion), `typeset.css`, the optional `shadcn.css` aliases, and the color and type values as TypeScript
 - `packages/utils`: `@locusgraph/utils`, money in cents and micro-USD, counts, dates, quota and balance status. No dependencies
 - `packages/brand`: `@locusgraph/brand`, the LocusGraph and SpendGraph marks and wordmarks, `LocusGraphIcon`, `SocialCard` (inline styles, works in Next.js `ImageResponse`) and the Google and GitHub marks, as React and SVG
 - `packages/components`: `@locusgraph/components`, Radix based React components, Rule Grid, the App and Docs shells, and `theme.css` (tokens plus a Tailwind source for the components)
@@ -44,10 +44,14 @@ These rules apply to every source file. They are not suggestions.
 
 Dependencies flow one way: `config` ← every package; `tokens` ← `components`, `email`; `utils` ← `blocks`, `loop`, `email`; `brand` ← `loop`; `components` ← `blocks`, `loop`. Never import upward.
 
+Everything the theme defines is prefixed with `locus` so it never clashes with an app's own CSS: variables are `--locus-*` (`packages/tokens/src/variables/palette.css`, light on `:root`, dark on `.dark`), and our classes, utilities and keyframes are `locus-*` (`locus-eyebrow`, `locus-shimmer`, `.locus-brand-grid`). `theme.css` never defines the unprefixed shadcn names (`--background`, `--muted`, `--primary`); `shadcn.css` (`@locusgraph/tokens/shadcn.css`, re-exported as `@locusgraph/components/shadcn.css`) maps them to ours for apps that also use shadcn components, and components must work without it. The Tailwind keys in `variables/mapping.css` keep their names (`bg-surface`, `text-faint`, `bg-primary`, `text-muted-foreground`) and point at `--locus-*`. `data-slot` attributes stay as shadcn names them.
+
 Icons come from `@phosphor-icons/react`, imported from `@phosphor-icons/react/ssr` (no context, so it works in server components) under the local name the code uses (`import { X as XIcon } from "@phosphor-icons/react/ssr"`). Render every icon bold and hidden from screen readers: `<XIcon weight="bold" aria-hidden />`, or `weight="fill"` for a filled state. Import the `Icon` type from `@phosphor-icons/react`.
 - `apps/design`: playground and docs for every component (Vite), one `src/demos/<group>/<name>.demo.tsx` per component, the landing page at `/`, the shells at `/shells`, `/DESIGN.md` and one `<path>.md` per page for agents (`src/agent-docs`, `plugins/agent-docs.ts`), deployed to design.locusgraph.com as a Cloudflare Worker (`cloudflare.config.ts`)
 - `scripts/registry`: builds the shadcn registry into `apps/design/public/r` (one item per source file, a bundle per docs page without one, and the `theme` item) and `install-test/` installs every item into a fresh `shadcn init` app and builds it
 - `apps/example-next` (port 3100) and `apps/example-react` (port 3200): small apps that use the packages the way a product would, in Next.js App Router and in Vite. Keep them building; they are the check that the packages work outside the docs site
+
+`components`, `blocks` and `loop` build with `tsc` (JSX preserved), then `scripts/react-compiler.mjs` (React Compiler, target React 19), then `scripts/esm-extensions.mjs`. The compiler step fails the build when a component bails out; fix the code, or add a `"use no memo"` directive where a library is known to be incompatible (TanStack Virtual's `useVirtualizer`). `brand` is not compiled: its marks render inside Satori (`ImageResponse`), which calls components without React's hook dispatcher. `node scripts/perf/bench-loop.mjs` times Loop's long lists against the built `dist` in happy-dom.
 
 Components that import Radix use its subpaths (`radix-ui/dialog`), never the `radix-ui` root: the root import hangs the vinext RSC build of apps that use this package.
 

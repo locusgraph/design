@@ -17,7 +17,7 @@ export function NotFoundPage({ path, onSearch }: { path: string; onSearch: () =>
           Did you mean{" "}
           <PlaygroundLink
             href={`/${suggestion.path}`}
-            className="font-medium text-foreground underline underline-offset-4 focus-ring hover:text-interactive"
+            className="font-medium text-foreground underline underline-offset-4 locus-focus-ring hover:text-interactive"
           >
             {suggestion.title}
           </PlaygroundLink>

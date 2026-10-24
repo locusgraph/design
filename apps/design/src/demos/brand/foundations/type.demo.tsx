@@ -38,7 +38,7 @@ function Weights() {
 function Eyebrow() {
   return (
     <div className="flex w-[30rem] max-w-full flex-col gap-1.5 p-6 ring-1 ring-border">
-      <span className="eyebrow">Usage this month</span>
+      <span className="locus-eyebrow">Usage this month</span>
       <h3 className="font-heading text-2xl font-semibold tracking-[-0.02em]">18,204 nodes</h3>
       <p className="text-sm text-muted-foreground">Across 3 graphs in acme-customers.</p>
     </div>
@@ -48,14 +48,14 @@ function Eyebrow() {
 export default defineDemo({
   title: "Type",
   description:
-    "Three families: Archivo for headings and the wordmark, Inter for everything you read, Fira Code for code and ids. One short size scale, three weights, and the eyebrow label. From `@locusgraph/tokens`.",
+    "Three families: Archivo for headings and the wordmark, Inter for everything you read, Fira Code for code and ids. One short size scale, three weights, and the locus-eyebrow label. From `@locusgraph/tokens`.",
   controls: { sample: text(defaultSample) },
   playground: ({ sample }) => (
     <div className="w-full max-w-3xl divide-y ring-1 ring-border">
       {typeFamilies.map((family) => (
         <div key={family.name} className="flex flex-col gap-2 px-5 py-5">
           <div className="flex flex-wrap items-baseline justify-between gap-2">
-            <span className="eyebrow">
+            <span className="locus-eyebrow">
               {family.name} · {family.role}
             </span>
             <code className="font-mono text-xs text-muted-foreground">{family.className}</code>
@@ -78,16 +78,16 @@ export default defineDemo({
       '<h1 className="font-heading text-2xl font-semibold tracking-[-0.02em]">…</h1>',
       '<p className="font-sans text-sm">…</p>',
       '<code className="font-mono text-xs">org_8f2k…</code>',
-      '<span className="eyebrow">Usage this month</span>',
+      '<span className="locus-eyebrow">Usage this month</span>',
     ].join("\n"),
   props: [
     { name: "fonts", type: "{ sans, heading, mono, emailSafeSans, emailSafeMono }" },
     { name: "headingTracking", type: "string", defaultValue: '"-0.02em"' },
-    { name: "eyebrow", type: "utility", defaultValue: "Fira Code 12px, uppercase, 0.05em" },
+    { name: "locus-eyebrow", type: "utility", defaultValue: "Fira Code 12px, uppercase, 0.05em" },
   ],
   examples: {
     Scale: {
-      description: "The sizes in use at the 17px root, from the 12px eyebrow to 2xl.",
+      description: "The sizes in use at the 17px root, from the 12px locus-eyebrow to 2xl.",
       component: Scale,
     },
     Weights: {
@@ -95,7 +95,7 @@ export default defineDemo({
       component: Weights,
     },
     Eyebrow: {
-      description: "The eyebrow labels a block; the value under it carries the weight.",
+      description: "The locus-eyebrow labels a block; the value under it carries the weight.",
       component: Eyebrow,
     },
   },

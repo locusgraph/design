@@ -1,3 +1,5 @@
+"use client";
+
 import { cn } from "@locusgraph/components";
 import { type KeyboardEvent, useEffect, useRef } from "react";
 import type { QuestionOption } from "../types";
@@ -76,7 +78,7 @@ export function QuestionChoices({
             onClick={() => onSelect(option.id)}
             onKeyDown={(event) => handleKeyDown(event, index)}
             className={cn(
-              "group relative -mx-2 flex items-start gap-3 px-2 py-1.5 text-left text-sm focus-ring motion-safe:transition-colors",
+              "group relative -mx-2 flex items-start gap-3 px-2 py-1.5 text-left text-sm locus-focus-ring motion-safe:transition-colors",
               checked ? "bg-muted" : "hover:bg-muted/50"
             )}
           >

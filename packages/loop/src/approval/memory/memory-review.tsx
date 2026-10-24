@@ -1,3 +1,5 @@
+"use client";
+
 import { Button, cn } from "@locusgraph/components";
 import { pluralize } from "@locusgraph/utils";
 import { Lightbulb as BrainIcon } from "@phosphor-icons/react/ssr";

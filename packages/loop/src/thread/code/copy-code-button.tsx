@@ -1,3 +1,5 @@
+"use client";
+
 import { Button } from "@locusgraph/components";
 import { Check as CheckIcon, Copy as CopyIcon } from "@phosphor-icons/react/ssr";
 import { LiveStatus } from "../../shared/live-status";

@@ -1,3 +1,5 @@
+"use client";
+
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -17,7 +19,7 @@ type VersionSwitcherProps = {
 };
 
 export const metaLinkClass =
-  "inline-flex items-center gap-1 focus-ring transition-colors duration-150 hover:text-interactive motion-reduce:transition-none";
+  "inline-flex items-center gap-1 locus-focus-ring transition-colors duration-150 hover:text-interactive motion-reduce:transition-none";
 
 function VersionLabel({ versions, current }: Omit<VersionSwitcherProps, "onVersionChange">) {
   return (

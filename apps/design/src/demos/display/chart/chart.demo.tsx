@@ -21,8 +21,8 @@ const usage = [
 ];
 
 const usageConfig = {
-  runs: { label: "Agent runs", color: "var(--chart-1)" },
-  toolCalls: { label: "Tool calls", color: "var(--chart-2)" },
+  runs: { label: "Agent runs", color: "var(--locus-chart-1)" },
+  toolCalls: { label: "Tool calls", color: "var(--locus-chart-2)" },
 } satisfies ChartConfig;
 
 const revenue = [
@@ -35,7 +35,7 @@ const revenue = [
 ];
 
 const revenueConfig = {
-  amount: { label: "Revenue", color: "var(--chart-1)" },
+  amount: { label: "Revenue", color: "var(--locus-chart-1)" },
 } satisfies ChartConfig;
 
 function UsageBars() {
@@ -123,7 +123,7 @@ export default defineDemo({
     </ChartContainer>
   ),
   code: ({ indicator, legend, grid }) =>
-    `const chartConfig = {\n  runs: { label: "Agent runs", color: "var(--chart-1)" },\n  toolCalls: { label: "Tool calls", color: "var(--chart-2)" },\n} satisfies ChartConfig;\n\n<ChartContainer config={chartConfig} className="min-h-60 w-full">\n  <BarChart accessibilityLayer data={usage}>${grid ? "\n    <CartesianGrid vertical={false} />" : ""}\n    <XAxis dataKey="month" tickLine={false} axisLine={false} tickMargin={10} />\n    <ChartTooltip content={<ChartTooltipContent${indicator === "dot" ? "" : ` indicator="${indicator}"`} />} />${legend ? "\n    <ChartLegend content={<ChartLegendContent />} />" : ""}\n    <Bar dataKey="runs" fill="var(--color-runs)" />\n    <Bar dataKey="toolCalls" fill="var(--color-toolCalls)" />\n  </BarChart>\n</ChartContainer>`,
+    `const chartConfig = {\n  runs: { label: "Agent runs", color: "var(--locus-chart-1)" },\n  toolCalls: { label: "Tool calls", color: "var(--locus-chart-2)" },\n} satisfies ChartConfig;\n\n<ChartContainer config={chartConfig} className="min-h-60 w-full">\n  <BarChart accessibilityLayer data={usage}>${grid ? "\n    <CartesianGrid vertical={false} />" : ""}\n    <XAxis dataKey="month" tickLine={false} axisLine={false} tickMargin={10} />\n    <ChartTooltip content={<ChartTooltipContent${indicator === "dot" ? "" : ` indicator="${indicator}"`} />} />${legend ? "\n    <ChartLegend content={<ChartLegendContent />} />" : ""}\n    <Bar dataKey="runs" fill="var(--color-runs)" />\n    <Bar dataKey="toolCalls" fill="var(--color-toolCalls)" />\n  </BarChart>\n</ChartContainer>`,
   props: [
     { name: "ChartContainer.config", type: "ChartConfig" },
     {

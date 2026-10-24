@@ -1,3 +1,5 @@
+"use client";
+
 import { cn, Textarea } from "@locusgraph/components";
 import { ShieldWarning as ShieldAlertIcon } from "@phosphor-icons/react/ssr";
 import type { ProposedMemory } from "../types";
@@ -42,7 +44,7 @@ function ChoiceSegments({
             aria-pressed={pressed}
             onClick={() => onChange(choice)}
             className={cn(
-              "text-xs focus-ring motion-safe:transition-colors",
+              "text-xs locus-focus-ring motion-safe:transition-colors",
               pressed
                 ? cn("font-medium", selectedChoiceClass[choice])
                 : "text-faint hover:text-interactive"

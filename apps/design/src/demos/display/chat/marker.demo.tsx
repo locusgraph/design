@@ -55,7 +55,7 @@ function Status() {
         <MarkerIcon>
           <Spinner />
         </MarkerIcon>
-        <MarkerContent className="shimmer">Checking invoices…</MarkerContent>
+        <MarkerContent className="locus-shimmer">Checking invoices…</MarkerContent>
       </Marker>
       <Marker>
         <MarkerIcon>

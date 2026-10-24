@@ -13,7 +13,7 @@ const agentPrompt = `Build this UI with the LocusGraph design system.
 1. Read https://design.locusgraph.com/DESIGN.md first. It lists every component, block and agent part, how to install them and the house style.
 2. Before using a component, fetch its page by adding .md to its path, for example https://design.locusgraph.com/loop/approval/approval.md, and use the props it documents. Do not guess props.
 3. Install with pnpm add @locusgraph/components (plus @locusgraph/blocks, @locusgraph/loop or @locusgraph/brand when needed) and import the CSS listed in DESIGN.md.
-4. Follow the house style: square containers, pill buttons, ruled lines instead of cards, the eyebrow class for small labels, tokens instead of raw colors.`;
+4. Follow the house style: square containers, pill buttons, ruled lines instead of cards, the locus-eyebrow class for small labels, tokens instead of raw colors.`;
 
 const agentChips: { label: string; icon: React.ReactNode }[] = [
   { label: "Claude Code", icon: <AsteriskIcon weight="bold" aria-hidden className="size-3.5" /> },
@@ -54,7 +54,7 @@ export function StartWithAgent({ className }: { className?: string }) {
       <button
         type="button"
         onClick={copy}
-        className="flex h-11 items-center gap-3 rounded-full bg-primary py-1.5 pr-4 pl-2 text-sm font-medium text-primary-foreground shadow-[0_1px_2px_rgb(0_0_0/0.12),inset_0_1px_0_rgb(255_255_255/0.14)] focus-ring motion-safe:transition-colors hover:bg-primary/90"
+        className="flex h-11 items-center gap-3 rounded-full bg-primary py-1.5 pr-4 pl-2 text-sm font-medium text-primary-foreground shadow-[0_1px_2px_rgb(0_0_0/0.12),inset_0_1px_0_rgb(255_255_255/0.14)] locus-focus-ring motion-safe:transition-colors hover:bg-primary/90"
       >
         <AgentChips />
         <span>{copied ? "Prompt copied" : "Start with an agent"}</span>

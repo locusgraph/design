@@ -36,7 +36,7 @@ function ChartSeries() {
     <div className="flex w-[30rem] max-w-full flex-col gap-3">
       <div className="flex h-8 ring-1 ring-border">
         {chartSeries.map((series) => (
-          <span key={series} className="flex-1" style={{ background: `var(--${series})` }} />
+          <span key={series} className="flex-1" style={{ background: `var(--locus-${series})` }} />
         ))}
       </div>
       <p className="text-xs text-muted-foreground">
@@ -51,13 +51,13 @@ function BothThemes() {
   return (
     <div className="grid w-[30rem] max-w-full grid-cols-2 ring-1 ring-border">
       <ThemeScope theme="light" className="flex flex-col gap-2 p-4">
-        <span className="eyebrow">Light</span>
+        <span className="locus-eyebrow">Light</span>
         <span className="text-sm">Foreground on surface</span>
         <span className="text-sm text-muted-foreground">Muted on surface</span>
         <span className="text-sm text-good">Good</span>
       </ThemeScope>
       <ThemeScope theme="dark" className="flex flex-col gap-2 p-4">
-        <span className="eyebrow">Dark</span>
+        <span className="locus-eyebrow">Dark</span>
         <span className="text-sm">Foreground on surface</span>
         <span className="text-sm text-muted-foreground">Muted on surface</span>
         <span className="text-sm text-good">Good</span>

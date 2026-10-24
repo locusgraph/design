@@ -60,7 +60,7 @@ function DialogContent({
         {showCloseButton ? (
           <DialogPrimitive.Close
             data-slot="dialog-close"
-            className="absolute top-4 right-4 text-muted-foreground opacity-70 transition-opacity hover:text-foreground hover:opacity-100 focus-ring"
+            className="absolute top-4 right-4 text-muted-foreground opacity-70 transition-opacity hover:text-foreground hover:opacity-100 locus-focus-ring"
           >
             <XIcon weight="bold" aria-hidden className="size-4" />
             <span className="sr-only">Close</span>
@@ -87,7 +87,7 @@ function DialogBody({ className, ...props }: React.ComponentProps<"div">) {
   return (
     <div
       data-slot="dialog-body"
-      className={cn("no-scrollbar min-h-0 flex-1 space-y-4 overflow-y-auto px-6", className)}
+      className={cn("locus-no-scrollbar min-h-0 flex-1 space-y-4 overflow-y-auto px-6", className)}
       {...props}
     />
   );

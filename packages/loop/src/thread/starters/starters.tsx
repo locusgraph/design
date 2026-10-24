@@ -1,3 +1,5 @@
+"use client";
+
 import { cn } from "@locusgraph/components";
 import { ArrowUpRight as ArrowUpRightIcon } from "@phosphor-icons/react/ssr";
 import type { ComponentProps } from "react";
@@ -42,7 +44,7 @@ export function Starters({
           type="button"
           disabled={disabled}
           onClick={() => onSelect(textOf(suggestion))}
-          className="group -mx-2 flex w-[calc(100%+1rem)] items-center gap-3 px-2 py-1.5 text-left text-sm text-muted-foreground focus-ring hover:bg-muted/50 hover:text-foreground disabled:pointer-events-none disabled:opacity-50 motion-safe:transition-colors"
+          className="group -mx-2 flex w-[calc(100%+1rem)] items-center gap-3 px-2 py-1.5 text-left text-sm text-muted-foreground locus-focus-ring hover:bg-muted/50 hover:text-foreground disabled:pointer-events-none disabled:opacity-50 motion-safe:transition-colors"
         >
           <span className="min-w-0 flex-1 text-pretty">{labelOf(suggestion)}</span>
           <ArrowUpRightIcon

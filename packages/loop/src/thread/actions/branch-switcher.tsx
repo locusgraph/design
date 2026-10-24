@@ -1,3 +1,5 @@
+"use client";
+
 import {
   CaretLeft as ChevronLeftIcon,
   CaretRight as ChevronRightIcon,

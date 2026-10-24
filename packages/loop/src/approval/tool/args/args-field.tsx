@@ -1,3 +1,5 @@
+"use client";
+
 import { Checkbox, cn } from "@locusgraph/components";
 import { CaretDown as ChevronDownIcon } from "@phosphor-icons/react/ssr";
 import type { ArgField } from "../../types";

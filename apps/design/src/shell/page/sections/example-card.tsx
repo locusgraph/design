@@ -1,5 +1,5 @@
 import type { DocExample } from "../../../registry/demo-docs";
-import { CodeTeaser } from "../../preview/code-teaser";
+import { CodeTeaser } from "../../preview/code/code-teaser";
 import { withInlineCode } from "../prose/inline-code";
 
 export function ExampleCard({ example }: { example: DocExample }) {

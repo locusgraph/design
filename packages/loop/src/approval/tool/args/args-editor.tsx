@@ -1,3 +1,5 @@
+"use client";
+
 import { Button, cn } from "@locusgraph/components";
 import { PencilSimple as SquarePenIcon } from "@phosphor-icons/react/ssr";
 import { useEffect, useId, useMemo, useRef, useState } from "react";

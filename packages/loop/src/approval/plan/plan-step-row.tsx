@@ -1,3 +1,5 @@
+"use client";
+
 import { Button, cn } from "@locusgraph/components";
 import {
   ArrowDown as ArrowDownIcon,

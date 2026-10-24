@@ -1,3 +1,5 @@
+"use client";
+
 import { cn } from "@locusgraph/components";
 import { useState } from "react";
 
@@ -81,7 +83,7 @@ export function ToolInputs({ input, muted = false }: { input: unknown; muted?: b
       {entries && (
         <button
           type="button"
-          className="ml-28 self-start text-xs sm:ml-36 text-faint focus-ring hover:text-interactive motion-safe:transition-colors"
+          className="ml-28 self-start text-xs sm:ml-36 text-faint locus-focus-ring hover:text-interactive motion-safe:transition-colors"
           onClick={() => setShowRaw((current) => !current)}
         >
           {showRaw ? "Show fields" : "Show raw"}

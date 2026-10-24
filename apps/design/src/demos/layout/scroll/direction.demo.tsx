@@ -34,7 +34,7 @@ function Comparison() {
   return (
     <div className="flex flex-col gap-6">
       <div className="flex flex-col gap-2">
-        <span className="eyebrow">ltr</span>
+        <span className="locus-eyebrow">ltr</span>
         <DirectionProvider dir="ltr">
           <div dir="ltr">
             <PlanTabs />
@@ -42,7 +42,7 @@ function Comparison() {
         </DirectionProvider>
       </div>
       <div className="flex flex-col gap-2">
-        <span className="eyebrow">rtl</span>
+        <span className="locus-eyebrow">rtl</span>
         <DirectionProvider dir="rtl">
           <div dir="rtl">
             <PlanTabs />

@@ -1,11 +1,6 @@
 import { readFileSync } from "node:fs";
 import { dirname, join, resolve } from "node:path";
-import {
-  assertShadcnMapping,
-  paletteVariables,
-  prefixVariables,
-  shadcnCssVars,
-} from "./theme-vars.mjs";
+import { shadcnCssVars } from "./theme-vars.mjs";
 
 const localImport = /^@import\s+"(\.[^"]+)";\s*$/gm;
 
@@ -16,24 +11,24 @@ function inlineImports(file) {
 
 export function themeItem(root, versionOf) {
   const tokens = join(root, "packages/tokens/src");
-  const css = [inlineImports(join(tokens, "theme.css")), inlineImports(join(tokens, "typeset.css"))]
+  const content = [
+    inlineImports(join(tokens, "theme.css")),
+    inlineImports(join(tokens, "typeset.css")),
+  ]
     .join("\n")
     .trim();
-  const palette = paletteVariables(join(tokens, "palette.css"));
-  assertShadcnMapping(palette);
-  const content = prefixVariables(css, palette);
   return {
     name: "theme",
     type: "registry:theme",
     title: "Locus theme",
     description:
-      "The LocusGraph tokens: palette for light and dark, square radius, control borders, overlay shadow, the eyebrow label and brand patterns, with Inter, Archivo and Fira Code.",
+      "The LocusGraph tokens: palette for light and dark, square radius, control borders, overlay shadow, the locus-eyebrow label and brand patterns, with Inter, Archivo and Fira Code.",
     dependencies: [
       "@fontsource-variable/inter",
       "@fontsource-variable/archivo",
       "@fontsource-variable/fira-code",
     ].map(versionOf),
-    cssVars: shadcnCssVars,
+    cssVars: shadcnCssVars(join(tokens, "variables/shadcn.css")),
     files: [
       {
         path: "locus/locus.css",

@@ -1,0 +1,36 @@
+:root,
+.dark {
+  --background: var(--locus-background);
+  --foreground: var(--locus-foreground);
+  --card: var(--locus-surface);
+  --card-foreground: var(--locus-foreground);
+  --popover: var(--locus-popover);
+  --popover-foreground: var(--locus-popover-foreground);
+  --primary: var(--locus-btn);
+  --primary-foreground: var(--locus-btn-ink);
+  --secondary: var(--locus-muted);
+  --secondary-foreground: var(--locus-foreground);
+  --muted: var(--locus-muted);
+  --muted-foreground: var(--locus-muted-foreground);
+  --accent: var(--locus-muted);
+  --accent-foreground: var(--locus-foreground);
+  --destructive: var(--locus-destructive);
+  --destructive-foreground: var(--locus-destructive-foreground);
+  --border: var(--locus-border);
+  --input: var(--locus-input);
+  --ring: var(--locus-interactive);
+  --radius: var(--locus-radius);
+  --sidebar: var(--locus-sidebar);
+  --sidebar-foreground: var(--locus-sidebar-foreground);
+  --sidebar-primary: var(--locus-sidebar-primary);
+  --sidebar-primary-foreground: var(--locus-sidebar-primary-foreground);
+  --sidebar-accent: var(--locus-sidebar-accent);
+  --sidebar-accent-foreground: var(--locus-sidebar-accent-foreground);
+  --sidebar-border: var(--locus-sidebar-border);
+  --sidebar-ring: var(--locus-sidebar-ring);
+  --chart-1: var(--locus-chart-1);
+  --chart-2: var(--locus-chart-2);
+  --chart-3: var(--locus-chart-3);
+  --chart-4: var(--locus-chart-4);
+  --chart-5: var(--locus-chart-5);
+}

@@ -52,7 +52,7 @@ function allModulesPage(app) {
       `import * as m${index} from "@/components/locus/${file.replace(/\.tsx?$/, "")}";`
   );
   const list = files.map((_file, index) => `m${index}`).join(", ");
-  const page = `"use client";\n\n${imports.join("\n")}\n\nconst modules = [${list}];\n\nexport default function AllPage() {\n  return <main className="eyebrow">{modules.length} modules</main>;\n}\n`;
+  const page = `"use client";\n\n${imports.join("\n")}\n\nconst modules = [${list}];\n\nexport default function AllPage() {\n  return <main className="locus-eyebrow">{modules.length} modules</main>;\n}\n`;
   writeFileSync(join(app, "app/all/page.tsx"), page);
   return files.length;
 }

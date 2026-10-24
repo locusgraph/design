@@ -11,6 +11,11 @@ import { Button, buttonVariants } from "../../action/button";
 import { cn } from "../../cn";
 import { CalendarDayButton } from "./calendar-day-button";
 
+const rtlFlippedNavIcons = [
+  String.raw`rtl:**:[.rdp-button\_next>svg]:rotate-180`,
+  String.raw`rtl:**:[.rdp-button\_previous>svg]:rotate-180`,
+];
+
 function Calendar({
   className,
   classNames,
@@ -30,8 +35,7 @@ function Calendar({
       showOutsideDays={showOutsideDays}
       className={cn(
         "group/calendar bg-background p-3 [--cell-size:--spacing(8)] [[data-slot=card-content]_&]:bg-transparent [[data-slot=popover-content]_&]:bg-transparent",
-        String.raw`rtl:**:[.rdp-button\_next>svg]:rotate-180`,
-        String.raw`rtl:**:[.rdp-button\_previous>svg]:rotate-180`,
+        rtlFlippedNavIcons,
         className
       )}
       captionLayout={captionLayout}

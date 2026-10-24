@@ -59,7 +59,7 @@ export function CostSteps({
           <ChartNoAxesGanttIcon weight="bold" aria-hidden />
         </span>
         <span className="truncate">{label}</span>
-        {running && <span className="shrink-0 text-warn motion-safe:shimmer">Running</span>}
+        {running && <span className="shrink-0 text-warn motion-safe:locus-shimmer">Running</span>}
       </header>
       {steps.length === 0 ? (
         <p className="pl-6 text-sm text-faint">{emptyText}</p>

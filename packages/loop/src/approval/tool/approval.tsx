@@ -1,3 +1,5 @@
+"use client";
+
 import { Button, cn } from "@locusgraph/components";
 import { useState } from "react";
 import { humanToolName } from "../../agent/tool/tool-status";

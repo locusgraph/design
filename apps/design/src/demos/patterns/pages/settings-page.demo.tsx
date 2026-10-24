@@ -5,7 +5,7 @@ import { PatternRules } from "./pattern-rules";
 
 const rules = [
   "Each section is a ruled RuleGrid block, never a card.",
-  "A RuleGridHeader names the section with an eyebrow and one muted line.",
+  "A RuleGridHeader names the section with an locus-eyebrow and one muted line.",
   "One Save per section, in its RuleGridFooter, enabled only after a change.",
   "Switch rows pair a label with a muted description, split by divide-y.",
   "The destructive action says what it does: Delete workspace.",

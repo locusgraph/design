@@ -1,3 +1,5 @@
+"use client";
+
 import { cn } from "@locusgraph/components";
 import { StarFour as SparkleIcon } from "@phosphor-icons/react/ssr";
 import type { PulseTone } from "./pulse-tone";
@@ -19,7 +21,7 @@ const toneText: Record<PulseTone, string> = {
   neutral:
     "bg-[linear-gradient(90deg,var(--color-faint)_25%,var(--color-foreground)_50%,var(--color-faint)_75%)]",
   brand:
-    "bg-[linear-gradient(90deg,var(--color-interactive),var(--color-memory),var(--s5),var(--color-interactive))]",
+    "bg-[linear-gradient(90deg,var(--color-interactive),var(--color-memory),var(--locus-s5),var(--color-interactive))]",
 };
 
 type GradientLabelProps = { label: string; tone?: PulseTone };

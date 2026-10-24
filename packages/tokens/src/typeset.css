@@ -1,6 +1,10 @@
 @import "./vendor/typeset.css";
 
-.typeset-chat {
+.typeset {
+  --radius: var(--locus-radius);
+}
+
+.locus-typeset-chat {
   --typeset-font-body: var(--font-sans);
   --typeset-font-heading: var(--font-sans);
   --typeset-font-mono: var(--font-mono);
@@ -10,11 +14,11 @@
 }
 
 @layer components {
-  .typeset.typeset-chat {
+  .typeset.locus-typeset-chat {
     font-size: var(--typeset-size);
   }
 
-  .typeset.typeset-chat
+  .typeset.locus-typeset-chat
     *:not(:where(.not-typeset, [data-not-typeset], .not-typeset *, [data-not-typeset] *)) {
     &:where(h1, h2, h3, h4) {
       letter-spacing: -0.01em;

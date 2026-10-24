@@ -1,12 +1,14 @@
+"use client";
+
 import { cn } from "@locusgraph/components";
-import { useState } from "react";
-import { formatTimeOfDay } from "./thread-groups";
+import { type ComponentProps, useState } from "react";
+import { formatTimeOfDay } from "../thread-groups";
 import { ThreadItemMenu } from "./thread-item-menu";
 import { ThreadTitleEditor } from "./thread-title-editor";
 
 export type HistoryItem = { id: string; title: string; updatedAt: string };
 
-type HistoryRowProps = {
+type HistoryRowProps = Omit<ComponentProps<"li">, "onSelect"> & {
   thread: HistoryItem;
   active: boolean;
   onSelect: (id: string) => void;
@@ -17,7 +19,15 @@ type HistoryRowProps = {
 const timeHiddenByMenuClass =
   "max-sm:hidden sm:group-focus-within:invisible sm:group-hover:invisible sm:group-has-[[data-state=open]]:invisible";
 
-export function HistoryRow({ thread, active, onSelect, onRename, onArchive }: HistoryRowProps) {
+export function HistoryRow({
+  thread,
+  active,
+  onSelect,
+  onRename,
+  onArchive,
+  className,
+  ...props
+}: HistoryRowProps) {
   const [editing, setEditing] = useState(false);
   const hasMenu = onRename !== undefined || onArchive !== undefined;
   return (
@@ -28,8 +38,10 @@ export function HistoryRow({ thread, active, onSelect, onRename, onArchive }: Hi
         "group relative flex items-center motion-safe:transition-colors",
         active
           ? "bg-muted text-foreground"
-          : "text-muted-foreground hover:bg-muted/50 hover:text-foreground"
+          : "text-muted-foreground hover:bg-muted/50 hover:text-foreground",
+        className
       )}
+      {...props}
     >
       {editing && onRename ? (
         <div className="flex-1 px-1 py-0.5">
@@ -49,7 +61,7 @@ export function HistoryRow({ thread, active, onSelect, onRename, onArchive }: Hi
           onClick={() => onSelect(thread.id)}
           onDoubleClick={onRename ? () => setEditing(true) : undefined}
           className={cn(
-            "flex min-w-0 flex-1 items-center gap-3 py-1.5 pl-2 text-left text-sm focus-ring-inset",
+            "flex min-w-0 flex-1 items-center gap-3 py-1.5 pl-2 text-left text-sm locus-focus-ring-inset",
             hasMenu ? "pr-8 sm:pr-2" : "pr-2",
             active && "font-medium"
           )}

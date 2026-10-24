@@ -15,6 +15,12 @@ export default defineConfig({
   plugins: [react(), tailwindcss()],
 });`;
 
+export const viteServerComponentsConfig = `export default defineConfig({
+  optimizeDeps: {
+    include: ["react/compiler-runtime"],
+  },
+});`;
+
 export const nextConfig = `import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
@@ -63,6 +69,11 @@ export const shadcnRegistry = `{
 }`;
 
 export const shadcnAdd = `pnpm dlx shadcn@latest add @locus/theme @locus/button @locus/approval`;
+
+export const shadcnAliases = `@import "tailwindcss";
+@import "tw-animate-css";
+@import "@locusgraph/components/theme.css";
+@import "@locusgraph/components/shadcn.css";`;
 
 export const shadcnTheme = `@import "tailwindcss";
 @import "../styles/locus.css";`;

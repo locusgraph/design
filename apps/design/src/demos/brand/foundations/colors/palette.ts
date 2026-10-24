@@ -32,7 +32,7 @@ function fromPalettes(name: string, token: string, usage: string, key: keyof Pal
 function chartSeries(index: number, light: string, dark: string): PaletteColor {
   return {
     name: `s${index}`,
-    token: `var(--s${index})`,
+    token: `var(--locus-s${index})`,
     usage: `Chart series ${index}`,
     light: solid(light),
     dark: solid(dark),
@@ -111,6 +111,11 @@ export const paletteColors: Record<ColorGroup, PaletteColor[]> = {
       light: foregroundMix(lightColors, 9),
       dark: foregroundMix(darkColors, 11),
     },
-    fromPalettes("brand-glow", "var(--brand-glow)", "Halo behind the brand grid", "brandGlow"),
+    fromPalettes(
+      "brand-glow",
+      "var(--locus-brand-glow)",
+      "Halo behind the brand grid",
+      "brandGlow"
+    ),
   ],
 };

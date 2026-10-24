@@ -16,7 +16,7 @@ function ComponentGrid({ entries }: { entries: DemoIndexEntry[] }) {
         <PlaygroundLink
           key={entry.path}
           href={`/${entry.path}`}
-          className="text-base underline-offset-4 focus-ring hover:underline"
+          className="text-base underline-offset-4 locus-focus-ring hover:underline"
         >
           {entry.title}
         </PlaygroundLink>
@@ -47,7 +47,7 @@ export function HomePage({ library }: { library: Library }) {
       ) : (
         groups.map(({ group, entries }) => (
           <section key={group} id={group} className="flex scroll-mt-24 flex-col gap-4">
-            <h2 className="eyebrow">{groupTitle(group)}</h2>
+            <h2 className="locus-eyebrow">{groupTitle(group)}</h2>
             <ComponentGrid entries={entries} />
           </section>
         ))

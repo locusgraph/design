@@ -1,6 +1,6 @@
 import { CopyCommand } from "../../../landing/actions/copy-command";
-import { CodeBlock } from "../../../preview/code-block";
-import { InstallLabel, PackageManagerSwitch } from "../install-parts";
+import { CodeBlock } from "../../../preview/code/code-block";
+import { InstallLabel } from "../install-parts";
 import { addPackagesCommand, usePackageManager } from "../package-manager";
 
 const componentsPackage = "@locusgraph/components";
@@ -25,29 +25,20 @@ function cssImports(packages: string[]) {
   return files.map((file) => `@import "${file}";`);
 }
 
-type PackageTabProps = { packages: string[]; importLine: string };
+type PackageTabProps = { packages: string[] };
 
-export function PackageTab({ packages, importLine }: PackageTabProps) {
+export function PackageTab({ packages }: PackageTabProps) {
   const packageManager = usePackageManager();
   return (
-    <div className="flex flex-col gap-4">
+    <div className="flex flex-col gap-5">
       <div className="flex flex-col gap-2">
-        <div className="flex items-center justify-between gap-3">
-          <InstallLabel>Install</InstallLabel>
-          <PackageManagerSwitch />
-        </div>
+        <InstallLabel>Install</InstallLabel>
         <CopyCommand command={addPackagesCommand(packageManager, packages)} />
       </div>
       <div className="flex flex-col gap-2">
         <InstallLabel>Global CSS</InstallLabel>
         <CodeBlock code={cssImports(packages).join("\n")} language="css" className="bg-muted/40" />
       </div>
-      {importLine && (
-        <div className="flex flex-col gap-2">
-          <InstallLabel>Import</InstallLabel>
-          <CodeBlock code={importLine} className="bg-muted/40" />
-        </div>
-      )}
     </div>
   );
 }

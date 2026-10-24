@@ -51,7 +51,7 @@ function Slider({
           key={index}
           aria-label={thumbLabels?.[index] ?? props["aria-label"]}
           aria-labelledby={thumbLabels?.[index] ? undefined : props["aria-labelledby"]}
-          className="block size-4 shrink-0 rounded-full border border-primary bg-background shadow-sm transition-[color,box-shadow] focus-ring disabled:pointer-events-none disabled:opacity-50"
+          className="block size-4 shrink-0 rounded-full border border-primary bg-background shadow-sm transition-[color,box-shadow] locus-focus-ring disabled:pointer-events-none disabled:opacity-50"
         />
       ))}
     </SliderPrimitive.Root>

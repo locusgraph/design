@@ -10,7 +10,7 @@ export function PackageManagerSwitch() {
       role="radiogroup"
       aria-label="Package manager"
       onKeyDown={selectRadioWithArrowKeys(packageManagers, active, selectPackageManager)}
-      className="flex items-center gap-1"
+      className="flex items-center gap-0.5"
     >
       {packageManagers.map((packageManager) => (
         <button
@@ -21,9 +21,9 @@ export function PackageManagerSwitch() {
           tabIndex={packageManager === active ? 0 : -1}
           onClick={() => selectPackageManager(packageManager)}
           className={cn(
-            "px-2 py-0.5 font-mono text-xs focus-ring",
+            "h-7 px-2 font-mono text-xs locus-focus-ring",
             packageManager === active
-              ? "bg-muted text-foreground ring-1 ring-border"
+              ? "bg-muted text-foreground"
               : "text-muted-foreground hover:text-foreground"
           )}
         >
@@ -34,8 +34,21 @@ export function PackageManagerSwitch() {
   );
 }
 
+export function InstallMeta({ parts }: { parts: string[] }) {
+  return (
+    <p className="flex flex-wrap items-center gap-x-2 font-mono text-xs text-muted-foreground">
+      {parts.map((part, index) => (
+        <span key={part} className="flex items-center gap-2">
+          {index > 0 && <span aria-hidden>·</span>}
+          {part}
+        </span>
+      ))}
+    </p>
+  );
+}
+
 export function InstallLabel({ children }: { children: ReactNode }) {
-  return <span className="eyebrow">{children}</span>;
+  return <span className="locus-eyebrow">{children}</span>;
 }
 
 type InstallStepProps = { number: number; title: string; children: ReactNode };

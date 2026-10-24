@@ -29,7 +29,7 @@ function OnThisPage({ sections, title = "On This Page" }: OnThisPageProps) {
   useScrollToHashSection(sectionIds, pinSection);
   return (
     <nav aria-label={title} className="-m-1 flex flex-col gap-2 p-1 text-sm">
-      <p className="eyebrow flex h-6 items-center">{title}</p>
+      <p className="locus-eyebrow flex h-6 items-center">{title}</p>
       {sections.map((section) => (
         <a
           key={section.id}
@@ -43,7 +43,7 @@ function OnThisPage({ sections, title = "On This Page" }: OnThisPageProps) {
           }}
           aria-current={activeId === section.id ? "location" : undefined}
           className={cn(
-            "w-fit text-xs text-muted-foreground transition-colors focus-ring hover:text-foreground",
+            "w-fit text-xs text-muted-foreground transition-colors locus-focus-ring hover:text-foreground",
             section.nested && "pl-4",
             activeId === section.id && "font-medium text-foreground"
           )}

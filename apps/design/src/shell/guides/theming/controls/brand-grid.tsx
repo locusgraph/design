@@ -47,7 +47,7 @@ export function BrandGrid({ mode, value, onValueChange }: BrandGridProps) {
   return (
     <div className="flex flex-col gap-3 px-4 py-3">
       <div className="flex items-baseline justify-between">
-        <span className="eyebrow">Brand</span>
+        <span className="locus-eyebrow">Brand</span>
         <span className="text-sm font-medium">{selected?.name}</span>
       </div>
       <div

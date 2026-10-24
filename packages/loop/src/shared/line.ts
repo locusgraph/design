@@ -1,7 +1,7 @@
 export const lineRowClass =
   "flex min-h-control-sm w-fit max-w-full items-center gap-2 text-left text-sm text-muted-foreground";
 
-export const lineTriggerClass = `group ${lineRowClass} focus-ring transition-colors duration-150 hover:text-foreground motion-reduce:transition-none`;
+export const lineTriggerClass = `group ${lineRowClass} locus-focus-ring transition-colors duration-150 hover:text-foreground motion-reduce:transition-none`;
 
 const lineIconFrame = "flex size-4 shrink-0 items-center justify-center [&_svg]:size-3.5";
 
@@ -21,4 +21,4 @@ export const lineDetailClass = "min-w-0 pl-6 text-sm";
 export const lineDetailRowClass =
   "flex w-full min-w-0 py-1 text-left outline-none transition-colors duration-150 motion-reduce:transition-none";
 
-export const lineDetailLinkClass = "hover:text-interactive focus-ring";
+export const lineDetailLinkClass = "hover:text-interactive locus-focus-ring";

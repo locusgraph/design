@@ -24,7 +24,7 @@ export function ShellsPage({ theme }: { theme: Theme }) {
             href={`#${shell.id}`}
             aria-current={shell.id === currentShellId ? "location" : undefined}
             className={cn(
-              "-mb-px border-b-2 border-transparent pb-2 text-sm font-medium text-muted-foreground transition-colors focus-ring hover:text-foreground",
+              "-mb-px border-b-2 border-transparent pb-2 text-sm font-medium text-muted-foreground transition-colors locus-focus-ring hover:text-foreground",
               shell.id === currentShellId && "border-foreground text-foreground"
             )}
           >

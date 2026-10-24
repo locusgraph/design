@@ -1,12 +1,15 @@
+"use client";
+
 import { Checkbox, cn } from "@locusgraph/components";
 import { Lock as LockIcon } from "@phosphor-icons/react/ssr";
+import type { ComponentProps } from "react";
 import { isoOf } from "../../shared/decision-summary";
 import type { RiskLevel } from "../../types";
 import { riskLabels } from "../shared/risk-badge";
 import { formatWaiting } from "../shared/time";
 import type { PendingApproval } from "../types";
 
-type InboxRowProps = {
+type InboxRowProps = Omit<ComponentProps<"li">, "onSelect"> & {
   item: PendingApproval;
   now: number;
   selected: boolean;
@@ -21,7 +24,16 @@ const riskTone: Record<RiskLevel, string> = {
   destructive: "font-medium text-destructive",
 };
 
-export function InboxRow({ item, now, selected, open, onSelect, onOpen }: InboxRowProps) {
+export function InboxRow({
+  item,
+  now,
+  selected,
+  open,
+  onSelect,
+  onOpen,
+  className,
+  ...props
+}: InboxRowProps) {
   const destructive = item.risk === "destructive";
   return (
     <li
@@ -31,8 +43,10 @@ export function InboxRow({ item, now, selected, open, onSelect, onOpen }: InboxR
       data-open={open || undefined}
       className={cn(
         "group relative flex items-start gap-3 px-2 py-2 has-[[data-slot=inbox-open]:focus-visible]:ring-2 has-[[data-slot=inbox-open]:focus-visible]:ring-ring/70 motion-safe:transition-colors",
-        selected || open ? "bg-muted" : "hover:bg-muted/50"
+        selected || open ? "bg-muted" : "hover:bg-muted/50",
+        className
       )}
+      {...props}
     >
       {destructive ? (
         <span className="relative z-10 mt-0.5 flex size-4 shrink-0 items-center justify-center text-faint">

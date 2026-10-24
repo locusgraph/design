@@ -2,7 +2,7 @@ import { readFileSync } from "node:fs";
 import { describe, expect, it } from "vitest";
 import { darkColors, hairline, lightColors } from "../colors";
 
-const palette = readFileSync(new URL("../../palette.css", import.meta.url), "utf8");
+const palette = readFileSync(new URL("../../variables/palette.css", import.meta.url), "utf8");
 
 function cssBlock(selector: string) {
   const start = palette.indexOf(`${selector} {`);
@@ -10,7 +10,7 @@ function cssBlock(selector: string) {
 }
 
 function cssValue(block: string, name: string) {
-  return block.match(new RegExp(`--${name}:\\s*([^;]+);`))?.[1]?.trim();
+  return block.match(new RegExp(`--locus-${name}:\\s*([^;]+);`))?.[1]?.trim();
 }
 
 const cssNames = {

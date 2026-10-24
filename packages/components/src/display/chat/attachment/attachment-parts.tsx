@@ -8,7 +8,7 @@ function AttachmentTitle({ className, ...props }: React.ComponentProps<"span">) 
     <span
       data-slot="attachment-title"
       className={cn(
-        "block max-w-full min-w-0 truncate font-medium group-data-[state=processing]/attachment:shimmer group-data-[state=uploading]/attachment:shimmer",
+        "block max-w-full min-w-0 truncate font-medium group-data-[state=processing]/attachment:locus-shimmer group-data-[state=uploading]/attachment:locus-shimmer",
         className
       )}
       {...props}
@@ -74,7 +74,7 @@ function AttachmentTrigger({
     <Comp
       data-slot="attachment-trigger"
       type={asChild ? undefined : (type ?? "button")}
-      className={cn("absolute inset-0 z-10 focus-ring-inset", className)}
+      className={cn("absolute inset-0 z-10 locus-focus-ring-inset", className)}
       {...props}
     />
   );

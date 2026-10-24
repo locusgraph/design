@@ -50,7 +50,7 @@ function RuleGridCell({
       className={cn(
         "flex min-w-0 flex-col gap-2 bg-card p-6 text-card-foreground ring-1 ring-border",
         interactive &&
-          "transition-colors duration-150 ease-out focus-ring-inset hover:bg-accent/60 active:bg-accent",
+          "transition-colors duration-150 ease-out locus-focus-ring-inset hover:bg-accent/60 active:bg-accent",
         className
       )}
       {...props}
@@ -85,7 +85,7 @@ function RuleGridFooter({ className, ...props }: React.ComponentProps<"div">) {
 }
 
 function RuleGridLabel({ className, ...props }: React.ComponentProps<"span">) {
-  return <span data-slot="rule-grid-label" className={cn("eyebrow", className)} {...props} />;
+  return <span data-slot="rule-grid-label" className={cn("locus-eyebrow", className)} {...props} />;
 }
 
 function RuleGridTitle({ className, ...props }: React.ComponentProps<"div">) {

@@ -1,3 +1,5 @@
+"use client";
+
 import { Collapsible, CollapsibleContent, CollapsibleTrigger, cn } from "@locusgraph/components";
 import { pluralize } from "@locusgraph/utils";
 import {

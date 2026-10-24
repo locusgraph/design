@@ -26,7 +26,7 @@ function barTone(step: CostStep): string {
 const statusMark: Partial<Record<CostStepStatus, { text: string; className: string }>> = {
   failed: { text: "Failed", className: "text-destructive" },
   retried: { text: "Retried", className: "text-warn" },
-  running: { text: "Running", className: "text-muted-foreground motion-safe:shimmer" },
+  running: { text: "Running", className: "text-muted-foreground motion-safe:locus-shimmer" },
   skipped: { text: "Skipped", className: "font-normal text-faint" },
 };
 

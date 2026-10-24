@@ -54,7 +54,7 @@ function BarContent({
   return (
     <>
       <span className="flex items-baseline justify-between gap-4 font-mono text-2xs tabular-nums">
-        <span className="eyebrow">{label}</span>
+        <span className="locus-eyebrow">{label}</span>
         <span className={cn(status === "ok" && "text-foreground")}>
           {percent}% · {formatTokensShort(usedTokens)} / {formatTokensShort(limitTokens)}
         </span>
@@ -89,7 +89,7 @@ export function Context({
       aria-valuetext={`${percent}%, ${summary}`}
       tabIndex={hasBreakdown ? 0 : undefined}
       className={cn(
-        "focus-ring",
+        "locus-focus-ring",
         statusTone[status],
         variant === "ring"
           ? "inline-flex h-control-xs items-center gap-1.5 rounded-full px-2 transition-colors duration-150 motion-reduce:transition-none"

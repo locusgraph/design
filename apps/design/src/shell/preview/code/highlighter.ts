@@ -1,5 +1,3 @@
-import { Button, cn } from "@locusgraph/components";
-import { Check as CheckIcon, Copy as CopyIcon } from "@phosphor-icons/react/ssr";
 import { useEffect, useState } from "react";
 import type { HighlighterCore, LanguageRegistration } from "shiki/core";
 
@@ -41,7 +39,7 @@ async function highlighterFor(language: CodeLanguage) {
   return loaded;
 }
 
-function useHighlightedHtml(code: string, language: CodeLanguage) {
+export function useHighlightedHtml(code: string, language: CodeLanguage) {
   const [html, setHtml] = useState("");
   useEffect(() => {
     let current = true;
@@ -60,55 +58,4 @@ function useHighlightedHtml(code: string, language: CodeLanguage) {
     };
   }, [code, language]);
   return html;
-}
-
-function CopyButton({ text }: { text: string }) {
-  const [copied, setCopied] = useState(false);
-  const copy = async () => {
-    try {
-      await navigator.clipboard.writeText(text);
-      setCopied(true);
-      setTimeout(() => setCopied(false), 1500);
-    } catch {
-      setCopied(false);
-    }
-  };
-  return (
-    <Button
-      variant="ghost"
-      size="icon-sm"
-      aria-label={copied ? "Copied" : "Copy code"}
-      onClick={copy}
-      className="absolute top-2 right-2 bg-surface hover:bg-accent"
-    >
-      {copied ? (
-        <CheckIcon weight="bold" aria-hidden className="text-good" />
-      ) : (
-        <CopyIcon weight="bold" aria-hidden />
-      )}
-    </Button>
-  );
-}
-
-type CodeBlockProps = {
-  code: string;
-  className?: string;
-  showCopy?: boolean;
-  language?: CodeLanguage;
-};
-
-export function CodeBlock({ code, className, showCopy = true, language = "tsx" }: CodeBlockProps) {
-  const html = useHighlightedHtml(code, language);
-  const codeClass =
-    "overflow-x-auto p-4 pr-12 font-mono text-sm [&_pre]:outline-none has-[pre:focus-visible]:outline-2 has-[pre:focus-visible]:-outline-offset-2 has-[pre:focus-visible]:outline-ring/70";
-  return (
-    <div className={cn("relative", className)}>
-      {showCopy && <CopyButton text={code} />}
-      {html ? (
-        <div className={codeClass} dangerouslySetInnerHTML={{ __html: html }} />
-      ) : (
-        <pre className={codeClass}>{code}</pre>
-      )}
-    </div>
-  );
 }

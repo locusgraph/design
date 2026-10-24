@@ -44,7 +44,7 @@ function PlanBanner() {
         ratio={21 / 9}
         className="flex flex-col justify-end gap-1 overflow-hidden bg-muted p-6 ring-1 ring-border"
       >
-        <span className="eyebrow">Pro plan</span>
+        <span className="locus-eyebrow">Pro plan</span>
         <span className="text-xl font-semibold text-foreground">
           Unlimited seats for your whole team
         </span>

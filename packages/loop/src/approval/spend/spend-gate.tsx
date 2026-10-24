@@ -1,3 +1,5 @@
+"use client";
+
 import { Button, cn } from "@locusgraph/components";
 import { formatMicroUsd } from "@locusgraph/utils";
 import { CurrencyCircleDollar as CircleDollarSignIcon } from "@phosphor-icons/react/ssr";

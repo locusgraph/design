@@ -65,7 +65,7 @@ function ProductNames() {
     <dl className="w-full divide-y divide-border ring-1 ring-border">
       {products.map((product) => (
         <div key={product} className="flex items-center justify-between gap-4 px-4 py-3">
-          <dt className="eyebrow">{product}</dt>
+          <dt className="locus-eyebrow">{product}</dt>
           <dd className="font-medium">{productNames[product]}</dd>
         </div>
       ))}

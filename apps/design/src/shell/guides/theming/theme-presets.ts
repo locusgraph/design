@@ -67,9 +67,9 @@ export function resolveTheme(preset: ThemePreset, mode: ThemeMode, ring: RingMod
 function cssBlock(selector: string, theme: ResolvedTheme) {
   return [
     `${selector} {`,
-    `  --btn: ${theme.primary};`,
-    `  --btn-ink: ${theme.primaryInk};`,
-    `  --interactive: ${theme.ring};`,
+    `  --locus-btn: ${theme.primary};`,
+    `  --locus-btn-ink: ${theme.primaryInk};`,
+    `  --locus-interactive: ${theme.ring};`,
     "}",
   ].join("\n");
 }
@@ -89,23 +89,23 @@ function ruleBlock(selector: string, declarations: string[][]) {
 }
 
 const derivedStatesCss = ruleBlock(":root", [
-  mixDeclaration("--btn-hover", "--btn", 84, "var(--background)"),
-  mixDeclaration("--btn-active", "--btn", 72, "var(--background)"),
-  mixDeclaration("--btn-subtle", "--btn", 12, "transparent"),
+  mixDeclaration("--btn-hover", "--locus-btn", 84, "var(--locus-background)"),
+  mixDeclaration("--btn-active", "--locus-btn", 72, "var(--locus-background)"),
+  mixDeclaration("--btn-subtle", "--locus-btn", 12, "transparent"),
 ]);
 
 const seeThroughGreysCss = ruleBlock(":root", [
-  mixDeclaration("--grey-a1", "--foreground", 4, "transparent"),
-  mixDeclaration("--grey-a2", "--foreground", 8, "transparent"),
-  mixDeclaration("--grey-a3", "--foreground", 14, "transparent"),
-  mixDeclaration("--grey-a4", "--foreground", 24, "transparent"),
+  mixDeclaration("--grey-a1", "--locus-foreground", 4, "transparent"),
+  mixDeclaration("--grey-a2", "--locus-foreground", 8, "transparent"),
+  mixDeclaration("--grey-a3", "--locus-foreground", 14, "transparent"),
+  mixDeclaration("--grey-a4", "--locus-foreground", 24, "transparent"),
 ]);
 
 const highContrastCss = ruleBlock('[data-contrast="high"]', [
-  mixDeclaration("--border", "--foreground", 34, "var(--surface)"),
-  mixDeclaration("--input", "--foreground", 58, "var(--surface)"),
-  mixDeclaration("--muted-foreground", "--foreground", 84, "var(--surface)"),
-  mixDeclaration("--faint", "--foreground", 66, "var(--surface)"),
+  mixDeclaration("--locus-border", "--locus-foreground", 34, "var(--locus-surface)"),
+  mixDeclaration("--locus-input", "--locus-foreground", 58, "var(--locus-surface)"),
+  mixDeclaration("--locus-muted-foreground", "--locus-foreground", 84, "var(--locus-surface)"),
+  mixDeclaration("--locus-faint", "--locus-foreground", 66, "var(--locus-surface)"),
 ]);
 
 export function themeCss(preset: ThemePreset, ring: RingMode, contrast: ContrastMode) {
@@ -120,8 +120,8 @@ export function themeCss(preset: ThemePreset, ring: RingMode, contrast: Contrast
 
 export function themeStyle(theme: ResolvedTheme) {
   return {
-    "--btn": theme.primary,
-    "--btn-ink": theme.primaryInk,
-    "--interactive": theme.ring,
+    "--locus-btn": theme.primary,
+    "--locus-btn-ink": theme.primaryInk,
+    "--locus-interactive": theme.ring,
   } as React.CSSProperties;
 }

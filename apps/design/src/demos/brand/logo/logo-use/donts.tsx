@@ -4,7 +4,7 @@ import type { ReactNode } from "react";
 type LogoRule = { label: string; correct: boolean; logo: ReactNode; backdrop?: string };
 
 const busyBackdrop =
-  "repeating-linear-gradient(45deg, var(--s1) 0 10px, var(--s2) 10px 20px, var(--s3) 20px 30px)";
+  "repeating-linear-gradient(45deg, var(--locus-s1) 0 10px, var(--locus-s2) 10px 20px, var(--locus-s3) 20px 30px)";
 
 const lockup = <LocusGraphWordmark withMark className="text-base" />;
 
@@ -18,7 +18,7 @@ export const logoRules: LogoRule[] = [
   {
     label: "Don't recolor it",
     correct: false,
-    logo: <LocusGraphWordmark withMark className="text-base text-[var(--s2)]" />,
+    logo: <LocusGraphWordmark withMark className="text-base text-[var(--locus-s2)]" />,
   },
   {
     label: "Don't rotate it",
@@ -31,7 +31,7 @@ export const logoRules: LogoRule[] = [
     logo: (
       <LocusGraphWordmark
         withMark
-        className="text-base drop-shadow-[0_3px_3px_color-mix(in_oklch,var(--s1)_70%,transparent)]"
+        className="text-base drop-shadow-[0_3px_3px_color-mix(in_oklch,var(--locus-s1)_70%,transparent)]"
       />
     ),
   },

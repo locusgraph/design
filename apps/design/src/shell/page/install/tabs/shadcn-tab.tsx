@@ -1,17 +1,17 @@
 import { CaretRight as ChevronRightIcon } from "@phosphor-icons/react/ssr";
 import { shadcnRegistry } from "../../../guides/installation-snippets";
 import { CopyCommand } from "../../../landing/actions/copy-command";
-import { CodeBlock } from "../../../preview/code-block";
-import { InstallLabel, InstallNote, PackageManagerSwitch } from "../install-parts";
+import { CodeBlock } from "../../../preview/code/code-block";
+import { InstallLabel, InstallMeta, InstallNote } from "../install-parts";
 import { shadcnAddCommand, usePackageManager } from "../package-manager";
-import { type RegistryTree, registryTreeSummary } from "../registry-tree";
+import { packageNameOf, type RegistryTree, registryTreeMeta } from "../registry-tree";
 
 const themeImport = '@import "../styles/locus.css";';
 
 function OneTimeSetup() {
   return (
-    <details className="group/setup ring-1 ring-border">
-      <summary className="flex cursor-pointer list-none items-center gap-2 px-3 py-2 text-sm font-medium focus-ring select-none hover:bg-accent [&::-webkit-details-marker]:hidden">
+    <details className="group/setup border-t border-border pt-4">
+      <summary className="flex cursor-pointer list-none items-center gap-2 text-sm font-medium select-none hover:text-foreground locus-focus-ring [&::-webkit-details-marker]:hidden">
         <ChevronRightIcon
           weight="bold"
           aria-hidden
@@ -19,7 +19,7 @@ function OneTimeSetup() {
         />
         One-time setup
       </summary>
-      <div className="flex flex-col gap-3 border-t border-border p-3">
+      <div className="flex flex-col gap-3 pt-3">
         <InstallNote>
           Add the registry to <code className="font-mono text-foreground">components.json</code>:
         </InstallNote>
@@ -42,12 +42,19 @@ export function ShadcnTab({ registryName, tree }: ShadcnTabProps) {
   return (
     <div className="flex flex-col gap-4">
       <div className="flex flex-col gap-2">
-        <div className="flex items-center justify-between gap-3">
-          <InstallLabel>Add</InstallLabel>
-          <PackageManagerSwitch />
-        </div>
+        <InstallLabel>Add</InstallLabel>
         <CopyCommand command={shadcnAddCommand(packageManager, registryName)} />
-        <InstallNote>{tree ? registryTreeSummary(tree) : "Reading the registry item…"}</InstallNote>
+        {tree ? (
+          <InstallMeta parts={registryTreeMeta(tree)} />
+        ) : (
+          <InstallNote>Reading the registry item…</InstallNote>
+        )}
+        {tree && tree.dependencies.length > 0 && (
+          <p className="text-xs text-muted-foreground">
+            Copies into <code className="font-mono">components/locus</code> and adds{" "}
+            {tree.dependencies.map(packageNameOf).join(", ")}.
+          </p>
+        )}
       </div>
       <OneTimeSetup />
     </div>

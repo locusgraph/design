@@ -135,7 +135,11 @@ export default defineDemo({
   ],
   examples: {
     Basic: { description: "A muted pill list with one panel per tab.", component: Basic },
-    Line: { description: "The line variant underlines the active tab.", component: Line },
+    Line: {
+      description:
+        "The line variant underlines the active tab. Vertical line tabs tint the active tab instead of drawing a side bar.",
+      component: Line,
+    },
     Vertical: {
       description: "Vertical tabs with icons work as a settings menu.",
       component: Vertical,

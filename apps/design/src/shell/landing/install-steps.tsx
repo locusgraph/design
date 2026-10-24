@@ -9,7 +9,7 @@ const steps = [
 export function InstallSteps() {
   return (
     <section aria-labelledby="install-title" className="flex flex-col gap-4 px-6 sm:px-10">
-      <h2 id="install-title" className="eyebrow">
+      <h2 id="install-title" className="locus-eyebrow">
         Install
       </h2>
       <ol className="flex flex-col divide-y ring-1 ring-border">

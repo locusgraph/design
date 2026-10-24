@@ -19,7 +19,7 @@ import { GreySample } from "./grey-sample";
 function PreviewRow({ label, children }: { label: string; children: React.ReactNode }) {
   return (
     <div className="flex flex-col gap-3 p-5 sm:flex-row sm:items-center sm:gap-6">
-      <span className="eyebrow w-24 shrink-0">{label}</span>
+      <span className="locus-eyebrow w-24 shrink-0">{label}</span>
       <div className="flex min-w-0 flex-1 flex-wrap items-center gap-3">{children}</div>
     </div>
   );
@@ -44,7 +44,7 @@ export function ComponentsSample() {
         <Badge>New</Badge>
       </PreviewRow>
       <PreviewRow label="States">
-        <StateSwatch label="Rest" color="var(--btn)" />
+        <StateSwatch label="Rest" color="var(--locus-btn)" />
         <StateSwatch label="Hover" color="var(--btn-hover)" />
         <StateSwatch label="Pressed" color="var(--btn-active)" />
         <StateSwatch label="Subtle" color="var(--btn-subtle)" />

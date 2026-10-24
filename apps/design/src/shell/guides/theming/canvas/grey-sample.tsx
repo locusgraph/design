@@ -35,8 +35,8 @@ export function GreySample() {
         ))}
       </div>
       <div className="ring-1 ring-border">
-        <GreyStrip surface="var(--background)" label="Page" />
-        <GreyStrip surface="var(--surface)" label="Card" />
+        <GreyStrip surface="var(--locus-background)" label="Page" />
+        <GreyStrip surface="var(--locus-surface)" label="Card" />
         <GreyStrip surface="var(--btn-subtle)" label="Tinted" />
       </div>
       <p className="text-xs text-pretty text-muted-foreground">

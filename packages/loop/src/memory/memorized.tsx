@@ -85,7 +85,11 @@ function MemorizedRow({ item, onUndo }: { item: MemorizedItem; onUndo?: (id: str
         {item.kind && <span className="text-xs text-faint">{item.kind}</span>}
       </span>
       {undone ? (
-        <span ref={undoneLabel} tabIndex={-1} className="shrink-0 text-xs text-faint focus-ring">
+        <span
+          ref={undoneLabel}
+          tabIndex={-1}
+          className="shrink-0 text-xs text-faint locus-focus-ring"
+        >
           Undone
         </span>
       ) : (
@@ -97,7 +101,7 @@ function MemorizedRow({ item, onUndo }: { item: MemorizedItem; onUndo?: (id: str
               undoWasPressed.current = true;
               onUndo(item.id);
             }}
-            className="shrink-0 text-xs text-faint focus-ring transition-colors hover:text-interactive"
+            className="shrink-0 text-xs text-faint locus-focus-ring transition-colors hover:text-interactive"
           >
             Undo
           </button>

@@ -44,7 +44,7 @@ export function Shell({ children }: { children: React.ReactNode }) {
   };
   return (
     <AppShell
-      bodyClassName="brand-grid-quiet"
+      bodyClassName="locus-brand-grid-quiet"
       sidebar={
         <AppSidebar brand={brand} groups={groups} activeHref={pathname} linkComponent={Link} />
       }

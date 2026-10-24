@@ -15,7 +15,7 @@ export function LandingFooter() {
           <a
             key={link.title}
             href={link.href}
-            className="underline-offset-4 focus-ring hover:text-foreground hover:underline"
+            className="underline-offset-4 locus-focus-ring hover:text-foreground hover:underline"
           >
             {link.title}
           </a>

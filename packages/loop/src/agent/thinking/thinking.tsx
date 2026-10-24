@@ -54,7 +54,10 @@ export function Thinking({ text, state, durationMs, defaultOpen, className }: Th
         <span aria-hidden className={lineIconClass}>
           <BrainIcon weight="bold" aria-hidden />
         </span>
-        <span aria-live="polite" className={cn("shrink-0", streaming && "motion-safe:shimmer")}>
+        <span
+          aria-live="polite"
+          className={cn("shrink-0", streaming && "motion-safe:locus-shimmer")}
+        >
           {streaming ? "Thinking…" : thoughtDurationLabel(durationMs)}
         </span>
         {!open && summary && (

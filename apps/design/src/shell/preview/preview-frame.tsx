@@ -10,7 +10,12 @@ import {
   isFrameReadyMessage,
 } from "./frame-messages";
 
-type PreviewFrameProps = { message: FrameRenderMessage; viewport: Viewport; height: PreviewHeight };
+type PreviewFrameProps = {
+  message: FrameRenderMessage;
+  viewport: Viewport;
+  height: PreviewHeight;
+  expectedHeight?: number;
+};
 
 const TALL_HEIGHT = 480;
 
@@ -44,16 +49,22 @@ function useWaitedTooLong(ms: number) {
   return waited;
 }
 
-export function PreviewFrame({ message, viewport, height }: PreviewFrameProps) {
+function frameHeightFor(
+  height: PreviewHeight,
+  contentHeight: number,
+  measured: boolean,
+  expectedHeight: number | undefined
+) {
+  if (!measured) return expectedHeight ?? autoPreviewMinHeight;
+  return Math.max(height === "tall" ? TALL_HEIGHT : autoPreviewMinHeight, contentHeight);
+}
+
+export function PreviewFrame({ message, viewport, height, expectedHeight }: PreviewFrameProps) {
   const frame = useRef<HTMLIFrameElement>(null);
   const { ready, contentHeight } = useFrameEvents(frame);
   const waitedTooLong = useWaitedTooLong(2000);
   const measured = contentHeight > 0 || waitedTooLong;
-  const frameHeight = !measured
-    ? autoPreviewMinHeight
-    : height === "tall"
-      ? Math.max(TALL_HEIGHT, contentHeight)
-      : Math.max(autoPreviewMinHeight, contentHeight);
+  const frameHeight = frameHeightFor(height, contentHeight, measured, expectedHeight);
   const [initialTheme] = useState(message.theme);
 
   useEffect(() => {

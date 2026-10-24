@@ -1,3 +1,5 @@
+"use client";
+
 import {
   cn,
   DropdownMenu,
@@ -41,7 +43,7 @@ export function ModelPicker({
         disabled={disabled}
         aria-label={`${label}: ${selected?.name ?? "none selected"}`}
         className={cn(
-          "group inline-flex h-control-sm max-w-full items-center gap-1.5 rounded-full px-2.5 text-xs focus-ring transition-colors duration-150 hover:bg-accent disabled:pointer-events-none disabled:opacity-50 data-[state=open]:bg-accent motion-reduce:transition-none",
+          "group inline-flex h-control-sm max-w-full items-center gap-1.5 rounded-full px-2.5 text-xs locus-focus-ring transition-colors duration-150 hover:bg-accent disabled:pointer-events-none disabled:opacity-50 data-[state=open]:bg-accent motion-reduce:transition-none",
           className
         )}
       >
@@ -60,7 +62,7 @@ export function ModelPicker({
         sideOffset={6}
         className="w-80 rounded-none border-0 bg-popover p-0 shadow-overlay ring-1 ring-border"
       >
-        <DropdownMenuLabel className="eyebrow flex justify-between gap-3 px-3 pt-2.5 pb-1 font-normal">
+        <DropdownMenuLabel className="locus-eyebrow flex justify-between gap-3 px-3 pt-2.5 pb-1 font-normal">
           <span>{label}</span>
           <span className="pr-7">Per 1M tokens</span>
         </DropdownMenuLabel>

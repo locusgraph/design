@@ -60,4 +60,25 @@ describe("History", () => {
     expect(ids).toHaveLength(4);
     expect(new Set(ids).size).toBe(4);
   });
+
+  it("virtualizes a long history and keeps day headings and set sizes", () => {
+    const many = Array.from({ length: 400 }, (_, index) => ({
+      id: `thr_${index}`,
+      title: `Thread ${index}`,
+      updatedAt: localIso(10, 16, 23, 0),
+    }));
+    const html = renderToStaticMarkup(
+      <History threads={many} now={localIso(10, 17, 12)} onSelect={() => {}} />
+    );
+    const rendered = html.match(/data-slot="history-item"/g) ?? [];
+    expect(html).toContain('data-slot="history-list"');
+    expect(html).toContain("Yesterday");
+    expect(rendered.length).toBeGreaterThan(0);
+    expect(rendered.length).toBeLessThan(60);
+    expect(html).toContain('aria-setsize="400"');
+    const plain = renderToStaticMarkup(
+      <History threads={many} virtualize={false} onSelect={() => {}} />
+    );
+    expect(plain.match(/data-slot="history-item"/g)).toHaveLength(400);
+  });
 });

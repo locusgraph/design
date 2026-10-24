@@ -1,11 +1,11 @@
 [data-theme-lab] {
-  --btn-hover: color-mix(in oklch, var(--btn) 84%, var(--background));
-  --btn-active: color-mix(in oklch, var(--btn) 72%, var(--background));
-  --grey-a1: color-mix(in oklch, var(--foreground) 4%, transparent);
-  --grey-a2: color-mix(in oklch, var(--foreground) 8%, transparent);
-  --grey-a3: color-mix(in oklch, var(--foreground) 14%, transparent);
-  --grey-a4: color-mix(in oklch, var(--foreground) 24%, transparent);
-  --btn-subtle: color-mix(in oklch, var(--btn) 12%, transparent);
+  --btn-hover: color-mix(in oklch, var(--locus-btn) 84%, var(--locus-background));
+  --btn-active: color-mix(in oklch, var(--locus-btn) 72%, var(--locus-background));
+  --grey-a1: color-mix(in oklch, var(--locus-foreground) 4%, transparent);
+  --grey-a2: color-mix(in oklch, var(--locus-foreground) 8%, transparent);
+  --grey-a3: color-mix(in oklch, var(--locus-foreground) 14%, transparent);
+  --grey-a4: color-mix(in oklch, var(--locus-foreground) 24%, transparent);
+  --btn-subtle: color-mix(in oklch, var(--locus-btn) 12%, transparent);
 }
 
 [data-theme-lab] [data-slot="button"][data-variant="default"]:hover:not(:disabled) {
@@ -17,8 +17,8 @@
 }
 
 [data-theme-lab][data-contrast="high"] {
-  --border: color-mix(in oklch, var(--foreground) 34%, var(--surface));
-  --input: color-mix(in oklch, var(--foreground) 58%, var(--surface));
-  --muted-foreground: color-mix(in oklch, var(--foreground) 84%, var(--surface));
-  --faint: color-mix(in oklch, var(--foreground) 66%, var(--surface));
+  --locus-border: color-mix(in oklch, var(--locus-foreground) 34%, var(--locus-surface));
+  --locus-input: color-mix(in oklch, var(--locus-foreground) 58%, var(--locus-surface));
+  --locus-muted-foreground: color-mix(in oklch, var(--locus-foreground) 84%, var(--locus-surface));
+  --locus-faint: color-mix(in oklch, var(--locus-foreground) 66%, var(--locus-surface));
 }

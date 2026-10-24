@@ -23,6 +23,8 @@ pnpm add @locusgraph/components @locusgraph/blocks @locusgraph/loop @locusgraph/
 @import "@locusgraph/brand/sources.css";
 \`\`\`
 
+An app that also uses its own shadcn components adds \`@import "@locusgraph/components/shadcn.css";\` after the theme, so the shadcn variables (\`--background\`, \`--primary\`, \`--muted-foreground\`, \`--radius\`) point at the Locus ones.
+
 ## Copy the source with shadcn
 
 \`\`\`bash
@@ -34,16 +36,17 @@ Every item is listed at https://design.locusgraph.com/r/registry.json. Files lan
 ## House style
 
 - Containers, fields, menus and code are square: never add a radius class. Buttons, chips, badges, dots, avatars and bars are pills (\`rounded-full\`). Nothing in between.
-- Every clickable element shows focus with \`focus-ring\` (a 2px ring, offset 2px), or \`focus-ring-inset\` on full-bleed rows, tabs and scroll areas where an outer ring would clip. Text fields use \`focus-visible:border-ring\` with \`ring-1\`.
+- Every clickable element shows focus with \`locus-focus-ring\` (a 2px ring, offset 2px), or \`locus-focus-ring-inset\` on full-bleed rows, tabs and scroll areas where an outer ring would clip. Text fields use \`focus-visible:border-ring\` with \`ring-1\`.
 - App pages (components, blocks, shells): group with ruled lines (\`RuleGrid\`, \`ring-1 ring-border\`, \`divide-y\`), not cards or shadows.
 - The chat area (\`@locusgraph/loop\`): no rules, frames or panels. Hierarchy comes from text weight and tone, spacing and color that means state. Only fields (the composer) and overlays (menus, popovers) keep a frame.
-- Small labels use the \`eyebrow\` class (mono, \`text-2xs\`, uppercase, muted).
+- Small labels use the \`locus-eyebrow\` class (mono, \`text-2xs\`, uppercase, muted).
 - Type sizes come from the scale only: \`text-2xs\` (0.6875rem, mono meta and tiny counts), \`text-xs\`, \`text-code\` (0.8125rem, mono names and commands), \`text-sm\` (UI and chat), \`text-base\` and up. No \`text-[13px]\`.
 - Controls share four heights: \`h-control-xs\` (24px), \`h-control-sm\` (32px), \`h-control\` (36px), \`h-control-lg\` (40px), with matching \`size-control-*\` for icon buttons.
-- One primary action per view. Color means state: \`text-interactive\` (clickable, on hover), \`text-memory\` (remembered), \`text-good\`, \`text-warn\` (waiting), \`text-destructive\`. Chart series use \`--s1\` to \`--s8\` and never carry meaning.
+- One primary action per view. Color means state: \`text-interactive\` (clickable, on hover), \`text-memory\` (remembered), \`text-good\`, \`text-warn\` (waiting), \`text-destructive\`. Chart series use \`--locus-s1\` to \`--locus-s8\` and never carry meaning.
 - Text tones: \`text-foreground\` for values, \`text-muted-foreground\` for labels, \`text-faint\` for meta and hints. All three pass WCAG AA.
 - Surfaces: the page is \`bg-background\` (off-white, near-black in dark); cells and panels are a solid \`bg-card\` one step above it. Action strips are \`RuleGridFooter\` (\`border-t bg-muted/70\`), header strips \`RuleGridHeader\` (\`border-b bg-muted/35\`). One tint per strip; never tint content.
-- Use tokens (\`bg-card\`, \`bg-muted\`, \`text-muted-foreground\`, \`border-input\`), never raw hex.`;
+- Use tokens (\`bg-card\`, \`bg-muted\`, \`text-muted-foreground\`, \`border-input\`), never raw hex.
+- In CSS the theme variables are \`--locus-*\` (\`var(--locus-surface)\`, \`var(--locus-border)\`, \`var(--locus-muted)\`) and the theme's own classes are \`locus-*\`. The shadcn names (\`--background\`, \`--muted-foreground\`) exist only when the app imports \`@locusgraph/components/shadcn.css\`.`;
 
 function firstSentence(text: string) {
   const match = text.match(/^.*?[.!?](\s|$)/);

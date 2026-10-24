@@ -2,12 +2,8 @@
 
 import { cn, Textarea } from "@locusgraph/components";
 import * as React from "react";
-import {
-  ComposerAttachButton,
-  type ComposerStatus,
-  ComposerSubmit,
-  isComposerBusy,
-} from "./composer-actions";
+import { ComposerAttachButton, ComposerSubmit } from "./composer-actions";
+import { type ComposerStatus, isComposerBusy } from "./composer-status";
 import { useAutoGrow } from "./use-auto-grow";
 
 export type ComposerProps = Omit<React.ComponentProps<"form">, "onSubmit" | "children"> & {

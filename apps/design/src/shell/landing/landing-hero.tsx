@@ -7,7 +7,7 @@ function NewLoopPill() {
   return (
     <PlaygroundLink
       href="/loop"
-      className="group flex items-center gap-2 rounded-full bg-card py-1 pr-3 pl-1 text-xs ring-1 ring-border focus-ring hover:bg-accent"
+      className="group flex items-center gap-2 rounded-full bg-card py-1 pr-3 pl-1 text-xs ring-1 ring-border locus-focus-ring hover:bg-accent"
     >
       <span className="rounded-full bg-foreground px-2 py-0.5 font-medium text-background">
         New
@@ -24,7 +24,7 @@ function NewLoopPill() {
 
 export function LandingHero() {
   return (
-    <header className="brand-grid-quiet relative flex flex-col items-start gap-6 px-6 pt-16 pb-4 sm:px-10 sm:pt-20">
+    <header className="locus-brand-grid-quiet relative flex flex-col items-start gap-6 px-6 pt-16 pb-4 sm:px-10 sm:pt-20">
       <NewLoopPill />
       <h1 className="max-w-3xl font-heading text-4xl leading-[1.05] font-semibold tracking-[-0.03em] text-balance sm:text-6xl">
         Design that keeps humans in the loop.
@@ -49,7 +49,7 @@ export function LandingHero() {
         </span>
         <PlaygroundLink
           href="/installation#copy-with-shadcn"
-          className="underline-offset-4 focus-ring hover:text-foreground hover:underline"
+          className="underline-offset-4 locus-focus-ring hover:text-foreground hover:underline"
         >
           Registry →
         </PlaygroundLink>

@@ -15,7 +15,7 @@ function DocsShell({ header, sidebar, aside, children }: DocsShellProps) {
     <TooltipProvider delayDuration={0}>
       <div
         data-slot="docs-shell"
-        className="flex min-h-svh flex-col bg-background [--docs-header-height:3.5rem] lg:[--docs-header-height:4rem]"
+        className="flex min-h-svh flex-col bg-background [--locus-docs-header-height:3.5rem] lg:[--locus-docs-header-height:4rem]"
       >
         <SkipLink />
         {header}
@@ -28,7 +28,7 @@ function DocsShell({ header, sidebar, aside, children }: DocsShellProps) {
           {sidebar && (
             <aside
               data-slot="docs-sidebar"
-              className="sticky top-[calc(var(--docs-header-height)+0.6rem)] hidden h-[calc(100svh-10rem)] lg:block"
+              className="sticky top-[calc(var(--locus-docs-header-height)+0.6rem)] hidden h-[calc(100svh-10rem)] lg:block"
             >
               {sidebar}
             </aside>
@@ -45,9 +45,11 @@ function DocsShell({ header, sidebar, aside, children }: DocsShellProps) {
             {aside && (
               <aside
                 data-slot="docs-aside"
-                className="sticky top-[calc(var(--docs-header-height)+1px)] hidden h-[calc(100svh-var(--docs-header-height)-1px)] w-72 shrink-0 flex-col gap-8 overflow-hidden pt-10 xl:flex"
+                className="sticky top-[calc(var(--locus-docs-header-height)+1px)] hidden h-[calc(100svh-var(--locus-docs-header-height)-1px)] w-72 shrink-0 flex-col gap-8 overflow-hidden pt-10 xl:flex"
               >
-                <div className="no-scrollbar flex flex-col gap-8 overflow-y-auto px-8">{aside}</div>
+                <div className="locus-no-scrollbar flex flex-col gap-8 overflow-y-auto px-8">
+                  {aside}
+                </div>
               </aside>
             )}
           </div>

@@ -73,7 +73,7 @@ function DocsHeader({
       data-slot="docs-header"
       className="sticky top-0 z-50 w-full bg-background/95 backdrop-blur"
     >
-      <div className="mx-auto flex h-(--docs-header-height) w-full max-w-[1536px] items-center gap-4 px-6 **:data-[slot=separator]:h-4!">
+      <div className="mx-auto flex h-(--locus-docs-header-height) w-full max-w-[1536px] items-center gap-4 px-6 **:data-[slot=separator]:h-4!">
         <MobileNavSheet links={links} activeHref={activeHref} linkComponent={Link}>
           {mobileNav}
         </MobileNavSheet>
@@ -94,7 +94,7 @@ function DocsHeader({
               href={link.href}
               aria-current={link.href === activeHref ? "page" : undefined}
               className={cn(
-                "px-2.5 py-1.5 text-sm font-medium text-muted-foreground transition-colors focus-ring hover:text-foreground",
+                "px-2.5 py-1.5 text-sm font-medium text-muted-foreground transition-colors locus-focus-ring hover:text-foreground",
                 link.href === activeHref && "text-foreground"
               )}
             >

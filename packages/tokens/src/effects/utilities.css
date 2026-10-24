@@ -1,5 +1,5 @@
 @theme inline {
-  @keyframes tw-shimmer {
+  @keyframes locus-shimmer {
     from {
       background-position: 100% 0;
     }
@@ -9,10 +9,10 @@
   }
 }
 
-@utility shimmer {
-  --_spread: var(--shimmer-spread, calc(3ch + 40px));
+@utility locus-shimmer {
+  --_spread: var(--locus-shimmer-spread, calc(3ch + 40px));
   --_base: currentColor;
-  --_highlight: var(--shimmer-color, oklch(from currentColor l c h / calc(alpha * 0.2)));
+  --_highlight: var(--locus-shimmer-color, oklch(from currentColor l c h / calc(alpha * 0.2)));
   background-image: linear-gradient(
     90deg,
     var(--_base) calc(50% - var(--_spread)),
@@ -26,10 +26,10 @@
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  animation: tw-shimmer var(--shimmer-duration, 2s) linear infinite;
+  animation: locus-shimmer var(--locus-shimmer-duration, 2s) linear infinite;
 
   @variant dark {
-    --_highlight: var(--shimmer-color, oklch(from currentColor max(0.8, calc(l + 0.4)) c h / calc(alpha + 0.4)));
+    --_highlight: var(--locus-shimmer-color, oklch(from currentColor max(0.8, calc(l + 0.4)) c h / calc(alpha + 0.4)));
   }
 
   @media (prefers-reduced-motion: reduce) {
@@ -39,7 +39,7 @@
   }
 }
 
-@utility scrollbar-none {
+@utility locus-scrollbar-none {
   scrollbar-width: none;
 
   &::-webkit-scrollbar {
@@ -47,24 +47,24 @@
   }
 }
 
-@utility scrollbar-thin {
+@utility locus-scrollbar-thin {
   scrollbar-width: thin;
 }
 
-@utility scrollbar-gutter-stable {
+@utility locus-scrollbar-gutter-stable {
   scrollbar-gutter: stable;
 }
 
-@utility eyebrow {
+@utility locus-eyebrow {
   font-family: var(--font-mono);
   font-size: var(--text-2xs);
   line-height: var(--text-2xs--line-height);
   letter-spacing: 0.05em;
   text-transform: uppercase;
-  color: var(--muted-foreground);
+  color: var(--locus-muted-foreground);
 }
 
-@utility focus-ring {
+@utility locus-focus-ring {
   outline: none;
 
   &:focus-visible {
@@ -73,7 +73,7 @@
   }
 }
 
-@utility focus-ring-inset {
+@utility locus-focus-ring-inset {
   outline: none;
 
   &:focus-visible {

@@ -15,7 +15,7 @@ export function SegmentedRow<Value extends string>({
 }: SegmentedRowProps<Value>) {
   return (
     <div className="flex items-center justify-between gap-3 px-4 py-3">
-      <span className="eyebrow">{label}</span>
+      <span className="locus-eyebrow">{label}</span>
       <ToggleGroup
         type="single"
         variant="outline"

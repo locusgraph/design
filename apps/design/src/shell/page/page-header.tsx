@@ -74,7 +74,7 @@ export function PageHeader({ title, description, markdown, previous, next }: Pag
           <NeighborButton entry={next} direction="next" />
         </div>
       </div>
-      <div className="typeset typeset-docs text-balance text-muted-foreground md:max-w-[80%]">
+      <div className="typeset locus-typeset-docs text-balance text-muted-foreground md:max-w-[80%]">
         <p>{withInlineCode(description)}</p>
       </div>
     </header>

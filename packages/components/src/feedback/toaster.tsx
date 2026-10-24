@@ -11,10 +11,10 @@ import type * as React from "react";
 import { Toaster as Sonner, type ToasterProps } from "sonner";
 
 const toasterColors = {
-  "--normal-bg": "var(--popover)",
-  "--normal-text": "var(--popover-foreground)",
-  "--normal-border": "var(--border)",
-  "--border-radius": "var(--radius)",
+  "--normal-bg": "var(--locus-popover)",
+  "--normal-text": "var(--locus-popover-foreground)",
+  "--normal-border": "var(--locus-border)",
+  "--border-radius": "var(--locus-radius)",
 } as React.CSSProperties;
 
 const statusRuleClassNames = {

@@ -60,6 +60,20 @@ function Playground({ empty }: { empty: boolean }) {
   );
 }
 
+const longQueue: PendingApproval[] = Array.from({ length: 300 }, (_, index) => ({
+  ...items[index % items.length],
+  id: `apr_long_${index}`,
+  requestedAt: now - index * 4 * minute,
+}));
+
+function LongQueue() {
+  return (
+    <div className="w-full max-w-2xl">
+      <Inbox items={longQueue} now={now} onOpen={() => {}} onApproveAll={() => {}} />
+    </div>
+  );
+}
+
 function Empty() {
   return (
     <div className="w-full max-w-2xl">
@@ -83,9 +97,15 @@ export default defineDemo({
     { name: "openId", type: "string | null", defaultValue: "null" },
     { name: "onOpen", type: "(id: string) => void" },
     { name: "onApproveAll", type: "(ids: string[]) => void" },
+    { name: "virtualize", type: "boolean", defaultValue: "true" },
   ],
   examples: {
     Empty: { description: "Nothing waiting.", component: Empty },
+    LongQueue: {
+      description:
+        "300 approvals. Above 50 the list scrolls inside the panel and only the rows near the viewport are mounted.",
+      component: LongQueue,
+    },
   },
   isNew: true,
 });

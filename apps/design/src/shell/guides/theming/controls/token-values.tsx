@@ -2,9 +2,9 @@ import type { ResolvedTheme } from "../theme-presets";
 
 function baseRows(theme: ResolvedTheme) {
   return [
-    { token: "--btn", color: theme.primary, value: theme.primary },
-    { token: "--btn-ink", color: theme.primaryInk, value: theme.primaryInk },
-    { token: "--interactive", color: theme.ring, value: theme.ring },
+    { token: "--locus-btn", color: theme.primary, value: theme.primary },
+    { token: "--locus-btn-ink", color: theme.primaryInk, value: theme.primaryInk },
+    { token: "--locus-interactive", color: theme.ring, value: theme.ring },
   ];
 }
 
@@ -12,12 +12,12 @@ function derivedRows(theme: ResolvedTheme) {
   return [
     {
       token: "--btn-hover",
-      color: `color-mix(in oklch, ${theme.primary} 84%, var(--background))`,
+      color: `color-mix(in oklch, ${theme.primary} 84%, var(--locus-background))`,
       value: "84% mix",
     },
     {
       token: "--btn-active",
-      color: `color-mix(in oklch, ${theme.primary} 72%, var(--background))`,
+      color: `color-mix(in oklch, ${theme.primary} 72%, var(--locus-background))`,
       value: "72% mix",
     },
     {
@@ -33,7 +33,7 @@ type TokenRow = { token: string; color: string; value: string };
 function TokenList({ label, rows }: { label: string; rows: TokenRow[] }) {
   return (
     <div className="flex flex-col gap-2 px-4 py-3">
-      <span className="eyebrow">{label}</span>
+      <span className="locus-eyebrow">{label}</span>
       <dl className="flex flex-col gap-1.5">
         {rows.map((row) => (
           <div key={row.token} className="flex items-center gap-2 font-mono text-xs">

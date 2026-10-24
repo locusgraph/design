@@ -29,7 +29,7 @@ export function App() {
         <LocusGraphWordmark withMark className="text-base" />
         <ThemeToggle theme={theme} onThemeChange={changeTheme} />
       </header>
-      <main className="brand-grid-quiet mx-auto flex max-w-5xl flex-col gap-8 px-6 py-10">
+      <main className="locus-brand-grid-quiet mx-auto flex max-w-5xl flex-col gap-8 px-6 py-10">
         <div className="flex flex-col gap-1.5">
           <p className="font-mono text-2xs text-muted-foreground">
             {organization.name} · {formatMicroUsd(wallet.balanceMicroUsd)} in credits
@@ -43,7 +43,7 @@ export function App() {
             <TabsTrigger value="email">Emails</TabsTrigger>
             <TabsTrigger value="agent">Agent</TabsTrigger>
           </TabsList>
-          <TabsContent value="billing" className="enter-cascade flex flex-col gap-8 pt-6">
+          <TabsContent value="billing" className="locus-enter-cascade flex flex-col gap-8 pt-6">
             <UsageAlert
               balanceMicroUsd={wallet.balanceMicroUsd}
               quotas={quotas}

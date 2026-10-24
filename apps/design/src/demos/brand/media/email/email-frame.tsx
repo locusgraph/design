@@ -14,7 +14,7 @@ export function EmailFrame({ email }: { email: RenderedEmail }) {
   return (
     <section className="flex w-[40rem] max-w-full flex-col ring-1 ring-border">
       <div className="flex flex-col gap-0.5 border-b px-4 py-3">
-        <span className="eyebrow">Subject</span>
+        <span className="locus-eyebrow">Subject</span>
         <span className="text-sm font-medium">{email.subject}</span>
       </div>
       <iframe
@@ -31,7 +31,7 @@ export function EmailFrame({ email }: { email: RenderedEmail }) {
 export function PlainTextPart({ email }: { email: RenderedEmail }) {
   return (
     <section className="flex w-[40rem] max-w-full flex-col ring-1 ring-border">
-      <span className="eyebrow border-b px-4 py-3">Plain text part</span>
+      <span className="locus-eyebrow border-b px-4 py-3">Plain text part</span>
       <pre className="overflow-x-auto px-4 py-3 font-mono text-xs whitespace-pre-wrap text-muted-foreground">
         {email.text}
       </pre>

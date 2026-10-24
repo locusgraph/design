@@ -12,7 +12,7 @@ export function DocsArticle() {
       <p className="text-muted-foreground">
         Create keys for agents and services, and limit what each key can do.
       </p>
-      <div className="typeset typeset-docs mt-6">
+      <div className="typeset locus-typeset-docs mt-6">
         <h2 id="overview">Overview</h2>
         <p>
           Every request to the platform API carries a key. A key belongs to one organization and
