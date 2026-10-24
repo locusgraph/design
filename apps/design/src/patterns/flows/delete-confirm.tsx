@@ -142,7 +142,7 @@ export function DeleteConfirm({
           <Button
             variant="ghost"
             size="sm"
-            className="text-destructive hover:bg-destructive/10 hover:text-destructive"
+            className="text-muted-foreground hover:bg-destructive/10 hover:text-destructive"
           >
             <TrashIcon weight="bold" aria-hidden="true" />
             Delete
