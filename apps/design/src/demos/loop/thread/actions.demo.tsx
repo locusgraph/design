@@ -5,7 +5,7 @@ import { defineDemo, select, toggle } from "../../../registry/define-demo";
 const answers = [
   "September spend was $1,284.20, up 18% on August, driven by the support agent.",
   "Spend rose to $1,284.20 in September. The support agent's longer prompts account for most of it.",
-  "September: $1,284.20 (+18%). Support agent, gpt-4.1, 61% of the increase.",
+  "September: $1,284.20 (+18%). Support agent, claude-sonnet-5-5, 61% of the increase.",
 ];
 
 type Reveal = "always" | "hover";

@@ -12,7 +12,7 @@ const spend = new SpendGraph({ apiKey: process.env.SPENDGRAPH_KEY });
 
 await spend.track({
   workflow: "support-agent",
-  model: "gpt-4.1",
+  model: "claude-sonnet-5-5",
   inputTokens: 1840,
   outputTokens: 312,
 });`,
