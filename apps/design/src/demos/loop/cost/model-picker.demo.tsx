@@ -44,7 +44,7 @@ const models: ModelOption[] = [
 function ChooseModel() {
   const [value, setValue] = useState("claude-sonnet-4.5");
   return (
-    <div className="flex h-[24rem] w-full justify-center">
+    <div className="flex w-full justify-center">
       <ModelPicker models={models} value={value} onChange={setValue} />
     </div>
   );
