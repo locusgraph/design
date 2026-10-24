@@ -46,6 +46,15 @@ function sentenceWord(word: string, position: number) {
   return position === 0 || isAcronym ? word : word.toLowerCase();
 }
 
+const punctuatedPhrases: [RegExp, string][] = [
+  [/\b([Rr])ead only\b/g, "$1ead-only"],
+  [/\b([Dd])onts\b/g, "$1on'ts"],
+];
+
+function punctuate(title: string) {
+  return punctuatedPhrases.reduce((text, [phrase, fixed]) => text.replace(phrase, fixed), title);
+}
+
 export function titleFromName(functionName: string) {
-  return (functionName.match(namePart) ?? [functionName]).map(sentenceWord).join(" ");
+  return punctuate((functionName.match(namePart) ?? [functionName]).map(sentenceWord).join(" "));
 }

@@ -45,4 +45,9 @@ describe("titleFromName", () => {
     expect(titleFromName("HtmlLinkTags")).toBe("HTML link tags");
     expect(titleFromName("CopyAPIKey")).toBe("Copy API key");
   });
+
+  it("restores hyphens and apostrophes that names cannot hold", () => {
+    expect(titleFromName("ReadOnlyEmpty")).toBe("Read-only empty");
+    expect(titleFromName("DosAndDonts")).toBe("Dos and don'ts");
+  });
 });
