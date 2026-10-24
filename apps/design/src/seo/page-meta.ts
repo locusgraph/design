@@ -73,6 +73,10 @@ export function staticPageMeta(path: string): PageMeta | undefined {
   return guide ? meta(path, titled(guide.title), guide.description) : undefined;
 }
 
+export function notFoundPageMeta(path: string) {
+  return meta(path, titled("Page not found"), defaultDescription);
+}
+
 export function demoPageMeta(entry: Pick<DemoEntry, "path" | "title">, description?: string) {
   const library = libraryOfPath(entry.path);
   const fitted = description ? fitDescription(description) : defaultDescription;

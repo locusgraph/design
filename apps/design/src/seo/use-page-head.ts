@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { type DemoEntry, findDemoIndexEntry } from "../registry/load-demos";
-import { demoPageMeta, type PageMeta, staticPageMeta } from "./page-meta";
+import { demoPageMeta, notFoundPageMeta, type PageMeta, staticPageMeta } from "./page-meta";
 
 function setHeadAttribute(selector: string, attribute: string, value: string) {
   document.head.querySelector(selector)?.setAttribute(attribute, value);
@@ -12,7 +12,7 @@ export function currentPageMeta(path: string, loaded: DemoEntry | undefined): Pa
     const description = loaded?.path === path ? loaded.demo.description : undefined;
     return demoPageMeta(indexEntry, description);
   }
-  return staticPageMeta(path) ?? (staticPageMeta("") as PageMeta);
+  return staticPageMeta(path) ?? notFoundPageMeta(path);
 }
 
 export function usePageHead(path: string, loaded: DemoEntry | undefined) {
