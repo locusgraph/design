@@ -48,4 +48,16 @@ describe("History", () => {
     expect(html).toContain("No conversations yet.");
     expect(html).not.toContain("<ul");
   });
+
+  it("gives each list its own group heading ids so two lists can share a page", () => {
+    const html = renderToStaticMarkup(
+      <>
+        <History threads={threads} now={localIso(10, 17, 12)} onSelect={() => {}} />
+        <History threads={threads} now={localIso(10, 17, 12)} onSelect={() => {}} />
+      </>
+    );
+    const ids = [...html.matchAll(/<h3 id="([^"]+)"/g)].map((match) => match[1]);
+    expect(ids).toHaveLength(4);
+    expect(new Set(ids).size).toBe(4);
+  });
 });

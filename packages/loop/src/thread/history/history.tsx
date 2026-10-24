@@ -2,7 +2,7 @@
 
 import { Button, cn, ScrollArea } from "@locusgraph/components";
 import { Plus as PlusIcon } from "@phosphor-icons/react/ssr";
-import type { ComponentProps } from "react";
+import { type ComponentProps, useId } from "react";
 import { type HistoryItem, HistoryRow } from "./history-row";
 import { groupThreadsByDay } from "./thread-groups";
 
@@ -32,6 +32,7 @@ export function History({
   ...props
 }: HistoryProps) {
   const groups = groupThreadsByDay(threads, now);
+  const groupIdPrefix = useId();
   return (
     <nav
       data-slot="history"
@@ -54,9 +55,9 @@ export function History({
         <ScrollArea className="min-h-0 flex-1">
           <div className="flex flex-col gap-4 pr-2.5 pb-2">
             {groups.map((group) => (
-              <section key={group.key} aria-labelledby={`thread-group-${group.key}`}>
+              <section key={group.key} aria-labelledby={`${groupIdPrefix}-${group.key}`}>
                 <h3
-                  id={`thread-group-${group.key}`}
+                  id={`${groupIdPrefix}-${group.key}`}
                   className="px-2 pb-1 font-sans text-xs text-faint"
                   suppressHydrationWarning
                 >
