@@ -49,7 +49,7 @@ export default defineDemo({
                   size="sm"
                   variant="ghost"
                   aria-label={`Revoke ${key.name}`}
-                  className="text-muted-foreground hover:text-destructive"
+                  className="text-muted-foreground hover:bg-destructive/10 hover:text-destructive"
                 >
                   Revoke
                 </Button>
