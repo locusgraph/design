@@ -37,6 +37,7 @@ export function HeaderActions({ settings, onSearch }: HeaderActionsProps) {
         onValueChange={(viewport) =>
           viewport && setParam("viewport", viewport === "desktop" ? null : viewport)
         }
+        aria-label="Preview size"
         className="hidden sm:flex"
       >
         <ToggleGroupItem value="desktop" aria-label="Desktop preview" className="size-control-sm">

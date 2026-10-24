@@ -36,6 +36,7 @@ export function PreviewToolbar({ background, canReset, onReset }: PreviewToolbar
         size="sm"
         value={background}
         onValueChange={(next) => next && setParam("background", next === "surface" ? null : next)}
+        aria-label="Preview background"
       >
         {swatches.map((swatch) => (
           <Tooltip key={swatch.value}>

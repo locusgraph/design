@@ -82,6 +82,7 @@ export function ShellToolbar(props: ShellToolbarProps) {
           spacing={1}
           value={props.viewport}
           onValueChange={(value) => value && props.onViewportChange(value as ShellViewport)}
+          aria-label="Preview size"
         >
           {viewports.map((viewport) => (
             <ToggleGroupItem
