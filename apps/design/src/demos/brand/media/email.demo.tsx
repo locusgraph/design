@@ -19,7 +19,7 @@ const outOfCreditsEmail = lowCreditsEmail({
 
 function ComposeFromKit() {
   return (
-    <KitPreview subject="acme-customers is ready" height={460}>
+    <KitPreview subject="acme-customers is ready">
       <EmailLayout preview="Your graph acme-customers is ready">
         <EmailLabel>Graphs</EmailLabel>
         <EmailHeading>acme-customers is ready</EmailHeading>
@@ -37,7 +37,7 @@ function ComposeFromKit() {
 }
 
 function OutOfCredits() {
-  return <EmailFrame email={outOfCreditsEmail} height={420} />;
+  return <EmailFrame email={outOfCreditsEmail} />;
 }
 
 function PlainText() {
