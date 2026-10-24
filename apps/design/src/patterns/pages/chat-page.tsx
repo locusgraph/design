@@ -52,6 +52,7 @@ export function ChatPage({
         part={part}
         risk="write"
         actionLabel="Archive 3 accounts"
+        autoFocus={false}
         decision={session.decision}
         onApprove={() => session.decide(decideBy(true))}
         onDeny={(reason) => session.decide(decideBy(false, reason))}
