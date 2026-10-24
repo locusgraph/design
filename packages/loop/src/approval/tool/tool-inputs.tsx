@@ -1,5 +1,5 @@
 import { cn } from "@locusgraph/components";
-import { useId, useState } from "react";
+import { useState } from "react";
 
 function isPlainRecord(value: unknown): value is Record<string, unknown> {
   return typeof value === "object" && value !== null && !Array.isArray(value);
@@ -50,7 +50,6 @@ function rawJson(input: unknown) {
 
 export function ToolInputs({ input, muted = false }: { input: unknown; muted?: boolean }) {
   const [showRaw, setShowRaw] = useState(false);
-  const rawId = useId();
   const entries = isPlainRecord(input) ? Object.entries(input) : null;
   return (
     <div data-slot="tool-inputs" className="flex flex-col gap-2">
@@ -75,7 +74,7 @@ export function ToolInputs({ input, muted = false }: { input: unknown; muted?: b
         </dl>
       )}
       {(showRaw || !entries) && (
-        <pre id={rawId} className="overflow-x-auto font-mono text-xs text-muted-foreground">
+        <pre className="overflow-x-auto font-mono text-xs text-muted-foreground">
           {rawJson(input)}
         </pre>
       )}
@@ -83,8 +82,6 @@ export function ToolInputs({ input, muted = false }: { input: unknown; muted?: b
         <button
           type="button"
           className="ml-28 self-start text-xs sm:ml-36 text-faint focus-ring hover:text-interactive motion-safe:transition-colors"
-          aria-expanded={showRaw}
-          aria-controls={showRaw ? rawId : undefined}
           onClick={() => setShowRaw((current) => !current)}
         >
           {showRaw ? "Show fields" : "Show raw"}
