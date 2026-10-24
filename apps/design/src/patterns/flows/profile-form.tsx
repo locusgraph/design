@@ -164,15 +164,19 @@ export function ProfileForm({
           <Field data-invalid={!!visibleError("bio") || undefined}>
             <div className="flex items-baseline justify-between gap-3">
               <FieldLabel htmlFor={`${fieldId}-bio`}>Bio</FieldLabel>
-              <span className="text-xs text-muted-foreground tabular-nums" aria-live="polite">
+              <span
+                id={`${fieldId}-bio-count`}
+                className="text-xs text-muted-foreground tabular-nums"
+              >
                 {values.bio.length}/{bioLimit}
+                <span className="sr-only"> characters</span>
               </span>
             </div>
             <Textarea
               id={`${fieldId}-bio`}
               rows={3}
               aria-invalid={!!visibleError("bio")}
-              aria-describedby={describedBy("bio", true)}
+              aria-describedby={`${fieldId}-bio-count ${describedBy("bio", true)}`}
               value={values.bio}
               onChange={(event) => update("bio", event.target.value)}
               onBlur={() => markTouched("bio")}
