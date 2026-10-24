@@ -48,8 +48,8 @@ const rowColumns =
 
 function ThemeValue({ value, theme }: { value: ColorValue; theme: string }) {
   return (
-    <span className="col-start-2 flex items-center gap-0.5 sm:col-start-auto">
-      <span className="w-9 text-2xs text-faint sm:hidden">{theme}</span>
+    <span className="flex items-center gap-1">
+      <span className="text-2xs text-faint sm:hidden">{theme}</span>
       <span className="font-mono text-xs">{value.label}</span>
       <CopyButton value={value.css} label={`${theme} value`} />
     </span>
@@ -73,8 +73,10 @@ export function SwatchRow({ color }: { color: PaletteColor }) {
           <CopyButton value={color.token} label={color.token} />
         </span>
       </span>
-      <ThemeValue value={color.light} theme="light" />
-      <ThemeValue value={color.dark} theme="dark" />
+      <span className="col-start-2 flex flex-wrap gap-x-4 sm:contents">
+        <ThemeValue value={color.light} theme="light" />
+        <ThemeValue value={color.dark} theme="dark" />
+      </span>
     </div>
   );
 }
