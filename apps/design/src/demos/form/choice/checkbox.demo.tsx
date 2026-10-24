@@ -40,8 +40,8 @@ function Group() {
       <FieldGroup className="gap-3">
         {notifications.map((item) => (
           <Field key={item.id} orientation="horizontal">
-            <Checkbox id={item.id} defaultChecked={item.id !== "members"} />
-            <FieldLabel htmlFor={item.id}>{item.label}</FieldLabel>
+            <Checkbox id={`email-${item.id}`} defaultChecked={item.id !== "members"} />
+            <FieldLabel htmlFor={`email-${item.id}`}>{item.label}</FieldLabel>
           </Field>
         ))}
       </FieldGroup>
