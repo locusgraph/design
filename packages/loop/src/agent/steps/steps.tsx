@@ -77,7 +77,9 @@ export function Steps({ steps, title = "Plan", className }: StepsProps) {
           <ListChecksIcon weight="bold" aria-hidden />
         </span>
         <span className="truncate">{title}</span>
-        <span className="shrink-0 text-faint tabular-nums">{progressLabel(steps)}</span>
+        <span aria-live="polite" className="shrink-0 text-faint tabular-nums">
+          {progressLabel(steps)}
+        </span>
       </header>
       <ol className="flex min-w-0 flex-col text-sm">
         {steps.map((step) => (
