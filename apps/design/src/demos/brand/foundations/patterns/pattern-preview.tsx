@@ -52,9 +52,9 @@ export function PatternPreview({ pattern }: { pattern: BrandPattern }) {
       <div className={`${background} flex h-72 items-center justify-center overflow-hidden`}>
         <PatternContent pattern={pattern} />
       </div>
-      <div className="flex items-center justify-between gap-4 border-t px-4 py-3">
+      <div className="flex flex-col gap-0.5 border-t px-4 py-3">
         <code className="font-mono text-xs">.{pattern}</code>
-        <span className="text-right text-xs text-muted-foreground">{patternUsage[pattern]}</span>
+        <span className="text-xs text-muted-foreground">{patternUsage[pattern]}</span>
       </div>
     </div>
   );
