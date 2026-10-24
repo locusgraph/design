@@ -79,7 +79,7 @@ export function Tool({
       onOpenChange={setOpen}
       className={cn("flex min-w-0 flex-col", className)}
     >
-      <CollapsibleTrigger aria-expanded={open} className={lineTriggerClass}>
+      <CollapsibleTrigger className={lineTriggerClass}>
         <span aria-hidden className={toneClasses[tone].icon}>
           {icon ?? <WrenchIcon weight="bold" aria-hidden />}
         </span>

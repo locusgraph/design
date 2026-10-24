@@ -50,7 +50,7 @@ export function Thinking({ text, state, durationMs, defaultOpen, className }: Th
       onOpenChange={setOpen}
       className={cn("flex min-w-0 flex-col", className)}
     >
-      <CollapsibleTrigger aria-expanded={open} className={lineTriggerClass}>
+      <CollapsibleTrigger className={lineTriggerClass}>
         <span aria-hidden className={lineIconClass}>
           <BrainIcon weight="bold" aria-hidden />
         </span>
