@@ -59,6 +59,7 @@ export function Thinking({ text, state, durationMs, defaultOpen, className }: Th
         </span>
         {!open && summary && (
           <span data-slot="thinking-summary" className="min-w-0 truncate text-faint">
+            <span className="sr-only">: </span>
             {summary}
           </span>
         )}

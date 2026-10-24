@@ -38,6 +38,7 @@ export function ToolStatus({ state }: { state: ToolState }) {
       className={visibleClass ?? "sr-only"}
     >
       {toolStateLabels[state]}
+      <span className="sr-only">: </span>
     </span>
   );
 }
