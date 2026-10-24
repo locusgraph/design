@@ -78,8 +78,8 @@ export function ComponentsSample() {
         </Tabs>
       </PreviewRow>
       <PreviewRow label="Progress">
-        <Progress value={62} className="max-w-64" />
-        <Slider defaultValue={[40]} max={100} className="max-w-48" />
+        <Progress value={62} aria-label="Sample progress" className="max-w-64" />
+        <Slider defaultValue={[40]} max={100} aria-label="Sample value" className="max-w-64" />
       </PreviewRow>
     </div>
   );
