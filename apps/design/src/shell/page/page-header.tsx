@@ -8,6 +8,7 @@ import {
 import { useState } from "react";
 import type { DemoIndexEntry } from "../../registry/load-demos";
 import { PlaygroundLink } from "../nav/playground-nav";
+import { withInlineCode } from "./prose/inline-code";
 
 type PageHeaderProps = {
   title: string;
@@ -74,7 +75,7 @@ export function PageHeader({ title, description, markdown, previous, next }: Pag
         </div>
       </div>
       <div className="typeset typeset-docs text-balance text-muted-foreground md:max-w-[80%]">
-        <p>{description}</p>
+        <p>{withInlineCode(description)}</p>
       </div>
     </header>
   );

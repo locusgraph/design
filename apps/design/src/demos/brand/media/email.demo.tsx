@@ -63,7 +63,7 @@ export default defineDemo({
   examples: {
     ComposeFromKit: {
       description:
-        "A new email built from the kit: EmailLayout, EmailLabel, EmailHeading, EmailText, EmailRows and EmailButton, rendered with renderEmail.",
+        "A new email built from the kit: `EmailLayout`, `EmailLabel`, `EmailHeading`, `EmailText`, `EmailRows` and `EmailButton`, rendered with `renderEmail`.",
       component: ComposeFromKit,
     },
     OutOfCredits: {

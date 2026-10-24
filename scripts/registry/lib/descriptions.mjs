@@ -15,7 +15,7 @@ export function demoDescriptions(root) {
   const descriptions = new Map();
   for (const file of demoFiles(join(root, "apps/design/src/demos"))) {
     const match = readFileSync(file, "utf8").match(descriptionField);
-    if (match) descriptions.set(basename(file, ".demo.tsx"), match[1]);
+    if (match) descriptions.set(basename(file, ".demo.tsx"), match[1].replaceAll("`", ""));
   }
   return descriptions;
 }

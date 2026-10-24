@@ -48,7 +48,7 @@ export function canonicalUrl(path: string) {
 }
 
 export function fitDescription(text: string, limit = descriptionLimit) {
-  const clean = text.replace(/\s+/g, " ").trim();
+  const clean = text.replaceAll("`", "").replace(/\s+/g, " ").trim();
   if (clean.length <= limit) return clean;
   const cut = clean.slice(0, limit - 1);
   const lastSpace = cut.lastIndexOf(" ");

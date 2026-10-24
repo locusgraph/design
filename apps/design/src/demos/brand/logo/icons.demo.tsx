@@ -137,7 +137,7 @@ export default defineDemo({
     },
     NextAppIcon: {
       description:
-        "In Next.js, render it with ImageResponse from app/icon.tsx; repeat in app/apple-icon.tsx at 180.",
+        "In Next.js, render it with `ImageResponse` from `app/icon.tsx`; repeat in `app/apple-icon.tsx` at 180.",
       component: NextAppIcon,
     },
     HtmlLinkTags: {

@@ -1,18 +1,6 @@
 import type { DocExample } from "../../../registry/demo-docs";
 import { CodeTeaser } from "../../preview/code-teaser";
-
-function withInlineCode(text: string) {
-  return text.split(/(`[^`]+`)/).map((part, index) =>
-    part.startsWith("`") && part.endsWith("`") ? (
-      // biome-ignore lint/suspicious/noArrayIndexKey: the parts of one fixed string never reorder
-      <code key={index} className="font-mono text-[0.9em] text-foreground">
-        {part.slice(1, -1)}
-      </code>
-    ) : (
-      part
-    )
-  );
-}
+import { withInlineCode } from "../prose/inline-code";
 
 export function ExampleCard({ example }: { example: DocExample }) {
   const Example = example.component;

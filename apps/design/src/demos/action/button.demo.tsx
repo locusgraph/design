@@ -72,7 +72,7 @@ function AsLink() {
 export default defineDemo({
   title: "Button",
   description:
-    "Trigger an action. Variants set the weight, sizes set the density, and asChild renders a link as a button.",
+    "Trigger an action. Variants set the weight, sizes set the density, and `asChild` renders a link as a button.",
   controls: {
     variant: select(variants),
     size: select(sizes),
