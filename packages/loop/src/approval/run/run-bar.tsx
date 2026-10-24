@@ -72,7 +72,7 @@ export function RunBar({
         className
       )}
     >
-      <span className="flex min-w-0 flex-1 items-center gap-2.5 text-sm">
+      <span className="flex min-w-0 flex-auto items-center gap-2.5 text-sm">
         {runName && <span className="truncate font-medium text-foreground">{runName}</span>}
         <span role="status" aria-live="polite" className={cn("shrink-0", statusTone[status])}>
           {statusLabels[status]}
