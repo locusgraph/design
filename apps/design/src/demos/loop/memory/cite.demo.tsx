@@ -29,7 +29,7 @@ function InAnswer() {
 export default defineDemo({
   title: "Cite",
   description:
-    "A small numbered chip next to a claim. Hover or focus shows the source title, host and snippet. A citation with a url is a link; without one it is a button that calls onOpen.",
+    "A small numbered chip next to a claim. Hover or focus shows the source title, host and snippet. A citation with a `url` is a link; without one it is a button that calls `onOpen`.",
   controls: { withUrl: toggle(true) },
   playground: ({ withUrl }) => (
     <p className="max-w-prose text-sm">

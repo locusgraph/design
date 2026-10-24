@@ -72,7 +72,7 @@ export default defineDemo({
   ],
   examples: {
     ReadOnlyEmpty: {
-      description: "Without newKeyHref, it tells the viewer to ask an owner.",
+      description: "Without `newKeyHref`, it tells the viewer to ask an owner.",
       component: ReadOnlyEmpty,
     },
   },

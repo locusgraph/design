@@ -152,7 +152,7 @@ export default defineDemo({
       component: Stats,
     },
     LinkCells: {
-      description: "Cells rendered as links with asChild, with hover and keyboard focus.",
+      description: "Cells rendered as links with `asChild`, with hover and keyboard focus.",
       component: LinkCells,
     },
     SpanningCell: {

@@ -97,7 +97,7 @@ export default defineDemo({
       component: Default,
     },
     WaitingForApproval: {
-      description: "A dynamic tool takes its name from toolName, in words: graph write.",
+      description: "A dynamic tool takes its name from `toolName`, in words: graph write.",
       component: WaitingForApproval,
     },
   },

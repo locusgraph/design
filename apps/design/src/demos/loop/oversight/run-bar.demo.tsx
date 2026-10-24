@@ -50,7 +50,7 @@ export default defineDemo({
   ],
   examples: {
     WithoutStepping: {
-      description: "Leave out onStep when the runtime cannot run one step at a time.",
+      description: "Leave out `onStep` when the runtime cannot run one step at a time.",
       component: WithoutStepping,
     },
   },

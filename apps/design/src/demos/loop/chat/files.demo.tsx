@@ -32,7 +32,7 @@ function Grid() {
 export default defineDemo({
   title: "Files",
   description:
-    "Files on a message or in the composer: an icon or image thumbnail, the name, and the size when known. Pass onRemove to make each chip removable.",
+    "Files on a message or in the composer: an icon or image thumbnail, the name, and the size when known. Pass `onRemove` to make each chip removable.",
   controls: { layout: select(layouts), removable: toggle(true) },
   playground: ({ layout, removable }) => (
     <Files
