@@ -67,7 +67,7 @@ export default defineDemo({
       component: ComposeFromKit,
     },
     OutOfCredits: {
-      description: "lowCreditsEmail with a zero balance switches to the out-of-credits copy.",
+      description: "`lowCreditsEmail` with a zero balance switches to the out-of-credits copy.",
       component: OutOfCredits,
     },
     PlainText: {

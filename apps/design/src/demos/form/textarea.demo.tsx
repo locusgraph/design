@@ -68,7 +68,7 @@ export default defineDemo({
       component: WithField,
     },
     Invalid: {
-      description: "aria-invalid colors the border, and FieldError announces the message.",
+      description: "`aria-invalid` colors the border, and `FieldError` announces the message.",
       component: Invalid,
     },
     WithButton: {

@@ -160,7 +160,7 @@ export default defineDemo({
   ],
   examples: {
     MultipleScopes: {
-      description: "multiple with chips picks several scopes for an API key.",
+      description: "`multiple` with chips picks several scopes for an API key.",
       component: MultipleScopes,
     },
     GroupedRegions: {
@@ -168,7 +168,7 @@ export default defineDemo({
       component: GroupedRegions,
     },
     WithClear: {
-      description: "showClear adds a button that removes the current choice.",
+      description: "`showClear` adds a button that removes the current choice.",
       component: WithClear,
     },
   },

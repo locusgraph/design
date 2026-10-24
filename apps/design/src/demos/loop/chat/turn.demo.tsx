@@ -99,7 +99,7 @@ export default defineDemo({
       component: Pair,
     },
     CustomTool: {
-      description: "renderTool replaces the plain tool row with your own.",
+      description: "`renderTool` replaces the plain tool row with your own.",
       component: CustomTool,
     },
   },

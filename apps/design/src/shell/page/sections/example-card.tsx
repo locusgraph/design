@@ -1,6 +1,19 @@
 import type { DocExample } from "../../../registry/demo-docs";
 import { CodeTeaser } from "../../preview/code-teaser";
 
+function withInlineCode(text: string) {
+  return text.split(/(`[^`]+`)/).map((part, index) =>
+    part.startsWith("`") && part.endsWith("`") ? (
+      // biome-ignore lint/suspicious/noArrayIndexKey: the parts of one fixed string never reorder
+      <code key={index} className="font-mono text-[0.9em] text-foreground">
+        {part.slice(1, -1)}
+      </code>
+    ) : (
+      part
+    )
+  );
+}
+
 export function ExampleCard({ example }: { example: DocExample }) {
   const Example = example.component;
   return (
@@ -8,7 +21,7 @@ export function ExampleCard({ example }: { example: DocExample }) {
       <div className="flex flex-col gap-1">
         <h3 className="text-base font-medium">{example.title}</h3>
         {example.description && (
-          <p className="text-sm text-muted-foreground">{example.description}</p>
+          <p className="text-sm text-muted-foreground">{withInlineCode(example.description)}</p>
         )}
       </div>
       <div className="overflow-hidden border">

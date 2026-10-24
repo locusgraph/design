@@ -43,7 +43,7 @@ export default defineDemo({
   ],
   examples: {
     OpenWhenDone: {
-      description: "defaultOpen keeps the full thought visible after it finishes.",
+      description: "`defaultOpen` keeps the full thought visible after it finishes.",
       component: OpenWhenDone,
     },
     LongThought: {

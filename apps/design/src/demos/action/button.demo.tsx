@@ -110,7 +110,7 @@ export default defineDemo({
       component: WithIcon,
     },
     AsLink: {
-      description: "asChild renders the child element, so a link looks like a button.",
+      description: "`asChild` renders the child element, so a link looks like a button.",
       component: AsLink,
     },
   },

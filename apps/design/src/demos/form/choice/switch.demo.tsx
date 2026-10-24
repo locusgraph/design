@@ -91,7 +91,7 @@ export default defineDemo({
       component: SettingsList,
     },
     Controlled: {
-      description: "checked and onCheckedChange let the page react to the switch.",
+      description: "`checked` and `onCheckedChange` let the page react to the switch.",
       component: Controlled,
     },
     Disabled: {

@@ -53,7 +53,7 @@ export default defineDemo({
   ],
   examples: {
     WithInput: {
-      description: "htmlFor ties the label to the input's id.",
+      description: "`htmlFor` ties the label to the input's id.",
       component: WithInput,
     },
     WithCheckbox: {

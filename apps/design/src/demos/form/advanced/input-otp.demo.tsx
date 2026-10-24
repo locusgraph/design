@@ -149,7 +149,7 @@ export default defineDemo({
       component: Separated,
     },
     Controlled: {
-      description: "value and onChange track the code, and pattern allows digits only.",
+      description: "`value` and `onChange` track the code, and `pattern` allows digits only.",
       component: Controlled,
     },
     WithField: {
@@ -157,7 +157,7 @@ export default defineDemo({
       component: WithField,
     },
     Invalid: {
-      description: "aria-invalid on each slot marks a code that was rejected.",
+      description: "`aria-invalid` on each slot marks a code that was rejected.",
       component: Invalid,
     },
   },

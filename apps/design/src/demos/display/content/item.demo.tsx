@@ -140,7 +140,7 @@ export default defineDemo({
       component: MemberList,
     },
     AsLink: {
-      description: "asChild renders the item as a link with hover state.",
+      description: "`asChild` renders the item as a link with hover state.",
       component: AsLink,
     },
     Muted: {

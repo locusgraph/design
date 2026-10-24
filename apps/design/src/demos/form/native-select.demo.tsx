@@ -95,7 +95,7 @@ export default defineDemo({
       component: Groups,
     },
     Invalid: {
-      description: "aria-invalid colors the border when no option is chosen.",
+      description: "`aria-invalid` colors the border when no option is chosen.",
       component: Invalid,
     },
   },

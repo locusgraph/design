@@ -139,7 +139,7 @@ export default defineDemo({
       component: Groups,
     },
     Invalid: {
-      description: "aria-invalid on the trigger marks a required choice that is missing.",
+      description: "`aria-invalid` on the trigger marks a required choice that is missing.",
       component: Invalid,
     },
   },

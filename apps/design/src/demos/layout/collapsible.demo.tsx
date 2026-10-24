@@ -106,7 +106,7 @@ export default defineDemo({
       component: Basic,
     },
     OpenByDefault: {
-      description: "defaultOpen starts expanded, and the chevron turns with the state.",
+      description: "`defaultOpen` starts expanded, and the chevron turns with the state.",
       component: OpenByDefault,
     },
     Disabled: {

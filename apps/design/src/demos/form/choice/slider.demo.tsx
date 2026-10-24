@@ -116,7 +116,7 @@ export default defineDemo({
       component: Range,
     },
     Vertical: {
-      description: "orientation turns the track upright, for one or two thumbs.",
+      description: "`orientation` turns the track upright, for one or two thumbs.",
       component: Vertical,
     },
     Disabled: {
