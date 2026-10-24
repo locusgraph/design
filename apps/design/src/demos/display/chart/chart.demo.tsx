@@ -46,8 +46,8 @@ function UsageBars() {
         <XAxis dataKey="month" tickLine={false} axisLine={false} tickMargin={10} />
         <ChartTooltip content={<ChartTooltipContent />} />
         <ChartLegend content={<ChartLegendContent />} />
-        <Bar dataKey="runs" fill="var(--color-runs)" radius={4} />
-        <Bar dataKey="tokens" fill="var(--color-tokens)" radius={4} />
+        <Bar dataKey="runs" fill="var(--color-runs)" />
+        <Bar dataKey="tokens" fill="var(--color-tokens)" />
       </BarChart>
     </ChartContainer>
   );
@@ -117,13 +117,13 @@ export default defineDemo({
         <XAxis dataKey="month" tickLine={false} axisLine={false} tickMargin={10} />
         <ChartTooltip content={<ChartTooltipContent indicator={indicator} />} />
         {legend && <ChartLegend content={<ChartLegendContent />} />}
-        <Bar dataKey="runs" fill="var(--color-runs)" radius={4} />
-        <Bar dataKey="tokens" fill="var(--color-tokens)" radius={4} />
+        <Bar dataKey="runs" fill="var(--color-runs)" />
+        <Bar dataKey="tokens" fill="var(--color-tokens)" />
       </BarChart>
     </ChartContainer>
   ),
   code: ({ indicator, legend, grid }) =>
-    `const chartConfig = {\n  runs: { label: "Agent runs", color: "var(--chart-1)" },\n  tokens: { label: "Tool calls", color: "var(--chart-2)" },\n} satisfies ChartConfig;\n\n<ChartContainer config={chartConfig} className="min-h-60 w-full">\n  <BarChart accessibilityLayer data={usage}>${grid ? "\n    <CartesianGrid vertical={false} />" : ""}\n    <XAxis dataKey="month" tickLine={false} axisLine={false} tickMargin={10} />\n    <ChartTooltip content={<ChartTooltipContent${indicator === "dot" ? "" : ` indicator="${indicator}"`} />} />${legend ? "\n    <ChartLegend content={<ChartLegendContent />} />" : ""}\n    <Bar dataKey="runs" fill="var(--color-runs)" radius={4} />\n    <Bar dataKey="tokens" fill="var(--color-tokens)" radius={4} />\n  </BarChart>\n</ChartContainer>`,
+    `const chartConfig = {\n  runs: { label: "Agent runs", color: "var(--chart-1)" },\n  tokens: { label: "Tool calls", color: "var(--chart-2)" },\n} satisfies ChartConfig;\n\n<ChartContainer config={chartConfig} className="min-h-60 w-full">\n  <BarChart accessibilityLayer data={usage}>${grid ? "\n    <CartesianGrid vertical={false} />" : ""}\n    <XAxis dataKey="month" tickLine={false} axisLine={false} tickMargin={10} />\n    <ChartTooltip content={<ChartTooltipContent${indicator === "dot" ? "" : ` indicator="${indicator}"`} />} />${legend ? "\n    <ChartLegend content={<ChartLegendContent />} />" : ""}\n    <Bar dataKey="runs" fill="var(--color-runs)" />\n    <Bar dataKey="tokens" fill="var(--color-tokens)" />\n  </BarChart>\n</ChartContainer>`,
   props: [
     { name: "ChartContainer.config", type: "ChartConfig" },
     {
