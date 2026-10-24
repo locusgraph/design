@@ -63,6 +63,7 @@ export function HistoryRow({ thread, active, onSelect, onRename, onArchive }: Hi
               hasMenu && timeHiddenByMenuClass
             )}
           >
+            <span className="sr-only">, </span>
             {formatTimeOfDay(thread.updatedAt)}
           </time>
         </button>
