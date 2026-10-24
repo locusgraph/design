@@ -83,10 +83,13 @@ export default defineDemo({
   props: [
     { name: "fonts", type: "{ sans, heading, mono, emailSafeSans, emailSafeMono }" },
     { name: "headingTracking", type: "string", defaultValue: '"-0.02em"' },
-    { name: "eyebrow", type: "utility", defaultValue: "Fira Code 11px, uppercase, 0.05em" },
+    { name: "eyebrow", type: "utility", defaultValue: "Fira Code 12px, uppercase, 0.05em" },
   ],
   examples: {
-    Scale: { description: "The sizes in use, from the 11px eyebrow to 2xl.", component: Scale },
+    Scale: {
+      description: "The sizes in use at the 17px root, from the 12px eyebrow to 2xl.",
+      component: Scale,
+    },
     Weights: {
       description: "400 for reading, 500 for controls, 600 for headings.",
       component: Weights,

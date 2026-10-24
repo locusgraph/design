@@ -28,20 +28,20 @@ export const typeFamilies: TypeFamily[] = [
 export type TypeStep = { name: string; className: string; size: string; use: string };
 
 export const typeScale: TypeStep[] = [
-  { name: "eyebrow", className: "eyebrow", size: "11px", use: "Section labels, column headers" },
-  { name: "2xs", className: "text-2xs", size: "11px", use: "Badges, chips, counters, timestamps" },
-  { name: "xs", className: "text-xs", size: "12px", use: "Hints, metadata, captions" },
+  { name: "eyebrow", className: "eyebrow", size: "12px", use: "Section labels, column headers" },
+  { name: "2xs", className: "text-2xs", size: "12px", use: "Badges, chips, counters, timestamps" },
+  { name: "xs", className: "text-xs", size: "13px", use: "Hints, metadata, captions" },
   {
     name: "code",
     className: "text-code font-mono",
-    size: "13px",
+    size: "14px",
     use: "Fenced code and code panels",
   },
-  { name: "sm", className: "text-sm", size: "14px", use: "Default UI text, buttons, tables" },
-  { name: "base", className: "text-base", size: "16px", use: "Long-form body copy" },
-  { name: "lg", className: "text-lg", size: "18px", use: "Card and dialog titles" },
-  { name: "xl", className: "text-xl", size: "20px", use: "Section headings" },
-  { name: "2xl", className: "text-2xl", size: "24px", use: "Page titles, big numbers" },
+  { name: "sm", className: "text-sm", size: "15px", use: "Default UI text, buttons, tables" },
+  { name: "base", className: "text-base", size: "17px", use: "Long-form body copy" },
+  { name: "lg", className: "text-lg", size: "19px", use: "Card and dialog titles" },
+  { name: "xl", className: "text-xl", size: "21px", use: "Section headings" },
+  { name: "2xl", className: "text-2xl", size: "26px", use: "Page titles, big numbers" },
 ];
 
 export type TypeWeight = { value: number; className: string; use: string };

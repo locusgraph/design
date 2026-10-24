@@ -38,7 +38,7 @@ Every item is listed at https://design.locusgraph.com/r/registry.json. Files lan
 - App pages (components, blocks, shells): group with ruled lines (\`RuleGrid\`, \`ring-1 ring-border\`, \`divide-y\`), not cards or shadows.
 - The chat area (\`@locusgraph/loop\`): no rules, frames or panels. Hierarchy comes from text weight and tone, spacing and color that means state. Only fields (the composer) and overlays (menus, popovers) keep a frame.
 - Small labels use the \`eyebrow\` class (mono, \`text-2xs\`, uppercase, muted).
-- Type sizes come from the scale only: \`text-2xs\` (11px, mono meta and tiny counts), \`text-xs\`, \`text-code\` (13px, mono names and commands), \`text-sm\` (UI and chat), \`text-base\` and up. No \`text-[13px]\`.
+- Type sizes come from the scale only: \`text-2xs\` (0.6875rem, mono meta and tiny counts), \`text-xs\`, \`text-code\` (0.8125rem, mono names and commands), \`text-sm\` (UI and chat), \`text-base\` and up. No \`text-[13px]\`.
 - Controls share four heights: \`h-control-xs\` (24px), \`h-control-sm\` (32px), \`h-control\` (36px), \`h-control-lg\` (40px), with matching \`size-control-*\` for icon buttons.
 - One primary action per view. Color means state: \`text-interactive\` (clickable, on hover), \`text-memory\` (remembered), \`text-good\`, \`text-warn\` (waiting), \`text-destructive\`. Chart series use \`--s1\` to \`--s8\` and never carry meaning.
 - Text tones: \`text-foreground\` for values, \`text-muted-foreground\` for labels, \`text-faint\` for meta and hints. All three pass WCAG AA.
