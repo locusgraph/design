@@ -72,7 +72,8 @@ describe("SkeletonRuleGrid", () => {
 
   it("hides every bar from assistive technology and respects reduced motion", () => {
     const html = renderToStaticMarkup(<SkeletonRuleGrid cells={1} />);
-    expect(html).toContain("motion-reduce:animate-none");
+    expect(html).toContain("motion-safe:animate-pulse");
+    expect(html).not.toMatch(/(^|[ "])animate-pulse/);
     expect(html).not.toMatch(/data-slot="skeleton"(?![^>]*aria-hidden="true")[^>]*>/);
   });
 });
