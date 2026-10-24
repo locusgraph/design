@@ -62,6 +62,7 @@ export function navigate(path: string) {
     }
   }
   writeUrl(path, kept, "push");
+  window.scrollTo(0, 0);
 }
 
 export function setParam(name: string, value: string | null) {
