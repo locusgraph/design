@@ -45,7 +45,7 @@ function LoadingLabel() {
 export default defineDemo({
   title: "Patterns",
   description:
-    "Brand backgrounds and effects from @locusgraph/tokens: brand-grid for heroes, brand-grid-quiet for app headers, ignites for the mark's entrance, tracked for kickers and shimmer for loading text. All hold still under reduced motion.",
+    "Brand backgrounds and effects from @locusgraph/tokens: a grid for heroes, a quieter grid for app headers, an entrance for the mark, wide tracking for kickers and a shimmer for loading text. All hold still under reduced motion.",
   controls: { pattern: select(brandPatterns, "brand-grid") },
   playground: ({ pattern }) => <PatternPreview pattern={pattern} />,
   code: ({ pattern }) => {
@@ -68,15 +68,16 @@ export default defineDemo({
   ],
   examples: {
     HeroPanel: {
-      description: "A hero: brand-grid behind, the mark ignites, a tracked kicker over the title.",
+      description:
+        "A hero with the full grid behind it, the mark lighting up and a tracked kicker over the title.",
       component: HeroPanel,
     },
     QuietHeader: {
-      description: "brand-grid-quiet under an app page header, where the full grid would be loud.",
+      description: "The quiet grid under an app page header, where the full grid would be loud.",
       component: QuietHeader,
     },
     LoadingLabel: {
-      description: "shimmer on text that names what is loading.",
+      description: "A shimmer on text that names what is loading.",
       component: LoadingLabel,
     },
   },
