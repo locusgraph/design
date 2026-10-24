@@ -5,6 +5,7 @@ import {
   demoPathFromFile,
   demoTitleFromPath,
   findDemoIndexEntry,
+  findDemoIndexEntryByName,
   loadAllDemoEntries,
   loadDemoEntry,
 } from "../../src/registry/load-demos";
@@ -41,6 +42,14 @@ describe("demoIndex", () => {
   it("finds no entry for an unknown path", () => {
     expect(findDemoIndexEntry("action/missing")).toBeUndefined();
     expect(loadDemoEntry("action/missing")).toBeUndefined();
+  });
+
+  it("finds an entry by the last segment of a mistyped path", () => {
+    expect(findDemoIndexEntryByName("components/navigation/tabs/")?.path).toBe("layout/tabs");
+    expect(findDemoIndexEntryByName("overlay/context-menu")?.path).toBe(
+      "overlay/context-menu/context-menu"
+    );
+    expect(findDemoIndexEntryByName("no/such-page")).toBeUndefined();
   });
 });
 

@@ -59,6 +59,11 @@ export function findDemoIndexEntry(path: string) {
   return demoIndex.find((entry) => entry.path === path);
 }
 
+export function findDemoIndexEntryByName(path: string) {
+  const name = path.split("/").filter(Boolean).at(-1);
+  return demoIndex.find((entry) => entry.path.split("/").at(-1) === name);
+}
+
 const loading = new Map<string, Promise<DemoEntry>>();
 const loaded = new Map<string, DemoEntry>();
 
