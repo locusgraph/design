@@ -49,7 +49,7 @@ function ShortLabels() {
 export default defineDemo({
   title: "Starters",
   description:
-    "Starter prompts as ruled rows for an empty conversation. Selecting one hands its text to onSelect.",
+    "Starter prompts as quiet text rows for an empty conversation. Selecting one hands its text to `onSelect`.",
   controls: { product: select(products) },
   playground: ({ product }) => <Playground product={product} />,
   code: () =>
