@@ -22,6 +22,7 @@ import {
   DotsThree as MoreHorizontalIcon,
   User as UserIcon,
 } from "@phosphor-icons/react/ssr";
+import { useState } from "react";
 import { formatProp } from "../../../registry/control-values";
 import { defineDemo, select, toggle } from "../../../registry/define-demo";
 
@@ -88,6 +89,9 @@ function RowActions() {
 }
 
 function Checkboxes() {
+  const [showAmount, setShowAmount] = useState(true);
+  const [showStatus, setShowStatus] = useState(true);
+  const [showDueDate, setShowDueDate] = useState(false);
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
@@ -96,22 +100,29 @@ function Checkboxes() {
       <DropdownMenuContent className="w-48">
         <DropdownMenuLabel>Invoice columns</DropdownMenuLabel>
         <DropdownMenuSeparator />
-        <DropdownMenuCheckboxItem defaultChecked>Amount</DropdownMenuCheckboxItem>
-        <DropdownMenuCheckboxItem defaultChecked>Status</DropdownMenuCheckboxItem>
-        <DropdownMenuCheckboxItem>Due date</DropdownMenuCheckboxItem>
+        <DropdownMenuCheckboxItem checked={showAmount} onCheckedChange={setShowAmount}>
+          Amount
+        </DropdownMenuCheckboxItem>
+        <DropdownMenuCheckboxItem checked={showStatus} onCheckedChange={setShowStatus}>
+          Status
+        </DropdownMenuCheckboxItem>
+        <DropdownMenuCheckboxItem checked={showDueDate} onCheckedChange={setShowDueDate}>
+          Due date
+        </DropdownMenuCheckboxItem>
       </DropdownMenuContent>
     </DropdownMenu>
   );
 }
 
 function RadioGroup() {
+  const [period, setPeriod] = useState("monthly");
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <Button variant="outline">Billing period</Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent className="w-48">
-        <DropdownMenuRadioGroup defaultValue="monthly">
+        <DropdownMenuRadioGroup value={period} onValueChange={setPeriod}>
           <DropdownMenuRadioItem value="monthly">Monthly</DropdownMenuRadioItem>
           <DropdownMenuRadioItem value="yearly">Yearly</DropdownMenuRadioItem>
         </DropdownMenuRadioGroup>

@@ -13,6 +13,7 @@ import {
   ContextMenuSubTrigger,
   ContextMenuTrigger,
 } from "@locusgraph/components";
+import { useState } from "react";
 import { formatProp } from "../../../registry/control-values";
 import { defineDemo, text, toggle } from "../../../registry/define-demo";
 
@@ -66,15 +67,22 @@ function WithSubmenu() {
 }
 
 function CheckboxesAndRadios() {
+  const [showApiCalls, setShowApiCalls] = useState(true);
+  const [showStorage, setShowStorage] = useState(false);
+  const [range, setRange] = useState("month");
   return (
     <ContextMenu>
       <TriggerArea label="Right click the usage chart" />
       <ContextMenuContent className="w-52">
-        <ContextMenuCheckboxItem defaultChecked>Show API calls</ContextMenuCheckboxItem>
-        <ContextMenuCheckboxItem>Show storage</ContextMenuCheckboxItem>
+        <ContextMenuCheckboxItem checked={showApiCalls} onCheckedChange={setShowApiCalls}>
+          Show API calls
+        </ContextMenuCheckboxItem>
+        <ContextMenuCheckboxItem checked={showStorage} onCheckedChange={setShowStorage}>
+          Show storage
+        </ContextMenuCheckboxItem>
         <ContextMenuSeparator />
         <ContextMenuLabel inset>Range</ContextMenuLabel>
-        <ContextMenuRadioGroup defaultValue="month">
+        <ContextMenuRadioGroup value={range} onValueChange={setRange}>
           <ContextMenuRadioItem value="week">Last 7 days</ContextMenuRadioItem>
           <ContextMenuRadioItem value="month">Last 30 days</ContextMenuRadioItem>
         </ContextMenuRadioGroup>
