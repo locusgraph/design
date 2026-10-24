@@ -40,8 +40,8 @@ export default defineDemo({
       />
     </div>
   ),
-  code: () =>
-    "<MemoryReview\n  memories={proposed}\n  onSubmit={({ kept, edited, discarded }) => writeMemories([...kept, ...edited])}\n/>",
+  code: ({ decided }) =>
+    `<MemoryReview\n  memories={proposed}\n${decided ? "  decision={review.decision}\n" : ""}  onSubmit={({ kept, edited, discarded }) => writeMemories([...kept, ...edited])}\n/>`,
   props: [
     {
       name: "memories",
