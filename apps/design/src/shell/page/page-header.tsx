@@ -40,9 +40,10 @@ function NeighborButton({
   direction: "previous" | "next";
 }) {
   const Icon = direction === "previous" ? ArrowLeftIcon : ArrowRightIcon;
+  const label = direction === "previous" ? "Previous" : "Next";
   if (!entry) {
     return (
-      <Button variant="secondary" size="icon-sm" disabled aria-label={`No ${direction} component`}>
+      <Button variant="secondary" size="icon-sm" disabled aria-label={`No ${direction} page`}>
         <Icon weight="bold" aria-hidden />
       </Button>
     );
@@ -51,7 +52,7 @@ function NeighborButton({
     <Tooltip>
       <TooltipTrigger asChild>
         <Button asChild variant="secondary" size="icon-sm">
-          <PlaygroundLink href={`/${entry.path}`} aria-label={`${direction}: ${entry.title}`}>
+          <PlaygroundLink href={`/${entry.path}`} aria-label={`${label}: ${entry.title}`}>
             <Icon weight="bold" aria-hidden />
           </PlaygroundLink>
         </Button>
