@@ -30,6 +30,18 @@ type CarouselContextProps = {
 
 const CarouselContext = React.createContext<CarouselContextProps | null>(null);
 
+function labelSlides(api: NonNullable<CarouselApi>) {
+  const slides = api.slideNodes();
+  slides.forEach((slide, index) => {
+    if (slide.dataset.labelledByCarousel === undefined && slide.hasAttribute("aria-label")) return;
+    slide.dataset.labelledByCarousel = "";
+    slide.setAttribute("aria-label", `${index + 1} of ${slides.length}`);
+  });
+}
+
+const previousKeys = { horizontal: "ArrowLeft", vertical: "ArrowUp" };
+const nextKeys = { horizontal: "ArrowRight", vertical: "ArrowDown" };
+
 function useCarousel() {
   const context = React.useContext(CarouselContext);
 
@@ -75,15 +87,15 @@ function Carousel({
 
   const handleKeyDown = React.useCallback(
     (event: React.KeyboardEvent<HTMLDivElement>) => {
-      if (event.key === "ArrowLeft") {
+      if (event.key === previousKeys[orientation]) {
         event.preventDefault();
         scrollPrev();
-      } else if (event.key === "ArrowRight") {
+      } else if (event.key === nextKeys[orientation]) {
         event.preventDefault();
         scrollNext();
       }
     },
-    [scrollPrev, scrollNext]
+    [orientation, scrollPrev, scrollNext]
   );
 
   React.useEffect(() => {
@@ -94,11 +106,15 @@ function Carousel({
   React.useEffect(() => {
     if (!api) return;
     onSelect(api);
+    labelSlides(api);
     api.on("reInit", onSelect);
+    api.on("reInit", labelSlides);
     api.on("select", onSelect);
 
     return () => {
-      api?.off("select", onSelect);
+      api.off("reInit", onSelect);
+      api.off("reInit", labelSlides);
+      api.off("select", onSelect);
     };
   }, [api, onSelect]);
 
