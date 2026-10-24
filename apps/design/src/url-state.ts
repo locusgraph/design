@@ -47,7 +47,7 @@ function writeUrl(path: string, params: URLSearchParams, mode: "push" | "replace
   if (mode === "push") {
     window.history.pushState(null, "", href);
   } else {
-    window.history.replaceState(null, "", href);
+    window.history.replaceState(null, "", href + window.location.hash);
   }
   window.dispatchEvent(new Event(NAVIGATE_EVENT));
 }
