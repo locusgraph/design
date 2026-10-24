@@ -45,7 +45,7 @@ function DocsShell({ header, sidebar, aside, children }: DocsShellProps) {
             {aside && (
               <aside
                 data-slot="docs-aside"
-                className="sticky top-[calc(var(--docs-header-height)+1px)] hidden h-[90svh] w-72 shrink-0 flex-col gap-8 overflow-hidden pt-10 xl:flex"
+                className="sticky top-[calc(var(--docs-header-height)+1px)] hidden h-[calc(100svh-var(--docs-header-height)-1px)] w-72 shrink-0 flex-col gap-8 overflow-hidden pt-10 xl:flex"
               >
                 <div className="no-scrollbar flex flex-col gap-8 overflow-y-auto px-8">{aside}</div>
               </aside>
