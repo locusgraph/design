@@ -41,9 +41,11 @@ type PaginationLinkProps = {
 const activePageEmphasis = "border-input bg-muted font-semibold text-foreground dark:bg-muted";
 
 function PaginationLink({ className, isActive, size = "icon", ...props }: PaginationLinkProps) {
+  const unavailable = props.href === undefined;
   return (
     <a
       aria-current={isActive ? "page" : undefined}
+      aria-disabled={unavailable || undefined}
       data-slot="pagination-link"
       data-active={isActive}
       className={cn(
@@ -52,6 +54,7 @@ function PaginationLink({ className, isActive, size = "icon", ...props }: Pagina
           size,
         }),
         isActive ? activePageEmphasis : "text-muted-foreground hover:text-foreground",
+        unavailable && "pointer-events-none opacity-50",
         className
       )}
       {...props}
