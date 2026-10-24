@@ -96,7 +96,7 @@ export default defineDemo({
     const buttonAddon = button
       ? '\n  <InputGroupAddon align="inline-end">\n    <InputGroupButton>Search</InputGroupButton>\n  </InputGroupAddon>'
       : "";
-    return `<InputGroup>\n  <InputGroupInput placeholder="${placeholder}" />\n  <InputGroupAddon${alignProp}>\n    <SearchIcon weight="bold" aria-hidden />\n  </InputGroupAddon>${buttonAddon}\n</InputGroup>`;
+    return `<InputGroup>\n  <InputGroupInput aria-label="Search" placeholder="${placeholder}" />\n  <InputGroupAddon${alignProp}>\n    <SearchIcon weight="bold" aria-hidden />\n  </InputGroupAddon>${buttonAddon}\n</InputGroup>`;
   },
   props: [
     {

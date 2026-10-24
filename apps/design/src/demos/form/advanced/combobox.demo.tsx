@@ -147,7 +147,7 @@ export default defineDemo({
     </Combobox>
   ),
   code: ({ placeholder, showClear, autoHighlight, disabled }) =>
-    `<Combobox items={members}${formatProp("autoHighlight", autoHighlight, false)}${formatProp("disabled", disabled, false)}>\n  <ComboboxInput placeholder="${placeholder}"${formatProp("showClear", showClear, false)}${formatProp("disabled", disabled, false)} />\n  <ComboboxContent>\n    <ComboboxEmpty>No members found.</ComboboxEmpty>\n    <ComboboxList>\n      {(item) => (\n        <ComboboxItem key={item} value={item}>\n          {item}\n        </ComboboxItem>\n      )}\n    </ComboboxList>\n  </ComboboxContent>\n</Combobox>`,
+    `<Combobox items={members}${formatProp("autoHighlight", autoHighlight, false)}${formatProp("disabled", disabled, false)}>\n  <ComboboxInput aria-label="Member" placeholder="${placeholder}"${formatProp("showClear", showClear, false)}${formatProp("disabled", disabled, false)} />\n  <ComboboxContent>\n    <ComboboxEmpty>No members found.</ComboboxEmpty>\n    <ComboboxList>\n      {(item) => (\n        <ComboboxItem key={item} value={item}>\n          {item}\n        </ComboboxItem>\n      )}\n    </ComboboxList>\n  </ComboboxContent>\n</Combobox>`,
   props: [
     { name: "items", type: "readonly Item[]" },
     { name: "value / onValueChange", type: "controlled selected item" },

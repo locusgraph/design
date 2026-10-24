@@ -56,7 +56,7 @@ export default defineDemo({
     />
   ),
   code: ({ placeholder, disabled, invalid }) =>
-    `<Textarea placeholder="${placeholder}"${disabled ? " disabled" : ""}${invalid ? " aria-invalid" : ""} />`,
+    `<Textarea aria-label="Invoice note" placeholder="${placeholder}"${disabled ? " disabled" : ""}${invalid ? " aria-invalid" : ""} />`,
   props: [
     { name: "rows", type: "number" },
     { name: "aria-invalid", type: "boolean", defaultValue: "false" },

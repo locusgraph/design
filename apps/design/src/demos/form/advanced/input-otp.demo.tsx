@@ -132,7 +132,7 @@ export default defineDemo({
     const body = separator
       ? `${group(slots.slice(0, half))}\n  <InputOTPSeparator />\n${group(slots.slice(half))}`
       : group(slots);
-    return `<InputOTP maxLength={${length}}${formatProp("disabled", disabled, false)}>\n${body}\n</InputOTP>`;
+    return `<InputOTP maxLength={${length}}${formatProp("disabled", disabled, false)} aria-label="Verification code">\n${body}\n</InputOTP>`;
   },
   props: [
     { name: "maxLength", type: "number" },
