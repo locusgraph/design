@@ -9,13 +9,22 @@ const popupSelector = [
   "[data-slot=combobox-content]",
 ].join(",");
 const popupMargin = 16;
+const viewportPinnedSelector = "[data-sonner-toaster]";
+
+const subpixelSlack = 2;
+
+function scrollsVertically(element: Element) {
+  const overflow = getComputedStyle(element).overflowY;
+  return overflow === "auto" || overflow === "scroll";
+}
 
 function hiddenScrollHeight(popup: Element) {
   let hidden = 0;
   for (const element of [popup, ...popup.querySelectorAll("*")]) {
+    if (!scrollsVertically(element)) continue;
     hidden = Math.max(hidden, element.scrollHeight - element.clientHeight);
   }
-  return hidden;
+  return hidden > subpixelSlack ? hidden : 0;
 }
 
 function naturalPopupHeight(popup: Element, renderedHeight: number) {
@@ -30,6 +39,10 @@ function lowestPopupBottom() {
     const rendered = popup.getBoundingClientRect();
     if (rendered.height === 0) continue;
     const height = naturalPopupHeight(popup, rendered.height);
+    if (popup.closest(viewportPinnedSelector)) {
+      bottom = Math.max(bottom, height + popupMargin * 2);
+      continue;
+    }
     const clippedAbove = rendered.top < popupMargin;
     const roomToFlipBelow = window.innerHeight + height + popupMargin;
     bottom = Math.max(bottom, clippedAbove ? roomToFlipBelow : rendered.top + height + popupMargin);
