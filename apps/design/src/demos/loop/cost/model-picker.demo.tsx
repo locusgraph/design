@@ -4,8 +4,8 @@ import { defineDemo } from "../../../registry/define-demo";
 
 const models: ModelOption[] = [
   {
-    id: "claude-haiku-4.5",
-    name: "Claude Haiku 4.5",
+    id: "claude-haiku-5-5",
+    name: "Claude Haiku 5.5",
     provider: "Anthropic",
     inputPerMillionMicroUsd: 1_000_000,
     outputPerMillionMicroUsd: 5_000_000,
@@ -13,8 +13,8 @@ const models: ModelOption[] = [
     contextTokens: 200_000,
   },
   {
-    id: "claude-sonnet-4.5",
-    name: "Claude Sonnet 4.5",
+    id: "claude-sonnet-5-5",
+    name: "Claude Sonnet 5.5",
     provider: "Anthropic",
     inputPerMillionMicroUsd: 3_000_000,
     outputPerMillionMicroUsd: 15_000_000,
@@ -22,8 +22,8 @@ const models: ModelOption[] = [
     contextTokens: 1_000_000,
   },
   {
-    id: "claude-opus-4.1",
-    name: "Claude Opus 4.1",
+    id: "claude-opus-5-5",
+    name: "Claude Opus 5.5",
     provider: "Anthropic",
     inputPerMillionMicroUsd: 15_000_000,
     outputPerMillionMicroUsd: 75_000_000,
@@ -42,7 +42,7 @@ const models: ModelOption[] = [
 ];
 
 function ChooseModel() {
-  const [value, setValue] = useState("claude-sonnet-4.5");
+  const [value, setValue] = useState("claude-sonnet-5-5");
   return (
     <div className="flex w-full justify-center">
       <ModelPicker models={models} value={value} onChange={setValue} />

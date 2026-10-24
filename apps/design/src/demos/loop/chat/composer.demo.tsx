@@ -17,8 +17,8 @@ const attached: FileItem[] = [
 
 const models: ModelOption[] = [
   {
-    id: "claude-sonnet-4.5",
-    name: "Claude Sonnet 4.5",
+    id: "claude-sonnet-5-5",
+    name: "Claude Sonnet 5.5",
     provider: "Anthropic",
     inputPerMillionMicroUsd: 3_000_000,
     outputPerMillionMicroUsd: 15_000_000,
@@ -26,8 +26,8 @@ const models: ModelOption[] = [
     contextTokens: 1_000_000,
   },
   {
-    id: "claude-haiku-4.5",
-    name: "Claude Haiku 4.5",
+    id: "claude-haiku-5-5",
+    name: "Claude Haiku 5.5",
     provider: "Anthropic",
     inputPerMillionMicroUsd: 1_000_000,
     outputPerMillionMicroUsd: 5_000_000,
@@ -37,7 +37,7 @@ const models: ModelOption[] = [
 ];
 
 function ComposerModel({ disabled }: { disabled?: boolean }) {
-  const [modelId, setModelId] = useState("claude-sonnet-4.5");
+  const [modelId, setModelId] = useState("claude-sonnet-5-5");
   return <ModelPicker models={models} value={modelId} onChange={setModelId} disabled={disabled} />;
 }
 

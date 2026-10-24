@@ -7,7 +7,7 @@ const timedOut = {
   inputTokens: 18_420,
   outputTokens: 0,
   costMicroUsd: 55_260,
-  model: "claude-sonnet-4.5",
+  model: "claude-sonnet-5-5",
   failed: true,
 };
 
@@ -15,7 +15,7 @@ const answered = {
   inputTokens: 18_960,
   outputTokens: 1_284,
   costMicroUsd: 76_140,
-  model: "claude-sonnet-4.5",
+  model: "claude-sonnet-5-5",
 };
 
 function UnderMessage() {
