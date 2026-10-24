@@ -100,8 +100,22 @@ export default defineDemo({
       onStop={() => {}}
     />
   ),
-  code: ({ status, disabled }) =>
-    `<Composer\n  status="${status}"${disabled ? "\n  disabled" : ""}\n  files={files}\n  onAttachFiles={addFiles}\n  attachments={<Files items={items} onRemove={removeFile} />}\n  modelSlot={<ModelPicker />}\n  onSubmit={(text, files) => sendMessage({ text, files })}\n  onStop={stop}\n/>`,
+  code: ({ status, attachments, disabled }) =>
+    [
+      "<Composer",
+      `  status="${status}"`,
+      disabled && "  disabled",
+      status === "error" && "  errorMessage={error?.message}",
+      attachments && "  files={files}",
+      "  onAttachFiles={addFiles}",
+      attachments && "  attachments={<Files items={items} onRemove={removeFile} />}",
+      "  modelSlot={<ModelPicker />}",
+      "  onSubmit={(text, files) => sendMessage({ text, files })}",
+      "  onStop={stop}",
+      "/>",
+    ]
+      .filter(Boolean)
+      .join("\n"),
   props: [
     { name: "onSubmit", type: "(text: string, files: File[]) => void" },
     { name: "onStop", type: "() => void" },
