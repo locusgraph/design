@@ -86,22 +86,24 @@ export function Inbox({
                   id={selectAllId}
                   className="mt-0.5"
                   checked={allState}
+                  aria-describedby={hasDestructive ? `${selectAllId}-note` : undefined}
                   onCheckedChange={(checked) =>
                     setSelected(
                       checked === true ? new Set(selectable.map((item) => item.id)) : new Set()
                     )
                   }
                 />
-                <Label
-                  htmlFor={selectAllId}
-                  className="flex min-w-0 flex-col items-start gap-0 font-normal"
-                >
-                  <span className="text-sm tabular-nums">
+                <span className="flex min-w-0 flex-col items-start">
+                  <Label htmlFor={selectAllId} className="text-sm font-normal tabular-nums">
                     <span className="sr-only">Select all that can be approved together. </span>
                     {selectedIds.length > 0 ? `${selectedIds.length} selected` : "Select all"}
-                  </span>
-                  {hasDestructive && <span className="text-xs text-faint">{oneAtATimeNote}</span>}
-                </Label>
+                  </Label>
+                  {hasDestructive && (
+                    <span id={`${selectAllId}-note`} className="text-xs text-faint">
+                      {oneAtATimeNote}
+                    </span>
+                  )}
+                </span>
               </span>
               <Button
                 type="button"
