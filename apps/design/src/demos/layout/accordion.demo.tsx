@@ -67,7 +67,7 @@ function Disabled() {
 
 function Bordered() {
   return (
-    <Accordion type="single" collapsible className="w-full max-w-md rounded-lg border">
+    <Accordion type="single" collapsible className="w-full max-w-md border">
       {questions.map((item) => (
         <AccordionItem key={item.value} value={item.value} className="px-4">
           <AccordionTrigger>{item.question}</AccordionTrigger>

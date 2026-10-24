@@ -4,7 +4,7 @@ import { defineDemo, toggle } from "../../../registry/define-demo";
 import { PatternRules } from "./pattern-rules";
 
 const rules = [
-  "Turns render every part; renderTool swaps a write tool for an Approval.",
+  "Turns render every part; `renderTool` swaps a write tool for an `Approval`.",
   "Read tools run without asking; write tools wait for Approve or Deny.",
   "The Composer is pinned below the chat and disabled while an approval is open.",
   "A Pulse shows while the agent streams; the Composer offers Stop.",

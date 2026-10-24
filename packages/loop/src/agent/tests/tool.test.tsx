@@ -27,12 +27,41 @@ describe("Tool", () => {
     expect(toolStateLabels[state as ToolState]).toBe(label);
   });
 
-  it("names the tool from its type or toolName", () => {
-    expect(renderToStaticMarkup(<Tool part={base} />)).toContain("memory.search");
+  it("names the tool in words from its type or toolName", () => {
+    expect(renderToStaticMarkup(<Tool part={base} />)).toContain("memory search");
     const dynamic = renderToStaticMarkup(
       <Tool part={{ ...base, type: "dynamic-tool", toolName: "graph.write" }} />
     );
-    expect(dynamic).toContain("graph.write");
+    expect(dynamic).toContain("graph write");
+  });
+
+  it("reads as a verb and a target", () => {
+    const done = { ...base, state: "output-available" as const };
+    expect(renderToStaticMarkup(<Tool part={done} />)).toContain("Ran ");
+    const html = renderToStaticMarkup(
+      <Tool part={done} verb="Searched" activeVerb="Searching" target="who owns billing" />
+    );
+    expect(html).toContain("Searched ");
+    expect(html).toContain("who owns billing");
+    expect(renderToStaticMarkup(<Tool part={base} activeVerb="Searching" />)).toContain(
+      "Searching "
+    );
+  });
+
+  it("marks memory tools in the memory color", () => {
+    const html = renderToStaticMarkup(
+      <Tool part={{ ...base, state: "output-available" }} tone="memory" />
+    );
+    expect(html).toContain('data-tone="memory"');
+    expect(html).toMatch(/text-memory[^>]*>memory search/);
+  });
+
+  it("shows the state word only when the call did not succeed", () => {
+    const done = renderToStaticMarkup(<Tool part={{ ...base, state: "output-available" }} />);
+    expect(done).toMatch(/class="sr-only"[^>]*>Done/);
+    const failed = renderToStaticMarkup(<Tool part={{ ...base, state: "output-error" }} />);
+    expect(failed).toMatch(/text-destructive[^>]*>Failed/);
+    expect(failed).not.toContain("Ran ");
   });
 
   it("renders input and output as pretty JSON when open", () => {

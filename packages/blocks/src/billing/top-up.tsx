@@ -57,6 +57,7 @@ export function TopUp({
                     : "font-medium text-good tabular-nums"
                 }
               >
+                <span className="sr-only">, </span>
                 for {formatCents(pack.priceCents)}
               </span>
             )}

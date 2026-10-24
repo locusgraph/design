@@ -1,14 +1,15 @@
 "use client";
 
-import {
-  BookmarkAdd as BookmarkPlusIcon,
-  Checkmark as CheckIcon,
-  Undo as Undo2Icon,
-} from "@carbon/icons-react";
-import { Button, cn } from "@locusgraph/components";
+import { cn } from "@locusgraph/components";
 import { pluralize } from "@locusgraph/utils";
-import { StatusDot } from "../shared/status-dot";
-import { eyebrowClass, ruledListClass } from "./shared/disclosure";
+import { BookmarkSimple as BookmarkPlusIcon } from "@phosphor-icons/react/ssr";
+import { useEffect, useRef } from "react";
+import {
+  lineDetailClass,
+  lineMemoryIconClass,
+  lineMemoryObjectClass,
+  lineRowClass,
+} from "../shared/line";
 
 export type MemorizedStatus = "saved" | "undone";
 
@@ -25,9 +26,12 @@ export type MemorizedProps = {
   className?: string;
 };
 
+function savedCount(items: MemorizedItem[]) {
+  return items.filter((item) => item.status === "saved").length;
+}
+
 export function memorizedSummary(items: MemorizedItem[]): string {
-  const saved = items.filter((item) => item.status === "saved").length;
-  return `Saved ${pluralize(saved, "memory", "memories")}`;
+  return `Saved ${pluralize(savedCount(items), "memory", "memories")}`;
 }
 
 export function Memorized({ items, onUndo, className }: MemorizedProps) {
@@ -36,13 +40,20 @@ export function Memorized({ items, onUndo, className }: MemorizedProps) {
     <section
       data-slot="memorized"
       aria-label="Saved to memory"
-      className={cn("flex min-w-0 flex-col gap-2", className)}
+      className={cn("flex min-w-0 flex-col", className)}
     >
-      <header aria-live="polite" className={cn("flex items-center gap-2 py-1", eyebrowClass)}>
-        <BookmarkPlusIcon aria-hidden />
-        {memorizedSummary(items)}
+      <header aria-live="polite" className={lineRowClass}>
+        <span aria-hidden className={lineMemoryIconClass}>
+          <BookmarkPlusIcon weight="bold" aria-hidden />
+        </span>
+        <span className="truncate">
+          Saved{" "}
+          <span className={lineMemoryObjectClass}>
+            {pluralize(savedCount(items), "memory", "memories")}
+          </span>
+        </span>
       </header>
-      <ul className={ruledListClass}>
+      <ul className={cn(lineDetailClass, "flex flex-col pb-2 text-muted-foreground")}>
         {items.map((item) => (
           <MemorizedRow key={item.id} item={item} onUndo={onUndo} />
         ))}
@@ -53,44 +64,47 @@ export function Memorized({ items, onUndo, className }: MemorizedProps) {
 
 function MemorizedRow({ item, onUndo }: { item: MemorizedItem; onUndo?: (id: string) => void }) {
   const undone = item.status === "undone";
+  const undoneLabel = useRef<HTMLSpanElement>(null);
+  const undoWasPressed = useRef(false);
+  useEffect(() => {
+    if (undone && undoWasPressed.current) {
+      undoWasPressed.current = false;
+      undoneLabel.current?.focus();
+    }
+  }, [undone]);
   return (
     <li
       data-slot="memorized-item"
       data-status={item.status}
-      className="flex min-h-11 items-center gap-3 px-3 py-2.5"
+      className="flex min-w-0 items-baseline gap-3 py-1"
     >
-      <CheckIcon
-        aria-hidden
-        className={cn("size-3.5 shrink-0", undone ? "text-muted-foreground/40" : "text-good")}
-      />
-      <span className="flex min-w-0 flex-1 flex-col gap-0.5">
-        <span
-          className={cn(
-            "text-sm font-medium",
-            undone && "font-normal text-muted-foreground line-through decoration-muted-foreground"
-          )}
-        >
+      <span className="flex min-w-0 flex-wrap items-baseline gap-x-1.5">
+        <span className={cn(undone && "text-faint line-through decoration-faint")}>
           {item.text}
         </span>
-        {item.kind && <span className="font-mono text-xs text-muted-foreground">{item.kind}</span>}
+        {item.kind && <span className="text-xs text-faint">{item.kind}</span>}
       </span>
       {undone ? (
-        <span className="locus-eyebrow flex shrink-0 items-center gap-1.5">
-          <StatusDot tone="idle" />
+        <span
+          ref={undoneLabel}
+          tabIndex={-1}
+          className="shrink-0 text-xs text-faint locus-focus-ring"
+        >
           Undone
         </span>
       ) : (
         onUndo && (
-          <Button
-            variant="ghost"
-            size="xs"
-            className="-mr-2 text-muted-foreground hover:text-foreground"
+          <button
+            type="button"
             aria-label={`Undo saving ${item.text}`}
-            onClick={() => onUndo(item.id)}
+            onClick={() => {
+              undoWasPressed.current = true;
+              onUndo(item.id);
+            }}
+            className="shrink-0 text-xs text-faint locus-focus-ring transition-colors hover:text-interactive"
           >
-            <Undo2Icon aria-hidden />
             Undo
-          </Button>
+          </button>
         )
       )}
     </li>

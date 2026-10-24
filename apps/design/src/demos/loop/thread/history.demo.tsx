@@ -87,8 +87,8 @@ export default defineDemo({
     "Chat history grouped by day, with the active thread marked. Rename inline from the menu or by double click; Enter saves, Escape cancels.",
   controls: { editable: toggle(true) },
   playground: ({ editable }) => <Playground editable={editable} />,
-  code: () =>
-    `<History\n  threads={threads}\n  activeId={threadId}\n  onSelect={openThread}\n  onNew={startThread}\n  onRename={renameThread}\n  onArchive={archiveThread}\n/>`,
+  code: ({ editable }) =>
+    `<History\n  threads={threads}\n  activeId={threadId}\n  onSelect={openThread}\n  onNew={startThread}\n${editable ? "  onRename={renameThread}\n  onArchive={archiveThread}\n" : ""}/>`,
   props: [
     { name: "threads", type: "HistoryItem[]" },
     { name: "activeId", type: "string | null", defaultValue: "null" },

@@ -11,9 +11,16 @@ export function quotaPercent({ used, included }: QuotaAmounts): number {
   return Math.min(Math.round((used / included) * 100), 100);
 }
 
+function usedShare({ used, included }: QuotaAmounts): number {
+  if (included <= 0) {
+    return used > 0 ? 1 : 0;
+  }
+  return used / included;
+}
+
 export function quotaStatus(quota: QuotaAmounts): QuotaStatus {
   if (quota.used > quota.included) {
     return "over";
   }
-  return quotaPercent(quota) >= nearLimitPercent ? "near" : "ok";
+  return usedShare(quota) >= nearLimitPercent / 100 ? "near" : "ok";
 }

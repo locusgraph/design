@@ -5,6 +5,7 @@ import {
   demoPathFromFile,
   demoTitleFromPath,
   findDemoIndexEntry,
+  findDemoIndexEntryByName,
   loadAllDemoEntries,
   loadDemoEntry,
 } from "../../src/registry/load-demos";
@@ -19,6 +20,7 @@ describe("demoTitleFromPath", () => {
   it("title-cases the file name, with the overrides", () => {
     expect(demoTitleFromPath("action/button-group")).toBe("Button Group");
     expect(demoTitleFromPath("form/advanced/input-otp")).toBe("Input OTP");
+    expect(demoTitleFromPath("patterns/flows/empty-and-loading")).toBe("Empty and Loading");
   });
 
   it("matches the title every demo declares", async () => {
@@ -40,6 +42,15 @@ describe("demoIndex", () => {
   it("finds no entry for an unknown path", () => {
     expect(findDemoIndexEntry("action/missing")).toBeUndefined();
     expect(loadDemoEntry("action/missing")).toBeUndefined();
+  });
+
+  it("finds an entry by the last segment of a mistyped path", () => {
+    expect(findDemoIndexEntryByName("components/navigation/tabs/")?.path).toBe("layout/tabs");
+    expect(findDemoIndexEntryByName("overlay/context-menu")?.path).toBe(
+      "overlay/context-menu/context-menu"
+    );
+    expect(findDemoIndexEntryByName("blocks/billing/top-up")?.path).toBe("blocks/billing");
+    expect(findDemoIndexEntryByName("no/such-page")).toBeUndefined();
   });
 });
 

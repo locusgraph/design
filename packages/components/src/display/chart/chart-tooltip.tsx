@@ -1,9 +1,9 @@
 "use client";
 
-import { cn } from "cn";
 import * as React from "react";
 import type { TooltipValueType } from "recharts";
 import * as RechartsPrimitive from "recharts";
+import { cn } from "../../cn";
 import { getPayloadConfigFromPayload, useChart } from "./chart-container";
 
 type TooltipNameType = number | string;
@@ -100,16 +100,13 @@ function ChartTooltipContent({
                     ) : (
                       !hideIndicator && (
                         <div
-                          className={cn(
-                            "shrink-0 rounded-[2px] border-(--color-border) bg-(--color-bg)",
-                            {
-                              "h-2.5 w-2.5": indicator === "dot",
-                              "w-1": indicator === "line",
-                              "w-0 border-[1.5px] border-dashed bg-transparent":
-                                indicator === "dashed",
-                              "my-0.5": nestLabel && indicator === "dashed",
-                            }
-                          )}
+                          className={cn("shrink-0 border-(--color-border) bg-(--color-bg)", {
+                            "size-2.5 rounded-full": indicator === "dot",
+                            "w-1 rounded-full": indicator === "line",
+                            "w-0 border-[1.5px] border-dashed bg-transparent":
+                              indicator === "dashed",
+                            "my-0.5": nestLabel && indicator === "dashed",
+                          })}
                           style={
                             {
                               "--color-bg": indicatorColor,

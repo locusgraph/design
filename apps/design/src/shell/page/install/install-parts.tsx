@@ -1,20 +1,27 @@
 import { cn } from "@locusgraph/components";
 import type { ReactNode } from "react";
+import { selectRadioWithArrowKeys } from "../../radio-arrow-keys";
 import { packageManagers, selectPackageManager, usePackageManager } from "./package-manager";
 
 export function PackageManagerSwitch() {
   const active = usePackageManager();
   return (
-    <div role="radiogroup" aria-label="Package manager" className="flex items-center gap-0.5">
+    <div
+      role="radiogroup"
+      aria-label="Package manager"
+      onKeyDown={selectRadioWithArrowKeys(packageManagers, active, selectPackageManager)}
+      className="flex items-center gap-0.5"
+    >
       {packageManagers.map((packageManager) => (
         <button
           key={packageManager}
           type="button"
           role="radio"
           aria-checked={packageManager === active}
+          tabIndex={packageManager === active ? 0 : -1}
           onClick={() => selectPackageManager(packageManager)}
           className={cn(
-            "h-7 px-2 font-mono text-xs outline-none focus-visible:ring-2 focus-visible:ring-ring",
+            "h-7 px-2 font-mono text-xs locus-focus-ring",
             packageManager === active
               ? "bg-muted text-foreground"
               : "text-muted-foreground hover:text-foreground"
@@ -50,7 +57,7 @@ export function InstallStep({ number, title, children }: InstallStepProps) {
   return (
     <li className="flex flex-col gap-3">
       <span className="flex items-center gap-2.5 text-sm font-medium">
-        <span className="flex size-5 items-center justify-center font-mono text-[11px] text-muted-foreground ring-1 ring-border">
+        <span className="flex size-5 items-center justify-center font-mono text-2xs text-muted-foreground ring-1 ring-border">
           {number}
         </span>
         {title}

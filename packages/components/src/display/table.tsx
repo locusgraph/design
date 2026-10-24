@@ -1,5 +1,5 @@
-import { cn } from "cn";
 import type * as React from "react";
+import { cn } from "../cn";
 
 function Table({ className, ...props }: React.ComponentProps<"table">) {
   return (
@@ -83,7 +83,7 @@ function TableCaption({ className, ...props }: React.ComponentProps<"caption">) 
   return (
     <caption
       data-slot="table-caption"
-      className={cn("mt-4 text-sm text-muted-foreground", className)}
+      className={cn("mt-4 px-3 text-left text-sm text-muted-foreground sm:px-4", className)}
       {...props}
     />
   );

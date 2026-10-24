@@ -1,5 +1,5 @@
-import { cn } from "cn";
 import type * as React from "react";
+import { cn } from "../../cn";
 
 function FieldSet({ className, ...props }: React.ComponentProps<"fieldset">) {
   return (

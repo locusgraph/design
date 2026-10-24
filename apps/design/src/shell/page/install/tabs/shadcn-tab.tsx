@@ -1,4 +1,4 @@
-import { ChevronRight as ChevronRightIcon } from "@carbon/icons-react";
+import { CaretRight as ChevronRightIcon } from "@phosphor-icons/react/ssr";
 import { shadcnRegistry } from "../../../guides/installation-snippets";
 import { CopyCommand } from "../../../landing/actions/copy-command";
 import { CodeBlock } from "../../../preview/code/code-block";
@@ -10,9 +10,10 @@ const themeImport = '@import "../styles/locus.css";';
 
 function OneTimeSetup() {
   return (
-    <details className="group/setup border-t border-line pt-4">
-      <summary className="flex cursor-pointer list-none items-center gap-2 text-sm font-medium outline-none select-none hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring [&::-webkit-details-marker]:hidden">
+    <details className="group/setup border-t border-border pt-4">
+      <summary className="flex cursor-pointer list-none items-center gap-2 text-sm font-medium select-none hover:text-foreground locus-focus-ring [&::-webkit-details-marker]:hidden">
         <ChevronRightIcon
+          weight="bold"
           aria-hidden
           className="size-4 text-muted-foreground motion-safe:transition-transform group-open/setup:rotate-90"
         />

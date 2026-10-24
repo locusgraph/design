@@ -1,9 +1,9 @@
 "use client";
 
-import { Close as XIcon } from "@carbon/icons-react";
-import { cn } from "cn";
+import { X as XIcon } from "@phosphor-icons/react/ssr";
 import * as DialogPrimitive from "radix-ui/dialog";
 import * as React from "react";
+import { cn } from "../cn";
 
 function Dialog({ ...props }: React.ComponentProps<typeof DialogPrimitive.Root>) {
   return <DialogPrimitive.Root data-slot="dialog" {...props} />;
@@ -51,7 +51,7 @@ function DialogContent({
       <DialogPrimitive.Content
         data-slot="dialog-content"
         className={cn(
-          "fixed top-[50%] left-[50%] z-[300] flex max-h-[calc(100dvh-4rem)] w-full max-w-[calc(100%-2rem)] translate-x-[-50%] translate-y-[-50%] flex-col overflow-hidden rounded-lg border border-line bg-popover shadow-overlay duration-200 data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=closed]:zoom-out-95 data-[state=open]:animate-in data-[state=open]:fade-in-0 data-[state=open]:zoom-in-95 sm:max-w-lg",
+          "fixed top-[50%] left-[50%] z-[300] flex max-h-[calc(100dvh-4rem)] w-full max-w-[calc(100%-2rem)] translate-x-[-50%] translate-y-[-50%] flex-col overflow-hidden border border-border bg-popover shadow-overlay duration-200 data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=closed]:zoom-out-95 data-[state=open]:animate-in data-[state=open]:fade-in-0 data-[state=open]:zoom-in-95 sm:max-w-lg",
           className
         )}
         {...props}
@@ -60,9 +60,9 @@ function DialogContent({
         {showCloseButton ? (
           <DialogPrimitive.Close
             data-slot="dialog-close"
-            className="absolute top-4 right-4 rounded-sm text-soft opacity-70 transition-opacity hover:text-foreground hover:opacity-100 focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-hidden"
+            className="absolute top-4 right-4 text-muted-foreground opacity-70 transition-opacity hover:text-foreground hover:opacity-100 locus-focus-ring"
           >
-            <XIcon className="size-4" />
+            <XIcon weight="bold" aria-hidden className="size-4" />
             <span className="sr-only">Close</span>
           </DialogPrimitive.Close>
         ) : null}
@@ -97,10 +97,7 @@ function DialogFooter({ className, ...props }: React.ComponentProps<"div">) {
   return (
     <div
       data-slot="dialog-footer"
-      className={cn(
-        "mt-auto flex flex-col-reverse gap-2 px-6 pt-4 pb-6 sm:flex-row sm:justify-end",
-        className
-      )}
+      className={cn("mt-auto flex flex-col gap-2 px-6 pt-4 pb-6 sm:flex-row", className)}
       {...props}
     />
   );
@@ -123,7 +120,7 @@ function DialogDescription({
   return (
     <DialogPrimitive.Description
       data-slot="dialog-description"
-      className={cn("text-sm text-soft", className)}
+      className={cn("text-sm text-muted-foreground", className)}
       {...props}
     />
   );

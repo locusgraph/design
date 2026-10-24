@@ -29,16 +29,16 @@ function InAnswer() {
 export default defineDemo({
   title: "Cite",
   description:
-    "A small numbered chip next to a claim. Hover or focus shows the source title, host and snippet. A citation with a url is a link; without one it is a button that calls onOpen.",
+    "A small numbered chip next to a claim. Hover or focus shows the source title, host and snippet. A citation with a `url` is a link; without one it is a button that calls `onOpen`.",
   controls: { withUrl: toggle(true) },
   playground: ({ withUrl }) => (
     <p className="max-w-prose text-sm">
       Recall ranks memories by relevance and recency
-      <Cite citation={withUrl ? recallDoc : teamNote} />.
+      {withUrl ? <Cite citation={recallDoc} /> : <Cite citation={teamNote} onOpen={() => {}} />}.
     </p>
   ),
   code: ({ withUrl }) =>
-    `<p>\n  Recall ranks memories by relevance and recency\n  <Cite citation={${withUrl ? "recallDoc" : "teamNote"}} />.\n</p>`,
+    `<p>\n  Recall ranks memories by relevance and recency\n  ${withUrl ? "<Cite citation={recallDoc} />" : "<Cite citation={teamNote} onOpen={openNote} />"}.\n</p>`,
   props: [
     { name: "citation", type: "Citation" },
     { name: "onOpen", type: "(citation: Citation) => void" },

@@ -1,9 +1,4 @@
 import {
-  Purchase as CreditCardIcon,
-  Password as KeyRoundIcon,
-  UserMultiple as UsersIcon,
-} from "@carbon/icons-react";
-import {
   NavigationMenu,
   NavigationMenuContent,
   NavigationMenuItem,
@@ -12,6 +7,11 @@ import {
   NavigationMenuTrigger,
   navigationMenuTriggerStyle,
 } from "@locusgraph/components";
+import {
+  CreditCard as CreditCardIcon,
+  Key as KeyRoundIcon,
+  Users as UsersIcon,
+} from "@phosphor-icons/react/ssr";
 import { formatProp } from "../../registry/control-values";
 import { defineDemo, text, toggle } from "../../registry/define-demo";
 
@@ -60,19 +60,19 @@ function WithIcons() {
             <ul className="grid w-52 gap-1">
               <li>
                 <NavigationMenuLink href="#members" className="flex-row items-center gap-2">
-                  <UsersIcon />
+                  <UsersIcon weight="bold" aria-hidden />
                   Members
                 </NavigationMenuLink>
               </li>
               <li>
                 <NavigationMenuLink href="#billing" className="flex-row items-center gap-2">
-                  <CreditCardIcon />
+                  <CreditCardIcon weight="bold" aria-hidden />
                   Billing
                 </NavigationMenuLink>
               </li>
               <li>
                 <NavigationMenuLink href="#api-keys" className="flex-row items-center gap-2">
-                  <KeyRoundIcon />
+                  <KeyRoundIcon weight="bold" aria-hidden />
                   API keys
                 </NavigationMenuLink>
               </li>
@@ -130,7 +130,7 @@ export default defineDemo({
       component: Basic,
     },
     WithIcons: {
-      description: "viewport={false} anchors the panel under its own trigger.",
+      description: "With the viewport off, each panel opens right under its own trigger.",
       component: WithIcons,
     },
   },

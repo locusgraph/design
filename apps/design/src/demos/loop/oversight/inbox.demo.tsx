@@ -1,4 +1,5 @@
 import { Inbox, type PendingApproval } from "@locusgraph/loop";
+import { useState } from "react";
 import { defineDemo, toggle } from "../../../registry/define-demo";
 
 const now = Date.UTC(2026, 9, 17, 12, 0);
@@ -38,6 +39,27 @@ const items: PendingApproval[] = [
   },
 ];
 
+function Playground({ empty }: { empty: boolean }) {
+  const [openId, setOpenId] = useState<string | null>(null);
+  const opened = items.find((item) => item.id === openId);
+  return (
+    <div className="flex w-full max-w-2xl flex-col gap-4">
+      <Inbox
+        items={empty ? [] : items}
+        now={now}
+        openId={openId}
+        onOpen={setOpenId}
+        onApproveAll={() => {}}
+      />
+      {opened && !empty && (
+        <p className="px-2 text-sm text-faint">
+          Opens the approval for <span className="text-foreground">{opened.title}</span>.
+        </p>
+      )}
+    </div>
+  );
+}
+
 const longQueue: PendingApproval[] = Array.from({ length: 300 }, (_, index) => ({
   ...items[index % items.length],
   id: `apr_long_${index}`,
@@ -47,13 +69,7 @@ const longQueue: PendingApproval[] = Array.from({ length: 300 }, (_, index) => (
 function LongQueue() {
   return (
     <div className="w-full max-w-2xl">
-      <Inbox
-        items={longQueue}
-        now={now}
-        onApprove={() => {}}
-        onDeny={() => {}}
-        onApproveAll={() => {}}
-      />
+      <Inbox items={longQueue} now={now} onOpen={() => {}} onApproveAll={() => {}} />
     </div>
   );
 }
@@ -61,7 +77,7 @@ function LongQueue() {
 function Empty() {
   return (
     <div className="w-full max-w-2xl">
-      <Inbox items={[]} onApprove={() => {}} onDeny={() => {}} onApproveAll={() => {}} />
+      <Inbox items={[]} onOpen={() => {}} onApproveAll={() => {}} />
     </div>
   );
 }
@@ -69,27 +85,17 @@ function Empty() {
 export default defineDemo({
   title: "Inbox",
   description:
-    "Every approval waiting across runs, with how long each has waited. Select several to approve together; destructive requests are approved one at a time.",
+    "Every approval waiting across runs, with how long each has waited. Click a request to open its full approval and decide with the inputs in view; select several safe ones to approve together.",
   controls: { empty: toggle(false) },
-  playground: ({ empty }) => (
-    <div className="w-full max-w-2xl">
-      <Inbox
-        items={empty ? [] : items}
-        now={now}
-        onApprove={() => {}}
-        onDeny={() => {}}
-        onApproveAll={() => {}}
-      />
-    </div>
-  ),
+  playground: ({ empty }) => <Playground empty={empty} />,
   code: () =>
-    "<Inbox\n  items={pending}\n  onApprove={(id) => respond(id, true)}\n  onDeny={(id) => respond(id, false)}\n  onApproveAll={(ids) => ids.forEach((id) => respond(id, true))}\n/>",
+    "<Inbox\n  items={pending}\n  openId={openId}\n  onOpen={setOpenId}\n  onApproveAll={(ids) => ids.forEach((id) => respond(id, true))}\n/>",
   props: [
     { name: "items", type: "{ id; title; runName; risk; requestedAt; summary? }[]" },
     { name: "now", type: "number", defaultValue: "Date.now()" },
     { name: "title", type: "string", defaultValue: '"Waiting for approval"' },
-    { name: "onApprove", type: "(id: string) => void" },
-    { name: "onDeny", type: "(id: string) => void" },
+    { name: "openId", type: "string | null", defaultValue: "null" },
+    { name: "onOpen", type: "(id: string) => void" },
     { name: "onApproveAll", type: "(ids: string[]) => void" },
     { name: "virtualize", type: "boolean", defaultValue: "true" },
   ],

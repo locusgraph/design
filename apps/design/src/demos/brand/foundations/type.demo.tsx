@@ -7,8 +7,8 @@ function Scale() {
   return (
     <div className="w-[36rem] max-w-full divide-y ring-1 ring-border">
       {typeScale.map((step) => (
-        <div key={step.name} className="grid grid-cols-[5rem_1fr] items-baseline gap-4 px-4 py-3">
-          <span className="font-mono text-xs text-muted-foreground">
+        <div key={step.name} className="grid grid-cols-[7rem_1fr] items-baseline gap-4 px-4 py-3">
+          <span className="font-mono text-xs whitespace-nowrap text-muted-foreground">
             {step.name} · {step.size}
           </span>
           <span className={step.className}>{step.use}</span>
@@ -48,7 +48,7 @@ function Eyebrow() {
 export default defineDemo({
   title: "Type",
   description:
-    "Three families: Archivo for headings and the wordmark, Inter for everything you read, Fira Code for code and ids. One short size scale, three weights, and the locus-eyebrow label. From @locusgraph/tokens.",
+    "Three families: Archivo for headings and the wordmark, Inter for everything you read, Fira Code for code and ids. One short size scale, three weights, and the locus-eyebrow label. From `@locusgraph/tokens`.",
   controls: { sample: text(defaultSample) },
   playground: ({ sample }) => (
     <div className="w-full max-w-3xl divide-y ring-1 ring-border">
@@ -83,11 +83,11 @@ export default defineDemo({
   props: [
     { name: "fonts", type: "{ sans, heading, mono, emailSafeSans, emailSafeMono }" },
     { name: "headingTracking", type: "string", defaultValue: '"-0.02em"' },
-    { name: "locus-eyebrow", type: "utility", defaultValue: "Fira Code 11px, uppercase, 0.05em" },
+    { name: "locus-eyebrow", type: "utility", defaultValue: "Fira Code 12px, uppercase, 0.05em" },
   ],
   examples: {
     Scale: {
-      description: "The sizes in use, from the 11px locus-eyebrow to 2xl.",
+      description: "The sizes in use at the 17px root, from the 12px locus-eyebrow to 2xl.",
       component: Scale,
     },
     Weights: {

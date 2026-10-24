@@ -18,6 +18,10 @@ function resolveRelative(fromFile, specifier) {
   return candidates.find((candidate) => existsSync(candidate) && /\.(ts|tsx)$/.test(candidate));
 }
 
+function isLocalCn(path) {
+  return path?.endsWith("packages/components/src/cn/index.ts") ?? false;
+}
+
 function npmPackageOf(specifier) {
   const parts = specifier.split("/");
   return specifier.startsWith("@") ? parts.slice(0, 2).join("/") : parts[0];
@@ -60,7 +64,12 @@ export function rewriteSource(file, filesByPath, exportsByPackage) {
     fromStatement,
     (statement, keyword, typeOnly, clause, specifier) => {
       if (specifier.startsWith(".")) {
-        const target = filesByPath.get(resolveRelative(file.path, specifier));
+        const resolved = resolveRelative(file.path, specifier);
+        if (isLocalCn(resolved)) {
+          needs.utils = true;
+          return `${keyword}${typeOnly ?? ""} ${clause} from "@/lib/utils";`;
+        }
+        const target = filesByPath.get(resolved);
         if (!target) throw new Error(`${file.path}: cannot resolve ${specifier}`);
         needs.items.add(target.name);
         return `${keyword}${typeOnly ?? ""} ${clause} from "${itemImportBase}/${target.name}";`;

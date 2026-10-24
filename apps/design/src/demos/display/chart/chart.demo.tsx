@@ -12,17 +12,17 @@ import { defineDemo, select, toggle } from "../../../registry/define-demo";
 const indicators = ["dot", "line", "dashed"] as const;
 
 const usage = [
-  { month: "Jan", runs: 42000, tokens: 18000 },
-  { month: "Feb", runs: 51000, tokens: 23000 },
-  { month: "Mar", runs: 47000, tokens: 21000 },
-  { month: "Apr", runs: 63000, tokens: 29000 },
-  { month: "May", runs: 72000, tokens: 34000 },
-  { month: "Jun", runs: 82000, tokens: 39000 },
+  { month: "Jan", runs: 42000, toolCalls: 18000 },
+  { month: "Feb", runs: 51000, toolCalls: 23000 },
+  { month: "Mar", runs: 47000, toolCalls: 21000 },
+  { month: "Apr", runs: 63000, toolCalls: 29000 },
+  { month: "May", runs: 72000, toolCalls: 34000 },
+  { month: "Jun", runs: 82000, toolCalls: 39000 },
 ];
 
 const usageConfig = {
   runs: { label: "Agent runs", color: "var(--locus-chart-1)" },
-  tokens: { label: "Tool calls", color: "var(--locus-chart-2)" },
+  toolCalls: { label: "Tool calls", color: "var(--locus-chart-2)" },
 } satisfies ChartConfig;
 
 const revenue = [
@@ -46,8 +46,8 @@ function UsageBars() {
         <XAxis dataKey="month" tickLine={false} axisLine={false} tickMargin={10} />
         <ChartTooltip content={<ChartTooltipContent />} />
         <ChartLegend content={<ChartLegendContent />} />
-        <Bar dataKey="runs" fill="var(--color-runs)" radius={4} />
-        <Bar dataKey="tokens" fill="var(--color-tokens)" radius={4} />
+        <Bar dataKey="runs" fill="var(--color-runs)" />
+        <Bar dataKey="toolCalls" fill="var(--color-toolCalls)" />
       </BarChart>
     </ChartContainer>
   );
@@ -80,11 +80,11 @@ function StackedArea() {
         <XAxis dataKey="month" tickLine={false} axisLine={false} tickMargin={8} />
         <ChartTooltip cursor={false} content={<ChartTooltipContent indicator="line" />} />
         <Area
-          dataKey="tokens"
+          dataKey="toolCalls"
           type="natural"
-          fill="var(--color-tokens)"
+          fill="var(--color-toolCalls)"
           fillOpacity={0.4}
-          stroke="var(--color-tokens)"
+          stroke="var(--color-toolCalls)"
           stackId="usage"
         />
         <Area
@@ -117,13 +117,13 @@ export default defineDemo({
         <XAxis dataKey="month" tickLine={false} axisLine={false} tickMargin={10} />
         <ChartTooltip content={<ChartTooltipContent indicator={indicator} />} />
         {legend && <ChartLegend content={<ChartLegendContent />} />}
-        <Bar dataKey="runs" fill="var(--color-runs)" radius={4} />
-        <Bar dataKey="tokens" fill="var(--color-tokens)" radius={4} />
+        <Bar dataKey="runs" fill="var(--color-runs)" />
+        <Bar dataKey="toolCalls" fill="var(--color-toolCalls)" />
       </BarChart>
     </ChartContainer>
   ),
   code: ({ indicator, legend, grid }) =>
-    `const chartConfig = {\n  runs: { label: "Agent runs", color: "var(--locus-chart-1)" },\n  tokens: { label: "Tool calls", color: "var(--locus-chart-2)" },\n} satisfies ChartConfig;\n\n<ChartContainer config={chartConfig} className="min-h-60 w-full">\n  <BarChart accessibilityLayer data={usage}>${grid ? "\n    <CartesianGrid vertical={false} />" : ""}\n    <XAxis dataKey="month" tickLine={false} axisLine={false} tickMargin={10} />\n    <ChartTooltip content={<ChartTooltipContent${indicator === "dot" ? "" : ` indicator="${indicator}"`} />} />${legend ? "\n    <ChartLegend content={<ChartLegendContent />} />" : ""}\n    <Bar dataKey="runs" fill="var(--color-runs)" radius={4} />\n    <Bar dataKey="tokens" fill="var(--color-tokens)" radius={4} />\n  </BarChart>\n</ChartContainer>`,
+    `const chartConfig = {\n  runs: { label: "Agent runs", color: "var(--locus-chart-1)" },\n  toolCalls: { label: "Tool calls", color: "var(--locus-chart-2)" },\n} satisfies ChartConfig;\n\n<ChartContainer config={chartConfig} className="min-h-60 w-full">\n  <BarChart accessibilityLayer data={usage}>${grid ? "\n    <CartesianGrid vertical={false} />" : ""}\n    <XAxis dataKey="month" tickLine={false} axisLine={false} tickMargin={10} />\n    <ChartTooltip content={<ChartTooltipContent${indicator === "dot" ? "" : ` indicator="${indicator}"`} />} />${legend ? "\n    <ChartLegend content={<ChartLegendContent />} />" : ""}\n    <Bar dataKey="runs" fill="var(--color-runs)" />\n    <Bar dataKey="toolCalls" fill="var(--color-toolCalls)" />\n  </BarChart>\n</ChartContainer>`,
   props: [
     { name: "ChartContainer.config", type: "ChartConfig" },
     {

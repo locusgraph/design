@@ -13,7 +13,9 @@ describe("Cite", () => {
   it("renders the number as a link labelled with the source", () => {
     const html = renderToStaticMarkup(<Cite citation={citation} />);
     expect(html).toContain('data-slot="cite"');
-    expect(html).toContain('aria-label="Source 2: Recall ranking in LocusGraph"');
+    expect(html).toContain(
+      'aria-label="Source 2: Recall ranking in LocusGraph, opens in a new tab"'
+    );
     expect(html).toContain('href="https://www.docs.locusgraph.com/recall"');
     expect(html).toContain(">2</a>");
   });
@@ -23,6 +25,12 @@ describe("Cite", () => {
       <Cite citation={{ index: 1, title: "Team notes" }} onOpen={() => {}} />
     );
     expect(html).toContain('<button type="button" aria-label="Source 1: Team notes"');
+  });
+
+  it("renders a focusable note when the citation has nothing to open", () => {
+    const html = renderToStaticMarkup(<Cite citation={{ index: 3, title: "Team notes" }} />);
+    expect(html).toContain('role="note" tabindex="0" aria-label="Source 3: Team notes"');
+    expect(html).not.toContain("<button");
   });
 });
 
@@ -34,7 +42,7 @@ describe("Sources", () => {
 
   it("counts the sources while collapsed", () => {
     const html = renderToStaticMarkup(<Sources sources={sources} />);
-    expect(html).toContain("Used 2 sources");
+    expect(html).toMatch(/Used <span[^>]*>2 sources<\/span>/);
     expect(html).not.toContain("stripe.com");
   });
 
@@ -57,7 +65,14 @@ describe("Recall", () => {
   ];
 
   it("counts recalled memories", () => {
-    expect(renderToStaticMarkup(<Recall memories={memories} />)).toContain("Recalled 2 memories");
+    expect(renderToStaticMarkup(<Recall memories={memories} />)).toMatch(
+      /Recalled <span[^>]*>2 memories<\/span>/
+    );
+  });
+
+  it("marks memory work in the memory color", () => {
+    const html = renderToStaticMarkup(<Recall memories={memories} />);
+    expect(html).toMatch(/text-memory[^>]*>2 memories/);
   });
 
   it("exposes relevance as a meter", () => {
@@ -68,7 +83,8 @@ describe("Recall", () => {
     expect(html).toContain('aria-valuenow="92"');
     expect(html).toContain('aria-valuenow="46"');
     expect(html).toContain("preference");
-    expect(html).toContain('aria-label="Open memory Prefers weekly invoices"');
+    expect(html).toContain('aria-label="Open memory Prefers weekly invoices, 92% relevant"');
+    expect(html).toContain("aria-describedby=");
   });
 });
 
@@ -83,7 +99,7 @@ describe("Memorized", () => {
         onUndo={() => {}}
       />
     );
-    expect(html).toContain("Saved 1 memory");
+    expect(html).toMatch(/Saved <span[^>]*>1 memory<\/span>/);
     expect(html).toContain('data-status="undone"');
     expect(html).toContain("line-through");
     expect(html).toContain("Undone");

@@ -1,7 +1,7 @@
 "use client";
 
-import { ArrowUpRight as ArrowUpRightIcon } from "@carbon/icons-react";
 import { cn } from "@locusgraph/components";
+import { ArrowUpRight as ArrowUpRightIcon } from "@phosphor-icons/react/ssr";
 import type { ComponentProps } from "react";
 
 export type Starter = string | { text: string; label?: string };
@@ -35,7 +35,7 @@ export function Starters({
       data-slot="starters"
       role="group"
       aria-label="Suggested prompts"
-      className={cn("flex flex-col divide-y bg-card ring-1 ring-border", className)}
+      className={cn("flex flex-col", className)}
       {...props}
     >
       {suggestions.map((suggestion) => (
@@ -44,12 +44,13 @@ export function Starters({
           type="button"
           disabled={disabled}
           onClick={() => onSelect(textOf(suggestion))}
-          className="group flex w-full items-center gap-3 px-3 py-2.5 text-left text-sm outline-none hover:bg-accent/50 focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-ring disabled:pointer-events-none disabled:opacity-50 motion-safe:transition-colors"
+          className="group -mx-2 flex w-[calc(100%+1rem)] items-center gap-3 px-2 py-1.5 text-left text-sm text-muted-foreground locus-focus-ring hover:bg-muted/50 hover:text-foreground disabled:pointer-events-none disabled:opacity-50 motion-safe:transition-colors"
         >
           <span className="min-w-0 flex-1 text-pretty">{labelOf(suggestion)}</span>
           <ArrowUpRightIcon
+            weight="bold"
             aria-hidden
-            className="size-3.5 shrink-0 text-muted-foreground opacity-0 group-hover:opacity-100 group-focus-visible:opacity-100 motion-safe:transition-opacity"
+            className="size-3.5 shrink-0 text-interactive opacity-0 group-hover:opacity-100 group-focus-visible:opacity-100 motion-safe:transition-opacity"
           />
         </button>
       ))}

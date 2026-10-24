@@ -23,7 +23,7 @@ function Playground({ product }: { product: (typeof products)[number] }) {
   return (
     <div className="flex w-full max-w-xl flex-col gap-3">
       <Starters suggestions={[...prompts[product]]} onSelect={setChosen} />
-      <p className="locus-eyebrow">{chosen ? `Sent: ${chosen}` : "Pick a prompt"}</p>
+      <p className="text-xs text-faint">{chosen ? `Sent: ${chosen}` : "Pick a prompt"}</p>
     </div>
   );
 }
@@ -49,10 +49,11 @@ function ShortLabels() {
 export default defineDemo({
   title: "Starters",
   description:
-    "Starter prompts as ruled rows for an empty conversation. Selecting one hands its text to onSelect.",
+    "Starter prompts as quiet text rows for an empty conversation. Selecting one hands its text to `onSelect`.",
   controls: { product: select(products) },
   playground: ({ product }) => <Playground product={product} />,
-  code: () => `<Starters suggestions={prompts} onSelect={(text) => sendMessage({ text })} />`,
+  code: () =>
+    `<Starters\n  suggestions={prompts}\n  onSelect={(text) => sendMessage({ text })}\n/>`,
   props: [
     { name: "suggestions", type: "Starter[]" },
     { name: "onSelect", type: "(text: string) => void" },

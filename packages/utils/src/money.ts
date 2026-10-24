@@ -12,13 +12,22 @@ const usd = (fractionDigits: { min: number; max: number }) =>
 const wholeCentsFormat = usd({ min: 2, max: 2 });
 const subCentFormat = usd({ min: 2, max: 4 });
 
-export function formatCents(cents: number): string {
-  return wholeCentsFormat.format(cents / 100);
+function withoutNegativeZero(amount: number): number {
+  return amount === 0 ? 0 : amount;
 }
 
+export function formatCents(cents: number): string {
+  return wholeCentsFormat.format(withoutNegativeZero(cents) / 100);
+}
+
+const smallestShownMicroUsd = 100;
+
 export function formatMicroUsd(microUsd: number): string {
+  if (microUsd > 0 && microUsd < smallestShownMicroUsd) {
+    return `<${subCentFormat.format(smallestShownMicroUsd / microUsdPerDollar)}`;
+  }
   const format = microUsd % microUsdPerCent === 0 ? wholeCentsFormat : subCentFormat;
-  return format.format(microUsd / microUsdPerDollar);
+  return format.format(withoutNegativeZero(microUsd) / microUsdPerDollar);
 }
 
 export function centsToMicroUsd(cents: number): number {

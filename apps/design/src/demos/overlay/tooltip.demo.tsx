@@ -1,4 +1,3 @@
-import { Copy as CopyIcon, Information as InfoIcon } from "@carbon/icons-react";
 import {
   Button,
   Kbd,
@@ -7,6 +6,7 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@locusgraph/components";
+import { Copy as CopyIcon, Info as InfoIcon } from "@phosphor-icons/react/ssr";
 import { formatProp } from "../../registry/control-values";
 import { defineDemo, select, text, toggle } from "../../registry/define-demo";
 
@@ -39,7 +39,7 @@ function IconButton() {
       <Tooltip>
         <TooltipTrigger asChild>
           <Button variant="outline" size="icon" aria-label="Copy API key">
-            <CopyIcon />
+            <CopyIcon weight="bold" aria-hidden />
           </Button>
         </TooltipTrigger>
         <TooltipContent>Copy API key</TooltipContent>
@@ -72,7 +72,7 @@ function ExplainMetric() {
         <Tooltip>
           <TooltipTrigger asChild>
             <button type="button" aria-label="About billable events">
-              <InfoIcon className="size-4 text-muted-foreground" />
+              <InfoIcon weight="bold" aria-hidden className="size-4 text-muted-foreground" />
             </button>
           </TooltipTrigger>
           <TooltipContent className="max-w-56">

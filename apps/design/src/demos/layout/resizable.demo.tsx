@@ -10,7 +10,7 @@ function Pane({ label }: { label: string }) {
 
 function Basic() {
   return (
-    <ResizablePanelGroup orientation="horizontal" className="min-h-48 max-w-md rounded-lg border">
+    <ResizablePanelGroup orientation="horizontal" className="min-h-48 max-w-md border">
       <ResizablePanel defaultSize="50%">
         <Pane label="Members" />
       </ResizablePanel>
@@ -24,7 +24,7 @@ function Basic() {
 
 function Vertical() {
   return (
-    <ResizablePanelGroup orientation="vertical" className="min-h-64 max-w-md rounded-lg border">
+    <ResizablePanelGroup orientation="vertical" className="min-h-64 max-w-md border">
       <ResizablePanel defaultSize="30%">
         <Pane label="Invoice header" />
       </ResizablePanel>
@@ -38,7 +38,7 @@ function Vertical() {
 
 function Nested() {
   return (
-    <ResizablePanelGroup orientation="horizontal" className="min-h-64 max-w-md rounded-lg border">
+    <ResizablePanelGroup orientation="horizontal" className="min-h-64 max-w-md border">
       <ResizablePanel defaultSize="40%" minSize="25%">
         <Pane label="Organizations" />
       </ResizablePanel>
@@ -71,7 +71,7 @@ export default defineDemo({
     <ResizablePanelGroup
       key={orientation}
       orientation={orientation}
-      className="min-h-64 w-80 rounded-lg border"
+      className="min-h-64 w-80 border"
     >
       <ResizablePanel defaultSize="40%" minSize="20%">
         <Pane label="Invoices" />

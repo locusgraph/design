@@ -1,6 +1,6 @@
-import { Checkmark as CheckIcon } from "@carbon/icons-react";
 import { DropdownMenuRadioItem } from "@locusgraph/components";
 import { formatMicroUsd } from "@locusgraph/utils";
+import { Check as CheckIcon } from "@phosphor-icons/react/ssr";
 import { formatTokensShort } from "./usage-totals";
 
 export type ModelSpeed = "fast" | "balanced" | "deep";
@@ -37,7 +37,7 @@ function PriceColumn({ model }: { model: ModelOption }) {
   const input = model.inputPerMillionMicroUsd;
   const output = model.outputPerMillionMicroUsd;
   return (
-    <span className="flex flex-col items-end font-mono text-[11px] text-muted-foreground tabular-nums">
+    <span className="flex flex-col items-end font-mono text-2xs text-muted-foreground tabular-nums">
       {input !== undefined && <span>{formatMicroUsd(input)} in</span>}
       {output !== undefined && <span>{formatMicroUsd(output)} out</span>}
     </span>
@@ -58,13 +58,14 @@ export function ModelOptionRow({ model }: { model: ModelOption }) {
           <span className="truncate text-xs text-muted-foreground">{model.provider}</span>
         </span>
         {facts.length > 0 && (
-          <span className="font-mono text-[11px] text-muted-foreground tabular-nums">
+          <span className="font-mono text-2xs text-muted-foreground tabular-nums">
             {facts.join(" · ")}
           </span>
         )}
       </span>
       <PriceColumn model={model} />
       <CheckIcon
+        weight="bold"
         aria-hidden
         className="size-4 text-foreground opacity-0 group-data-[state=checked]:opacity-100"
       />

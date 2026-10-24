@@ -81,7 +81,7 @@ export function Composer({
       data-disabled={disabled || undefined}
       aria-busy={isBusy || undefined}
       className={cn(
-        "flex flex-col bg-card text-card-foreground ring-1 ring-border transition-shadow focus-within:ring-foreground/40 data-[status=error]:ring-destructive/60 data-disabled:opacity-60",
+        "flex flex-col bg-card text-card-foreground ring-1 ring-border transition-shadow focus-within:ring-ring data-[status=error]:ring-destructive data-disabled:opacity-60",
         className
       )}
       onSubmit={(event) => {
@@ -111,7 +111,7 @@ export function Composer({
             send();
           }
         }}
-        className="max-h-48 min-h-14 resize-none border-0 bg-transparent px-4 pt-3.5 pb-1 text-sm leading-relaxed shadow-none placeholder:text-muted-foreground/80 focus-visible:ring-0 dark:bg-transparent"
+        className="max-h-48 min-h-14 resize-none border-0 bg-transparent px-4 pt-3.5 pb-1 text-sm leading-relaxed shadow-none placeholder:text-faint focus-visible:ring-0 dark:bg-transparent"
       />
       {showError && (
         <p id={errorId} role="alert" className="px-4 pt-1 text-xs text-destructive">
@@ -129,7 +129,8 @@ export function Composer({
         {modelSlot && (
           <div
             data-slot="composer-model"
-            className={cn("min-w-0", disabled && "pointer-events-none opacity-50")}
+            inert={disabled || undefined}
+            className={cn("min-w-0", disabled && "opacity-50")}
           >
             {modelSlot}
           </div>

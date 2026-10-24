@@ -31,6 +31,11 @@ const guidePages: Record<string, { title: string; description: string }> = {
     description:
       "Install Locus Design from npm or copy the source with shadcn, add Tailwind, import the theme and render your first component.",
   },
+  theming: {
+    title: "Theming",
+    description:
+      "Monochrome by default. Set one brand color for the primary action and focus ring with three CSS variables; everything else stays grey.",
+  },
   shells: {
     title: "Shells",
     description:
@@ -43,7 +48,7 @@ export function canonicalUrl(path: string) {
 }
 
 export function fitDescription(text: string, limit = descriptionLimit) {
-  const clean = text.replace(/\s+/g, " ").trim();
+  const clean = text.replaceAll("`", "").replace(/\s+/g, " ").trim();
   if (clean.length <= limit) return clean;
   const cut = clean.slice(0, limit - 1);
   const lastSpace = cut.lastIndexOf(" ");
@@ -66,6 +71,10 @@ export function staticPageMeta(path: string): PageMeta | undefined {
   }
   const guide = guidePages[path];
   return guide ? meta(path, titled(guide.title), guide.description) : undefined;
+}
+
+export function notFoundPageMeta(path: string) {
+  return meta(path, titled("Page not found"), defaultDescription);
 }
 
 export function demoPageMeta(entry: Pick<DemoEntry, "path" | "title">, description?: string) {

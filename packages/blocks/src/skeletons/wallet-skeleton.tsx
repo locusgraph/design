@@ -20,7 +20,7 @@ export function WalletSkeleton({ grants = 1 }: WalletSkeletonProps) {
       <div className="flex flex-col gap-1" aria-hidden="true">
         <SkeletonBar className="h-9 w-32" />
       </div>
-      <ul className="flex flex-col divide-y divide-line" aria-hidden="true">
+      <ul className="flex flex-col divide-y divide-border" aria-hidden="true">
         {Array.from({ length: count }, (_, index) => (
           <li
             // biome-ignore lint/suspicious/noArrayIndexKey: placeholder grants have no identity

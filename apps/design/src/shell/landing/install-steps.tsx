@@ -19,7 +19,7 @@ export function InstallSteps() {
             className="flex flex-col gap-3 bg-card px-5 py-4 sm:flex-row sm:items-center sm:gap-6"
           >
             <span className="flex w-44 shrink-0 items-center gap-2.5 text-sm font-medium">
-              <span className="flex size-5 items-center justify-center font-mono text-[11px] text-muted-foreground ring-1 ring-border">
+              <span className="flex size-5 items-center justify-center font-mono text-2xs text-muted-foreground ring-1 ring-border">
                 {index + 1}
               </span>
               {step.label}

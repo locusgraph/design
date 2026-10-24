@@ -1,4 +1,3 @@
-import { Reset as RotateCcwIcon } from "@carbon/icons-react";
 import {
   Button,
   cn,
@@ -8,6 +7,7 @@ import {
   TooltipContent,
   TooltipTrigger,
 } from "@locusgraph/components";
+import { ArrowCounterClockwise as RotateCcwIcon } from "@phosphor-icons/react/ssr";
 import { type PreviewBackground, setParam } from "../../url-state";
 
 export const previewBackgroundClass: Record<PreviewBackground, string> = {
@@ -30,12 +30,13 @@ type PreviewToolbarProps = {
 
 export function PreviewToolbar({ background, canReset, onReset }: PreviewToolbarProps) {
   return (
-    <div className="flex shrink-0 items-center gap-1 self-start rounded-md border bg-background p-0.5 sm:ml-auto sm:self-center">
+    <div className="flex shrink-0 items-center gap-1 self-start border bg-background p-0.5 sm:ml-auto sm:self-center">
       <ToggleGroup
         type="single"
         size="sm"
         value={background}
         onValueChange={(next) => next && setParam("background", next === "surface" ? null : next)}
+        aria-label="Preview background"
       >
         {swatches.map((swatch) => (
           <Tooltip key={swatch.value}>
@@ -47,7 +48,7 @@ export function PreviewToolbar({ background, canReset, onReset }: PreviewToolbar
               >
                 <span
                   className={cn(
-                    "block size-3.5 shrink-0 rounded-sm border",
+                    "block size-3.5 shrink-0 border",
                     previewBackgroundClass[swatch.value]
                   )}
                 />
@@ -59,7 +60,7 @@ export function PreviewToolbar({ background, canReset, onReset }: PreviewToolbar
       </ToggleGroup>
       {canReset && (
         <Button variant="ghost" size="xs" onClick={onReset}>
-          <RotateCcwIcon />
+          <RotateCcwIcon weight="bold" aria-hidden />
           Reset
         </Button>
       )}

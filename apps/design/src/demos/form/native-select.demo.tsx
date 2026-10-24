@@ -78,7 +78,7 @@ export default defineDemo({
     </NativeSelect>
   ),
   code: ({ size, disabled, invalid }) =>
-    `<NativeSelect${formatProp("size", size, "default")}${formatProp("disabled", disabled, false)}${invalid ? " aria-invalid" : ""} defaultValue="all">\n  <NativeSelectOption value="all">All invoices</NativeSelectOption>\n  <NativeSelectOption value="paid">Paid</NativeSelectOption>\n  <NativeSelectOption value="open">Open</NativeSelectOption>\n  <NativeSelectOption value="void">Void</NativeSelectOption>\n</NativeSelect>`,
+    `<NativeSelect${formatProp("size", size, "default")}${formatProp("disabled", disabled, false)}${invalid ? " aria-invalid" : ""} aria-label="Invoice status" defaultValue="all">\n  <NativeSelectOption value="all">All invoices</NativeSelectOption>\n  <NativeSelectOption value="paid">Paid</NativeSelectOption>\n  <NativeSelectOption value="open">Open</NativeSelectOption>\n  <NativeSelectOption value="void">Void</NativeSelectOption>\n</NativeSelect>`,
   props: [
     { name: "size", type: "default | sm", defaultValue: "default" },
     { name: "aria-invalid", type: "boolean", defaultValue: "false" },
@@ -95,7 +95,7 @@ export default defineDemo({
       component: Groups,
     },
     Invalid: {
-      description: "aria-invalid colors the border when no option is chosen.",
+      description: "`aria-invalid` colors the border when no option is chosen.",
       component: Invalid,
     },
   },

@@ -23,10 +23,10 @@ function RemoveMember({ title, open }: { title: string; open?: boolean }) {
           <DialogDescription>They lose access to this organization right away.</DialogDescription>
         </DialogHeader>
         <DialogFooter className="px-6 pb-6">
+          <Button variant="destructive">Remove</Button>
           <DialogClose asChild>
             <Button variant="outline">Cancel</Button>
           </DialogClose>
-          <Button variant="destructive">Remove</Button>
         </DialogFooter>
       </DialogContent>
     </Dialog>
@@ -44,7 +44,7 @@ export default defineDemo({
   controls: { open: toggle(), title: text("Remove member?") },
   playground: ({ open, title }) => <RemoveMember title={title} open={open} />,
   code: ({ title }) =>
-    `<Dialog>\n  <DialogTrigger asChild>\n    <Button variant="outline">Open dialog</Button>\n  </DialogTrigger>\n  <DialogContent>\n    <DialogHeader>\n      <DialogTitle>${title}</DialogTitle>\n      <DialogDescription>They lose access to this organization right away.</DialogDescription>\n    </DialogHeader>\n    <DialogFooter>\n      <DialogClose asChild>\n        <Button variant="outline">Cancel</Button>\n      </DialogClose>\n      <Button variant="destructive">Remove</Button>\n    </DialogFooter>\n  </DialogContent>\n</Dialog>`,
+    `<Dialog>\n  <DialogTrigger asChild>\n    <Button variant="outline">Open dialog</Button>\n  </DialogTrigger>\n  <DialogContent>\n    <DialogHeader>\n      <DialogTitle>${title}</DialogTitle>\n      <DialogDescription>They lose access to this organization right away.</DialogDescription>\n    </DialogHeader>\n    <DialogFooter>\n      <Button variant="destructive">Remove</Button>\n      <DialogClose asChild>\n        <Button variant="outline">Cancel</Button>\n      </DialogClose>\n    </DialogFooter>\n  </DialogContent>\n</Dialog>`,
   props: [
     { name: "open", type: "boolean" },
     { name: "defaultOpen", type: "boolean", defaultValue: "false" },

@@ -19,7 +19,7 @@ describe("Approval", () => {
       <Approval part={deletePart} actionLabel="Delete 2 files" onApprove={noop} onDeny={noop} />
     );
     expect(html).toContain('data-slot="approval"');
-    expect(html).toContain("delete_files");
+    expect(html).toContain("delete files");
     expect(html).toContain("Dry run");
     expect(html).toContain("graphs/acme/old.json, graphs/acme/tmp.json");
     expect(html).toContain("Delete 2 files");
@@ -34,7 +34,7 @@ describe("Approval", () => {
     expect(html).toContain('data-risk="destructive"');
     expect(html).toContain("This can&#x27;t be undone.");
     expect(html).toContain("Destructive");
-    expect(html).toContain("Run delete_files");
+    expect(html).toContain("Run delete files");
   });
 
   it("shows who decided and when instead of the buttons", () => {
@@ -54,7 +54,7 @@ describe("Approval", () => {
     expect(html).toContain("Denied by Maya Chen");
     expect(html).toContain("Oct 17, 2026, 2:32 PM UTC");
     expect(html).toContain("Reason: Wrong folder");
-    expect(html).not.toContain("Run delete_files");
+    expect(html).not.toContain("Run delete files");
   });
 
   it("shows raw JSON when the input is not an object", () => {
@@ -91,8 +91,9 @@ describe("ArgsEditor", () => {
     );
     expect(html).toContain('value="ops@acme.dev"');
     expect(html).toContain('value="120"');
-    expect(html).toContain("Recipient<span");
-    expect(html).toContain("Run send_invoice with these inputs");
+    expect(html).toContain('Recipient</span><span class="sr-only"> (required)');
+    expect(html).toContain(">Optional<");
+    expect(html).toContain("Run send invoice with these inputs");
   });
 
   it("validates required, number range and select values", () => {

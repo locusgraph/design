@@ -1,12 +1,12 @@
 "use client";
 
 import {
-  CheckmarkOutline as CircleCheckIcon,
-  Information as InfoIcon,
-  InProgress as Loader2Icon,
-  ErrorOutline as OctagonXIcon,
-  WarningAlt as TriangleAlertIcon,
-} from "@carbon/icons-react";
+  CheckCircle as CircleCheckIcon,
+  Info as InfoIcon,
+  CircleNotch as Loader2Icon,
+  XCircle as OctagonXIcon,
+  Warning as TriangleAlertIcon,
+} from "@phosphor-icons/react/ssr";
 import type * as React from "react";
 import { Toaster as Sonner, type ToasterProps } from "sonner";
 
@@ -19,7 +19,7 @@ const toasterColors = {
 
 const statusRuleClassNames = {
   success: "border-l-2! border-l-good! [&_[data-icon]]:text-good",
-  info: "border-l-2! border-l-info! [&_[data-icon]]:text-info",
+  info: "border-l-2! border-l-interactive! [&_[data-icon]]:text-interactive",
   warning: "border-l-2! border-l-warn! [&_[data-icon]]:text-warn",
   error: "border-l-2! border-l-destructive! [&_[data-icon]]:text-destructive",
 };
@@ -34,11 +34,13 @@ function Toaster({ theme = "system", toastOptions, ...props }: ToasterProps) {
         classNames: { ...statusRuleClassNames, ...toastOptions?.classNames },
       }}
       icons={{
-        success: <CircleCheckIcon className="size-4" />,
-        info: <InfoIcon className="size-4" />,
-        warning: <TriangleAlertIcon className="size-4" />,
-        error: <OctagonXIcon className="size-4" />,
-        loading: <Loader2Icon className="size-4 animate-spin" />,
+        success: <CircleCheckIcon weight="bold" aria-hidden className="size-4" />,
+        info: <InfoIcon weight="bold" aria-hidden className="size-4" />,
+        warning: <TriangleAlertIcon weight="bold" aria-hidden className="size-4" />,
+        error: <OctagonXIcon weight="bold" aria-hidden className="size-4" />,
+        loading: (
+          <Loader2Icon weight="bold" aria-hidden className="size-4 motion-safe:animate-spin" />
+        ),
       }}
       style={toasterColors}
       {...props}

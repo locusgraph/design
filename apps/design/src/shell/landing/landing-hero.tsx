@@ -1,5 +1,5 @@
-import { ArrowRight as ArrowRightIcon } from "@carbon/icons-react";
 import { Button } from "@locusgraph/components";
+import { ArrowRight as ArrowRightIcon } from "@phosphor-icons/react/ssr";
 import { PlaygroundLink } from "../nav/playground-nav";
 import { StartWithAgent } from "./actions/start-with-agent";
 
@@ -7,13 +7,14 @@ function NewLoopPill() {
   return (
     <PlaygroundLink
       href="/loop"
-      className="group flex items-center gap-2 rounded-full bg-card py-1 pr-3 pl-1 text-xs ring-1 ring-border outline-none hover:bg-accent focus-visible:ring-2 focus-visible:ring-ring"
+      className="group flex items-center gap-2 rounded-full bg-card py-1 pr-3 pl-1 text-xs ring-1 ring-border locus-focus-ring hover:bg-accent"
     >
       <span className="rounded-full bg-foreground px-2 py-0.5 font-medium text-background">
         New
       </span>
       <span>Loop, the agent kit</span>
       <ArrowRightIcon
+        weight="bold"
         aria-hidden
         className="size-3 text-muted-foreground motion-safe:transition-transform group-hover:translate-x-0.5"
       />
@@ -34,10 +35,10 @@ export function LandingHero() {
       </p>
       <div className="flex flex-col items-start gap-2 sm:flex-row sm:items-center sm:gap-4">
         <StartWithAgent />
-        <Button asChild size="lg" variant="ghost">
+        <Button asChild size="lg" variant="ghost" className="-ml-4 sm:ml-0">
           <PlaygroundLink href="/components">
             Browse components
-            <ArrowRightIcon aria-hidden />
+            <ArrowRightIcon weight="bold" aria-hidden />
           </PlaygroundLink>
         </Button>
       </div>
@@ -48,7 +49,7 @@ export function LandingHero() {
         </span>
         <PlaygroundLink
           href="/installation#copy-with-shadcn"
-          className="underline-offset-4 outline-none hover:text-foreground hover:underline focus-visible:ring-2 focus-visible:ring-ring"
+          className="underline-offset-4 locus-focus-ring hover:text-foreground hover:underline"
         >
           Registry →
         </PlaygroundLink>

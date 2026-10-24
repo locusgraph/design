@@ -1,12 +1,12 @@
 "use client";
 
+import { Button, cn } from "@locusgraph/components";
 import {
   ArrowDown as ArrowDownIcon,
   ArrowUp as ArrowUpIcon,
-  Edit as PencilIcon,
-  TrashCan as Trash2Icon,
-} from "@carbon/icons-react";
-import { Button, cn } from "@locusgraph/components";
+  PencilSimple as PencilIcon,
+  Trash as Trash2Icon,
+} from "@phosphor-icons/react/ssr";
 import type { PlanStepDraft } from "../types";
 
 export type StepAction = "up" | "down" | "remove";
@@ -84,13 +84,10 @@ export function PlanStepRow({
     },
   ];
   return (
-    <li
-      data-slot="plan-step"
-      className="group flex items-start gap-3 px-5 py-2.5 focus-within:bg-accent/50 hover:bg-accent/50 motion-safe:transition-colors"
-    >
+    <li data-slot="plan-step" className="group flex items-start gap-3 py-1">
       <span
         aria-hidden
-        className="mt-0.5 flex size-5 shrink-0 items-center justify-center font-mono text-[11px] text-muted-foreground tabular-nums ring-1 ring-input"
+        className="flex h-control-xs w-5 shrink-0 items-center text-xs text-faint tabular-nums"
       >
         {number}
       </span>
@@ -103,11 +100,11 @@ export function PlanStepRow({
           aria-invalid={blank || undefined}
           onChange={(event) => onRename(event.target.value)}
           className={cn(
-            "-mx-1.5 h-6 min-w-0 bg-transparent px-1.5 text-sm font-medium outline-none placeholder:font-normal placeholder:text-muted-foreground focus-visible:bg-background focus-visible:ring-1 focus-visible:ring-ring",
+            "-mx-1.5 h-control-xs min-w-0 bg-transparent px-1.5 text-sm text-foreground outline-none placeholder:text-faint hover:bg-muted/50 focus-visible:bg-muted focus-visible:ring-1 focus-visible:ring-ring",
             blank && "ring-1 ring-destructive/70"
           )}
         />
-        {step.detail && <p className="text-xs text-muted-foreground">{step.detail}</p>}
+        {step.detail && <p className="text-xs text-faint">{step.detail}</p>}
       </div>
       <div className="flex shrink-0 gap-0.5 sm:opacity-0 sm:group-focus-within:opacity-100 sm:group-hover:opacity-100 sm:motion-safe:transition-opacity">
         {controls.map(({ id, label, icon: Icon, disabled, onClick, danger }) => (
@@ -122,11 +119,11 @@ export function PlanStepRow({
             disabled={disabled}
             onClick={onClick}
             className={cn(
-              "text-muted-foreground hover:text-foreground",
+              "text-faint hover:bg-transparent hover:text-interactive",
               danger && "hover:text-destructive"
             )}
           >
-            <Icon aria-hidden />
+            <Icon weight="bold" aria-hidden />
           </Button>
         ))}
       </div>

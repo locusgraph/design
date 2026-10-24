@@ -20,14 +20,15 @@ export function applyStepAction(
 export function focusAfterAction(
   steps: PlanStepDraft[],
   stepId: string,
-  action: StepAction
+  action: StepAction,
+  removedPosition = 0
 ): { stepId: string; control: StepAction | "title" } | null {
   if (action !== "remove") {
     const index = steps.findIndex((step) => step.id === stepId);
     const atEdge = action === "up" ? index === 0 : index === steps.length - 1;
     return { stepId, control: atEdge ? "title" : action };
   }
-  const neighbor = steps[0];
+  const neighbor = steps[Math.min(removedPosition, steps.length - 1)];
   return neighbor ? { stepId: neighbor.id, control: "title" } : null;
 }
 

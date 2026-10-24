@@ -7,7 +7,7 @@ const timedOut = {
   inputTokens: 18_420,
   outputTokens: 0,
   costMicroUsd: 55_260,
-  model: "claude-sonnet-4.5",
+  model: "claude-sonnet-5-5",
   failed: true,
 };
 
@@ -15,7 +15,7 @@ const answered = {
   inputTokens: 18_960,
   outputTokens: 1_284,
   costMicroUsd: 76_140,
-  model: "claude-sonnet-4.5",
+  model: "claude-sonnet-5-5",
 };
 
 function UnderMessage() {
@@ -30,7 +30,7 @@ function UnderMessage() {
 export default defineDemo({
   title: "Cost",
   description:
-    "Tokens and cost for one message or run. Pass one RunUsage or every attempt; failed attempts are counted and their wasted cost shown in red.",
+    "Tokens and cost for one message or run. Pass one `RunUsage` or every attempt; failed attempts are counted and their wasted cost shown in red.",
   controls: { variant: select(variants, "detailed"), withFailure: toggle(true) },
   playground: ({ variant, withFailure }) => (
     <div className="w-[32rem] max-w-full">

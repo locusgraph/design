@@ -15,7 +15,7 @@ type UsageSkeletonProps = {
 function QuotaSkeleton() {
   return (
     <div data-slot="quota-skeleton" aria-hidden="true" className="flex flex-col gap-2">
-      <div className="flex items-baseline justify-between gap-4">
+      <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
         <SkeletonBar className="h-4 w-28" />
         <SkeletonBar className="h-4 w-36" />
       </div>

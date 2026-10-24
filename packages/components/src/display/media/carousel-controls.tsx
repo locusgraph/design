@@ -1,16 +1,15 @@
 "use client";
 
-import { ArrowLeft, ArrowRight } from "@carbon/icons-react";
-import { cn } from "cn";
+import { ArrowLeft, ArrowRight } from "@phosphor-icons/react/ssr";
 import * as React from "react";
-
 import { Button } from "../../action/button";
+import { cn } from "../../cn";
 import { useCarousel } from "./carousel";
 
 function CarouselPrevious({
   className,
   variant = "outline",
-  size = "icon",
+  size = "icon-sm",
   ...props
 }: React.ComponentProps<typeof Button>) {
   const { orientation, scrollPrev, canScrollPrev } = useCarousel();
@@ -21,7 +20,7 @@ function CarouselPrevious({
       variant={variant}
       size={size}
       className={cn(
-        "absolute size-8 rounded-full",
+        "absolute",
         orientation === "horizontal"
           ? "top-1/2 -left-12 -translate-y-1/2"
           : "-top-12 left-1/2 -translate-x-1/2 rotate-90",
@@ -31,7 +30,7 @@ function CarouselPrevious({
       onClick={scrollPrev}
       {...props}
     >
-      <ArrowLeft />
+      <ArrowLeft weight="bold" aria-hidden />
       <span className="sr-only">Previous slide</span>
     </Button>
   );
@@ -40,7 +39,7 @@ function CarouselPrevious({
 function CarouselNext({
   className,
   variant = "outline",
-  size = "icon",
+  size = "icon-sm",
   ...props
 }: React.ComponentProps<typeof Button>) {
   const { orientation, scrollNext, canScrollNext } = useCarousel();
@@ -51,7 +50,7 @@ function CarouselNext({
       variant={variant}
       size={size}
       className={cn(
-        "absolute size-8 rounded-full",
+        "absolute",
         orientation === "horizontal"
           ? "top-1/2 -right-12 -translate-y-1/2"
           : "-bottom-12 left-1/2 -translate-x-1/2 rotate-90",
@@ -61,7 +60,7 @@ function CarouselNext({
       onClick={scrollNext}
       {...props}
     >
-      <ArrowRight />
+      <ArrowRight weight="bold" aria-hidden />
       <span className="sr-only">Next slide</span>
     </Button>
   );

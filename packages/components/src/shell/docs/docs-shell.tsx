@@ -1,6 +1,7 @@
-import { cn } from "cn";
 import type * as React from "react";
+import { cn } from "../../cn";
 import { TooltipProvider } from "../../overlay/tooltip";
+import { SkipLink, shellContentId } from "../navigation/skip-link";
 
 type DocsShellProps = {
   header: React.ReactNode;
@@ -16,6 +17,7 @@ function DocsShell({ header, sidebar, aside, children }: DocsShellProps) {
         data-slot="docs-shell"
         className="flex min-h-svh flex-col bg-background [--locus-docs-header-height:3.5rem] lg:[--locus-docs-header-height:4rem]"
       >
+        <SkipLink />
         {header}
         <div
           className={cn(
@@ -32,13 +34,18 @@ function DocsShell({ header, sidebar, aside, children }: DocsShellProps) {
             </aside>
           )}
           <div className="flex min-w-0 items-stretch">
-            <main data-slot="docs-body" className="min-w-0 flex-1 px-4 pt-6 pb-16 md:px-6 lg:pt-10">
+            <main
+              id={shellContentId}
+              tabIndex={-1}
+              data-slot="docs-body"
+              className="min-w-0 flex-1 px-4 pt-6 outline-none pb-16 md:px-6 lg:pt-10"
+            >
               {children}
             </main>
             {aside && (
               <aside
                 data-slot="docs-aside"
-                className="sticky top-[calc(var(--locus-docs-header-height)+1px)] hidden h-[90svh] w-72 shrink-0 flex-col gap-8 overflow-hidden pt-10 xl:flex"
+                className="sticky top-[calc(var(--locus-docs-header-height)+1px)] hidden h-[calc(100svh-var(--locus-docs-header-height)-1px)] w-72 shrink-0 flex-col gap-8 overflow-hidden pt-10 xl:flex"
               >
                 <div className="locus-no-scrollbar flex flex-col gap-8 overflow-y-auto px-8">
                   {aside}

@@ -1,5 +1,5 @@
-import { Checkmark as Check, Copy } from "@carbon/icons-react";
 import { Button } from "@locusgraph/components";
+import { Check, Copy } from "@phosphor-icons/react/ssr";
 import { useState } from "react";
 import type { ColorValue, PaletteColor } from "./palette";
 
@@ -17,8 +17,18 @@ export function CopyButton({ value, label }: { value: string; label: string }) {
     }
   };
   return (
-    <Button variant="ghost" size="icon-sm" aria-label={`Copy ${label}`} onClick={copy}>
-      {copied ? <Check className="text-good" /> : <Copy />}
+    <Button
+      variant="ghost"
+      size="icon-sm"
+      aria-label={`Copy ${label}`}
+      onClick={copy}
+      className="text-faint hover:bg-transparent hover:text-interactive"
+    >
+      {copied ? (
+        <Check weight="bold" aria-hidden className="text-good" />
+      ) : (
+        <Copy weight="bold" aria-hidden />
+      )}
     </Button>
   );
 }
@@ -33,11 +43,13 @@ function Swatch({ value, theme }: { value: ColorValue; theme: string }) {
   );
 }
 
-const rowColumns = "grid grid-cols-[4rem_minmax(0,1fr)_7.5rem_7.5rem] items-center gap-x-4";
+const rowColumns =
+  "grid grid-cols-[4rem_minmax(0,1fr)] items-center gap-x-4 gap-y-1 sm:grid-cols-[4rem_minmax(0,1fr)_7.5rem_7.5rem]";
 
 function ThemeValue({ value, theme }: { value: ColorValue; theme: string }) {
   return (
-    <span className="flex items-center gap-0.5">
+    <span className="flex items-center gap-1">
+      <span className="text-2xs text-faint sm:hidden">{theme}</span>
       <span className="font-mono text-xs">{value.label}</span>
       <CopyButton value={value.css} label={`${theme} value`} />
     </span>
@@ -61,8 +73,10 @@ export function SwatchRow({ color }: { color: PaletteColor }) {
           <CopyButton value={color.token} label={color.token} />
         </span>
       </span>
-      <ThemeValue value={color.light} theme="light" />
-      <ThemeValue value={color.dark} theme="dark" />
+      <span className="col-start-2 flex flex-wrap gap-x-4 sm:contents">
+        <ThemeValue value={color.light} theme="light" />
+        <ThemeValue value={color.dark} theme="dark" />
+      </span>
     </div>
   );
 }
@@ -72,8 +86,8 @@ export function SwatchHeader() {
     <div className={`${rowColumns} px-4 py-2`}>
       <span className="locus-eyebrow">Swatch</span>
       <span className="locus-eyebrow">Name and token</span>
-      <span className="locus-eyebrow">Light</span>
-      <span className="locus-eyebrow">Dark</span>
+      <span className="locus-eyebrow hidden sm:block">Light</span>
+      <span className="locus-eyebrow hidden sm:block">Dark</span>
     </div>
   );
 }

@@ -1,10 +1,10 @@
-import {
-  Purchase as CreditCardIcon,
-  Password as KeyRoundIcon,
-  Search as SearchIcon,
-  UserFollow as UserPlusIcon,
-} from "@carbon/icons-react";
 import { Marker, MarkerContent, MarkerIcon, Spinner } from "@locusgraph/components";
+import {
+  CreditCard as CreditCardIcon,
+  Key as KeyRoundIcon,
+  MagnifyingGlass as SearchIcon,
+  UserPlus as UserPlusIcon,
+} from "@phosphor-icons/react/ssr";
 import { formatProp } from "../../../registry/control-values";
 import { defineDemo, select, text, toggle } from "../../../registry/define-demo";
 
@@ -15,19 +15,19 @@ function Events() {
     <div className="flex w-full max-w-sm flex-col gap-6">
       <Marker>
         <MarkerIcon>
-          <UserPlusIcon />
+          <UserPlusIcon weight="bold" aria-hidden />
         </MarkerIcon>
         <MarkerContent>Priya joined the organization</MarkerContent>
       </Marker>
       <Marker>
         <MarkerIcon>
-          <KeyRoundIcon />
+          <KeyRoundIcon weight="bold" aria-hidden />
         </MarkerIcon>
         <MarkerContent>API key sk_live_…4f2a was revoked</MarkerContent>
       </Marker>
       <Marker>
         <MarkerIcon>
-          <CreditCardIcon />
+          <CreditCardIcon weight="bold" aria-hidden />
         </MarkerIcon>
         <MarkerContent>Plan changed from Starter to Pro</MarkerContent>
       </Marker>
@@ -59,7 +59,7 @@ function Status() {
       </Marker>
       <Marker>
         <MarkerIcon>
-          <SearchIcon />
+          <SearchIcon weight="bold" aria-hidden />
         </MarkerIcon>
         <MarkerContent>Searched 12 invoices</MarkerContent>
       </Marker>
@@ -91,14 +91,14 @@ export default defineDemo({
     <Marker variant={variant} className="w-80">
       {icon && (
         <MarkerIcon>
-          <UserPlusIcon />
+          <UserPlusIcon weight="bold" aria-hidden />
         </MarkerIcon>
       )}
       <MarkerContent>{label}</MarkerContent>
     </Marker>
   ),
   code: ({ variant, icon, label }) =>
-    `<Marker${formatProp("variant", variant, "default")}>${icon ? "\n  <MarkerIcon>\n    <UserPlusIcon />\n  </MarkerIcon>" : ""}\n  <MarkerContent>${label}</MarkerContent>\n</Marker>`,
+    `<Marker${formatProp("variant", variant, "default")}>${icon ? '\n  <MarkerIcon>\n    <UserPlusIcon weight="bold" aria-hidden />\n  </MarkerIcon>' : ""}\n  <MarkerContent>${label}</MarkerContent>\n</Marker>`,
   props: [
     { name: "variant", type: variants.join(" | "), defaultValue: "default" },
     { name: "asChild", type: "boolean", defaultValue: "false" },

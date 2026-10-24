@@ -1,14 +1,14 @@
 import { cva, type VariantProps } from "class-variance-authority";
-import { cn } from "cn";
 import type * as React from "react";
+import { cn } from "../../../cn";
 import { SkeletonBar, SkeletonLoadingLabel, skeletonRootProps } from "../skeleton-parts";
 
 const skeletonButtonVariants = cva("rounded-full", {
   variants: {
     size: {
-      sm: "h-8 w-20",
-      default: "h-9 w-24",
-      lg: "h-10 w-28",
+      sm: "h-control-sm w-20",
+      default: "h-control w-24",
+      lg: "h-control-lg w-28",
     },
   },
   defaultVariants: {

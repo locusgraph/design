@@ -1,5 +1,5 @@
-import { Checkmark as CheckIcon, Copy as CopyIcon } from "@carbon/icons-react";
 import { Button } from "@locusgraph/components";
+import { Check as CheckIcon, Copy as CopyIcon } from "@phosphor-icons/react/ssr";
 import { useState } from "react";
 
 function articleFor(word: string) {
@@ -18,7 +18,7 @@ export function CompositionSection({ title, tree }: { title: string; tree: strin
       <h2 className="text-xl font-semibold tracking-tight">Composition</h2>
       <p className="text-muted-foreground">
         Use the following composition to build {articleFor(title)}{" "}
-        <code className="rounded bg-muted px-1 py-0.5 font-mono text-sm">{title}</code>:
+        <code className="bg-muted px-1 py-0.5 font-mono text-sm">{title}</code>:
       </p>
       <div className="relative border bg-surface">
         <Button
@@ -28,7 +28,11 @@ export function CompositionSection({ title, tree }: { title: string; tree: strin
           onClick={copy}
           className="absolute top-2 right-2"
         >
-          {copied ? <CheckIcon /> : <CopyIcon />}
+          {copied ? (
+            <CheckIcon weight="bold" aria-hidden />
+          ) : (
+            <CopyIcon weight="bold" aria-hidden />
+          )}
         </Button>
         <pre className="overflow-x-auto p-4 font-mono text-sm leading-relaxed">{tree}</pre>
       </div>

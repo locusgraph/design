@@ -44,7 +44,7 @@
     "react-dom": "^19.2.0"
   },
   "dependencies": {
-    "@carbon/icons-react": "catalog:",
+    "@phosphor-icons/react": "catalog:",
     "@locusgraph/brand": "workspace:*",
     "@locusgraph/utils": "workspace:*",
     "@tanstack/react-virtual": "catalog:",

@@ -3,7 +3,13 @@ import { EmailLayout } from "../kit/email-layout";
 import { EmailButton, EmailHeading, EmailLabel, EmailRows, EmailText } from "../kit/parts";
 import { renderEmail } from "../render";
 
-export type OverQuota = { key: string; used: number; included: number; periodLabel: string };
+export type OverQuota = {
+  key: string;
+  label?: string;
+  used: number;
+  included: number;
+  periodLabel: string;
+};
 
 export type UsageOverPlanEmailProps = {
   organizationName: string;
@@ -26,7 +32,7 @@ export function UsageOverPlanEmail({
       </EmailText>
       <EmailRows
         rows={quotas.map((quota) => [
-          quota.key,
+          quota.label ?? quota.key,
           `${formatCount(quota.used)} of ${formatCount(quota.included)} ${quota.periodLabel}`,
         ])}
       />

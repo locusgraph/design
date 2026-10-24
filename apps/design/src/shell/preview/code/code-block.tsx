@@ -1,5 +1,5 @@
-import { Checkmark as CheckIcon, Copy as CopyIcon } from "@carbon/icons-react";
 import { Button, cn } from "@locusgraph/components";
+import { Check as CheckIcon, Copy as CopyIcon } from "@phosphor-icons/react/ssr";
 import { useState } from "react";
 import { type CodeLanguage, useHighlightedHtml } from "./highlighter";
 
@@ -12,19 +12,27 @@ const collapsedHeight =
 function CopyButton({ text }: { text: string }) {
   const [copied, setCopied] = useState(false);
   const copy = async () => {
-    await navigator.clipboard.writeText(text);
-    setCopied(true);
-    setTimeout(() => setCopied(false), 1500);
+    try {
+      await navigator.clipboard.writeText(text);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 1500);
+    } catch {
+      setCopied(false);
+    }
   };
   return (
     <Button
       variant="ghost"
       size="icon-sm"
-      aria-label="Copy code"
+      aria-label={copied ? "Copied" : "Copy code"}
       onClick={copy}
       className="absolute top-2 right-2 z-10 bg-surface hover:bg-accent"
     >
-      {copied ? <CheckIcon /> : <CopyIcon />}
+      {copied ? (
+        <CheckIcon weight="bold" aria-hidden className="text-good" />
+      ) : (
+        <CopyIcon weight="bold" aria-hidden />
+      )}
     </Button>
   );
 }
@@ -69,7 +77,7 @@ export function CodeBlock({
   const lineCount = code.split("\n").length;
   const canCollapse = collapsible && lineCount > collapsedLineCount;
   const codeClass = cn(
-    "overflow-x-auto p-4 pr-12 font-mono text-sm [&_pre]:outline-none",
+    "overflow-x-auto p-4 pr-12 font-mono text-sm [&_pre]:outline-none has-[pre:focus-visible]:outline-2 has-[pre:focus-visible]:-outline-offset-2 has-[pre:focus-visible]:outline-ring/70",
     canCollapse && !expanded && collapsedHeight
   );
   return (

@@ -81,7 +81,7 @@ function CustomTool() {
 export default defineDemo({
   title: "Turn",
   description:
-    "One AgentMessage with its parts in order. User text is a compact muted block on the right; assistant text is unboxed prose at a comfortable reading width. Thinking, tool calls and sources use the rich components unless you pass a render prop.",
+    "One `AgentMessage` with its parts in order. User text is a compact muted block on the right; assistant text is unboxed prose at a comfortable reading width. Thinking, tool calls and sources use the rich components unless you pass a render prop.",
   controls: { role: select(roles) },
   playground: ({ role }) => <Turn className="w-full max-w-xl" message={messages[role]} />,
   code: () => "<Turn message={message} />",
@@ -99,7 +99,7 @@ export default defineDemo({
       component: Pair,
     },
     CustomTool: {
-      description: "renderTool replaces the plain tool row with your own.",
+      description: "`renderTool` replaces the plain tool row with your own.",
       component: CustomTool,
     },
   },

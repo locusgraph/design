@@ -42,7 +42,7 @@ const steps: CostStep[] = [
 export default defineDemo({
   title: "Cost Steps",
   description:
-    "What each step of a run cost, as ruled rows with a bar proportional to cost. The total leads; tokens, time and money wasted on failed steps follow.",
+    "What each step of a run cost, as quiet rows with a bar proportional to cost, no dividers. The total leads with tokens and time beside it; a failed step shows its cost in red.",
   controls: { withFailure: toggle(true) },
   playground: ({ withFailure }) => (
     <div className="w-[36rem] max-w-full">

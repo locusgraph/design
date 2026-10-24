@@ -1,4 +1,4 @@
-import { ChevronRight as ChevronRightIcon } from "@carbon/icons-react";
+import { CaretRight as ChevronRightIcon } from "@phosphor-icons/react/ssr";
 import type * as React from "react";
 import type { LinkComponent } from "./link";
 
@@ -23,10 +23,13 @@ function CrumbLabel({
     );
   }
   if (crumb.href === undefined) {
-    return <span className="truncate text-soft">{crumb.label}</span>;
+    return <span className="truncate text-muted-foreground">{crumb.label}</span>;
   }
   return (
-    <Link href={crumb.href} className="truncate text-soft transition-colors hover:text-foreground">
+    <Link
+      href={crumb.href}
+      className="truncate text-muted-foreground transition-colors locus-focus-ring hover:text-foreground"
+    >
       {crumb.label}
     </Link>
   );
@@ -46,7 +49,11 @@ function Breadcrumbs({ items, linkComponent = "a" }: BreadcrumbsProps) {
           >
             <CrumbLabel crumb={crumb} last={last} Link={linkComponent} />
             {last ? null : (
-              <ChevronRightIcon className="size-3.5 shrink-0 text-faint" aria-hidden />
+              <ChevronRightIcon
+                weight="bold"
+                className="size-3.5 shrink-0 text-faint"
+                aria-hidden
+              />
             )}
           </span>
         );

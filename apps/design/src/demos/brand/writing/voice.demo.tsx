@@ -1,5 +1,5 @@
-import { Warning as CircleAlert } from "@carbon/icons-react";
 import { Alert, AlertDescription, AlertTitle, Button } from "@locusgraph/components";
+import { WarningCircle as CircleAlert } from "@phosphor-icons/react/ssr";
 import { defineDemo, select } from "../../../registry/define-demo";
 import { RulePair, voiceViews } from "./voice/rule-pair";
 import { voiceRules } from "./voice/voice-rules";
@@ -25,7 +25,7 @@ function PaymentError() {
   return (
     <div className="w-[26rem] max-w-full">
       <Alert variant="destructive">
-        <CircleAlert />
+        <CircleAlert weight="bold" aria-hidden />
         <AlertTitle>Card declined</AlertTitle>
         <AlertDescription>
           Paid usage stops on Nov 1. Use a different card or ask your bank to allow the charge.

@@ -1,8 +1,12 @@
 "use client";
 
-import { Bot as BotIcon, Grid as LayoutGridIcon, Email as MailIcon } from "@carbon/icons-react";
 import { LocusGraphMark } from "@locusgraph/brand";
 import { AppHeader, AppShell, AppSidebar, ThemeToggle } from "@locusgraph/components";
+import {
+  Robot as BotIcon,
+  SquaresFour as LayoutGridIcon,
+  Envelope as MailIcon,
+} from "@phosphor-icons/react/ssr";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import type * as React from "react";

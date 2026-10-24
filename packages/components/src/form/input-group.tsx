@@ -1,9 +1,9 @@
 "use client";
 
 import { cva, type VariantProps } from "class-variance-authority";
-import { cn } from "cn";
 import * as React from "react";
 import { Button } from "../action/button";
+import { cn } from "../cn";
 import { Input } from "./input";
 import { Textarea } from "./textarea";
 
@@ -26,8 +26,8 @@ function InputGroup({ className, ...props }: React.ComponentProps<"div">) {
       data-slot="input-group"
       role="group"
       className={cn(
-        "group/input-group relative flex w-full items-center rounded-md border border-input shadow-xs transition-[color,box-shadow] outline-none dark:bg-input/30",
-        "h-9 min-w-0 has-[>textarea]:h-auto",
+        "group/input-group relative flex w-full items-center border border-input shadow-xs transition-[color,box-shadow] outline-none dark:bg-input/30",
+        "h-control min-w-0 has-[>textarea]:h-auto has-[[data-slot=input-group-control]:disabled]:cursor-not-allowed",
         inputGroupAlignmentClasses,
         inputGroupFocusClasses,
         inputGroupErrorClasses,
@@ -39,7 +39,7 @@ function InputGroup({ className, ...props }: React.ComponentProps<"div">) {
 }
 
 const inputGroupAddonVariants = cva(
-  "flex h-auto cursor-text items-center justify-center gap-2 py-1.5 text-sm font-medium text-muted-foreground select-none group-data-[disabled=true]/input-group:opacity-50 [&>kbd]:rounded-[calc(var(--locus-radius)-5px)] [&>svg:not([class*='size-'])]:size-4",
+  "flex h-auto cursor-text items-center justify-center gap-2 py-1.5 text-sm font-medium text-muted-foreground select-none group-has-[[data-slot=input-group-control]:disabled]/input-group:cursor-not-allowed group-has-[[data-slot=input-group-control]:disabled]/input-group:opacity-50 group-data-[disabled=true]/input-group:opacity-50 [&>svg:not([class*='size-'])]:size-4",
   {
     variants: {
       align: {
@@ -72,7 +72,9 @@ function InputGroupAddon({
         if ((e.target as HTMLElement).closest("button")) {
           return;
         }
-        e.currentTarget.parentElement?.querySelector("input")?.focus();
+        e.currentTarget.parentElement
+          ?.querySelector<HTMLElement>("[data-slot=input-group-control]")
+          ?.focus();
       }}
       {...props}
     />
@@ -82,10 +84,10 @@ function InputGroupAddon({
 const inputGroupButtonVariants = cva("flex items-center gap-2 text-sm shadow-none", {
   variants: {
     size: {
-      xs: "h-6 gap-1 rounded-full px-2.5 has-[>svg]:px-2 [&>svg:not([class*='size-'])]:size-3.5",
-      sm: "h-8 gap-1.5 rounded-full px-3 has-[>svg]:px-2.5",
-      "icon-xs": "size-6 rounded-full p-0 has-[>svg]:p-0",
-      "icon-sm": "size-8 rounded-full p-0 has-[>svg]:p-0",
+      xs: "h-control-xs gap-1 rounded-full px-2.5 has-[>svg]:px-2 [&>svg:not([class*='size-'])]:size-3.5",
+      sm: "h-control-sm gap-1.5 rounded-full px-3 has-[>svg]:px-2.5",
+      "icon-xs": "size-control-xs rounded-full p-0 has-[>svg]:p-0",
+      "icon-sm": "size-control-sm rounded-full p-0 has-[>svg]:p-0",
     },
   },
   defaultVariants: {

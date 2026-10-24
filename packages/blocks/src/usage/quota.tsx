@@ -2,17 +2,19 @@ import { Progress } from "@locusgraph/components";
 import { formatCount, quotaPercent, quotaStatus } from "@locusgraph/utils";
 import { periodLabel, type QuotaData } from "../types";
 
-const statusIndicator = {
-  ok: "",
-  near: "[&_[data-slot=progress-indicator]]:bg-warn",
-  over: "[&_[data-slot=progress-indicator]]:bg-destructive",
-} as const;
+const statusTone = { ok: "default", near: "warn", over: "destructive" } as const;
+
+function quotaValueText(quota: QuotaData) {
+  const usage = `${formatCount(quota.used)} of ${formatCount(quota.included)} ${periodLabel(quota.period)}`;
+  const overBy = quota.used - quota.included;
+  return overBy > 0 ? `${usage}, ${formatCount(overBy)} over` : usage;
+}
 
 function QuotaStatusNote({ quota }: { quota: QuotaData }) {
   const status = quotaStatus(quota);
   if (status === "over") {
     return (
-      <span className="font-medium text-destructive">
+      <span className="font-medium whitespace-nowrap text-destructive">
         {formatCount(quota.used - quota.included)} over
       </span>
     );
@@ -32,7 +34,7 @@ export function Quota({ quota }: { quota: QuotaData }) {
         <span className={quota.label ? "text-muted-foreground" : "font-mono text-muted-foreground"}>
           {name}
         </span>
-        <span className="flex items-baseline gap-2 tabular-nums">
+        <span className="flex flex-wrap items-baseline gap-x-2 tabular-nums">
           <span className="font-medium text-foreground">
             {formatCount(quota.used)} of {formatCount(quota.included)} {periodLabel(quota.period)}
           </span>
@@ -41,8 +43,9 @@ export function Quota({ quota }: { quota: QuotaData }) {
       </div>
       <Progress
         value={percent}
-        aria-label={`${name} ${percent}% of quota`}
-        className={statusIndicator[quotaStatus(quota)]}
+        aria-label={name}
+        getValueLabel={() => quotaValueText(quota)}
+        tone={statusTone[quotaStatus(quota)]}
       />
     </div>
   );

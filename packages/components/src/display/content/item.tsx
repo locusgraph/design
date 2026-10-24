@@ -1,7 +1,7 @@
 import { cva, type VariantProps } from "class-variance-authority";
-import { cn } from "cn";
 import * as Slot from "radix-ui/slot";
 import * as React from "react";
+import { cn } from "../../cn";
 
 import { Separator } from "../separator";
 
@@ -28,7 +28,7 @@ function ItemSeparator({ className, ...props }: React.ComponentProps<typeof Sepa
 }
 
 const itemVariants = cva(
-  "group/item flex flex-wrap items-center rounded-md border border-transparent text-sm transition-colors duration-100 outline-none focus-visible:border-ring focus-visible:ring-2 focus-visible:ring-ring/70 focus-visible:ring-offset-2 focus-visible:ring-offset-background [a]:transition-colors [a]:hover:bg-accent/50",
+  "group/item flex flex-wrap items-center border border-transparent text-sm transition-colors duration-100 locus-focus-ring [a]:transition-colors [a]:hover:bg-accent/50",
   {
     variants: {
       variant: {
@@ -73,8 +73,8 @@ const itemMediaVariants = cva(
     variants: {
       variant: {
         default: "bg-transparent",
-        icon: "size-8 rounded-sm border bg-muted [&_svg:not([class*='size-'])]:size-4",
-        image: "size-10 overflow-hidden rounded-sm [&_img]:size-full [&_img]:object-cover",
+        icon: "size-8 border bg-muted [&_svg:not([class*='size-'])]:size-4",
+        image: "size-10 overflow-hidden [&_img]:size-full [&_img]:object-cover",
       },
     },
     defaultVariants: {

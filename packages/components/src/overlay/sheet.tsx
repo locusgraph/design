@@ -1,9 +1,9 @@
 "use client";
 
-import { Close as XIcon } from "@carbon/icons-react";
-import { cn } from "cn";
+import { X as XIcon } from "@phosphor-icons/react/ssr";
 import * as SheetPrimitive from "radix-ui/dialog";
 import * as React from "react";
+import { cn } from "../cn";
 
 function Sheet({ ...props }: React.ComponentProps<typeof SheetPrimitive.Root>) {
   return <SheetPrimitive.Root data-slot="sheet" {...props} />;
@@ -68,8 +68,8 @@ function SheetContent({
       >
         {children}
         {showCloseButton && (
-          <SheetPrimitive.Close className="absolute top-4 right-4 rounded-sm text-soft opacity-70 transition-opacity hover:text-foreground hover:opacity-100 focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-hidden disabled:pointer-events-none">
-            <XIcon className="size-4" />
+          <SheetPrimitive.Close className="absolute top-4 right-4 text-muted-foreground opacity-70 transition-opacity hover:text-foreground hover:opacity-100 locus-focus-ring disabled:pointer-events-none">
+            <XIcon weight="bold" aria-hidden className="size-4" />
             <span className="sr-only">Close</span>
           </SheetPrimitive.Close>
         )}
@@ -92,7 +92,7 @@ function SheetFooter({ className, ...props }: React.ComponentProps<"div">) {
   return (
     <div
       data-slot="sheet-footer"
-      className={cn("mt-auto flex flex-col gap-2 px-6 pt-4 pb-6", className)}
+      className={cn("mt-auto flex flex-col gap-2 px-6 pt-4 pb-6 sm:flex-row", className)}
       {...props}
     />
   );

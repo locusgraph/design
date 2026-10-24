@@ -1,11 +1,11 @@
 "use client";
 
+import { Button } from "@locusgraph/components";
 import {
   ArrowUp as ArrowUpIcon,
-  Attachment as PaperclipIcon,
-  StopFilledAlt as SquareIcon,
-} from "@carbon/icons-react";
-import { Button } from "@locusgraph/components";
+  Paperclip as PaperclipIcon,
+  Stop as SquareIcon,
+} from "@phosphor-icons/react/ssr";
 import { useRef } from "react";
 import { type ComposerStatus, isComposerBusy } from "./composer-status";
 
@@ -27,7 +27,7 @@ export function ComposerSubmit({ status, canSend, onStop }: ComposerSubmitProps)
         disabled={!onStop}
         onClick={onStop}
       >
-        <SquareIcon aria-hidden="true" className="size-2.5 fill-current" />
+        <SquareIcon weight="fill" aria-hidden="true" className="size-2.5 fill-current" />
         Stop
       </Button>
     );
@@ -40,7 +40,7 @@ export function ComposerSubmit({ status, canSend, onStop }: ComposerSubmitProps)
       aria-label="Send"
       disabled={!canSend}
     >
-      <ArrowUpIcon aria-hidden="true" />
+      <ArrowUpIcon weight="bold" aria-hidden="true" />
     </Button>
   );
 }
@@ -85,7 +85,7 @@ export function ComposerAttachButton({
         disabled={disabled}
         onClick={() => inputRef.current?.click()}
       >
-        <PaperclipIcon aria-hidden="true" />
+        <PaperclipIcon weight="bold" aria-hidden="true" />
       </Button>
     </>
   );

@@ -31,12 +31,10 @@ export function App() {
       </header>
       <main className="locus-brand-grid-quiet mx-auto flex max-w-5xl flex-col gap-8 px-6 py-10">
         <div className="flex flex-col gap-1.5">
-          <p className="font-mono text-[11.5px] text-muted-foreground">
+          <p className="font-mono text-2xs text-muted-foreground">
             {organization.name} · {formatMicroUsd(wallet.balanceMicroUsd)} in credits
           </p>
-          <h1 className="text-[26px] leading-tight font-semibold tracking-[-0.03em]">
-            React example
-          </h1>
+          <h1 className="text-2xl leading-tight font-semibold tracking-[-0.03em]">React example</h1>
         </div>
         <Tabs defaultValue="billing">
           <TabsList>
@@ -54,19 +52,21 @@ export function App() {
               upgradeHref="#plans"
             />
             <Usage quotas={quotas} />
-            <RuleGrid columns={2}>
+            <RuleGrid id="billing" columns={2}>
               <Wallet balanceMicroUsd={wallet.balanceMicroUsd} grants={grants} />
               <TopUp packs={packs} onBuy={setLastPack} />
             </RuleGrid>
             {lastPack && (
-              <p className="font-mono text-[11.5px] text-muted-foreground">
+              <p className="font-mono text-2xs text-muted-foreground">
                 onBuy("{lastPack}") would open Stripe Checkout.
               </p>
             )}
-            <Plans
-              plans={plans}
-              actionFor={(plan) => <Button size="sm">Upgrade to {plan.name}</Button>}
-            />
+            <div id="plans">
+              <Plans
+                plans={plans}
+                actionFor={(plan) => <Button size="sm">Upgrade to {plan.name}</Button>}
+              />
+            </div>
           </TabsContent>
           <TabsContent value="keys" className="pt-6">
             <RuleGrid columns={1}>

@@ -9,7 +9,7 @@ function supportsFieldSizing(): boolean {
 export function useAutoGrow(textareaRef: RefObject<HTMLTextAreaElement | null>, text: string) {
   useLayoutEffect(() => {
     const textarea = textareaRef.current;
-    if (!textarea || supportsFieldSizing() || text === undefined) {
+    if (!textarea || supportsFieldSizing()) {
       return;
     }
     textarea.style.height = "auto";

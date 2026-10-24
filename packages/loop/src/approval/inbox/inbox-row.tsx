@@ -1,35 +1,36 @@
 "use client";
 
-import { Checkmark as CheckIcon, Locked as LockIcon, Close as XIcon } from "@carbon/icons-react";
-import { Button, Checkbox, cn } from "@locusgraph/components";
+import { Checkbox, cn } from "@locusgraph/components";
+import { Lock as LockIcon } from "@phosphor-icons/react/ssr";
 import type { ComponentProps } from "react";
+import { isoOf } from "../../shared/decision-summary";
 import type { RiskLevel } from "../../types";
 import { riskLabels } from "../shared/risk-badge";
-import { formatWaiting, isoOf } from "../shared/time";
+import { formatWaiting } from "../shared/time";
 import type { PendingApproval } from "../types";
 
 type InboxRowProps = Omit<ComponentProps<"li">, "onSelect"> & {
   item: PendingApproval;
   now: number;
   selected: boolean;
+  open: boolean;
   onSelect: (selected: boolean) => void;
-  onApprove: () => void;
-  onDeny: () => void;
+  onOpen: () => void;
 };
 
-const riskDot: Record<RiskLevel, string> = {
-  read: "bg-muted-foreground/50",
-  write: "bg-warn",
-  destructive: "bg-destructive",
+const riskTone: Record<RiskLevel, string> = {
+  read: "text-faint",
+  write: "font-medium text-warn",
+  destructive: "font-medium text-destructive",
 };
 
 export function InboxRow({
   item,
   now,
   selected,
+  open,
   onSelect,
-  onApprove,
-  onDeny,
+  onOpen,
   className,
   ...props
 }: InboxRowProps) {
@@ -39,73 +40,61 @@ export function InboxRow({
       data-slot="inbox-item"
       data-risk={item.risk}
       data-selected={selected || undefined}
+      data-open={open || undefined}
       className={cn(
-        "group flex items-center gap-3 px-5 py-2.5 motion-safe:transition-colors",
-        selected ? "bg-accent" : "hover:bg-accent/50",
+        "group relative flex items-start gap-3 px-2 py-2 has-[[data-slot=inbox-open]:focus-visible]:ring-2 has-[[data-slot=inbox-open]:focus-visible]:ring-ring/70 motion-safe:transition-colors",
+        selected || open ? "bg-muted" : "hover:bg-muted/50",
         className
       )}
       {...props}
     >
       {destructive ? (
-        <span className="flex size-4 shrink-0 items-center justify-center text-muted-foreground">
-          <LockIcon aria-hidden className="size-3.5" />
+        <span className="relative z-10 mt-0.5 flex size-4 shrink-0 items-center justify-center text-faint">
+          <LockIcon weight="bold" aria-hidden className="size-3.5" />
           <span className="sr-only">{item.title} must be approved on its own</span>
         </span>
       ) : (
         <Checkbox
           aria-label={`Select ${item.title}`}
           checked={selected}
+          className="relative z-10 mt-0.5"
           onCheckedChange={(checked) => onSelect(checked === true)}
         />
       )}
       <div className="flex min-w-0 flex-1 flex-col gap-0.5">
         <p className="flex min-w-0 items-baseline gap-2 text-sm">
-          <span className="truncate font-medium">{item.title}</span>
-          <span className="hidden shrink-0 truncate text-xs text-muted-foreground sm:inline">
+          <button
+            type="button"
+            data-slot="inbox-open"
+            aria-current={open || undefined}
+            onClick={onOpen}
+            className="cursor-pointer truncate text-left font-medium text-foreground outline-none after:absolute after:inset-0"
+          >
+            {item.title}
+          </button>
+          <span className="hidden shrink-0 truncate text-xs text-faint sm:inline">
             {item.runName}
           </span>
         </p>
         <p className="flex min-w-0 items-center gap-1.5 text-xs text-muted-foreground">
-          <span aria-hidden className={cn("size-1.5 shrink-0 rounded-full", riskDot[item.risk])} />
-          <span className="shrink-0">{riskLabels[item.risk]}</span>
+          <span className={cn("shrink-0", riskTone[item.risk])}>{riskLabels[item.risk]}</span>
           {item.summary && (
             <>
-              <span aria-hidden>·</span>
+              <span aria-hidden className="text-faint">
+                ·
+              </span>
               <span className="truncate">{item.summary}</span>
             </>
           )}
         </p>
-        <p className="truncate text-xs text-muted-foreground sm:hidden">{item.runName}</p>
+        <p className="truncate text-xs text-faint sm:hidden">{item.runName}</p>
       </div>
       <time
         dateTime={isoOf(item.requestedAt)}
-        className="w-12 shrink-0 text-right font-mono text-[11px] text-muted-foreground tabular-nums"
+        className="mt-0.5 w-12 shrink-0 text-right text-xs text-faint tabular-nums"
       >
         {formatWaiting(item.requestedAt, now)}
       </time>
-      <span className="flex shrink-0 gap-1">
-        <Button
-          type="button"
-          size="icon-xs"
-          variant="outline"
-          aria-label={`Approve ${item.title}`}
-          title="Approve"
-          onClick={onApprove}
-        >
-          <CheckIcon aria-hidden />
-        </Button>
-        <Button
-          type="button"
-          size="icon-xs"
-          variant="ghost"
-          aria-label={`Deny ${item.title}`}
-          title="Deny"
-          className="text-muted-foreground hover:text-foreground"
-          onClick={onDeny}
-        >
-          <XIcon aria-hidden />
-        </Button>
-      </span>
     </li>
   );
 }

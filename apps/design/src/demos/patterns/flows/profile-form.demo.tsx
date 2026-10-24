@@ -10,7 +10,7 @@ const rules = [
   "An error turns only the input border and its message red; the label stays neutral.",
   "Required fields carry a muted asterisk; optional ones say Optional in the description.",
   "Save stays disabled until the form is valid, and the footer hint says what is left to fix.",
-  "Actions sit right-aligned in a ruled footer strip: Cancel ghost, one primary named by action.",
+  "Actions sit left-aligned in a ruled footer strip: one primary named by its action, then Cancel ghost.",
   "Saving shows a spinner in the button; success shows one status line in the footer.",
 ];
 

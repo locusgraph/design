@@ -1,10 +1,4 @@
 import {
-  Add as AddIcon,
-  Network_3 as GraphIcon,
-  Renew as RetryIcon,
-  WarningAlt as WarningIcon,
-} from "@carbon/icons-react";
-import {
   Alert,
   AlertDescription,
   AlertTitle,
@@ -19,6 +13,13 @@ import {
   SkeletonLoadingLabel,
   skeletonRootProps,
 } from "@locusgraph/components";
+import {
+  Plus as AddIcon,
+  Graph as GraphIcon,
+  ArrowsClockwise as RetryIcon,
+  Warning as WarningIcon,
+} from "@phosphor-icons/react/ssr";
+import { useId } from "react";
 
 export type ListState = "loading" | "empty" | "ready" | "error";
 
@@ -83,14 +84,14 @@ function EmptyList({ onCreate }: { onCreate?: () => void }) {
     <Empty>
       <EmptyHeader>
         <EmptyMedia variant="icon">
-          <GraphIcon aria-hidden="true" />
+          <GraphIcon weight="bold" aria-hidden="true" />
         </EmptyMedia>
         <EmptyTitle>No graphs yet</EmptyTitle>
         <EmptyDescription>A graph stores what your agents learn, one per product.</EmptyDescription>
       </EmptyHeader>
       <EmptyContent>
         <Button onClick={onCreate}>
-          <AddIcon aria-hidden="true" />
+          <AddIcon weight="bold" aria-hidden="true" />
           Create graph
         </Button>
       </EmptyContent>
@@ -102,12 +103,12 @@ function ErrorNotice({ message, onRetry }: { message: string; onRetry?: () => vo
   return (
     <div className="p-4">
       <Alert variant="destructive">
-        <WarningIcon aria-hidden="true" />
+        <WarningIcon weight="bold" aria-hidden="true" />
         <AlertTitle>Graphs did not load</AlertTitle>
         <AlertDescription>
           <p>{message}</p>
           <Button variant="outline" size="sm" className="mt-2" onClick={onRetry}>
-            <RetryIcon aria-hidden="true" />
+            <RetryIcon weight="bold" aria-hidden="true" />
             Retry
           </Button>
         </AlertDescription>
@@ -130,14 +131,15 @@ export function EmptyAndLoading({
   onCreate,
 }: EmptyAndLoadingProps) {
   const count = headerCount(state, rows);
+  const titleId = useId();
   return (
     <section
-      aria-labelledby="graph-list-title"
+      aria-labelledby={titleId}
       aria-busy={state === "loading"}
       className="flex w-full max-w-2xl flex-col bg-card text-card-foreground ring-1 ring-border"
     >
       <header className="flex min-h-11 items-center gap-3 border-b bg-muted/20 px-4 py-2.5">
-        <h2 id="graph-list-title" className="locus-eyebrow">
+        <h2 id={titleId} className="locus-eyebrow">
           Graphs
         </h2>
         {count ? <span className="text-sm text-muted-foreground tabular-nums">{count}</span> : null}

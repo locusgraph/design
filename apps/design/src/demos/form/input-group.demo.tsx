@@ -1,4 +1,3 @@
-import { Copy as CopyIcon, Search as SearchIcon } from "@carbon/icons-react";
 import {
   InputGroup,
   InputGroupAddon,
@@ -7,6 +6,7 @@ import {
   InputGroupText,
   InputGroupTextarea,
 } from "@locusgraph/components";
+import { Copy as CopyIcon, MagnifyingGlass as SearchIcon } from "@phosphor-icons/react/ssr";
 import { defineDemo, select, text, toggle } from "../../registry/define-demo";
 
 const aligns = ["inline-start", "inline-end"] as const;
@@ -14,9 +14,9 @@ const aligns = ["inline-start", "inline-end"] as const;
 function Search() {
   return (
     <InputGroup className="max-w-sm">
-      <InputGroupInput placeholder="Search members" />
+      <InputGroupInput aria-label="Search members" placeholder="Search members" />
       <InputGroupAddon>
-        <SearchIcon />
+        <SearchIcon weight="bold" aria-hidden />
       </InputGroupAddon>
       <InputGroupAddon align="inline-end">12 results</InputGroupAddon>
     </InputGroup>
@@ -29,7 +29,7 @@ function Price() {
       <InputGroupAddon>
         <InputGroupText>$</InputGroupText>
       </InputGroupAddon>
-      <InputGroupInput type="number" placeholder="0.00" />
+      <InputGroupInput type="number" aria-label="Amount in dollars" placeholder="0.00" />
       <InputGroupAddon align="inline-end">
         <InputGroupText>USD / month</InputGroupText>
       </InputGroupAddon>
@@ -40,10 +40,15 @@ function Price() {
 function CopyKey() {
   return (
     <InputGroup className="max-w-sm">
-      <InputGroupInput readOnly defaultValue="lg_live_4f9a2c7e1b" className="font-mono" />
+      <InputGroupInput
+        readOnly
+        aria-label="API key"
+        defaultValue="lg_live_4f9a2c7e1b"
+        className="font-mono"
+      />
       <InputGroupAddon align="inline-end">
         <InputGroupButton size="icon-xs" aria-label="Copy API key">
-          <CopyIcon />
+          <CopyIcon weight="bold" aria-hidden />
         </InputGroupButton>
       </InputGroupAddon>
     </InputGroup>
@@ -53,7 +58,7 @@ function CopyKey() {
 function WithTextarea() {
   return (
     <InputGroup className="max-w-md">
-      <InputGroupTextarea placeholder="Message to the account owner" />
+      <InputGroupTextarea aria-label="Message" placeholder="Message to the account owner" />
       <InputGroupAddon align="block-end">
         <InputGroupText>0 / 500</InputGroupText>
         <InputGroupButton variant="default" size="sm" className="ml-auto">
@@ -75,9 +80,9 @@ export default defineDemo({
   },
   playground: ({ align, button, placeholder }) => (
     <InputGroup className="w-80">
-      <InputGroupInput placeholder={placeholder} />
+      <InputGroupInput aria-label="Search" placeholder={placeholder} />
       <InputGroupAddon align={align}>
-        <SearchIcon />
+        <SearchIcon weight="bold" aria-hidden />
       </InputGroupAddon>
       {button && (
         <InputGroupAddon align="inline-end">
@@ -91,7 +96,7 @@ export default defineDemo({
     const buttonAddon = button
       ? '\n  <InputGroupAddon align="inline-end">\n    <InputGroupButton>Search</InputGroupButton>\n  </InputGroupAddon>'
       : "";
-    return `<InputGroup>\n  <InputGroupInput placeholder="${placeholder}" />\n  <InputGroupAddon${alignProp}>\n    <SearchIcon />\n  </InputGroupAddon>${buttonAddon}\n</InputGroup>`;
+    return `<InputGroup>\n  <InputGroupInput aria-label="Search" placeholder="${placeholder}" />\n  <InputGroupAddon${alignProp}>\n    <SearchIcon weight="bold" aria-hidden />\n  </InputGroupAddon>${buttonAddon}\n</InputGroup>`;
   },
   props: [
     {

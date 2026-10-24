@@ -2,7 +2,7 @@
 
 import { LocusGraphMark } from "@locusgraph/brand";
 import { useEffect, useRef } from "react";
-import { prefersReducedMotion } from "../use-loop-animation";
+import { prefersReducedMotion } from "../../../shared/reduced-motion";
 
 const sweepMs = 1800;
 const markCenter = { x: 14.5, y: 13 };

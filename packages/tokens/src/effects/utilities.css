@@ -57,9 +57,27 @@
 
 @utility locus-eyebrow {
   font-family: var(--font-mono);
-  font-size: 11px;
-  line-height: 1rem;
+  font-size: var(--text-2xs);
+  line-height: var(--text-2xs--line-height);
   letter-spacing: 0.05em;
   text-transform: uppercase;
-  color: var(--locus-muted);
+  color: var(--locus-muted-foreground);
+}
+
+@utility locus-focus-ring {
+  outline: none;
+
+  &:focus-visible {
+    outline: 2px solid color-mix(in oklch, var(--color-ring) 70%, transparent);
+    outline-offset: 2px;
+  }
+}
+
+@utility locus-focus-ring-inset {
+  outline: none;
+
+  &:focus-visible {
+    outline: 2px solid color-mix(in oklch, var(--color-ring) 70%, transparent);
+    outline-offset: -2px;
+  }
 }

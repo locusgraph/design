@@ -23,7 +23,7 @@ function StatusInUse() {
       </div>
       <div className="flex items-center justify-between px-4 py-3 text-sm">
         <span>Plan</span>
-        <Badge variant="outline" className="text-info">
+        <Badge variant="outline" className="text-interactive">
           Changes on Nov 1
         </Badge>
       </div>
@@ -69,7 +69,7 @@ function BothThemes() {
 export default defineDemo({
   title: "Colors",
   description:
-    "Every color in the LocusGraph palette, with its token and its light and dark value. Use the token, never the hex: the token switches with the theme. From @locusgraph/tokens.",
+    "Every color in the LocusGraph palette, with its token and its light and dark value. Use the token, never the hex: the token switches with the theme. From `@locusgraph/tokens`.",
   controls: { group: select(colorGroups, "base") },
   playground: ({ group }) => (
     <div className="w-full max-w-4xl divide-y ring-1 ring-border">

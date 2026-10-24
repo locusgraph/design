@@ -1,14 +1,10 @@
-import { cn } from "cn";
 import type * as React from "react";
+import { cn } from "../../cn";
 import { Skeleton } from "../status/skeleton";
 
 function SkeletonBar({ className, ...props }: React.ComponentProps<typeof Skeleton>) {
   return (
-    <Skeleton
-      aria-hidden="true"
-      className={cn("rounded-none bg-skeleton motion-reduce:animate-none", className)}
-      {...props}
-    />
+    <Skeleton aria-hidden="true" className={cn("rounded-none bg-skeleton", className)} {...props} />
   );
 }
 

@@ -25,15 +25,16 @@ export function demoPathFromFile(file: string) {
   return file.replace(/^\.\.\/demos\//, "").replace(/\.demo\.tsx$/, "");
 }
 
+const minorWords = new Set(["and", "or", "of", "to", "in", "on", "for", "with"]);
+
+function titleWord(word: string, position: number) {
+  if (position > 0 && minorWords.has(word)) return word;
+  return word.charAt(0).toUpperCase() + word.slice(1);
+}
+
 export function demoTitleFromPath(path: string) {
   const name = path.split("/").at(-1) ?? "";
-  return (
-    titleOverrides[name] ??
-    name
-      .split("-")
-      .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-      .join(" ")
-  );
+  return titleOverrides[name] ?? name.split("-").map(titleWord).join(" ");
 }
 
 export function demoIndexEntryFromPath(path: string): DemoIndexEntry {
@@ -56,6 +57,23 @@ export const demoIndexByTitle: DemoIndexEntry[] = [...demoIndex].sort((first, se
 
 export function findDemoIndexEntry(path: string) {
   return demoIndex.find((entry) => entry.path === path);
+}
+
+function findNearestAncestorEntry(segments: string[]) {
+  for (let length = segments.length - 1; length > 0; length--) {
+    const entry = findDemoIndexEntry(segments.slice(0, length).join("/"));
+    if (entry) return entry;
+  }
+  return undefined;
+}
+
+export function findDemoIndexEntryByName(path: string) {
+  const segments = path.split("/").filter(Boolean);
+  const name = segments.at(-1);
+  return (
+    demoIndex.find((entry) => entry.path.split("/").at(-1) === name) ??
+    findNearestAncestorEntry(segments)
+  );
 }
 
 const loading = new Map<string, Promise<DemoEntry>>();

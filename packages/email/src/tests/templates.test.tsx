@@ -15,6 +15,18 @@ describe("email templates", () => {
     expect(email.html).toContain('href="https://accounts.locusgraph.com/invite/abc"');
     expect(email.text).toContain("Accept invitation: https://accounts.locusgraph.com/invite/abc");
     expect(email.text).not.toContain("<");
+    expect(email.text).toContain("Dana invited you to Acme Inc as a member.");
+  });
+
+  it("puts an before a role that starts with a vowel", () => {
+    const email = invitationEmail({
+      organizationName: "Acme Inc",
+      inviterName: "Dana",
+      role: "admin",
+      acceptUrl: "https://accounts.locusgraph.com/invite/abc",
+      expiresOn: "Oct 24, 2026",
+    });
+    expect(email.text).toContain("as an admin.");
   });
 
   it("formats money in receipts and credit emails", () => {
@@ -49,6 +61,24 @@ describe("email templates", () => {
       ],
     });
     expect(email.text).toContain("spendgraph.events 10,450 of 10,000 this month");
+  });
+
+  it("names a quota by its label when one is given", () => {
+    const email = usageOverPlanEmail({
+      organizationName: "Acme",
+      usageUrl: "https://u",
+      quotas: [
+        {
+          key: "spendgraph.events",
+          label: "Events",
+          used: 10450,
+          included: 10000,
+          periodLabel: "this month",
+        },
+      ],
+    });
+    expect(email.text).toContain("Events 10,450 of 10,000 this month");
+    expect(email.text).not.toContain("spendgraph.events");
   });
 
   it("uses only inline styles and square containers", () => {

@@ -37,8 +37,20 @@ const renderers: Record<EmailTemplate, () => RenderedEmail> = {
     usageOverPlanEmail({
       organizationName: "Acme Inc",
       quotas: [
-        { key: "Memory writes", used: 124_000, included: 100_000, periodLabel: "this month" },
-        { key: "Graphs", used: 6, included: 5, periodLabel: "in total" },
+        {
+          key: "locusgraph.memory_writes",
+          label: "Memory writes",
+          used: 124_000,
+          included: 100_000,
+          periodLabel: "this month",
+        },
+        {
+          key: "locusgraph.graphs",
+          label: "Graphs",
+          used: 6,
+          included: 5,
+          periodLabel: "in total",
+        },
       ],
       usageUrl: "https://accounts.locusgraph.com/usage",
     }),
@@ -76,7 +88,7 @@ export const templateCode: Record<EmailTemplate, string> = {
 })`,
   "usage-over-plan": `usageOverPlanEmail({
   organizationName: "Acme Inc",
-  quotas: [{ key: "Memory writes", used: 124_000, included: 100_000, periodLabel: "this month" }],
+  quotas: [{ key: "locusgraph.memory_writes", label: "Memory writes", used: 124_000, included: 100_000, periodLabel: "this month" }],
   usageUrl,
 })`,
 };

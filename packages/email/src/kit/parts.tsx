@@ -8,7 +8,7 @@ export function EmailLabel({ children }: { children: React.ReactNode }) {
         margin: "0 0 8px",
         fontFamily: emailFonts.mono,
         fontSize: 12,
-        color: emailColors.muted,
+        color: emailColors.mutedForeground,
       }}
     >
       {children}
@@ -45,7 +45,7 @@ export function EmailText({
         margin: "0 0 16px",
         fontSize: 15,
         lineHeight: "24px",
-        color: muted ? emailColors.muted : emailColors.foreground,
+        color: muted ? emailColors.mutedForeground : emailColors.foreground,
       }}
     >
       {children}
@@ -95,7 +95,7 @@ export function EmailRows({ rows }: { rows: [label: string, value: string][] }) 
               style={{
                 padding: "10px 0",
                 fontSize: 14,
-                color: emailColors.muted,
+                color: emailColors.mutedForeground,
                 borderBottom: `1px solid ${emailColors.line}`,
               }}
             >

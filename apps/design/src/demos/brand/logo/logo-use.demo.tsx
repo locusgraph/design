@@ -29,7 +29,7 @@ function MinimumSizes() {
       <div className="flex flex-col items-center gap-3 px-4 py-6">
         <span className="flex w-20 flex-col gap-1">
           <LocusGraphWordmark className="text-[14.5px] leading-none" />
-          <span className="h-px w-20 bg-s1" />
+          <span className="h-px w-20 bg-interactive" />
         </span>
         <span className="locus-eyebrow">Wordmark · 80px wide</span>
       </div>

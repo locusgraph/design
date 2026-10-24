@@ -1,9 +1,9 @@
+import { ToggleGroup, ToggleGroupItem } from "@locusgraph/components";
 import {
-  TextBold as BoldIcon,
+  TextB as BoldIcon,
   TextItalic as ItalicIcon,
   TextUnderline as UnderlineIcon,
-} from "@carbon/icons-react";
-import { ToggleGroup, ToggleGroupItem } from "@locusgraph/components";
+} from "@phosphor-icons/react/ssr";
 import { formatProp } from "../../registry/control-values";
 import { defineDemo, select, toggle } from "../../registry/define-demo";
 
@@ -12,7 +12,7 @@ const sizes = ["default", "sm", "lg"] as const;
 
 function BillingPeriod() {
   return (
-    <ToggleGroup type="single" variant="outline" defaultValue="monthly">
+    <ToggleGroup type="single" variant="outline" defaultValue="monthly" aria-label="Billing period">
       <ToggleGroupItem value="monthly">Monthly</ToggleGroupItem>
       <ToggleGroupItem value="yearly">Yearly</ToggleGroupItem>
     </ToggleGroup>
@@ -21,15 +21,15 @@ function BillingPeriod() {
 
 function Multiple() {
   return (
-    <ToggleGroup type="multiple" variant="outline" defaultValue={["bold"]}>
+    <ToggleGroup type="multiple" variant="outline" defaultValue={["bold"]} aria-label="Text style">
       <ToggleGroupItem value="bold" aria-label="Bold">
-        <BoldIcon />
+        <BoldIcon weight="bold" aria-hidden />
       </ToggleGroupItem>
       <ToggleGroupItem value="italic" aria-label="Italic">
-        <ItalicIcon />
+        <ItalicIcon weight="bold" aria-hidden />
       </ToggleGroupItem>
       <ToggleGroupItem value="underline" aria-label="Underline">
-        <UnderlineIcon />
+        <UnderlineIcon weight="bold" aria-hidden />
       </ToggleGroupItem>
     </ToggleGroup>
   );
@@ -37,7 +37,13 @@ function Multiple() {
 
 function Spaced() {
   return (
-    <ToggleGroup type="single" variant="outline" spacing={2} defaultValue="30d">
+    <ToggleGroup
+      type="single"
+      variant="outline"
+      spacing={2}
+      defaultValue="30d"
+      aria-label="Date range"
+    >
       <ToggleGroupItem value="7d">7 days</ToggleGroupItem>
       <ToggleGroupItem value="30d">30 days</ToggleGroupItem>
       <ToggleGroupItem value="90d">90 days</ToggleGroupItem>
@@ -47,7 +53,7 @@ function Spaced() {
 
 function Disabled() {
   return (
-    <ToggleGroup type="single" defaultValue="all" disabled>
+    <ToggleGroup type="single" defaultValue="all" disabled aria-label="Invoice status">
       <ToggleGroupItem value="all">All</ToggleGroupItem>
       <ToggleGroupItem value="paid">Paid</ToggleGroupItem>
       <ToggleGroupItem value="open">Open</ToggleGroupItem>
@@ -74,6 +80,7 @@ export default defineDemo({
         size={size}
         disabled={disabled}
         defaultValue="30d"
+        aria-label="Date range"
       >
         <ToggleGroupItem value="7d">7 days</ToggleGroupItem>
         <ToggleGroupItem value="30d">30 days</ToggleGroupItem>
@@ -87,6 +94,7 @@ export default defineDemo({
         size={size}
         disabled={disabled}
         defaultValue={["30d"]}
+        aria-label="Date range"
       >
         <ToggleGroupItem value="7d">7 days</ToggleGroupItem>
         <ToggleGroupItem value="30d">30 days</ToggleGroupItem>
@@ -94,7 +102,7 @@ export default defineDemo({
       </ToggleGroup>
     ),
   code: ({ type, variant, size, disabled }) =>
-    `<ToggleGroup type="${type}"${formatProp("variant", variant, "default")}${formatProp("size", size, "default")}${formatProp("disabled", disabled, false)}>\n  <ToggleGroupItem value="7d">7 days</ToggleGroupItem>\n  <ToggleGroupItem value="30d">30 days</ToggleGroupItem>\n  <ToggleGroupItem value="90d">90 days</ToggleGroupItem>\n</ToggleGroup>`,
+    `<ToggleGroup type="${type}"${formatProp("variant", variant, "default")}${formatProp("size", size, "default")}${formatProp("disabled", disabled, false)} aria-label="Date range">\n  <ToggleGroupItem value="7d">7 days</ToggleGroupItem>\n  <ToggleGroupItem value="30d">30 days</ToggleGroupItem>\n  <ToggleGroupItem value="90d">90 days</ToggleGroupItem>\n</ToggleGroup>`,
   props: [
     { name: "type", type: "single | multiple" },
     { name: "variant", type: variants.join(" | "), defaultValue: "default" },

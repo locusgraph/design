@@ -2,6 +2,7 @@ import { renderToStaticMarkup } from "react-dom/server";
 import { describe, expect, it } from "vitest";
 import { MemoryReview, RunBar, SpendGate } from "../index";
 import { reviewResult } from "../memory/memory-choices";
+import { minimumCapMicroUsd, suggestedCapMicroUsd } from "../spend/spend-math";
 
 const noop = () => {};
 
@@ -89,5 +90,13 @@ describe("RunBar", () => {
     expect(renderToStaticMarkup(<RunBar status="paused" {...callbacks} />)).toContain("Resume");
     const done = renderToStaticMarkup(<RunBar status="done" {...callbacks} />);
     expect(done).not.toContain("<button");
+  });
+});
+
+describe("raised cap", () => {
+  it("must cover the next step, not just pass the current cap", () => {
+    expect(minimumCapMicroUsd(5_470_000, 5_000_000)).toBe(5_470_000);
+    expect(minimumCapMicroUsd(4_000_000, 5_000_000)).toBe(5_010_000);
+    expect(suggestedCapMicroUsd(5_470_000, 5_000_000)).toBe(6_000_000);
   });
 });

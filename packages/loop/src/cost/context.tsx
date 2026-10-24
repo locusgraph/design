@@ -33,7 +33,7 @@ function RingContent({ percent, status }: { percent: number; status: ContextStat
   return (
     <>
       <MeterRing percent={percent} status={status} />
-      <span className="font-mono text-[11px] tabular-nums">{percent}%</span>
+      <span className="font-mono text-2xs tabular-nums">{percent}%</span>
     </>
   );
 }
@@ -53,7 +53,7 @@ function BarContent({
 }) {
   return (
     <>
-      <span className="flex items-baseline justify-between gap-4 font-mono text-[11px] tabular-nums">
+      <span className="flex items-baseline justify-between gap-4 font-mono text-2xs tabular-nums">
         <span className="locus-eyebrow">{label}</span>
         <span className={cn(status === "ok" && "text-foreground")}>
           {percent}% · {formatTokensShort(usedTokens)} / {formatTokensShort(limitTokens)}
@@ -89,10 +89,10 @@ export function Context({
       aria-valuetext={`${percent}%, ${summary}`}
       tabIndex={hasBreakdown ? 0 : undefined}
       className={cn(
-        "outline-none focus-visible:ring-2 focus-visible:ring-ring/70",
+        "locus-focus-ring",
         statusTone[status],
         variant === "ring"
-          ? "inline-flex h-6 items-center gap-1.5 rounded-full px-2 transition-colors duration-150 motion-reduce:transition-none"
+          ? "inline-flex h-control-xs items-center gap-1.5 rounded-full px-2 transition-colors duration-150 motion-reduce:transition-none"
           : "flex w-full flex-col gap-2",
         variant === "ring" && hasBreakdown && "cursor-default hover:bg-accent",
         className

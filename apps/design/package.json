@@ -12,13 +12,14 @@
     "registry": "node ../../scripts/registry/build.mjs"
   },
   "dependencies": {
-    "@carbon/icons-react": "catalog:",
+    "@phosphor-icons/react": "catalog:",
     "@locusgraph/blocks": "workspace:*",
     "@locusgraph/brand": "workspace:*",
     "@locusgraph/components": "workspace:*",
     "@locusgraph/email": "workspace:*",
     "@locusgraph/loop": "workspace:*",
     "@locusgraph/tokens": "workspace:*",
+    "@locusgraph/utils": "workspace:*",
     "@shikijs/langs": "catalog:",
     "@shikijs/themes": "catalog:",
     "react": "catalog:",

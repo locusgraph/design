@@ -1,5 +1,5 @@
-import { Checkmark as CheckIcon } from "@carbon/icons-react";
 import { Badge } from "@locusgraph/components";
+import { Check as CheckIcon } from "@phosphor-icons/react/ssr";
 import { formatProp } from "../../registry/control-values";
 import { defineDemo, select, text } from "../../registry/define-demo";
 
@@ -33,7 +33,7 @@ function PlanStatus() {
   return (
     <div className="flex flex-wrap items-center gap-2">
       <Badge variant="success">
-        <CheckIcon />
+        <CheckIcon weight="bold" aria-hidden />
         Active
       </Badge>
       <Badge variant="outline">Trial</Badge>

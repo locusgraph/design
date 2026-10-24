@@ -3,7 +3,7 @@ import { neighborEntries } from "../../registry/demo-docs";
 import type { DemoEntry } from "../../registry/load-demos";
 import type { ShellSettings } from "../../url-state";
 import { Playground } from "../demo/playground";
-import { libraryEntries, libraryOfPath } from "../nav/libraries";
+import { entriesInLibraryOrder, libraryOfPath } from "../nav/libraries";
 import { InstallationSection } from "./install/installation-section";
 import type { PageDocs } from "./page-docs";
 import { PageHeader } from "./page-header";
@@ -23,10 +23,7 @@ type DemoPageProps = {
 export function DemoPage({ entry, docs, params, settings }: DemoPageProps) {
   const { demo } = entry;
   const values = readControlValues(demo.controls, params);
-  const { previous, next } = neighborEntries(
-    libraryEntries(libraryOfPath(entry.path).id),
-    entry.path
-  );
+  const { previous, next } = neighborEntries(entriesInLibraryOrder, entry.path);
   return (
     <article className="mx-auto flex w-full max-w-160 min-w-0 flex-col gap-12">
       <PageHeader

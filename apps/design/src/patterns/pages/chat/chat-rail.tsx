@@ -13,7 +13,7 @@ export function ChatRail({ usage, usedTokens, limitTokens }: ChatRailProps) {
       aria-label="Run details"
       className="hidden w-72 shrink-0 flex-col divide-y divide-border border-l bg-card lg:flex"
     >
-      <div className="flex min-h-11 items-center bg-muted/20 px-4">
+      <div className="flex min-h-11 items-center px-4">
         <RuleGridLabel>Run</RuleGridLabel>
       </div>
       <div className="flex flex-col gap-3 p-4">

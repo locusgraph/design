@@ -19,16 +19,15 @@ export function isWastedStep(step: CostStep): boolean {
 
 function barTone(step: CostStep): string {
   if (isWastedStep(step)) return "bg-destructive";
-  if (step.status === "retried") return "bg-warn/40";
   if (step.status === "running") return "bg-warn/60 motion-safe:animate-pulse";
-  return "bg-primary/35";
+  return "bg-muted-foreground/50";
 }
 
 const statusMark: Partial<Record<CostStepStatus, { text: string; className: string }>> = {
   failed: { text: "Failed", className: "text-destructive" },
   retried: { text: "Retried", className: "text-warn" },
-  running: { text: "Running", className: "text-muted-foreground" },
-  skipped: { text: "Skipped", className: "text-muted-foreground" },
+  running: { text: "Running", className: "text-muted-foreground motion-safe:locus-shimmer" },
+  skipped: { text: "Skipped", className: "font-normal text-faint" },
 };
 
 function barWidth(cost: number, maxCost: number): number {
@@ -55,36 +54,37 @@ export function StepCostRow({
       data-status={step.status}
       data-wasted={wasted || undefined}
       aria-label={`${step.title}: ${formatMicroUsd(cost)}, ${share}% of run${mark ? `, ${mark.text.toLowerCase()}` : ""}`}
-      className="grid grid-cols-[minmax(0,11rem)_1fr_3.5rem_4.5rem] items-center gap-x-4 gap-y-1.5 px-5 py-2.5 text-sm tabular-nums max-sm:grid-cols-[1fr_auto_auto]"
+      className="grid grid-cols-[minmax(0,11rem)_1fr_3.5rem_4.5rem] items-center gap-x-4 gap-y-1.5 py-1 text-sm tabular-nums max-sm:grid-cols-[1fr_auto_auto]"
     >
-      <span className="flex min-w-0 items-baseline gap-2">
-        <span className={cn("truncate", step.status === "skipped" && "text-muted-foreground")}>
+      <span className="flex min-w-0 items-baseline gap-x-2 max-sm:flex-wrap">
+        <span
+          className={cn(
+            "text-foreground normal-nums sm:truncate",
+            step.status === "skipped" && "text-faint"
+          )}
+        >
           {step.title}
         </span>
         {mark && (
-          <span
-            className={cn("shrink-0 font-mono text-[11px] tracking-wide uppercase", mark.className)}
-          >
-            {mark.text}
-          </span>
+          <span className={cn("shrink-0 text-xs font-medium", mark.className)}>{mark.text}</span>
         )}
       </span>
       <span
         aria-hidden
-        className="relative h-1.5 w-full bg-muted-foreground/10 max-sm:col-span-3 max-sm:row-start-2"
+        className="relative h-1 w-full overflow-hidden rounded-full bg-muted-foreground/10 max-sm:col-span-3 max-sm:row-start-2"
       >
         <span
           className={cn(
-            "absolute inset-y-0 left-0 transition-[width] duration-300 motion-reduce:transition-none",
+            "absolute inset-y-0 left-0 rounded-full transition-[width] duration-300 motion-reduce:transition-none",
             barTone(step)
           )}
           style={{ width: `${barWidth(cost, maxCost)}%` }}
         />
       </span>
-      <span className="text-right font-mono text-[11px] text-muted-foreground">
+      <span className="text-right text-xs text-faint">
         {step.durationMs !== undefined ? formatDuration(step.durationMs) : ""}
       </span>
-      <span className={cn("text-right font-mono text-xs", wasted && "text-destructive")}>
+      <span className={cn("text-right", wasted ? "text-destructive" : "text-foreground")}>
         {formatMicroUsd(cost)}
       </span>
     </li>

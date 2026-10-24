@@ -1,6 +1,5 @@
 "use client";
 
-import { ChevronDown as ChevronDownIcon } from "@carbon/icons-react";
 import {
   cn,
   DropdownMenu,
@@ -9,6 +8,7 @@ import {
   DropdownMenuRadioGroup,
   DropdownMenuTrigger,
 } from "@locusgraph/components";
+import { CaretDown as ChevronDownIcon } from "@phosphor-icons/react/ssr";
 import { type ModelOption, ModelOptionRow } from "./shared/model-option-row";
 
 export {
@@ -43,7 +43,7 @@ export function ModelPicker({
         disabled={disabled}
         aria-label={`${label}: ${selected?.name ?? "none selected"}`}
         className={cn(
-          "group inline-flex h-7 max-w-full items-center gap-1.5 rounded-full px-2.5 text-xs outline-none transition-colors duration-150 hover:bg-accent focus-visible:ring-2 focus-visible:ring-ring/70 disabled:pointer-events-none disabled:opacity-50 data-[state=open]:bg-accent motion-reduce:transition-none",
+          "group inline-flex h-control-sm max-w-full items-center gap-1.5 rounded-full px-2.5 text-xs locus-focus-ring transition-colors duration-150 hover:bg-accent disabled:pointer-events-none disabled:opacity-50 data-[state=open]:bg-accent motion-reduce:transition-none",
           className
         )}
       >
@@ -52,6 +52,7 @@ export function ModelPicker({
           <span className="truncate text-muted-foreground max-sm:hidden">{selected.provider}</span>
         )}
         <ChevronDownIcon
+          weight="bold"
           aria-hidden
           className="size-3 shrink-0 text-muted-foreground transition-transform duration-150 group-data-[state=open]:rotate-180 motion-reduce:transition-none"
         />
@@ -61,14 +62,14 @@ export function ModelPicker({
         sideOffset={6}
         className="w-80 rounded-none border-0 bg-popover p-0 shadow-overlay ring-1 ring-border"
       >
-        <DropdownMenuLabel className="locus-eyebrow flex justify-between gap-3 border-b border-border px-3 py-2 font-normal">
+        <DropdownMenuLabel className="locus-eyebrow flex justify-between gap-3 px-3 pt-2.5 pb-1 font-normal">
           <span>{label}</span>
           <span className="pr-7">Per 1M tokens</span>
         </DropdownMenuLabel>
         <DropdownMenuRadioGroup
           value={value}
           onValueChange={onChange}
-          className="flex flex-col divide-y divide-border"
+          className="flex flex-col pb-1"
         >
           {models.map((model) => (
             <ModelOptionRow key={model.id} model={model} />

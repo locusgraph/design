@@ -8,7 +8,7 @@ function AppHeader({ breadcrumbs, children }: AppHeaderProps) {
   return (
     <header
       data-slot="app-header"
-      className="flex h-14 shrink-0 items-center gap-3 border-b border-line bg-background px-4"
+      className="flex h-14 shrink-0 items-center gap-3 border-b border-border bg-background px-4"
     >
       <SidebarTrigger className="-ml-1" />
       <Separator orientation="vertical" className="h-4" />
@@ -27,7 +27,7 @@ function CommandHint({
 }) {
   return (
     <span className="hidden items-center gap-1.5 text-xs text-faint 2xl:flex">
-      <kbd className="rounded border border-line bg-ghost px-1.5 py-0.5 font-mono text-[11px]">
+      <kbd className="border border-border bg-muted px-1.5 py-0.5 font-mono text-2xs">
         {shortcut}
       </kbd>
       {label}

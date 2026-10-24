@@ -1,5 +1,6 @@
 import type { DocExample } from "../../../registry/demo-docs";
 import { CodeTeaser } from "../../preview/code/code-teaser";
+import { withInlineCode } from "../prose/inline-code";
 
 export function ExampleCard({ example }: { example: DocExample }) {
   const Example = example.component;
@@ -8,7 +9,7 @@ export function ExampleCard({ example }: { example: DocExample }) {
       <div className="flex flex-col gap-1">
         <h3 className="text-base font-medium">{example.title}</h3>
         {example.description && (
-          <p className="text-sm text-muted-foreground">{example.description}</p>
+          <p className="text-sm text-muted-foreground">{withInlineCode(example.description)}</p>
         )}
       </div>
       <div className="overflow-hidden border">

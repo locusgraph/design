@@ -1,18 +1,16 @@
 import {
-  ChevronLeft as ChevronLeftIcon,
-  ChevronRight as ChevronRightIcon,
-  OverflowMenuHorizontal as MoreHorizontalIcon,
-} from "@carbon/icons-react";
-import { cn } from "cn";
+  CaretLeft as ChevronLeftIcon,
+  CaretRight as ChevronRightIcon,
+  DotsThree as MoreHorizontalIcon,
+} from "@phosphor-icons/react/ssr";
 import * as React from "react";
-
 import { type Button, buttonVariants } from "../action/button";
+import { cn } from "../cn";
 
 function Pagination({ className, ...props }: React.ComponentProps<"nav">) {
   return (
     <nav
-      role="navigation"
-      aria-label="pagination"
+      aria-label="Pagination"
       data-slot="pagination"
       className={cn("mx-auto flex w-full justify-center", className)}
       {...props}
@@ -42,9 +40,11 @@ type PaginationLinkProps = {
 const activePageEmphasis = "border-input bg-muted font-semibold text-foreground dark:bg-muted";
 
 function PaginationLink({ className, isActive, size = "icon", ...props }: PaginationLinkProps) {
+  const unavailable = props.href === undefined;
   return (
     <a
       aria-current={isActive ? "page" : undefined}
+      aria-disabled={unavailable || undefined}
       data-slot="pagination-link"
       data-active={isActive}
       className={cn(
@@ -53,6 +53,7 @@ function PaginationLink({ className, isActive, size = "icon", ...props }: Pagina
           size,
         }),
         isActive ? activePageEmphasis : "text-muted-foreground hover:text-foreground",
+        unavailable && "pointer-events-none opacity-50",
         className
       )}
       {...props}
@@ -68,7 +69,7 @@ function PaginationPrevious({ className, ...props }: React.ComponentProps<typeof
       className={cn("gap-1 px-2.5 text-foreground sm:pl-2.5", className)}
       {...props}
     >
-      <ChevronLeftIcon />
+      <ChevronLeftIcon weight="bold" aria-hidden />
       <span className="hidden sm:block">Previous</span>
     </PaginationLink>
   );
@@ -83,7 +84,7 @@ function PaginationNext({ className, ...props }: React.ComponentProps<typeof Pag
       {...props}
     >
       <span className="hidden sm:block">Next</span>
-      <ChevronRightIcon />
+      <ChevronRightIcon weight="bold" aria-hidden />
     </PaginationLink>
   );
 }
@@ -91,12 +92,11 @@ function PaginationNext({ className, ...props }: React.ComponentProps<typeof Pag
 function PaginationEllipsis({ className, ...props }: React.ComponentProps<"span">) {
   return (
     <span
-      aria-hidden
       data-slot="pagination-ellipsis"
-      className={cn("flex size-9 items-center justify-center", className)}
+      className={cn("flex size-control items-center justify-center", className)}
       {...props}
     >
-      <MoreHorizontalIcon className="size-4" />
+      <MoreHorizontalIcon weight="bold" aria-hidden className="size-4" />
       <span className="sr-only">More pages</span>
     </span>
   );

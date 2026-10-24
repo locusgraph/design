@@ -58,8 +58,8 @@ describe("page titles", () => {
     expect(page.canonical).toBe(canonicalUrl("loop/approval/approval"));
   });
 
-  it("falls back to the site defaults for an unknown path", () => {
-    expect(currentPageMeta("no/such/page", undefined).title).toBe(defaultTitle);
+  it("titles an unknown path as not found", () => {
+    expect(currentPageMeta("no/such/page", undefined).title).toBe("Page not found · Locus Design");
   });
 });
 

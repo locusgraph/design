@@ -1,21 +1,15 @@
 "use client";
 
-import { ShieldAlert as ShieldAlertIcon, Tools as WrenchIcon } from "@carbon/icons-react";
 import { Button, cn } from "@locusgraph/components";
 import { useState } from "react";
-import {
-  ApprovalPanel,
-  LiveStatus,
-  PanelBody,
-  PanelFooter,
-  PanelHeader,
-  PanelTitle,
-  type PanelTone,
-} from "../../shared/panel";
+import { humanToolName } from "../../agent/tool/tool-status";
+import { DecisionSummary } from "../../shared/decision-summary";
+import { LiveStatus } from "../../shared/live-status";
 import { type RiskLevel, type ToolPart, type ToolState, toolNameOf } from "../../types";
-import { DecisionSummary } from "../shared/decision-line";
-import { riskCopy, riskLabels, riskRing } from "../shared/risk-badge";
+import { ApprovalHeadline, SettledLine } from "../shared/approval-line";
+import { riskCopy } from "../shared/risk-badge";
 import { useFocusOnMount } from "../shared/use-focus-on-mount";
+import { useFocusWhenSettled } from "../shared/use-focus-when-settled";
 import type { ApprovalDecision } from "../types";
 import { DenyForm } from "./deny-form";
 import { ToolInputs } from "./tool-inputs";
@@ -43,18 +37,6 @@ function settledLabel(state: ToolState) {
   return settledStateLabels[state] ?? "Waiting for the tool inputs.";
 }
 
-function headerStatus(
-  awaiting: boolean,
-  decision?: ApprovalDecision
-): { status?: string; tone: PanelTone } {
-  if (decision) {
-    return decision.approved
-      ? { status: "Approved", tone: "done" }
-      : { status: "Denied", tone: "danger" };
-  }
-  return awaiting ? { status: "Waiting for you", tone: "waiting" } : { tone: "idle" };
-}
-
 function decidedResult(toolName: string, state: ToolState, decision: ApprovalDecision) {
   return settledStateLabels[state] ?? `${toolName} ${decision.approved ? "approved" : "denied"}`;
 }
@@ -72,47 +54,33 @@ export function Approval({
 }: ApprovalProps) {
   const [denying, setDenying] = useState(false);
   const toolName = toolNameOf(part);
+  const name = humanToolName(toolName);
   const awaiting = !decision && part.state === "approval-requested";
   const approveRef = useFocusOnMount<HTMLButtonElement>(autoFocus && awaiting);
+  const sectionRef = useFocusWhenSettled<HTMLElement>(awaiting);
   const destructive = risk === "destructive";
-  const Icon = destructive ? ShieldAlertIcon : WrenchIcon;
-  const header = headerStatus(awaiting, decision);
   return (
-    <ApprovalPanel
+    <section
+      ref={sectionRef}
+      tabIndex={-1}
       data-slot="approval"
       data-risk={risk}
       data-state={decision ? (decision.approved ? "approved" : "denied") : part.state}
-      aria-label={`Approve ${toolName}`}
-      className={cn(awaiting && riskRing[risk], className)}
+      data-tool-name={toolName}
+      aria-label={`Approve ${name}`}
+      className={cn("flex min-w-0 flex-col outline-none", awaiting && "gap-3", className)}
     >
-      <PanelHeader
-        icon={<Icon aria-hidden />}
-        eyebrow={awaiting ? "Approval needed" : "Tool call"}
-        aside={riskLabels[risk]}
-        status={header.status}
-        tone={header.tone}
-      />
-      <PanelTitle className={cn("truncate font-mono", !awaiting && "text-muted-foreground")}>
-        {toolName}
-      </PanelTitle>
       {awaiting && (
-        <p className="px-5 pt-1 text-sm text-muted-foreground">
-          {description ?? riskCopy[risk](toolName)}
-        </p>
-      )}
-      {awaiting && !denying && (
         <>
-          <PanelBody>
-            <ToolInputs input={part.input} />
-          </PanelBody>
-          <PanelFooter className="justify-between">
-            <span className="hidden font-mono text-[11px] text-muted-foreground sm:inline">
-              The run is paused
-            </span>
-            <span className="flex flex-wrap gap-2">
-              <Button type="button" size="sm" variant="ghost" onClick={() => setDenying(true)}>
-                Deny
-              </Button>
+          <ApprovalHeadline name={name} risk={risk} />
+          <p className="-mt-2 text-sm text-faint">{description ?? riskCopy[risk]()}</p>
+          <div>
+            <ToolInputs input={part.input} muted={denying} />
+          </div>
+          {denying ? (
+            <DenyForm onDeny={onDeny} onBack={() => setDenying(false)} />
+          ) : (
+            <div className="flex flex-wrap gap-2 pt-1">
               <Button
                 ref={approveRef}
                 type="button"
@@ -120,41 +88,36 @@ export function Approval({
                 variant={destructive ? "destructive" : "default"}
                 onClick={onApprove}
               >
-                {actionLabel ?? `Run ${toolName}`}
+                {actionLabel ?? `Run ${name}`}
               </Button>
-            </span>
-          </PanelFooter>
-        </>
-      )}
-      {awaiting && denying && (
-        <>
-          <PanelBody className="pb-4">
-            <ToolInputs input={part.input} muted />
-          </PanelBody>
-          <DenyForm onDeny={onDeny} onBack={() => setDenying(false)} />
+              <Button type="button" size="sm" variant="ghost" onClick={() => setDenying(true)}>
+                Deny
+              </Button>
+            </div>
+          )}
         </>
       )}
       {!awaiting && (
-        <PanelBody className="pt-3">
+        <SettledLine name={name}>
           {decision ? (
             <DecisionSummary
               decision={decision}
-              result={decidedResult(toolName, part.state, decision)}
+              result={decidedResult(name, part.state, decision)}
             />
           ) : (
-            <p className="text-sm text-muted-foreground">{settledLabel(part.state)}</p>
+            <p className="text-sm text-faint">{settledLabel(part.state)}</p>
           )}
-        </PanelBody>
+        </SettledLine>
       )}
       <LiveStatus
         message={
           decision
-            ? `${toolName} ${decision.approved ? "approved" : "denied"} by ${decision.by}`
+            ? `${name} ${decision.approved ? "approved" : "denied"} by ${decision.by}`
             : awaiting
-              ? `${toolName} is waiting for your approval`
+              ? `${name} is waiting for your approval`
               : settledLabel(part.state)
         }
       />
-    </ApprovalPanel>
+    </section>
   );
 }

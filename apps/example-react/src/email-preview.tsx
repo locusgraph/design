@@ -25,7 +25,7 @@ export function EmailPreview() {
     <div className="grid gap-6 lg:grid-cols-2">
       {emails.map((email) => (
         <section key={email.subject} className="flex flex-col gap-2">
-          <p className="font-mono text-[11.5px] text-muted-foreground">{email.subject}</p>
+          <p className="font-mono text-2xs text-muted-foreground">{email.subject}</p>
           <iframe title={email.subject} srcDoc={email.html} className="h-[520px] w-full border" />
         </section>
       ))}

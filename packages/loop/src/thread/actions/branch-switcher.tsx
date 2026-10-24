@@ -1,9 +1,9 @@
 "use client";
 
 import {
-  ChevronLeft as ChevronLeftIcon,
-  ChevronRight as ChevronRightIcon,
-} from "@carbon/icons-react";
+  CaretLeft as ChevronLeftIcon,
+  CaretRight as ChevronRightIcon,
+} from "@phosphor-icons/react/ssr";
 import { ActionButton } from "./action-button";
 
 export type MessageBranch = { index: number; count: number };
@@ -20,27 +20,28 @@ export function BranchSwitcher({ branch, onBranchChange }: BranchSwitcherProps) 
       data-slot="branch-switcher"
       role="group"
       aria-label="Reply versions"
-      className="flex items-center"
+      className="mr-2 flex items-center"
     >
       <ActionButton
         label="Previous version"
         disabled={branch.index <= 0}
         onClick={() => onBranchChange(branch.index - 1)}
       >
-        <ChevronLeftIcon />
+        <ChevronLeftIcon weight="bold" aria-hidden />
       </ActionButton>
       <span
         aria-live="polite"
-        className="min-w-9 text-center font-mono text-xs text-muted-foreground tabular-nums"
+        className="min-w-8 text-center text-xs text-muted-foreground tabular-nums"
       >
-        {`${position} / ${branch.count}`}
+        <span aria-hidden>{`${position} / ${branch.count}`}</span>
+        <span className="sr-only">{`Version ${position} of ${branch.count}`}</span>
       </span>
       <ActionButton
         label="Next version"
         disabled={position >= branch.count}
         onClick={() => onBranchChange(branch.index + 1)}
       >
-        <ChevronRightIcon />
+        <ChevronRightIcon weight="bold" aria-hidden />
       </ActionButton>
     </div>
   );

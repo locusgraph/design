@@ -1,6 +1,7 @@
 "use client";
 
-import { Checkbox, Input, Label, NativeSelect, NativeSelectOption } from "@locusgraph/components";
+import { Checkbox, cn } from "@locusgraph/components";
+import { CaretDown as ChevronDownIcon } from "@phosphor-icons/react/ssr";
 import type { ArgField } from "../../types";
 import type { ArgDraft } from "./args-validation";
 
@@ -11,6 +12,12 @@ type ArgsFieldProps = {
   error?: string;
   onChange: (draft: ArgDraft) => void;
 };
+
+const valueWellClass =
+  "flex h-control min-w-0 flex-1 items-center gap-2 bg-muted px-3 transition-shadow focus-within:ring-1 focus-within:ring-ring has-[[aria-invalid=true]]:ring-1 has-[[aria-invalid=true]]:ring-destructive motion-reduce:transition-none";
+
+const bareControlClass =
+  "h-full min-w-0 flex-1 bg-transparent text-foreground outline-none placeholder:text-faint";
 
 function describedBy(id: string, field: ArgField, error?: string) {
   const ids = [field.description && `${id}-hint`, error && `${id}-error`].filter(Boolean);
@@ -37,54 +44,83 @@ function FieldControl({ id, field, draft, error, onChange }: ArgsFieldProps) {
   const text = typeof draft === "string" ? draft : "";
   if (field.type === "select") {
     return (
-      <NativeSelect {...shared} value={text} onChange={(event) => onChange(event.target.value)}>
-        <NativeSelectOption value="">Choose…</NativeSelectOption>
-        {(field.options ?? []).map((option) => (
-          <NativeSelectOption key={option.value} value={option.value}>
-            {option.label}
-          </NativeSelectOption>
-        ))}
-      </NativeSelect>
+      <>
+        <select
+          {...shared}
+          value={text}
+          className={cn(
+            bareControlClass,
+            "appearance-none has-[option[value='']:checked]:text-faint"
+          )}
+          onChange={(event) => onChange(event.target.value)}
+        >
+          <option value="">Choose…</option>
+          {(field.options ?? []).map((option) => (
+            <option key={option.value} value={option.value}>
+              {option.label}
+            </option>
+          ))}
+        </select>
+        <ChevronDownIcon
+          weight="bold"
+          aria-hidden
+          className="pointer-events-none size-3.5 shrink-0 text-faint"
+        />
+      </>
     );
   }
   return (
-    <Input
+    <input
       {...shared}
       type={field.type === "number" ? "number" : "text"}
       inputMode={field.type === "number" ? "decimal" : undefined}
       min={field.min}
       max={field.max}
       value={text}
+      className={bareControlClass}
       onChange={(event) => onChange(event.target.value)}
     />
   );
 }
 
-export function ArgsField(props: ArgsFieldProps) {
-  const { id, field, error } = props;
-  const inline = field.type === "boolean";
-  return (
-    <div
-      data-slot="args-field"
-      data-type={field.type}
-      className="flex flex-col gap-1.5 [&_[data-slot=native-select-wrapper]]:w-full"
-    >
-      <div className={inline ? "flex flex-row-reverse items-center justify-end gap-2" : "contents"}>
-        <Label htmlFor={id}>
-          {field.label}
-          {field.required && (
-            <span className="text-xs font-normal text-muted-foreground">required</span>
-          )}
-        </Label>
+function FieldValue(props: ArgsFieldProps) {
+  if (props.field.type === "boolean") {
+    return (
+      <div className="flex h-control flex-1 items-center px-3">
         <FieldControl {...props} />
       </div>
+    );
+  }
+  return (
+    <div className={valueWellClass}>
+      <FieldControl {...props} />
+    </div>
+  );
+}
+
+export function ArgsField(props: ArgsFieldProps) {
+  const { id, field, error } = props;
+  const optional = !field.required && field.type !== "boolean";
+  return (
+    <div data-slot="args-field" data-type={field.type} className="flex flex-col gap-1">
+      <div className="flex min-w-0 items-center gap-4 text-sm">
+        <label
+          htmlFor={id}
+          className="flex w-32 shrink-0 cursor-pointer flex-col text-muted-foreground"
+        >
+          <span className="truncate">{field.label}</span>
+          {optional && <span className="text-xs text-faint">Optional</span>}
+          {field.required && <span className="sr-only"> (required)</span>}
+        </label>
+        <FieldValue {...props} />
+      </div>
       {field.description && (
-        <p id={`${id}-hint`} className="text-xs text-muted-foreground">
+        <p id={`${id}-hint`} className="pl-39 text-xs text-faint">
           {field.description}
         </p>
       )}
       {error && (
-        <p id={`${id}-error`} className="text-xs text-destructive">
+        <p id={`${id}-error`} className="pl-39 text-xs text-destructive">
           {error}
         </p>
       )}

@@ -16,7 +16,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@locusgraph/components";
-import { useState } from "react";
+import { useId, useState } from "react";
 import { type WorkspaceGeneral, workspaceUrlPrefix } from "./settings-data";
 import { SettingsSection } from "./settings-section";
 
@@ -33,6 +33,7 @@ function hasChanged(saved: WorkspaceGeneral, draft: WorkspaceGeneral) {
 }
 
 export function SettingsGeneral({ workspace, timezones, onSave }: SettingsGeneralProps) {
+  const fieldId = useId();
   const [saved, setSaved] = useState(workspace);
   const [draft, setDraft] = useState(workspace);
   const update = (field: keyof WorkspaceGeneral, value: string) =>
@@ -53,36 +54,37 @@ export function SettingsGeneral({ workspace, timezones, onSave }: SettingsGenera
     >
       <FieldGroup>
         <Field>
-          <FieldLabel htmlFor="workspace-name">Name</FieldLabel>
+          <FieldLabel htmlFor={`${fieldId}-name`}>Name</FieldLabel>
           <Input
-            id="workspace-name"
+            id={`${fieldId}-name`}
             value={draft.name}
             onChange={(event) => update("name", event.target.value)}
           />
         </Field>
         <Field>
-          <FieldLabel htmlFor="workspace-slug">URL</FieldLabel>
+          <FieldLabel htmlFor={`${fieldId}-slug`}>URL</FieldLabel>
           <InputGroup>
             <InputGroupAddon>
-              <InputGroupText>{workspaceUrlPrefix}</InputGroupText>
+              <InputGroupText id={`${fieldId}-slug-prefix`}>{workspaceUrlPrefix}</InputGroupText>
             </InputGroupAddon>
             <InputGroupInput
-              id="workspace-slug"
+              id={`${fieldId}-slug`}
+              aria-describedby={`${fieldId}-slug-prefix`}
               value={draft.slug}
               onChange={(event) => update("slug", event.target.value)}
             />
           </InputGroup>
         </Field>
         <Field>
-          <FieldLabel htmlFor="workspace-timezone">Timezone</FieldLabel>
+          <FieldLabel htmlFor={`${fieldId}-timezone`}>Timezone</FieldLabel>
           <Select value={draft.timezone} onValueChange={(value) => update("timezone", value)}>
-            <SelectTrigger id="workspace-timezone" className="w-full sm:w-72">
+            <SelectTrigger id={`${fieldId}-timezone`} className="w-full sm:w-72">
               <SelectValue />
             </SelectTrigger>
             <SelectContent>
               {timezones.map((timezone) => (
                 <SelectItem key={timezone} value={timezone}>
-                  {timezone.replace("_", " ")}
+                  {timezone.replaceAll("_", " ")}
                 </SelectItem>
               ))}
             </SelectContent>

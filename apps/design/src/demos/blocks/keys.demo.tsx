@@ -33,7 +33,8 @@ function ReadOnlyEmpty() {
 
 export default defineDemo({
   title: "Keys",
-  description: "Keys, the API key table, and KeysEmpty, its empty state. From @locusgraph/blocks.",
+  description:
+    "Keys, the API key table, and KeysEmpty, its empty state. From `@locusgraph/blocks`.",
   controls: { empty: toggle(false) },
   playground: ({ empty }) => (
     <div className="w-full max-w-3xl">
@@ -44,11 +45,12 @@ export default defineDemo({
           <RuleGridCell className="p-0">
             <Keys
               keys={keys}
-              actions={() => (
+              actions={(key) => (
                 <Button
                   size="sm"
                   variant="ghost"
-                  className="text-muted-foreground hover:text-destructive"
+                  aria-label={`Revoke ${key.name}`}
+                  className="text-muted-foreground hover:bg-destructive/10 hover:text-destructive"
                 >
                   Revoke
                 </Button>
@@ -62,7 +64,7 @@ export default defineDemo({
   code: ({ empty }) =>
     empty
       ? `<KeysEmpty newKeyHref="/keys/new" linkComponent={Link} />`
-      : `<Keys keys={keys} actions={(key) => <RevokeButton keyId={key.id} />} />`,
+      : `<Keys\n  keys={keys}\n  actions={(key) => <RevokeButton keyId={key.id} />}\n/>`,
   props: [
     { name: "Keys.keys", type: "ApiKeyRow[]" },
     { name: "Keys.actions", type: "(key: ApiKeyRow) => ReactNode" },
@@ -71,7 +73,7 @@ export default defineDemo({
   ],
   examples: {
     ReadOnlyEmpty: {
-      description: "Without newKeyHref, it tells the viewer to ask an owner.",
+      description: "Without `newKeyHref`, it tells the viewer to ask an owner.",
       component: ReadOnlyEmpty,
     },
   },

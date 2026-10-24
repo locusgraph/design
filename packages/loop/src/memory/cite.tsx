@@ -13,7 +13,7 @@ export type CiteProps = {
 };
 
 const pillClass =
-  "inline-flex h-4 min-w-4 items-center justify-center bg-muted px-1 font-mono text-[11px] leading-none font-medium text-foreground/80 tabular-nums no-underline ring-1 ring-border transition-colors duration-150 outline-none hover:bg-accent hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring/70 motion-reduce:transition-none";
+  "inline-flex h-4 min-w-4 items-center justify-center rounded-full bg-muted px-1 text-2xs leading-none font-medium text-muted-foreground tabular-nums no-underline transition-colors duration-150 locus-focus-ring hover:bg-interactive/15 hover:text-interactive data-[state=open]:bg-interactive/15 data-[state=open]:text-interactive motion-reduce:transition-none";
 
 export function citationLabel(citation: Citation): string {
   return `Source ${citation.index}: ${citation.title}`;
@@ -40,16 +40,20 @@ export function Cite({ citation, onOpen, className }: CiteProps) {
               href={citation.url}
               target="_blank"
               rel="noreferrer"
-              aria-label={label}
+              aria-label={onOpen ? label : `${label}, opens in a new tab`}
               onClick={open}
               className={pillClass}
             >
               {citation.index}
             </a>
-          ) : (
+          ) : onOpen ? (
             <button type="button" aria-label={label} onClick={open} className={pillClass}>
               {citation.index}
             </button>
+          ) : (
+            <span role="note" tabIndex={0} aria-label={label} className={pillClass}>
+              {citation.index}
+            </span>
           )}
         </HoverCardTrigger>
         <HoverCardContent
@@ -57,9 +61,10 @@ export function Cite({ citation, onOpen, className }: CiteProps) {
           side="bottom"
           align="start"
           sideOffset={6}
+          collisionPadding={12}
           className="flex w-72 flex-col gap-2 rounded-none border-0 p-4 ring-1 ring-border"
         >
-          <span className="locus-eyebrow flex min-w-0 items-center gap-2">
+          <span className="flex min-w-0 items-center gap-2 text-xs text-faint">
             <SourceMark citation={citation} />
             <span className="truncate">{host ?? "Source"}</span>
           </span>

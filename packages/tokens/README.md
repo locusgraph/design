@@ -14,7 +14,7 @@ pnpm add @locusgraph/tokens
 
 `@locusgraph/components/theme.css` already imports both; import tokens directly only in an app that does not use the components.
 
-Everything the theme defines is prefixed with `locus`: variables are `--locus-*` (light on `:root`, dark on `.dark`) and our classes, utilities and keyframes are `locus-*`. The Tailwind keys keep their names (`bg-surface`, `text-soft`, `bg-primary`, `text-muted-foreground`), now pointing at `--locus-*`. An app that also uses shadcn components and needs the shadcn variable names (`--background`, `--primary`, `--muted-foreground`, `--radius`, …) adds the optional aliases:
+Everything the theme defines is prefixed with `locus`: variables are `--locus-*` (light on `:root`, dark on `.dark`) and our classes, utilities and keyframes are `locus-*`. The Tailwind keys keep their names (`bg-surface`, `text-faint`, `bg-primary`, `text-muted-foreground`), now pointing at `--locus-*`. An app that also uses shadcn components and needs the shadcn variable names (`--background`, `--primary`, `--muted-foreground`, `--radius`, …) adds the optional aliases:
 
 ```css
 @import "@locusgraph/tokens/shadcn.css";
@@ -22,14 +22,33 @@ Everything the theme defines is prefixed with `locus`: variables are `--locus-*`
 
 ## What `theme.css` holds
 
-- Palette: one white (`--locus-surface`, also `--locus-background`), text, muted, status colors and a dark set under `.dark`.
-- Hairlines: `--locus-border` is 13% of the text color mixed into the surface.
-- Square containers: every radius token is 0. Use `rounded-full` for pills.
+- Palette: `--locus-background` for the page, `--locus-surface` for cards and panels, `--locus-foreground`, `--locus-muted-foreground` and `--locus-faint` for text tones, `--locus-muted` for fills, and a dark set under `.dark`. Every text tone passes WCAG AA on background, surface and muted in both themes.
+- Role colors: `interactive` (clickable, on hover), `memory` (remembered), `good`, `warn` (waiting) and `destructive`. Color means state; chart series `--locus-s1` to `--locus-s8` carry no meaning.
+- Hairlines: `--locus-border` is the text color mixed into the surface, 9% light and 10% dark.
+- Square containers: every radius token is 0. Buttons, chips, badges, dots and avatars use `rounded-full`.
 - Fonts: Inter for text, Archivo for headings and the brand, Fira Code for mono labels.
+- Type scale: Tailwind's steps plus `text-2xs` (0.6875rem) for badges and counters and `text-code` (0.8125rem) for code.
+- Control heights: `h-control-xs` (1.5rem), `h-control-sm` (2rem), `h-control` (2.25rem) and `h-control-lg` (2.5rem), also as `size-control-*`.
+- Focus: `locus-focus-ring` draws a 2px ring outside the element; `locus-focus-ring-inset` draws it inside for rows, tabs and scroll areas.
 - Base: 17px root size, tight balanced headings, `text-pretty` paragraphs.
 - Effects: `locus-brand-grid` and `locus-brand-grid-quiet` backgrounds, `locus-enter-cascade`, `locus-rises`, `locus-shimmer`, `locus-scroll-fade-b`, `locus-scroll-fade-x`, `locus-no-scrollbar`, `locus-scrollbar-none`, `locus-scrollbar-thin`, `locus-scrollbar-gutter-stable`, the `locus-eyebrow` label, `locus-ignites` and `locus-tracked`. Motion falls back to a fade under reduced motion.
 
-`typeset.css` styles long-form content inside `.typeset`; it is vendored from shadcn/typeset.
+`typeset.css` styles long-form content inside `.typeset`, vendored from shadcn/typeset. Add `locus-typeset-chat` for agent replies: 14px, sans headings, tables without row rules.
+
+## Migrating from 0.3
+
+The role colors are renamed so each one names its meaning, and the gray text tones are darker so they pass WCAG AA.
+
+| 0.3 | 0.4 |
+|---|---|
+| `--locus-muted` (gray text) | `--locus-muted-foreground` |
+| `--locus-ghost` (fill) | `--locus-muted` |
+| `--locus-bad`, `text-bad` | `--locus-destructive`, `text-destructive` |
+| `--locus-info`, `text-info` | `--locus-interactive`, `text-interactive` |
+| `text-soft`, `border-line`, `bg-ghost`, `bg-btn`, `bg-btn-ink` | `text-muted-foreground`, `border-border`, `bg-muted`, `bg-primary`, `text-primary-foreground` |
+| `locus-focus-ring`, `locus-focus-ring-inset`, `typeset-chat` | `locus-focus-ring`, `locus-focus-ring-inset`, `locus-typeset-chat` |
+
+New: `--locus-memory` (`text-memory`), `--locus-destructive-foreground`, `text-2xs`, `text-code` and the `h-control-*` heights.
 
 ## Migrating from 0.2
 

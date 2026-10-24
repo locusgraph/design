@@ -60,7 +60,7 @@ export function QuestionChoices({
       role="radiogroup"
       aria-label={label}
       data-slot="question-choices"
-      className="-mx-5 flex flex-col divide-y border-y"
+      className="flex flex-col"
     >
       {options.map((option, index) => {
         const checked = option.id === selectedId;
@@ -78,25 +78,26 @@ export function QuestionChoices({
             onClick={() => onSelect(option.id)}
             onKeyDown={(event) => handleKeyDown(event, index)}
             className={cn(
-              "group relative flex items-center gap-3 px-5 py-2.5 text-left text-sm outline-none motion-safe:transition-colors focus-visible:z-10 focus-visible:ring-2 focus-visible:ring-ring/70 focus-visible:ring-inset",
-              checked ? "bg-accent" : "hover:bg-accent/50"
+              "group relative -mx-2 flex items-start gap-3 px-2 py-1.5 text-left text-sm locus-focus-ring motion-safe:transition-colors",
+              checked ? "bg-muted" : "hover:bg-muted/50"
             )}
           >
             <span
               aria-hidden
               className={cn(
-                "flex size-5 shrink-0 items-center justify-center font-mono text-[11px] ring-1",
-                checked
-                  ? "bg-primary text-primary-foreground ring-primary"
-                  : "text-muted-foreground ring-input"
+                "flex h-5 w-4 shrink-0 items-center text-xs tabular-nums",
+                checked ? "font-medium text-interactive" : "text-faint"
               )}
             >
               {index + 1}
             </span>
             <span className="flex min-w-0 flex-1 flex-col">
-              <span className="font-medium">{option.label}</span>
+              <span className="font-medium text-foreground">{option.label}</span>
               {option.description && (
-                <span className="text-xs text-muted-foreground">{option.description}</span>
+                <span className="text-xs text-faint">
+                  <span className="sr-only">, </span>
+                  {option.description}
+                </span>
               )}
             </span>
           </button>

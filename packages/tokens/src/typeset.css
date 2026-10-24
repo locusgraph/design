@@ -3,3 +3,84 @@
 .typeset {
   --radius: var(--locus-radius);
 }
+
+.locus-typeset-chat {
+  --typeset-font-body: var(--font-sans);
+  --typeset-font-heading: var(--font-sans);
+  --typeset-font-mono: var(--font-mono);
+  --typeset-size: 14px;
+  --typeset-leading: 1.65;
+  --typeset-flow: 0.85em;
+}
+
+@layer components {
+  .typeset.locus-typeset-chat {
+    font-size: var(--typeset-size);
+  }
+
+  .typeset.locus-typeset-chat
+    *:not(:where(.not-typeset, [data-not-typeset], .not-typeset *, [data-not-typeset] *)) {
+    &:where(h1, h2, h3, h4) {
+      letter-spacing: -0.01em;
+    }
+    &:where(h1) {
+      font-size: 1.15em;
+      margin-block-start: calc(var(--typeset-flow) * 2);
+    }
+    &:where(h2) {
+      font-size: 1.075em;
+      margin-block-start: calc(var(--typeset-flow) * 1.75);
+    }
+    &:where(h3) {
+      font-size: 1em;
+      margin-block-start: calc(var(--typeset-flow) * 1.5);
+    }
+    &:where(h4) {
+      font-size: 1em;
+      font-weight: 500;
+      color: var(--typeset-muted);
+      margin-block-start: calc(var(--typeset-flow) * 1.5);
+    }
+    &:where(h1 + *, h2 + *, h3 + *, h4 + *) {
+      margin-block-start: 0.5em;
+    }
+    &:where(a) {
+      color: var(--color-foreground);
+      text-decoration-color: var(--color-faint);
+      text-underline-offset: 3px;
+      transition: color 150ms, text-decoration-color 150ms;
+    }
+    &:where(a:hover) {
+      color: var(--color-interactive);
+      text-decoration-color: var(--color-interactive);
+    }
+    &:where(li) {
+      margin-block-start: 0.35em;
+    }
+    &:where(blockquote) {
+      color: var(--typeset-muted);
+    }
+    &:where(hr) {
+      margin-block-start: calc(var(--typeset-flow) * 2);
+    }
+    &:where(table) {
+      border-block-end: 0;
+    }
+    &:where(thead th) {
+      font-size: 0.86em;
+      color: var(--color-faint);
+      padding: 0.45em 0.85em;
+      border-block-end: 1px solid var(--typeset-rule);
+    }
+    &:where(:is(tbody, tfoot) :is(td, th)) {
+      padding: 0.4em 0.85em;
+      border-block-start: 0;
+    }
+    &:where(th:first-child, td:first-child) {
+      padding-inline-start: 0;
+    }
+    &:where(th:last-child, td:last-child) {
+      padding-inline-end: 0;
+    }
+  }
+}

@@ -29,7 +29,7 @@ function UndoableWrites() {
 export default defineDemo({
   title: "Memorized",
   description:
-    "What the agent saved to the graph this turn. Each item can be undone; undone items stay in the list, struck through.",
+    "What the agent saved to the graph this turn, as a line with the items indented below. Each item can be undone; undone items stay in the list, struck through in faint text.",
   controls: {},
   playground: () => <UndoableWrites />,
   code: () => `<Memorized items={turn.memorized} onUndo={undoMemorized} />`,

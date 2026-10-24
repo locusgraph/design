@@ -1,0 +1,24 @@
+[data-theme-lab] {
+  --btn-hover: color-mix(in oklch, var(--locus-btn) 84%, var(--locus-background));
+  --btn-active: color-mix(in oklch, var(--locus-btn) 72%, var(--locus-background));
+  --grey-a1: color-mix(in oklch, var(--locus-foreground) 4%, transparent);
+  --grey-a2: color-mix(in oklch, var(--locus-foreground) 8%, transparent);
+  --grey-a3: color-mix(in oklch, var(--locus-foreground) 14%, transparent);
+  --grey-a4: color-mix(in oklch, var(--locus-foreground) 24%, transparent);
+  --btn-subtle: color-mix(in oklch, var(--locus-btn) 12%, transparent);
+}
+
+[data-theme-lab] [data-slot="button"][data-variant="default"]:hover:not(:disabled) {
+  background-color: var(--btn-hover);
+}
+
+[data-theme-lab] [data-slot="button"][data-variant="default"]:active:not(:disabled) {
+  background-color: var(--btn-active);
+}
+
+[data-theme-lab][data-contrast="high"] {
+  --locus-border: color-mix(in oklch, var(--locus-foreground) 34%, var(--locus-surface));
+  --locus-input: color-mix(in oklch, var(--locus-foreground) 58%, var(--locus-surface));
+  --locus-muted-foreground: color-mix(in oklch, var(--locus-foreground) 84%, var(--locus-surface));
+  --locus-faint: color-mix(in oklch, var(--locus-foreground) 66%, var(--locus-surface));
+}

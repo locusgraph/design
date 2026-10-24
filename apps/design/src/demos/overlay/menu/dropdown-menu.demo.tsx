@@ -1,11 +1,4 @@
 import {
-  Purchase as CreditCardIcon,
-  Password as KeyRoundIcon,
-  Logout as LogOutIcon,
-  OverflowMenuHorizontal as MoreHorizontalIcon,
-  User as UserIcon,
-} from "@carbon/icons-react";
-import {
   Button,
   DropdownMenu,
   DropdownMenuCheckboxItem,
@@ -22,6 +15,14 @@ import {
   DropdownMenuSubTrigger,
   DropdownMenuTrigger,
 } from "@locusgraph/components";
+import {
+  CreditCard as CreditCardIcon,
+  Key as KeyRoundIcon,
+  SignOut as LogOutIcon,
+  DotsThree as MoreHorizontalIcon,
+  User as UserIcon,
+} from "@phosphor-icons/react/ssr";
+import { useState } from "react";
 import { formatProp } from "../../../registry/control-values";
 import { defineDemo, select, toggle } from "../../../registry/define-demo";
 
@@ -38,23 +39,23 @@ function AccountMenu({ align, open }: { align: (typeof aligns)[number]; open?: b
         <DropdownMenuSeparator />
         <DropdownMenuGroup>
           <DropdownMenuItem>
-            <UserIcon />
+            <UserIcon weight="bold" aria-hidden />
             Profile
             <DropdownMenuShortcut>⇧⌘P</DropdownMenuShortcut>
           </DropdownMenuItem>
           <DropdownMenuItem>
-            <CreditCardIcon />
+            <CreditCardIcon weight="bold" aria-hidden />
             Billing
             <DropdownMenuShortcut>⌘B</DropdownMenuShortcut>
           </DropdownMenuItem>
           <DropdownMenuItem>
-            <KeyRoundIcon />
+            <KeyRoundIcon weight="bold" aria-hidden />
             API keys
           </DropdownMenuItem>
         </DropdownMenuGroup>
         <DropdownMenuSeparator />
         <DropdownMenuItem variant="destructive">
-          <LogOutIcon />
+          <LogOutIcon weight="bold" aria-hidden />
           Sign out
         </DropdownMenuItem>
       </DropdownMenuContent>
@@ -67,7 +68,7 @@ function RowActions() {
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <Button variant="ghost" size="icon" aria-label="Member actions">
-          <MoreHorizontalIcon />
+          <MoreHorizontalIcon weight="bold" aria-hidden />
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end">
@@ -88,6 +89,9 @@ function RowActions() {
 }
 
 function Checkboxes() {
+  const [showAmount, setShowAmount] = useState(true);
+  const [showStatus, setShowStatus] = useState(true);
+  const [showDueDate, setShowDueDate] = useState(false);
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
@@ -96,22 +100,29 @@ function Checkboxes() {
       <DropdownMenuContent className="w-48">
         <DropdownMenuLabel>Invoice columns</DropdownMenuLabel>
         <DropdownMenuSeparator />
-        <DropdownMenuCheckboxItem defaultChecked>Amount</DropdownMenuCheckboxItem>
-        <DropdownMenuCheckboxItem defaultChecked>Status</DropdownMenuCheckboxItem>
-        <DropdownMenuCheckboxItem>Due date</DropdownMenuCheckboxItem>
+        <DropdownMenuCheckboxItem checked={showAmount} onCheckedChange={setShowAmount}>
+          Amount
+        </DropdownMenuCheckboxItem>
+        <DropdownMenuCheckboxItem checked={showStatus} onCheckedChange={setShowStatus}>
+          Status
+        </DropdownMenuCheckboxItem>
+        <DropdownMenuCheckboxItem checked={showDueDate} onCheckedChange={setShowDueDate}>
+          Due date
+        </DropdownMenuCheckboxItem>
       </DropdownMenuContent>
     </DropdownMenu>
   );
 }
 
 function RadioGroup() {
+  const [period, setPeriod] = useState("monthly");
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <Button variant="outline">Billing period</Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent className="w-48">
-        <DropdownMenuRadioGroup defaultValue="monthly">
+        <DropdownMenuRadioGroup value={period} onValueChange={setPeriod}>
           <DropdownMenuRadioItem value="monthly">Monthly</DropdownMenuRadioItem>
           <DropdownMenuRadioItem value="yearly">Yearly</DropdownMenuRadioItem>
         </DropdownMenuRadioGroup>

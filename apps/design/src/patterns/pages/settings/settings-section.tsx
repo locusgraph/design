@@ -30,7 +30,7 @@ export function SettingsSection({
           <p className="text-sm text-muted-foreground">{description}</p>
         </RuleGridHeader>
         {children}
-        <RuleGridFooter className="justify-end">{footer}</RuleGridFooter>
+        <RuleGridFooter>{footer}</RuleGridFooter>
       </RuleGridCell>
     </RuleGrid>
   );

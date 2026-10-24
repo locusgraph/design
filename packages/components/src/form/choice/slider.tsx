@@ -1,8 +1,8 @@
 "use client";
 
-import { cn } from "cn";
 import * as SliderPrimitive from "radix-ui/slider";
 import * as React from "react";
+import { cn } from "../../cn";
 
 function Slider({
   className,
@@ -10,8 +10,9 @@ function Slider({
   value,
   min = 0,
   max = 100,
+  thumbLabels,
   ...props
-}: React.ComponentProps<typeof SliderPrimitive.Root>) {
+}: React.ComponentProps<typeof SliderPrimitive.Root> & { thumbLabels?: string[] }) {
   const _values = React.useMemo(
     () => (Array.isArray(value) ? value : Array.isArray(defaultValue) ? defaultValue : [min, max]),
     [value, defaultValue, min, max]
@@ -48,7 +49,9 @@ function Slider({
           data-slot="slider-thumb"
           // biome-ignore lint/suspicious/noArrayIndexKey: each thumb is identified by its position in the value array
           key={index}
-          className="block size-4 shrink-0 rounded-full border border-primary bg-background shadow-sm transition-[color,box-shadow] focus-visible:ring-2 focus-visible:ring-ring/70 focus-visible:ring-offset-2 focus-visible:ring-offset-background focus-visible:outline-hidden disabled:pointer-events-none disabled:opacity-50"
+          aria-label={thumbLabels?.[index] ?? props["aria-label"]}
+          aria-labelledby={thumbLabels?.[index] ? undefined : props["aria-labelledby"]}
+          className="block size-4 shrink-0 rounded-full border border-primary bg-background shadow-sm transition-[color,box-shadow] locus-focus-ring disabled:pointer-events-none disabled:opacity-50"
         />
       ))}
     </SliderPrimitive.Root>

@@ -1,27 +1,7 @@
 import type { PageSection } from "@locusgraph/components";
 import type { DemoIndexEntry } from "../registry/load-demos";
-import { type Library, libraryEntries } from "./nav/libraries";
+import { groupTitle, type Library, libraryGroups } from "./nav/libraries";
 import { PlaygroundLink } from "./nav/playground-nav";
-
-function groupTitle(group: string) {
-  return group
-    .split("-")
-    .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-    .join(" ");
-}
-
-function groupKey(library: Library, entry: DemoIndexEntry) {
-  return library.id === "components" ? entry.group : entry.section || entry.group;
-}
-
-function libraryGroups(library: Library) {
-  const entries = libraryEntries(library.id);
-  const keys = entries.map((entry) => groupKey(library, entry));
-  return [...new Set(keys)].sort().map((group) => ({
-    group,
-    entries: entries.filter((entry) => groupKey(library, entry) === group),
-  }));
-}
 
 export function homeSections(library: Library): PageSection[] {
   const groups = libraryGroups(library);
@@ -36,7 +16,7 @@ function ComponentGrid({ entries }: { entries: DemoIndexEntry[] }) {
         <PlaygroundLink
           key={entry.path}
           href={`/${entry.path}`}
-          className="text-base underline-offset-4 hover:underline"
+          className="text-base underline-offset-4 locus-focus-ring hover:underline"
         >
           {entry.title}
         </PlaygroundLink>
@@ -58,8 +38,8 @@ export function HomePage({ library }: { library: Library }) {
       <header className="flex flex-col gap-2">
         <h1 className="text-3xl font-semibold tracking-tight">{library.title}</h1>
         <p className="text-balance text-muted-foreground">
-          {countLabel(count, library.noun)} in {library.packageName}, each with a live playground,
-          usage and props.
+          {countLabel(count, library.noun)} {library.packageRelation} {library.packageName}, each
+          with a live playground, usage and API.
         </p>
       </header>
       {groups.length === 1 ? (

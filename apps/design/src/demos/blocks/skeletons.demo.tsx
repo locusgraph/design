@@ -80,7 +80,7 @@ function Keys() {
 export default defineDemo({
   title: "Skeletons",
   description:
-    "Loading placeholders with the same outer shape and spacing as Usage, Wallet, TopUp, Plans and Keys. WalletSkeleton and TopUpSkeleton are Rule Grid cells, so they share a row. From @locusgraph/blocks.",
+    "Loading placeholders with the same outer shape and spacing as Usage, Wallet, TopUp, Plans and Keys. WalletSkeleton and TopUpSkeleton are Rule Grid cells, so they share a row. From `@locusgraph/blocks`.",
   controls: { block: select(blocks) },
   playground: ({ block }) => renderBlock(block),
   code: ({ block }) => blockCode[block],

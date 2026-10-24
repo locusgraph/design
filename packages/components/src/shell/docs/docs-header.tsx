@@ -1,12 +1,13 @@
 "use client";
 
-import { Menu as MenuIcon } from "@carbon/icons-react";
-import { cn } from "cn";
+import { List as MenuIcon } from "@phosphor-icons/react/ssr";
 import type * as React from "react";
 import { useState } from "react";
 import { Button } from "../../action/button";
+import { cn } from "../../cn";
 import { Sheet, SheetContent, SheetTitle } from "../../overlay/sheet";
 import type { LinkComponent } from "../link";
+import { DocsNavList } from "./docs-sidebar";
 
 type DocsBrand = { name: string; product?: string; icon: React.ReactNode; href: string };
 type DocsHeaderLink = { title: string; href: string };
@@ -20,7 +21,11 @@ type DocsHeaderProps = {
   children?: React.ReactNode;
 };
 
-function MobileNavSheet({ children }: { children: React.ReactNode }) {
+type MobileNavSheetProps = Pick<DocsHeaderProps, "links" | "activeHref" | "linkComponent"> & {
+  children: React.ReactNode;
+};
+
+function MobileNavSheet({ links, activeHref, linkComponent, children }: MobileNavSheetProps) {
   const [open, setOpen] = useState(false);
   const closeOnLinkClick = (event: React.MouseEvent) => {
     if ((event.target as HTMLElement).closest("a")) {
@@ -36,12 +41,19 @@ function MobileNavSheet({ children }: { children: React.ReactNode }) {
         aria-label="Open menu"
         onClick={() => setOpen(true)}
       >
-        <MenuIcon />
+        <MenuIcon weight="bold" aria-hidden />
       </Button>
       <Sheet open={open} onOpenChange={setOpen}>
         <SheetContent side="left" className="w-72 overflow-y-auto p-4">
           <SheetTitle className="sr-only">Menu</SheetTitle>
-          <div onClickCapture={closeOnLinkClick}>{children}</div>
+          <div onClickCapture={closeOnLinkClick} className="flex flex-col gap-4">
+            <DocsNavList
+              groups={[{ label: "Sections", items: links }]}
+              activeHref={activeHref}
+              linkComponent={linkComponent}
+            />
+            {children}
+          </div>
         </SheetContent>
       </Sheet>
     </>
@@ -62,7 +74,9 @@ function DocsHeader({
       className="sticky top-0 z-50 w-full bg-background/95 backdrop-blur"
     >
       <div className="mx-auto flex h-(--locus-docs-header-height) w-full max-w-[1536px] items-center gap-4 px-6 **:data-[slot=separator]:h-4!">
-        <MobileNavSheet>{mobileNav}</MobileNavSheet>
+        <MobileNavSheet links={links} activeHref={activeHref} linkComponent={Link}>
+          {mobileNav}
+        </MobileNavSheet>
         <Link
           href={brand.href}
           className="flex items-center gap-2 font-brand text-base tracking-tight"
@@ -80,7 +94,7 @@ function DocsHeader({
               href={link.href}
               aria-current={link.href === activeHref ? "page" : undefined}
               className={cn(
-                "rounded-md px-2.5 py-1.5 text-sm font-medium text-foreground/80 transition-colors hover:text-foreground",
+                "px-2.5 py-1.5 text-sm font-medium text-muted-foreground transition-colors locus-focus-ring hover:text-foreground",
                 link.href === activeHref && "text-foreground"
               )}
             >

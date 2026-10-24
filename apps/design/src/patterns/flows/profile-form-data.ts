@@ -9,6 +9,8 @@ export type ProfileField = keyof ProfileValues;
 
 export type ProfileErrors = Partial<Record<ProfileField, string>>;
 
+export const allFields: ProfileField[] = ["name", "email", "role", "bio"];
+
 export const bioLimit = 160;
 
 export const sampleRoles = ["Owner", "Admin", "Developer", "Billing", "Viewer"];

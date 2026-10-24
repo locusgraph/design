@@ -48,7 +48,11 @@ export function BillingOverview() {
         <RuleGridCell className="gap-3 p-5">
           <RuleGridTitle>Agent runs this month</RuleGridTitle>
           <RuleGridDescription>82,400 of 100,000 included runs</RuleGridDescription>
-          <Progress value={82} />
+          <Progress
+            value={82.4}
+            aria-label="Agent runs this month"
+            getValueLabel={() => "82,400 of 100,000 included runs"}
+          />
         </RuleGridCell>
       </RuleGrid>
       <RuleGrid columns={1}>

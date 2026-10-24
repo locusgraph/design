@@ -1,4 +1,7 @@
-import { cn } from "cn";
+"use client";
+
+import { type RefObject, useEffect, useRef } from "react";
+import { cn } from "../../cn";
 import type { LinkComponent } from "../link";
 
 type DocsNavItem = { title: string; href: string };
@@ -25,8 +28,8 @@ function DocsNavList({ groups, activeHref, linkComponent: Link = "a" }: DocsNavL
                     href={item.href}
                     aria-current={active ? "page" : undefined}
                     className={cn(
-                      "flex h-[30px] w-fit items-center rounded-md border border-transparent px-2 text-sm font-medium transition-colors hover:bg-accent",
-                      active && "border-accent bg-accent"
+                      "flex h-control-sm w-fit items-center border border-transparent px-2 text-sm font-medium text-muted-foreground transition-colors locus-focus-ring hover:bg-accent hover:text-foreground",
+                      active && "border-accent bg-accent text-foreground"
                     )}
                   >
                     {item.title}
@@ -41,11 +44,28 @@ function DocsNavList({ groups, activeHref, linkComponent: Link = "a" }: DocsNavL
   );
 }
 
+const fadeAllowance = 48;
+
+function useActiveLinkInView(nav: RefObject<HTMLElement | null>, activeHref: string) {
+  useEffect(() => {
+    const container = nav.current;
+    const link = container?.querySelector<HTMLElement>(`[aria-current="page"]`);
+    if (!container || !link || !activeHref) return;
+    const top = link.offsetTop - container.scrollTop;
+    const hidden =
+      top < fadeAllowance || top + link.offsetHeight > container.clientHeight - fadeAllowance;
+    if (hidden) container.scrollTo({ top: link.offsetTop - container.clientHeight / 2 });
+  }, [nav, activeHref]);
+}
+
 function DocsSidebar(props: DocsNavListProps) {
+  const navRef = useRef<HTMLElement>(null);
+  useActiveLinkInView(navRef, props.activeHref);
   return (
     <div className="relative h-full">
       <div className="absolute top-12 right-2 bottom-0 w-px bg-[linear-gradient(to_bottom,transparent_0%,var(--locus-border)_10%,var(--locus-border)_90%,transparent_100%)]" />
       <nav
+        ref={navRef}
         aria-label="Documentation"
         className="locus-no-scrollbar h-full w-56 overflow-y-auto pt-10 pb-12 pl-2.5 [mask-image:linear-gradient(to_bottom,transparent,black_2rem,black_calc(100%-3rem),transparent)]"
       >

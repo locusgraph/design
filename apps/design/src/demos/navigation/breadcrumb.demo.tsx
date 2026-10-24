@@ -1,4 +1,3 @@
-import { SquareSlash as SlashIcon } from "@carbon/icons-react";
 import {
   Breadcrumb,
   BreadcrumbEllipsis,
@@ -40,7 +39,7 @@ function CustomSeparator() {
           <BreadcrumbLink href="#billing">Billing</BreadcrumbLink>
         </BreadcrumbItem>
         <BreadcrumbSeparator>
-          <SlashIcon />
+          <span aria-hidden>/</span>
         </BreadcrumbSeparator>
         <BreadcrumbItem>
           <BreadcrumbPage>Invoices</BreadcrumbPage>
@@ -85,7 +84,7 @@ export default defineDemo({
     page: text("API keys"),
   },
   playground: ({ separator, collapsed, page }) => {
-    const separatorIcon = separator === "slash" ? <SlashIcon /> : undefined;
+    const separatorIcon = separator === "slash" ? <span aria-hidden>/</span> : undefined;
     return (
       <Breadcrumb>
         <BreadcrumbList>
@@ -111,7 +110,7 @@ export default defineDemo({
   code: ({ separator, collapsed, page }) => {
     const separatorTag =
       separator === "slash"
-        ? "<BreadcrumbSeparator>\n      <SlashIcon />\n    </BreadcrumbSeparator>"
+        ? "<BreadcrumbSeparator>\n      <span aria-hidden>/</span>\n    </BreadcrumbSeparator>"
         : "<BreadcrumbSeparator />";
     const middle = collapsed
       ? "<BreadcrumbEllipsis />"

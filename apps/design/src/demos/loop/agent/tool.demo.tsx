@@ -34,6 +34,16 @@ function partFor(state: (typeof toolStates)[number]): ToolPart {
   };
 }
 
+function Default() {
+  return (
+    <div className="flex w-full max-w-xl flex-col gap-1">
+      <Tool part={search} />
+      <Tool part={search} verb="Searched memory for" target="who owns billing" />
+      <Tool part={search} tone="memory" verb="Searched memory for" target="who owns billing" />
+    </div>
+  );
+}
+
 function WaitingForApproval() {
   return (
     <div className="w-full max-w-xl">
@@ -54,21 +64,40 @@ function WaitingForApproval() {
 export default defineDemo({
   title: "Tool",
   description:
-    "One tool call as a single ruled row: the tool name, a status dot and word for each state, and its input and output as JSON when opened. Errors show in red without opening.",
-  controls: { state: select(toolStates, "output-available"), open: toggle(true) },
+    "One tool call as a quiet line of text: a muted verb and the thing it acted on. A running call shimmers; a waiting, failed or denied call leads with a colored word; a finished call shows nothing extra. Input and output open as indented JSON. Errors show in red without opening.",
+  controls: { state: select(toolStates, "output-available"), open: toggle(false) },
   playground: ({ state, open }) => (
     <div className="w-full max-w-xl">
-      <Tool key={`${state}-${open}`} part={partFor(state)} defaultOpen={open} />
+      <Tool
+        key={`${state}-${open}`}
+        part={partFor(state)}
+        tone="memory"
+        verb="Searched memory for"
+        activeVerb="Searching memory for"
+        target="who owns billing"
+        defaultOpen={open}
+      />
     </div>
   ),
-  code: ({ open }) => `<Tool part={part}${open ? " defaultOpen" : ""} />`,
+  code: ({ open }) =>
+    `<Tool\n  part={part}\n  tone="memory"\n  verb="Searched memory for"\n  activeVerb="Searching memory for"\n  target={part.input.query}${open ? "\n  defaultOpen" : ""}\n/>`,
   props: [
     { name: "part", type: "ToolPart" },
+    { name: "tone", type: '"default" | "memory"', defaultValue: '"default"' },
+    { name: "verb", type: "string", defaultValue: '"Ran"' },
+    { name: "activeVerb", type: "string", defaultValue: '"Running"' },
+    { name: "target", type: "ReactNode", defaultValue: "tool name in words" },
+    { name: "icon", type: "ReactNode" },
     { name: "defaultOpen", type: "boolean", defaultValue: "false" },
   ],
   examples: {
+    Default: {
+      description:
+        'Without a verb the line reads Ran and the tool name in words. With one it reads as what happened. tone="memory" marks LocusGraph memory tools in violet.',
+      component: Default,
+    },
     WaitingForApproval: {
-      description: "A dynamic tool takes its name from toolName.",
+      description: "A dynamic tool takes its name from `toolName`, in words: graph write.",
       component: WaitingForApproval,
     },
   },

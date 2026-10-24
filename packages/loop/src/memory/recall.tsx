@@ -1,18 +1,22 @@
 "use client";
 
-import {
-  ChevronRight as ChevronRightIcon,
-  RecentlyViewed as HistoryIcon,
-} from "@carbon/icons-react";
 import { Collapsible, CollapsibleContent, CollapsibleTrigger, cn } from "@locusgraph/components";
 import { pluralize } from "@locusgraph/utils";
-import type { MemoryRef } from "../types";
 import {
-  chevronClass,
-  collapsibleTriggerClass,
-  interactiveRowClass,
-  ruledListClass,
-} from "./shared/disclosure";
+  CaretRight as ChevronRightIcon,
+  ClockCounterClockwise as HistoryIcon,
+} from "@phosphor-icons/react/ssr";
+import { useId } from "react";
+import {
+  lineChevronClass,
+  lineDetailClass,
+  lineDetailLinkClass,
+  lineDetailRowClass,
+  lineMemoryIconClass,
+  lineMemoryObjectClass,
+  lineTriggerClass,
+} from "../shared/line";
+import type { MemoryRef } from "../types";
 
 export type RecallProps = {
   memories: MemoryRef[];
@@ -31,15 +35,22 @@ export function Recall({ memories, onOpenMemory, defaultOpen = false, className 
     <Collapsible
       data-slot="recall"
       defaultOpen={defaultOpen}
-      className={cn("flex min-w-0 flex-col gap-2", className)}
+      className={cn("flex min-w-0 flex-col", className)}
     >
-      <CollapsibleTrigger className={collapsibleTriggerClass}>
-        <HistoryIcon aria-hidden />
-        Recalled {pluralize(memories.length, "memory", "memories")}
-        <ChevronRightIcon aria-hidden className={chevronClass} />
+      <CollapsibleTrigger className={lineTriggerClass}>
+        <span aria-hidden className={lineMemoryIconClass}>
+          <HistoryIcon weight="bold" aria-hidden />
+        </span>
+        <span className="truncate">
+          Recalled{" "}
+          <span className={lineMemoryObjectClass}>
+            {pluralize(memories.length, "memory", "memories")}
+          </span>
+        </span>
+        <ChevronRightIcon weight="bold" aria-hidden className={lineChevronClass} />
       </CollapsibleTrigger>
       <CollapsibleContent>
-        <ul className={ruledListClass}>
+        <ul className={cn(lineDetailClass, "flex flex-col pb-2 text-muted-foreground")}>
           {memories.map((memory) => (
             <RecallRow key={memory.id} memory={memory} onOpenMemory={onOpenMemory} />
           ))}
@@ -49,30 +60,28 @@ export function Recall({ memories, onOpenMemory, defaultOpen = false, className 
   );
 }
 
-function RelevanceMeter({ memory }: { memory: MemoryRef }) {
+function Relevance({ memory }: { memory: MemoryRef }) {
   if (memory.relevance === undefined) return null;
   const percent = relevancePercent(memory.relevance);
   return (
-    <span className="flex shrink-0 items-center gap-2">
-      <span
-        role="meter"
-        aria-label={`Relevance of ${memory.label}`}
-        aria-valuemin={0}
-        aria-valuemax={100}
-        aria-valuenow={percent}
-        aria-valuetext={`${percent}% relevant`}
-        className="relative h-[3px] w-10 overflow-hidden bg-muted"
-      >
-        <span
-          className="absolute inset-y-0 left-0 bg-foreground/60 transition-[width] duration-300 motion-reduce:transition-none"
-          style={{ width: `${percent}%` }}
-        />
-      </span>
-      <span className="w-8 text-right font-mono text-xs text-muted-foreground tabular-nums">
-        {percent}%
-      </span>
+    <span
+      role="meter"
+      aria-label={`Relevance of ${memory.label}`}
+      aria-valuemin={0}
+      aria-valuemax={100}
+      aria-valuenow={percent}
+      aria-valuetext={`${percent}% relevant`}
+      className="shrink-0 text-xs text-faint tabular-nums"
+    >
+      {percent}%
     </span>
   );
+}
+
+function openMemoryLabel(memory: MemoryRef) {
+  const relevance =
+    memory.relevance === undefined ? "" : `, ${relevancePercent(memory.relevance)}% relevant`;
+  return `Open memory ${memory.label}${relevance}`;
 }
 
 function RecallRow({
@@ -82,30 +91,33 @@ function RecallRow({
   memory: MemoryRef;
   onOpenMemory?: (id: string) => void;
 }) {
+  const detailId = useId();
+  const hasDetail = Boolean(memory.kind || memory.snippet);
   const content = (
     <>
       <span className="flex w-full items-baseline gap-3">
-        <span className="min-w-0 flex-1 truncate text-sm font-medium">{memory.label}</span>
-        <RelevanceMeter memory={memory} />
+        <span className="min-w-0 truncate">{memory.label}</span>
+        <Relevance memory={memory} />
       </span>
-      {(memory.kind || memory.snippet) && (
-        <span className="flex w-full gap-2 text-xs text-muted-foreground">
-          {memory.kind && <span className="shrink-0 font-mono">{memory.kind}</span>}
-          {memory.kind && memory.snippet && <span aria-hidden>·</span>}
-          {memory.snippet && <span className="line-clamp-2 min-w-0">{memory.snippet}</span>}
+      {hasDetail && (
+        <span id={detailId} className="line-clamp-2 w-full text-xs text-faint">
+          {memory.kind && <span className="whitespace-nowrap">{memory.kind}</span>}
+          {memory.kind && memory.snippet && <span aria-hidden> · </span>}
+          {memory.snippet}
         </span>
       )}
     </>
   );
-  const rowClass = "flex w-full flex-col items-start gap-1 px-3 py-2.5 text-left";
+  const rowClass = cn(lineDetailRowClass, "flex-col items-start gap-0.5");
   return (
     <li data-slot="recall-item" data-id={memory.id}>
       {onOpenMemory ? (
         <button
           type="button"
-          aria-label={`Open memory ${memory.label}`}
+          aria-label={openMemoryLabel(memory)}
+          aria-describedby={hasDetail ? detailId : undefined}
           onClick={() => onOpenMemory(memory.id)}
-          className={cn(rowClass, interactiveRowClass)}
+          className={cn(rowClass, lineDetailLinkClass)}
         >
           {content}
         </button>

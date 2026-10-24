@@ -32,7 +32,7 @@ function Wordmarks() {
 export default defineDemo({
   title: "Marks",
   description:
-    "The LocusGraph mark and wordmark, and the Google and GitHub marks for sign-in. From @locusgraph/brand.",
+    "The LocusGraph mark and wordmark, and the Google and GitHub marks for sign-in. From `@locusgraph/brand`.",
   controls: { size: select(sizeOptions, "md"), wordmark: toggle(true) },
   playground: ({ size, wordmark }) => (
     <div className="flex items-center gap-2.5">

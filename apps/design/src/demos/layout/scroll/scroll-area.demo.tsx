@@ -21,7 +21,7 @@ function InvoiceList({ heading }: { heading: string }) {
 
 function Basic() {
   return (
-    <ScrollArea className="h-72 w-48 rounded-md border">
+    <ScrollArea className="h-72 w-48 border">
       <InvoiceList heading="Invoices" />
     </ScrollArea>
   );
@@ -29,12 +29,12 @@ function Basic() {
 
 function Horizontal() {
   return (
-    <ScrollArea className="w-72 rounded-md border whitespace-nowrap">
+    <ScrollArea className="w-72 border whitespace-nowrap">
       <div className="flex w-max gap-4 p-4">
         {plans.map((plan) => (
           <div
             key={plan}
-            className="flex h-24 w-32 items-center justify-center rounded-md bg-muted text-sm font-medium"
+            className="flex h-24 w-32 items-center justify-center bg-muted text-sm font-medium"
           >
             {plan}
           </div>
@@ -47,7 +47,7 @@ function Horizontal() {
 
 function AuditLog() {
   return (
-    <ScrollArea className="h-48 w-72 rounded-md border">
+    <ScrollArea className="h-48 w-72 border">
       <ul className="flex flex-col gap-3 p-4 text-sm">
         {invoices.slice(0, 15).map((invoice, index) => (
           <li key={invoice} className="flex justify-between gap-4">
@@ -67,12 +67,12 @@ export default defineDemo({
     "A scrolling region with a styled scrollbar that looks the same in every browser. Good for long invoice and member lists.",
   controls: { height: select(["md", "sm", "lg"]), heading: text("Invoices") },
   playground: ({ height, heading }) => (
-    <ScrollArea className={`${heights[height]} w-56 rounded-md border`}>
+    <ScrollArea className={`${heights[height]} w-56 border`}>
       <InvoiceList heading={heading} />
     </ScrollArea>
   ),
   code: ({ height, heading }) =>
-    `<ScrollArea className="${heights[height]} w-56 rounded-md border">\n  <div className="p-4">\n    <h4 className="locus-eyebrow">${heading}</h4>\n    {invoices.map((invoice) => (\n      <div key={invoice}>{invoice}</div>\n    ))}\n  </div>\n</ScrollArea>`,
+    `<ScrollArea className="${heights[height]} w-56 border">\n  <div className="p-4">\n    <h4 className="locus-eyebrow">${heading}</h4>\n    {invoices.map((invoice) => (\n      <div key={invoice}>{invoice}</div>\n    ))}\n  </div>\n</ScrollArea>`,
   props: [
     { name: "type", type: "auto | always | scroll | hover", defaultValue: "auto" },
     { name: "scrollHideDelay", type: "number (ms)", defaultValue: "600" },

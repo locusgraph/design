@@ -33,8 +33,21 @@ describe("extractExampleSource", () => {
 });
 
 describe("titleFromName", () => {
-  it("splits camel case into words", () => {
-    expect(titleFromName("AsLink")).toBe("As Link");
+  it("splits camel case into a sentence case title", () => {
+    expect(titleFromName("AsLink")).toBe("As link");
+    expect(titleFromName("OutOfCredits")).toBe("Out of credits");
     expect(titleFromName("Variants")).toBe("Variants");
+  });
+
+  it("keeps product names and acronyms", () => {
+    expect(titleFromName("LocusGraph")).toBe("LocusGraph");
+    expect(titleFromName("NextOpenGraphImage")).toBe("Next Open Graph image");
+    expect(titleFromName("HtmlLinkTags")).toBe("HTML link tags");
+    expect(titleFromName("CopyAPIKey")).toBe("Copy API key");
+  });
+
+  it("restores hyphens and apostrophes that names cannot hold", () => {
+    expect(titleFromName("ReadOnlyEmpty")).toBe("Read-only empty");
+    expect(titleFromName("DosAndDonts")).toBe("Dos and don'ts");
   });
 });

@@ -10,9 +10,11 @@ function plainText(html: string): string {
     .replace(/<\/(p|h1|tr|table)>/g, "\n")
     .replace(/<\/td>/g, " ")
     .replace(/<[^>]+>/g, "")
-    .replace(/&amp;/g, "&")
     .replace(/&#x27;|&#39;/g, "'")
     .replace(/&quot;/g, '"')
+    .replace(/&lt;/g, "<")
+    .replace(/&gt;/g, ">")
+    .replace(/&amp;/g, "&")
     .replace(/[ \t]+/g, " ")
     .replace(/\n\s*\n+/g, "\n\n")
     .trim();

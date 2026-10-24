@@ -26,7 +26,7 @@ function LongThought() {
 export default defineDemo({
   title: "Thinking",
   description:
-    "The agent's thinking behind a quiet trigger line. Open with a shimmering label while it streams, then closes to how long it took and the first line, unless the user opened it.",
+    "The agent's thinking as one quiet line of text. Open with a shimmering label while it streams, then closes to how long it took with the first line in faint text beside it, unless the user opened it.",
   controls: { state: select(states) },
   playground: ({ state }) => (
     <div className="w-full max-w-xl">
@@ -34,7 +34,7 @@ export default defineDemo({
     </div>
   ),
   code: ({ state }) =>
-    `<Thinking text={part.text} state="${state}"${state === "done" ? " durationMs={4000}" : ""} />`,
+    `<Thinking\n  text={part.text}\n  state="${state}"${state === "done" ? "\n  durationMs={4000}" : ""}\n/>`,
   props: [
     { name: "text", type: "string" },
     { name: "state", type: '"streaming" | "done"' },
@@ -43,7 +43,7 @@ export default defineDemo({
   ],
   examples: {
     OpenWhenDone: {
-      description: "defaultOpen keeps the full thought visible after it finishes.",
+      description: "`defaultOpen` keeps the full thought visible after it finishes.",
       component: OpenWhenDone,
     },
     LongThought: {

@@ -6,6 +6,7 @@ const config: NextConfig = {
     "@locusgraph/brand",
     "@locusgraph/components",
     "@locusgraph/email",
+    "@locusgraph/loop",
     "@locusgraph/tokens",
     "@locusgraph/utils",
   ],

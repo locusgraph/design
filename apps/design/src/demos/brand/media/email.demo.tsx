@@ -19,7 +19,7 @@ const outOfCreditsEmail = lowCreditsEmail({
 
 function ComposeFromKit() {
   return (
-    <KitPreview subject="acme-customers is ready" height={460}>
+    <KitPreview subject="acme-customers is ready">
       <EmailLayout preview="Your graph acme-customers is ready">
         <EmailLabel>Graphs</EmailLabel>
         <EmailHeading>acme-customers is ready</EmailHeading>
@@ -37,7 +37,7 @@ function ComposeFromKit() {
 }
 
 function OutOfCredits() {
-  return <EmailFrame email={outOfCreditsEmail} height={420} />;
+  return <EmailFrame email={outOfCreditsEmail} />;
 }
 
 function PlainText() {
@@ -63,11 +63,11 @@ export default defineDemo({
   examples: {
     ComposeFromKit: {
       description:
-        "A new email built from the kit: EmailLayout, EmailLabel, EmailHeading, EmailText, EmailRows and EmailButton, rendered with renderEmail.",
+        "A new email built from the kit: `EmailLayout`, `EmailLabel`, `EmailHeading`, `EmailText`, `EmailRows` and `EmailButton`, rendered with `renderEmail`.",
       component: ComposeFromKit,
     },
     OutOfCredits: {
-      description: "lowCreditsEmail with a zero balance switches to the out-of-credits copy.",
+      description: "`lowCreditsEmail` with a zero balance switches to the out-of-credits copy.",
       component: OutOfCredits,
     },
     PlainText: {

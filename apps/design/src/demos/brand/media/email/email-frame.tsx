@@ -1,9 +1,16 @@
 import { type RenderedEmail, renderEmail } from "@locusgraph/email";
-import type { ReactElement } from "react";
+import type { ReactElement, SyntheticEvent } from "react";
 
-type EmailFrameProps = { email: RenderedEmail; height?: number };
+function fitFrameToEmail(event: SyntheticEvent<HTMLIFrameElement>) {
+  const frame = event.currentTarget;
+  frame.style.height = "0px";
+  const emailHeight = frame.contentDocument?.documentElement.scrollHeight;
+  if (emailHeight) frame.style.height = `${emailHeight}px`;
+}
 
-export function EmailFrame({ email, height = 560 }: EmailFrameProps) {
+const placeholderHeight = 560;
+
+export function EmailFrame({ email }: { email: RenderedEmail }) {
   return (
     <section className="flex w-[40rem] max-w-full flex-col ring-1 ring-border">
       <div className="flex flex-col gap-0.5 border-b px-4 py-3">
@@ -14,7 +21,8 @@ export function EmailFrame({ email, height = 560 }: EmailFrameProps) {
         title={email.subject}
         srcDoc={email.html}
         className="w-full bg-white"
-        style={{ height }}
+        style={{ height: placeholderHeight }}
+        onLoad={fitFrameToEmail}
       />
     </section>
   );
@@ -31,8 +39,8 @@ export function PlainTextPart({ email }: { email: RenderedEmail }) {
   );
 }
 
-type KitPreviewProps = { subject: string; height?: number; children: ReactElement };
+type KitPreviewProps = { subject: string; children: ReactElement };
 
-export function KitPreview({ subject, height, children }: KitPreviewProps) {
-  return <EmailFrame email={renderEmail(subject, children)} height={height} />;
+export function KitPreview({ subject, children }: KitPreviewProps) {
+  return <EmailFrame email={renderEmail(subject, children)} />;
 }

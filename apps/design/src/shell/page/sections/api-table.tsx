@@ -25,11 +25,11 @@ export function ApiTable({ rows }: { rows: PropRow[] }) {
         <TableBody>
           {rows.map((row) => (
             <TableRow key={row.name}>
-              <TableCell className="font-mono text-[13px]">{row.name}</TableCell>
-              <TableCell className="font-mono text-[13px] whitespace-normal text-muted-foreground">
+              <TableCell className="font-mono text-code">{row.name}</TableCell>
+              <TableCell className="font-mono text-code whitespace-normal text-muted-foreground">
                 {row.type}
               </TableCell>
-              <TableCell className="font-mono text-[13px]">{row.defaultValue ?? "—"}</TableCell>
+              <TableCell className="font-mono text-code">{row.defaultValue ?? "—"}</TableCell>
             </TableRow>
           ))}
         </TableBody>

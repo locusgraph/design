@@ -37,8 +37,8 @@ export function HistoryRow({
       className={cn(
         "group relative flex items-center motion-safe:transition-colors",
         active
-          ? "bg-accent text-accent-foreground before:absolute before:inset-y-0 before:left-0 before:w-0.5 before:bg-foreground"
-          : "text-foreground/85 hover:bg-accent/40",
+          ? "bg-muted text-foreground"
+          : "text-muted-foreground hover:bg-muted/50 hover:text-foreground",
         className
       )}
       {...props}
@@ -61,7 +61,7 @@ export function HistoryRow({
           onClick={() => onSelect(thread.id)}
           onDoubleClick={onRename ? () => setEditing(true) : undefined}
           className={cn(
-            "flex min-w-0 flex-1 items-center gap-3 py-1.5 pl-2 text-left text-sm outline-none focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-ring",
+            "flex min-w-0 flex-1 items-center gap-3 py-1.5 pl-2 text-left text-sm locus-focus-ring-inset",
             hasMenu ? "pr-8 sm:pr-2" : "pr-2",
             active && "font-medium"
           )}
@@ -71,10 +71,11 @@ export function HistoryRow({
             dateTime={thread.updatedAt}
             suppressHydrationWarning
             className={cn(
-              "shrink-0 font-mono text-[11px] font-normal text-muted-foreground tabular-nums",
+              "shrink-0 text-xs font-normal text-faint tabular-nums",
               hasMenu && timeHiddenByMenuClass
             )}
           >
+            <span className="sr-only">, </span>
             {formatTimeOfDay(thread.updatedAt)}
           </time>
         </button>

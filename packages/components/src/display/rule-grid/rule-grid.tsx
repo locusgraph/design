@@ -1,7 +1,7 @@
 import { cva, type VariantProps } from "class-variance-authority";
-import { cn } from "cn";
 import * as Slot from "radix-ui/slot";
 import * as React from "react";
+import { cn } from "../../cn";
 
 const ruleGridVariants = cva("grid grid-cols-1 gap-px p-px", {
   variants: {
@@ -50,7 +50,7 @@ function RuleGridCell({
       className={cn(
         "flex min-w-0 flex-col gap-2 bg-card p-6 text-card-foreground ring-1 ring-border",
         interactive &&
-          "transition-colors duration-150 ease-out outline-none hover:bg-accent/60 focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-ring active:bg-accent",
+          "transition-colors duration-150 ease-out locus-focus-ring-inset hover:bg-accent/60 active:bg-accent",
         className
       )}
       {...props}
@@ -92,7 +92,7 @@ function RuleGridTitle({ className, ...props }: React.ComponentProps<"div">) {
   return (
     <div
       data-slot="rule-grid-title"
-      className={cn("text-[15px] font-medium tracking-[-0.01em]", className)}
+      className={cn("text-base font-medium tracking-[-0.01em]", className)}
       {...props}
     />
   );

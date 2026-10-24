@@ -48,8 +48,18 @@ export default defineDemo({
       />
     </div>
   ),
-  code: () =>
-    `<Question\n  question={question.text}\n  options={question.options}\n  allowText\n  answer={question.answer}\n  onAnswer={(answer) => addToolResult({ toolCallId, output: answer })}\n/>`,
+  code: ({ mode }) =>
+    [
+      "<Question",
+      "  question={question.text}",
+      mode !== "text" && "  options={question.options}",
+      (mode === "choices-and-text" || mode === "answered") && "  allowText",
+      "  answer={question.answer}",
+      "  onAnswer={(answer) => addToolResult({ toolCallId, output: answer })}",
+      "/>",
+    ]
+      .filter(Boolean)
+      .join("\n"),
   props: [
     { name: "question", type: "string" },
     { name: "options", type: "{ id: string; label: string; description?: string }[]" },

@@ -1,4 +1,3 @@
-import { Download as DownloadIcon } from "@carbon/icons-react";
 import {
   Badge,
   Button,
@@ -13,26 +12,14 @@ import {
   TableHeader,
   TableRow,
 } from "@locusgraph/components";
+import { formatCents, formatDate } from "@locusgraph/utils";
+import { DownloadSimple as DownloadIcon } from "@phosphor-icons/react/ssr";
 import type { Invoice } from "./billing-data";
 
 type BillingInvoicesProps = {
   invoices: Invoice[];
   onDownload: (invoiceId: string) => void;
 };
-
-const invoiceDateFormat = new Intl.DateTimeFormat("en-US", {
-  dateStyle: "medium",
-  timeZone: "UTC",
-});
-const invoiceAmountFormat = new Intl.NumberFormat("en-US", { style: "currency", currency: "USD" });
-
-function formatInvoiceDate(issuedAt: string) {
-  return invoiceDateFormat.format(new Date(issuedAt));
-}
-
-function formatInvoiceAmount(amountCents: number) {
-  return invoiceAmountFormat.format(amountCents / 100);
-}
 
 function InvoiceStatusBadge({ status }: { status: Invoice["status"] }) {
   return status === "paid" ? (
@@ -45,14 +32,14 @@ function InvoiceStatusBadge({ status }: { status: Invoice["status"] }) {
 export function BillingInvoices({ invoices, onDownload }: BillingInvoicesProps) {
   return (
     <RuleGrid columns={1}>
-      <RuleGridCell className="gap-0 px-4 pb-2 sm:px-6">
-        <RuleGridHeader className="-mx-4 mb-0 px-4 sm:-mx-6 sm:px-6">
+      <RuleGridCell className="gap-0 pb-2">
+        <RuleGridHeader className="mb-0">
           <RuleGridLabel>Invoices</RuleGridLabel>
         </RuleGridHeader>
         {invoices.length === 0 ? (
           <p className="py-4 text-sm text-muted-foreground">No invoices yet.</p>
         ) : (
-          <Table>
+          <Table className="[&_tr>*:first-child]:pl-0 [&_tr>*:last-child]:pr-0">
             <TableHeader>
               <TableRow>
                 <TableHead>Date</TableHead>
@@ -68,14 +55,14 @@ export function BillingInvoices({ invoices, onDownload }: BillingInvoicesProps) 
                 <TableRow key={invoice.id}>
                   <TableCell>
                     <span className="flex flex-col items-start gap-1">
-                      {formatInvoiceDate(invoice.issuedAt)}
+                      {formatDate(invoice.issuedAt)}
                       <span className="sm:hidden">
                         <InvoiceStatusBadge status={invoice.status} />
                       </span>
                     </span>
                   </TableCell>
                   <TableCell className="text-right tabular-nums">
-                    {formatInvoiceAmount(invoice.amountCents)}
+                    {formatCents(invoice.amountCents)}
                   </TableCell>
                   <TableCell className="hidden sm:table-cell">
                     <InvoiceStatusBadge status={invoice.status} />
@@ -84,10 +71,10 @@ export function BillingInvoices({ invoices, onDownload }: BillingInvoicesProps) 
                     <Button
                       size="icon-sm"
                       variant="ghost"
-                      aria-label={`Download invoice from ${formatInvoiceDate(invoice.issuedAt)}`}
+                      aria-label={`Download invoice from ${formatDate(invoice.issuedAt)}`}
                       onClick={() => onDownload(invoice.id)}
                     >
-                      <DownloadIcon aria-hidden="true" />
+                      <DownloadIcon weight="bold" aria-hidden="true" />
                     </Button>
                   </TableCell>
                 </TableRow>

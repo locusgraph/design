@@ -1,4 +1,4 @@
-import { ChevronRight as ChevronRightIcon } from "@carbon/icons-react";
+import { CaretRight as ChevronRightIcon } from "@phosphor-icons/react/ssr";
 import { useState } from "react";
 import { CopyCommand } from "../../../landing/actions/copy-command";
 import { CodeBlock, type CodeLanguage } from "../../../preview/code/code-block";
@@ -14,8 +14,9 @@ function SourceFile({ file, language = "tsx" }: SourceFileProps) {
   const [open, setOpen] = useState(false);
   return (
     <details className="group/file" onToggle={(event) => setOpen(event.currentTarget.open)}>
-      <summary className="flex cursor-pointer list-none items-center gap-2 px-3 py-2.5 font-mono text-xs outline-none select-none hover:bg-accent focus-visible:ring-2 focus-visible:ring-ring [&::-webkit-details-marker]:hidden">
+      <summary className="flex cursor-pointer list-none items-center gap-2 px-3 py-2.5 font-mono text-xs select-none hover:bg-accent locus-focus-ring [&::-webkit-details-marker]:hidden">
         <ChevronRightIcon
+          weight="bold"
           aria-hidden
           className="size-4 shrink-0 text-muted-foreground motion-safe:transition-transform group-open/file:rotate-90"
         />
@@ -25,7 +26,7 @@ function SourceFile({ file, language = "tsx" }: SourceFileProps) {
         <CodeBlock
           code={file.content}
           language={language}
-          className="border-t border-line bg-muted/40 [&>div:last-child]:max-h-120 [&>div:last-child]:overflow-y-auto"
+          className="border-t border-border bg-muted/40 [&>div:last-child]:max-h-120 [&>div:last-child]:overflow-y-auto"
         />
       )}
     </details>
@@ -64,7 +65,7 @@ function ThemeStep({ theme }: { theme: RegistryTree["theme"] }) {
 
 function FileList({ files, language }: { files: InstallFile[]; language?: CodeLanguage }) {
   return (
-    <ul className="flex flex-col divide-y divide-line ring-1 ring-border">
+    <ul className="flex flex-col divide-y ring-1 ring-border">
       {files.map((file) => (
         <li key={file.targetPath}>
           <SourceFile file={file} language={language} />

@@ -1,8 +1,8 @@
 "use client";
 
-import { cn } from "cn";
 import * as ProgressPrimitive from "radix-ui/progress";
 import * as React from "react";
+import { cn } from "../../cn";
 
 type ProgressTone = "default" | "good" | "warn" | "destructive" | "auto";
 

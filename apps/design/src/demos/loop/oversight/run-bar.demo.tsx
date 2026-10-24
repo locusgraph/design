@@ -21,7 +21,7 @@ function WithoutStepping() {
 export default defineDemo({
   title: "Run Bar",
   description:
-    "A slim status bar for a running agent: status dot, elapsed time, and pause, resume, step once or stop. Only the actions that make sense for the current status are enabled, and the status is announced.",
+    "A slim status bar for a running agent: a status word that shimmers while running, elapsed time, and pause, resume, step once or stop. Only the actions that make sense for the current status are enabled, and the status is announced.",
   controls: { status: select(statusOptions, "running") },
   playground: ({ status }) => (
     <div className="w-full max-w-2xl">
@@ -50,7 +50,7 @@ export default defineDemo({
   ],
   examples: {
     WithoutStepping: {
-      description: "Leave out onStep when the runtime cannot run one step at a time.",
+      description: "Leave out `onStep` when the runtime cannot run one step at a time.",
       component: WithoutStepping,
     },
   },

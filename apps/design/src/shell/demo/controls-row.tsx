@@ -48,7 +48,7 @@ function ControlInput({ name, control, value, onChange }: ControlInputProps) {
       id={name}
       value={String(value)}
       onChange={(event) => onChange(event.target.value)}
-      className="h-8 w-36"
+      className="h-control-sm w-48"
     />
   );
 }

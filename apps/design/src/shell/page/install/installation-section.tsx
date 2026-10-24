@@ -28,7 +28,7 @@ export function InstallationSection({
       <div className="bg-card ring-1 ring-border">
         {inRegistry ? (
           <Tabs defaultValue="package" className="gap-0">
-            <div className="flex items-end justify-between gap-3 border-b border-line pr-3">
+            <div className="flex items-end justify-between gap-3 border-b pr-3">
               <TabsList
                 variant="line"
                 className="justify-start px-3 pt-1 group-data-[orientation=horizontal]/tabs:border-b-0"
@@ -59,7 +59,7 @@ export function InstallationSection({
           </Tabs>
         ) : (
           <>
-            <div className="flex items-center justify-between gap-3 border-b border-line px-4 py-1.5 sm:px-5">
+            <div className="flex items-center justify-between gap-3 border-b px-4 py-1.5 sm:px-5">
               <span className="locus-eyebrow">npm</span>
               <PackageManagerSwitch />
             </div>

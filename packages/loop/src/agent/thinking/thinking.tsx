@@ -1,8 +1,14 @@
 "use client";
 
-import { Idea as BrainIcon, ChevronRight as ChevronRightIcon } from "@carbon/icons-react";
 import { Collapsible, CollapsibleContent, CollapsibleTrigger, cn } from "@locusgraph/components";
+import { Lightbulb as BrainIcon, CaretRight as ChevronRightIcon } from "@phosphor-icons/react/ssr";
 import { useEffect, useRef, useState } from "react";
+import {
+  lineChevronClass,
+  lineDetailClass,
+  lineIconClass,
+  lineTriggerClass,
+} from "../../shared/line";
 import type { ReasoningPart } from "../../types";
 import { firstLineOf, thoughtDurationLabel } from "./thought-duration";
 
@@ -42,35 +48,32 @@ export function Thinking({ text, state, durationMs, defaultOpen, className }: Th
       data-state={streaming ? "streaming" : "done"}
       open={open}
       onOpenChange={setOpen}
-      className={cn("flex min-w-0 flex-col gap-2 text-sm text-muted-foreground", className)}
+      className={cn("flex min-w-0 flex-col", className)}
     >
-      <CollapsibleTrigger
-        aria-expanded={open}
-        className="group locus-eyebrow flex w-fit items-center gap-2 py-1 transition-colors hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/70"
-      >
-        <BrainIcon className="size-3.5 shrink-0" aria-hidden />
-        <span aria-live="polite" className={cn(streaming && "motion-safe:locus-shimmer")}>
+      <CollapsibleTrigger className={lineTriggerClass}>
+        <span aria-hidden className={lineIconClass}>
+          <BrainIcon weight="bold" aria-hidden />
+        </span>
+        <span
+          aria-live="polite"
+          className={cn("shrink-0", streaming && "motion-safe:locus-shimmer")}
+        >
           {streaming ? "Thinking…" : thoughtDurationLabel(durationMs)}
         </span>
-        <ChevronRightIcon
-          aria-hidden
-          className={cn(
-            "size-3.5 shrink-0 opacity-70 motion-safe:transition-transform",
-            open && "rotate-90"
-          )}
-        />
+        {!open && summary && (
+          <span data-slot="thinking-summary" className="min-w-0 truncate text-faint">
+            <span className="sr-only">: </span>
+            {summary}
+          </span>
+        )}
+        <ChevronRightIcon weight="bold" aria-hidden className={lineChevronClass} />
       </CollapsibleTrigger>
-      {!open && summary && (
-        <p
-          data-slot="thinking-summary"
-          className="ml-[6.5px] truncate border-l border-border pl-4 text-muted-foreground/80"
-        >
-          {summary}
-        </p>
-      )}
       <CollapsibleContent
         data-slot="thinking-content"
-        className="ml-[6.5px] border-l border-border pl-4 leading-relaxed whitespace-pre-wrap"
+        className={cn(
+          lineDetailClass,
+          "pb-2 leading-relaxed whitespace-pre-wrap text-muted-foreground"
+        )}
       >
         {text}
       </CollapsibleContent>

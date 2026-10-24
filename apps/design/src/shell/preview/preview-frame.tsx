@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import type { PreviewHeight } from "../../registry/define-demo";
 import type { Viewport } from "../../url-state";
 import {
+  autoPreviewMinHeight,
   type FrameRenderMessage,
   isFrameHeightMessage,
   isFrameReadyMessage,
@@ -16,7 +17,6 @@ type PreviewFrameProps = {
   expectedHeight?: number;
 };
 
-const AUTO_MIN_HEIGHT = 200;
 const TALL_HEIGHT = 480;
 
 function useFrameEvents(frame: React.RefObject<HTMLIFrameElement | null>) {
@@ -55,8 +55,8 @@ function frameHeightFor(
   measured: boolean,
   expectedHeight: number | undefined
 ) {
-  if (!measured) return expectedHeight ?? AUTO_MIN_HEIGHT;
-  return height === "tall" ? Math.max(TALL_HEIGHT, contentHeight) : contentHeight;
+  if (!measured) return expectedHeight ?? autoPreviewMinHeight;
+  return Math.max(height === "tall" ? TALL_HEIGHT : autoPreviewMinHeight, contentHeight);
 }
 
 export function PreviewFrame({ message, viewport, height, expectedHeight }: PreviewFrameProps) {

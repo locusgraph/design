@@ -52,7 +52,7 @@ function MultipleScopes() {
               {values.map((value) => (
                 <ComboboxChip key={value}>{value}</ComboboxChip>
               ))}
-              <ComboboxChipsInput placeholder="Add scope" />
+              <ComboboxChipsInput aria-label="Scopes" placeholder="Add scope" />
             </Fragment>
           )}
         </ComboboxValue>
@@ -74,7 +74,7 @@ function MultipleScopes() {
 function GroupedRegions() {
   return (
     <Combobox items={regions}>
-      <ComboboxInput placeholder="Select a data region" />
+      <ComboboxInput aria-label="Data region" placeholder="Select a data region" />
       <ComboboxContent>
         <ComboboxEmpty>No regions found.</ComboboxEmpty>
         <ComboboxList>
@@ -100,7 +100,7 @@ function GroupedRegions() {
 function WithClear() {
   return (
     <Combobox items={members} defaultValue={members[1]}>
-      <ComboboxInput placeholder="Assign an owner" showClear />
+      <ComboboxInput aria-label="Owner" placeholder="Assign an owner" showClear />
       <ComboboxContent>
         <ComboboxEmpty>No members found.</ComboboxEmpty>
         <ComboboxList>
@@ -128,7 +128,12 @@ export default defineDemo({
   },
   playground: ({ placeholder, showClear, autoHighlight, disabled }) => (
     <Combobox items={members} autoHighlight={autoHighlight} disabled={disabled}>
-      <ComboboxInput placeholder={placeholder} showClear={showClear} disabled={disabled} />
+      <ComboboxInput
+        aria-label="Member"
+        placeholder={placeholder}
+        showClear={showClear}
+        disabled={disabled}
+      />
       <ComboboxContent>
         <ComboboxEmpty>No members found.</ComboboxEmpty>
         <ComboboxList>
@@ -142,7 +147,7 @@ export default defineDemo({
     </Combobox>
   ),
   code: ({ placeholder, showClear, autoHighlight, disabled }) =>
-    `<Combobox items={members}${formatProp("autoHighlight", autoHighlight, false)}${formatProp("disabled", disabled, false)}>\n  <ComboboxInput placeholder="${placeholder}"${formatProp("showClear", showClear, false)}${formatProp("disabled", disabled, false)} />\n  <ComboboxContent>\n    <ComboboxEmpty>No members found.</ComboboxEmpty>\n    <ComboboxList>\n      {(item) => (\n        <ComboboxItem key={item} value={item}>\n          {item}\n        </ComboboxItem>\n      )}\n    </ComboboxList>\n  </ComboboxContent>\n</Combobox>`,
+    `<Combobox items={members}${formatProp("autoHighlight", autoHighlight, false)}${formatProp("disabled", disabled, false)}>\n  <ComboboxInput aria-label="Member" placeholder="${placeholder}"${formatProp("showClear", showClear, false)}${formatProp("disabled", disabled, false)} />\n  <ComboboxContent>\n    <ComboboxEmpty>No members found.</ComboboxEmpty>\n    <ComboboxList>\n      {(item) => (\n        <ComboboxItem key={item} value={item}>\n          {item}\n        </ComboboxItem>\n      )}\n    </ComboboxList>\n  </ComboboxContent>\n</Combobox>`,
   props: [
     { name: "items", type: "readonly Item[]" },
     { name: "value / onValueChange", type: "controlled selected item" },
@@ -155,7 +160,7 @@ export default defineDemo({
   ],
   examples: {
     MultipleScopes: {
-      description: "multiple with chips picks several scopes for an API key.",
+      description: "`multiple` with chips picks several scopes for an API key.",
       component: MultipleScopes,
     },
     GroupedRegions: {
@@ -163,7 +168,7 @@ export default defineDemo({
       component: GroupedRegions,
     },
     WithClear: {
-      description: "showClear adds a button that removes the current choice.",
+      description: "`showClear` adds a button that removes the current choice.",
       component: WithClear,
     },
   },

@@ -1,19 +1,17 @@
 "use client";
 
-import { ArrowRight as ArrowRightIcon, ListChecked as ListChecksIcon } from "@carbon/icons-react";
-import { Button } from "@locusgraph/components";
+import { Button, cn } from "@locusgraph/components";
 import { pluralize } from "@locusgraph/utils";
-import { useEffect, useId, useState } from "react";
 import {
-  ApprovalPanel,
-  LiveStatus,
-  PanelBody,
-  PanelFooter,
-  PanelHeader,
-  PanelTitle,
-} from "../../shared/panel";
-import { DecisionSummary } from "../shared/decision-line";
+  ArrowRight as ArrowRightIcon,
+  ListChecks as ListChecksIcon,
+} from "@phosphor-icons/react/ssr";
+import { useEffect, useId, useState } from "react";
+import { DecisionSummary } from "../../shared/decision-summary";
+import { LiveStatus } from "../../shared/live-status";
+import { ApprovalHeadline, SettledLine } from "../shared/approval-line";
 import { useFocusOnMount } from "../shared/use-focus-on-mount";
+import { useFocusWhenSettled } from "../shared/use-focus-when-settled";
 import type { ApprovalDecision, PlanStepDraft } from "../types";
 import { PlanStepRow, type StepAction, stepControlId } from "./plan-step-row";
 import { applyStepAction, describeStepAction, focusAfterAction } from "./plan-steps";
@@ -32,10 +30,10 @@ export type PlanReviewProps = {
 
 function DecidedSteps({ steps }: { steps: PlanStepDraft[] }) {
   return (
-    <ol className="flex flex-col gap-1 pl-6.5 text-sm text-muted-foreground">
+    <ol className="flex flex-col gap-1 pt-2 text-sm text-muted-foreground">
       {steps.map((step, position) => (
         <li key={step.id} className="flex gap-3">
-          <span className="w-4 shrink-0 font-mono text-xs leading-5 tabular-nums">
+          <span className="w-4 shrink-0 text-xs leading-5 text-faint tabular-nums">
             {position + 1}
           </span>
           <span className="min-w-0">{step.title}</span>
@@ -61,6 +59,7 @@ export function PlanReview({
   const [announcement, setAnnouncement] = useState("");
   const [pendingFocus, setPendingFocus] = useState<{ id: string } | null>(null);
   const approveRef = useFocusOnMount<HTMLButtonElement>(autoFocus && !decision);
+  const settleRef = useFocusWhenSettled<HTMLElement>(!decision);
   const hasBlankTitle = steps.some((step) => step.title.trim() === "");
 
   useEffect(() => {
@@ -69,7 +68,7 @@ export function PlanReview({
 
   function handleAction(stepId: string, position: number, action: StepAction) {
     const next = applyStepAction(steps, stepId, action);
-    const focus = focusAfterAction(next, stepId, action);
+    const focus = focusAfterAction(next, stepId, action, position);
     setSteps(next);
     setAnnouncement(describeStepAction(position, action));
     setPendingFocus(focus ? { id: stepControlId(idPrefix, focus.stepId, focus.control) } : null);
@@ -81,23 +80,22 @@ export function PlanReview({
     );
   }
 
+  const stepCount = pluralize(steps.length, "step");
   return (
-    <ApprovalPanel
+    <section
+      ref={settleRef}
+      tabIndex={-1}
       data-slot="plan-review"
       data-decided={decision ? true : undefined}
       aria-label={title}
-      className={className}
+      className={cn("flex min-w-0 flex-col outline-none", !decision && "gap-3", className)}
     >
-      <PanelHeader
-        icon={<ListChecksIcon aria-hidden />}
-        eyebrow="Plan"
-        status={decision ? (decision.approved ? "Approved" : "Cancelled") : "Waiting for you"}
-        tone={decision ? (decision.approved ? "done" : "danger") : "waiting"}
-        aside={pluralize(steps.length, "step")}
-      />
-      <PanelTitle className={decision ? "text-muted-foreground" : undefined}>{title}</PanelTitle>
       {decision ? (
-        <PanelBody>
+        <SettledLine
+          name={pluralize(initialSteps.length, "step")}
+          verb="Planned"
+          icon={<ListChecksIcon weight="bold" aria-hidden />}
+        >
           <DecisionSummary
             decision={decision}
             deniedVerb="Cancelled"
@@ -108,56 +106,53 @@ export function PlanReview({
             }
           />
           <DecidedSteps steps={initialSteps} />
-        </PanelBody>
+        </SettledLine>
       ) : (
         <>
-          <p className="px-5 pt-1 text-sm text-muted-foreground">{description}</p>
-          <PanelBody className="pb-0">
-            <ol className="-mx-5 flex flex-col divide-y border-t">
-              {steps.map((step, position) => (
-                <PlanStepRow
-                  key={step.id}
-                  idPrefix={idPrefix}
-                  step={step}
-                  position={position}
-                  count={steps.length}
-                  onRename={(nextTitle) => renameStep(step.id, nextTitle)}
-                  onAction={(action) => handleAction(step.id, position, action)}
-                />
-              ))}
-            </ol>
-          </PanelBody>
-          <PanelFooter className="justify-between">
-            {hasBlankTitle ? (
+          <ApprovalHeadline
+            name={stepCount}
+            action="to run"
+            icon={<ListChecksIcon weight="bold" aria-hidden />}
+          />
+          <p className="-mt-2 text-sm text-faint">{description}</p>
+          <ol className="flex flex-col">
+            {steps.map((step, position) => (
+              <PlanStepRow
+                key={step.id}
+                idPrefix={idPrefix}
+                step={step}
+                position={position}
+                count={steps.length}
+                onRename={(nextTitle) => renameStep(step.id, nextTitle)}
+                onAction={(action) => handleAction(step.id, position, action)}
+              />
+            ))}
+          </ol>
+          <div className="flex flex-wrap items-center gap-2 pt-1">
+            <Button
+              ref={approveRef}
+              type="button"
+              size="sm"
+              disabled={hasBlankTitle || steps.length === 0}
+              onClick={() =>
+                onApprove(steps.map((step) => ({ ...step, title: step.title.trim() })))
+              }
+            >
+              {actionLabel ?? `Run ${stepCount}`}
+              <ArrowRightIcon weight="bold" aria-hidden />
+            </Button>
+            <Button type="button" size="sm" variant="ghost" onClick={onCancel}>
+              Cancel
+            </Button>
+            {hasBlankTitle && (
               <span className="text-xs text-destructive">Every step needs a title.</span>
-            ) : (
-              <span className="hidden font-mono text-[11px] text-muted-foreground sm:inline">
-                The run starts when you approve
-              </span>
             )}
-            <span className="ml-auto flex gap-2">
-              <Button type="button" size="sm" variant="ghost" onClick={onCancel}>
-                Cancel
-              </Button>
-              <Button
-                ref={approveRef}
-                type="button"
-                size="sm"
-                disabled={hasBlankTitle || steps.length === 0}
-                onClick={() =>
-                  onApprove(steps.map((step) => ({ ...step, title: step.title.trim() })))
-                }
-              >
-                {actionLabel ?? `Run ${pluralize(steps.length, "step")}`}
-                <ArrowRightIcon aria-hidden />
-              </Button>
-            </span>
-          </PanelFooter>
+          </div>
         </>
       )}
       <LiveStatus
         message={decision ? (decision.approved ? "Plan approved" : "Plan cancelled") : announcement}
       />
-    </ApprovalPanel>
+    </section>
   );
 }

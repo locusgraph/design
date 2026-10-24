@@ -1,10 +1,10 @@
-import { ChevronRight, OverflowMenuHorizontal as MoreHorizontal } from "@carbon/icons-react";
-import { cn } from "cn";
+import { CaretRight as ChevronRight, DotsThree as MoreHorizontal } from "@phosphor-icons/react/ssr";
 import * as Slot from "radix-ui/slot";
 import * as React from "react";
+import { cn } from "../cn";
 
 function Breadcrumb({ ...props }: React.ComponentProps<"nav">) {
-  return <nav aria-label="breadcrumb" data-slot="breadcrumb" {...props} />;
+  return <nav aria-label="Breadcrumb" data-slot="breadcrumb" {...props} />;
 }
 
 function BreadcrumbList({ className, ...props }: React.ComponentProps<"ol">) {
@@ -70,7 +70,7 @@ function BreadcrumbSeparator({ children, className, ...props }: React.ComponentP
       className={cn("[&>svg]:size-3.5", className)}
       {...props}
     >
-      {children ?? <ChevronRight />}
+      {children ?? <ChevronRight weight="bold" aria-hidden />}
     </li>
   );
 }
@@ -79,12 +79,10 @@ function BreadcrumbEllipsis({ className, ...props }: React.ComponentProps<"span"
   return (
     <span
       data-slot="breadcrumb-ellipsis"
-      role="presentation"
-      aria-hidden="true"
-      className={cn("flex size-9 items-center justify-center", className)}
+      className={cn("flex size-5 items-center justify-center", className)}
       {...props}
     >
-      <MoreHorizontal className="size-4" />
+      <MoreHorizontal weight="bold" aria-hidden className="size-4" />
       <span className="sr-only">More</span>
     </span>
   );

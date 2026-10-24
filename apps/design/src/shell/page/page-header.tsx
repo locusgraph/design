@@ -1,13 +1,14 @@
+import { Button, Tooltip, TooltipContent, TooltipTrigger } from "@locusgraph/components";
 import {
   ArrowLeft as ArrowLeftIcon,
   ArrowRight as ArrowRightIcon,
-  Checkmark as CheckIcon,
+  Check as CheckIcon,
   Copy as CopyIcon,
-} from "@carbon/icons-react";
-import { Button, Tooltip, TooltipContent, TooltipTrigger } from "@locusgraph/components";
+} from "@phosphor-icons/react/ssr";
 import { useState } from "react";
 import type { DemoIndexEntry } from "../../registry/load-demos";
 import { PlaygroundLink } from "../nav/playground-nav";
+import { withInlineCode } from "./prose/inline-code";
 
 type PageHeaderProps = {
   title: string;
@@ -25,9 +26,9 @@ function CopyPageButton({ markdown }: { markdown: string }) {
     setTimeout(() => setCopied(false), 1500);
   };
   return (
-    <Button variant="secondary" size="sm" onClick={copy} className="h-7 shadow-none">
-      {copied ? <CheckIcon /> : <CopyIcon />}
-      {copied ? "Copied" : "Copy page"}
+    <Button variant="secondary" size="sm" onClick={copy}>
+      {copied ? <CheckIcon weight="bold" aria-hidden /> : <CopyIcon weight="bold" aria-hidden />}
+      <span className="sr-only sm:not-sr-only">{copied ? "Copied" : "Copy page"}</span>
     </Button>
   );
 }
@@ -40,25 +41,20 @@ function NeighborButton({
   direction: "previous" | "next";
 }) {
   const Icon = direction === "previous" ? ArrowLeftIcon : ArrowRightIcon;
+  const label = direction === "previous" ? "Previous" : "Next";
   if (!entry) {
     return (
-      <Button
-        variant="secondary"
-        size="icon-sm"
-        className="size-7 shadow-none"
-        disabled
-        aria-label={`No ${direction} component`}
-      >
-        <Icon />
+      <Button variant="secondary" size="icon-sm" disabled aria-label={`No ${direction} page`}>
+        <Icon weight="bold" aria-hidden />
       </Button>
     );
   }
   return (
     <Tooltip>
       <TooltipTrigger asChild>
-        <Button asChild variant="secondary" size="icon-sm" className="size-7 shadow-none">
-          <PlaygroundLink href={`/${entry.path}`} aria-label={`${direction}: ${entry.title}`}>
-            <Icon />
+        <Button asChild variant="secondary" size="icon-sm">
+          <PlaygroundLink href={`/${entry.path}`} aria-label={`${label}: ${entry.title}`}>
+            <Icon weight="bold" aria-hidden />
           </PlaygroundLink>
         </Button>
       </TooltipTrigger>
@@ -79,7 +75,7 @@ export function PageHeader({ title, description, markdown, previous, next }: Pag
         </div>
       </div>
       <div className="typeset locus-typeset-docs text-balance text-muted-foreground md:max-w-[80%]">
-        <p>{description}</p>
+        <p>{withInlineCode(description)}</p>
       </div>
     </header>
   );

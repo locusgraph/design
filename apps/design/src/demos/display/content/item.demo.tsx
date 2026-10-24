@@ -1,9 +1,4 @@
 import {
-  ChevronRight as ChevronRightIcon,
-  Password as KeyRoundIcon,
-  Security as ShieldCheckIcon,
-} from "@carbon/icons-react";
-import {
   Avatar,
   AvatarFallback,
   Button,
@@ -16,6 +11,11 @@ import {
   ItemSeparator,
   ItemTitle,
 } from "@locusgraph/components";
+import {
+  CaretRight as ChevronRightIcon,
+  Key as KeyRoundIcon,
+  ShieldCheck as ShieldCheckIcon,
+} from "@phosphor-icons/react/ssr";
 import { Fragment } from "react";
 import { formatProp } from "../../../registry/control-values";
 import { defineDemo, select, text } from "../../../registry/define-demo";
@@ -67,14 +67,14 @@ function AsLink() {
     <Item variant="outline" asChild className="w-full max-w-md">
       <a href="#security">
         <ItemMedia variant="icon">
-          <ShieldCheckIcon />
+          <ShieldCheckIcon weight="bold" aria-hidden />
         </ItemMedia>
         <ItemContent>
           <ItemTitle>Two-factor authentication</ItemTitle>
           <ItemDescription>Required for every member of this organization.</ItemDescription>
         </ItemContent>
         <ItemActions>
-          <ChevronRightIcon className="size-4" />
+          <ChevronRightIcon weight="bold" aria-hidden className="size-4" />
         </ItemActions>
       </a>
     </Item>
@@ -108,21 +108,25 @@ export default defineDemo({
   playground: ({ variant, size, title }) => (
     <Item variant={variant} size={size} className="w-full max-w-md">
       <ItemMedia variant="icon">
-        <KeyRoundIcon />
+        <KeyRoundIcon weight="bold" aria-hidden />
       </ItemMedia>
       <ItemContent>
         <ItemTitle>{title}</ItemTitle>
         <ItemDescription>Created Mar 3 · last used 2 hours ago</ItemDescription>
       </ItemContent>
       <ItemActions>
-        <Button variant="outline" size="sm">
+        <Button
+          variant="ghost"
+          size="sm"
+          className="text-muted-foreground hover:bg-destructive/10 hover:text-destructive"
+        >
           Revoke
         </Button>
       </ItemActions>
     </Item>
   ),
   code: ({ variant, size, title }) =>
-    `<Item${formatProp("variant", variant, "default")}${formatProp("size", size, "default")}>\n  <ItemMedia variant="icon">\n    <KeyRoundIcon />\n  </ItemMedia>\n  <ItemContent>\n    <ItemTitle>${title}</ItemTitle>\n    <ItemDescription>Created Mar 3 · last used 2 hours ago</ItemDescription>\n  </ItemContent>\n  <ItemActions>\n    <Button variant="outline" size="sm">Revoke</Button>\n  </ItemActions>\n</Item>`,
+    `<Item${formatProp("variant", variant, "default")}${formatProp("size", size, "default")}>\n  <ItemMedia variant="icon">\n    <KeyRoundIcon weight="bold" aria-hidden />\n  </ItemMedia>\n  <ItemContent>\n    <ItemTitle>${title}</ItemTitle>\n    <ItemDescription>Created Mar 3 · last used 2 hours ago</ItemDescription>\n  </ItemContent>\n  <ItemActions>\n    <Button\n      variant="ghost"\n      size="sm"\n      className="text-muted-foreground hover:bg-destructive/10 hover:text-destructive"\n    >\n      Revoke\n    </Button>\n  </ItemActions>\n</Item>`,
   props: [
     { name: "variant", type: variants.join(" | "), defaultValue: "default" },
     { name: "size", type: sizes.join(" | "), defaultValue: "default" },
@@ -136,7 +140,7 @@ export default defineDemo({
       component: MemberList,
     },
     AsLink: {
-      description: "asChild renders the item as a link with hover state.",
+      description: "`asChild` renders the item as a link with hover state.",
       component: AsLink,
     },
     Muted: {

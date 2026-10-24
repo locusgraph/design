@@ -28,14 +28,14 @@ function BrandLink({ brand, Link }: { brand: AppBrand; Link: LinkComponent | "a"
           <Link href={brand.href}>
             <span
               data-slot="app-brand-icon"
-              className="flex aspect-square size-8 shrink-0 items-center justify-center rounded-lg border border-line bg-ghost"
+              className="flex aspect-square size-8 shrink-0 items-center justify-center border border-border bg-muted"
             >
               {brand.icon}
             </span>
             <span className="grid flex-1 text-left leading-tight">
               <span className="truncate text-sm font-semibold tracking-tight">{brand.title}</span>
               {brand.subtitle && (
-                <span className="truncate text-xs text-soft">{brand.subtitle}</span>
+                <span className="truncate text-xs text-muted-foreground">{brand.subtitle}</span>
               )}
             </span>
           </Link>
@@ -55,23 +55,30 @@ function AppSidebar({
 }: AppSidebarProps) {
   return (
     <Sidebar collapsible="icon">
-      <SidebarHeader className="h-14 justify-center border-b border-line py-0">
+      <SidebarHeader className="h-14 justify-center border-b border-border py-0">
         <BrandLink brand={brand} Link={linkComponent} />
       </SidebarHeader>
       <SidebarContent>
-        {groups.map((group) => (
-          <NavGroup key={group.label} group={group} activeHref={activeHref} Link={linkComponent} />
-        ))}
-        {bottomItems && bottomItems.length > 0 && (
-          <NavGroup
-            group={{ label: "", items: bottomItems }}
-            activeHref={activeHref}
-            Link={linkComponent}
-            className="mt-auto"
-          />
-        )}
+        <nav aria-label="Main" className="flex flex-1 flex-col gap-2">
+          {groups.map((group) => (
+            <NavGroup
+              key={group.label}
+              group={group}
+              activeHref={activeHref}
+              Link={linkComponent}
+            />
+          ))}
+          {bottomItems && bottomItems.length > 0 && (
+            <NavGroup
+              group={{ label: "", items: bottomItems }}
+              activeHref={activeHref}
+              Link={linkComponent}
+              className="mt-auto"
+            />
+          )}
+        </nav>
       </SidebarContent>
-      {footer && <SidebarFooter className="border-t border-line">{footer}</SidebarFooter>}
+      {footer && <SidebarFooter className="border-t border-border">{footer}</SidebarFooter>}
       <SidebarRail />
     </Sidebar>
   );

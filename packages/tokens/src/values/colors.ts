@@ -2,15 +2,16 @@ export type ColorName =
   | "surface"
   | "background"
   | "foreground"
-  | "muted"
+  | "mutedForeground"
   | "faint"
   | "btn"
   | "btnInk"
-  | "ghost"
+  | "muted"
+  | "interactive"
+  | "memory"
   | "good"
-  | "bad"
-  | "info"
   | "warn"
+  | "destructive"
   | "brandGlow";
 
 export type Palette = Record<ColorName, string>;
@@ -19,15 +20,16 @@ export const lightColors: Palette = {
   surface: "#ffffff",
   background: "#fafafa",
   foreground: "#09090b",
-  muted: "#71717a",
-  faint: "#a1a1aa",
+  mutedForeground: "#52525b",
+  faint: "#6b6b73",
   btn: "#18181b",
   btnInk: "#fafafa",
-  ghost: "#f4f4f5",
+  muted: "#f4f4f5",
+  interactive: "#1b66c4",
+  memory: "#4a3aa7",
   good: "#006300",
-  bad: "#d03b3b",
-  info: "#1f6fd1",
   warn: "#a15c00",
+  destructive: "#c53030",
   brandGlow: "#0099ff",
 };
 
@@ -35,15 +37,16 @@ export const darkColors: Palette = {
   surface: "#111113",
   background: "#0c0c0d",
   foreground: "#ededed",
-  muted: "#a1a1aa",
-  faint: "#71717a",
+  mutedForeground: "#a1a1aa",
+  faint: "#85858e",
   btn: "#ededed",
   btnInk: "#0a0a0a",
-  ghost: "#1b1b1d",
+  muted: "#1b1b1d",
+  interactive: "#5b9df0",
+  memory: "#9085e9",
   good: "#0ca30c",
-  bad: "#e66767",
-  info: "#5b9df0",
   warn: "#e0a400",
+  destructive: "#e66767",
   brandGlow: "#0099ff",
 };
 

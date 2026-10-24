@@ -2,8 +2,8 @@
 
 import { cn } from "@locusgraph/components";
 import { useEffect, useState } from "react";
+import { prefersReducedMotion } from "../../../shared/reduced-motion";
 import type { PulseTone } from "../pulse-tone";
-import { prefersReducedMotion } from "../use-loop-animation";
 
 const glyphs = ["·", "✢", "✳", "✶", "✻", "✽", "✻", "✶", "✳", "✢"];
 const restingGlyph = "✻";
@@ -25,7 +25,7 @@ export function GlyphMark({ tone = "neutral" }: { tone?: PulseTone }) {
       data-slot="pulse-glyph"
       className={cn(
         "inline-flex w-[1.1em] justify-center font-mono text-[1.15em] leading-none",
-        tone === "brand" ? "text-orange-500" : "text-foreground/70"
+        tone === "brand" ? "text-[var(--locus-s2)]" : "text-muted-foreground"
       )}
     >
       {index === undefined ? restingGlyph : glyphs[index]}

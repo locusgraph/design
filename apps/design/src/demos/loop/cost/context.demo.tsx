@@ -37,7 +37,7 @@ export default defineDemo({
     "Context window used against its limit. Amber from 80%, red when full. With a breakdown, hover or focus shows what fills the window.",
   controls: { level: select(levelOptions, "near"), variant: select(variants) },
   playground: ({ level, variant }) => (
-    <div className="h-[20rem] w-[22rem] max-w-full">
+    <div className="w-[22rem] max-w-full">
       <Context
         variant={variant}
         usedTokens={levels[level]}

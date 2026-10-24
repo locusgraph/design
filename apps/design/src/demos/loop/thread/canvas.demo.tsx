@@ -1,6 +1,6 @@
-import { Download as DownloadIcon } from "@carbon/icons-react";
 import { Button } from "@locusgraph/components";
-import { Canvas, type CanvasVersion, Code } from "@locusgraph/loop";
+import { Canvas, type CanvasVersion, Code, CopyCodeButton } from "@locusgraph/loop";
+import { DownloadSimple as DownloadIcon } from "@phosphor-icons/react/ssr";
 import { useState } from "react";
 import { defineDemo, select } from "../../../registry/define-demo";
 
@@ -37,6 +37,36 @@ function Report({ versionId }: { versionId: string }) {
   );
 }
 
+const canvasCode = {
+  document: `<Canvas
+  title="September spend report"
+  kind="Document"
+  versions={versions}
+  versionId={versionId}
+  onVersionChange={setVersionId}
+  actions={<DownloadButton />}
+  onClose={closePanel}
+>
+  {content}
+</Canvas>`,
+  code: `<Canvas
+  title="budgets.ts"
+  kind="Code"
+  versions={versions}
+  versionId={versionId}
+  onVersionChange={setVersionId}
+  actions={
+    <>
+      <CopyCodeButton code={source} size="icon-sm" />
+      <DownloadButton />
+    </>
+  }
+  onClose={closePanel}
+>
+  <Code language="ts" code={source} />
+</Canvas>`,
+} satisfies Record<(typeof kinds)[number], string>;
+
 function Playground({ kind }: { kind: (typeof kinds)[number] }) {
   const [versionId, setVersionId] = useState("ver_3");
   const [open, setOpen] = useState(true);
@@ -57,9 +87,12 @@ function Playground({ kind }: { kind: (typeof kinds)[number] }) {
         onVersionChange={setVersionId}
         onClose={() => setOpen(false)}
         actions={
-          <Button variant="ghost" size="icon-sm" aria-label="Download">
-            <DownloadIcon />
-          </Button>
+          <>
+            {kind === "code" && <CopyCodeButton code={budgetCode} size="icon-sm" />}
+            <Button variant="ghost" size="icon-sm" aria-label="Download">
+              <DownloadIcon weight="bold" aria-hidden />
+            </Button>
+          </>
         }
       >
         {kind === "code" ? (
@@ -85,11 +118,10 @@ function SingleVersion() {
 export default defineDemo({
   title: "Canvas",
   description:
-    "A panel for a document or code the agent generated: kind and title up top, actions and close on the right, and the version switcher in the footer.",
+    "A panel for a document or code the agent generated. The title leads; a faint line under it holds the kind and the version switcher, with Back to latest on older versions. A light tint, not a rule, sets it apart from the chat.",
   controls: { kind: select(kinds) },
   playground: ({ kind }) => <Playground kind={kind} />,
-  code: () =>
-    `<Canvas\n  title="September spend report"\n  kind="Document"\n  versions={versions}\n  versionId={versionId}\n  onVersionChange={setVersionId}\n  actions={<DownloadButton />}\n  onClose={closePanel}\n>\n  {content}\n</Canvas>`,
+  code: ({ kind }) => canvasCode[kind],
   props: [
     { name: "title", type: "string" },
     { name: "kind", type: "string" },

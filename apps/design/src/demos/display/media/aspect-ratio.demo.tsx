@@ -1,5 +1,5 @@
-import { Play as PlayIcon } from "@carbon/icons-react";
 import { AspectRatio } from "@locusgraph/components";
+import { Play as PlayIcon } from "@phosphor-icons/react/ssr";
 import { defineDemo, select } from "../../../registry/define-demo";
 
 const ratios = ["16 / 9", "4 / 3", "1 / 1", "21 / 9"] as const;
@@ -17,7 +17,7 @@ function VideoThumbnail() {
         className="flex items-center justify-center overflow-hidden bg-muted ring-1 ring-border"
       >
         <span className="flex size-12 items-center justify-center rounded-full bg-primary text-primary-foreground">
-          <PlayIcon className="size-5" />
+          <PlayIcon weight="bold" aria-hidden className="size-5" />
         </span>
       </AspectRatio>
     </div>

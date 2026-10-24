@@ -1,6 +1,5 @@
 "use client";
 
-import { cn } from "@locusgraph/components";
 import { useRef } from "react";
 import {
   rowOffsetStyle,
@@ -15,8 +14,8 @@ const estimatedRowHeightPx = 57;
 export type InboxRowHandlers = {
   isSelected: (id: string) => boolean;
   onSelect: (id: string, selected: boolean) => void;
-  onApprove: (id: string) => void;
-  onDeny: (id: string) => void;
+  isOpen: (id: string) => boolean;
+  onOpen: (id: string) => void;
 };
 
 type VirtualInboxListProps = InboxRowHandlers & {
@@ -29,8 +28,8 @@ export function VirtualInboxList({
   now,
   isSelected,
   onSelect,
-  onApprove,
-  onDeny,
+  isOpen,
+  onOpen,
 }: VirtualInboxListProps) {
   const scrollRef = useRef<HTMLDivElement>(null);
   const { rows, totalSize, itemProps } = useListVirtualizer({
@@ -43,7 +42,7 @@ export function VirtualInboxList({
     <div
       ref={scrollRef}
       data-slot="inbox-scroll"
-      className="mt-4 max-h-[min(36rem,70vh)] overflow-y-auto overscroll-contain border-t"
+      className="max-h-[min(36rem,70vh)] overflow-y-auto overscroll-contain"
     >
       <ul className="relative" style={{ height: totalSize }}>
         {rows.map((row) => {
@@ -54,14 +53,14 @@ export function VirtualInboxList({
               {...itemProps(row.index)}
               aria-posinset={row.index + 1}
               aria-setsize={items.length}
-              className={cn(virtualRowClassName, "border-b")}
+              className={virtualRowClassName}
               style={rowOffsetStyle(row.start)}
               item={item}
               now={now}
               selected={isSelected(item.id)}
               onSelect={(on) => onSelect(item.id, on)}
-              onApprove={() => onApprove(item.id)}
-              onDeny={() => onDeny(item.id)}
+              open={isOpen(item.id)}
+              onOpen={() => onOpen(item.id)}
             />
           );
         })}

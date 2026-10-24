@@ -1,8 +1,8 @@
 "use client";
 
-import { Add as PlusIcon } from "@carbon/icons-react";
 import { Button, cn, ScrollArea } from "@locusgraph/components";
-import type { ComponentProps } from "react";
+import { Plus as PlusIcon } from "@phosphor-icons/react/ssr";
+import { type ComponentProps, useId } from "react";
 import { shouldVirtualize } from "../../shared/virtual/use-list-virtualizer";
 import { type HistoryItem, HistoryRow } from "./row/history-row";
 import { groupThreadsByDay } from "./thread-groups";
@@ -36,6 +36,7 @@ export function History({
   ...props
 }: HistoryProps) {
   const groups = groupThreadsByDay(threads, now ?? new Date());
+  const groupIdPrefix = useId();
   return (
     <nav
       data-slot="history"
@@ -43,11 +44,11 @@ export function History({
       className={cn("flex min-h-0 flex-col gap-2", className)}
       {...props}
     >
-      <div className="flex h-7 items-center justify-between gap-2 px-2">
+      <div className="flex h-control-sm items-center justify-between gap-2 px-2">
         <span className="text-sm font-medium text-foreground">{label}</span>
         {onNew && (
-          <Button type="button" variant="outline" size="xs" onClick={onNew}>
-            <PlusIcon />
+          <Button type="button" variant="ghost" size="xs" onClick={onNew}>
+            <PlusIcon weight="bold" aria-hidden />
             New chat
           </Button>
         )}
@@ -70,10 +71,10 @@ export function History({
           ) : (
             <div className="flex flex-col gap-4 pr-2.5 pb-2">
               {groups.map((group) => (
-                <section key={group.key} aria-labelledby={`thread-group-${group.key}`}>
+                <section key={group.key} aria-labelledby={`${groupIdPrefix}-${group.key}`}>
                   <h3
-                    id={`thread-group-${group.key}`}
-                    className="locus-eyebrow px-2 pb-1"
+                    id={`${groupIdPrefix}-${group.key}`}
+                    className="px-2 pb-1 font-sans text-xs text-faint"
                     suppressHydrationWarning
                   >
                     {group.label}

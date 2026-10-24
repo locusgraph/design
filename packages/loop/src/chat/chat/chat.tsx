@@ -1,7 +1,7 @@
 "use client";
 
-import { ArrowDown as ArrowDownIcon } from "@carbon/icons-react";
 import { Button, cn } from "@locusgraph/components";
+import { ArrowDown as ArrowDownIcon } from "@phosphor-icons/react/ssr";
 import * as React from "react";
 import { shouldVirtualize } from "../../shared/virtual/use-list-virtualizer";
 import { useStickToBottom } from "./use-stick-to-bottom";
@@ -44,7 +44,7 @@ export function Chat({
         aria-busy={(isVirtual && scrolling) || undefined}
         tabIndex={0}
         onScroll={handleScroll}
-        className="min-h-0 flex-1 overflow-y-auto overscroll-contain outline-none focus-visible:ring-1 focus-visible:ring-ring focus-visible:ring-inset"
+        className="min-h-0 flex-1 overflow-y-auto overscroll-contain locus-focus-ring-inset"
       >
         <div
           ref={contentRef}
@@ -73,12 +73,12 @@ export function Chat({
         <Button
           type="button"
           variant="outline"
-          size="sm"
+          size="xs"
           data-slot="chat-jump"
           onClick={scrollToLatest}
-          className="absolute bottom-3 left-1/2 h-7 -translate-x-1/2 bg-card px-3 text-xs text-muted-foreground shadow-none hover:text-foreground motion-safe:animate-in motion-safe:fade-in-0 dark:bg-card"
+          className="absolute bottom-3 left-1/2 -translate-x-1/2 bg-card px-3 text-muted-foreground shadow-none hover:text-foreground motion-safe:animate-in motion-safe:fade-in-0 dark:bg-card"
         >
-          <ArrowDownIcon aria-hidden="true" className="size-3.5" />
+          <ArrowDownIcon weight="bold" aria-hidden="true" className="size-3.5" />
           {jumpLabel}
         </Button>
       )}

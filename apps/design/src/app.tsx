@@ -13,17 +13,21 @@ import {
   prefetchDemoEntries,
   useDemoEntry,
 } from "./registry/load-demos";
+import { staticPageMeta } from "./seo/page-meta";
 import { usePageHead } from "./seo/use-page-head";
 import { ShellsPage } from "./shell/blocks/shells-page";
 import { InstallationPage, installationSections } from "./shell/guides/installation-page";
+import { ThemingPage } from "./shell/guides/theming/theming-page";
 import { HomePage, homeSections } from "./shell/home-page";
 import { LandingPage } from "./shell/landing/landing-page";
 import { HeaderActions } from "./shell/nav/header-actions";
 import { libraries, libraryEntries, libraryOfPath } from "./shell/nav/libraries";
 import { PlaygroundLink, playgroundNavGroups } from "./shell/nav/playground-nav";
 import { SearchDialog, useSearchShortcut } from "./shell/nav/search-dialog";
+import { NotFoundPage } from "./shell/not-found-page";
 import { DemoPage } from "./shell/page/demo-page";
 import { usePageDocs } from "./shell/page/page-docs";
+import { RouteAnnouncer } from "./shell/route-announcer";
 import { useDocumentTheme } from "./shell/theme";
 import { readShellSettings, useLocation } from "./url-state";
 
@@ -37,6 +41,7 @@ const brand = {
 const headerLinks = [
   ...libraries.map(({ title, href }) => ({ title, href })),
   { title: "Shells", href: "/shells" },
+  { title: "Theming", href: "/theming" },
 ];
 
 function useShownEntry(loaded: DemoEntry | undefined, isDemoPage: boolean) {
@@ -66,18 +71,24 @@ export function App() {
   const loadedEntry = useDemoEntry(path);
   const entry = useShownEntry(loadedEntry, isDemoPage);
   const docs = usePageDocs(entry);
-  usePageHead(path, loadedEntry);
+  const pageTitle = usePageHead(path, loadedEntry);
   const activeHref = `/${path}`;
   const isShellsPage = path === "shells";
   const isLandingPage = path === "";
-  const isFullWidth = isShellsPage || isLandingPage;
+  const isThemingPage = path === "theming";
+  const isFullWidth = isShellsPage || isLandingPage || isThemingPage;
   const isInstallationPage = path === "installation";
+  const isKnownPage = isDemoPage || staticPageMeta(path) !== undefined;
   const library = libraryOfPath(path);
   usePrefetchLibrary(library.id);
   const navGroups = playgroundNavGroups(library);
   const pageSections =
     docs?.sections ??
-    (isInstallationPage ? installationSections : isDemoPage ? [] : homeSections(library));
+    (isInstallationPage
+      ? installationSections
+      : isDemoPage || !isKnownPage
+        ? []
+        : homeSections(library));
 
   return (
     <>
@@ -86,7 +97,17 @@ export function App() {
           <DocsHeader
             brand={brand}
             links={headerLinks}
-            activeHref={isShellsPage ? "/shells" : isLandingPage ? "/" : library.href}
+            activeHref={
+              isShellsPage
+                ? "/shells"
+                : isThemingPage
+                  ? "/theming"
+                  : isLandingPage
+                    ? "/"
+                    : isKnownPage
+                      ? library.href
+                      : ""
+            }
             linkComponent={PlaygroundLink}
             mobileNav={
               <DocsNavList
@@ -122,14 +143,19 @@ export function App() {
           <ShellsPage theme={settings.theme} />
         ) : isInstallationPage ? (
           <InstallationPage />
+        ) : isThemingPage ? (
+          <ThemingPage mode={settings.theme} />
         ) : entry && docs ? (
           <DemoPage entry={entry} docs={docs} params={params} settings={settings} />
         ) : isDemoPage ? (
           <div aria-busy="true" className="min-h-svh" />
+        ) : !isKnownPage ? (
+          <NotFoundPage path={path} onSearch={openSearch} />
         ) : (
           <HomePage library={library} />
         )}
       </DocsShell>
+      <RouteAnnouncer path={path} title={pageTitle} />
       <SearchDialog open={searchOpen} onOpenChange={setSearchOpen} />
       <Toaster theme={settings.theme} />
     </>

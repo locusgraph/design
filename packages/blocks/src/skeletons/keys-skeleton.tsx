@@ -17,18 +17,19 @@ type KeysSkeletonProps = {
 
 const columns = [
   { name: "Key", visibility: "hidden md:table-cell", bar: "w-36" },
-  { name: "Product", visibility: "", bar: "w-20" },
+  { name: "Product", visibility: "hidden sm:table-cell", bar: "w-20" },
   { name: "Created by", visibility: "hidden md:table-cell", bar: "w-32" },
   { name: "Created", visibility: "hidden md:table-cell", bar: "w-20" },
-  { name: "Expires", visibility: "", bar: "w-20" },
+  { name: "Expires", visibility: "hidden sm:table-cell", bar: "w-20" },
 ] as const;
 
 function NameCellSkeleton() {
   return (
-    <TableCell className="max-w-40">
+    <TableCell className="w-full max-w-0 sm:w-auto sm:max-w-40">
       <div className="flex flex-col gap-1">
         <SkeletonBar className="h-4 w-28" />
         <SkeletonBar className="h-3 w-20 md:hidden" />
+        <SkeletonBar className="h-3 w-24 sm:hidden" />
       </div>
     </TableCell>
   );
@@ -66,7 +67,7 @@ export function KeysSkeleton({ rows = 3, actions = false }: KeysSkeletonProps) {
               ))}
               {actions && (
                 <TableCell className="w-0 pr-2 text-right">
-                  <SkeletonBar className="ml-auto h-8 w-16 rounded-full" />
+                  <SkeletonBar className="ml-auto h-control-sm w-16 rounded-full" />
                 </TableCell>
               )}
             </TableRow>

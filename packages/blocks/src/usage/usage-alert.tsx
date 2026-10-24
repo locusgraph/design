@@ -1,4 +1,3 @@
-import { Warning as CircleAlertIcon } from "@carbon/icons-react";
 import { Alert, AlertDescription, AlertTitle, Button } from "@locusgraph/components";
 import {
   type BalanceLevel,
@@ -7,6 +6,7 @@ import {
   formatMicroUsd,
   quotaStatus,
 } from "@locusgraph/utils";
+import { WarningCircle as CircleAlertIcon } from "@phosphor-icons/react/ssr";
 import { type LinkComponent, periodLabel, type QuotaData } from "../types";
 
 type UsageAlertProps = {
@@ -46,7 +46,7 @@ export function UsageAlert({
   const upgradeFirst = !paidPlan && over.length > 0;
   return (
     <Alert className={toneClasses[empty ? "destructive" : "warn"]}>
-      <CircleAlertIcon />
+      <CircleAlertIcon weight="bold" aria-hidden />
       <AlertTitle>{attentionTitle(level, over.length)}</AlertTitle>
       <AlertDescription className="flex flex-col items-start gap-3">
         <ul className="flex flex-col gap-1">

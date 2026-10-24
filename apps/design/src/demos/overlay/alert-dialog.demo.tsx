@@ -1,4 +1,3 @@
-import { Password as KeyRoundIcon } from "@carbon/icons-react";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -12,6 +11,7 @@ import {
   AlertDialogTrigger,
   Button,
 } from "@locusgraph/components";
+import { Key as KeyRoundIcon } from "@phosphor-icons/react/ssr";
 import { formatProp } from "../../registry/control-values";
 import { defineDemo, select, text, toggle } from "../../registry/define-demo";
 
@@ -39,8 +39,8 @@ function RevokeKey({
           </AlertDialogDescription>
         </AlertDialogHeader>
         <AlertDialogFooter>
-          <AlertDialogCancel>Cancel</AlertDialogCancel>
           <AlertDialogAction variant="destructive">Revoke</AlertDialogAction>
+          <AlertDialogCancel>Cancel</AlertDialogCancel>
         </AlertDialogFooter>
       </AlertDialogContent>
     </AlertDialog>
@@ -61,8 +61,8 @@ function CancelSubscription() {
           </AlertDialogDescription>
         </AlertDialogHeader>
         <AlertDialogFooter>
-          <AlertDialogCancel>Keep plan</AlertDialogCancel>
           <AlertDialogAction variant="destructive">Cancel plan</AlertDialogAction>
+          <AlertDialogCancel>Keep plan</AlertDialogCancel>
         </AlertDialogFooter>
       </AlertDialogContent>
     </AlertDialog>
@@ -78,14 +78,14 @@ function WithMedia() {
       <AlertDialogContent size="sm">
         <AlertDialogHeader>
           <AlertDialogMedia>
-            <KeyRoundIcon />
+            <KeyRoundIcon weight="bold" aria-hidden />
           </AlertDialogMedia>
           <AlertDialogTitle>Rotate API key?</AlertDialogTitle>
           <AlertDialogDescription>The old key stops working in 24 hours.</AlertDialogDescription>
         </AlertDialogHeader>
         <AlertDialogFooter>
-          <AlertDialogCancel>Cancel</AlertDialogCancel>
           <AlertDialogAction>Rotate</AlertDialogAction>
+          <AlertDialogCancel>Cancel</AlertDialogCancel>
         </AlertDialogFooter>
       </AlertDialogContent>
     </AlertDialog>
@@ -99,7 +99,7 @@ export default defineDemo({
   controls: { open: toggle(), size: select(sizes), title: text("Revoke this API key?") },
   playground: ({ open, size, title }) => <RevokeKey title={title} size={size} open={open} />,
   code: ({ size, title }) =>
-    `<AlertDialog>\n  <AlertDialogTrigger asChild>\n    <Button variant="outline">Revoke key</Button>\n  </AlertDialogTrigger>\n  <AlertDialogContent${formatProp("size", size, "default")}>\n    <AlertDialogHeader>\n      <AlertDialogTitle>${title}</AlertDialogTitle>\n      <AlertDialogDescription>\n        Requests signed with this key start failing right away. This cannot be undone.\n      </AlertDialogDescription>\n    </AlertDialogHeader>\n    <AlertDialogFooter>\n      <AlertDialogCancel>Cancel</AlertDialogCancel>\n      <AlertDialogAction variant="destructive">Revoke</AlertDialogAction>\n    </AlertDialogFooter>\n  </AlertDialogContent>\n</AlertDialog>`,
+    `<AlertDialog>\n  <AlertDialogTrigger asChild>\n    <Button variant="outline">Revoke key</Button>\n  </AlertDialogTrigger>\n  <AlertDialogContent${formatProp("size", size, "default")}>\n    <AlertDialogHeader>\n      <AlertDialogTitle>${title}</AlertDialogTitle>\n      <AlertDialogDescription>\n        Requests signed with this key start failing right away. This cannot be undone.\n      </AlertDialogDescription>\n    </AlertDialogHeader>\n    <AlertDialogFooter>\n      <AlertDialogAction variant="destructive">Revoke</AlertDialogAction>\n      <AlertDialogCancel>Cancel</AlertDialogCancel>\n    </AlertDialogFooter>\n  </AlertDialogContent>\n</AlertDialog>`,
   props: [
     { name: "open", type: "boolean" },
     { name: "defaultOpen", type: "boolean", defaultValue: "false" },
@@ -135,7 +135,7 @@ export default defineDemo({
           },
           {
             name: "AlertDialogFooter",
-            children: [{ name: "AlertDialogCancel" }, { name: "AlertDialogAction" }],
+            children: [{ name: "AlertDialogAction" }, { name: "AlertDialogCancel" }],
           },
         ],
       },

@@ -33,7 +33,7 @@ export function RulePair({ rule, view }: { rule: VoiceRule; view: VoiceView }) {
         <span className="text-xs text-muted-foreground">{rule.why}</span>
       </div>
       <div
-        className={`grid grid-cols-1 divide-y ${view === "pairs" ? "sm:grid-cols-2 sm:divide-x sm:divide-y-0" : ""}`}
+        className={`grid grid-cols-1 [&>*+*]:pt-0 ${view === "pairs" ? "sm:grid-cols-2 sm:divide-x sm:[&>*+*]:pt-4" : ""}`}
       >
         {view !== "don't" && (
           <ExampleCell verdict="do" copy={rule.good.copy}>

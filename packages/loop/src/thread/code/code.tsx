@@ -14,8 +14,8 @@ type CodeProps = Omit<ComponentProps<"figure">, "children"> & {
 };
 
 const codeAreaClass = cn(
-  "overflow-x-auto bg-muted/40 px-4 py-3 font-mono text-xs leading-relaxed",
-  "[&_pre]:bg-transparent! [&_pre]:outline-none",
+  "overflow-x-auto px-4 pb-3 font-mono text-xs leading-relaxed",
+  "[&_pre]:bg-transparent! [&_pre]:outline-none has-[pre:focus-visible]:outline-2 has-[pre:focus-visible]:-outline-offset-2 has-[pre:focus-visible]:outline-ring/70",
   "[&_.shiki_span]:text-(--shiki-light) dark:[&_.shiki_span]:text-(--shiki-dark)"
 );
 
@@ -56,17 +56,17 @@ export function Code({
     <figure
       data-slot="code"
       data-language={language}
-      className={cn("min-w-0 bg-card text-card-foreground ring-1 ring-border", className)}
+      className={cn("min-w-0 bg-muted/40 text-foreground", className)}
       {...props}
     >
-      <figcaption className="flex h-8 items-center justify-between gap-2 border-b pr-1 pl-3">
+      <figcaption className="flex h-control items-center justify-between gap-2 pr-1.5 pl-4 text-xs text-faint">
         {filename ? (
-          <span className="min-w-0 truncate font-mono text-xs text-foreground">{filename}</span>
+          <span className="min-w-0 truncate font-medium text-muted-foreground">{filename}</span>
         ) : (
-          <span className="locus-eyebrow">{language}</span>
+          <span>{language}</span>
         )}
         <span className="flex shrink-0 items-center gap-2">
-          {filename && <span className="locus-eyebrow">{language}</span>}
+          {filename && <span>{language}</span>}
           {showCopy && <CopyCodeButton code={code} onCopy={onCopy} />}
         </span>
       </figcaption>

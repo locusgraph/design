@@ -15,10 +15,10 @@ function isSourceUrlPart(item: SourceItem): item is SourceUrlPart {
   return "type" in item && item.type === "source-url";
 }
 
-export function toCitation(item: SourceItem, position: number): Citation {
+export function toCitation(item: SourceItem, position: number, firstIndex = 1): Citation {
   if (!isSourceUrlPart(item)) return item;
   return {
-    index: position + 1,
+    index: firstIndex + position,
     title: item.title ?? hostLabel(item.url) ?? item.url,
     url: item.url,
   };

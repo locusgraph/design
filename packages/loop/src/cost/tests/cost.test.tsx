@@ -1,6 +1,7 @@
 import { renderToStaticMarkup } from "react-dom/server";
 import { describe, expect, it } from "vitest";
 import { Context, Cost, CostSteps, ModelPicker } from "../index";
+import { wholePercentsOf } from "../shared/usage-totals";
 
 describe("Context", () => {
   it("is a meter with its percent", () => {
@@ -8,7 +9,7 @@ describe("Context", () => {
     expect(html).toContain('role="meter"');
     expect(html).toContain('aria-valuenow="25"');
     expect(html).toContain('data-status="ok"');
-    expect(html).toContain("50K / 200K");
+    expect(html).toContain("50k / 200k");
   });
 
   it("turns amber near the limit and red when full", () => {
@@ -54,7 +55,7 @@ describe("Cost", () => {
 
   it("shows tokens, model and cost compactly", () => {
     const html = renderToStaticMarkup(<Cost usage={succeeded} />);
-    expect(html).toContain("1,250 in");
+    expect(html).toContain("1.3k in");
     expect(html).toContain("420 out");
     expect(html).toContain("$0.0101");
     expect(html).toContain("claude-sonnet");
@@ -63,9 +64,11 @@ describe("Cost", () => {
   it("marks failed attempts and their wasted cost in red", () => {
     const html = renderToStaticMarkup(<Cost usage={attempts} variant="detailed" />);
     expect(html).toContain("$0.0137");
-    expect(html).toContain("1 failed attempt · $0.0036");
     expect(html).toContain("text-destructive");
     expect(html).toContain("Failed");
+    expect(html).toContain("line-through");
+    expect(html).toContain('data-slot="cost-wasted"');
+    expect(renderToStaticMarkup(<Cost usage={attempts} />)).toContain("1 failed attempt · $0.0036");
   });
 });
 
@@ -90,9 +93,8 @@ describe("CostSteps", () => {
   it("totals cost, tokens, time and waste", () => {
     const html = renderToStaticMarkup(<CostSteps steps={steps} />);
     expect(html).toContain("$2.50");
-    expect(html).toContain("1,300 in · 300 out");
+    expect(html).toContain("1.3k in · 300 out");
     expect(html).toContain("2.0s");
-    expect(html).toContain("Wasted on failures");
     expect(html).toContain('data-wasted="true"');
     expect(html).toContain("width:100%");
   });
@@ -124,5 +126,17 @@ describe("ModelPicker", () => {
     expect(html).toContain('aria-label="Model: Claude Sonnet"');
     expect(html).toContain("Anthropic");
     expect(html).not.toContain("Claude Haiku");
+  });
+});
+
+describe("wholePercentsOf", () => {
+  it("rounds shares of a whole so they add up to 100", () => {
+    const shares = wholePercentsOf([3_100, 37_048, 52_204, 76_048, 31_600], 200_000);
+    expect(shares).toEqual([2, 18, 26, 38, 16]);
+  });
+
+  it("rounds each share when the parts do not fill the whole", () => {
+    expect(wholePercentsOf([150, 100], 200)).toEqual([75, 50]);
+    expect(wholePercentsOf([10], 0)).toEqual([0]);
   });
 });

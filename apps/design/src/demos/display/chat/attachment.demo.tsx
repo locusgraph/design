@@ -1,12 +1,4 @@
 import {
-  Warning as AlertCircleIcon,
-  DataTable as FileSpreadsheetIcon,
-  Document as FileTextIcon,
-  Image as ImageIcon,
-  Reset as RotateCcwIcon,
-  Close as XIcon,
-} from "@carbon/icons-react";
-import {
   Attachment,
   AttachmentAction,
   AttachmentActions,
@@ -17,6 +9,14 @@ import {
   AttachmentTitle,
   Spinner,
 } from "@locusgraph/components";
+import {
+  WarningCircle as AlertCircleIcon,
+  Table as FileSpreadsheetIcon,
+  FileText as FileTextIcon,
+  Image as ImageIcon,
+  ArrowCounterClockwise as RotateCcwIcon,
+  X as XIcon,
+} from "@phosphor-icons/react/ssr";
 import { formatProp } from "../../../registry/control-values";
 import { defineDemo, select } from "../../../registry/define-demo";
 
@@ -50,13 +50,13 @@ function States() {
         </AttachmentContent>
         <AttachmentActions>
           <AttachmentAction aria-label="Cancel upload of usage-march.csv">
-            <XIcon />
+            <XIcon weight="bold" aria-hidden />
           </AttachmentAction>
         </AttachmentActions>
       </Attachment>
       <Attachment state="error" className="w-full">
         <AttachmentMedia>
-          <AlertCircleIcon />
+          <AlertCircleIcon weight="bold" aria-hidden />
         </AttachmentMedia>
         <AttachmentContent>
           <AttachmentTitle>contract.docx</AttachmentTitle>
@@ -64,16 +64,16 @@ function States() {
         </AttachmentContent>
         <AttachmentActions>
           <AttachmentAction aria-label="Retry contract.docx">
-            <RotateCcwIcon />
+            <RotateCcwIcon weight="bold" aria-hidden />
           </AttachmentAction>
           <AttachmentAction aria-label="Remove contract.docx">
-            <XIcon />
+            <XIcon weight="bold" aria-hidden />
           </AttachmentAction>
         </AttachmentActions>
       </Attachment>
       <Attachment className="w-full">
         <AttachmentMedia>
-          <FileSpreadsheetIcon />
+          <FileSpreadsheetIcon weight="bold" aria-hidden />
         </AttachmentMedia>
         <AttachmentContent>
           <AttachmentTitle>seats-export.xlsx</AttachmentTitle>
@@ -90,7 +90,7 @@ function Group() {
       {files.map((file) => (
         <Attachment key={file.name} orientation="vertical">
           <AttachmentMedia>
-            <file.Icon />
+            <file.Icon weight="bold" aria-hidden />
           </AttachmentMedia>
           <AttachmentContent>
             <AttachmentTitle>{file.name}</AttachmentTitle>
@@ -108,7 +108,7 @@ function Sizes() {
       {sizes.map((size) => (
         <Attachment key={size} size={size}>
           <AttachmentMedia>
-            <FileTextIcon />
+            <FileTextIcon weight="bold" aria-hidden />
           </AttachmentMedia>
           <AttachmentContent>
             <AttachmentTitle>invoice-0042.pdf</AttachmentTitle>
@@ -133,7 +133,11 @@ export default defineDemo({
   playground: ({ state, size, orientation }) => (
     <Attachment state={state} size={size} orientation={orientation}>
       <AttachmentMedia>
-        {state === "uploading" || state === "processing" ? <Spinner /> : <FileTextIcon />}
+        {state === "uploading" || state === "processing" ? (
+          <Spinner />
+        ) : (
+          <FileTextIcon weight="bold" aria-hidden />
+        )}
       </AttachmentMedia>
       <AttachmentContent>
         <AttachmentTitle>invoice-0042.pdf</AttachmentTitle>
@@ -141,13 +145,13 @@ export default defineDemo({
       </AttachmentContent>
       <AttachmentActions>
         <AttachmentAction aria-label="Remove invoice-0042.pdf">
-          <XIcon />
+          <XIcon weight="bold" aria-hidden />
         </AttachmentAction>
       </AttachmentActions>
     </Attachment>
   ),
   code: ({ state, size, orientation }) =>
-    `<Attachment${formatProp("state", state, "done")}${formatProp("size", size, "default")}${formatProp("orientation", orientation, "horizontal")}>\n  <AttachmentMedia>\n    <FileTextIcon />\n  </AttachmentMedia>\n  <AttachmentContent>\n    <AttachmentTitle>invoice-0042.pdf</AttachmentTitle>\n    <AttachmentDescription>${descriptions[state]}</AttachmentDescription>\n  </AttachmentContent>\n  <AttachmentActions>\n    <AttachmentAction aria-label="Remove invoice-0042.pdf">\n      <XIcon />\n    </AttachmentAction>\n  </AttachmentActions>\n</Attachment>`,
+    `<Attachment${formatProp("state", state, "done")}${formatProp("size", size, "default")}${formatProp("orientation", orientation, "horizontal")}>\n  <AttachmentMedia>\n    <FileTextIcon weight="bold" aria-hidden />\n  </AttachmentMedia>\n  <AttachmentContent>\n    <AttachmentTitle>invoice-0042.pdf</AttachmentTitle>\n    <AttachmentDescription>${descriptions[state]}</AttachmentDescription>\n  </AttachmentContent>\n  <AttachmentActions>\n    <AttachmentAction aria-label="Remove invoice-0042.pdf">\n      <XIcon weight="bold" aria-hidden />\n    </AttachmentAction>\n  </AttachmentActions>\n</Attachment>`,
   props: [
     { name: "state", type: states.join(" | "), defaultValue: "done" },
     { name: "size", type: sizes.join(" | "), defaultValue: "default" },

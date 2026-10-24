@@ -79,7 +79,7 @@ describe("docExamples", () => {
     expect(basic?.code).toBe("<Button>Go</Button>");
     expect(withIcon).toMatchObject({
       id: "example-with-icon",
-      title: "With Icon",
+      title: "With icon",
       description: "Icon first.",
     });
     expect(withIcon?.code).toBe("<Button>\n  Icon\n</Button>");

@@ -70,11 +70,7 @@ export function VirtualHistoryList({
               className={cn(virtualRowClassName, virtualRow.index > 0 && "pt-4")}
               style={rowOffsetStyle(virtualRow.start)}
             >
-              <h3
-                id={`thread-group-${row.groupKey}`}
-                className="locus-eyebrow px-2 pb-1"
-                suppressHydrationWarning
-              >
+              <h3 className="px-2 pb-1 font-sans text-xs text-faint" suppressHydrationWarning>
                 {row.label}
               </h3>
             </li>

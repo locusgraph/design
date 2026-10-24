@@ -28,7 +28,7 @@ function AllStates() {
 }
 
 export default defineDemo({
-  title: "Empty And Loading",
+  title: "Empty and Loading",
   description:
     "One data list with its loading, empty, error and ready states. Copy it for any list that fetches.",
   controls: {

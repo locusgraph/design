@@ -1,4 +1,4 @@
-import { Home as HomeIcon, Password as KeyRoundIcon } from "@carbon/icons-react";
+import { House as HomeIcon, Key as KeyRoundIcon } from "@phosphor-icons/react/ssr";
 import type * as React from "react";
 import { renderToStaticMarkup } from "react-dom/server";
 import { describe, expect, it } from "vitest";
@@ -50,6 +50,14 @@ describe("AppShell", () => {
     const html = renderShell("/keys/new");
     expect(html).toMatch(/data-active="true"[^>]*href="\/keys"/);
     expect(html).not.toMatch(/data-active="true"[^>]*href="\/overview"/);
+  });
+
+  it("starts with a skip link to the body and names the sidebar nav", () => {
+    const html = renderShell("/overview");
+    expect(html.indexOf('data-slot="skip-link"')).toBeLessThan(html.indexOf('data-slot="sidebar"'));
+    expect(html).toContain('href="#content"');
+    expect(html).toMatch(/id="content"[^>]*data-slot="app-shell-body"/);
+    expect(html).toContain('<nav aria-label="Main"');
   });
 
   it("renders nav links through the given link component", () => {

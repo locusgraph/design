@@ -31,7 +31,7 @@ describe("Breadcrumb", () => {
         </BreadcrumbList>
       </Breadcrumb>
     );
-    expect(html).toContain('aria-label="breadcrumb"');
+    expect(html).toContain('aria-label="Breadcrumb"');
     expect(html).toMatch(/aria-current="page"[^>]*>Invoices</);
   });
 });

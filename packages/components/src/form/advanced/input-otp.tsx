@@ -1,22 +1,34 @@
 "use client";
 
-import { Subtract as MinusIcon } from "@carbon/icons-react";
-import { cn } from "cn";
+import { Minus as MinusIcon } from "@phosphor-icons/react/ssr";
 import { OTPInput, OTPInputContext } from "input-otp";
 import * as React from "react";
+import { cn } from "../../cn";
 
 function InputOTP({
   className,
   containerClassName,
+  value,
+  defaultValue,
+  onChange,
   ...props
 }: React.ComponentProps<typeof OTPInput> & {
   containerClassName?: string;
 }) {
+  const [uncontrolledValue, setUncontrolledValue] = React.useState(() =>
+    typeof defaultValue === "string" ? defaultValue : ""
+  );
+  const controlled = value !== undefined;
   return (
     <OTPInput
       data-slot="input-otp"
       containerClassName={cn("flex items-center gap-2 has-disabled:opacity-50", containerClassName)}
       className={cn("disabled:cursor-not-allowed", className)}
+      value={controlled ? value : uncontrolledValue}
+      onChange={(next: string) => {
+        if (!controlled) setUncontrolledValue(next);
+        onChange?.(next);
+      }}
       {...props}
     />
   );
@@ -43,7 +55,7 @@ function InputOTPSlot({
       data-slot="input-otp-slot"
       data-active={isActive}
       className={cn(
-        "relative flex h-9 w-9 items-center justify-center border-y border-r border-input font-mono text-base tabular-nums shadow-xs transition-[color,background-color,border-color,box-shadow] duration-150 ease-out outline-none first:rounded-l-md first:border-l last:rounded-r-md aria-invalid:border-destructive data-[active=true]:z-10 data-[active=true]:border-ring data-[active=true]:ring-1 data-[active=true]:ring-ring data-[active=true]:aria-invalid:border-destructive data-[active=true]:aria-invalid:ring-destructive/20 dark:bg-input/30 dark:data-[active=true]:aria-invalid:ring-destructive/40",
+        "relative flex size-control items-center justify-center border-y border-r border-input font-mono text-base tabular-nums shadow-xs transition-[color,background-color,border-color,box-shadow] duration-150 ease-out outline-none first:border-l aria-invalid:border-destructive data-[active=true]:z-10 data-[active=true]:border-ring data-[active=true]:ring-1 data-[active=true]:ring-ring data-[active=true]:aria-invalid:border-destructive data-[active=true]:aria-invalid:ring-destructive/20 dark:bg-input/30 dark:data-[active=true]:aria-invalid:ring-destructive/40",
         className
       )}
       {...props}
@@ -61,7 +73,7 @@ function InputOTPSlot({
 function InputOTPSeparator({ ...props }: React.ComponentProps<"div">) {
   return (
     <div data-slot="input-otp-separator" role="separator" {...props}>
-      <MinusIcon />
+      <MinusIcon weight="bold" aria-hidden />
     </div>
   );
 }

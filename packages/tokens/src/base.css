@@ -60,6 +60,6 @@ body {
 }
 
 [data-rehype-pretty-code-figure] [data-highlighted-line] {
-  background: var(--locus-ghost);
+  background: var(--locus-muted);
   box-shadow: inset 2px 0 var(--locus-border);
 }

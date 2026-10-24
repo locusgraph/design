@@ -1,7 +1,7 @@
 import { renderToStaticMarkup } from "react-dom/server";
 import { describe, expect, it } from "vitest";
 import { PlanReview, Question } from "../index";
-import { applyStepAction } from "../plan/plan-steps";
+import { applyStepAction, focusAfterAction } from "../plan/plan-steps";
 
 const steps = [
   { id: "s1", title: "Read the Acme graph" },
@@ -26,6 +26,13 @@ describe("PlanReview", () => {
     expect(applyStepAction(steps, "s2", "up").map((step) => step.id)).toEqual(["s2", "s1", "s3"]);
     expect(applyStepAction(steps, "s3", "down")).toBe(steps);
     expect(applyStepAction(steps, "s1", "remove").map((step) => step.id)).toEqual(["s2", "s3"]);
+  });
+
+  it("focuses the step that takes a removed step's place, or the new last step", () => {
+    const withoutMiddle = applyStepAction(steps, "s2", "remove");
+    expect(focusAfterAction(withoutMiddle, "s2", "remove", 1)?.stepId).toBe("s3");
+    const withoutLast = applyStepAction(steps, "s3", "remove");
+    expect(focusAfterAction(withoutLast, "s3", "remove", 2)?.stepId).toBe("s2");
   });
 
   it("shows the decision once approved", () => {

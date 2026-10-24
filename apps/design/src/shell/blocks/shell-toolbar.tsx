@@ -1,12 +1,4 @@
 import {
-  Launch as ExternalLinkIcon,
-  Maximize as MaximizeIcon,
-  Screen as MonitorIcon,
-  Restart as RotateCwIcon,
-  Mobile as SmartphoneIcon,
-  Tablet as TabletIcon,
-} from "@carbon/icons-react";
-import {
   Button,
   Separator,
   Tabs,
@@ -18,6 +10,15 @@ import {
   TooltipContent,
   TooltipTrigger,
 } from "@locusgraph/components";
+import type { Icon as IconType } from "@phosphor-icons/react";
+import {
+  ArrowSquareOut as ExternalLinkIcon,
+  ArrowsOut as MaximizeIcon,
+  Monitor as MonitorIcon,
+  ArrowClockwise as RotateCwIcon,
+  DeviceMobile as SmartphoneIcon,
+  DeviceTablet as TabletIcon,
+} from "@phosphor-icons/react/ssr";
 import type * as React from "react";
 
 export type ShellView = "preview" | "layout" | "code";
@@ -35,7 +36,7 @@ type ShellToolbarProps = {
   onFullscreen: () => void;
 };
 
-const viewports: { value: ShellViewport; label: string; icon: React.ComponentType }[] = [
+const viewports: { value: ShellViewport; label: string; icon: IconType }[] = [
   { value: "desktop", label: "Desktop", icon: MonitorIcon },
   { value: "tablet", label: "Tablet", icon: TabletIcon },
   { value: "mobile", label: "Mobile", icon: SmartphoneIcon },
@@ -54,7 +55,7 @@ export function ShellToolbar(props: ShellToolbarProps) {
   return (
     <div className="flex flex-wrap items-center gap-2">
       <Tabs value={props.view} onValueChange={(value) => props.onViewChange(value as ShellView)}>
-        <TabsList className="h-8">
+        <TabsList className="h-control-sm">
           <TabsTrigger value="preview" className="text-xs">
             Preview
           </TabsTrigger>
@@ -67,23 +68,30 @@ export function ShellToolbar(props: ShellToolbarProps) {
         </TabsList>
       </Tabs>
       <Separator orientation="vertical" className="mx-1 h-4" />
-      <p className="text-sm font-medium">{props.title}</p>
-      <p className="hidden text-sm text-muted-foreground xl:block">{props.description}</p>
-      <div className="ml-auto flex h-8 items-center gap-1 rounded-md border p-0.5">
+      <p className="shrink-0 text-sm font-medium">{props.title}</p>
+      <p
+        title={props.description}
+        className="hidden min-w-0 flex-1 basis-0 truncate text-sm text-muted-foreground xl:block"
+      >
+        {props.description}
+      </p>
+      <div className="ml-auto flex h-control-sm items-center gap-1 border p-0.5">
         <ToggleGroup
           type="single"
           size="sm"
+          spacing={1}
           value={props.viewport}
           onValueChange={(value) => value && props.onViewportChange(value as ShellViewport)}
+          aria-label="Preview size"
         >
           {viewports.map((viewport) => (
             <ToggleGroupItem
               key={viewport.value}
               value={viewport.value}
               aria-label={viewport.label}
-              className="size-6"
+              className="size-control-xs px-0"
             >
-              <viewport.icon />
+              <viewport.icon weight="bold" aria-hidden />
             </ToggleGroupItem>
           ))}
         </ToggleGroup>
@@ -96,13 +104,13 @@ export function ShellToolbar(props: ShellToolbarProps) {
             disabled={props.view === "code"}
             onClick={props.onFullscreen}
           >
-            <MaximizeIcon />
+            <MaximizeIcon weight="bold" aria-hidden />
           </Button>
         </IconAction>
         <IconAction label="Open in new tab">
           <Button asChild variant="ghost" size="icon-xs">
             <a href={props.frameUrl} target="_blank" rel="noreferrer" aria-label="Open in new tab">
-              <ExternalLinkIcon />
+              <ExternalLinkIcon weight="bold" aria-hidden />
             </a>
           </Button>
         </IconAction>
@@ -113,7 +121,7 @@ export function ShellToolbar(props: ShellToolbarProps) {
             aria-label="Reload preview"
             onClick={props.onReload}
           >
-            <RotateCwIcon />
+            <RotateCwIcon weight="bold" aria-hidden />
           </Button>
         </IconAction>
       </div>

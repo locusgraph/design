@@ -38,11 +38,11 @@ export function PlansSkeleton({ plans = 2, points = 2, currentIndex = 0 }: Plans
             ))}
           </div>
           {plan === currentIndex ? (
-            <div className="mt-auto flex min-h-8 items-center">
+            <div className="mt-auto flex min-h-control-sm items-center">
               <SkeletonBar className="h-4 w-16" />
             </div>
           ) : (
-            <SkeletonBar className="mt-auto h-8 w-28 rounded-full" />
+            <SkeletonBar className="mt-auto h-control-sm w-28 rounded-full" />
           )}
         </RuleGridCell>
       ))}

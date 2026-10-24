@@ -1,5 +1,3 @@
-import { Code } from "../../thread/code/code";
-
 export function prettyJson(value: unknown) {
   if (typeof value === "string") return value;
   try {
@@ -11,12 +9,11 @@ export function prettyJson(value: unknown) {
 
 export function JsonBlock({ label, value }: { label: string; value: unknown }) {
   return (
-    <Code
-      data-slot="tool-json"
-      code={prettyJson(value)}
-      language="json"
-      filename={label}
-      className="[&_[data-slot=code-area]]:max-h-72 [&_[data-slot=code-area]]:overflow-auto"
-    />
+    <div data-slot="tool-json" className="flex min-w-0 flex-col gap-1">
+      <span className="text-xs text-faint">{label}</span>
+      <pre className="max-h-72 overflow-auto font-mono text-xs leading-relaxed text-muted-foreground">
+        {prettyJson(value)}
+      </pre>
+    </div>
   );
 }

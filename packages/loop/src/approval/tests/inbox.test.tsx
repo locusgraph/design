@@ -27,19 +27,28 @@ const items = [
 describe("Inbox", () => {
   it("lists pending approvals with waiting time", () => {
     const html = renderToStaticMarkup(
-      <Inbox items={items} now={now} onApprove={noop} onDeny={noop} onApproveAll={noop} />
+      <Inbox items={items} now={now} onOpen={noop} onApproveAll={noop} />
     );
     expect(html).toContain("Send invoice INV-2041");
     expect(html).toContain("7 min");
     expect(html).toContain("3 h");
     expect(html).toContain("Approve selected");
+    expect(html).toContain('data-slot="inbox-open"');
+    expect(html).not.toContain("Approve Send invoice");
+    expect(html).toContain("Destructive requests are approved one at a time.");
+  });
+
+  it("drops the bulk controls when every request is destructive", () => {
+    const html = renderToStaticMarkup(
+      <Inbox items={[items[1]]} now={now} onOpen={noop} onApproveAll={noop} />
+    );
+    expect(html).not.toContain("Approve selected");
+    expect(html).not.toContain("Select all");
     expect(html).toContain("Destructive requests are approved one at a time.");
   });
 
   it("shows an empty state", () => {
-    const html = renderToStaticMarkup(
-      <Inbox items={[]} onApprove={noop} onDeny={noop} onApproveAll={noop} />
-    );
+    const html = renderToStaticMarkup(<Inbox items={[]} onOpen={noop} onApproveAll={noop} />);
     expect(html).toContain('data-slot="inbox-empty"');
     expect(html).toContain("Nothing waiting for you");
     expect(html).not.toContain("Approve selected");
@@ -57,7 +66,7 @@ describe("Inbox", () => {
       title: `Send invoice ${index}`,
     }));
     const html = renderToStaticMarkup(
-      <Inbox items={many} now={now} onApprove={noop} onDeny={noop} onApproveAll={noop} />
+      <Inbox items={many} now={now} onOpen={noop} onApproveAll={noop} />
     );
     const rendered = html.match(/data-slot="inbox-item"/g) ?? [];
     expect(html).toContain('data-slot="inbox-scroll"');
@@ -66,14 +75,7 @@ describe("Inbox", () => {
     expect(rendered.length).toBeLessThan(40);
     expect(html).toContain('aria-setsize="200"');
     const plain = renderToStaticMarkup(
-      <Inbox
-        items={many}
-        now={now}
-        virtualize={false}
-        onApprove={noop}
-        onDeny={noop}
-        onApproveAll={noop}
-      />
+      <Inbox items={many} now={now} virtualize={false} onOpen={noop} onApproveAll={noop} />
     );
     expect(plain.match(/data-slot="inbox-item"/g)).toHaveLength(200);
   });
