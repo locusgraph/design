@@ -92,7 +92,10 @@ export function QuestionChoices({
             <span className="flex min-w-0 flex-1 flex-col">
               <span className="font-medium text-foreground">{option.label}</span>
               {option.description && (
-                <span className="text-xs text-faint">{option.description}</span>
+                <span className="text-xs text-faint">
+                  <span className="sr-only">, </span>
+                  {option.description}
+                </span>
               )}
             </span>
           </button>
