@@ -24,7 +24,7 @@ export function HeaderActions({ settings, onSearch }: HeaderActionsProps) {
         className="w-8 justify-start bg-surface font-normal text-muted-foreground shadow-none hover:bg-surface/80 sm:w-64"
       >
         <SearchIcon weight="bold" aria-hidden />
-        <span className="hidden sm:inline">Search components…</span>
+        <span className="hidden sm:inline">Search the docs…</span>
         <kbd className="ml-auto hidden border bg-background px-1.5 font-mono text-2xs sm:inline">
           ⌘K
         </kbd>
