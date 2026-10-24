@@ -1,3 +1,6 @@
+"use client";
+
+import { type RefObject, useEffect, useRef } from "react";
 import { cn } from "../../cn";
 import type { LinkComponent } from "../link";
 
@@ -41,11 +44,28 @@ function DocsNavList({ groups, activeHref, linkComponent: Link = "a" }: DocsNavL
   );
 }
 
+const fadeAllowance = 48;
+
+function useActiveLinkInView(nav: RefObject<HTMLElement | null>, activeHref: string) {
+  useEffect(() => {
+    const container = nav.current;
+    const link = container?.querySelector<HTMLElement>(`[aria-current="page"]`);
+    if (!container || !link || !activeHref) return;
+    const top = link.offsetTop - container.scrollTop;
+    const hidden =
+      top < fadeAllowance || top + link.offsetHeight > container.clientHeight - fadeAllowance;
+    if (hidden) container.scrollTop = link.offsetTop - container.clientHeight / 2;
+  }, [nav, activeHref]);
+}
+
 function DocsSidebar(props: DocsNavListProps) {
+  const navRef = useRef<HTMLElement>(null);
+  useActiveLinkInView(navRef, props.activeHref);
   return (
     <div className="relative h-full">
       <div className="absolute top-12 right-2 bottom-0 w-px bg-[linear-gradient(to_bottom,transparent_0%,var(--border)_10%,var(--border)_90%,transparent_100%)]" />
       <nav
+        ref={navRef}
         aria-label="Documentation"
         className="no-scrollbar h-full w-56 overflow-y-auto pt-10 pb-12 pl-2.5 [mask-image:linear-gradient(to_bottom,transparent,black_2rem,black_calc(100%-3rem),transparent)]"
       >
