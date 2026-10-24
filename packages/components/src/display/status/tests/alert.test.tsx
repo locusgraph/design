@@ -19,7 +19,7 @@ describe("Alert", () => {
   });
 
   it("lets the caller override the role", () => {
-    const html = renderToStaticMarkup(<Alert role="note">Read only</Alert>);
+    const html = renderToStaticMarkup(<Alert role="note">Read-only</Alert>);
     expect(html).toContain('role="note"');
   });
 });

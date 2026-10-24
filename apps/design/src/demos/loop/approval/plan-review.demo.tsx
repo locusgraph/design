@@ -2,7 +2,7 @@ import { PlanReview } from "@locusgraph/loop";
 import { defineDemo, toggle } from "../../../registry/define-demo";
 
 const steps = [
-  { id: "s1", title: "Read the acme-customers graph", detail: "18,204 nodes, read only" },
+  { id: "s1", title: "Read the acme-customers graph", detail: "18,204 nodes, read-only" },
   { id: "s2", title: "Find duplicate customers by email and domain" },
   { id: "s3", title: "Merge 142 duplicate pairs", detail: "Writes to acme-customers" },
   { id: "s4", title: "Email the merge report to ops@acme.dev" },
