@@ -49,6 +49,7 @@ describe("demoIndex", () => {
     expect(findDemoIndexEntryByName("overlay/context-menu")?.path).toBe(
       "overlay/context-menu/context-menu"
     );
+    expect(findDemoIndexEntryByName("blocks/billing/top-up")?.path).toBe("blocks/billing");
     expect(findDemoIndexEntryByName("no/such-page")).toBeUndefined();
   });
 });
