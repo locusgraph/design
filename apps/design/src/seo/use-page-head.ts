@@ -27,4 +27,5 @@ export function usePageHead(path: string, loaded: DemoEntry | undefined) {
     setHeadAttribute('meta[name="twitter:title"]', "content", title);
     setHeadAttribute('meta[name="twitter:description"]', "content", description);
   }, [title, description, canonical]);
+  return title;
 }

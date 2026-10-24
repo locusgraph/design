@@ -27,6 +27,7 @@ import { SearchDialog, useSearchShortcut } from "./shell/nav/search-dialog";
 import { NotFoundPage } from "./shell/not-found-page";
 import { DemoPage } from "./shell/page/demo-page";
 import { usePageDocs } from "./shell/page/page-docs";
+import { RouteAnnouncer } from "./shell/route-announcer";
 import { useDocumentTheme } from "./shell/theme";
 import { readShellSettings, useLocation } from "./url-state";
 
@@ -70,7 +71,7 @@ export function App() {
   const loadedEntry = useDemoEntry(path);
   const entry = useShownEntry(loadedEntry, isDemoPage);
   const docs = usePageDocs(entry);
-  usePageHead(path, loadedEntry);
+  const pageTitle = usePageHead(path, loadedEntry);
   const activeHref = `/${path}`;
   const isShellsPage = path === "shells";
   const isLandingPage = path === "";
@@ -154,6 +155,7 @@ export function App() {
           <HomePage library={library} />
         )}
       </DocsShell>
+      <RouteAnnouncer path={path} title={pageTitle} />
       <SearchDialog open={searchOpen} onOpenChange={setSearchOpen} />
       <Toaster theme={settings.theme} />
     </>
