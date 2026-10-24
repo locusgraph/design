@@ -17,7 +17,13 @@ export function CopyButton({ value, label }: { value: string; label: string }) {
     }
   };
   return (
-    <Button variant="ghost" size="icon-sm" aria-label={`Copy ${label}`} onClick={copy}>
+    <Button
+      variant="ghost"
+      size="icon-sm"
+      aria-label={`Copy ${label}`}
+      onClick={copy}
+      className="text-faint hover:bg-transparent hover:text-interactive"
+    >
       {copied ? (
         <Check weight="bold" aria-hidden className="text-good" />
       ) : (
