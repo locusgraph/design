@@ -15,6 +15,7 @@ type UsageAlertProps = {
   paidPlan: boolean;
   buyCreditsHref: string;
   upgradeHref: string;
+  lowAtMicroUsd?: number;
   linkComponent?: LinkComponent | "a";
 };
 
@@ -37,9 +38,10 @@ export function UsageAlert({
   paidPlan,
   buyCreditsHref,
   upgradeHref,
+  lowAtMicroUsd,
   linkComponent: Link = "a",
 }: UsageAlertProps) {
-  const level = balanceMicroUsd === null ? "fine" : balanceLevel(balanceMicroUsd);
+  const level = balanceMicroUsd === null ? "fine" : balanceLevel(balanceMicroUsd, lowAtMicroUsd);
   const over = quotas.filter((quota) => quotaStatus(quota) === "over");
   if (level === "fine" && over.length === 0) return null;
   const empty = level === "empty";
@@ -54,8 +56,8 @@ export function UsageAlert({
             <li key={quota.key}>
               <span className={quota.label ? undefined : "font-mono"}>
                 {quota.label ?? quota.key}
-              </span>{" "}
-              is at {formatCount(quota.used)} of {formatCount(quota.included)}{" "}
+              </span>
+              : {formatCount(quota.used)} of {formatCount(quota.included)}{" "}
               {periodLabel(quota.period)}.
             </li>
           ))}

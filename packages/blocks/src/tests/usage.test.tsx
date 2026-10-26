@@ -35,12 +35,28 @@ describe("UsageAlert", () => {
       <UsageAlert balanceMicroUsd={1_000_000} quotas={[events]} paidPlan={false} {...links} />
     );
     expect(free).toContain("Usage is over your plan");
+    expect(free).toContain("spendgraph.events</span>: 10,450 of 10,000 this month.");
     expect(free).toContain("$1.00 of credits left.");
     expect(free).toContain("Upgrade to Pro");
     const paid = renderToStaticMarkup(
       <UsageAlert balanceMicroUsd={1_000_000} quotas={[events]} paidPlan {...links} />
     );
     expect(paid).not.toContain("Upgrade to Pro");
+  });
+
+  it("calls a balance low only below the threshold it is given", () => {
+    const starterGrant = (lowAtMicroUsd?: number) =>
+      renderToStaticMarkup(
+        <UsageAlert
+          balanceMicroUsd={1_000_000}
+          quotas={[graphs]}
+          paidPlan={false}
+          lowAtMicroUsd={lowAtMicroUsd}
+          {...links}
+        />
+      );
+    expect(starterGrant()).toContain("Credits are running low");
+    expect(starterGrant(250_000)).toBe("");
   });
 
   it("says out of credits when the wallet is empty", () => {
