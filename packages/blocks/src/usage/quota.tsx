@@ -1,3 +1,5 @@
+"use client";
+
 import { Progress } from "@locusgraph/components";
 import { formatCount, quotaPercent, quotaStatus } from "@locusgraph/utils";
 import { periodLabel, type QuotaData } from "../types";
