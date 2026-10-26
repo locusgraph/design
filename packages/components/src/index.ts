@@ -72,6 +72,7 @@ export * from "./navigation/breadcrumb";
 export * from "./navigation/menubar/menubar";
 export * from "./navigation/menubar/menubar-items";
 export * from "./navigation/menubar/menubar-sub";
+export * from "./navigation/nav-tabs";
 export * from "./navigation/navigation-menu";
 export * from "./navigation/pagination";
 export * from "./overlay/alert-dialog";
