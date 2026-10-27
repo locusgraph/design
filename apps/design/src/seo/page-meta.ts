@@ -25,7 +25,7 @@ const libraryDescriptions: Record<string, string> = {
     "The LocusGraph and SpendGraph marks, wordmarks, app icon, social card and sign-in marks, as React components and SVG files.",
 };
 
-const guidePages: Record<string, { title: string; description: string }> = {
+export const guidePageMeta: Record<string, { title: string; description: string }> = {
   installation: {
     title: "Installation",
     description:
@@ -88,7 +88,7 @@ export function staticPageMeta(path: string): PageMeta | undefined {
   if (library) {
     return meta(path, titled(library.title), libraryDescriptions[library.id] ?? defaultDescription);
   }
-  const guide = guidePages[path];
+  const guide = guidePageMeta[path];
   return guide ? meta(path, titled(guide.title), guide.description) : undefined;
 }
 
@@ -105,7 +105,7 @@ export function demoPageMeta(entry: Pick<DemoEntry, "path" | "title">, descripti
 export const staticPagePaths = [
   "",
   ...libraries.map((item) => item.href.slice(1)),
-  ...Object.keys(guidePages),
+  ...Object.keys(guidePageMeta),
 ];
 
 export function sitePages(entries: DemoEntry[]): PageMeta[] {

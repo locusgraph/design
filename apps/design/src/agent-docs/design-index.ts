@@ -1,5 +1,6 @@
 import type { DemoEntry } from "../registry/load-demos";
 import { libraries, libraryOfGroup } from "../shell/nav/libraries";
+import type { GuideDoc } from "./guide-markdown";
 
 export const siteOrigin = "https://design.locusgraph.com";
 
@@ -65,7 +66,19 @@ function librarySection(id: string, entries: DemoEntry[]) {
   return [`## ${library.title} (\`${library.packageName}\`)`, ...lines].join("\n");
 }
 
-export function designIndex(entries: DemoEntry[]) {
+function guidesSection(guides: GuideDoc[]) {
+  if (guides.length === 0) return "";
+  const lines = guides.map(
+    (guide) =>
+      `- [${guide.title}](${siteOrigin}/${guide.path}.md): ${firstSentence(guide.description)}`
+  );
+  return ["## Guides", ...lines].join("\n");
+}
+
+export function designIndex(entries: DemoEntry[], guides: GuideDoc[] = []) {
   const sections = libraries.map((library) => librarySection(library.id, entries));
-  return [intro, ...sections.filter(Boolean)].join("\n\n").concat("\n");
+  return [intro, guidesSection(guides), ...sections.filter(Boolean)]
+    .filter(Boolean)
+    .join("\n\n")
+    .concat("\n");
 }
