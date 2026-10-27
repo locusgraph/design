@@ -24,9 +24,11 @@ Everything the theme defines is prefixed with `locus`: variables are `--locus-*`
 
 - Palette: `--locus-background` for the page, `--locus-surface` for cards and panels, `--locus-foreground`, `--locus-muted-foreground` and `--locus-faint` for text tones, `--locus-muted` for fills, and a dark set under `.dark`. Every text tone passes WCAG AA on background, surface and muted in both themes.
 - Role colors: `interactive` (clickable, on hover), `memory` (remembered), `good`, `warn` (waiting) and `destructive`. Color means state; chart series `--locus-s1` to `--locus-s8` carry no meaning.
+- Fill colors: `--locus-good-fill` and `--locus-warn-fill` (`bg-good-fill`, `bg-warn-fill`) for bars and meters. They are brighter than the role colors in light and equal to them in dark; never use them for text.
 - Hairlines: `--locus-border` is the text color mixed into the surface, 9% light and 10% dark.
 - Square containers: every radius token is 0. Buttons, chips, badges, dots and avatars use `rounded-full`.
-- Fonts: IBM Plex Sans for text, Archivo for headings and the brand, IBM Plex Mono for mono labels.
+- Fonts: IBM Plex Sans for text, inputs and menus, Archivo for headings, `locus-eyebrow` labels, buttons and the brand, IBM Plex Mono for code and ids.
+- Base: interactive elements (buttons, tabs, options, switches, `summary`, `label[for]`) get `cursor: pointer` unless disabled.
 - Type scale: Tailwind's steps plus `text-2xs` (0.6875rem) for badges and counters and `text-code` (0.8125rem) for code.
 - Control heights: `h-control-xs` (1.5rem), `h-control-sm` (2rem), `h-control` (2.25rem) and `h-control-lg` (2.5rem), also as `size-control-*`.
 - Focus: `locus-focus-ring` draws a 2px ring outside the element; `locus-focus-ring-inset` draws it inside for rows, tabs and scroll areas.

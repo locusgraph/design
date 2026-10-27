@@ -1,13 +1,13 @@
 :root {
   --locus-surface: #ffffff;
-  --locus-background: #fafafa;
+  --locus-background: #f4f4f5;
   --locus-foreground: #09090b;
   --locus-border: color-mix(in oklch, var(--locus-foreground) 9%, var(--locus-surface));
   --locus-muted-foreground: #52525b;
-  --locus-faint: #6b6b73;
+  --locus-faint: #636369;
   --locus-btn: #18181b;
   --locus-btn-ink: #fafafa;
-  --locus-muted: #f4f4f5;
+  --locus-muted: #ebebed;
   --locus-s1: #2a78d6;
   --locus-s2: #eb6834;
   --locus-s3: #1baf7a;
@@ -18,9 +18,11 @@
   --locus-s8: #e34948;
   --locus-interactive: #1b66c4;
   --locus-memory: #4a3aa7;
-  --locus-good: #006300;
-  --locus-warn: #a15c00;
-  --locus-destructive: #c53030;
+  --locus-good: #137a39;
+  --locus-warn: #a84b07;
+  --locus-destructive: #c81e1e;
+  --locus-good-fill: #16a34a;
+  --locus-warn-fill: var(--locus-s4);
   --locus-destructive-foreground: #ffffff;
   --locus-popover: var(--locus-surface);
   --locus-input: color-mix(in oklch, var(--locus-foreground) 26%, var(--locus-surface));
@@ -70,6 +72,8 @@
   --locus-good: #0ca30c;
   --locus-warn: #e0a400;
   --locus-destructive: #e66767;
+  --locus-good-fill: var(--locus-good);
+  --locus-warn-fill: var(--locus-warn);
   --locus-destructive-foreground: #0a0a0a;
   --locus-input: color-mix(in oklch, var(--locus-foreground) 24%, var(--locus-surface));
   --locus-skeleton: color-mix(in oklch, var(--locus-foreground) 11%, var(--locus-surface));

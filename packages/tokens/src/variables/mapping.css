@@ -9,6 +9,8 @@
   --color-memory: var(--locus-memory);
   --color-good: var(--locus-good);
   --color-warn: var(--locus-warn);
+  --color-good-fill: var(--locus-good-fill);
+  --color-warn-fill: var(--locus-warn-fill);
   --color-border: var(--locus-border);
   --color-input: var(--locus-input);
   --color-skeleton: var(--locus-skeleton);

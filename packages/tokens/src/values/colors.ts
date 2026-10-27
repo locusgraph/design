@@ -18,18 +18,18 @@ export type Palette = Record<ColorName, string>;
 
 export const lightColors: Palette = {
   surface: "#ffffff",
-  background: "#fafafa",
+  background: "#f4f4f5",
   foreground: "#09090b",
   mutedForeground: "#52525b",
-  faint: "#6b6b73",
+  faint: "#636369",
   btn: "#18181b",
   btnInk: "#fafafa",
-  muted: "#f4f4f5",
+  muted: "#ebebed",
   interactive: "#1b66c4",
   memory: "#4a3aa7",
-  good: "#006300",
-  warn: "#a15c00",
-  destructive: "#c53030",
+  good: "#137a39",
+  warn: "#a84b07",
+  destructive: "#c81e1e",
   brandGlow: "#0099ff",
 };
 

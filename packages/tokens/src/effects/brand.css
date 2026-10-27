@@ -1,11 +1,18 @@
 :root {
   --locus-brand-glow: #0099ff;
+  --locus-brand-glow-mix: 30%;
+  --locus-brand-glow-quiet-mix: 18%;
   --locus-brand-loop: 7s;
   --locus-brand-grid-image:
     radial-gradient(circle, color-mix(in oklch, var(--locus-foreground) 7%, transparent) 1.5px, transparent 1.5px),
     repeating-linear-gradient(0deg, transparent 0 23px, color-mix(in oklch, var(--locus-foreground) 3%, transparent) 23px 24px),
     repeating-linear-gradient(90deg, transparent 0 23px, color-mix(in oklch, var(--locus-foreground) 3%, transparent) 23px 24px);
   --locus-brand-grid-size: 24px 24px, 24px 24px, 24px 24px;
+}
+
+.dark {
+  --locus-brand-glow-mix: 16%;
+  --locus-brand-glow-quiet-mix: 9%;
 }
 
 .locus-brand-grid {
@@ -37,7 +44,7 @@
   aspect-ratio: 1;
   transform: translate(-50%, -50%) scale(0.98);
   transform-origin: center;
-  background: radial-gradient(circle, color-mix(in oklch, var(--locus-brand-glow) 16%, transparent), transparent 62%);
+  background: radial-gradient(circle, color-mix(in oklch, var(--locus-brand-glow) var(--locus-brand-glow-mix), transparent), transparent 62%);
   filter: blur(14px);
   opacity: 0.55;
   animation: locus-brand-grid-halo var(--locus-brand-loop) ease-in-out infinite;
@@ -97,7 +104,7 @@
   width: min(40rem, 70%);
   aspect-ratio: 1;
   transform: translate(-50%, -50%);
-  background: radial-gradient(circle, color-mix(in oklch, var(--locus-brand-glow) 9%, transparent), transparent 66%);
+  background: radial-gradient(circle, color-mix(in oklch, var(--locus-brand-glow) var(--locus-brand-glow-quiet-mix), transparent), transparent 66%);
   opacity: 0.4;
 }
 
