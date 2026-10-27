@@ -44,7 +44,7 @@ export function Chat({
         aria-busy={(isVirtual && scrolling) || undefined}
         tabIndex={0}
         onScroll={handleScroll}
-        className="min-h-0 flex-1 overflow-y-auto overscroll-contain locus-focus-ring-inset"
+        className="min-h-0 flex-1 [mask-image:linear-gradient(to_bottom,transparent,black_1rem,black_calc(100%-1.5rem),transparent)] overflow-y-auto overscroll-contain locus-focus-ring-inset"
       >
         <div
           ref={contentRef}

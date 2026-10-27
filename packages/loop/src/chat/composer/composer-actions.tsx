@@ -39,6 +39,7 @@ export function ComposerSubmit({ status, canSend, onStop }: ComposerSubmitProps)
       data-slot="composer-send"
       aria-label="Send"
       disabled={!canSend}
+      className="disabled:bg-muted disabled:text-faint disabled:ring-0"
     >
       <ArrowUpIcon weight="bold" aria-hidden="true" />
     </Button>
