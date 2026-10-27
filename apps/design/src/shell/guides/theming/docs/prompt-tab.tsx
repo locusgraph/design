@@ -2,7 +2,10 @@ import { Button } from "@locusgraph/components";
 import { Copy as CopyIcon } from "@phosphor-icons/react/ssr";
 import { useState } from "react";
 
-export function PromptTab({ prompt }: { prompt: string }) {
+const themeNote =
+  "Paste this into your coding agent. It sets the three variables and nothing else.";
+
+export function PromptTab({ prompt, note = themeNote }: { prompt: string; note?: string }) {
   const [copied, setCopied] = useState(false);
   const copy = () => {
     void navigator.clipboard.writeText(prompt).then(() => setCopied(true));
@@ -10,9 +13,7 @@ export function PromptTab({ prompt }: { prompt: string }) {
   };
   return (
     <>
-      <p className="text-sm text-pretty text-muted-foreground">
-        Paste this into your coding agent. It sets the three variables and nothing else.
-      </p>
+      <p className="text-sm text-pretty text-muted-foreground">{note}</p>
       <pre className="border bg-background p-3 font-mono text-xs leading-relaxed whitespace-pre-wrap">
         {prompt}
       </pre>

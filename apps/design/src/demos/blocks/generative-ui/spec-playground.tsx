@@ -8,7 +8,7 @@ import { sampleState } from "./presets";
 
 type Store = ReturnType<typeof createStateStore>;
 
-function storeSetState(store: Store): SetState {
+export function storeSetState(store: Store): SetState {
   return (updater) => {
     const next = updater(store.getSnapshot());
     store.update(
@@ -17,7 +17,7 @@ function storeSetState(store: Store): SetState {
   };
 }
 
-function parseSpec(source: string): { spec?: Spec; error?: string } {
+export function parseSpec(source: string): { spec?: Spec; error?: string } {
   try {
     const spec = JSON.parse(source) as Spec;
     if (typeof spec.root !== "string" || typeof spec.elements !== "object") {

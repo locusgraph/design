@@ -31,6 +31,11 @@ export const guidePageMeta: Record<string, { title: string; description: string 
     description:
       "Install Locus Design from npm or copy the source with shadcn, add Tailwind, import the theme and render your first component.",
   },
+  "generative-ui": {
+    title: "Generative UI",
+    description:
+      "A model writes a JSON spec and Locus Design draws it with json-render. Watch it stream, edit the spec, and approve every action it wires up.",
+  },
   theming: {
     title: "Theming",
     description:

@@ -16,6 +16,7 @@ import {
 import { staticPageMeta } from "./seo/page-meta";
 import { usePageHead } from "./seo/use-page-head";
 import { ShellsPage } from "./shell/blocks/shells-page";
+import { GenerativeUiPage } from "./shell/guides/generative-ui/generative-ui-page";
 import { guidePages } from "./shell/guides/guide-pages";
 import { ThemingPage } from "./shell/guides/theming/theming-page";
 import { HomePage, homeSections } from "./shell/home-page";
@@ -42,6 +43,7 @@ const headerLinks = [
   ...libraries.map(({ title, href }) => ({ title, href })),
   { title: "Shells", href: "/shells" },
   { title: "Theming", href: "/theming" },
+  { title: "Generative UI", href: "/generative-ui" },
 ];
 
 function useShownEntry(loaded: DemoEntry | undefined, isDemoPage: boolean) {
@@ -76,7 +78,8 @@ export function App() {
   const isShellsPage = path === "shells";
   const isLandingPage = path === "";
   const isThemingPage = path === "theming";
-  const isFullWidth = isShellsPage || isLandingPage || isThemingPage;
+  const isGenerativePage = path === "generative-ui";
+  const isFullWidth = isShellsPage || isLandingPage || isThemingPage || isGenerativePage;
   const guidePage = guidePages[path];
   const isKnownPage = isDemoPage || staticPageMeta(path) !== undefined;
   const library = libraryOfPath(path);
@@ -98,11 +101,13 @@ export function App() {
                 ? "/shells"
                 : isThemingPage
                   ? "/theming"
-                  : isLandingPage
-                    ? "/"
-                    : isKnownPage && !guidePage
-                      ? library.href
-                      : ""
+                  : isGenerativePage
+                    ? "/generative-ui"
+                    : isLandingPage
+                      ? "/"
+                      : isKnownPage && !guidePage
+                        ? library.href
+                        : ""
             }
             linkComponent={PlaygroundLink}
             mobileNav={
@@ -141,6 +146,8 @@ export function App() {
           <guidePage.Page />
         ) : isThemingPage ? (
           <ThemingPage mode={settings.theme} />
+        ) : isGenerativePage ? (
+          <GenerativeUiPage />
         ) : entry && docs ? (
           <DemoPage entry={entry} docs={docs} params={params} settings={settings} />
         ) : isDemoPage ? (

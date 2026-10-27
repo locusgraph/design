@@ -25,7 +25,7 @@ export function playgroundNavGroups(library: Library): DocsNavGroup[] {
         { title: "Installation", href: "/installation" },
         { title: "Principles", href: "/principles" },
         { title: "Human in the loop", href: "/human-in-the-loop" },
-        { title: "Generative UI", href: "/blocks/generative-ui" },
+        { title: "Generative UI", href: "/generative-ui" },
         { title: "For agents", href: "/for-agents" },
         { title: "Changelog", href: "/changelog" },
       ],
