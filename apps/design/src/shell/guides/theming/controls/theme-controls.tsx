@@ -47,10 +47,10 @@ function isDefault(settings: ThemeSettings) {
 
 export function ThemeControls({ mode, settings, theme, onChange, onShuffle }: ThemeControlsProps) {
   return (
-    <div className="flex flex-col bg-surface ring-1 ring-border">
+    <div className="flex flex-col bg-surface">
       <div className="flex flex-col gap-1 border-b bg-muted/35 px-4 py-3">
-        <h1 className="text-sm font-semibold">Theming</h1>
-        <p className="text-xs text-muted-foreground">
+        <h1 className="text-lg font-semibold">Theming</h1>
+        <p className="text-sm text-muted-foreground">
           One brand color. Everything else stays grey.
         </p>
       </div>
