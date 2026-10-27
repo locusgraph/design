@@ -26,6 +26,11 @@ export const changelogEntries: ChangelogEntry[] = [
       "IBM Plex Sans and Plex Mono replace Inter and Fira Code; Archivo for labels and buttons.",
       "Deeper light palette, good and warn fill tokens for bars, pointer cursor on controls.",
       "Toaster as a quiet card with a status icon, a detail line and one action.",
+      "Segmented tabs are pills; vertical tabs drop the track and mark the active tab with a muted pill.",
+      "Chat fades at its scroll edges, the composer is shorter and a disabled send stays a solid pill.",
+      "Approval inputs and changes stack label over value in narrow containers.",
+      "Docs sidebar and On this page titles in semibold foreground, so groups stand out from links.",
+      "Guides for principles, human in the loop and agents, each also served as Markdown.",
     ],
   },
   {
