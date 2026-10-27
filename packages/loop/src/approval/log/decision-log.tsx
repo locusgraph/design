@@ -1,5 +1,10 @@
 import { cn } from "@locusgraph/components";
-import { DecisionSummary } from "../../shared/decision-summary";
+import {
+  type DecisionOutcome,
+  DecisionSummary,
+  type DecisionTimeStyle,
+  isoOf,
+} from "../../shared/decision-summary";
 import type { DecisionLogEntry, DecisionLogKind } from "../types";
 
 export type DecisionLogProps = {
@@ -15,12 +20,34 @@ const kindVerbs: Record<DecisionLogKind, { approved: string; denied: string }> =
   rule: { approved: "Allowed by a rule", denied: "Blocked by a rule" },
 };
 
+function dayOf(entry: DecisionLogEntry) {
+  return entry.decision.at === undefined ? undefined : isoOf(entry.decision.at)?.slice(0, 10);
+}
+
+function timeStylesFor(entries: DecisionLogEntry[]): DecisionTimeStyle[] {
+  const days = entries.map(dayOf);
+  const allOnOneDay = new Set(days).size <= 1;
+  return days.map((day, index) =>
+    allOnOneDay || (index > 0 && days[index - 1] === day) ? "time" : "full"
+  );
+}
+
+function summaryAndNotes(entry: DecisionLogEntry) {
+  const { reason, by, ...rest } = entry.decision;
+  const isRule = entry.kind === "rule";
+  const decision: DecisionOutcome = isRule || by === undefined ? rest : { ...rest, by };
+  const notes = [isRule ? by : undefined, entry.detail, reason].filter((note): note is string =>
+    Boolean(note)
+  );
+  return { decision, notes };
+}
+
 function TimelineRail() {
   return (
     <span
       aria-hidden
       data-slot="decision-log-rail"
-      className="absolute top-5.5 -bottom-3.5 left-2 w-px -translate-x-1/2 bg-border"
+      className="absolute top-5 -bottom-4 left-2 w-px -translate-x-1/2 bg-faint/60"
     />
   );
 }
@@ -37,6 +64,7 @@ export function DecisionLog({
       </p>
     );
   }
+  const timeStyles = timeStylesFor(entries);
   return (
     <ol
       data-slot="decision-log"
@@ -45,17 +73,22 @@ export function DecisionLog({
     >
       {entries.map((entry, index) => {
         const kind = entry.kind ?? "approval";
-        const hasNext = index < entries.length - 1;
+        const { decision, notes } = summaryAndNotes(entry);
         return (
-          <li key={entry.id} data-kind={kind} className="relative flex flex-col gap-1">
-            {hasNext && <TimelineRail />}
+          <li key={entry.id} data-kind={kind} className="relative flex flex-col gap-0.5">
+            {index < entries.length - 1 && <TimelineRail />}
             <DecisionSummary
-              decision={entry.decision}
+              decision={decision}
               result={entry.title}
               approvedVerb={kindVerbs[kind].approved}
               deniedVerb={kindVerbs[kind].denied}
+              timeStyle={timeStyles[index]}
             />
-            {entry.detail && <p className="pl-6.5 text-xs text-faint">{entry.detail}</p>}
+            {notes.map((note) => (
+              <p key={note} className="pl-6.5 text-xs text-muted-foreground">
+                {note}
+              </p>
+            ))}
           </li>
         );
       })}

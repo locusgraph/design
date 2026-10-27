@@ -138,4 +138,26 @@ describe("DecisionLog", () => {
     );
     expect(html.match(/data-slot="decision-log-rail"/g)).toHaveLength(2);
   });
+
+  it("names the rule on its own line and shows only the time within one day", () => {
+    const html = renderToStaticMarkup(
+      <DecisionLog
+        entries={[
+          {
+            id: "a",
+            title: "Send INV-2042",
+            kind: "rule",
+            decision: {
+              approved: true,
+              by: "Allowed for this run",
+              at: "2026-10-27T14:03:00.000Z",
+            },
+          },
+        ]}
+      />
+    );
+    expect(html).not.toContain("by Allowed for this run");
+    expect(html).toContain("Allowed for this run</p>");
+    expect(html).toContain(">2:03 PM</time>");
+  });
 });
