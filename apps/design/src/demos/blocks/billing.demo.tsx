@@ -87,6 +87,16 @@ export default defineDemo({
     { name: "Plans.actionFor", type: "(plan: PlanOffer) => ReactNode" },
     { name: "Plans.actions", type: "BlockAction[]", defaultValue: "data instead of actionFor" },
     { name: "Plans.onAction", type: "(actionId: string, plan: PlanOffer) => void" },
+    {
+      name: "Plans.pending",
+      type: "{ actionId, target }",
+      defaultValue: "locks every action, spinner on the plan named target",
+    },
+    {
+      name: "Plans.settled",
+      type: "{ actionId, target, label }",
+      defaultValue: "shows label on target, locks the rest",
+    },
   ],
   examples: {
     ChoosePlan: {

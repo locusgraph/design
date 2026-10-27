@@ -7,27 +7,33 @@ import {
   TableRow,
 } from "@locusgraph/components";
 import type * as React from "react";
-import { BlockActions } from "../actions/block-actions";
+import { BlockActionOutcome, BlockActions } from "../actions/block-actions";
 import { LocalDate } from "../dates/local-date";
-import type { ApiKeyRow, BlockAction } from "../types";
+import type { ApiKeyRow, BlockAction, PendingBlockAction, SettledBlockAction } from "../types";
 
 type KeysProps = {
   keys: ApiKeyRow[];
   actions?: ((key: ApiKeyRow) => React.ReactNode) | BlockAction[];
   onAction?: (actionId: string, key: ApiKeyRow) => void;
   highlightedId?: string;
+  pending?: PendingBlockAction;
+  settled?: SettledBlockAction;
 };
 
-function keyActions(
-  { actions, onAction }: Pick<KeysProps, "actions" | "onAction">,
-  key: ApiKeyRow
-) {
+type KeyActionProps = Pick<KeysProps, "actions" | "onAction" | "pending" | "settled">;
+
+function keyActions({ actions, onAction, pending, settled }: KeyActionProps, key: ApiKeyRow) {
   if (typeof actions === "function") return actions(key);
+  if (settled?.target === key.id) {
+    return <BlockActionOutcome label={settled.label} className="justify-end" />;
+  }
   return (
     <BlockActions
       actions={actions ?? []}
       defaultVariant="ghost"
       className="justify-end"
+      locked={Boolean(pending || settled)}
+      pendingActionId={pending?.target === key.id ? pending.actionId : undefined}
       onAction={onAction && ((actionId) => onAction(actionId, key))}
     />
   );
@@ -51,7 +57,7 @@ function expiryPhrase(expiresAt: string | null) {
   );
 }
 
-export function Keys({ keys, actions, onAction, highlightedId }: KeysProps) {
+export function Keys({ keys, actions, onAction, highlightedId, pending, settled }: KeysProps) {
   const showActions = hasActions(actions);
   return (
     <Table>
@@ -91,7 +97,7 @@ export function Keys({ keys, actions, onAction, highlightedId }: KeysProps) {
             <TableCell className="hidden sm:table-cell">{dateOr(key.expiresAt, "Never")}</TableCell>
             {showActions && (
               <TableCell className="w-0 pr-2 text-right whitespace-nowrap">
-                {keyActions({ actions, onAction }, key)}
+                {keyActions({ actions, onAction, pending, settled }, key)}
               </TableCell>
             )}
           </TableRow>

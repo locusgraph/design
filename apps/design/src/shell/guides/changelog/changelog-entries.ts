@@ -10,6 +10,19 @@ export const changelogEntries: ChangelogEntry[] = [
   {
     id: "next",
     date: "Next release",
+    title: "One click, one run",
+    packages: ["blocks 0.8.0", "json-render 0.2.0"],
+    changes: [
+      "Plans and Keys take pending, which locks every action and spins the one that runs.",
+      "Plans and Keys take settled, which shows the outcome in place of the buttons.",
+      "guardAction runs one action at a time and writes /pending, then /settled, to state.",
+      "/locked freezes an older turn so its buttons cannot fire again.",
+      "Generative UI page: an Extend tab for adding, replacing and removing catalog components.",
+    ],
+  },
+  {
+    id: "2026-10-28",
+    date: "2026-10-28",
     title: "Human in the loop, IBM Plex and a quieter light theme",
     packages: [
       "tokens 0.5.0",

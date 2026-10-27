@@ -2,6 +2,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@locusgraph/components
 import type * as React from "react";
 import { PromptTab } from "../../theming/docs/prompt-tab";
 import { CatalogList } from "./catalog-list";
+import { ExtendGuide } from "./extend-guide";
 import { SpecEditor } from "./spec-editor";
 
 type GenerativeDocsPanelProps = {
@@ -20,6 +21,7 @@ export function GenerativeDocsPanel({ editor, prompt }: GenerativeDocsPanelProps
           <TabsTrigger value="spec">Spec</TabsTrigger>
           <TabsTrigger value="catalog">Catalog</TabsTrigger>
           <TabsTrigger value="prompt">Prompt</TabsTrigger>
+          <TabsTrigger value="extend">Extend</TabsTrigger>
         </TabsList>
       </div>
       <TabsContent value="spec" className="flex min-h-0 flex-1 flex-col">
@@ -33,6 +35,9 @@ export function GenerativeDocsPanel({ editor, prompt }: GenerativeDocsPanelProps
           prompt={prompt}
           note="catalog.prompt() writes this from the catalog. Send it as the system prompt."
         />
+      </TabsContent>
+      <TabsContent value="extend" className="flex min-h-0 flex-col gap-5 overflow-y-auto p-4">
+        <ExtendGuide />
       </TabsContent>
     </Tabs>
   );

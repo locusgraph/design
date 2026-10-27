@@ -59,8 +59,8 @@ export const billingSpec: Spec = {
     },
     "last-action": {
       type: "Notice",
-      props: { tone: "success", title: { $state: "/lastAction" }, description: null },
-      visible: { $state: "/lastAction" },
+      props: { tone: "success", title: { $state: "/settled/label" }, description: null },
+      visible: { $state: "/settled" },
     },
   },
 };

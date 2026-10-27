@@ -1,6 +1,6 @@
 {
   "name": "@locusgraph/json-render",
-  "version": "0.1.1",
+  "version": "0.2.0",
   "description": "A json-render catalog and registry for LocusGraph components and blocks, so a model can lay out LocusGraph screens as JSON.",
   "license": "MIT",
   "repository": {

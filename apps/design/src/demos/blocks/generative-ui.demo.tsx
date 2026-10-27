@@ -19,7 +19,7 @@ export default defineDemo({
   controls: { spec: select(presetNames, "over-quota") },
   playground: ({ spec }) => <SpecPlayground key={spec} initialSpec={presets[spec]} />,
   code: () =>
-    'import { defineCatalog } from "@json-render/core";\nimport { defineRegistry } from "@json-render/react";\nimport { schema } from "@json-render/react/schema";\nimport { locusComponents, locusRenderers } from "@locusgraph/json-render";\nimport { useApprovalGate } from "@locusgraph/loop";\n\nconst catalog = defineCatalog(schema, {\n  components: { ...locusComponents },\n  actions: { pickedAction: { description: "Run the action at /picked" } },\n});\n\nconst { registry, handlers } = defineRegistry(catalog, {\n  components: { ...locusRenderers },\n  actions: {\n    pickedAction: async (_params, setState, state) => {\n      const decision = await gate.ask({ toolName: state.picked.actionId, risk: "write" });\n      if (decision.approved) await run(state.picked);\n    },\n  },\n});\n\nconst systemPrompt = catalog.prompt();',
+    'import { defineCatalog } from "@json-render/core";\nimport { defineRegistry } from "@json-render/react";\nimport { schema } from "@json-render/react/schema";\nimport { guardAction, locusComponents, locusRenderers } from "@locusgraph/json-render";\n\nconst catalog = defineCatalog(schema, {\n  components: { ...locusComponents },\n  actions: { pickedAction: { description: "Run the action at /picked" } },\n});\n\nconst { registry, handlers } = defineRegistry(catalog, {\n  components: { ...locusRenderers },\n  actions: {\n    pickedAction: guardAction(async (picked) => {\n      const decision = await gate.ask({ toolName: picked.actionId, risk: "write", input: picked });\n      if (!decision.approved) return null;\n      await run(picked);\n      return `Done: ${picked.actionId} ${picked.target}`;\n    }),\n  },\n});\n\nconst systemPrompt = catalog.prompt();',
   props: [
     {
       name: "locusComponents",
@@ -28,6 +28,11 @@ export default defineDemo({
     { name: "locusRenderers", type: "registry components for the same names" },
     { name: "TopUp emits", type: "buy, after writing /selectedPackId" },
     { name: "Plans and Keys emit", type: "action, after writing /picked = { actionId, target }" },
+    {
+      name: "guardAction(run)",
+      type: "action handler: one run at a time, /pending while it runs, /settled = { label } after",
+    },
+    { name: "/locked", type: "true freezes a turn, such as an older one in a chat" },
   ],
   examples: {
     CatalogPrompt: {

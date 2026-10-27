@@ -91,6 +91,16 @@ export default defineDemo({
     { name: "Keys.keys", type: "ApiKeyRow[]" },
     { name: "Keys.actions", type: "((key: ApiKeyRow) => ReactNode) | BlockAction[]" },
     { name: "Keys.onAction", type: "(actionId: string, key: ApiKeyRow) => void" },
+    {
+      name: "Keys.pending",
+      type: "{ actionId, target }",
+      defaultValue: "locks every action, spinner on the key whose id is target",
+    },
+    {
+      name: "Keys.settled",
+      type: "{ actionId, target, label }",
+      defaultValue: "shows label on target, locks the rest",
+    },
     { name: "Keys.highlightedId", type: "string", defaultValue: "flashes a just-created key" },
     { name: "KeysEmpty.newKeyHref", type: "string", defaultValue: "omit for read-only roles" },
   ],

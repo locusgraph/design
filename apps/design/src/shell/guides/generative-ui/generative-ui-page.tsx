@@ -36,6 +36,7 @@ export function GenerativeUiPage() {
     setPrompt(sample.prompt);
     setSource(formatSpec(sample.spec));
     setLastGood(sample.spec);
+    session.startTurn();
     if (replay) setRunId((current) => current + 1);
   };
   const editSource = (next: string) => {
