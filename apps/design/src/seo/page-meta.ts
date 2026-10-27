@@ -17,7 +17,7 @@ export type PageMeta = {
 
 const libraryDescriptions: Record<string, string> = {
   components:
-    "Radix based React components for LocusGraph apps: square, ruled and quiet, in light and dark. Install @locusgraph/components or copy with shadcn.",
+    "Radix based React components from Locus Design: square, ruled and quiet, in light and dark. Install @locusgraph/components or copy with shadcn.",
   blocks:
     "Product blocks for usage, quota, wallet, top-ups, plans and API keys. Props and callbacks only, built from @locusgraph/components.",
   loop: "Loop, the agent UI with the human in the loop: chat, thread, agent, approval, memory and cost, on Vercel AI SDK message parts.",
@@ -58,7 +58,7 @@ export const guidePageMeta: Record<string, { title: string; description: string 
   shells: {
     title: "Shells",
     description:
-      "App and docs shells for LocusGraph apps: header, sidebar, content and aside, responsive and in light and dark.",
+      "App and docs shells from Locus Design: header, sidebar, content and aside, responsive and in light and dark.",
   },
 };
 

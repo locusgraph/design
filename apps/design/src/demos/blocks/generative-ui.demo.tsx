@@ -15,7 +15,7 @@ function CatalogPrompt() {
 export default defineDemo({
   title: "Generative UI",
   description:
-    "A model writes a JSON spec, json-render draws it with LocusGraph blocks through @locusgraph/json-render. Edit the spec and the screen follows. Every action the spec wires up asks a person first.",
+    "A model writes a JSON spec, json-render draws it with Locus Design blocks through @locusgraph/json-render. Edit the spec and the screen follows. Every action the spec wires up asks a person first.",
   controls: { spec: select(presetNames, "over-quota") },
   playground: ({ spec }) => <SpecPlayground key={spec} initialSpec={presets[spec]} />,
   code: () =>

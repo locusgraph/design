@@ -6,7 +6,7 @@ export const siteOrigin = "https://design.locusgraph.com";
 
 const intro = `# Locus Design
 
-> The interface kit for LocusGraph: components, product blocks (\`@locusgraph/blocks\`), an agent kit with the human in the loop (\`@locusgraph/loop\`) and brand assets. React 19, Tailwind v4, Radix. Light and dark.
+> Locus Design, a design system for agent products: components, product blocks (\`@locusgraph/blocks\`), an agent kit with the human in the loop (\`@locusgraph/loop\`) and brand assets. React 19, Tailwind v4, Radix. Light and dark.
 
 Every page below has a Markdown version: add \`.md\` to its path. Fetch the ones you need instead of guessing props.
 

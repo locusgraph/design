@@ -8,7 +8,7 @@ import {
 import type * as React from "react";
 import { useState } from "react";
 
-export const agentPrompt = `Build this UI with the LocusGraph design system.
+export const agentPrompt = `Build this UI with the Locus Design system.
 
 1. Read https://design.locusgraph.com/DESIGN.md first. It lists every component, block and agent part, how to install them and the house style.
 2. Before using a component, fetch its page by adding .md to its path, for example https://design.locusgraph.com/loop/approval/approval.md, and use the props it documents. Do not guess props.

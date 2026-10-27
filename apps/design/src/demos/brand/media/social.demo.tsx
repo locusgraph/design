@@ -154,6 +154,7 @@ export default defineDemo({
     { name: "product", type: "string" },
     { name: "url", type: "string" },
     { name: "theme", type: '"dark" | "light"', defaultValue: '"dark"' },
+    { name: "brand", type: "ReactNode", defaultValue: "LocusGraph mark and wordmark" },
   ],
   examples: {
     BothThemes: {
