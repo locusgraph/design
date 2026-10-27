@@ -1,5 +1,11 @@
 # @locusgraph/loop
 
+<img alt="Locus Design: design that keeps humans in the loop" src="https://raw.githubusercontent.com/locusgraph/design/master/.github/assets/hero-light.png">
+
+[![npm](https://img.shields.io/npm/v/@locusgraph/loop?color=111111&style=flat-square)](https://www.npmjs.com/package/@locusgraph/loop) [![MIT license](https://img.shields.io/badge/license-MIT-111111?style=flat-square)](https://github.com/locusgraph/design/blob/master/LICENSE)
+
+[Docs](https://design.locusgraph.com/human-in-the-loop) · [Source](https://github.com/locusgraph/design/tree/master/packages/loop) · [All packages](https://github.com/locusgraph/design#packages)
+
 Loop is the agent kit from Locus Design: chat, what the agent is doing, human-in-the-loop approvals, memory and cost. Components take data and callbacks only and never call a model. Message shapes follow the Vercel AI SDK `UIMessage` parts, so `useChat()` output can be passed straight in.
 
 ```bash

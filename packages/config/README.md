@@ -1,5 +1,9 @@
 # @locusgraph/config
 
+[![npm](https://img.shields.io/npm/v/@locusgraph/config?color=111111&style=flat-square)](https://www.npmjs.com/package/@locusgraph/config) [![MIT license](https://img.shields.io/badge/license-MIT-111111?style=flat-square)](https://github.com/locusgraph/design/blob/master/LICENSE)
+
+[Docs](https://design.locusgraph.com) · [Source](https://github.com/locusgraph/design/tree/master/packages/config) · [All packages](https://github.com/locusgraph/design#packages)
+
 The Biome, TypeScript, Vitest, Cucumber, PostCSS and shadcn configuration LocusGraph projects share. It replaces `@spendgraph/config`; the theme and typography CSS moved to `@locusgraph/tokens`.
 
 ```bash

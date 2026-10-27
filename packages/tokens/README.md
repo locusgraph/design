@@ -1,5 +1,9 @@
 # @locusgraph/tokens
 
+[![npm](https://img.shields.io/npm/v/@locusgraph/tokens?color=111111&style=flat-square)](https://www.npmjs.com/package/@locusgraph/tokens) [![MIT license](https://img.shields.io/badge/license-MIT-111111?style=flat-square)](https://github.com/locusgraph/design/blob/master/LICENSE)
+
+[Docs](https://design.locusgraph.com/theming) · [Source](https://github.com/locusgraph/design/tree/master/packages/tokens) · [All packages](https://github.com/locusgraph/design#packages)
+
 The LocusGraph theme for Tailwind CSS 4, and the same values as TypeScript for places CSS cannot reach, such as email.
 
 ```bash

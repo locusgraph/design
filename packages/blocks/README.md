@@ -1,5 +1,9 @@
 # @locusgraph/blocks
 
+[![npm](https://img.shields.io/npm/v/@locusgraph/blocks?color=111111&style=flat-square)](https://www.npmjs.com/package/@locusgraph/blocks) [![MIT license](https://img.shields.io/badge/license-MIT-111111?style=flat-square)](https://github.com/locusgraph/design/blob/master/LICENSE)
+
+[Docs](https://design.locusgraph.com/blocks) · [Source](https://github.com/locusgraph/design/tree/master/packages/blocks) · [All packages](https://github.com/locusgraph/design#packages)
+
 Product sections built from `@locusgraph/components` and its Rule Grid: the same usage, billing and API-key screens in every LocusGraph app. Blocks take plain data and callbacks; they never fetch.
 
 ```bash
