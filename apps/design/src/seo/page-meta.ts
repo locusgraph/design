@@ -36,6 +36,25 @@ const guidePages: Record<string, { title: string; description: string }> = {
     description:
       "Monochrome by default. Set one brand color for the primary action and focus ring with three CSS variables; everything else stays grey.",
   },
+  principles: {
+    title: "Principles",
+    description:
+      "The rules behind Locus Design: people decide, square and ruled layouts, color that means state, three typefaces and dark first.",
+  },
+  "human-in-the-loop": {
+    title: "Human in the loop",
+    description:
+      "From one approval to a whole run a person can oversee: risk levels, Approval, Approval Gate, Decision Log, Spend Gate and Run Bar.",
+  },
+  "for-agents": {
+    title: "For agents",
+    description:
+      "Every page is also Markdown. Point a coding agent at DESIGN.md, fetch a page with .md and install parts from the shadcn registry.",
+  },
+  changelog: {
+    title: "Changelog",
+    description: "What changed in each release of the Locus Design packages.",
+  },
   shells: {
     title: "Shells",
     description:

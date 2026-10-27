@@ -16,7 +16,7 @@ import {
 import { staticPageMeta } from "./seo/page-meta";
 import { usePageHead } from "./seo/use-page-head";
 import { ShellsPage } from "./shell/blocks/shells-page";
-import { InstallationPage, installationSections } from "./shell/guides/installation-page";
+import { guidePages } from "./shell/guides/guide-pages";
 import { ThemingPage } from "./shell/guides/theming/theming-page";
 import { HomePage, homeSections } from "./shell/home-page";
 import { LandingPage } from "./shell/landing/landing-page";
@@ -77,18 +77,14 @@ export function App() {
   const isLandingPage = path === "";
   const isThemingPage = path === "theming";
   const isFullWidth = isShellsPage || isLandingPage || isThemingPage;
-  const isInstallationPage = path === "installation";
+  const guidePage = guidePages[path];
   const isKnownPage = isDemoPage || staticPageMeta(path) !== undefined;
   const library = libraryOfPath(path);
   usePrefetchLibrary(library.id);
   const navGroups = playgroundNavGroups(library);
   const pageSections =
     docs?.sections ??
-    (isInstallationPage
-      ? installationSections
-      : isDemoPage || !isKnownPage
-        ? []
-        : homeSections(library));
+    (guidePage ? guidePage.sections : isDemoPage || !isKnownPage ? [] : homeSections(library));
 
   return (
     <>
@@ -104,7 +100,7 @@ export function App() {
                   ? "/theming"
                   : isLandingPage
                     ? "/"
-                    : isKnownPage
+                    : isKnownPage && !guidePage
                       ? library.href
                       : ""
             }
@@ -141,8 +137,8 @@ export function App() {
           <LandingPage />
         ) : isShellsPage ? (
           <ShellsPage theme={settings.theme} />
-        ) : isInstallationPage ? (
-          <InstallationPage />
+        ) : guidePage ? (
+          <guidePage.Page />
         ) : isThemingPage ? (
           <ThemingPage mode={settings.theme} />
         ) : entry && docs ? (
