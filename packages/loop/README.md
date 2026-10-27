@@ -1,6 +1,6 @@
 # @locusgraph/loop
 
-Loop is the agent kit for LocusGraph apps: chat, what the agent is doing, human-in-the-loop approvals, memory and cost. Components take data and callbacks only and never call a model. Message shapes follow the Vercel AI SDK `UIMessage` parts, so `useChat()` output can be passed straight in.
+Loop is the agent kit from Locus Design: chat, what the agent is doing, human-in-the-loop approvals, memory and cost. Components take data and callbacks only and never call a model. Message shapes follow the Vercel AI SDK `UIMessage` parts, so `useChat()` output can be passed straight in.
 
 ```bash
 pnpm add @locusgraph/loop @locusgraph/components

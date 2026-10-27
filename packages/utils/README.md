@@ -1,6 +1,6 @@
 # @locusgraph/utils
 
-Formatting and quota helpers LocusGraph apps share. No dependencies, no React.
+Formatting and quota helpers the Locus Design packages share. No dependencies, no React.
 
 ```bash
 pnpm add @locusgraph/utils

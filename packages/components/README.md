@@ -1,6 +1,6 @@
 # @locusgraph/components
 
-The LocusGraph design system: React components on Radix, the App and Docs shells, and the theme
+The Locus Design system: React components on Radix, the App and Docs shells, and the theme
 (`theme.css`) every LocusGraph app uses. See every component with a live playground in
 `apps/design` (`pnpm --filter @locusgraph/design dev`, port 5180).
 

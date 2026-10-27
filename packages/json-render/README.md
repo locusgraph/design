@@ -1,6 +1,6 @@
 # @locusgraph/json-render
 
-A [json-render](https://json-render.dev) catalog and registry for LocusGraph components and blocks. A model lays out a LocusGraph screen as JSON; json-render draws it with the real components, in the LocusGraph look. Data comes from state through `$state` bindings, so the model picks the layout and never writes the numbers.
+A [json-render](https://json-render.dev) catalog and registry for Locus Design components and blocks. A model lays out a Locus Design screen as JSON; json-render draws it with the real components, in the Locus Design look. Data comes from state through `$state` bindings, so the model picks the layout and never writes the numbers.
 
 ```bash
 pnpm add @locusgraph/json-render @json-render/core @json-render/react zod @locusgraph/blocks @locusgraph/components

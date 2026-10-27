@@ -12,4 +12,4 @@ What a Vite app needs:
 - `src/globals.css` imports Tailwind, `tw-animate-css`, `@locusgraph/components/theme.css`, and the `sources.css` of `blocks` and `brand`.
 - Toggle the `dark` class on `<html>` for dark mode.
 
-The json-render tab (`src/json-render`) renders a billing page from a JSON spec with `@json-render/react`. The catalog describes LocusGraph blocks to a model, the registry maps each catalog entry to the real component, and the spec binds data from state, so the model picks layout and never writes numbers.
+The json-render tab (`src/json-render`) renders a billing page from a JSON spec with `@json-render/react`. The catalog describes Locus Design blocks to a model, the registry maps each catalog entry to the real component, and the spec binds data from state, so the model picks layout and never writes numbers.
