@@ -31,8 +31,9 @@ export function PrinciplesPage() {
           <p>
             Containers, fields, menus and code have no radius. Group with ruled lines from{" "}
             <DocLink href="/display/rule-grid/rule-grid">Rule Grid</DocLink>, not cards and shadows.
-            A line that splits a cell runs edge to edge. Buttons, badges, chips, avatars and bars
-            are pills; nothing sits in between.
+            A line that splits a cell runs edge to edge. Anything you press that has a fill is a
+            pill: buttons, segmented tabs, toggles, badges, chips, avatars and bars. Line tabs have
+            no shape, only an underline. Nothing sits in between.
           </p>
         </Prose>
       </GuideSection>

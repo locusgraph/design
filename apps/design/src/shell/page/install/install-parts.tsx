@@ -21,7 +21,7 @@ export function PackageManagerSwitch() {
           tabIndex={packageManager === active ? 0 : -1}
           onClick={() => selectPackageManager(packageManager)}
           className={cn(
-            "h-7 px-2 font-mono text-xs locus-focus-ring",
+            "h-7 rounded-full px-2.5 font-mono text-xs locus-focus-ring",
             packageManager === active
               ? "bg-muted text-foreground"
               : "text-muted-foreground hover:text-foreground"

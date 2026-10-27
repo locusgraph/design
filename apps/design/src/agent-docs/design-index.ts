@@ -35,7 +35,7 @@ Every item is listed at https://design.locusgraph.com/r/registry.json. Files lan
 
 ## House style
 
-- Containers, fields, menus and code are square: never add a radius class. Buttons, chips, badges, dots, avatars and bars are pills (\`rounded-full\`). Nothing in between.
+- Containers, fields, menus and code are square: never add a radius class. Buttons, segmented tabs and toggle groups, chips, badges, dots, avatars and bars are pills (\`rounded-full\`). Line tabs have no shape, only an underline. Nothing in between.
 - Every clickable element shows focus with \`locus-focus-ring\` (a 2px ring, offset 2px), or \`locus-focus-ring-inset\` on full-bleed rows, tabs and scroll areas where an outer ring would clip. Text fields use \`focus-visible:border-ring\` with \`ring-1\`.
 - App pages (components, blocks, shells): group with ruled lines (\`RuleGrid\`, \`ring-1 ring-border\`, \`divide-y\`), not cards or shadows.
 - The chat area (\`@locusgraph/loop\`): no rules, frames or panels. Hierarchy comes from text weight and tone, spacing and color that means state. Only fields (the composer) and overlays (menus, popovers) keep a frame.

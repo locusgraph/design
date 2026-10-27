@@ -31,7 +31,7 @@ type PreviewToolbarProps = {
 
 export function PreviewToolbar({ background, canReset, onReset }: PreviewToolbarProps) {
   return (
-    <div className="flex shrink-0 items-center gap-1 self-start border bg-background p-0.5 sm:ml-auto sm:self-center">
+    <div className="flex shrink-0 items-center gap-1 self-start rounded-full border bg-background p-0.5 sm:ml-auto sm:self-center">
       <ToggleGroup
         type="single"
         size="sm"
@@ -49,7 +49,7 @@ export function PreviewToolbar({ background, canReset, onReset }: PreviewToolbar
               >
                 <span
                   className={cn(
-                    "block size-3.5 shrink-0 border",
+                    "block size-3.5 shrink-0 rounded-full border",
                     previewBackgroundClass[swatch.value]
                   )}
                 />
