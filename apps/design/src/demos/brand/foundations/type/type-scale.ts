@@ -18,7 +18,7 @@ export const typeFamilies: TypeFamily[] = [
   },
   { name: "Inter", role: "Body, labels and controls", className: "font-sans", stack: fonts.sans },
   {
-    name: "Fira Code",
+    name: "IBM Plex Mono",
     role: "Code, ids, numbers in tables",
     className: "font-mono",
     stack: fonts.mono,

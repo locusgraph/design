@@ -39,7 +39,7 @@
   --locus-sidebar-ring: var(--locus-interactive);
   --locus-font-inter: "Inter Variable", ui-sans-serif, system-ui, sans-serif;
   --locus-font-archivo: "Archivo Variable", ui-sans-serif, system-ui, sans-serif;
-  --locus-font-fira-code: "Fira Code Variable", ui-monospace, monospace;
+  --locus-font-ibm-plex-mono: "IBM Plex Mono", ui-monospace, monospace;
   --locus-chart-1: var(--locus-s1);
   --locus-chart-2: var(--locus-s2);
   --locus-chart-3: var(--locus-s3);

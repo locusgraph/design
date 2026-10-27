@@ -67,7 +67,7 @@ color). Tailwind classes such as `bg-surface`, `text-soft`, `text-good`, `bg-btn
 | `--s1` … `--s8`, `--good`, `--bad`, `--info`, `--warn` | `--locus-s1` … `--locus-s8`, `--locus-good`, `--locus-bad`, `--locus-info`, `--locus-warn` |
 | `--skeleton`, `--scrim`, `--overlay-shadow`, `--radius` | `--locus-skeleton`, `--locus-scrim`, `--locus-overlay-shadow`, `--locus-radius` |
 | `--sidebar`, `--sidebar-*`, `--chart-1` … `--chart-5` | `--locus-sidebar`, `--locus-sidebar-*`, `--locus-chart-1` … `--locus-chart-5` |
-| `--font-inter`, `--font-archivo`, `--font-fira-code` | `--locus-font-inter`, `--locus-font-archivo`, `--locus-font-fira-code` |
+| `--font-inter`, `--font-archivo`, `--font-ibm-plex-mono` | `--locus-font-inter`, `--locus-font-archivo`, `--locus-font-ibm-plex-mono` |
 | `--brand-glow`, `--brand-loop`, `--brand-grid-image`, `--brand-grid-size` | `--locus-brand-glow`, `--locus-brand-loop`, `--locus-brand-grid-image`, `--locus-brand-grid-size` |
 | `--shimmer-spread`, `--shimmer-color`, `--shimmer-duration` | `--locus-shimmer-spread`, `--locus-shimmer-color`, `--locus-shimmer-duration` |
 | `--scroll-fade-size`, `--scroll-fade-reveal` | `--locus-scroll-fade-size`, `--locus-scroll-fade-reveal` |

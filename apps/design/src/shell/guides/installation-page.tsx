@@ -77,7 +77,7 @@ export function InstallationPage() {
         <Prose>
           <p>
             Import the theme in your global CSS after Tailwind. It brings the colors, the Inter,
-            Archivo and Fira Code fonts, the typeset styles, and tells Tailwind to scan the
+            Archivo and IBM Plex Mono fonts, the typeset styles, and tells Tailwind to scan the
             components for their classes.
           </p>
         </Prose>

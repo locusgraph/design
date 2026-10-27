@@ -6,7 +6,7 @@ export const socialCardSize = { width: 1200, height: 630 } as const;
 export const socialCardFonts = {
   brand: '"Archivo Variable", Archivo, ui-sans-serif, system-ui, sans-serif',
   body: '"Inter Variable", Inter, ui-sans-serif, system-ui, sans-serif',
-  mono: '"Fira Code Variable", "Fira Code", ui-monospace, monospace',
+  mono: '"IBM Plex Mono", ui-monospace, monospace',
 } as const;
 
 export function socialCardStyles(theme: BrandTheme) {

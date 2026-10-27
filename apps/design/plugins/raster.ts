@@ -13,9 +13,9 @@ const fontFiles: FontFile[] = [
   { name: "Archivo", weight: 700, file: "@fontsource/archivo/files/archivo-latin-700-normal.woff" },
   { name: "Inter", weight: 400, file: "@fontsource/inter/files/inter-latin-400-normal.woff" },
   {
-    name: "Fira Code",
+    name: "IBM Plex Mono",
     weight: 400,
-    file: "@fontsource/fira-code/files/fira-code-latin-400-normal.woff",
+    file: "@fontsource/ibm-plex-mono/files/ibm-plex-mono-latin-400-normal.woff",
   },
 ];
 

@@ -38,7 +38,7 @@
   --color-sidebar-ring: var(--locus-sidebar-ring);
   --font-sans: var(--locus-font-inter);
   --font-heading: var(--locus-font-archivo);
-  --font-mono: var(--locus-font-fira-code);
+  --font-mono: var(--locus-font-ibm-plex-mono);
   --font-brand: var(--locus-font-archivo);
   --shadow-overlay: var(--locus-overlay-shadow);
   --text-2xs: 0.6875rem;
