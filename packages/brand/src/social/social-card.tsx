@@ -1,3 +1,4 @@
+import type * as React from "react";
 import { LocusGraphMark } from "../locusgraph-mark";
 import type { BrandTheme } from "../themes/brand-themes";
 import { socialCardStyles } from "./social-card-styles";
@@ -8,19 +9,31 @@ export type SocialCardProps = {
   product?: string;
   url?: string;
   theme?: BrandTheme;
+  brand?: React.ReactNode;
 };
 
-export function SocialCard({ title, description, product, url, theme = "dark" }: SocialCardProps) {
+export function SocialCard({
+  title,
+  description,
+  product,
+  url,
+  theme = "dark",
+  brand,
+}: SocialCardProps) {
   const styles = socialCardStyles(theme);
   const hasFooter = Boolean(product || url);
   return (
     <div data-slot="social-card" style={styles.root}>
       <div style={styles.brandRow}>
-        <LocusGraphMark width={44} height={40} style={{ color: styles.brandRow.color }} />
-        <div style={{ display: "flex" }}>
-          <span style={{ fontWeight: 700 }}>locus</span>
-          <span style={{ fontWeight: 300 }}>graph</span>
-        </div>
+        {brand ?? (
+          <>
+            <LocusGraphMark width={44} height={40} style={{ color: styles.brandRow.color }} />
+            <div style={{ display: "flex" }}>
+              <span style={{ fontWeight: 700 }}>locus</span>
+              <span style={{ fontWeight: 300 }}>graph</span>
+            </div>
+          </>
+        )}
       </div>
       <div style={styles.body}>
         <div style={styles.title}>{title}</div>
