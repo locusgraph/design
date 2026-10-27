@@ -65,6 +65,8 @@ export default defineDemo({
     { name: "TopUp.pendingPackId", type: "string", defaultValue: "shows a spinner" },
     { name: "PlanOffer.amountCents", type: "number", defaultValue: "falls back to price" },
     { name: "Plans.actionFor", type: "(plan: PlanOffer) => ReactNode" },
+    { name: "Plans.actions", type: "BlockAction[]", defaultValue: "data instead of actionFor" },
+    { name: "Plans.onAction", type: "(actionId: string, plan: PlanOffer) => void" },
   ],
   examples: {
     ChoosePlan: {

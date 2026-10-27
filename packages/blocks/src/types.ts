@@ -1,5 +1,14 @@
 export type { LinkComponent } from "@locusgraph/components";
 
+export type BlockActionVariant = "default" | "outline" | "ghost" | "destructive";
+
+export type BlockAction = {
+  id: string;
+  label: string;
+  variant?: BlockActionVariant;
+  disabled?: boolean;
+};
+
 export type QuotaPeriod = "month" | "lifetime";
 
 export type QuotaData = {

@@ -112,3 +112,49 @@ describe("keys", () => {
     expect(readOnly).not.toContain("href");
   });
 });
+
+describe("data actions", () => {
+  const plans = [
+    { name: "Free", price: "$0", points: ["A free tier"], current: true },
+    { name: "Pro", price: "$40.00 per month", points: ["Higher quotas"], current: false },
+  ];
+  const key = {
+    id: "k1",
+    name: "worker",
+    maskedKey: "lg_…a1b2",
+    productLabel: "LocusGraph",
+    createdBy: "You",
+    createdAt: null,
+    expiresAt: null,
+  };
+
+  it("renders plan actions from data on every plan but the current one", () => {
+    const html = renderToStaticMarkup(
+      <Plans plans={plans} actions={[{ id: "upgrade", label: "Upgrade" }]} onAction={() => {}} />
+    );
+    expect(html.match(/data-action-id="upgrade"/g)).toHaveLength(1);
+    expect(html).toContain("Upgrade");
+  });
+
+  it("prefers actionFor over data actions", () => {
+    const html = renderToStaticMarkup(
+      <Plans
+        plans={plans}
+        actionFor={() => <button type="button">Custom</button>}
+        actions={[{ id: "upgrade", label: "Upgrade" }]}
+      />
+    );
+    expect(html).toContain("Custom");
+    expect(html).not.toContain('data-action-id="upgrade"');
+  });
+
+  it("renders key actions from data and drops the column when there are none", () => {
+    const html = renderToStaticMarkup(
+      <Keys keys={[key]} actions={[{ id: "revoke", label: "Revoke", variant: "destructive" }]} />
+    );
+    expect(html).toContain('data-action-id="revoke"');
+    expect(html).toContain("Revoke");
+    const empty = renderToStaticMarkup(<Keys keys={[key]} actions={[]} />);
+    expect(empty).not.toContain('data-slot="block-actions"');
+  });
+});

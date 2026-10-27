@@ -6,19 +6,35 @@ import {
   RuleGridTitle,
 } from "@locusgraph/components";
 import type * as React from "react";
-import type { PlanOffer } from "../types";
+import { BlockActions } from "../actions/block-actions";
+import type { BlockAction, PlanOffer } from "../types";
 import { PlanPrice } from "./plan-price";
 
 type PlansProps = {
   plans: PlanOffer[];
   actionFor?: (plan: PlanOffer) => React.ReactNode;
+  actions?: BlockAction[];
+  onAction?: (actionId: string, plan: PlanOffer) => void;
 };
 
-export function Plans({ plans, actionFor }: PlansProps) {
+function planAction({ actionFor, actions, onAction }: Omit<PlansProps, "plans">, plan: PlanOffer) {
+  if (plan.current) return null;
+  if (actionFor) return actionFor(plan);
+  if (!actions?.length) return null;
+  return (
+    <BlockActions
+      actions={actions}
+      defaultVariant="default"
+      onAction={onAction && ((actionId) => onAction(actionId, plan))}
+    />
+  );
+}
+
+export function Plans({ plans, actionFor, actions, onAction }: PlansProps) {
   return (
     <RuleGrid columns={plans.length >= 3 ? 3 : 2}>
       {plans.map((plan) => {
-        const action = plan.current ? null : actionFor?.(plan);
+        const action = planAction({ actionFor, actions, onAction }, plan);
         return (
           <RuleGridCell key={plan.name} data-current={plan.current || undefined} className="gap-4">
             <div className="flex flex-col gap-2">

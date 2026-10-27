@@ -67,7 +67,8 @@ export default defineDemo({
       : `<Keys\n  keys={keys}\n  actions={(key) => <RevokeButton keyId={key.id} />}\n/>`,
   props: [
     { name: "Keys.keys", type: "ApiKeyRow[]" },
-    { name: "Keys.actions", type: "(key: ApiKeyRow) => ReactNode" },
+    { name: "Keys.actions", type: "((key: ApiKeyRow) => ReactNode) | BlockAction[]" },
+    { name: "Keys.onAction", type: "(actionId: string, key: ApiKeyRow) => void" },
     { name: "Keys.highlightedId", type: "string", defaultValue: "flashes a just-created key" },
     { name: "KeysEmpty.newKeyHref", type: "string", defaultValue: "omit for read-only roles" },
   ],

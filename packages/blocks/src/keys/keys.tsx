@@ -7,14 +7,35 @@ import {
   TableRow,
 } from "@locusgraph/components";
 import type * as React from "react";
+import { BlockActions } from "../actions/block-actions";
 import { LocalDate } from "../dates/local-date";
-import type { ApiKeyRow } from "../types";
+import type { ApiKeyRow, BlockAction } from "../types";
 
 type KeysProps = {
   keys: ApiKeyRow[];
-  actions?: (key: ApiKeyRow) => React.ReactNode;
+  actions?: ((key: ApiKeyRow) => React.ReactNode) | BlockAction[];
+  onAction?: (actionId: string, key: ApiKeyRow) => void;
   highlightedId?: string;
 };
+
+function keyActions(
+  { actions, onAction }: Pick<KeysProps, "actions" | "onAction">,
+  key: ApiKeyRow
+) {
+  if (typeof actions === "function") return actions(key);
+  return (
+    <BlockActions
+      actions={actions ?? []}
+      defaultVariant="ghost"
+      className="justify-end"
+      onAction={onAction && ((actionId) => onAction(actionId, key))}
+    />
+  );
+}
+
+function hasActions(actions: KeysProps["actions"]) {
+  return typeof actions === "function" || Boolean(actions?.length);
+}
 
 function dateOr(value: string | null, empty: string) {
   return value ? <LocalDate value={value} /> : empty;
@@ -30,7 +51,8 @@ function expiryPhrase(expiresAt: string | null) {
   );
 }
 
-export function Keys({ keys, actions, highlightedId }: KeysProps) {
+export function Keys({ keys, actions, onAction, highlightedId }: KeysProps) {
+  const showActions = hasActions(actions);
   return (
     <Table>
       <TableHeader>
@@ -41,7 +63,7 @@ export function Keys({ keys, actions, highlightedId }: KeysProps) {
           <TableHead className="hidden md:table-cell">Created by</TableHead>
           <TableHead className="hidden md:table-cell">Created</TableHead>
           <TableHead className="hidden sm:table-cell">Expires</TableHead>
-          {actions && <TableHead className="w-0" />}
+          {showActions && <TableHead className="w-0" />}
         </TableRow>
       </TableHeader>
       <TableBody>
@@ -67,9 +89,9 @@ export function Keys({ keys, actions, highlightedId }: KeysProps) {
             <TableCell className="hidden md:table-cell">{key.createdBy}</TableCell>
             <TableCell className="hidden md:table-cell">{dateOr(key.createdAt, "—")}</TableCell>
             <TableCell className="hidden sm:table-cell">{dateOr(key.expiresAt, "Never")}</TableCell>
-            {actions && (
+            {showActions && (
               <TableCell className="w-0 pr-2 text-right whitespace-nowrap">
-                {actions(key)}
+                {keyActions({ actions, onAction }, key)}
               </TableCell>
             )}
           </TableRow>
