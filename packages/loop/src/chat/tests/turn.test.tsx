@@ -104,4 +104,26 @@ describe("groupParts", () => {
     );
     expect(firstIndexes).toEqual([1, 3]);
   });
+
+  it("renders data parts only through renderData, keyed by the part id", () => {
+    const message: AgentMessage = {
+      id: "msg_3",
+      role: "assistant",
+      parts: [
+        { type: "text", text: "Here is your billing." },
+        { type: "data-spec", id: "spec_1", data: { root: "page" } },
+      ],
+    };
+    const hidden = renderToStaticMarkup(<Turn message={message} />);
+    expect(hidden).not.toContain('data-kind="data"');
+    const shown = renderToStaticMarkup(
+      <Turn
+        message={message}
+        renderData={(part) => <output>{`${part.type} ${JSON.stringify(part.data)}`}</output>}
+      />
+    );
+    expect(shown).toContain('data-kind="data"');
+    expect(shown).toContain("data-spec {&quot;root&quot;:&quot;page&quot;}");
+    expect(groupParts(message.parts).at(-1)?.key).toBe("spec_1");
+  });
 });

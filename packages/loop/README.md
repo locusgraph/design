@@ -33,6 +33,6 @@ import { Chat, Composer, Turn } from "@locusgraph/loop";
 | Memory | `Cite`, `Sources`, `Recall`, `Memorized` |
 | Cost | `Context`, `Cost`, `CostSteps`, `ModelPicker` |
 
-`Turn` renders reasoning, tool and source parts with `Thinking`, `Tool` and `Sources`; pass `renderReasoning`, `renderTool` or `renderSources` to replace them. A tool part in the `approval-requested` state is where `Approval` goes: wire its `onApprove` and `onDeny` to the AI SDK's tool approval response.
+`Turn` renders reasoning, tool and source parts with `Thinking`, `Tool` and `Sources`; pass `renderReasoning`, `renderTool` or `renderSources` to replace them. Data parts (`data-*`, such as a json-render `data-spec`) render only through `renderData`; without it they are skipped. A tool part in the `approval-requested` state is where `Approval` goes: wire its `onApprove` and `onDeny` to the AI SDK's tool approval response.
 
 Approvals follow one rule: tools that only read run without asking; tools that write, pay, send or delete pause and show exactly what is being approved, with stronger warnings for destructive ones. Money is integer micro-USD, formatted with `@locusgraph/utils`.

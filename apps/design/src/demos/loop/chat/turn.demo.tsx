@@ -92,6 +92,11 @@ export default defineDemo({
     { name: "renderReasoning", type: "(part: ReasoningPart) => ReactNode" },
     { name: "renderTool", type: "(part: ToolPart) => ReactNode" },
     { name: "renderSources", type: "(parts: SourceUrlPart[]) => ReactNode" },
+    {
+      name: "renderData",
+      type: "(part: DataPart) => ReactNode",
+      defaultValue: "data parts hidden",
+    },
   ],
   examples: {
     Pair: {
