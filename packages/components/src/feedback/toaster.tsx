@@ -15,23 +15,43 @@ const toasterColors = {
   "--normal-text": "var(--locus-popover-foreground)",
   "--normal-border": "var(--locus-border)",
   "--border-radius": "var(--locus-radius)",
+  "--width": "22.5rem",
 } as React.CSSProperties;
 
-const statusRuleClassNames = {
-  success: "border-l-2! border-l-good! [&_[data-icon]]:text-good",
-  info: "border-l-2! border-l-interactive! [&_[data-icon]]:text-interactive",
-  warning: "border-l-2! border-l-warn! [&_[data-icon]]:text-warn",
-  error: "border-l-2! border-l-destructive! [&_[data-icon]]:text-destructive",
+const quietCardClassNames = {
+  toast:
+    "items-start! gap-3! p-4! font-sans! shadow-[var(--locus-overlay-shadow)]! [&_[data-icon]]:mt-0.5",
+  content: "gap-0.5!",
+  title: "text-sm! leading-snug! font-medium!",
+  description: "text-xs! leading-snug! text-muted-foreground!",
+  actionButton:
+    "h-control-xs! self-center! rounded-full! bg-primary! px-3! font-heading! text-xs! font-medium! text-primary-foreground! locus-focus-ring",
+  cancelButton:
+    "h-control-xs! self-center! rounded-full! bg-muted! px-3! font-heading! text-xs! font-medium! text-foreground! locus-focus-ring",
+  closeButton:
+    "border-border! bg-popover! text-muted-foreground! hover:text-foreground! locus-focus-ring",
+  success: "[&_[data-icon]]:text-good",
+  info: "[&_[data-icon]]:text-interactive",
+  warning: "[&_[data-icon]]:text-warn",
+  error: "[&_[data-icon]]:text-destructive",
 };
 
-function Toaster({ theme = "system", toastOptions, ...props }: ToasterProps) {
+function Toaster({
+  theme = "system",
+  expand = true,
+  gap = 8,
+  toastOptions,
+  ...props
+}: ToasterProps) {
   return (
     <Sonner
       theme={theme}
+      expand={expand}
+      gap={gap}
       className="toaster group"
       toastOptions={{
         ...toastOptions,
-        classNames: { ...statusRuleClassNames, ...toastOptions?.classNames },
+        classNames: { ...quietCardClassNames, ...toastOptions?.classNames },
       }}
       icons={{
         success: <CircleCheckIcon weight="bold" aria-hidden className="size-4" />,
