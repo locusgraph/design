@@ -29,7 +29,9 @@ function OnThisPage({ sections, title = "On this page" }: OnThisPageProps) {
   useScrollToHashSection(sectionIds, pinSection);
   return (
     <nav aria-label={title} className="-m-1 flex flex-col gap-2 p-1 text-sm">
-      <p className="locus-eyebrow flex h-6 items-center">{title}</p>
+      <p className="flex h-6 items-center font-heading text-xs font-semibold text-foreground">
+        {title}
+      </p>
       {sections.map((section) => (
         <a
           key={section.id}

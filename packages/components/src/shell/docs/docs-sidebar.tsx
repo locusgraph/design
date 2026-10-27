@@ -18,7 +18,9 @@ function DocsNavList({ groups, activeHref, linkComponent: Link = "a" }: DocsNavL
     <div className="flex flex-col gap-6">
       {groups.map((group) => (
         <div key={group.label} className="flex flex-col">
-          <p className="locus-eyebrow flex h-8 items-center px-2">{group.label}</p>
+          <p className="flex h-8 items-center px-2 font-heading text-xs font-semibold text-foreground">
+            {group.label}
+          </p>
           <ul className="flex flex-col gap-0.5">
             {group.items.map((item) => {
               const active = item.href === activeHref;
