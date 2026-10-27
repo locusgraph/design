@@ -26,7 +26,7 @@ function Allowed() {
 export default defineDemo({
   title: "Spend Gate",
   description:
-    "SpendGraph pauses a run that would pass its cost cap (amber) or run out of prepaid credits (red). Allow the next step once, raise the cap, or stop.",
+    "Pauses a run before a step that would pass its cost cap (amber) or the prepaid balance (red). Allow the step once, raise the cap, or stop.",
   controls: { situation: select(situationOptions, "over-cap") },
   playground: ({ situation }) => (
     <div className="w-full max-w-xl">
