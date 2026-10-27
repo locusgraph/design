@@ -70,9 +70,8 @@ export function ChatPage({
           ))}
           {session.status === "streaming" && <Pulse label="Working…" />}
         </Chat>
-        <div className="px-3 pt-1 pb-3">
+        <div className="mx-auto w-full max-w-3xl px-4 pb-4">
           <Composer
-            className="mx-auto max-w-3xl"
             status={session.status}
             placeholder={composerPlaceholder(session.awaitingApproval)}
             disabled={session.awaitingApproval}
