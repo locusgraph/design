@@ -1,26 +1,79 @@
 import { LocusGraphWordmark } from "@locusgraph/brand";
+import { PlaygroundLink } from "../nav/playground-nav";
 
-const footerLinks = [
-  { title: "GitHub", href: "https://github.com/locusgraph/design" },
-  { title: "npm", href: "https://www.npmjs.com/org/locusgraph" },
-  { title: "DESIGN.md", href: "/DESIGN.md" },
+type FooterLink = { title: string; href: string; external?: boolean };
+
+const footerColumns: { title: string; links: FooterLink[] }[] = [
+  {
+    title: "Libraries",
+    links: [
+      { title: "Components", href: "/components" },
+      { title: "Blocks", href: "/blocks" },
+      { title: "Loop", href: "/loop" },
+      { title: "Patterns", href: "/patterns" },
+      { title: "Shells", href: "/shells" },
+      { title: "Brand", href: "/brand" },
+    ],
+  },
+  {
+    title: "Guides",
+    links: [
+      { title: "Installation", href: "/installation" },
+      { title: "Principles", href: "/principles" },
+      { title: "Human in the loop", href: "/human-in-the-loop" },
+      { title: "Theming", href: "/theming" },
+      { title: "Changelog", href: "/changelog" },
+    ],
+  },
+  {
+    title: "Project",
+    links: [
+      { title: "GitHub", href: "https://github.com/locusgraph/design", external: true },
+      { title: "npm", href: "https://www.npmjs.com/org/locusgraph", external: true },
+      { title: "DESIGN.md", href: "/DESIGN.md", external: true },
+      { title: "Registry", href: "/r/registry.json", external: true },
+    ],
+  },
 ];
+
+const linkClass =
+  "w-fit text-sm text-muted-foreground underline-offset-4 locus-focus-ring hover:text-foreground hover:underline";
+
+function FooterLinkItem({ link }: { link: FooterLink }) {
+  return link.external ? (
+    <a href={link.href} className={linkClass}>
+      {link.title}
+    </a>
+  ) : (
+    <PlaygroundLink href={link.href} className={linkClass}>
+      {link.title}
+    </PlaygroundLink>
+  );
+}
 
 export function LandingFooter() {
   return (
-    <footer className="mx-6 flex flex-col gap-4 border-t py-8 text-sm text-muted-foreground sm:mx-10 sm:flex-row sm:items-center sm:justify-between">
-      <LocusGraphWordmark withMark className="text-base text-foreground" />
-      <nav aria-label="Project links" className="flex gap-5">
-        {footerLinks.map((link) => (
-          <a
-            key={link.title}
-            href={link.href}
-            className="underline-offset-4 locus-focus-ring hover:text-foreground hover:underline"
-          >
-            {link.title}
-          </a>
+    <footer className="landing-full-rule -mb-16">
+      <div className="grid grid-cols-2 gap-x-6 gap-y-10 px-6 py-12 sm:px-10 lg:grid-cols-[2fr_1fr_1fr_1fr]">
+        <div className="col-span-2 flex flex-col gap-3 lg:col-span-1">
+          <LocusGraphWordmark withMark className="text-base text-foreground" />
+          <p className="max-w-72 text-sm text-pretty text-muted-foreground">
+            Components, blocks and Loop for products where agents ask before they act.
+          </p>
+        </div>
+        {footerColumns.map((column) => (
+          <nav key={column.title} aria-label={column.title} className="flex flex-col gap-3">
+            <h2 className="font-heading text-sm font-semibold text-foreground">{column.title}</h2>
+            {column.links.map((link) => (
+              <FooterLinkItem key={link.title} link={link} />
+            ))}
+          </nav>
         ))}
-      </nav>
+      </div>
+      <div className="landing-full-rule flex flex-col gap-2 px-6 py-5 text-xs text-faint sm:flex-row sm:items-center sm:justify-between sm:px-10">
+        <span>© 2026 LocusGraph</span>
+        <span>React 19 · Tailwind 4 · Light and dark</span>
+      </div>
     </footer>
   );
 }
