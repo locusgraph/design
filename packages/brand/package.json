@@ -1,6 +1,6 @@
 {
   "name": "@locusgraph/brand",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "description": "LocusGraph logo, wordmark and sign-in provider marks as React components and SVG files.",
   "license": "MIT",
   "repository": {
