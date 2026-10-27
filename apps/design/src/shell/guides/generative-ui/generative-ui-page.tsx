@@ -4,7 +4,7 @@ import { catalogPrompt, parseSpec } from "../../../demos/blocks/generative-ui/sp
 import { GenerativeCanvas } from "./canvas/generative-canvas";
 import { GenerativeControls } from "./controls/generative-controls";
 import { GenerativeDocsPanel } from "./docs/generative-docs-panel";
-import { findGenerativeSample, generativeSamples, sampleForPrompt } from "./session/samples";
+import { findGenerativeSample, generativeSamples } from "./session/samples";
 import { elementOrder, gatedActionCount, partialSpec, useSpecStream } from "./session/spec-stream";
 import { useGenerativeSession, type WriteGate } from "./session/use-generative-session";
 
@@ -33,6 +33,7 @@ export function GenerativeUiPage() {
   const showSample = (id: string, replay: boolean) => {
     const sample = findGenerativeSample(id);
     setSampleId(sample.id);
+    setPrompt(sample.prompt);
     setSource(formatSpec(sample.spec));
     setLastGood(sample.spec);
     if (replay) setRunId((current) => current + 1);
@@ -50,8 +51,7 @@ export function GenerativeUiPage() {
           promptBox={{
             prompt,
             streaming: stream.streaming,
-            onPromptChange: setPrompt,
-            onGenerate: (text) => showSample(sampleForPrompt(text).id, true),
+            onReplay: (id) => showSample(id, true),
           }}
           stream={{
             bytes: source.length,

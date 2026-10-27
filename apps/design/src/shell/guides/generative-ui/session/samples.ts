@@ -28,19 +28,9 @@ export const generativeSamples: GenerativeSample[] = [
   },
 ];
 
-const sampleKeywords: [string, RegExp][] = [
-  ["keys", /\b(key|keys|rotate|revoke|token)\b/i],
-  ["credits", /\b(credit|credits|top ?up|wallet|balance|pay)\b/i],
-];
-
 export function findGenerativeSample(id: string): GenerativeSample {
   return (
     generativeSamples.find((sample) => sample.id === id) ??
     (generativeSamples[0] as GenerativeSample)
   );
-}
-
-export function sampleForPrompt(prompt: string): GenerativeSample {
-  const match = sampleKeywords.find(([, pattern]) => pattern.test(prompt));
-  return findGenerativeSample(match?.[0] ?? "over-quota");
 }

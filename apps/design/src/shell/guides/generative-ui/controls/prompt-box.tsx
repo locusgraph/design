@@ -1,46 +1,47 @@
 import { Button, Textarea } from "@locusgraph/components";
-import { Sparkle as SparkleIcon } from "@phosphor-icons/react/ssr";
+import { useId } from "react";
 import { generativeSamples } from "../session/samples";
 
 type PromptBoxProps = {
   prompt: string;
   streaming: boolean;
-  onPromptChange: (prompt: string) => void;
-  onGenerate: (prompt: string) => void;
+  onReplay: (sampleId: string) => void;
 };
 
-export function PromptBox({ prompt, streaming, onPromptChange, onGenerate }: PromptBoxProps) {
+export function PromptBox({ prompt, streaming, onReplay }: PromptBoxProps) {
+  const noteId = useId();
   return (
     <div className="flex flex-col gap-3 px-4 py-4">
       <span className="locus-eyebrow">Ask the model</span>
       <Textarea
         aria-label="Prompt"
+        aria-describedby={noteId}
         value={prompt}
         rows={3}
-        onChange={(event) => onPromptChange(event.target.value)}
+        disabled
+        readOnly
         className="min-h-20 resize-none text-sm"
       />
-      <div className="flex flex-wrap gap-1.5">
-        {generativeSamples.map((sample) => (
-          <Button
-            key={sample.id}
-            variant="outline"
-            size="xs"
-            className="text-muted-foreground hover:text-foreground"
-            onClick={() => {
-              onPromptChange(sample.prompt);
-              onGenerate(sample.prompt);
-            }}
-          >
-            {sample.label}
-          </Button>
-        ))}
+      <p id={noteId} className="text-xs text-pretty text-faint">
+        No model key on this site. Replay a recorded reply instead.
+      </p>
+      <div className="flex flex-col gap-2">
+        <span className="locus-eyebrow">Recorded replies</span>
+        <div className="flex flex-wrap gap-1.5">
+          {generativeSamples.map((sample) => (
+            <Button
+              key={sample.id}
+              variant="outline"
+              size="xs"
+              disabled={streaming}
+              className="text-muted-foreground hover:text-foreground"
+              onClick={() => onReplay(sample.id)}
+            >
+              {sample.label}
+            </Button>
+          ))}
+        </div>
       </div>
-      <Button disabled={streaming || prompt.trim() === ""} onClick={() => onGenerate(prompt)}>
-        <SparkleIcon weight="bold" aria-hidden />
-        {streaming ? "Generating…" : "Generate"}
-      </Button>
-      <p className="text-xs text-faint">Replays a recorded reply. No model is called.</p>
     </div>
   );
 }
