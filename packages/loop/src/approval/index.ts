@@ -1,4 +1,7 @@
+export * from "./gate/approval-gate";
+export * from "./gate/use-approval-gate";
 export * from "./inbox/inbox";
+export * from "./log/decision-log";
 export * from "./memory/memory-review";
 export * from "./plan/plan-review";
 export * from "./plan/question";

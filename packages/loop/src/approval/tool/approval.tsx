@@ -10,7 +10,8 @@ import { ApprovalHeadline, SettledLine } from "../shared/approval-line";
 import { riskCopy } from "../shared/risk-badge";
 import { useFocusOnMount } from "../shared/use-focus-on-mount";
 import { useFocusWhenSettled } from "../shared/use-focus-when-settled";
-import type { ApprovalDecision } from "../types";
+import type { ApprovalChange, ApprovalDecision } from "../types";
+import { ChangePreview } from "./change-preview";
 import { DenyForm } from "./deny-form";
 import { ToolInputs } from "./tool-inputs";
 
@@ -20,8 +21,10 @@ export type ApprovalProps = {
   actionLabel?: string;
   description?: string;
   decision?: ApprovalDecision;
+  changes?: ApprovalChange[];
   onApprove: () => void;
   onDeny: (reason?: string) => void;
+  onAllowForRun?: () => void;
   autoFocus?: boolean;
   className?: string;
 };
@@ -47,8 +50,10 @@ export function Approval({
   actionLabel,
   description,
   decision,
+  changes,
   onApprove,
   onDeny,
+  onAllowForRun,
   autoFocus = true,
   className,
 }: ApprovalProps) {
@@ -77,6 +82,7 @@ export function Approval({
           <div>
             <ToolInputs input={part.input} muted={denying} />
           </div>
+          {changes && changes.length > 0 && <ChangePreview changes={changes} />}
           {denying ? (
             <DenyForm onDeny={onDeny} onBack={() => setDenying(false)} />
           ) : (
@@ -90,6 +96,11 @@ export function Approval({
               >
                 {actionLabel ?? `Run ${name}`}
               </Button>
+              {onAllowForRun && !destructive && (
+                <Button type="button" size="sm" variant="outline" onClick={onAllowForRun}>
+                  Allow for this run
+                </Button>
+              )}
               <Button type="button" size="sm" variant="ghost" onClick={() => setDenying(true)}>
                 Deny
               </Button>

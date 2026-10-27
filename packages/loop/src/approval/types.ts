@@ -52,3 +52,15 @@ export type PendingApproval = {
   requestedAt: DecidedAt;
   summary?: string;
 };
+
+export type ApprovalChange = { label: string; before?: ArgValue | null; after: ArgValue | null };
+
+export type DecisionLogKind = "approval" | "spend" | "stop" | "rule";
+
+export type DecisionLogEntry = {
+  id: string;
+  title: string;
+  kind?: DecisionLogKind;
+  decision: ApprovalDecision;
+  detail?: string;
+};
