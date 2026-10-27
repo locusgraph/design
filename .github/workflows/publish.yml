@@ -36,6 +36,6 @@ jobs:
           echo "PACKAGE=@locusgraph/$folder" >> "$GITHUB_ENV"
       - run: pnpm --filter "$PACKAGE" --if-present typecheck
       - run: pnpm --filter "$PACKAGE" --if-present test
-      - run: pnpm --filter "$PACKAGE" publish --no-git-checks
+      - run: pnpm --filter "$PACKAGE" publish --no-git-checks --provenance
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
