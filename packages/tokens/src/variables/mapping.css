@@ -36,7 +36,7 @@
   --color-sidebar-accent-foreground: var(--locus-sidebar-accent-foreground);
   --color-sidebar-border: var(--locus-sidebar-border);
   --color-sidebar-ring: var(--locus-sidebar-ring);
-  --font-sans: var(--locus-font-inter);
+  --font-sans: var(--locus-font-ibm-plex-sans);
   --font-heading: var(--locus-font-archivo);
   --font-mono: var(--locus-font-ibm-plex-mono);
   --font-brand: var(--locus-font-archivo);

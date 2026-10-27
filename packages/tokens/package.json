@@ -45,7 +45,7 @@
   "dependencies": {
     "@fontsource-variable/archivo": "catalog:",
     "@fontsource/ibm-plex-mono": "catalog:",
-    "@fontsource-variable/inter": "catalog:"
+    "@fontsource-variable/ibm-plex-sans": "catalog:"
   },
   "devDependencies": {
     "@locusgraph/config": "workspace:*",

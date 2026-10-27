@@ -48,7 +48,7 @@ function Eyebrow() {
 export default defineDemo({
   title: "Type",
   description:
-    "Three families: Archivo for headings and the wordmark, Inter for everything you read, IBM Plex Mono for code, ids and labels. One short size scale, three weights, and the locus-eyebrow label. From `@locusgraph/tokens`.",
+    "Three families: Archivo for headings and the wordmark, IBM Plex Sans for everything you read, IBM Plex Mono for code, ids and labels. One short size scale, three weights, and the locus-eyebrow label. From `@locusgraph/tokens`.",
   controls: { sample: text(defaultSample) },
   playground: ({ sample }) => (
     <div className="w-full max-w-3xl divide-y ring-1 ring-border">

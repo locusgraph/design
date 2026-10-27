@@ -16,7 +16,12 @@ export const typeFamilies: TypeFamily[] = [
     stack: fonts.heading,
     tracking: headingTracking,
   },
-  { name: "Inter", role: "Body, labels and controls", className: "font-sans", stack: fonts.sans },
+  {
+    name: "IBM Plex Sans",
+    role: "Body, labels and controls",
+    className: "font-sans",
+    stack: fonts.sans,
+  },
   {
     name: "IBM Plex Mono",
     role: "Code, ids, numbers in tables",

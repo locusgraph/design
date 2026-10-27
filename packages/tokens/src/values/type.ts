@@ -1,9 +1,9 @@
 export const fonts = {
-  sans: '"Inter Variable", ui-sans-serif, system-ui, sans-serif',
+  sans: '"IBM Plex Sans Variable", ui-sans-serif, system-ui, sans-serif',
   heading: '"Archivo Variable", ui-sans-serif, system-ui, sans-serif',
   mono: '"IBM Plex Mono", ui-monospace, monospace',
   emailSafeSans:
-    "Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif",
+    "'IBM Plex Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif",
   emailSafeMono: "'IBM Plex Mono', SFMono-Regular, Menlo, Consolas, monospace",
 } as const;
 

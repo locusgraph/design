@@ -11,7 +11,11 @@ type FontFile = { name: string; weight: 300 | 400 | 700; file: string };
 const fontFiles: FontFile[] = [
   { name: "Archivo", weight: 300, file: "@fontsource/archivo/files/archivo-latin-300-normal.woff" },
   { name: "Archivo", weight: 700, file: "@fontsource/archivo/files/archivo-latin-700-normal.woff" },
-  { name: "Inter", weight: 400, file: "@fontsource/inter/files/inter-latin-400-normal.woff" },
+  {
+    name: "IBM Plex Sans",
+    weight: 400,
+    file: "@fontsource/ibm-plex-sans/files/ibm-plex-sans-latin-400-normal.woff",
+  },
   {
     name: "IBM Plex Mono",
     weight: 400,

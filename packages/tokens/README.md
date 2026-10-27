@@ -26,7 +26,7 @@ Everything the theme defines is prefixed with `locus`: variables are `--locus-*`
 - Role colors: `interactive` (clickable, on hover), `memory` (remembered), `good`, `warn` (waiting) and `destructive`. Color means state; chart series `--locus-s1` to `--locus-s8` carry no meaning.
 - Hairlines: `--locus-border` is the text color mixed into the surface, 9% light and 10% dark.
 - Square containers: every radius token is 0. Buttons, chips, badges, dots and avatars use `rounded-full`.
-- Fonts: Inter for text, Archivo for headings and the brand, IBM Plex Mono for mono labels.
+- Fonts: IBM Plex Sans for text, Archivo for headings and the brand, IBM Plex Mono for mono labels.
 - Type scale: Tailwind's steps plus `text-2xs` (0.6875rem) for badges and counters and `text-code` (0.8125rem) for code.
 - Control heights: `h-control-xs` (1.5rem), `h-control-sm` (2rem), `h-control` (2.25rem) and `h-control-lg` (2.5rem), also as `size-control-*`.
 - Focus: `locus-focus-ring` draws a 2px ring outside the element; `locus-focus-ring-inset` draws it inside for rows, tabs and scroll areas.
@@ -64,7 +64,7 @@ color). Tailwind classes such as `bg-surface`, `text-soft`, `text-good`, `bg-btn
 | `--s1` … `--s8`, `--good`, `--bad`, `--info`, `--warn` | `--locus-s1` … `--locus-s8`, `--locus-good`, `--locus-bad`, `--locus-info`, `--locus-warn` |
 | `--skeleton`, `--scrim`, `--overlay-shadow`, `--radius` | `--locus-skeleton`, `--locus-scrim`, `--locus-overlay-shadow`, `--locus-radius` |
 | `--sidebar`, `--sidebar-*`, `--chart-1` … `--chart-5` | `--locus-sidebar`, `--locus-sidebar-*`, `--locus-chart-1` … `--locus-chart-5` |
-| `--font-inter`, `--font-archivo`, `--font-ibm-plex-mono` | `--locus-font-inter`, `--locus-font-archivo`, `--locus-font-ibm-plex-mono` |
+| `--font-ibm-plex-sans`, `--font-archivo`, `--font-ibm-plex-mono` | `--locus-font-ibm-plex-sans`, `--locus-font-archivo`, `--locus-font-ibm-plex-mono` |
 | `--brand-glow`, `--brand-loop`, `--brand-grid-image`, `--brand-grid-size` | `--locus-brand-glow`, `--locus-brand-loop`, `--locus-brand-grid-image`, `--locus-brand-grid-size` |
 | `--shimmer-spread`, `--shimmer-color`, `--shimmer-duration` | `--locus-shimmer-spread`, `--locus-shimmer-color`, `--locus-shimmer-duration` |
 | `--scroll-fade-size`, `--scroll-fade-reveal` | `--locus-scroll-fade-size`, `--locus-scroll-fade-reveal` |

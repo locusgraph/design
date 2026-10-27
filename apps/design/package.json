@@ -36,7 +36,7 @@
     "@cloudflare/vite-plugin": "catalog:",
     "@fontsource/archivo": "catalog:",
     "@fontsource/ibm-plex-mono": "catalog:",
-    "@fontsource/inter": "catalog:",
+    "@fontsource/ibm-plex-sans": "catalog:",
     "@locusgraph/config": "workspace:*",
     "@resvg/resvg-js": "catalog:",
     "@tailwindcss/vite": "catalog:",
