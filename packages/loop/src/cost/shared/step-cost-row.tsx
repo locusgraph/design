@@ -19,7 +19,7 @@ export function isWastedStep(step: CostStep): boolean {
 
 function barTone(step: CostStep): string {
   if (isWastedStep(step)) return "bg-destructive";
-  if (step.status === "running") return "bg-warn/60 motion-safe:animate-pulse";
+  if (step.status === "running") return "bg-warn-fill/60 motion-safe:animate-pulse";
   return "bg-muted-foreground/50";
 }
 

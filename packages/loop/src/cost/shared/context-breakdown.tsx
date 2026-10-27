@@ -8,8 +8,8 @@ export type ContextSegment = { label: string; tokens: number };
 const statusWord = { ok: "Room left", near: "Near limit", full: "Full" } as const;
 
 const statusDot = {
-  ok: "bg-good",
-  near: "bg-warn",
+  ok: "bg-good-fill",
+  near: "bg-warn-fill",
   full: "bg-destructive",
 } as const;
 
