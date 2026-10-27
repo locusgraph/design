@@ -18,11 +18,11 @@ function ChangeValue({ change }: { change: ApprovalChange }) {
 
 export function ChangePreview({ changes }: { changes: ApprovalChange[] }) {
   return (
-    <div data-slot="change-preview" className="flex flex-col gap-2">
+    <div data-slot="change-preview" className="@container flex flex-col gap-2">
       <p className="text-xs font-medium text-muted-foreground">What changes</p>
-      <dl className="grid grid-cols-[6rem_minmax(0,1fr)] gap-x-4 gap-y-2 text-sm sm:grid-cols-[8rem_minmax(0,1fr)]">
+      <dl className="flex flex-col gap-3 text-sm @sm:grid @sm:grid-cols-[8rem_minmax(0,1fr)] @sm:gap-x-4 @sm:gap-y-2">
         {changes.map((change) => (
-          <div key={change.label} className="contents">
+          <div key={change.label} className="flex flex-col gap-0.5 @sm:contents">
             <dt className="truncate text-muted-foreground">{change.label}</dt>
             <dd className="min-w-0 break-words">
               <ChangeValue change={change} />

@@ -54,16 +54,16 @@ export function ToolInputs({ input, muted = false }: { input: unknown; muted?: b
   const [showRaw, setShowRaw] = useState(false);
   const entries = isPlainRecord(input) ? Object.entries(input) : null;
   return (
-    <div data-slot="tool-inputs" className="flex flex-col gap-2">
+    <div data-slot="tool-inputs" className="@container flex flex-col gap-2">
       {entries && !showRaw && (
         <dl
           className={cn(
-            "grid grid-cols-[6rem_minmax(0,1fr)] gap-x-4 sm:grid-cols-[8rem_minmax(0,1fr)] gap-y-2 text-sm",
+            "flex flex-col gap-3 text-sm @sm:grid @sm:grid-cols-[8rem_minmax(0,1fr)] @sm:gap-x-4 @sm:gap-y-2",
             muted ? "text-faint" : "text-foreground"
           )}
         >
           {entries.map(([key, value]) => (
-            <div key={key} className="contents">
+            <div key={key} className="flex flex-col gap-0.5 @sm:contents">
               <dt className="truncate text-muted-foreground">{humanizeKey(key)}</dt>
               <dd className={cn("min-w-0 break-words", !muted && "font-medium")}>
                 {readableValue(value)}
@@ -83,7 +83,7 @@ export function ToolInputs({ input, muted = false }: { input: unknown; muted?: b
       {entries && (
         <button
           type="button"
-          className="ml-28 self-start text-xs sm:ml-36 text-faint locus-focus-ring hover:text-interactive motion-safe:transition-colors"
+          className="self-start text-xs @sm:ml-36 text-faint locus-focus-ring hover:text-interactive motion-safe:transition-colors"
           onClick={() => setShowRaw((current) => !current)}
         >
           {showRaw ? "Show fields" : "Show raw"}
