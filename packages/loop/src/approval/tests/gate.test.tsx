@@ -124,4 +124,18 @@ describe("DecisionLog", () => {
     );
     expect(html).toContain("Stopped by Dana");
   });
+
+  it("joins each decision to the next with a rail, none after the last", () => {
+    const decision = { approved: true, by: "You", at: "2026-10-27T12:00:00.000Z" };
+    const html = renderToStaticMarkup(
+      <DecisionLog
+        entries={[
+          { id: "a", title: "Move to Pro", decision },
+          { id: "b", title: "Rotate key", decision },
+          { id: "c", title: "Revoke key", decision },
+        ]}
+      />
+    );
+    expect(html.match(/data-slot="decision-log-rail"/g)).toHaveLength(2);
+  });
 });

@@ -15,6 +15,16 @@ const kindVerbs: Record<DecisionLogKind, { approved: string; denied: string }> =
   rule: { approved: "Allowed by a rule", denied: "Blocked by a rule" },
 };
 
+function TimelineRail() {
+  return (
+    <span
+      aria-hidden
+      data-slot="decision-log-rail"
+      className="absolute top-5.5 -bottom-3.5 left-2 w-px -translate-x-1/2 bg-border"
+    />
+  );
+}
+
 export function DecisionLog({
   entries,
   emptyText = "No decisions yet.",
@@ -33,10 +43,12 @@ export function DecisionLog({
       aria-label="Decision log"
       className={cn("flex flex-col gap-4", className)}
     >
-      {entries.map((entry) => {
+      {entries.map((entry, index) => {
         const kind = entry.kind ?? "approval";
+        const hasNext = index < entries.length - 1;
         return (
-          <li key={entry.id} data-kind={kind} className="flex flex-col gap-1">
+          <li key={entry.id} data-kind={kind} className="relative flex flex-col gap-1">
+            {hasNext && <TimelineRail />}
             <DecisionSummary
               decision={entry.decision}
               result={entry.title}
