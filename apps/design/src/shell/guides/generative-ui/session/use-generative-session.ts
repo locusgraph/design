@@ -54,7 +54,8 @@ export function useGenerativeSession(writeGate: WriteGate) {
   const log = [...gate.log, ...autoLog].sort(
     (first, second) => decidedAtMs(first) - decidedAtMs(second)
   );
-  return { gate, store, registry, actionHandlers, log };
+  const startTurn = () => store.update({ "/picked": null, "/pending": null, "/settled": null });
+  return { gate, store, registry, actionHandlers, log, startTurn };
 }
 
 export type GenerativeSession = ReturnType<typeof useGenerativeSession>;

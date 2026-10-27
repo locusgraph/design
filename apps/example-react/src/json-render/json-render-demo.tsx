@@ -19,7 +19,8 @@ function createBillingStore() {
     keys,
     selectedPackId: null,
     picked: null,
-    lastAction: null,
+    pending: null,
+    settled: null,
   });
 }
 

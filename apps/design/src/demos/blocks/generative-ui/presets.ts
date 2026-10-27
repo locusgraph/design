@@ -29,19 +29,20 @@ export const sampleState = {
   ],
   selectedPackId: null,
   picked: null,
-  lastAction: null,
+  pending: null,
+  settled: null,
 };
 
 const lastAction = {
   type: "Notice",
-  props: { tone: "success", title: { $state: "/lastAction" }, description: null },
-  visible: { $state: "/lastAction" },
+  props: { tone: "success", title: { $state: "/settled/label" }, description: null },
+  visible: { $state: "/settled" },
 };
 
 export const overQuotaSpec: Spec = {
   root: "page",
   elements: {
-    page: { type: "Stack", props: { gap: "md" }, children: ["notice", "usage", "plans", "done"] },
+    page: { type: "Stack", props: { gap: "md" }, children: ["notice", "usage", "plans"] },
     notice: {
       type: "Notice",
       props: { tone: "warning", title: "You're 450 events over this month", description: null },
@@ -56,7 +57,6 @@ export const overQuotaSpec: Spec = {
       },
       on: { action: { action: "pickedAction" } },
     },
-    done: lastAction,
   },
 };
 
@@ -84,7 +84,7 @@ export const creditsSpec: Spec = {
 export const keysSpec: Spec = {
   root: "page",
   elements: {
-    page: { type: "Stack", props: { gap: "md" }, children: ["keys", "done"] },
+    page: { type: "Stack", props: { gap: "md" }, children: ["keys"] },
     keys: {
       type: "Keys",
       props: {
@@ -96,7 +96,6 @@ export const keysSpec: Spec = {
       },
       on: { action: { action: "pickedAction" } },
     },
-    done: lastAction,
   },
 };
 

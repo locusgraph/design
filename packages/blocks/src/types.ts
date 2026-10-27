@@ -9,6 +9,10 @@ export type BlockAction = {
   disabled?: boolean;
 };
 
+export type PendingBlockAction = { actionId: string; target: string };
+
+export type SettledBlockAction = { actionId: string; target: string; label: string };
+
 export type QuotaPeriod = "month" | "lifetime";
 
 export type QuotaData = {

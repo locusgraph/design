@@ -22,8 +22,8 @@ pnpm add @locusgraph/blocks @locusgraph/components
 | `UsageAlert` | `balanceMicroUsd`, `quotas`, `paidPlan`, `buyCreditsHref`, `upgradeHref`, `linkComponent`. Renders nothing when credits are fine and no quota is over |
 | `Wallet` | `balanceMicroUsd`, `debtMicroUsd`, `grants`. A Rule Grid cell |
 | `TopUp` | `packs`, `onBuy(packId)`, `pending`. A Rule Grid cell |
-| `Plans` | `plans`, `actionFor(plan)` for plans that are not current, or `actions` as data (`BlockAction[]`) with `onAction(actionId, plan)` |
-| `Keys` | `keys`, `actions(key)` or `actions` as data with `onAction(actionId, key)`, `highlightedId` to flash a just-created key. Dates render in the viewer's time zone after hydration |
+| `Plans` | `plans`, `actionFor(plan)` for plans that are not current, or `actions` as data (`BlockAction[]`) with `onAction(actionId, plan)`. `pending` locks every action and spins the one running; `settled` shows its `label` on the target in place of the buttons |
+| `Keys` | `keys`, `actions(key)` or `actions` as data with `onAction(actionId, key)`, `highlightedId` to flash a just-created key, `pending` and `settled` as for `Plans`, with the key id as `target`. Dates render in the viewer's time zone after hydration |
 | `LocalDate` | `value` (ISO string): UTC on the server, the viewer's time zone after hydration |
 | `KeysEmpty` | `newKeyHref` (omit for read-only roles), `linkComponent` |
 
