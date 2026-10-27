@@ -2,9 +2,9 @@ import { describe, expect, it } from "vitest";
 import { readShellSettings } from "../src/url-state";
 
 describe("readShellSettings", () => {
-  it("defaults to light, desktop and surface", () => {
+  it("defaults to dark, desktop and surface", () => {
     expect(readShellSettings(new URLSearchParams())).toEqual({
-      theme: "light",
+      theme: "dark",
       viewport: "desktop",
       background: "surface",
     });

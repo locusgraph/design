@@ -22,7 +22,7 @@ const grants = [{ label: "Free start", remainingMicroUsd: 1_000_000, expiresAt: 
 
 export function BlocksPreview() {
   return (
-    <div className="flex w-full max-w-md flex-col gap-3">
+    <div className="flex w-full flex-col divide-y [&_[data-slot=rule-grid-cell]]:p-8 [&_[data-slot=rule-grid-cell]]:ring-0 [&_[data-slot=rule-grid]]:p-0">
       <Usage quotas={quotas} />
       <RuleGrid columns={1}>
         <Wallet balanceMicroUsd={1_000_000} grants={grants} />

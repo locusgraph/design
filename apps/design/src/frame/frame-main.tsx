@@ -6,7 +6,7 @@ import { FrameShell } from "./frame-shell";
 
 const frameParams = new URLSearchParams(window.location.search);
 const shellId = frameParams.get("shell");
-const shellTheme = frameParams.get("theme") === "dark" ? "dark" : "light";
+const shellTheme = frameParams.get("theme") === "light" ? "light" : "dark";
 
 if (shellId && frameParams.get("outline") === "1") {
   document.documentElement.dataset.shellOutline = "";

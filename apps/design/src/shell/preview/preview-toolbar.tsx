@@ -11,7 +11,8 @@ import { ArrowCounterClockwise as RotateCcwIcon } from "@phosphor-icons/react/ss
 import { type PreviewBackground, setParam } from "../../url-state";
 
 export const previewBackgroundClass: Record<PreviewBackground, string> = {
-  surface: "bg-background",
+  surface:
+    "bg-surface bg-[radial-gradient(var(--locus-border)_1px,transparent_1px)] [background-size:16px_16px]",
   plain: "bg-white dark:bg-black",
   checker: "preview-checker",
 };

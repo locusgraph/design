@@ -26,7 +26,7 @@ function CopyButton({ text }: { text: string }) {
       size="icon-sm"
       aria-label={copied ? "Copied" : "Copy code"}
       onClick={copy}
-      className="absolute top-2 right-2 z-10 bg-surface hover:bg-accent"
+      className="m-2 shrink-0 hover:bg-accent"
     >
       {copied ? (
         <CheckIcon weight="bold" aria-hidden className="text-good" />
@@ -77,19 +77,21 @@ export function CodeBlock({
   const lineCount = code.split("\n").length;
   const canCollapse = collapsible && lineCount > collapsedLineCount;
   const codeClass = cn(
-    "overflow-x-auto p-4 pr-12 font-mono text-sm [&_pre]:outline-none has-[pre:focus-visible]:outline-2 has-[pre:focus-visible]:-outline-offset-2 has-[pre:focus-visible]:outline-ring/70",
+    "min-w-0 flex-1 overflow-x-auto p-4 pr-2 font-mono text-sm [&_pre]:outline-none has-[pre:focus-visible]:outline-2 has-[pre:focus-visible]:-outline-offset-2 has-[pre:focus-visible]:outline-ring/70",
     canCollapse && !expanded && collapsedHeight
   );
   return (
-    <div className={cn("relative", className)}>
-      {showCopy && <CopyButton text={code} />}
-      {html ? (
-        <div className={codeClass} dangerouslySetInnerHTML={{ __html: html }} />
-      ) : (
-        <div className={codeClass}>
-          <UnhighlightedCode code={code} />
-        </div>
-      )}
+    <div className={className}>
+      <div className="flex items-start">
+        {html ? (
+          <div className={codeClass} dangerouslySetInnerHTML={{ __html: html }} />
+        ) : (
+          <div className={codeClass}>
+            <UnhighlightedCode code={code} />
+          </div>
+        )}
+        {showCopy && <CopyButton text={code} />}
+      </div>
       {canCollapse && (
         <ExpandToggle
           expanded={expanded}

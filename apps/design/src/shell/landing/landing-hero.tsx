@@ -1,6 +1,7 @@
 import { Button } from "@locusgraph/components";
 import { ArrowRight as ArrowRightIcon } from "@phosphor-icons/react/ssr";
 import { PlaygroundLink } from "../nav/playground-nav";
+import { CopyCommand } from "./actions/copy-command";
 import { StartWithAgent } from "./actions/start-with-agent";
 
 function NewLoopPill() {
@@ -42,18 +43,20 @@ export function LandingHero() {
           </PlaygroundLink>
         </Button>
       </div>
-      <p className="flex flex-wrap items-center gap-x-3 gap-y-1 font-mono text-xs text-muted-foreground">
-        <span>
-          or copy the source:{" "}
-          <span className="text-foreground/80">pnpm dlx shadcn@latest add @locus/…</span>
-        </span>
-        <PlaygroundLink
-          href="/installation#copy-with-shadcn"
-          className="underline-offset-4 locus-focus-ring hover:text-foreground hover:underline"
-        >
-          Registry →
-        </PlaygroundLink>
-      </p>
+      <div className="flex w-full max-w-xl flex-col gap-2">
+        <span className="locus-eyebrow">Or copy the source</span>
+        <div className="flex flex-wrap items-center gap-x-4 gap-y-2">
+          <div className="min-w-0 flex-1">
+            <CopyCommand command="pnpm dlx shadcn@latest add @locus/approval" />
+          </div>
+          <PlaygroundLink
+            href="/installation#copy-with-shadcn"
+            className="text-sm font-medium text-muted-foreground underline-offset-4 locus-focus-ring hover:text-foreground hover:underline"
+          >
+            Registry →
+          </PlaygroundLink>
+        </div>
+      </div>
     </header>
   );
 }

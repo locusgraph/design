@@ -106,3 +106,26 @@ body {
 [data-shell-outline] [data-slot="docs-aside"]::after {
   content: "On this page";
 }
+
+@keyframes landing-skeleton-sweep {
+  from {
+    background-position-x: 100%;
+  }
+  to {
+    background-position-x: 0%;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .landing-skeletons [data-slot="skeleton"],
+  .landing-skeletons [data-slot="skeleton-text-line"] {
+    background-image: linear-gradient(
+      90deg,
+      transparent 35%,
+      color-mix(in oklch, var(--locus-foreground) 14%, transparent) 50%,
+      transparent 65%
+    );
+    background-size: 300% 100%;
+    animation: landing-skeleton-sweep 1.8s linear infinite;
+  }
+}
