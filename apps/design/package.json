@@ -9,7 +9,8 @@
     "typecheck": "tsc -p tsconfig.json --noEmit",
     "test": "vitest run",
     "deploy": "pnpm registry && cf deploy",
-    "registry": "node ../../scripts/registry/build.mjs"
+    "registry": "node ../../scripts/registry/build.mjs",
+    "readme:hero": "node scripts/readme-hero.ts"
   },
   "dependencies": {
     "@json-render/core": "catalog:",

@@ -36,9 +36,13 @@ export function svgToPng(svg: string, width: number) {
   return new Resvg(svg, { fitTo: { mode: "width", value: width } }).render().asPng();
 }
 
-export async function elementToPng(element: ReactNode, size: { width: number; height: number }) {
+export async function elementToPng(
+  element: ReactNode,
+  size: { width: number; height: number },
+  outputWidth = size.width
+) {
   const svg = await satori(element, { ...size, fonts: loadFonts() });
-  return svgToPng(svg, size.width);
+  return svgToPng(svg, outputWidth);
 }
 
 const icoHeaderBytes = 6;

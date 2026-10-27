@@ -1,6 +1,18 @@
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset=".github/assets/hero-dark.png">
+  <img alt="Locus Design: design that keeps humans in the loop" src=".github/assets/hero-light.png">
+</picture>
+
+<p align="center">
+  <a href="https://design.locusgraph.com">Docs</a> ·
+  <a href="https://design.locusgraph.com/DESIGN.md">DESIGN.md</a> ·
+  <a href="https://design.locusgraph.com/r/registry.json">shadcn registry</a> ·
+  <a href="https://www.npmjs.com/package/@locusgraph/components">npm</a>
+</p>
+
 # Locus Design
 
-Design that keeps humans in the loop. A design system for agent products: React components
+A design system for agent products: React components
 on Radix, product blocks, Loop (agent UI with the human in the loop), brand assets, and one theme
 with light and dark modes. Icons are Phosphor (`@phosphor-icons/react`), bold weight.
 
