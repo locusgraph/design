@@ -8,6 +8,7 @@ on:
       - "components-v*"
       - "config-v*"
       - "email-v*"
+      - "json-render-v*"
       - "loop-v*"
       - "tokens-v*"
       - "utils-v*"

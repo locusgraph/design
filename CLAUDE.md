@@ -1,6 +1,6 @@
 # design
 
-The LocusGraph design system: seven npm packages under `packages/` and the docs site in `apps/design` (design.locusgraph.com).
+The LocusGraph design system: nine npm packages under `packages/` and the docs site in `apps/design` (design.locusgraph.com).
 
 ## Code rules
 
@@ -41,8 +41,9 @@ These rules apply to every source file. They are not suggestions.
 - `packages/blocks`: `@locusgraph/blocks`, product sections (`Usage`, `UsageAlert`, `Quota`, `Wallet`, `TopUp`, `Plans`, `Keys`, `KeysEmpty` and their skeletons) built from components. Props and callbacks only, never fetching
 - `packages/loop`: `@locusgraph/loop`, agent UI (chat, thread, agent, approval, memory, cost) on Vercel AI SDK `UIMessage` parts. Never calls a model
 - `packages/email`: `@locusgraph/email`, transactional email templates with inline styles from tokens
+- `packages/json-render`: `@locusgraph/json-render`, a json-render catalog (`locusComponents`) and registry (`locusRenderers`) for components and blocks, so a model can lay out LocusGraph screens as JSON
 
-Dependencies flow one way: `config` ← every package; `tokens` ← `components`, `email`; `utils` ← `blocks`, `loop`, `email`; `brand` ← `loop`; `components` ← `blocks`, `loop`. Never import upward.
+Dependencies flow one way: `config` ← every package; `tokens` ← `components`, `email`; `utils` ← `blocks`, `loop`, `email`; `brand` ← `loop`; `components` ← `blocks`, `loop`, `json-render`; `blocks` ← `json-render`. Never import upward.
 
 Everything the theme defines is prefixed with `locus` so it never clashes with an app's own CSS: variables are `--locus-*` (`packages/tokens/src/variables/palette.css`, light on `:root`, dark on `.dark`), and our classes, utilities and keyframes are `locus-*` (`locus-eyebrow`, `locus-shimmer`, `.locus-brand-grid`). `theme.css` never defines the unprefixed shadcn names (`--background`, `--muted`, `--primary`); `shadcn.css` (`@locusgraph/tokens/shadcn.css`, re-exported as `@locusgraph/components/shadcn.css`) maps them to ours for apps that also use shadcn components, and components must work without it. The Tailwind keys in `variables/mapping.css` keep their names (`bg-surface`, `text-faint`, `bg-primary`, `text-muted-foreground`) and point at `--locus-*`. `data-slot` attributes stay as shadcn names them.
 
@@ -51,7 +52,7 @@ Icons come from `@phosphor-icons/react`, imported from `@phosphor-icons/react/ss
 - `scripts/registry`: builds the shadcn registry into `apps/design/public/r` (one item per source file, a bundle per docs page without one, and the `theme` item) and `install-test/` installs every item into a fresh `shadcn init` app and builds it
 - `apps/example-next` (port 3100) and `apps/example-react` (port 3200): small apps that use the packages the way a product would, in Next.js App Router and in Vite. Keep them building; they are the check that the packages work outside the docs site
 
-`components`, `blocks` and `loop` build with `tsc` (JSX preserved), then `scripts/react-compiler.mjs` (React Compiler, target React 19), then `scripts/esm-extensions.mjs`. The compiler step fails the build when a component bails out; fix the code, or add a `"use no memo"` directive where a library is known to be incompatible (TanStack Virtual's `useVirtualizer`). `brand` is not compiled: its marks render inside Satori (`ImageResponse`), which calls components without React's hook dispatcher. `node scripts/perf/bench-loop.mjs` times Loop's long lists against the built `dist` in happy-dom.
+`components`, `blocks`, `loop` and `json-render` build with `tsc` (JSX preserved), then `scripts/react-compiler.mjs` (React Compiler, target React 19), then `scripts/esm-extensions.mjs`. The compiler step fails the build when a component bails out; fix the code, or add a `"use no memo"` directive where a library is known to be incompatible (TanStack Virtual's `useVirtualizer`). `brand` is not compiled: its marks render inside Satori (`ImageResponse`), which calls components without React's hook dispatcher. `node scripts/perf/bench-loop.mjs` times Loop's long lists against the built `dist` in happy-dom.
 
 Components that import Radix use its subpaths (`radix-ui/dialog`), never the `radix-ui` root: the root import hangs the vinext RSC build of apps that use this package.
 
@@ -68,7 +69,7 @@ cd apps/design && pnpm run deploy            # registry, build and deploy to des
 
 ## Releases
 
-Bump `version` in `packages/<folder>/package.json`, merge, then push the tag `<folder>-v<version>` (for example `tokens-v0.1.0`). The `publish` workflow finds the package from the tag, checks the tag matches the version, typechecks, tests, builds and publishes to npm with provenance, using the `NPM_TOKEN` repository secret. Publish a dependency before the packages that use it: `config`, `tokens`, `utils`, `brand`, then `components`, then `blocks`, `loop` and `email`. Semver: a fix is a patch, a new component or prop a minor, a removed or renamed export, prop or token a major (while 0.x, a minor).
+Bump `version` in `packages/<folder>/package.json`, merge, then push the tag `<folder>-v<version>` (for example `tokens-v0.1.0`). The `publish` workflow finds the package from the tag, checks the tag matches the version, typechecks, tests, builds and publishes to npm with provenance, using the `NPM_TOKEN` repository secret. Publish a dependency before the packages that use it: `config`, `tokens`, `utils`, `brand`, then `components`, then `blocks`, `loop` and `email`, then `json-render`. Semver: a fix is a patch, a new component or prop a minor, a removed or renamed export, prop or token a major (while 0.x, a minor).
 
 ## Commits
 
@@ -76,6 +77,6 @@ Enforced by `.githooks/commit-msg` (run `pnpm run prepare` once after cloning):
 
 - One line only: `type(folder): what it does`
 - `type` is one of feat, fix, chore, docs, refactor, test, build, ci, perf, style, revert
-- `folder` is a package folder (`config`, `tokens`, `utils`, `brand`, `components`, `blocks`, `loop`, `email`), `design`, or `repo`
+- `folder` is a package folder (`config`, `tokens`, `utils`, `brand`, `components`, `blocks`, `loop`, `email`, `json-render`), `design`, or `repo`
 - Lowercase description, no trailing period, at most 100 characters
 - No `Co-Authored-By` trailer
