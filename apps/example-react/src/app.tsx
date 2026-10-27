@@ -14,6 +14,7 @@ import { formatMicroUsd } from "@locusgraph/utils";
 import { useState } from "react";
 import { AgentChat } from "./agent/agent-chat";
 import { EmailPreview } from "./email-preview";
+import { JsonRenderDemo } from "./json-render/json-render-demo";
 import { grants, keys, organization, packs, plans, quotas, wallet } from "./sample-data";
 
 export function App() {
@@ -42,6 +43,7 @@ export function App() {
             <TabsTrigger value="keys">API keys</TabsTrigger>
             <TabsTrigger value="email">Emails</TabsTrigger>
             <TabsTrigger value="agent">Agent</TabsTrigger>
+            <TabsTrigger value="json-render">json-render</TabsTrigger>
           </TabsList>
           <TabsContent value="billing" className="locus-enter-cascade flex flex-col gap-8 pt-6">
             <UsageAlert
@@ -87,6 +89,9 @@ export function App() {
           </TabsContent>
           <TabsContent value="agent" className="pt-6">
             <AgentChat />
+          </TabsContent>
+          <TabsContent value="json-render" className="pt-6">
+            <JsonRenderDemo />
           </TabsContent>
         </Tabs>
       </main>

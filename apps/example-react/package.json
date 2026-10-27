@@ -9,6 +9,8 @@
     "typecheck": "tsc -p tsconfig.json --noEmit"
   },
   "dependencies": {
+    "@json-render/core": "catalog:",
+    "@json-render/react": "catalog:",
     "@phosphor-icons/react": "catalog:",
     "@locusgraph/blocks": "workspace:*",
     "@locusgraph/brand": "workspace:*",
@@ -17,7 +19,8 @@
     "@locusgraph/loop": "workspace:*",
     "@locusgraph/utils": "workspace:*",
     "react": "catalog:",
-    "react-dom": "catalog:"
+    "react-dom": "catalog:",
+    "zod": "catalog:"
   },
   "devDependencies": {
     "@locusgraph/config": "workspace:*",
