@@ -1,11 +1,12 @@
 import { createStateStore } from "@json-render/core";
 import { JSONUIProvider, Renderer, type SetState } from "@json-render/react";
 import { RuleGrid, RuleGridCell, RuleGridLabel } from "@locusgraph/components";
-import { useState } from "react";
+import { ApprovalGate, DecisionLog, useApprovalGate } from "@locusgraph/loop";
+import { useEffect, useRef, useState } from "react";
 import { grants, keys, packs, plans, quotas, wallet } from "../sample-data";
 import { billingSpec } from "./billing-spec";
 import { catalog } from "./catalog";
-import { handlers, registry } from "./registry";
+import { type AskApproval, createBillingRegistry } from "./registry";
 
 function createBillingStore() {
   return createStateStore({
@@ -32,7 +33,15 @@ function storeSetState(store: ReturnType<typeof createStateStore>): SetState {
 }
 
 export function JsonRenderDemo() {
+  const gate = useApprovalGate();
+  const askRef = useRef<AskApproval>(gate.ask);
+  useEffect(() => {
+    askRef.current = gate.ask;
+  });
   const [store] = useState(createBillingStore);
+  const [{ registry, handlers }] = useState(() =>
+    createBillingRegistry((request) => askRef.current(request))
+  );
   const [actionHandlers] = useState(() =>
     handlers(
       () => storeSetState(store),
@@ -45,6 +54,13 @@ export function JsonRenderDemo() {
       <JSONUIProvider registry={registry} store={store} handlers={actionHandlers}>
         <Renderer spec={billingSpec} registry={registry} />
       </JSONUIProvider>
+      <ApprovalGate gate={gate} />
+      <RuleGrid columns={1}>
+        <RuleGridCell className="gap-3">
+          <RuleGridLabel>Decision log</RuleGridLabel>
+          <DecisionLog entries={gate.log} />
+        </RuleGridCell>
+      </RuleGrid>
       <RuleGrid columns={2}>
         <RuleGridCell className="gap-3">
           <RuleGridLabel>Spec, what a model returns</RuleGridLabel>

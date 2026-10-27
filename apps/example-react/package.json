@@ -16,6 +16,7 @@
     "@locusgraph/brand": "workspace:*",
     "@locusgraph/components": "workspace:*",
     "@locusgraph/email": "workspace:*",
+    "@locusgraph/json-render": "workspace:*",
     "@locusgraph/loop": "workspace:*",
     "@locusgraph/utils": "workspace:*",
     "react": "catalog:",

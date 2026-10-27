@@ -540,6 +540,9 @@ importers:
       '@locusgraph/email':
         specifier: workspace:*
         version: link:../../packages/email
+      '@locusgraph/json-render':
+        specifier: workspace:*
+        version: link:../../packages/json-render
       '@locusgraph/loop':
         specifier: workspace:*
         version: link:../../packages/loop
