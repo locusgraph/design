@@ -1,4 +1,5 @@
 import type {
+  DataPart,
   FilePart,
   MessagePart,
   ReasoningPart,
@@ -11,11 +12,16 @@ export type PartSegment =
   | { kind: "text"; key: string; part: TextPart }
   | { kind: "reasoning"; key: string; part: ReasoningPart }
   | { kind: "tool"; key: string; part: ToolPart }
+  | { kind: "data"; key: string; part: DataPart }
   | { kind: "files"; key: string; parts: FilePart[] }
   | { kind: "sources"; key: string; parts: SourceUrlPart[]; firstIndex: number };
 
 export function isToolPart(part: MessagePart): part is ToolPart {
   return part.type === "dynamic-tool" || part.type.startsWith("tool-");
+}
+
+export function isDataPart(part: MessagePart): part is DataPart {
+  return part.type.startsWith("data-");
 }
 
 function appendToRun(
@@ -53,6 +59,8 @@ export function groupParts(parts: MessagePart[]): PartSegment[] {
       appendToRun(segments, "sources", part, key, sourcesSeen);
     } else if (isToolPart(part)) {
       segments.push({ kind: "tool", key: part.toolCallId, part });
+    } else if (isDataPart(part)) {
+      segments.push({ kind: "data", key: part.id ?? key, part });
     }
   });
   return segments;

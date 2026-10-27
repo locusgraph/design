@@ -1,5 +1,6 @@
+import { type QuotaData, Usage } from "@locusgraph/blocks";
 import { Avatar, AvatarFallback } from "@locusgraph/components";
-import { type AgentMessage, Turn } from "@locusgraph/loop";
+import { type AgentMessage, type DataPart, Turn } from "@locusgraph/loop";
 import { defineDemo, select } from "../../../registry/define-demo";
 
 const roles = ["assistant", "user"] as const;
@@ -48,6 +49,23 @@ const assistantMessage: AgentMessage = {
 
 const messages = { assistant: assistantMessage, user: userMessage };
 
+const usageMessage: AgentMessage = {
+  id: "msg_usage",
+  role: "assistant",
+  parts: [
+    { type: "text", text: "You are over the free SpendGraph quota this month." },
+    {
+      type: "data-usage",
+      id: "usage_1",
+      data: [{ key: "spendgraph.events", period: "month", used: 10450, included: 10000 }],
+    },
+  ],
+};
+
+function UsagePart({ part }: { part: DataPart }) {
+  return part.type === "data-usage" ? <Usage quotas={part.data as QuotaData[]} /> : null;
+}
+
 function Pair() {
   return (
     <div className="flex w-full max-w-xl flex-col gap-6">
@@ -78,6 +96,16 @@ function CustomTool() {
   );
 }
 
+function DataParts() {
+  return (
+    <Turn
+      className="w-full max-w-xl"
+      message={usageMessage}
+      renderData={(part) => <UsagePart part={part} />}
+    />
+  );
+}
+
 export default defineDemo({
   title: "Turn",
   description:
@@ -92,6 +120,11 @@ export default defineDemo({
     { name: "renderReasoning", type: "(part: ReasoningPart) => ReactNode" },
     { name: "renderTool", type: "(part: ToolPart) => ReactNode" },
     { name: "renderSources", type: "(parts: SourceUrlPart[]) => ReactNode" },
+    {
+      name: "renderData",
+      type: "(part: DataPart) => ReactNode",
+      defaultValue: "data parts hidden",
+    },
   ],
   examples: {
     Pair: {
@@ -101,6 +134,11 @@ export default defineDemo({
     CustomTool: {
       description: "`renderTool` replaces the plain tool row with your own.",
       component: CustomTool,
+    },
+    DataParts: {
+      description:
+        "`renderData` renders `data-*` parts, such as a json-render `data-spec`. Without it they are skipped.",
+      component: DataParts,
     },
   },
   isNew: true,

@@ -1,6 +1,6 @@
 {
   "name": "@locusgraph/blocks",
-  "version": "0.6.1",
+  "version": "0.7.0",
   "description": "Product sections built from @locusgraph/components: usage meters and alerts, wallet, credit packs, plan options and API keys.",
   "license": "MIT",
   "repository": {
@@ -53,6 +53,7 @@
     "@types/node": "catalog:",
     "@types/react": "catalog:",
     "@types/react-dom": "catalog:",
+    "happy-dom": "catalog:",
     "react": "catalog:",
     "react-dom": "catalog:",
     "typescript": "catalog:",

@@ -6,7 +6,7 @@ export const billingSpec: Spec = {
     page: {
       type: "Stack",
       props: { gap: "lg" },
-      children: ["over-quota", "usage", "money", "upgrade", "last-action"],
+      children: ["over-quota", "usage", "money", "plans", "keys", "last-action"],
     },
     "over-quota": {
       type: "Notice",
@@ -38,10 +38,24 @@ export const billingSpec: Spec = {
       props: { packs: { $state: "/packs" } },
       on: { buy: { action: "buyCredits" } },
     },
-    upgrade: {
-      type: "Action",
-      props: { label: "Upgrade to Pro", variant: "default" },
-      on: { press: { action: "upgrade" } },
+    plans: {
+      type: "Plans",
+      props: {
+        plans: { $state: "/plans" },
+        actions: [{ id: "upgrade", label: "Upgrade", variant: null, disabled: null }],
+      },
+      on: { action: { action: "planAction" } },
+    },
+    keys: {
+      type: "Keys",
+      props: {
+        keys: { $state: "/keys" },
+        actions: [
+          { id: "rotate", label: "Rotate", variant: null, disabled: null },
+          { id: "revoke", label: "Revoke", variant: "destructive", disabled: null },
+        ],
+      },
+      on: { action: { action: "keyAction" } },
     },
     "last-action": {
       type: "Notice",

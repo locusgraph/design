@@ -34,7 +34,9 @@ export type SourceUrlPart = { type: "source-url"; sourceId: string; url: string;
 
 export type FilePart = { type: "file"; mediaType: string; url: string; filename?: string };
 
-export type MessagePart = TextPart | ReasoningPart | ToolPart | SourceUrlPart | FilePart;
+export type DataPart = { type: `data-${string}`; id?: string; data: unknown };
+
+export type MessagePart = TextPart | ReasoningPart | ToolPart | SourceUrlPart | FilePart | DataPart;
 
 export type AgentMessage = { id: string; role: AgentRole; parts: MessagePart[] };
 

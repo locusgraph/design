@@ -22,6 +22,30 @@ const pack = z.object({
   amountMicroUsd: z.number(),
 });
 
+const blockAction = z.object({
+  id: z.string(),
+  label: z.string(),
+  variant: z.enum(["default", "outline", "ghost", "destructive"]).nullable(),
+  disabled: z.boolean().nullable(),
+});
+
+const plan = z.object({
+  name: z.string(),
+  price: z.string(),
+  points: z.array(z.string()),
+  current: z.boolean(),
+});
+
+const apiKey = z.object({
+  id: z.string(),
+  name: z.string().nullable(),
+  maskedKey: z.string(),
+  productLabel: z.string(),
+  createdBy: z.string(),
+  createdAt: z.string().nullable(),
+  expiresAt: z.string().nullable(),
+});
+
 export const catalog = defineCatalog(schema, {
   components: {
     Stack: {
@@ -52,13 +76,19 @@ export const catalog = defineCatalog(schema, {
       props: z.object({ packs: z.array(pack) }),
       description: "Credit packs to buy. Bind packs to /packs. Emits buy",
     },
-    Action: {
-      props: z.object({ label: z.string(), variant: z.enum(["default", "outline", "ghost"]) }),
-      description: "Button. Emits press",
+    Plans: {
+      props: z.object({ plans: z.array(plan), actions: z.array(blockAction) }),
+      description:
+        "Plan cards. Bind plans to /plans. actions appear on every plan but the current one. Emits action",
+    },
+    Keys: {
+      props: z.object({ keys: z.array(apiKey), actions: z.array(blockAction) }),
+      description: "API key table. Bind keys to /keys. actions appear on every row. Emits action",
     },
   },
   actions: {
     buyCredits: { description: "Open checkout for the pack at /selectedPackId" },
-    upgrade: { description: "Open the upgrade flow" },
+    planAction: { description: "Run the plan action at /picked" },
+    keyAction: { description: "Run the key action at /picked" },
   },
 });

@@ -9,7 +9,14 @@ import type * as React from "react";
 import { Thinking } from "../../agent/thinking/thinking";
 import { Tool } from "../../agent/tool/tool";
 import { Sources } from "../../memory/sources";
-import type { AgentMessage, ReasoningPart, SourceUrlPart, TextPart, ToolPart } from "../../types";
+import type {
+  AgentMessage,
+  DataPart,
+  ReasoningPart,
+  SourceUrlPart,
+  TextPart,
+  ToolPart,
+} from "../../types";
 import { fileFromFilePart } from "../files/file-meta";
 import { Files } from "../files/files";
 import { Reply } from "../reply/reply";
@@ -22,6 +29,7 @@ export type TurnProps = Omit<React.ComponentProps<"div">, "children"> & {
   renderReasoning?: (part: ReasoningPart) => React.ReactNode;
   renderTool?: (part: ToolPart) => React.ReactNode;
   renderSources?: (parts: SourceUrlPart[]) => React.ReactNode;
+  renderData?: (part: DataPart) => React.ReactNode;
 };
 
 const roleLabels: Record<AgentMessage["role"], string> = {
@@ -30,7 +38,10 @@ const roleLabels: Record<AgentMessage["role"], string> = {
   system: "System note",
 };
 
-type PartRenderers = Pick<TurnProps, "renderReasoning" | "renderTool" | "renderSources">;
+type PartRenderers = Pick<
+  TurnProps,
+  "renderReasoning" | "renderTool" | "renderSources" | "renderData"
+>;
 
 function UserText({ part }: { part: TextPart }) {
   return (
@@ -92,6 +103,8 @@ function renderSegment(segment: PartSegment, isUser: boolean, renderers: PartRen
       ) : (
         <Sources sources={segment.parts} firstIndex={segment.firstIndex} />
       );
+    case "data":
+      return renderers.renderData?.(segment.part);
     case "files":
       return (
         <Files
@@ -109,11 +122,15 @@ export function Turn({
   renderReasoning,
   renderTool,
   renderSources,
+  renderData,
   className,
   ...props
 }: TurnProps) {
   const isUser = message.role === "user";
-  const renderers = { renderReasoning, renderTool, renderSources };
+  const renderers = { renderReasoning, renderTool, renderSources, renderData };
+  const segments = groupParts(message.parts).filter(
+    (segment) => segment.kind !== "data" || renderData
+  );
   return (
     <MessageRow
       data-role={message.role}
@@ -129,7 +146,7 @@ export function Turn({
         </MessageAvatar>
       )}
       <MessageContent className={cn("gap-4", isUser && "items-end gap-2")}>
-        {groupParts(message.parts).map((segment, position, segments) => (
+        {segments.map((segment, position) => (
           <div
             key={segment.key}
             data-slot="message-part"
