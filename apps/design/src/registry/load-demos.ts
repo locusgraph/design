@@ -18,6 +18,7 @@ const demoSources = import.meta.glob<string>("../demos/**/*.demo.tsx", {
 });
 
 const titleOverrides: Record<string, string> = {
+  "generative-ui": "Generative UI",
   "input-otp": "Input OTP",
 };
 
