@@ -2,7 +2,7 @@ import { createStateStore } from "@json-render/core";
 import { JSONUIProvider, Renderer, type SetState } from "@json-render/react";
 import { RuleGrid, RuleGridCell, RuleGridLabel } from "@locusgraph/components";
 import { useState } from "react";
-import { grants, packs, quotas, wallet } from "../sample-data";
+import { grants, keys, packs, plans, quotas, wallet } from "../sample-data";
 import { billingSpec } from "./billing-spec";
 import { catalog } from "./catalog";
 import { handlers, registry } from "./registry";
@@ -14,7 +14,10 @@ function createBillingStore() {
     wallet,
     grants,
     packs,
+    plans: plans.map(({ name, price, points, current }) => ({ name, price, points, current })),
+    keys,
     selectedPackId: null,
+    picked: null,
     lastAction: null,
   });
 }
