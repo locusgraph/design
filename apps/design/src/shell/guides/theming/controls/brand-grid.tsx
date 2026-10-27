@@ -31,7 +31,7 @@ function BrandSwatch({
       tabIndex={selected ? 0 : -1}
       onClick={onSelect}
       className={cn(
-        "flex aspect-square items-center justify-center outline-offset-2 ring-1 ring-border ring-inset hover:outline-2 hover:outline-foreground/25 focus-visible:outline-2 focus-visible:outline-ring",
+        "flex aspect-square items-center justify-center rounded-full outline-offset-2 ring-1 ring-border ring-inset hover:outline-2 hover:outline-foreground/25 focus-visible:outline-2 focus-visible:outline-ring",
         selected && "outline-2 outline-foreground hover:outline-foreground"
       )}
       style={{ background: colors.primary, color: colors.primaryInk }}
