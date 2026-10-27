@@ -1,5 +1,9 @@
 # @locusgraph/brand
 
+[![npm](https://img.shields.io/npm/v/@locusgraph/brand?color=111111&style=flat-square)](https://www.npmjs.com/package/@locusgraph/brand) [![MIT license](https://img.shields.io/badge/license-MIT-111111?style=flat-square)](https://github.com/locusgraph/design/blob/master/LICENSE)
+
+[Docs](https://design.locusgraph.com/brand) · [Source](https://github.com/locusgraph/design/tree/master/packages/brand) · [All packages](https://github.com/locusgraph/design#packages)
+
 The LocusGraph mark and wordmark, and the Google and GitHub marks for sign-in buttons. React components, plus SVG files for favicons and anything that is not React.
 
 ```bash

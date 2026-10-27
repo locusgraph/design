@@ -1,5 +1,9 @@
 # @locusgraph/utils
 
+[![npm](https://img.shields.io/npm/v/@locusgraph/utils?color=111111&style=flat-square)](https://www.npmjs.com/package/@locusgraph/utils) [![MIT license](https://img.shields.io/badge/license-MIT-111111?style=flat-square)](https://github.com/locusgraph/design/blob/master/LICENSE)
+
+[Docs](https://design.locusgraph.com) · [Source](https://github.com/locusgraph/design/tree/master/packages/utils) · [All packages](https://github.com/locusgraph/design#packages)
+
 Formatting and quota helpers the Locus Design packages share. No dependencies, no React.
 
 ```bash

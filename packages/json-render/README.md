@@ -1,5 +1,9 @@
 # @locusgraph/json-render
 
+[![npm](https://img.shields.io/npm/v/@locusgraph/json-render?color=111111&style=flat-square)](https://www.npmjs.com/package/@locusgraph/json-render) [![MIT license](https://img.shields.io/badge/license-MIT-111111?style=flat-square)](https://github.com/locusgraph/design/blob/master/LICENSE)
+
+[Docs](https://design.locusgraph.com/generative-ui) · [Source](https://github.com/locusgraph/design/tree/master/packages/json-render) · [All packages](https://github.com/locusgraph/design#packages)
+
 A [json-render](https://json-render.dev) catalog and registry for Locus Design components and blocks. A model lays out a Locus Design screen as JSON; json-render draws it with the real components, in the Locus Design look. Data comes from state through `$state` bindings, so the model picks the layout and never writes the numbers.
 
 ```bash

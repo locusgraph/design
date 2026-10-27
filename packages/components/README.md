@@ -1,8 +1,14 @@
 # @locusgraph/components
 
+<img alt="Locus Design: design that keeps humans in the loop" src="https://raw.githubusercontent.com/locusgraph/design/master/.github/assets/hero-light.png">
+
+[![npm](https://img.shields.io/npm/v/@locusgraph/components?color=111111&style=flat-square)](https://www.npmjs.com/package/@locusgraph/components) [![MIT license](https://img.shields.io/badge/license-MIT-111111?style=flat-square)](https://github.com/locusgraph/design/blob/master/LICENSE)
+
+[Docs](https://design.locusgraph.com/components) · [Source](https://github.com/locusgraph/design/tree/master/packages/components) · [All packages](https://github.com/locusgraph/design#packages)
+
 The Locus Design system: React components on Radix, the App and Docs shells, and the theme
-(`theme.css`) every LocusGraph app uses. See every component with a live playground in
-`apps/design` (`pnpm --filter @locusgraph/design dev`, port 5180).
+(`theme.css`). See every component with a live playground at
+[design.locusgraph.com](https://design.locusgraph.com).
 
 ## Use it in an app
 

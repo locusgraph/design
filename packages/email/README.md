@@ -1,5 +1,9 @@
 # @locusgraph/email
 
+[![npm](https://img.shields.io/npm/v/@locusgraph/email?color=111111&style=flat-square)](https://www.npmjs.com/package/@locusgraph/email) [![MIT license](https://img.shields.io/badge/license-MIT-111111?style=flat-square)](https://github.com/locusgraph/design/blob/master/LICENSE)
+
+[Docs](https://design.locusgraph.com) · [Source](https://github.com/locusgraph/design/tree/master/packages/email) · [All packages](https://github.com/locusgraph/design#packages)
+
 LocusGraph transactional emails as React templates. Square panel, hairline borders and a pill button, with colors from `@locusgraph/tokens`. Everything is inline-styled tables, so it renders in Gmail, Outlook and Apple Mail. No React Email dependency.
 
 ```bash
