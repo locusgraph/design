@@ -53,7 +53,7 @@ export function ThemeDocsPanel({
       defaultValue="css"
       className="flex min-h-0 flex-col gap-0 bg-surface ring-1 ring-border lg:h-full"
     >
-      <div className="border-b bg-muted/35 px-4 py-2">
+      <div className="flex min-h-14 items-center border-b bg-muted/35 px-4">
         <TabsList>
           <TabsTrigger value="css">CSS</TabsTrigger>
           <TabsTrigger value="tokens">Tokens</TabsTrigger>

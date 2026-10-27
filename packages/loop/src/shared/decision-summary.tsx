@@ -17,6 +17,18 @@ export function isoOf(value: DecidedAt): string | undefined {
   return Number.isNaN(date.getTime()) ? undefined : date.toISOString();
 }
 
+const decisionClockFormat = new Intl.DateTimeFormat("en-US", {
+  timeStyle: "short",
+  timeZone: "UTC",
+});
+
+export type DecisionTimeStyle = "full" | "time";
+
+export function formatDecidedTime(value: DecidedAt): string {
+  const date = toDate(value);
+  return Number.isNaN(date.getTime()) ? "" : decisionClockFormat.format(date);
+}
+
 export function formatDecidedAt(value: DecidedAt): string {
   const date = toDate(value);
   return Number.isNaN(date.getTime()) ? "" : `${decisionTimeFormat.format(date)} UTC`;
@@ -34,9 +46,12 @@ export type DecisionSummaryProps = {
   result: ReactNode;
   approvedVerb?: string;
   deniedVerb?: string;
+  timeStyle?: DecisionTimeStyle;
 };
 
-function DecisionMeta({ decision, verb }: { decision: DecisionOutcome; verb: string }) {
+type DecisionMetaProps = { decision: DecisionOutcome; verb: string; timeStyle: DecisionTimeStyle };
+
+function DecisionMeta({ decision, verb, timeStyle }: DecisionMetaProps) {
   return (
     <p className="text-xs text-muted-foreground">
       {verb}
@@ -44,8 +59,12 @@ function DecisionMeta({ decision, verb }: { decision: DecisionOutcome; verb: str
       {decision.at !== undefined && (
         <>
           {" · "}
-          <time dateTime={isoOf(decision.at)} className="tabular-nums">
-            {formatDecidedAt(decision.at)}
+          <time
+            dateTime={isoOf(decision.at)}
+            title={formatDecidedAt(decision.at)}
+            className="tabular-nums"
+          >
+            {timeStyle === "time" ? formatDecidedTime(decision.at) : formatDecidedAt(decision.at)}
           </time>
         </>
       )}
@@ -58,6 +77,7 @@ export function DecisionSummary({
   result,
   approvedVerb = "Approved",
   deniedVerb = "Denied",
+  timeStyle = "full",
 }: DecisionSummaryProps) {
   const Icon = decision.approved ? CheckIcon : XIcon;
   return (
@@ -73,7 +93,11 @@ export function DecisionSummary({
       />
       <div className="flex min-w-0 flex-col gap-0.5">
         <p className="font-medium">{result}</p>
-        <DecisionMeta decision={decision} verb={decision.approved ? approvedVerb : deniedVerb} />
+        <DecisionMeta
+          decision={decision}
+          verb={decision.approved ? approvedVerb : deniedVerb}
+          timeStyle={timeStyle}
+        />
         {decision.reason && (
           <p className="text-xs text-muted-foreground">Reason: {decision.reason}</p>
         )}

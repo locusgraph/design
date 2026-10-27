@@ -63,7 +63,7 @@ export function ShellsPreview() {
 
 export function SkeletonsPreview() {
   return (
-    <div className="flex w-full max-w-64 items-start gap-3">
+    <div className="landing-skeletons flex w-full max-w-64 items-start gap-3">
       <SkeletonAvatar />
       <SkeletonText lines={3} className="flex-1" />
     </div>
@@ -81,7 +81,7 @@ const designIndexLines = [
 export function AgentsPreview() {
   return (
     <div aria-hidden className="flex w-full max-w-72 flex-col gap-2 font-mono text-xs">
-      <span className="locus-eyebrow">GET /DESIGN.md</span>
+      <span className="locus-eyebrow font-mono">GET /DESIGN.md</span>
       <div className="flex flex-col gap-1 bg-muted/40 px-3 py-2.5">
         {designIndexLines.map((line) => (
           <span key={line.text} className={`truncate ${line.tone}`}>

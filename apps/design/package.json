@@ -12,11 +12,14 @@
     "registry": "node ../../scripts/registry/build.mjs"
   },
   "dependencies": {
+    "@json-render/core": "catalog:",
+    "@json-render/react": "catalog:",
     "@phosphor-icons/react": "catalog:",
     "@locusgraph/blocks": "workspace:*",
     "@locusgraph/brand": "workspace:*",
     "@locusgraph/components": "workspace:*",
     "@locusgraph/email": "workspace:*",
+    "@locusgraph/json-render": "workspace:*",
     "@locusgraph/loop": "workspace:*",
     "@locusgraph/tokens": "workspace:*",
     "@locusgraph/utils": "workspace:*",
@@ -26,13 +29,14 @@
     "react-dom": "catalog:",
     "react-hook-form": "catalog:",
     "recharts": "catalog:",
-    "shiki": "catalog:"
+    "shiki": "catalog:",
+    "zod": "catalog:"
   },
   "devDependencies": {
     "@cloudflare/vite-plugin": "catalog:",
     "@fontsource/archivo": "catalog:",
-    "@fontsource/fira-code": "catalog:",
-    "@fontsource/inter": "catalog:",
+    "@fontsource/ibm-plex-mono": "catalog:",
+    "@fontsource/ibm-plex-sans": "catalog:",
     "@locusgraph/config": "workspace:*",
     "@resvg/resvg-js": "catalog:",
     "@tailwindcss/vite": "catalog:",

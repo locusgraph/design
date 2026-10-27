@@ -59,7 +59,7 @@ export function InstallationPage() {
           <p>
             The theme lands in styles/locus.css. Import it after Tailwind; it also sets the shadcn
             colors and radius in your global CSS, so existing shadcn components match. If shadcn
-            init added a font such as Geist to your layout, remove it to use Inter.
+            init added a font such as Geist to your layout, remove it to use IBM Plex Sans.
           </p>
         </Prose>
         <Code code={snippets.shadcnTheme} language="css" />
@@ -76,9 +76,9 @@ export function InstallationPage() {
       <Step id="import-the-theme" title="Import the theme">
         <Prose>
           <p>
-            Import the theme in your global CSS after Tailwind. It brings the colors, the Inter,
-            Archivo and Fira Code fonts, the typeset styles, and tells Tailwind to scan the
-            components for their classes.
+            Import the theme in your global CSS after Tailwind. It brings the colors, the IBM Plex
+            Sans, Archivo and IBM Plex Mono fonts, the typeset styles, and tells Tailwind to scan
+            the components for their classes.
           </p>
         </Prose>
         <Code code={snippets.globalsCss} language="css" />

@@ -1,6 +1,7 @@
 import { loadAllDemoEntries } from "../registry/load-demos";
 import { buildPageDocs } from "../shell/page/page-docs";
 import { designIndex, siteOrigin } from "./design-index";
+import { guideDocs } from "./guide-markdown";
 
 export type AgentDocFile = { fileName: string; markdown: string };
 
@@ -14,5 +15,14 @@ export async function agentDocFiles(): Promise<AgentDocFile[]> {
     fileName: `${entry.path}.md`,
     markdown: buildPageDocs(entry).markdown + pageFooter(entry.path),
   }));
-  return [{ fileName: "DESIGN.md", markdown: designIndex(entries) }, ...pages];
+  const guides = guideDocs();
+  const guideFiles = guides.map((guide) => ({
+    fileName: `${guide.path}.md`,
+    markdown: guide.markdown + pageFooter(guide.path),
+  }));
+  return [
+    { fileName: "DESIGN.md", markdown: designIndex(entries, guides) },
+    ...guideFiles,
+    ...pages,
+  ];
 }

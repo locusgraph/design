@@ -11,7 +11,8 @@ import { ArrowCounterClockwise as RotateCcwIcon } from "@phosphor-icons/react/ss
 import { type PreviewBackground, setParam } from "../../url-state";
 
 export const previewBackgroundClass: Record<PreviewBackground, string> = {
-  surface: "bg-background",
+  surface:
+    "bg-surface bg-[radial-gradient(var(--locus-border)_1px,transparent_1px)] [background-size:16px_16px]",
   plain: "bg-white dark:bg-black",
   checker: "preview-checker",
 };
@@ -30,7 +31,7 @@ type PreviewToolbarProps = {
 
 export function PreviewToolbar({ background, canReset, onReset }: PreviewToolbarProps) {
   return (
-    <div className="flex shrink-0 items-center gap-1 self-start border bg-background p-0.5 sm:ml-auto sm:self-center">
+    <div className="flex shrink-0 items-center gap-1 self-start rounded-full border bg-background p-0.5 sm:ml-auto sm:self-center">
       <ToggleGroup
         type="single"
         size="sm"
@@ -48,7 +49,7 @@ export function PreviewToolbar({ background, canReset, onReset }: PreviewToolbar
               >
                 <span
                   className={cn(
-                    "block size-3.5 shrink-0 border",
+                    "block size-3.5 shrink-0 rounded-full border",
                     previewBackgroundClass[swatch.value]
                   )}
                 />

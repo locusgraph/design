@@ -12,7 +12,7 @@ export const siteTagline = "Design that keeps humans in the loop";
 export const defaultTitle = `${siteName} — ${siteTagline}`;
 
 export const defaultDescription =
-  "Components, product blocks and Loop, the agent UI with the human in the loop, for LocusGraph apps. Square, ruled and quiet, in light and dark. Install from npm or copy with shadcn.";
+  "Locus Design: components, product blocks and Loop, the agent UI with the human in the loop. Square, ruled and quiet, in light and dark. Install from npm or copy with shadcn.";
 
 export const themeColors = { light: lightColors.surface, dark: darkColors.surface };
 

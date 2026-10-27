@@ -4,12 +4,13 @@ import { iconSvg, socialCardElement, webManifest } from "../../src/seo/build/sit
 import { iconFiles, themeColors } from "../../src/seo/site-meta";
 
 describe("site icons", () => {
-  it("draws the brand LocusGraph icon at the asked size", () => {
+  it("draws the Locus Design diamond on the dark page color at the asked size", () => {
     const svg = iconSvg(64);
     expect(svg.startsWith("<svg")).toBe(true);
     expect(svg).toContain('xmlns="http://www.w3.org/2000/svg"');
     expect(svg).toContain('viewBox="0 0 64 64"');
-    expect(svg).toContain(lightColors.brandGlow);
+    expect(svg).toContain(darkColors.background);
+    expect(svg).toContain(darkColors.foreground);
   });
 });
 

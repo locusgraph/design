@@ -13,7 +13,7 @@ import type { Theme } from "../url-state";
 import { useReportFrameHeight } from "./use-frame-height";
 
 const themeFromUrl: Theme =
-  new URLSearchParams(window.location.search).get("theme") === "dark" ? "dark" : "light";
+  new URLSearchParams(window.location.search).get("theme") === "light" ? "light" : "dark";
 
 function useRenderMessage() {
   const [message, setMessage] = useState<FrameRenderMessage | null>(null);

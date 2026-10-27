@@ -27,7 +27,7 @@ export function LandingPage() {
         <div className="grid grid-cols-1 gap-px p-px lg:grid-cols-6">
           <LandingTile
             className="lg:col-span-3"
-            previewClassName="min-h-96"
+            previewClassName="min-h-96 items-stretch justify-start p-0"
             title="Loop"
             description="Agent UI with the human in the loop."
             href="/loop"
@@ -36,7 +36,7 @@ export function LandingPage() {
           />
           <LandingTile
             className="lg:col-span-3"
-            previewClassName="min-h-96"
+            previewClassName="min-h-96 items-stretch justify-start p-0"
             title="Blocks"
             description="Usage, wallet, plans and keys, ready to drop in."
             href="/blocks"

@@ -27,7 +27,7 @@ function pickOne<Option extends string>(value: string | null, options: readonly 
 
 export function readShellSettings(params: URLSearchParams): ShellSettings {
   return {
-    theme: pickOne(params.get("theme"), ["light", "dark"]),
+    theme: pickOne(params.get("theme"), ["dark", "light"]),
     viewport: pickOne(params.get("viewport"), ["desktop", "mobile"]),
     background: pickOne(params.get("background"), ["surface", "plain", "checker"]),
   };

@@ -28,7 +28,7 @@ export function InstallationSection({
       <div className="bg-card ring-1 ring-border">
         {inRegistry ? (
           <Tabs defaultValue="package" className="gap-0">
-            <div className="flex items-end justify-between gap-3 border-b pr-3">
+            <div className="flex flex-wrap items-end justify-between gap-x-3 border-b pr-3">
               <TabsList
                 variant="line"
                 className="justify-start px-3 pt-1 group-data-[orientation=horizontal]/tabs:border-b-0"
@@ -43,7 +43,7 @@ export function InstallationSection({
                   Manual
                 </TabsTrigger>
               </TabsList>
-              <div className="pb-1.5">
+              <div className="pb-1.5 max-sm:pl-3">
                 <PackageManagerSwitch />
               </div>
             </div>

@@ -17,7 +17,7 @@ export type PageMeta = {
 
 const libraryDescriptions: Record<string, string> = {
   components:
-    "Radix based React components for LocusGraph apps: square, ruled and quiet, in light and dark. Install @locusgraph/components or copy with shadcn.",
+    "Radix based React components from Locus Design: square, ruled and quiet, in light and dark. Install @locusgraph/components or copy with shadcn.",
   blocks:
     "Product blocks for usage, quota, wallet, top-ups, plans and API keys. Props and callbacks only, built from @locusgraph/components.",
   loop: "Loop, the agent UI with the human in the loop: chat, thread, agent, approval, memory and cost, on Vercel AI SDK message parts.",
@@ -25,7 +25,7 @@ const libraryDescriptions: Record<string, string> = {
     "The LocusGraph and SpendGraph marks, wordmarks, app icon, social card and sign-in marks, as React components and SVG files.",
 };
 
-const guidePages: Record<string, { title: string; description: string }> = {
+export const guidePageMeta: Record<string, { title: string; description: string }> = {
   installation: {
     title: "Installation",
     description:
@@ -36,10 +36,29 @@ const guidePages: Record<string, { title: string; description: string }> = {
     description:
       "Monochrome by default. Set one brand color for the primary action and focus ring with three CSS variables; everything else stays grey.",
   },
+  principles: {
+    title: "Principles",
+    description:
+      "The rules behind Locus Design: people decide, square and ruled layouts, color that means state, three typefaces and dark first.",
+  },
+  "human-in-the-loop": {
+    title: "Human in the loop",
+    description:
+      "From one approval to a whole run a person can oversee: risk levels, Approval, Approval Gate, Decision Log, Spend Gate and Run Bar.",
+  },
+  "for-agents": {
+    title: "For agents",
+    description:
+      "Every page is also Markdown. Point a coding agent at DESIGN.md, fetch a page with .md and install parts from the shadcn registry.",
+  },
+  changelog: {
+    title: "Changelog",
+    description: "What changed in each release of the Locus Design packages.",
+  },
   shells: {
     title: "Shells",
     description:
-      "App and docs shells for LocusGraph apps: header, sidebar, content and aside, responsive and in light and dark.",
+      "App and docs shells from Locus Design: header, sidebar, content and aside, responsive and in light and dark.",
   },
 };
 
@@ -69,7 +88,7 @@ export function staticPageMeta(path: string): PageMeta | undefined {
   if (library) {
     return meta(path, titled(library.title), libraryDescriptions[library.id] ?? defaultDescription);
   }
-  const guide = guidePages[path];
+  const guide = guidePageMeta[path];
   return guide ? meta(path, titled(guide.title), guide.description) : undefined;
 }
 
@@ -86,7 +105,7 @@ export function demoPageMeta(entry: Pick<DemoEntry, "path" | "title">, descripti
 export const staticPagePaths = [
   "",
   ...libraries.map((item) => item.href.slice(1)),
-  ...Object.keys(guidePages),
+  ...Object.keys(guidePageMeta),
 ];
 
 export function sitePages(entries: DemoEntry[]): PageMeta[] {

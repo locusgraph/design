@@ -40,7 +40,7 @@ ${patterns}
 
 ## House style
 
-- Containers are square. Buttons are pills.
+- Containers are square. Buttons, segmented tabs and toggles are pills.
 - Group with ruled lines (RuleGrid, ring-1 ring-border, divide-y), never cards with shadows.
 - The page is bg-background; cells and panels are bg-card, one step above it.
 - Action strips use RuleGridFooter (border-t bg-muted/70); header strips RuleGridHeader (border-b bg-muted/35). One tint per strip.

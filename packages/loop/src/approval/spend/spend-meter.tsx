@@ -123,7 +123,7 @@ export function SpendMeter(props: SpendMeterProps) {
           aria-hidden
           className={cn(
             "absolute inset-y-0",
-            muted ? "bg-muted-foreground/25" : outOfCredits ? "bg-destructive" : "bg-warn"
+            muted ? "bg-muted-foreground/25" : outOfCredits ? "bg-destructive" : "bg-warn-fill"
           )}
           style={{ left: `${baseWidth}%`, width: `${estimateWidth}%` }}
         />

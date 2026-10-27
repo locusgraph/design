@@ -9,6 +9,8 @@
   --color-memory: var(--locus-memory);
   --color-good: var(--locus-good);
   --color-warn: var(--locus-warn);
+  --color-good-fill: var(--locus-good-fill);
+  --color-warn-fill: var(--locus-warn-fill);
   --color-border: var(--locus-border);
   --color-input: var(--locus-input);
   --color-skeleton: var(--locus-skeleton);
@@ -36,9 +38,9 @@
   --color-sidebar-accent-foreground: var(--locus-sidebar-accent-foreground);
   --color-sidebar-border: var(--locus-sidebar-border);
   --color-sidebar-ring: var(--locus-sidebar-ring);
-  --font-sans: var(--locus-font-inter);
+  --font-sans: var(--locus-font-ibm-plex-sans);
   --font-heading: var(--locus-font-archivo);
-  --font-mono: var(--locus-font-fira-code);
+  --font-mono: var(--locus-font-ibm-plex-mono);
   --font-brand: var(--locus-font-archivo);
   --shadow-overlay: var(--locus-overlay-shadow);
   --text-2xs: 0.6875rem;

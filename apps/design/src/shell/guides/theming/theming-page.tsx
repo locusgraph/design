@@ -21,8 +21,8 @@ export function ThemingPage({ mode }: { mode: ThemeMode }) {
   const dark = resolveTheme(preset, "dark", settings.ring);
   const current = mode === "dark" ? dark : light;
   return (
-    <div className="flex flex-col gap-4 lg:-mb-12 lg:grid lg:h-[calc(100svh-var(--locus-docs-header-height)-3.5rem)] lg:grid-cols-[16rem_minmax(0,1fr)_21rem] lg:items-stretch">
-      <div className="lg:min-h-0 lg:overflow-y-auto">
+    <div className="flex flex-col gap-px p-px lg:-mb-12 lg:grid lg:h-[calc(100svh-var(--locus-docs-header-height)-3.5rem)] lg:grid-cols-[16rem_minmax(0,1fr)_21rem] lg:items-stretch">
+      <div className="bg-surface ring-1 ring-border lg:min-h-0 lg:overflow-y-auto">
         <ThemeControls
           mode={mode}
           settings={settings}

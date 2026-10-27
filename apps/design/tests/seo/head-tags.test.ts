@@ -56,10 +56,9 @@ describe("withPageHead", () => {
 
 describe("index.html", () => {
   it("declares the language, viewport, theme colors and app title", () => {
-    expect(indexHtml).toContain('<html lang="en">');
+    expect(indexHtml).toContain('<html lang="en" class="dark" style="color-scheme: dark">');
     expect(indexHtml).toContain('name="viewport"');
-    expect(indexHtml).toContain('media="(prefers-color-scheme: light)" content="#ffffff"');
-    expect(indexHtml).toContain('media="(prefers-color-scheme: dark)" content="#101011"');
+    expect(indexHtml).toContain('<meta name="theme-color" content="#0c0c0d" />');
     expect(indexHtml).toContain('name="apple-mobile-web-app-title"');
     expect(indexHtml).toContain('rel="apple-touch-icon"');
   });

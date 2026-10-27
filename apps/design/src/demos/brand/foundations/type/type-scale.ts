@@ -11,14 +11,19 @@ export type TypeFamily = {
 export const typeFamilies: TypeFamily[] = [
   {
     name: "Archivo",
-    role: "Headings and the wordmark",
+    role: "Headings, eyebrow labels, buttons and the wordmark",
     className: "font-heading",
     stack: fonts.heading,
     tracking: headingTracking,
   },
-  { name: "Inter", role: "Body, labels and controls", className: "font-sans", stack: fonts.sans },
   {
-    name: "Fira Code",
+    name: "IBM Plex Sans",
+    role: "Body text, inputs and menus",
+    className: "font-sans",
+    stack: fonts.sans,
+  },
+  {
+    name: "IBM Plex Mono",
     role: "Code, ids, numbers in tables",
     className: "font-mono",
     stack: fonts.mono,
@@ -31,7 +36,7 @@ export const typeScale: TypeStep[] = [
   {
     name: "locus-eyebrow",
     className: "locus-eyebrow",
-    size: "12px",
+    size: "13px",
     use: "Section labels, column headers",
   },
   { name: "2xs", className: "text-2xs", size: "12px", use: "Badges, chips, counters, timestamps" },

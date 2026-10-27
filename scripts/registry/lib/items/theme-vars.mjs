@@ -15,9 +15,9 @@ export function shadcnCssVars(shadcnPath) {
   const aliases = shadcnAliases(shadcnPath);
   return {
     theme: {
-      "font-sans": '"Inter Variable", ui-sans-serif, system-ui, sans-serif',
+      "font-sans": '"IBM Plex Sans Variable", ui-sans-serif, system-ui, sans-serif',
       "font-heading": '"Archivo Variable", ui-sans-serif, system-ui, sans-serif',
-      "font-mono": '"Fira Code Variable", ui-monospace, monospace',
+      "font-mono": '"IBM Plex Mono", ui-monospace, monospace',
       ...squareRadius,
     },
     light: aliases,

@@ -22,11 +22,11 @@ export function themeItem(root, versionOf) {
     type: "registry:theme",
     title: "Locus theme",
     description:
-      "The LocusGraph tokens: palette for light and dark, square radius, control borders, overlay shadow, the locus-eyebrow label and brand patterns, with Inter, Archivo and Fira Code.",
+      "The LocusGraph tokens: palette for light and dark, square radius, control borders, overlay shadow, the locus-eyebrow label and brand patterns, with IBM Plex Sans, Archivo and IBM Plex Mono.",
     dependencies: [
-      "@fontsource-variable/inter",
+      "@fontsource-variable/ibm-plex-sans",
       "@fontsource-variable/archivo",
-      "@fontsource-variable/fira-code",
+      "@fontsource/ibm-plex-mono",
     ].map(versionOf),
     cssVars: shadcnCssVars(join(tokens, "variables/shadcn.css")),
     files: [

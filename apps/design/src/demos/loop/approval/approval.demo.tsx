@@ -68,6 +68,30 @@ function DeniedWithReason() {
   );
 }
 
+function ChangesAndAllowForRun() {
+  return (
+    <div className="w-full max-w-xl">
+      <Approval
+        part={{
+          type: "tool-update_plan",
+          toolCallId: "call_plan",
+          state: "approval-requested",
+          input: { organization: "Acme Inc", plan: "pro" },
+        }}
+        actionLabel="Upgrade to Pro"
+        changes={[
+          { label: "Plan", before: "Free", after: "Pro" },
+          { label: "Monthly bill", before: "$0.00", after: "$40.00" },
+        ]}
+        autoFocus={false}
+        onApprove={() => {}}
+        onDeny={() => {}}
+        onAllowForRun={() => {}}
+      />
+    </div>
+  );
+}
+
 export default defineDemo({
   title: "Approval",
   description:
@@ -99,9 +123,24 @@ export default defineDemo({
     },
     { name: "onApprove", type: "() => void" },
     { name: "onDeny", type: "(reason?: string) => void" },
+    {
+      name: "changes",
+      type: "{ label: string; before?: ArgValue | null; after: ArgValue | null }[]",
+      defaultValue: "what the action will change",
+    },
+    {
+      name: "onAllowForRun",
+      type: "() => void",
+      defaultValue: "shows Allow for this run, never on destructive",
+    },
     { name: "autoFocus", type: "boolean", defaultValue: "true" },
   ],
   examples: {
+    ChangesAndAllowForRun: {
+      description:
+        "`changes` shows what the action will change, before and after. `onAllowForRun` adds a way to stop asking for this tool in this run.",
+      component: ChangesAndAllowForRun,
+    },
     Approved: {
       description: "Once decided, the inputs and buttons collapse to who decided and when.",
       component: Approved,

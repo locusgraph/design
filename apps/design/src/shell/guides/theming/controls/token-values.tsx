@@ -39,7 +39,7 @@ function TokenList({ label, rows }: { label: string; rows: TokenRow[] }) {
           <div key={row.token} className="flex items-center gap-2 font-mono text-xs">
             <span
               aria-hidden="true"
-              className="size-3 shrink-0 ring-1 ring-border"
+              className="size-3 shrink-0 rounded-full ring-1 ring-border"
               style={{ background: row.color }}
             />
             <dt className="text-muted-foreground">{row.token}</dt>

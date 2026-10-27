@@ -26,7 +26,7 @@ function Allowed() {
 export default defineDemo({
   title: "Spend Gate",
   description:
-    "Pauses a run before a step that would pass its cost cap (amber) or the prepaid balance (red). Allow the step once, raise the cap, or stop.",
+    "Pauses a run before a step that would pass its cost cap (amber) or the prepaid balance (red). Allow the step once, raise the cap, or stop. The cap check is app code: compare spent plus the next estimate with the cap before each step, since SpendGraph budgets only alert and its ceilings end a run.",
   controls: { situation: select(situationOptions, "over-cap") },
   playground: ({ situation }) => (
     <div className="w-full max-w-xl">

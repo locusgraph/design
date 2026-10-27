@@ -21,11 +21,11 @@ function loadFont(file: string) {
 }
 
 export default async function OpenGraphImage() {
-  const [archivo, archivoBold, inter, firaCode] = await Promise.all([
+  const [archivo, archivoBold, plexSans, plexMono] = await Promise.all([
     loadFont("Archivo-Regular.ttf"),
     loadFont("Archivo-Bold.ttf"),
-    loadFont("Inter-Regular.ttf"),
-    loadFont("FiraCode-Regular.ttf"),
+    loadFont("IBMPlexSans-Regular.ttf"),
+    loadFont("IBMPlexMono-Regular.ttf"),
   ]);
   return new ImageResponse(
     <SocialCard
@@ -39,8 +39,8 @@ export default async function OpenGraphImage() {
       fonts: [
         { name: "Archivo", data: archivo, weight: 400 },
         { name: "Archivo", data: archivoBold, weight: 700 },
-        { name: "Inter", data: inter, weight: 400 },
-        { name: "Fira Code", data: firaCode, weight: 400 },
+        { name: "IBM Plex Sans", data: plexSans, weight: 400 },
+        { name: "IBM Plex Mono", data: plexMono, weight: 400 },
       ],
     }
   );
@@ -154,6 +154,7 @@ export default defineDemo({
     { name: "product", type: "string" },
     { name: "url", type: "string" },
     { name: "theme", type: '"dark" | "light"', defaultValue: '"dark"' },
+    { name: "brand", type: "ReactNode", defaultValue: "LocusGraph mark and wordmark" },
   ],
   examples: {
     BothThemes: {
@@ -167,7 +168,7 @@ export default defineDemo({
     },
     NextOpenGraphImage: {
       description:
-        "In Next.js, return it from app/opengraph-image.tsx. Satori only has the fonts you pass, so load Archivo, Inter and Fira Code.",
+        "In Next.js, return it from app/opengraph-image.tsx. Satori only has the fonts you pass, so load Archivo, IBM Plex Sans and IBM Plex Mono.",
       component: NextOpenGraphImage,
     },
   },

@@ -49,4 +49,4 @@ export default function Icon() {
 
 ## Social card
 
-`SocialCard` is a 1200×630 Open Graph image built with inline styles and flexbox only, so the same component renders in the browser and in `ImageResponse`. Props: `title`, `description`, `product`, `url` and `theme` (`dark` or `light`); `socialCardSize` and `socialCardFonts` help set up `opengraph-image.tsx`.
+`SocialCard` is a 1200×630 Open Graph image built with inline styles and flexbox only, so the same component renders in the browser and in `ImageResponse`. Props: `title`, `description`, `product`, `url`, `theme` (`dark` or `light`) and `brand`, which replaces the LocusGraph mark and wordmark in the top row; `socialCardSize` and `socialCardFonts` help set up `opengraph-image.tsx`.

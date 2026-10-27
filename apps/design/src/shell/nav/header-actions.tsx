@@ -21,7 +21,7 @@ export function HeaderActions({ settings, onSearch }: HeaderActionsProps) {
         variant="secondary"
         size="sm"
         onClick={onSearch}
-        className="w-8 justify-start bg-surface font-normal text-muted-foreground shadow-none hover:bg-surface/80 sm:w-64"
+        className="w-8 justify-start bg-surface font-sans font-normal text-muted-foreground shadow-none hover:bg-surface/80 sm:w-64"
       >
         <SearchIcon weight="bold" aria-hidden />
         <span className="hidden sm:inline">Search the docs…</span>
@@ -50,7 +50,7 @@ export function HeaderActions({ settings, onSearch }: HeaderActionsProps) {
       <Separator orientation="vertical" />
       <ThemeToggle
         theme={settings.theme}
-        onThemeChange={(theme) => setParam("theme", theme === "light" ? null : theme)}
+        onThemeChange={(theme) => setParam("theme", theme === "dark" ? null : theme)}
       />
     </>
   );

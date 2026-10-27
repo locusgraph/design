@@ -38,6 +38,7 @@ export const loopSections: NavSection[] = [
       "loop/approval/args-editor",
       "loop/approval/question",
       "loop/approval/plan-review",
+      "loop/approval/approval-gate",
     ],
   },
   {
@@ -47,6 +48,7 @@ export const loopSections: NavSection[] = [
       "loop/oversight/inbox",
       "loop/oversight/memory-review",
       "loop/oversight/spend-gate",
+      "loop/oversight/decision-log",
     ],
   },
   {

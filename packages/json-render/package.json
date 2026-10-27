@@ -1,0 +1,61 @@
+{
+  "name": "@locusgraph/json-render",
+  "version": "0.1.0",
+  "description": "A json-render catalog and registry for LocusGraph components and blocks, so a model can lay out LocusGraph screens as JSON.",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/locusgraph/design.git",
+    "directory": "packages/json-render"
+  },
+  "homepage": "https://design.locusgraph.com",
+  "type": "module",
+  "sideEffects": false,
+  "files": [
+    "dist"
+  ],
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org",
+    "access": "public",
+    "provenance": true,
+    "exports": {
+      ".": {
+        "types": "./dist/index.d.ts",
+        "default": "./dist/index.js"
+      }
+    }
+  },
+  "scripts": {
+    "build": "rm -rf dist && tsc -p tsconfig.build.json && node ../../scripts/react-compiler.mjs dist && node ../../scripts/esm-extensions.mjs dist",
+    "prepack": "pnpm run build",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "test": "vitest run"
+  },
+  "peerDependencies": {
+    "@json-render/core": "^0.21.3",
+    "@json-render/react": "^0.21.3",
+    "@locusgraph/blocks": "workspace:^",
+    "@locusgraph/components": "workspace:^",
+    "react": "^19.2.0",
+    "react-dom": "^19.2.0",
+    "zod": "^4.0.0"
+  },
+  "devDependencies": {
+    "@json-render/core": "catalog:",
+    "@json-render/react": "catalog:",
+    "@locusgraph/blocks": "workspace:*",
+    "@locusgraph/components": "workspace:*",
+    "@locusgraph/config": "workspace:*",
+    "@types/node": "catalog:",
+    "@types/react": "catalog:",
+    "@types/react-dom": "catalog:",
+    "react": "catalog:",
+    "react-dom": "catalog:",
+    "typescript": "catalog:",
+    "vitest": "catalog:",
+    "zod": "catalog:"
+  }
+}

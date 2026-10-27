@@ -111,14 +111,14 @@ export function Composer({
             send();
           }
         }}
-        className="max-h-48 min-h-14 resize-none border-0 bg-transparent px-4 pt-3.5 pb-1 text-sm leading-relaxed shadow-none placeholder:text-faint focus-visible:ring-0 dark:bg-transparent"
+        className="max-h-48 min-h-12 resize-none border-0 bg-transparent px-4 pt-3.5 pb-0 text-sm leading-relaxed shadow-none placeholder:text-faint focus-visible:ring-0 dark:bg-transparent"
       />
       {showError && (
         <p id={errorId} role="alert" className="px-4 pt-1 text-xs text-destructive">
           {errorMessage}
         </p>
       )}
-      <div data-slot="composer-toolbar" className="flex items-center gap-1 px-2.5 pt-1 pb-2.5">
+      <div data-slot="composer-toolbar" className="flex items-center gap-1 px-2 pt-1 pb-2">
         {onAttachFiles && (
           <ComposerAttachButton
             accept={accept}

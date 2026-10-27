@@ -8,7 +8,7 @@ import {
 import type * as React from "react";
 import { useState } from "react";
 
-const agentPrompt = `Build this UI with the LocusGraph design system.
+export const agentPrompt = `Build this UI with the Locus Design system.
 
 1. Read https://design.locusgraph.com/DESIGN.md first. It lists every component, block and agent part, how to install them and the house style.
 2. Before using a component, fetch its page by adding .md to its path, for example https://design.locusgraph.com/loop/approval/approval.md, and use the props it documents. Do not guess props.
@@ -24,12 +24,12 @@ const agentChips: { label: string; icon: React.ReactNode }[] = [
 
 function AgentChips() {
   return (
-    <span aria-hidden className="flex -space-x-1.5">
+    <span aria-hidden className="flex -space-x-1">
       {agentChips.map((chip) => (
         <span
           key={chip.label}
           title={chip.label}
-          className="flex size-6 items-center justify-center rounded-full bg-primary-foreground/15 font-mono text-2xs font-semibold text-primary-foreground ring-2 ring-primary"
+          className="flex size-7 items-center justify-center rounded-full bg-[color-mix(in_oklch,var(--locus-btn-ink)_20%,var(--locus-btn))] font-mono text-[0.625rem] font-semibold tracking-tight text-primary-foreground ring-2 ring-primary"
         >
           {chip.icon}
         </span>
@@ -54,7 +54,7 @@ export function StartWithAgent({ className }: { className?: string }) {
       <button
         type="button"
         onClick={copy}
-        className="flex h-11 items-center gap-3 rounded-full bg-primary py-1.5 pr-4 pl-2 text-sm font-medium text-primary-foreground shadow-[0_1px_2px_rgb(0_0_0/0.12),inset_0_1px_0_rgb(255_255_255/0.14)] locus-focus-ring motion-safe:transition-colors hover:bg-primary/90"
+        className="flex h-11 items-center gap-3 rounded-full bg-primary py-1.5 pr-4 pl-2 font-heading text-sm font-medium text-primary-foreground shadow-[0_1px_2px_rgb(0_0_0/0.12),inset_0_1px_0_rgb(255_255_255/0.14)] locus-focus-ring motion-safe:transition-colors hover:bg-primary/90"
       >
         <AgentChips />
         <span>{copied ? "Prompt copied" : "Start with an agent"}</span>

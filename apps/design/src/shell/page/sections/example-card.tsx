@@ -13,7 +13,7 @@ export function ExampleCard({ example }: { example: DocExample }) {
         )}
       </div>
       <div className="overflow-hidden border">
-        <div className="flex min-h-28 flex-wrap items-center justify-center bg-background p-8">
+        <div className="flex min-h-28 flex-wrap items-center justify-center bg-surface p-8">
           <Example />
         </div>
         <CodeTeaser code={example.code} />
