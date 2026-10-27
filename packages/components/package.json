@@ -1,6 +1,6 @@
 {
   "name": "@locusgraph/components",
-  "version": "0.5.0",
+  "version": "0.6.0",
   "description": "Radix and shadcn based React components, shells and theme for LocusGraph apps.",
   "license": "MIT",
   "repository": {

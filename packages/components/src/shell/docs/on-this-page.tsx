@@ -23,7 +23,7 @@ function useScrollToHashSection(sectionIds: string[], pinSection: (id: string) =
   }, [idsKey, pinSection]);
 }
 
-function OnThisPage({ sections, title = "On This Page" }: OnThisPageProps) {
+function OnThisPage({ sections, title = "On this page" }: OnThisPageProps) {
   const sectionIds = sections.map((section) => section.id);
   const [activeId, pinSection] = useActiveSection(sectionIds);
   useScrollToHashSection(sectionIds, pinSection);

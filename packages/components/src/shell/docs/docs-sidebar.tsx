@@ -15,7 +15,7 @@ type DocsNavListProps = {
 
 function DocsNavList({ groups, activeHref, linkComponent: Link = "a" }: DocsNavListProps) {
   return (
-    <div className="flex flex-col gap-4">
+    <div className="flex flex-col gap-6">
       {groups.map((group) => (
         <div key={group.label} className="flex flex-col">
           <p className="locus-eyebrow flex h-8 items-center px-2">{group.label}</p>
@@ -28,8 +28,8 @@ function DocsNavList({ groups, activeHref, linkComponent: Link = "a" }: DocsNavL
                     href={item.href}
                     aria-current={active ? "page" : undefined}
                     className={cn(
-                      "flex h-control-sm w-fit items-center border border-transparent px-2 text-sm font-medium text-muted-foreground transition-colors locus-focus-ring hover:bg-accent hover:text-foreground",
-                      active && "border-accent bg-accent text-foreground"
+                      "flex h-control-sm w-fit items-center border border-transparent px-2 text-sm text-muted-foreground transition-colors locus-focus-ring hover:bg-accent hover:text-foreground",
+                      active && "border-accent bg-accent font-medium text-foreground"
                     )}
                   >
                     {item.title}

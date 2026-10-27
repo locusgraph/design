@@ -8,8 +8,8 @@ type ProgressTone = "default" | "good" | "warn" | "destructive" | "auto";
 
 const indicatorToneClass: Record<Exclude<ProgressTone, "auto">, string> = {
   default: "bg-primary",
-  good: "bg-good",
-  warn: "bg-warn",
+  good: "bg-good-fill",
+  warn: "bg-warn-fill",
   destructive: "bg-destructive",
 };
 
@@ -35,7 +35,7 @@ function Progress({
       data-tone={resolvedTone}
       value={value}
       max={max}
-      className={cn("relative h-2 w-full overflow-hidden rounded-full bg-primary/20", className)}
+      className={cn("relative h-2 w-full overflow-hidden rounded-full bg-foreground/10", className)}
       {...props}
     >
       <ProgressPrimitive.Indicator
