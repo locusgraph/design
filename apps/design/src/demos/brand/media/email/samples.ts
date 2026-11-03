@@ -1,94 +1,51 @@
-import {
-  invitationEmail,
-  lowCreditsEmail,
-  type RenderedEmail,
-  receiptEmail,
-  usageOverPlanEmail,
-} from "@locusgraph/email";
+import type { EmailProduct, RenderedEmail } from "@locusgraph/email";
+import * as email from "@locusgraph/email";
+import { sampleProps } from "./sample-props";
 
-export const emailTemplates = ["invitation", "receipt", "low-credits", "usage-over-plan"] as const;
+export const emailTemplates = [
+  "invitation",
+  "invitation-accepted",
+  "role-changed",
+  "member-removed",
+  "ownership-transferred",
+  "organization-deleted",
+  "key-created",
+  "key-revoked",
+  "key-expiring",
+  "low-credits",
+  "receipt",
+  "usage-warning",
+  "usage-over-plan",
+  "usage-summary",
+] as const;
 
 export type EmailTemplate = (typeof emailTemplates)[number];
 
-const renderers: Record<EmailTemplate, () => RenderedEmail> = {
-  invitation: () =>
-    invitationEmail({
-      organizationName: "Acme Inc",
-      inviterName: "Dana Rivera",
-      role: "member",
-      acceptUrl: "https://accounts.locusgraph.com/invite/example",
-      expiresOn: "Oct 24, 2026",
-    }),
-  receipt: () =>
-    receiptEmail({
-      organizationName: "Acme Inc",
-      description: "Pro plan, October",
-      amountCents: 4000,
-      paidOn: "Oct 1, 2026",
-      receiptUrl: "https://pay.stripe.com/receipts/example",
-    }),
-  "low-credits": () =>
-    lowCreditsEmail({
-      organizationName: "Acme Inc",
-      balanceMicroUsd: 2_400_000,
-      buyCreditsUrl: "https://accounts.locusgraph.com/billing/credits",
-    }),
-  "usage-over-plan": () =>
-    usageOverPlanEmail({
-      organizationName: "Acme Inc",
-      quotas: [
-        {
-          key: "locusgraph.memory_writes",
-          label: "Memory writes",
-          used: 124_000,
-          included: 100_000,
-          periodLabel: "this month",
-        },
-        {
-          key: "locusgraph.graphs",
-          label: "Graphs",
-          used: 6,
-          included: 5,
-          periodLabel: "in total",
-        },
-      ],
-      usageUrl: "https://accounts.locusgraph.com/usage",
-    }),
-};
+type TemplateFunction = keyof typeof sampleProps;
 
-const rendered = new Map<EmailTemplate, RenderedEmail>();
-
-export function renderSampleEmail(template: EmailTemplate): RenderedEmail {
-  const cached = rendered.get(template);
-  if (cached) return cached;
-  const email = renderers[template]();
-  rendered.set(template, email);
-  return email;
+export function functionNameOf(template: EmailTemplate): TemplateFunction {
+  const camel = template.replace(/-(\w)/g, (_, letter: string) => letter.toUpperCase());
+  return `${camel}Email` as TemplateFunction;
 }
 
-export const templateCode: Record<EmailTemplate, string> = {
-  invitation: `invitationEmail({
-  organizationName: "Acme Inc",
-  inviterName: "Dana Rivera",
-  role: "member",
-  acceptUrl,
-  expiresOn: "Oct 24, 2026",
-})`,
-  receipt: `receiptEmail({
-  organizationName: "Acme Inc",
-  description: "Pro plan, October",
-  amountCents: 4000,
-  paidOn: "Oct 1, 2026",
-  receiptUrl,
-})`,
-  "low-credits": `lowCreditsEmail({
-  organizationName: "Acme Inc",
-  balanceMicroUsd: 2_400_000,
-  buyCreditsUrl,
-})`,
-  "usage-over-plan": `usageOverPlanEmail({
-  organizationName: "Acme Inc",
-  quotas: [{ key: "locusgraph.memory_writes", label: "Memory writes", used: 124_000, included: 100_000, periodLabel: "this month" }],
-  usageUrl,
-})`,
-};
+const rendered = new Map<string, RenderedEmail>();
+
+export function renderSampleEmail(
+  template: EmailTemplate,
+  product: EmailProduct = "locusgraph"
+): RenderedEmail {
+  const cacheKey = `${product}:${template}`;
+  const cached = rendered.get(cacheKey);
+  if (cached) return cached;
+  const name = functionNameOf(template);
+  const render = email[name] as (props: object) => RenderedEmail;
+  const result = render({ ...sampleProps[name], product });
+  rendered.set(cacheKey, result);
+  return result;
+}
+
+export function templateCode(template: EmailTemplate, product: EmailProduct): string {
+  const name = functionNameOf(template);
+  const props = JSON.stringify({ product, ...sampleProps[name] }, null, 2);
+  return `import { ${name} } from "@locusgraph/email";\n\nconst { subject, html, text } = ${name}(${props});`;
+}

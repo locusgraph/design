@@ -1,9 +1,10 @@
 import { formatCents } from "@locusgraph/utils";
-import { EmailLayout } from "../kit/email-layout";
-import { EmailButton, EmailHeading, EmailLabel, EmailRows, EmailText } from "../kit/parts";
-import { renderEmail } from "../render";
+import { type WithProduct } from "../../kit/brand";
+import { EmailLayout } from "../../kit/email-layout";
+import { EmailButton, EmailHeading, EmailLabel, EmailRows, EmailText } from "../../kit/parts";
+import { renderEmail } from "../../render";
 
-export type ReceiptEmailProps = {
+export type ReceiptEmailProps = WithProduct & {
   organizationName: string;
   description: string;
   amountCents: number;
@@ -12,6 +13,7 @@ export type ReceiptEmailProps = {
 };
 
 export function ReceiptEmail({
+  product,
   organizationName,
   description,
   amountCents,
@@ -20,6 +22,7 @@ export function ReceiptEmail({
 }: ReceiptEmailProps) {
   return (
     <EmailLayout
+      product={product}
       preview={`${formatCents(amountCents)} paid for ${organizationName}`}
       footer="Stripe processed this payment. The receipt link shows the full invoice."
     >

@@ -5,6 +5,7 @@ import {
   EmailLayout,
   EmailRows,
   EmailText,
+  emailProducts,
   lowCreditsEmail,
 } from "@locusgraph/email";
 import { defineDemo, select } from "../../../registry/define-demo";
@@ -47,16 +48,44 @@ function PlainText() {
 export default defineDemo({
   title: "Email",
   description:
-    "The branded email kit from @locusgraph/email: a 560px layout with the wordmark, a mono label, a heading, body text, ruled rows and one pill button, all with inline styles from tokens. Each template returns a subject, HTML and a plain text part.",
-  controls: { template: select(emailTemplates, "invitation") },
-  playground: ({ template }) => <EmailFrame email={renderSampleEmail(template)} />,
-  code: ({ template }) =>
-    `import { ${templateCode[template].split("(")[0]} } from "@locusgraph/email";\n\nconst { subject, html, text } = ${templateCode[template]};`,
+    "The branded email kit from @locusgraph/email: a 560px layout with the product mark and wordmark, a mono label, a heading, body text, ruled rows and one pill button, all with inline styles from tokens. Each template returns a subject, HTML and a plain text part.",
+  controls: {
+    template: select(emailTemplates, "invitation"),
+    product: select(emailProducts, "locusgraph"),
+  },
+  playground: ({ template, product }) => (
+    <EmailFrame email={renderSampleEmail(template, product)} />
+  ),
+  code: ({ template, product }) => templateCode(template, product),
   props: [
     { name: "invitationEmail", type: "(props: InvitationEmailProps) => RenderedEmail" },
     { name: "receiptEmail", type: "(props: ReceiptEmailProps) => RenderedEmail" },
     { name: "lowCreditsEmail", type: "(props: LowCreditsEmailProps) => RenderedEmail" },
     { name: "usageOverPlanEmail", type: "(props: UsageOverPlanEmailProps) => RenderedEmail" },
+    { name: "usageWarningEmail", type: "(props: UsageWarningEmailProps) => RenderedEmail" },
+    { name: "usageSummaryEmail", type: "(props: UsageSummaryEmailProps) => RenderedEmail" },
+    {
+      name: "invitationAcceptedEmail",
+      type: "(props: InvitationAcceptedEmailProps) => RenderedEmail",
+    },
+    { name: "roleChangedEmail", type: "(props: RoleChangedEmailProps) => RenderedEmail" },
+    { name: "memberRemovedEmail", type: "(props: MemberRemovedEmailProps) => RenderedEmail" },
+    {
+      name: "ownershipTransferredEmail",
+      type: "(props: OwnershipTransferredEmailProps) => RenderedEmail",
+    },
+    {
+      name: "organizationDeletedEmail",
+      type: "(props: OrganizationDeletedEmailProps) => RenderedEmail",
+    },
+    { name: "keyCreatedEmail", type: "(props: KeyCreatedEmailProps) => RenderedEmail" },
+    { name: "keyRevokedEmail", type: "(props: KeyRevokedEmailProps) => RenderedEmail" },
+    { name: "keyExpiringEmail", type: "(props: KeyExpiringEmailProps) => RenderedEmail" },
+    {
+      name: "product",
+      type: '"locusgraph" | "spendgraph"',
+      defaultValue: '"locusgraph"',
+    },
     { name: "renderEmail", type: "(subject: string, email: ReactElement) => RenderedEmail" },
     { name: "RenderedEmail", type: "{ subject: string; html: string; text: string }" },
   ],

@@ -1,13 +1,16 @@
 import type * as React from "react";
+import { brandOf, type EmailProduct } from "./brand";
 import { contentWidth, emailColors, emailFonts } from "./theme";
 
 type EmailLayoutProps = {
   preview: string;
   children: React.ReactNode;
   footer?: React.ReactNode;
+  product?: EmailProduct;
 };
 
-export function EmailLayout({ preview, children, footer }: EmailLayoutProps) {
+export function EmailLayout({ preview, children, footer, product }: EmailLayoutProps) {
+  const brand = brandOf(product);
   return (
     <html lang="en">
       <head>
@@ -43,11 +46,12 @@ export function EmailLayout({ preview, children, footer }: EmailLayoutProps) {
                 >
                   <tbody>
                     <tr>
-                      <td
-                        style={{ paddingBottom: 16, fontSize: 16, color: emailColors.foreground }}
-                      >
-                        <strong>locus</strong>
-                        <span style={{ fontWeight: 300 }}>graph</span>
+                      <td style={{ paddingBottom: 16 }}>
+                        <BrandHeader
+                          markUrl={brand.markUrl}
+                          bold={brand.wordmark[0]}
+                          light={brand.wordmark[1]}
+                        />
                       </td>
                     </tr>
                     <tr>
@@ -84,5 +88,29 @@ export function EmailLayout({ preview, children, footer }: EmailLayoutProps) {
         </table>
       </body>
     </html>
+  );
+}
+
+function BrandHeader({ markUrl, bold, light }: { markUrl: string; bold: string; light: string }) {
+  return (
+    <table role="presentation" cellPadding={0} cellSpacing={0}>
+      <tbody>
+        <tr>
+          <td style={{ paddingRight: 8, verticalAlign: "middle" }}>
+            <img
+              src={markUrl}
+              width={27}
+              height={24}
+              alt=""
+              style={{ display: "block", border: 0 }}
+            />
+          </td>
+          <td style={{ verticalAlign: "middle", fontSize: 16, color: emailColors.foreground }}>
+            <strong>{bold}</strong>
+            <span style={{ fontWeight: 300 }}>{light}</span>
+          </td>
+        </tr>
+      </tbody>
+    </table>
   );
 }

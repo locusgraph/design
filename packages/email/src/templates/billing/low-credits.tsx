@@ -1,15 +1,17 @@
 import { formatMicroUsd } from "@locusgraph/utils";
-import { EmailLayout } from "../kit/email-layout";
-import { EmailButton, EmailHeading, EmailLabel, EmailText } from "../kit/parts";
-import { renderEmail } from "../render";
+import { type WithProduct } from "../../kit/brand";
+import { EmailLayout } from "../../kit/email-layout";
+import { EmailButton, EmailHeading, EmailLabel, EmailText } from "../../kit/parts";
+import { renderEmail } from "../../render";
 
-export type LowCreditsEmailProps = {
+export type LowCreditsEmailProps = WithProduct & {
   organizationName: string;
   balanceMicroUsd: number;
   buyCreditsUrl: string;
 };
 
 export function LowCreditsEmail({
+  product,
   organizationName,
   balanceMicroUsd,
   buyCreditsUrl,
@@ -17,6 +19,7 @@ export function LowCreditsEmail({
   const empty = balanceMicroUsd <= 0;
   return (
     <EmailLayout
+      product={product}
       preview={
         empty ? `${organizationName} is out of credits` : `${organizationName} is low on credits`
       }
