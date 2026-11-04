@@ -22,7 +22,9 @@ export type ControlValues<C extends Controls> = {
 
 export type CompositionNode = { name: string; children?: CompositionNode[] };
 
-export type ExampleDefinition = ComponentType | { description: string; component: ComponentType };
+export type ExampleDefinition =
+  | ComponentType
+  | { description: string; component: ComponentType; code?: string };
 
 export type PreviewHeight = "auto" | "tall";
 

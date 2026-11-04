@@ -18,7 +18,7 @@ export function docExamples(demo: Demo, fileSource: string): DocExample[] {
       title: titleFromName(name),
       description: isComponent ? undefined : definition.description,
       component: isComponent ? definition : definition.component,
-      code: extractExampleSource(fileSource, name),
+      code: (isComponent ? undefined : definition.code) ?? extractExampleSource(fileSource, name),
     };
   });
 }

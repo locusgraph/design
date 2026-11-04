@@ -1,4 +1,4 @@
-import { type RenderedEmail, renderEmail } from "@locusgraph/email";
+import { emailAssetsOrigin, type RenderedEmail, renderEmail } from "@locusgraph/email";
 import type { ReactElement, SyntheticEvent } from "react";
 
 function fitFrameToEmail(event: SyntheticEvent<HTMLIFrameElement>) {
@@ -10,6 +10,11 @@ function fitFrameToEmail(event: SyntheticEvent<HTMLIFrameElement>) {
 
 const placeholderHeight = 560;
 
+function withLocalAssets(html: string) {
+  if (typeof window === "undefined") return html;
+  return html.replaceAll(emailAssetsOrigin, window.location.origin);
+}
+
 export function EmailFrame({ email }: { email: RenderedEmail }) {
   return (
     <section className="flex w-[40rem] max-w-full flex-col ring-1 ring-border">
@@ -19,7 +24,7 @@ export function EmailFrame({ email }: { email: RenderedEmail }) {
       </div>
       <iframe
         title={email.subject}
-        srcDoc={email.html}
+        srcDoc={withLocalAssets(email.html)}
         className="w-full bg-white"
         style={{ height: placeholderHeight }}
         onLoad={fitFrameToEmail}

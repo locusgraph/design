@@ -1,13 +1,23 @@
 import type * as React from "react";
+import { brandOf, type EmailBrand, type EmailProduct } from "./brand";
 import { contentWidth, emailColors, emailFonts } from "./theme";
 
 type EmailLayoutProps = {
   preview: string;
   children: React.ReactNode;
   footer?: React.ReactNode;
+  product?: EmailProduct;
+  brand?: Partial<EmailBrand>;
 };
 
-export function EmailLayout({ preview, children, footer }: EmailLayoutProps) {
+export function EmailLayout({
+  preview,
+  children,
+  footer,
+  product,
+  brand: override,
+}: EmailLayoutProps) {
+  const brand = brandOf(product, override);
   return (
     <html lang="en">
       <head>
@@ -43,11 +53,8 @@ export function EmailLayout({ preview, children, footer }: EmailLayoutProps) {
                 >
                   <tbody>
                     <tr>
-                      <td
-                        style={{ paddingBottom: 16, fontSize: 16, color: emailColors.foreground }}
-                      >
-                        <strong>locus</strong>
-                        <span style={{ fontWeight: 300 }}>graph</span>
+                      <td style={{ paddingBottom: 16 }}>
+                        <BrandHeader brand={brand} />
                       </td>
                     </tr>
                     <tr>
@@ -84,5 +91,30 @@ export function EmailLayout({ preview, children, footer }: EmailLayoutProps) {
         </table>
       </body>
     </html>
+  );
+}
+
+function BrandHeader({ brand }: { brand: EmailBrand }) {
+  const [bold, light] = brand.wordmark;
+  return (
+    <table role="presentation" cellPadding={0} cellSpacing={0}>
+      <tbody>
+        <tr>
+          <td style={{ paddingRight: 8, verticalAlign: "middle" }}>
+            <img
+              src={brand.markUrl}
+              width={brand.markWidth}
+              height={brand.markHeight}
+              alt=""
+              style={{ display: "block", border: 0 }}
+            />
+          </td>
+          <td style={{ verticalAlign: "middle", fontSize: 16, color: emailColors.foreground }}>
+            <strong>{bold}</strong>
+            <span style={{ fontWeight: 300 }}>{light}</span>
+          </td>
+        </tr>
+      </tbody>
+    </table>
   );
 }
