@@ -1,44 +1,29 @@
-import type { WithProduct } from "../../kit/brand";
-import { EmailLayout } from "../../kit/email-layout";
-import { EmailButton, EmailHeading, EmailLabel, EmailRows, EmailText } from "../../kit/parts";
-import { renderEmail } from "../../render";
+import { defineEmail } from "../../kit/text/define-email";
+import type { WithOverrides } from "../../kit/text/overrides";
 
-export type KeyExpiringEmailProps = WithProduct & {
+export type KeyExpiringEmailData = {
   organizationName: string;
   keyName: string;
   expiresOn: string;
   keysUrl: string;
 };
 
-export function KeyExpiringEmail({
-  product,
-  organizationName,
-  keyName,
-  expiresOn,
-  keysUrl,
-}: KeyExpiringEmailProps) {
-  return (
-    <EmailLayout product={product} preview={`The API key ${keyName} expires on ${expiresOn}`}>
-      <EmailLabel>API keys</EmailLabel>
-      <EmailHeading>API key expires on {expiresOn}</EmailHeading>
-      <EmailText>
-        After that date, anything using this key for {organizationName} gets refused. Create a new
-        key and switch to it before then.
-      </EmailText>
-      <EmailRows
-        rows={[
-          ["Key", keyName],
-          ["Expires", expiresOn],
-        ]}
-      />
-      <EmailButton href={keysUrl}>Create a new key</EmailButton>
-    </EmailLayout>
-  );
-}
+export type KeyExpiringEmailProps = WithOverrides<KeyExpiringEmailData>;
 
-export function keyExpiringEmail(props: KeyExpiringEmailProps) {
-  return renderEmail(
-    `API key ${props.keyName} expires on ${props.expiresOn}`,
-    <KeyExpiringEmail {...props} />
-  );
-}
+export const { Component: KeyExpiringEmail, render: keyExpiringEmail } =
+  defineEmail<KeyExpiringEmailData>({
+    text: {
+      subject: (p) => `API key ${p.keyName} expires on ${p.expiresOn}`,
+      preview: "Create a new key and switch to it before then",
+      label: "API keys",
+      heading: (p) => `API key expires on ${p.expiresOn}`,
+      body: (p) =>
+        `After that date, anything using this key for ${p.organizationName} gets refused. Create a new key and switch to it before then.`,
+      button: "Create a new key",
+    },
+    actionUrl: (p) => p.keysUrl,
+    rows: (p) => [
+      ["Key", p.keyName],
+      ["Expires", p.expiresOn],
+    ],
+  });

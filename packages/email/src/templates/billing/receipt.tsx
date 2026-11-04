@@ -1,10 +1,8 @@
 import { formatCents } from "@locusgraph/utils";
-import { type WithProduct } from "../../kit/brand";
-import { EmailLayout } from "../../kit/email-layout";
-import { EmailButton, EmailHeading, EmailLabel, EmailRows, EmailText } from "../../kit/parts";
-import { renderEmail } from "../../render";
+import { defineEmail } from "../../kit/text/define-email";
+import type { WithOverrides } from "../../kit/text/overrides";
 
-export type ReceiptEmailProps = WithProduct & {
+export type ReceiptEmailData = {
   organizationName: string;
   description: string;
   amountCents: number;
@@ -12,38 +10,22 @@ export type ReceiptEmailProps = WithProduct & {
   receiptUrl: string;
 };
 
-export function ReceiptEmail({
-  product,
-  organizationName,
-  description,
-  amountCents,
-  paidOn,
-  receiptUrl,
-}: ReceiptEmailProps) {
-  return (
-    <EmailLayout
-      product={product}
-      preview={`${formatCents(amountCents)} paid for ${organizationName}`}
-      footer="Stripe processed this payment. The receipt link shows the full invoice."
-    >
-      <EmailLabel>Receipt</EmailLabel>
-      <EmailHeading>{formatCents(amountCents)} paid</EmailHeading>
-      <EmailText>Thanks. Here is what {organizationName} paid for.</EmailText>
-      <EmailRows
-        rows={[
-          ["Item", description],
-          ["Date", paidOn],
-          ["Total", formatCents(amountCents)],
-        ]}
-      />
-      <EmailButton href={receiptUrl}>View receipt</EmailButton>
-    </EmailLayout>
-  );
-}
+export type ReceiptEmailProps = WithOverrides<ReceiptEmailData>;
 
-export function receiptEmail(props: ReceiptEmailProps) {
-  return renderEmail(
-    `Receipt: ${formatCents(props.amountCents)} for ${props.organizationName}`,
-    <ReceiptEmail {...props} />
-  );
-}
+export const { Component: ReceiptEmail, render: receiptEmail } = defineEmail<ReceiptEmailData>({
+  text: {
+    subject: (p) => `Receipt: ${formatCents(p.amountCents)} for ${p.organizationName}`,
+    preview: (p) => `${p.description}, paid on ${p.paidOn}`,
+    label: "Receipt",
+    heading: (p) => `${formatCents(p.amountCents)} paid`,
+    body: (p) => `Thanks. Here is what ${p.organizationName} paid for.`,
+    button: "View receipt",
+    footer: "Stripe processed this payment. The receipt link shows the full invoice.",
+  },
+  actionUrl: (p) => p.receiptUrl,
+  rows: (p) => [
+    ["Item", p.description],
+    ["Date", p.paidOn],
+    ["Total", formatCents(p.amountCents)],
+  ],
+});

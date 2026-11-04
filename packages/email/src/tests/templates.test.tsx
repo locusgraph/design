@@ -60,7 +60,7 @@ describe("email templates", () => {
         { key: "spendgraph.events", used: 10450, included: 10000, periodLabel: "this month" },
       ],
     });
-    expect(email.text).toContain("spendgraph.events 10,450 of 10,000 this month");
+    expect(email.text).toContain("spendgraph.events: 10,450 of 10,000 this month");
   });
 
   it("names a quota by its label when one is given", () => {
@@ -77,7 +77,7 @@ describe("email templates", () => {
         },
       ],
     });
-    expect(email.text).toContain("Events 10,450 of 10,000 this month");
+    expect(email.text).toContain("Events: 10,450 of 10,000 this month");
     expect(email.text).not.toContain("spendgraph.events");
   });
 

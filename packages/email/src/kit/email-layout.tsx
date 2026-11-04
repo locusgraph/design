@@ -1,5 +1,5 @@
 import type * as React from "react";
-import { brandOf, type EmailProduct } from "./brand";
+import { brandOf, type EmailBrand, type EmailProduct } from "./brand";
 import { contentWidth, emailColors, emailFonts } from "./theme";
 
 type EmailLayoutProps = {
@@ -7,10 +7,17 @@ type EmailLayoutProps = {
   children: React.ReactNode;
   footer?: React.ReactNode;
   product?: EmailProduct;
+  brand?: Partial<EmailBrand>;
 };
 
-export function EmailLayout({ preview, children, footer, product }: EmailLayoutProps) {
-  const brand = brandOf(product);
+export function EmailLayout({
+  preview,
+  children,
+  footer,
+  product,
+  brand: override,
+}: EmailLayoutProps) {
+  const brand = brandOf(product, override);
   return (
     <html lang="en">
       <head>
@@ -47,11 +54,7 @@ export function EmailLayout({ preview, children, footer, product }: EmailLayoutP
                   <tbody>
                     <tr>
                       <td style={{ paddingBottom: 16 }}>
-                        <BrandHeader
-                          markUrl={brand.markUrl}
-                          bold={brand.wordmark[0]}
-                          light={brand.wordmark[1]}
-                        />
+                        <BrandHeader brand={brand} />
                       </td>
                     </tr>
                     <tr>
@@ -91,16 +94,17 @@ export function EmailLayout({ preview, children, footer, product }: EmailLayoutP
   );
 }
 
-function BrandHeader({ markUrl, bold, light }: { markUrl: string; bold: string; light: string }) {
+function BrandHeader({ brand }: { brand: EmailBrand }) {
+  const [bold, light] = brand.wordmark;
   return (
     <table role="presentation" cellPadding={0} cellSpacing={0}>
       <tbody>
         <tr>
           <td style={{ paddingRight: 8, verticalAlign: "middle" }}>
             <img
-              src={markUrl}
-              width={27}
-              height={24}
+              src={brand.markUrl}
+              width={brand.markWidth}
+              height={brand.markHeight}
               alt=""
               style={{ display: "block", border: 0 }}
             />

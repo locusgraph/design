@@ -1,38 +1,28 @@
-import type { WithProduct } from "../../kit/brand";
-import { EmailLayout } from "../../kit/email-layout";
-import { EmailButton, EmailHeading, EmailLabel, EmailText } from "../../kit/parts";
+import { defineEmail } from "../../kit/text/define-email";
+import type { WithOverrides } from "../../kit/text/overrides";
+import { securityFooter } from "../../kit/text/security";
 import { withIndefiniteArticle } from "../../kit/words";
-import { renderEmail } from "../../render";
 
-export type RoleChangedEmailProps = WithProduct & {
+export type RoleChangedEmailData = {
   organizationName: string;
   role: string;
   changedBy: string;
   organizationUrl: string;
 };
 
-export function RoleChangedEmail({
-  product,
-  organizationName,
-  role,
-  changedBy,
-  organizationUrl,
-}: RoleChangedEmailProps) {
-  return (
-    <EmailLayout product={product} preview={`You are now ${withIndefiniteArticle(role)}`}>
-      <EmailLabel>Members</EmailLabel>
-      <EmailHeading>Your role changed</EmailHeading>
-      <EmailText>
-        {changedBy} made you {withIndefiniteArticle(role)} of {organizationName}.
-      </EmailText>
-      <EmailButton href={organizationUrl}>Open organization</EmailButton>
-    </EmailLayout>
-  );
-}
+export type RoleChangedEmailProps = WithOverrides<RoleChangedEmailData>;
 
-export function roleChangedEmail(props: RoleChangedEmailProps) {
-  return renderEmail(
-    `You are now ${withIndefiniteArticle(props.role)} of ${props.organizationName}`,
-    <RoleChangedEmail {...props} />
-  );
-}
+export const { Component: RoleChangedEmail, render: roleChangedEmail } =
+  defineEmail<RoleChangedEmailData>({
+    text: {
+      subject: (p) => `You are now ${withIndefiniteArticle(p.role)} of ${p.organizationName}`,
+      preview: (p) => `${p.changedBy} changed your role`,
+      label: "Members",
+      heading: "Your role changed",
+      body: (p) =>
+        `${p.changedBy} made you ${withIndefiniteArticle(p.role)} of ${p.organizationName}.`,
+      button: "Open organization",
+      footer: securityFooter,
+    },
+    actionUrl: (p) => p.organizationUrl,
+  });

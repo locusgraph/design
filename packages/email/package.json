@@ -1,7 +1,7 @@
 {
   "name": "@locusgraph/email",
-  "version": "0.2.2",
-  "description": "LocusGraph transactional emails as React templates with inline styles: invitation, receipt, low credits and usage over plan.",
+  "version": "0.3.0",
+  "description": "LocusGraph and SpendGraph transactional emails as React templates with inline styles: account, organization, members, API keys, billing, usage and agent approval, with a brand override and createEmails.",
   "license": "MIT",
   "repository": {
     "type": "git",

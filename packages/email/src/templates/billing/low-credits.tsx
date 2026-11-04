@@ -1,45 +1,36 @@
 import { formatMicroUsd } from "@locusgraph/utils";
-import { type WithProduct } from "../../kit/brand";
-import { EmailLayout } from "../../kit/email-layout";
-import { EmailButton, EmailHeading, EmailLabel, EmailText } from "../../kit/parts";
-import { renderEmail } from "../../render";
+import { defineEmail } from "../../kit/text/define-email";
+import type { WithOverrides } from "../../kit/text/overrides";
 
-export type LowCreditsEmailProps = WithProduct & {
+export type LowCreditsEmailData = {
   organizationName: string;
   balanceMicroUsd: number;
   buyCreditsUrl: string;
 };
 
-export function LowCreditsEmail({
-  product,
-  organizationName,
-  balanceMicroUsd,
-  buyCreditsUrl,
-}: LowCreditsEmailProps) {
-  const empty = balanceMicroUsd <= 0;
-  return (
-    <EmailLayout
-      product={product}
-      preview={
-        empty ? `${organizationName} is out of credits` : `${organizationName} is low on credits`
-      }
-    >
-      <EmailLabel>Credits</EmailLabel>
-      <EmailHeading>
-        {empty ? "Out of credits" : `${formatMicroUsd(balanceMicroUsd)} of credits left`}
-      </EmailHeading>
-      <EmailText>
-        {empty
-          ? `Paid usage for ${organizationName} is paused until you add credits.`
-          : `Add credits so paid usage for ${organizationName} does not stop.`}
-      </EmailText>
-      <EmailButton href={buyCreditsUrl}>Buy credits</EmailButton>
-    </EmailLayout>
-  );
-}
+export type LowCreditsEmailProps = WithOverrides<LowCreditsEmailData>;
 
-export function lowCreditsEmail(props: LowCreditsEmailProps) {
-  const subject =
-    props.balanceMicroUsd <= 0 ? "You are out of credits" : "Your credits are running low";
-  return renderEmail(`${subject} on ${props.organizationName}`, <LowCreditsEmail {...props} />);
-}
+const isEmpty = (p: LowCreditsEmailData) => p.balanceMicroUsd <= 0;
+
+export const { Component: LowCreditsEmail, render: lowCreditsEmail } =
+  defineEmail<LowCreditsEmailData>({
+    text: {
+      subject: (p) =>
+        isEmpty(p)
+          ? `You are out of credits on ${p.organizationName}`
+          : `Your credits are running low on ${p.organizationName}`,
+      preview: (p) =>
+        isEmpty(p)
+          ? "Paid usage is paused until you add credits"
+          : "Add credits so paid usage does not stop",
+      label: "Credits",
+      heading: (p) =>
+        isEmpty(p) ? "Out of credits" : `${formatMicroUsd(p.balanceMicroUsd)} of credits left`,
+      body: (p) =>
+        isEmpty(p)
+          ? `Paid usage for ${p.organizationName} is paused until you add credits.`
+          : `Add credits so paid usage for ${p.organizationName} does not stop.`,
+      button: "Buy credits",
+    },
+    actionUrl: (p) => p.buyCreditsUrl,
+  });

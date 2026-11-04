@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { emailAssetsOrigin, invitationEmail, lowCreditsEmail } from "../index";
+import { emailAssetsOrigin, invitationEmail, lowCreditsEmail } from "../../index";
 
 const invitation = {
   organizationName: "Acme",
@@ -14,7 +14,7 @@ describe("email brand", () => {
     const { html, text } = invitationEmail(invitation);
     expect(html).toContain(`src="${emailAssetsOrigin}/email/locusgraph-mark.png"`);
     expect(html).toContain("<strong>locus</strong>");
-    expect(text.startsWith("locusgraph")).toBe(true);
+    expect(text.endsWith("—\nLocusGraph")).toBe(true);
   });
 
   it("brands a SpendGraph email with its own mark, wordmark and name", () => {
@@ -34,5 +34,33 @@ describe("email brand", () => {
     });
     expect(html).toContain('alt=""');
     expect(html).toContain('<span style="font-weight:300">graph</span>');
+  });
+
+  it("swaps the logo, name and wordmark when a brand override is passed", () => {
+    const email = invitationEmail({
+      ...invitation,
+      brand: {
+        markUrl: "https://cdn.acme.com/logo.png",
+        markWidth: 32,
+        markHeight: 32,
+        name: "Acme Cloud",
+        wordmark: ["acme", "cloud"],
+      },
+    });
+    expect(email.subject).toBe("Join Acme on Acme Cloud");
+    expect(email.html).toContain('src="https://cdn.acme.com/logo.png" width="32" height="32"');
+    expect(email.html).toContain("<strong>acme</strong>");
+    expect(email.html).not.toContain("locusgraph-mark.png");
+  });
+
+  it("keeps the product name and wordmark when only the logo is overridden", () => {
+    const email = invitationEmail({
+      ...invitation,
+      product: "spendgraph",
+      brand: { markUrl: "https://cdn.example.com/spend.png" },
+    });
+    expect(email.subject).toBe("Join Acme on SpendGraph");
+    expect(email.html).toContain('src="https://cdn.example.com/spend.png" width="27" height="24"');
+    expect(email.html).toContain("<strong>spend</strong>");
   });
 });

@@ -1,10 +1,8 @@
-import { brandOf, type WithProduct } from "../../kit/brand";
-import { EmailLayout } from "../../kit/email-layout";
-import { EmailButton, EmailHeading, EmailLabel, EmailText } from "../../kit/parts";
+import { defineEmail } from "../../kit/text/define-email";
+import type { WithOverrides } from "../../kit/text/overrides";
 import { withIndefiniteArticle } from "../../kit/words";
-import { renderEmail } from "../../render";
 
-export type InvitationEmailProps = WithProduct & {
+export type InvitationEmailData = {
   organizationName: string;
   inviterName: string;
   role: string;
@@ -12,36 +10,20 @@ export type InvitationEmailProps = WithProduct & {
   expiresOn: string;
 };
 
-export function InvitationEmail({
-  product,
-  organizationName,
-  inviterName,
-  role,
-  acceptUrl,
-  expiresOn,
-}: InvitationEmailProps) {
-  return (
-    <EmailLayout
-      product={product}
-      preview={`${inviterName} invited you to ${organizationName}`}
-      footer={`The invitation expires on ${expiresOn}. If you did not expect it, ignore this email.`}
-    >
-      <EmailLabel>Invitation</EmailLabel>
-      <EmailHeading>
-        Join {organizationName} on {brandOf(product).name}
-      </EmailHeading>
-      <EmailText>
-        {inviterName} invited you to {organizationName} as {withIndefiniteArticle(role)}. Sign in
-        with Google or GitHub to accept.
-      </EmailText>
-      <EmailButton href={acceptUrl}>Accept invitation</EmailButton>
-    </EmailLayout>
-  );
-}
+export type InvitationEmailProps = WithOverrides<InvitationEmailData>;
 
-export function invitationEmail(props: InvitationEmailProps) {
-  return renderEmail(
-    `Join ${props.organizationName} on ${brandOf(props.product).name}`,
-    <InvitationEmail {...props} />
-  );
-}
+export const { Component: InvitationEmail, render: invitationEmail } =
+  defineEmail<InvitationEmailData>({
+    text: {
+      subject: (p) => `Join ${p.organizationName} on ${p.brandName}`,
+      preview: (p) => `${p.inviterName} invited you as ${withIndefiniteArticle(p.role)}`,
+      label: "Invitation",
+      heading: (p) => `Join ${p.organizationName} on ${p.brandName}`,
+      body: (p) =>
+        `${p.inviterName} invited you to ${p.organizationName} as ${withIndefiniteArticle(p.role)}. Sign in with Google or GitHub to accept.`,
+      button: "Accept invitation",
+      footer: (p) =>
+        `The invitation expires on ${p.expiresOn}. If you did not expect it, ignore this email.`,
+    },
+    actionUrl: (p) => p.acceptUrl,
+  });

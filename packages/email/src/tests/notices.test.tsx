@@ -72,7 +72,7 @@ describe("notice emails", () => {
       quotas: [{ key: "events", used: 8000, included: 10000, periodLabel: "this month" }],
     });
     expect(warning.subject).toBe("Acme used 80% of its plan");
-    expect(warning.text).toContain("events 8,000 of 10,000 this month");
+    expect(warning.text).toContain("events: 8,000 of 10,000 this month");
     const summary = usageSummaryEmail({
       organizationName: "Acme",
       periodLabel: "October 2026",
@@ -80,6 +80,6 @@ describe("notice emails", () => {
       usageUrl: "https://u",
     });
     expect(summary.subject).toBe("Acme usage for October 2026");
-    expect(summary.text).toContain("Memory writes 124,000");
+    expect(summary.text).toContain("Memory writes: 124,000");
   });
 });

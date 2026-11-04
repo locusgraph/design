@@ -16,6 +16,16 @@ const quotas = [
 ];
 
 export const sampleProps = {
+  welcomeEmail: {
+    userName: "Dana Rivera",
+    dashboardUrl: "https://accounts.locusgraph.com/",
+    docsUrl: "https://docs.locusgraph.com/",
+  },
+  emailVerificationEmail: {
+    code: "482913",
+    verifyUrl: "https://accounts.locusgraph.com/verify/example",
+    expiresInMinutes: 30,
+  },
   invitationEmail: {
     organizationName,
     inviterName: "Dana Rivera",
@@ -62,6 +72,37 @@ export const sampleProps = {
     amountCents: 4000,
     paidOn: "Oct 1, 2026",
     receiptUrl: "https://pay.stripe.com/receipts/example",
+  },
+  paymentFailedEmail: {
+    organizationName,
+    amountCents: 4000,
+    failedOn: "Nov 1, 2026",
+    reason: "Card declined",
+    retryOn: "Nov 4, 2026",
+    billingUrl: "https://accounts.locusgraph.com/billing",
+  },
+  planChangedEmail: {
+    organizationName,
+    previousPlan: "Free",
+    newPlan: "Pro",
+    effectiveOn: "Nov 4, 2026",
+    changedBy: "Dana Rivera",
+    billingUrl: "https://accounts.locusgraph.com/billing",
+  },
+  spendLimitReachedEmail: {
+    organizationName,
+    limitCents: 10_000,
+    reachedOn: "Nov 4, 2026",
+    resetsOn: "Dec 1, 2026",
+    limitsUrl: "https://accounts.locusgraph.com/billing/limits",
+  },
+  approvalRequestedEmail: {
+    organizationName,
+    agentName: "Deploy bot",
+    action: "Delete graph prod-memory",
+    requestedOn: "Nov 4, 2026, 10:42",
+    expiresOn: "Nov 5, 2026, 10:42",
+    reviewUrl: "https://accounts.locusgraph.com/approvals/example",
   },
   usageWarningEmail: {
     organizationName,

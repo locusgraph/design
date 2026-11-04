@@ -1,9 +1,8 @@
-import type { WithProduct } from "../../kit/brand";
-import { EmailLayout } from "../../kit/email-layout";
-import { EmailButton, EmailHeading, EmailLabel, EmailRows, EmailText } from "../../kit/parts";
-import { renderEmail } from "../../render";
+import { defineEmail } from "../../kit/text/define-email";
+import type { WithOverrides } from "../../kit/text/overrides";
+import { securityFooter } from "../../kit/text/security";
 
-export type KeyRevokedEmailProps = WithProduct & {
+export type KeyRevokedEmailData = {
   organizationName: string;
   keyName: string;
   revokedBy: string;
@@ -11,37 +10,24 @@ export type KeyRevokedEmailProps = WithProduct & {
   keysUrl: string;
 };
 
-export function KeyRevokedEmail({
-  product,
-  organizationName,
-  keyName,
-  revokedBy,
-  revokedOn,
-  keysUrl,
-}: KeyRevokedEmailProps) {
-  return (
-    <EmailLayout product={product} preview={`${revokedBy} revoked the API key ${keyName}`}>
-      <EmailLabel>API keys</EmailLabel>
-      <EmailHeading>API key revoked</EmailHeading>
-      <EmailText>
-        {revokedBy} revoked an API key for {organizationName}. Anything still using it now gets
-        refused.
-      </EmailText>
-      <EmailRows
-        rows={[
-          ["Key", keyName],
-          ["Revoked by", revokedBy],
-          ["Date", revokedOn],
-        ]}
-      />
-      <EmailButton href={keysUrl}>Review keys</EmailButton>
-    </EmailLayout>
-  );
-}
+export type KeyRevokedEmailProps = WithOverrides<KeyRevokedEmailData>;
 
-export function keyRevokedEmail(props: KeyRevokedEmailProps) {
-  return renderEmail(
-    `API key ${props.keyName} revoked on ${props.organizationName}`,
-    <KeyRevokedEmail {...props} />
-  );
-}
+export const { Component: KeyRevokedEmail, render: keyRevokedEmail } =
+  defineEmail<KeyRevokedEmailData>({
+    text: {
+      subject: (p) => `API key ${p.keyName} revoked on ${p.organizationName}`,
+      preview: "Anything still using it now gets refused",
+      label: "API keys",
+      heading: "API key revoked",
+      body: (p) =>
+        `${p.revokedBy} revoked an API key for ${p.organizationName}. Anything still using it now gets refused.`,
+      button: "Review keys",
+      footer: securityFooter,
+    },
+    actionUrl: (p) => p.keysUrl,
+    rows: (p) => [
+      ["Key", p.keyName],
+      ["Revoked by", p.revokedBy],
+      ["Date", p.revokedOn],
+    ],
+  });

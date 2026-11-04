@@ -1,9 +1,8 @@
-import type { WithProduct } from "../../kit/brand";
-import { EmailLayout } from "../../kit/email-layout";
-import { EmailButton, EmailHeading, EmailLabel, EmailRows, EmailText } from "../../kit/parts";
-import { renderEmail } from "../../render";
+import { defineEmail } from "../../kit/text/define-email";
+import type { WithOverrides } from "../../kit/text/overrides";
+import { securityFooter } from "../../kit/text/security";
 
-export type KeyCreatedEmailProps = WithProduct & {
+export type KeyCreatedEmailData = {
   organizationName: string;
   keyName: string;
   createdBy: string;
@@ -11,40 +10,23 @@ export type KeyCreatedEmailProps = WithProduct & {
   keysUrl: string;
 };
 
-export function KeyCreatedEmail({
-  product,
-  organizationName,
-  keyName,
-  createdBy,
-  createdOn,
-  keysUrl,
-}: KeyCreatedEmailProps) {
-  return (
-    <EmailLayout
-      product={product}
-      preview={`${createdBy} created the API key ${keyName}`}
-      footer="If you do not recognize this key, revoke it now."
-    >
-      <EmailLabel>API keys</EmailLabel>
-      <EmailHeading>New API key created</EmailHeading>
-      <EmailText>
-        {createdBy} created an API key for {organizationName}.
-      </EmailText>
-      <EmailRows
-        rows={[
-          ["Key", keyName],
-          ["Created by", createdBy],
-          ["Date", createdOn],
-        ]}
-      />
-      <EmailButton href={keysUrl}>Review keys</EmailButton>
-    </EmailLayout>
-  );
-}
+export type KeyCreatedEmailProps = WithOverrides<KeyCreatedEmailData>;
 
-export function keyCreatedEmail(props: KeyCreatedEmailProps) {
-  return renderEmail(
-    `New API key ${props.keyName} on ${props.organizationName}`,
-    <KeyCreatedEmail {...props} />
-  );
-}
+export const { Component: KeyCreatedEmail, render: keyCreatedEmail } =
+  defineEmail<KeyCreatedEmailData>({
+    text: {
+      subject: (p) => `New API key ${p.keyName} on ${p.organizationName}`,
+      preview: "If you do not recognize this key, revoke it",
+      label: "API keys",
+      heading: "New API key created",
+      body: (p) => `${p.createdBy} created an API key for ${p.organizationName}.`,
+      button: "Review keys",
+      footer: securityFooter,
+    },
+    actionUrl: (p) => p.keysUrl,
+    rows: (p) => [
+      ["Key", p.keyName],
+      ["Created by", p.createdBy],
+      ["Date", p.createdOn],
+    ],
+  });

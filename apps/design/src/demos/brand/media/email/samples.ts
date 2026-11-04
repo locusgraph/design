@@ -3,6 +3,8 @@ import * as email from "@locusgraph/email";
 import { sampleProps } from "./sample-props";
 
 export const emailTemplates = [
+  "welcome",
+  "email-verification",
   "invitation",
   "invitation-accepted",
   "role-changed",
@@ -14,9 +16,13 @@ export const emailTemplates = [
   "key-expiring",
   "low-credits",
   "receipt",
+  "payment-failed",
+  "plan-changed",
   "usage-warning",
   "usage-over-plan",
   "usage-summary",
+  "spend-limit-reached",
+  "approval-requested",
 ] as const;
 
 export type EmailTemplate = (typeof emailTemplates)[number];

@@ -1,9 +1,8 @@
-import type { WithProduct } from "../../kit/brand";
-import { EmailLayout } from "../../kit/email-layout";
-import { EmailButton, EmailHeading, EmailLabel, EmailRows, EmailText } from "../../kit/parts";
-import { renderEmail } from "../../render";
+import { defineEmail } from "../../kit/text/define-email";
+import type { WithOverrides } from "../../kit/text/overrides";
+import { securityFooter } from "../../kit/text/security";
 
-export type OwnershipTransferredEmailProps = WithProduct & {
+export type OwnershipTransferredEmailData = {
   organizationName: string;
   previousOwnerName: string;
   newOwnerName: string;
@@ -11,40 +10,24 @@ export type OwnershipTransferredEmailProps = WithProduct & {
   organizationUrl: string;
 };
 
-export function OwnershipTransferredEmail({
-  product,
-  organizationName,
-  previousOwnerName,
-  newOwnerName,
-  transferredOn,
-  organizationUrl,
-}: OwnershipTransferredEmailProps) {
-  return (
-    <EmailLayout
-      product={product}
-      preview={`${newOwnerName} now owns ${organizationName}`}
-      footer="If you did not expect this change, contact support by replying to this email."
-    >
-      <EmailLabel>Organization</EmailLabel>
-      <EmailHeading>{organizationName} has a new owner</EmailHeading>
-      <EmailText>
-        {previousOwnerName} transferred ownership of {organizationName} to {newOwnerName}.
-      </EmailText>
-      <EmailRows
-        rows={[
-          ["Previous owner", previousOwnerName],
-          ["New owner", newOwnerName],
-          ["Date", transferredOn],
-        ]}
-      />
-      <EmailButton href={organizationUrl}>Open organization</EmailButton>
-    </EmailLayout>
-  );
-}
+export type OwnershipTransferredEmailProps = WithOverrides<OwnershipTransferredEmailData>;
 
-export function ownershipTransferredEmail(props: OwnershipTransferredEmailProps) {
-  return renderEmail(
-    `${props.newOwnerName} now owns ${props.organizationName}`,
-    <OwnershipTransferredEmail {...props} />
-  );
-}
+export const { Component: OwnershipTransferredEmail, render: ownershipTransferredEmail } =
+  defineEmail<OwnershipTransferredEmailData>({
+    text: {
+      subject: (p) => `${p.newOwnerName} now owns ${p.organizationName}`,
+      preview: (p) => `${p.previousOwnerName} transferred ownership on ${p.transferredOn}`,
+      label: "Organization",
+      heading: (p) => `${p.organizationName} has a new owner`,
+      body: (p) =>
+        `${p.previousOwnerName} transferred ownership of ${p.organizationName} to ${p.newOwnerName}.`,
+      button: "Open organization",
+      footer: securityFooter,
+    },
+    actionUrl: (p) => p.organizationUrl,
+    rows: (p) => [
+      ["Previous owner", p.previousOwnerName],
+      ["New owner", p.newOwnerName],
+      ["Date", p.transferredOn],
+    ],
+  });

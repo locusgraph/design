@@ -1,37 +1,23 @@
-import type { WithProduct } from "../../kit/brand";
-import { EmailLayout } from "../../kit/email-layout";
-import { EmailHeading, EmailLabel, EmailText } from "../../kit/parts";
-import { renderEmail } from "../../render";
+import { defineEmail } from "../../kit/text/define-email";
+import type { WithOverrides } from "../../kit/text/overrides";
 
-export type MemberRemovedEmailProps = WithProduct & {
+export type MemberRemovedEmailData = {
   organizationName: string;
   removedBy: string;
 };
 
-export function MemberRemovedEmail({
-  product,
-  organizationName,
-  removedBy,
-}: MemberRemovedEmailProps) {
-  return (
-    <EmailLayout
-      product={product}
-      preview={`You were removed from ${organizationName}`}
-      footer={`If you think this is a mistake, ask an owner of ${organizationName} to invite you again.`}
-    >
-      <EmailLabel>Members</EmailLabel>
-      <EmailHeading>You were removed from {organizationName}</EmailHeading>
-      <EmailText>
-        {removedBy} removed you from {organizationName}. You no longer have access to its data or
-        keys.
-      </EmailText>
-    </EmailLayout>
-  );
-}
+export type MemberRemovedEmailProps = WithOverrides<MemberRemovedEmailData>;
 
-export function memberRemovedEmail(props: MemberRemovedEmailProps) {
-  return renderEmail(
-    `You were removed from ${props.organizationName}`,
-    <MemberRemovedEmail {...props} />
-  );
-}
+export const { Component: MemberRemovedEmail, render: memberRemovedEmail } =
+  defineEmail<MemberRemovedEmailData>({
+    text: {
+      subject: (p) => `You were removed from ${p.organizationName}`,
+      preview: "You no longer have access to its data or keys",
+      label: "Members",
+      heading: (p) => `You were removed from ${p.organizationName}`,
+      body: (p) =>
+        `${p.removedBy} removed you from ${p.organizationName}. You no longer have access to its data or keys.`,
+      footer: (p) =>
+        `If you think this is a mistake, ask an owner of ${p.organizationName} to invite you again.`,
+    },
+  });

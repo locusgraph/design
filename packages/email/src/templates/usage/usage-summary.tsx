@@ -1,42 +1,26 @@
-import type { WithProduct } from "../../kit/brand";
-import { EmailLayout } from "../../kit/email-layout";
-import { EmailButton, EmailHeading, EmailLabel, EmailRows, EmailText } from "../../kit/parts";
-import { renderEmail } from "../../render";
+import { defineEmail } from "../../kit/text/define-email";
+import type { WithOverrides } from "../../kit/text/overrides";
 
-export type UsageSummaryEmailProps = WithProduct & {
+export type UsageSummaryEmailData = {
   organizationName: string;
   periodLabel: string;
   rows: [label: string, value: string][];
   usageUrl: string;
 };
 
-export function UsageSummaryEmail({
-  product,
-  organizationName,
-  periodLabel,
-  rows,
-  usageUrl,
-}: UsageSummaryEmailProps) {
-  return (
-    <EmailLayout
-      product={product}
-      preview={`${organizationName} usage for ${periodLabel}`}
-      footer="You get this summary once a month as an owner or admin."
-    >
-      <EmailLabel>Monthly summary</EmailLabel>
-      <EmailHeading>Your {periodLabel} usage</EmailHeading>
-      <EmailText>
-        Here is what {organizationName} used in {periodLabel}.
-      </EmailText>
-      <EmailRows rows={rows} />
-      <EmailButton href={usageUrl}>See usage</EmailButton>
-    </EmailLayout>
-  );
-}
+export type UsageSummaryEmailProps = WithOverrides<UsageSummaryEmailData>;
 
-export function usageSummaryEmail(props: UsageSummaryEmailProps) {
-  return renderEmail(
-    `${props.organizationName} usage for ${props.periodLabel}`,
-    <UsageSummaryEmail {...props} />
-  );
-}
+export const { Component: UsageSummaryEmail, render: usageSummaryEmail } =
+  defineEmail<UsageSummaryEmailData>({
+    text: {
+      subject: (p) => `${p.organizationName} usage for ${p.periodLabel}`,
+      preview: (p) => `A summary of what ${p.organizationName} used`,
+      label: "Monthly summary",
+      heading: (p) => `Your ${p.periodLabel} usage`,
+      body: (p) => `Here is what ${p.organizationName} used in ${p.periodLabel}.`,
+      button: "See usage",
+      footer: "You get this summary once a month as an owner or admin.",
+    },
+    actionUrl: (p) => p.usageUrl,
+    rows: (p) => p.rows,
+  });

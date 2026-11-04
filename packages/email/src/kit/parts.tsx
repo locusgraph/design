@@ -1,5 +1,6 @@
 import type * as React from "react";
 import { emailColors, emailFonts } from "./theme";
+import { displayUrl } from "./words";
 
 export function EmailLabel({ children }: { children: React.ReactNode }) {
   return (
@@ -55,27 +56,38 @@ export function EmailText({
 
 export function EmailButton({ href, children }: { href: string; children: React.ReactNode }) {
   return (
-    <table role="presentation" cellPadding={0} cellSpacing={0} style={{ margin: "8px 0 16px" }}>
-      <tbody>
-        <tr>
-          <td style={{ backgroundColor: emailColors.btn, borderRadius: 9999 }}>
-            <a
-              href={href}
-              style={{
-                display: "inline-block",
-                padding: "10px 20px",
-                fontSize: 14,
-                fontWeight: 600,
-                color: emailColors.btnInk,
-                textDecoration: "none",
-              }}
-            >
-              {children}
-            </a>
-          </td>
-        </tr>
-      </tbody>
-    </table>
+    <>
+      <table role="presentation" cellPadding={0} cellSpacing={0} style={{ margin: "8px 0 8px" }}>
+        <tbody>
+          <tr>
+            <td style={{ backgroundColor: emailColors.btn, borderRadius: 9999 }}>
+              <a
+                href={href}
+                style={{
+                  display: "inline-block",
+                  padding: "10px 20px",
+                  fontSize: 14,
+                  fontWeight: 600,
+                  color: emailColors.btnInk,
+                  textDecoration: "none",
+                }}
+              >
+                {children}
+              </a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <p
+        data-link-fallback=""
+        style={{ margin: "0 0 16px", fontSize: 12, color: emailColors.mutedForeground }}
+      >
+        Or open:{" "}
+        <a href={href} style={{ color: emailColors.mutedForeground }}>
+          {displayUrl(href)}
+        </a>
+      </p>
+    </>
   );
 }
 
@@ -115,5 +127,13 @@ export function EmailRows({ rows }: { rows: [label: string, value: string][] }) 
         ))}
       </tbody>
     </table>
+  );
+}
+
+export function EmailLink({ href, children }: { href: string; children: React.ReactNode }) {
+  return (
+    <a href={href} style={{ color: emailColors.foreground, textDecoration: "underline" }}>
+      {children}
+    </a>
   );
 }
