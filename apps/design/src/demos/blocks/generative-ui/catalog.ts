@@ -3,6 +3,8 @@ import { defineRegistry } from "@json-render/react";
 import { schema } from "@json-render/react/schema";
 import { guardAction, locusComponents, locusRenderers } from "@locusgraph/json-render";
 import type { ApprovalDecision, ApprovalRequest } from "@locusgraph/loop";
+import { formatMicroUsd } from "@locusgraph/utils";
+import { sampleState } from "./presets";
 
 export type AskApproval = (request: ApprovalRequest) => Promise<ApprovalDecision>;
 
@@ -14,8 +16,13 @@ export const catalog = defineCatalog(schema, {
   },
 });
 
+function packAmount(packId: string) {
+  const pack = sampleState.packs.find((each) => each.id === packId);
+  return pack ? formatMicroUsd(pack.amountMicroUsd) : packId;
+}
+
 const doneLabels: Record<string, (target: string) => string> = {
-  buy: (pack) => `Checkout opened for ${pack}`,
+  buy: (packId) => `Checkout opened for ${packAmount(packId)} in credits`,
   upgrade: (plan) => `Moved to ${plan}`,
   rotate: (key) => `Rotated ${key}`,
   revoke: (key) => `Revoked ${key}`,

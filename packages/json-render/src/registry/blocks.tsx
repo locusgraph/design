@@ -1,9 +1,24 @@
 "use client";
 
 import { useStateStore, useStateValue } from "@json-render/react";
-import { Keys, Plans, TopUp, Usage, Wallet } from "@locusgraph/blocks";
+import {
+  Keys,
+  KeysEmpty,
+  Plans,
+  Quota,
+  TopUp,
+  Usage,
+  UsageAlert,
+  Wallet,
+} from "@locusgraph/blocks";
 import type { PickedAction, SettledAction } from "../actions/guard-action";
-import { blockActions, keyTarget, quotasWithoutNullLabels, withKeyId } from "./conversions";
+import {
+  blockActions,
+  keyTarget,
+  quotasWithoutNullLabels,
+  quotaWithoutNullLabel,
+  withKeyId,
+} from "./conversions";
 import type { LocusRendererProps } from "./props";
 
 function useActionState() {
@@ -15,6 +30,31 @@ function useActionState() {
 
 export function LocusUsage({ props }: LocusRendererProps<"Usage">) {
   return <Usage quotas={quotasWithoutNullLabels(props.quotas)} label={props.label ?? undefined} />;
+}
+
+export function LocusQuota({ props }: LocusRendererProps<"Quota">) {
+  return <Quota quota={quotaWithoutNullLabel(props.quota)} />;
+}
+
+export function LocusUsageAlert({ props }: LocusRendererProps<"UsageAlert">) {
+  return (
+    <UsageAlert
+      balanceMicroUsd={props.balanceMicroUsd}
+      quotas={quotasWithoutNullLabels(props.quotas)}
+      paidPlan={props.paidPlan}
+      buyCreditsHref={props.buyCreditsHref}
+      upgradeHref={props.upgradeHref}
+    />
+  );
+}
+
+export function LocusKeysEmpty({ props }: LocusRendererProps<"KeysEmpty">) {
+  return (
+    <KeysEmpty
+      newKeyHref={props.newKeyHref ?? undefined}
+      description={props.description ?? undefined}
+    />
+  );
 }
 
 export function LocusWallet({ props }: LocusRendererProps<"Wallet">) {
@@ -33,8 +73,9 @@ export function LocusTopUp({ props, emit }: LocusRendererProps<"TopUp">) {
     <TopUp
       packs={props.packs}
       onBuy={buy}
-      pending={Boolean(settled || locked)}
+      pending={Boolean(pending || settled || locked)}
       pendingPackId={pending?.actionId === "buy" ? pending.target : undefined}
+      settled={settled?.actionId === "buy" ? settled : undefined}
     />
   );
 }

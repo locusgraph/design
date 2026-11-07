@@ -23,7 +23,7 @@ export default defineDemo({
   props: [
     {
       name: "locusComponents",
-      type: "catalog components: Stack, Columns, Notice, Usage, Wallet, TopUp, Plans, Keys",
+      type: "catalog components: Stack, Columns, Notice, Usage, Quota, UsageAlert, Wallet, TopUp, Plans, KeysEmpty, Keys",
     },
     { name: "locusRenderers", type: "registry components for the same names" },
     { name: "TopUp emits", type: "buy, after writing /selectedPackId" },

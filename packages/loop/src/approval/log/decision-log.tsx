@@ -4,7 +4,7 @@ import {
   DecisionSummary,
   type DecisionTimeStyle,
   isoOf,
-} from "../../shared/decision-summary";
+} from "../../shared/decision/decision-summary";
 import type { DecisionLogEntry, DecisionLogKind } from "../types";
 
 export type DecisionLogProps = {

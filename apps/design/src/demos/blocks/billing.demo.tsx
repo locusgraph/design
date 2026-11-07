@@ -83,6 +83,11 @@ export default defineDemo({
     { name: "TopUp.onBuy", type: "(packId: string) => void" },
     { name: "TopUp.highlightedPackId", type: "string", defaultValue: "pack to suggest" },
     { name: "TopUp.pendingPackId", type: "string", defaultValue: "shows a spinner" },
+    {
+      name: "TopUp.settled",
+      type: "{ actionId, target, label }",
+      defaultValue: "shows label in place of the packs",
+    },
     { name: "PlanOffer.amountCents", type: "number", defaultValue: "falls back to price" },
     { name: "Plans.actionFor", type: "(plan: PlanOffer) => ReactNode" },
     { name: "Plans.actions", type: "BlockAction[]", defaultValue: "data instead of actionFor" },

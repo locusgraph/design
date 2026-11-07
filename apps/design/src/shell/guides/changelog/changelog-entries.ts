@@ -10,6 +10,17 @@ export const changelogEntries: ChangelogEntry[] = [
   {
     id: "next",
     date: "Next release",
+    title: "More blocks for models, and local times",
+    packages: ["blocks 0.9.0", "loop 0.7.0", "json-render 0.3.0"],
+    changes: [
+      "json-render catalog adds Quota, UsageAlert and KeysEmpty, with links bound to state.",
+      "TopUp takes settled and shows the outcome in place of the packs.",
+      "Approval and Decision Log times show in the viewer's time zone after hydration, UTC before.",
+    ],
+  },
+  {
+    id: "2026-10-28-actions",
+    date: "2026-10-28",
     title: "One click, one run",
     packages: ["blocks 0.8.0", "json-render 0.2.0"],
     changes: [

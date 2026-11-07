@@ -4,7 +4,7 @@ import { Button, cn } from "@locusgraph/components";
 import { pluralize } from "@locusgraph/utils";
 import { Lightbulb as BrainIcon } from "@phosphor-icons/react/ssr";
 import { useMemo, useState } from "react";
-import { DecisionSummary } from "../../shared/decision-summary";
+import { DecisionSummary } from "../../shared/decision/decision-summary";
 import { lineMemoryIconClass, lineMemoryObjectClass, lineRowClass } from "../../shared/line";
 import { LiveStatus } from "../../shared/live-status";
 import { PendingLine } from "../shared/approval-line";

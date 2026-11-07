@@ -1,12 +1,9 @@
 import { Check as CheckIcon, X as XIcon } from "@phosphor-icons/react/ssr";
 import type { ReactNode } from "react";
-import type { DecidedAt } from "../approval/types";
+import type { DecidedAt } from "../../approval/types";
+import { DecidedTime, type DecisionTimeStyle } from "./decided-time";
 
-const decisionTimeFormat = new Intl.DateTimeFormat("en-US", {
-  dateStyle: "medium",
-  timeStyle: "short",
-  timeZone: "UTC",
-});
+export type { DecisionTimeStyle } from "./decided-time";
 
 export function toDate(value: DecidedAt): Date {
   return value instanceof Date ? value : new Date(value);
@@ -15,23 +12,6 @@ export function toDate(value: DecidedAt): Date {
 export function isoOf(value: DecidedAt): string | undefined {
   const date = toDate(value);
   return Number.isNaN(date.getTime()) ? undefined : date.toISOString();
-}
-
-const decisionClockFormat = new Intl.DateTimeFormat("en-US", {
-  timeStyle: "short",
-  timeZone: "UTC",
-});
-
-export type DecisionTimeStyle = "full" | "time";
-
-export function formatDecidedTime(value: DecidedAt): string {
-  const date = toDate(value);
-  return Number.isNaN(date.getTime()) ? "" : decisionClockFormat.format(date);
-}
-
-export function formatDecidedAt(value: DecidedAt): string {
-  const date = toDate(value);
-  return Number.isNaN(date.getTime()) ? "" : `${decisionTimeFormat.format(date)} UTC`;
 }
 
 export type DecisionOutcome = {
@@ -52,20 +32,16 @@ export type DecisionSummaryProps = {
 type DecisionMetaProps = { decision: DecisionOutcome; verb: string; timeStyle: DecisionTimeStyle };
 
 function DecisionMeta({ decision, verb, timeStyle }: DecisionMetaProps) {
+  const date = decision.at === undefined ? undefined : toDate(decision.at);
+  const hasTime = date !== undefined && !Number.isNaN(date.getTime());
   return (
     <p className="text-xs text-muted-foreground">
       {verb}
       {decision.by && ` by ${decision.by}`}
-      {decision.at !== undefined && (
+      {hasTime && (
         <>
           {" · "}
-          <time
-            dateTime={isoOf(decision.at)}
-            title={formatDecidedAt(decision.at)}
-            className="tabular-nums"
-          >
-            {timeStyle === "time" ? formatDecidedTime(decision.at) : formatDecidedAt(decision.at)}
-          </time>
+          <DecidedTime date={date} style={timeStyle} />
         </>
       )}
     </p>

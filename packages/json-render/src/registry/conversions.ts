@@ -26,6 +26,10 @@ export function withKeyId<A extends { target: string }>(action: A | undefined, k
   return key ? { ...action, target: key.id } : action;
 }
 
+export function quotaWithoutNullLabel({ label, ...rest }: SpecQuota): QuotaData {
+  return label === null ? rest : { ...rest, label };
+}
+
 export function quotasWithoutNullLabels(quotas: SpecQuota[]): QuotaData[] {
-  return quotas.map(({ label, ...rest }) => (label === null ? rest : { ...rest, label }));
+  return quotas.map(quotaWithoutNullLabel);
 }
