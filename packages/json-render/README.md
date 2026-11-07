@@ -35,9 +35,12 @@ const systemPrompt = catalog.prompt();
 | `Columns` | `count`, 1 to 3 | |
 | `Notice` | `tone`, `title`, `description` | |
 | `Usage` | `quotas`, `label` | |
+| `Quota` | `quota` | |
+| `UsageAlert` | `balanceMicroUsd`, `quotas`, `paidPlan`, `buyCreditsHref`, `upgradeHref`; renders nothing unless a quota is over or credits are low | |
 | `Wallet` | `balanceMicroUsd`, `grants` | |
 | `TopUp` | `packs` | `buy`, after writing the pack id to `/selectedPackId` |
 | `Plans` | `plans`, `actions` | `action`, after writing `{ actionId, target }` to `/picked` |
+| `KeysEmpty` | `newKeyHref`, `description` | |
 | `Keys` | `keys`, `actions` | `action`, after writing `{ actionId, target }` to `/picked` |
 
 Props are nullable rather than optional, because models write `null` more reliably than they leave a key out.

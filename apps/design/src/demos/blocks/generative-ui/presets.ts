@@ -6,6 +6,7 @@ export const sampleState = {
     { key: "locusgraph.memories", period: "month", used: 1_820, included: 5_000, label: null },
   ],
   overQuota: true,
+  links: { buyCredits: "#credits", upgrade: "#plans" },
   wallet: { balanceMicroUsd: 1_000_000 },
   grants: [{ label: "Free start", remainingMicroUsd: 1_000_000, expiresAt: null }],
   packs: [
@@ -33,20 +34,19 @@ export const sampleState = {
   settled: null,
 };
 
-const lastAction = {
-  type: "Notice",
-  props: { tone: "success", title: { $state: "/settled/label" }, description: null },
-  visible: { $state: "/settled" },
-};
-
 export const overQuotaSpec: Spec = {
   root: "page",
   elements: {
-    page: { type: "Stack", props: { gap: "md" }, children: ["notice", "usage", "plans"] },
-    notice: {
-      type: "Notice",
-      props: { tone: "warning", title: "You're 450 events over this month", description: null },
-      visible: { $state: "/overQuota" },
+    page: { type: "Stack", props: { gap: "md" }, children: ["alert", "usage", "plans"] },
+    alert: {
+      type: "UsageAlert",
+      props: {
+        balanceMicroUsd: null,
+        quotas: { $state: "/quotas" },
+        paidPlan: false,
+        buyCreditsHref: { $state: "/links/buyCredits" },
+        upgradeHref: { $state: "/links/upgrade" },
+      },
     },
     usage: { type: "Usage", props: { quotas: { $state: "/quotas" }, label: "This month" } },
     plans: {
@@ -63,7 +63,7 @@ export const overQuotaSpec: Spec = {
 export const creditsSpec: Spec = {
   root: "page",
   elements: {
-    page: { type: "Stack", props: { gap: "md" }, children: ["money", "done"] },
+    page: { type: "Stack", props: { gap: "md" }, children: ["money"] },
     money: { type: "Columns", props: { count: 2 }, children: ["wallet", "top-up"] },
     wallet: {
       type: "Wallet",
@@ -77,7 +77,6 @@ export const creditsSpec: Spec = {
       props: { packs: { $state: "/packs" } },
       on: { buy: { action: "buyCredits" } },
     },
-    done: lastAction,
   },
 };
 

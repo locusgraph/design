@@ -6,7 +6,7 @@ export const billingSpec: Spec = {
     page: {
       type: "Stack",
       props: { gap: "lg" },
-      children: ["over-quota", "usage", "money", "plans", "keys", "last-action"],
+      children: ["over-quota", "usage", "money", "plans", "keys"],
     },
     "over-quota": {
       type: "Notice",
@@ -56,11 +56,6 @@ export const billingSpec: Spec = {
         ],
       },
       on: { action: { action: "keyAction" } },
-    },
-    "last-action": {
-      type: "Notice",
-      props: { tone: "success", title: { $state: "/settled/label" }, description: null },
-      visible: { $state: "/settled" },
     },
   },
 };

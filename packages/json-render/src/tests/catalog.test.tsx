@@ -71,4 +71,45 @@ describe("locusComponents", () => {
     expect(html).toContain("10,450");
     expect(html.match(/data-action-id="upgrade"/g)).toHaveLength(1);
   });
+
+  it("renders the alert, a single quota and the empty keys state from state", () => {
+    const over = {
+      key: "spendgraph.events",
+      period: "month",
+      used: 120,
+      included: 100,
+      label: null,
+    };
+    const html = renderToStaticMarkup(
+      <JSONUIProvider
+        registry={registry}
+        initialState={{ quotas: [over], links: { credits: "/credits", upgrade: "/plans" } }}
+      >
+        <Renderer
+          registry={registry}
+          spec={{
+            root: "page",
+            elements: {
+              page: { type: "Stack", props: { gap: "md" }, children: ["alert", "quota", "empty"] },
+              alert: {
+                type: "UsageAlert",
+                props: {
+                  balanceMicroUsd: null,
+                  quotas: { $state: "/quotas" },
+                  paidPlan: false,
+                  buyCreditsHref: { $state: "/links/credits" },
+                  upgradeHref: { $state: "/links/upgrade" },
+                },
+              },
+              quota: { type: "Quota", props: { quota: { $state: "/quotas/0" } } },
+              empty: { type: "KeysEmpty", props: { newKeyHref: null, description: null } },
+            },
+          }}
+        />
+      </JSONUIProvider>
+    );
+    expect(html).toContain("Usage is over your plan");
+    expect(html).toContain('href="/plans"');
+    expect(html).toContain('data-slot="quota"');
+  });
 });
