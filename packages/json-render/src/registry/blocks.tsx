@@ -73,7 +73,7 @@ export function LocusTopUp({ props, emit }: LocusRendererProps<"TopUp">) {
     <TopUp
       packs={props.packs}
       onBuy={buy}
-      pending={locked}
+      pending={Boolean(pending || settled || locked)}
       pendingPackId={pending?.actionId === "buy" ? pending.target : undefined}
       settled={settled?.actionId === "buy" ? settled : undefined}
     />
