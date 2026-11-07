@@ -647,6 +647,9 @@ importers:
       '@locusgraph/config':
         specifier: workspace:*
         version: link:../config
+      '@resvg/resvg-js':
+        specifier: 'catalog:'
+        version: 2.6.2
       '@types/node':
         specifier: 'catalog:'
         version: 22.20.5
@@ -662,6 +665,9 @@ importers:
       react-dom:
         specifier: 'catalog:'
         version: 19.2.8(react@19.2.8)
+      satori:
+        specifier: 'catalog:'
+        version: 0.33.5
       typescript:
         specifier: 'catalog:'
         version: 7.0.2
