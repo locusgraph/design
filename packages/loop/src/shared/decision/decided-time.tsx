@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useSyncExternalStore } from "react";
 
 const utcFull = new Intl.DateTimeFormat("en-US", {
   dateStyle: "medium",
@@ -21,16 +21,27 @@ function viewerText(date: Date, style: DecisionTimeStyle) {
   return style === "time" ? localClock.format(date) : localFull.format(date);
 }
 
+function subscribeToNothing() {
+  return () => {};
+}
+
+function useIsClient() {
+  return useSyncExternalStore(
+    subscribeToNothing,
+    () => true,
+    () => false
+  );
+}
+
 export function DecidedTime({ date, style }: { date: Date; style: DecisionTimeStyle }) {
-  const [hydrated, setHydrated] = useState(false);
-  useEffect(() => setHydrated(true), []);
+  const onClient = useIsClient();
   return (
     <time
       dateTime={date.toISOString()}
-      title={hydrated ? localFull.format(date) : serverText(date, "full")}
+      title={onClient ? localFull.format(date) : serverText(date, "full")}
       className="tabular-nums"
     >
-      {hydrated ? viewerText(date, style) : serverText(date, style)}
+      {onClient ? viewerText(date, style) : serverText(date, style)}
     </time>
   );
 }
