@@ -25,13 +25,14 @@ import { GitHubMark, GoogleMark, LocusGraphMark, LocusGraphWordmark } from "@loc
 
 The LocusGraph mark and the GitHub mark draw in the current text color, so they follow light and dark mode. The Google mark keeps Google's colors, as its brand rules require. Every mark is `aria-hidden`; put the name in visible text or an `aria-label` next to it.
 
-SVG files ship at `@locusgraph/brand/svg/locusgraph-mark.svg`, `google-mark.svg`, `github-mark.svg` and `locusgraph-icon-{dark,light,brand}.svg` (512px).
+SVG files ship at `@locusgraph/brand/svg/locusgraph-mark.svg`, `spendgraph-mark.svg`, `google-mark.svg`, `github-mark.svg` and `locusgraph-icon-{dark,light,brand}.svg` (512px).
 
 ## Product marks
 
-`SpendGraphWordmark` matches `LocusGraphWordmark`. `ProductWordmark` takes `product: "locusgraph" | "spendgraph"`.
+`SpendGraphMark` is the SpendGraph tally stick: a stick notched with a record, then split so each party keeps a half whose notches must line up. Same props as `LocusGraphMark`, drawn in the current text color as one path, so it renders in `ImageResponse` and as a plain SVG file. `SpendGraphWordmark` matches `LocusGraphWordmark` and uses `SpendGraphMark` with `withMark`. `ProductWordmark` takes `product: "locusgraph" | "spendgraph"`.
 
 ```tsx
+<SpendGraphMark className="size-5" />
 <ProductWordmark product="spendgraph" withMark />
 ```
 
