@@ -1,7 +1,7 @@
 import { act, type ReactNode } from "react";
 import { createRoot, type Root } from "react-dom/client";
 import { afterEach, beforeAll, describe, expect, it, vi } from "vitest";
-import { Keys, Plans } from "../../index";
+import { Keys, Plans, TopUp } from "../../index";
 import type { ApiKeyRow, PlanOffer } from "../../types";
 import { installDom } from "./dom";
 
@@ -77,5 +77,21 @@ describe("settled", () => {
     const remaining = buttonsFor("revoke");
     expect(remaining).toHaveLength(1);
     expect(remaining[0]?.disabled).toBe(true);
+  });
+});
+
+describe("TopUp settled", () => {
+  it("replaces the packs with the outcome", async () => {
+    await mount(
+      <TopUp
+        packs={[{ id: "credits_10", priceCents: 1000, amountMicroUsd: 10_000_000 }]}
+        onBuy={() => {}}
+        settled={{ actionId: "buy", target: "credits_10", label: "Checkout opened" }}
+      />
+    );
+    expect(container.querySelector('[data-slot="block-action-outcome"]')?.textContent).toBe(
+      "Checkout opened"
+    );
+    expect(container.querySelectorAll("button")).toHaveLength(0);
   });
 });

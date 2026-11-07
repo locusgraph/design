@@ -6,7 +6,8 @@ import {
   Spinner,
 } from "@locusgraph/components";
 import { centsToMicroUsd, formatCents, formatMicroUsd } from "@locusgraph/utils";
-import type { CreditPack } from "../types";
+import { BlockActionOutcome } from "../actions/block-actions";
+import type { CreditPack, SettledBlockAction } from "../types";
 
 type TopUpProps = {
   packs: CreditPack[];
@@ -14,6 +15,7 @@ type TopUpProps = {
   pending?: boolean;
   pendingPackId?: string;
   highlightedPackId?: string;
+  settled?: SettledBlockAction;
   description?: string;
 };
 
@@ -27,6 +29,7 @@ export function TopUp({
   pending = false,
   pendingPackId,
   highlightedPackId,
+  settled,
   description = "Pay once with Stripe. Credits never expire and never renew on their own.",
 }: TopUpProps) {
   const busy = pending || pendingPackId !== undefined;
@@ -38,32 +41,36 @@ export function TopUp({
         </span>
         <RuleGridDescription>{description}</RuleGridDescription>
       </div>
-      <div className="flex flex-wrap gap-2">
-        {packs.map((pack) => (
-          <Button
-            key={pack.id}
-            variant={pack.id === highlightedPackId ? "default" : "outline"}
-            disabled={busy}
-            aria-busy={pack.id === pendingPackId || undefined}
-            onClick={() => onBuy(pack.id)}
-          >
-            {pack.id === pendingPackId && <Spinner aria-hidden="true" role={undefined} />}
-            <span className="tabular-nums">{formatMicroUsd(pack.amountMicroUsd)}</span>
-            {hasBonus(pack) && (
-              <span
-                className={
-                  pack.id === highlightedPackId
-                    ? "tabular-nums opacity-75"
-                    : "font-medium text-good tabular-nums"
-                }
-              >
-                <span className="sr-only">, </span>
-                for {formatCents(pack.priceCents)}
-              </span>
-            )}
-          </Button>
-        ))}
-      </div>
+      {settled ? (
+        <BlockActionOutcome label={settled.label} />
+      ) : (
+        <div className="flex flex-wrap gap-2">
+          {packs.map((pack) => (
+            <Button
+              key={pack.id}
+              variant={pack.id === highlightedPackId ? "default" : "outline"}
+              disabled={busy}
+              aria-busy={pack.id === pendingPackId || undefined}
+              onClick={() => onBuy(pack.id)}
+            >
+              {pack.id === pendingPackId && <Spinner aria-hidden="true" role={undefined} />}
+              <span className="tabular-nums">{formatMicroUsd(pack.amountMicroUsd)}</span>
+              {hasBonus(pack) && (
+                <span
+                  className={
+                    pack.id === highlightedPackId
+                      ? "tabular-nums opacity-75"
+                      : "font-medium text-good tabular-nums"
+                  }
+                >
+                  <span className="sr-only">, </span>
+                  for {formatCents(pack.priceCents)}
+                </span>
+              )}
+            </Button>
+          ))}
+        </div>
+      )}
     </RuleGridCell>
   );
 }
