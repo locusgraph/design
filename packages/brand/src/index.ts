@@ -6,6 +6,7 @@ export {
 } from "./icons/locusgraph-icon";
 export { LocusGraphMark } from "./locusgraph-mark";
 export { type Product, ProductWordmark, productNames } from "./product/product-wordmark";
+export { SpendGraphMark } from "./product/spendgraph-mark";
 export { SpendGraphWordmark } from "./product/spendgraph-wordmark";
 export { GitHubMark, GoogleMark } from "./provider-marks";
 export { SocialCard, type SocialCardProps } from "./social/social-card";

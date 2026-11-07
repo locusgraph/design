@@ -1,13 +1,20 @@
 import { mkdirSync, writeFileSync } from "node:fs";
 import { createElement } from "react";
 import { renderToStaticMarkup } from "react-dom/server";
-import { GitHubMark, GoogleMark, LocusGraphIcon, LocusGraphMark } from "../dist/index.js";
+import {
+  GitHubMark,
+  GoogleMark,
+  LocusGraphIcon,
+  LocusGraphMark,
+  SpendGraphMark,
+} from "../dist/index.js";
 
 const outDir = new URL("../dist/svg/", import.meta.url);
 mkdirSync(outDir, { recursive: true });
 
 const marks = {
   "locusgraph-mark.svg": LocusGraphMark,
+  "spendgraph-mark.svg": SpendGraphMark,
   "google-mark.svg": GoogleMark,
   "github-mark.svg": GitHubMark,
 };

@@ -76,7 +76,7 @@ function ProductNames() {
 export default defineDemo({
   title: "Product Marks",
   description:
-    "Each product spells its name the same way: the first word bold, graph light, in the brand face. Both products share the LocusGraph mark.",
+    "Each product spells its name the same way: the first word bold, graph light, in the brand face. LocusGraph uses the LocusGraph mark and SpendGraph the tally stick.",
   controls: {
     product: select(products, "spendgraph"),
     mark: toggle(true),
