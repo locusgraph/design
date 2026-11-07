@@ -158,6 +158,6 @@ describe("DecisionLog", () => {
     );
     expect(html).not.toContain("by Allowed for this run");
     expect(html).toContain("Allowed for this run</p>");
-    expect(html).toContain(">2:03 PM</time>");
+    expect(html).toContain(">2:03 PM UTC</time>");
   });
 });

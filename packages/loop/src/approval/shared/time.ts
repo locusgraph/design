@@ -1,4 +1,4 @@
-import { toDate } from "../../shared/decision-summary";
+import { toDate } from "../../shared/decision/decision-summary";
 import type { DecidedAt } from "../types";
 
 const minuteMs = 60_000;

@@ -3,7 +3,7 @@
 import { Checkbox, cn } from "@locusgraph/components";
 import { Lock as LockIcon } from "@phosphor-icons/react/ssr";
 import type { ComponentProps } from "react";
-import { isoOf } from "../../shared/decision-summary";
+import { isoOf } from "../../shared/decision/decision-summary";
 import type { RiskLevel } from "../../types";
 import { riskLabels } from "../shared/risk-badge";
 import { formatWaiting } from "../shared/time";

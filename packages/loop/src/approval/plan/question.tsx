@@ -6,7 +6,7 @@ import {
   Question as MessageCircleQuestionIcon,
 } from "@phosphor-icons/react/ssr";
 import { useId, useState } from "react";
-import { DecisionSummary } from "../../shared/decision-summary";
+import { DecisionSummary } from "../../shared/decision/decision-summary";
 import { lineObjectClass } from "../../shared/line";
 import { LiveStatus } from "../../shared/live-status";
 import { PendingLine, SettledLine } from "../shared/approval-line";
