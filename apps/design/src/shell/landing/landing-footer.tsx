@@ -19,7 +19,7 @@ const footerColumns: { title: string; links: FooterLink[] }[] = [
     links: [
       { title: "Installation", href: "/installation" },
       { title: "Principles", href: "/principles" },
-      { title: "Human in the loop", href: "/human-in-the-loop" },
+      { title: "HITL", href: "/human-in-the-loop" },
       { title: "Theming", href: "/theming" },
       { title: "Generative UI", href: "/generative-ui" },
       { title: "Changelog", href: "/changelog" },
