@@ -60,7 +60,7 @@ export function ModelPicker({
       <DropdownMenuContent
         align="start"
         sideOffset={6}
-        className="w-80 rounded-none border-0 bg-popover p-0 shadow-overlay ring-1 ring-border"
+        className="w-80 rounded-none border-0 bg-popover p-0 ring-1 ring-border"
       >
         <DropdownMenuLabel className="locus-eyebrow flex justify-between gap-3 px-3 pt-2.5 pb-1 font-normal">
           <span>{label}</span>
