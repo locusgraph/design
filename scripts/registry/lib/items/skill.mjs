@@ -42,6 +42,7 @@ ${patterns}
 
 - Containers are square. Buttons, segmented tabs and toggles are pills.
 - Group with ruled lines (RuleGrid, ring-1 ring-border, divide-y), never cards with shadows.
+- Overlays (dialogs, sheets, drawers, popovers, menus, toasts) cast no shadow: bg-popover with a border or ring-1 ring-border, on the bg-scrim backdrop when modal.
 - The page is bg-background; cells and panels are bg-card, one step above it.
 - Action strips use RuleGridFooter (border-t bg-muted/70); header strips RuleGridHeader (border-b bg-muted/35). One tint per strip.
 - Small labels use the locus-eyebrow class. Titles are one weight up, not one size up.

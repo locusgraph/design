@@ -19,8 +19,7 @@ const toasterColors = {
 } as React.CSSProperties;
 
 const quietCardClassNames = {
-  toast:
-    "items-start! gap-3! p-4! font-sans! shadow-[var(--locus-overlay-shadow)]! [&_[data-icon]]:mt-0.5",
+  toast: "items-start! gap-3! p-4! font-sans! shadow-none! [&_[data-icon]]:mt-0.5",
   content: "gap-0.5!",
   title: "text-sm! leading-snug! font-medium!",
   description: "text-xs! leading-snug! text-muted-foreground!",
