@@ -118,7 +118,7 @@ export function Context({
       <HoverCardContent
         align="end"
         sideOffset={6}
-        className="w-72 rounded-none border-0 bg-popover p-0 shadow-overlay ring-1 ring-border"
+        className="w-72 rounded-none border-0 bg-popover p-0 ring-1 ring-border"
       >
         <ContextBreakdown
           label={label}
