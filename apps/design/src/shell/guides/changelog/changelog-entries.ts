@@ -8,6 +8,35 @@ export type ChangelogEntry = {
 
 export const changelogEntries: ChangelogEntry[] = [
   {
+    id: "2026-11-13-marketing",
+    date: "2026-11-13",
+    title: "Marketing blocks for landing pages",
+    packages: ["marketing 0.1.0"],
+    changes: [
+      "New package @locusgraph/marketing: Navbar, Hero, Features, FeatureRows, LogoCloud, Testimonials, Pricing, Faq, CtaBand, Waitlist and Footer, with content as props.",
+      "Blocks are server components; only the navbar menu, the pricing toggle and the waitlist form run on the client.",
+    ],
+  },
+  {
+    id: "2026-11-13-theming",
+    date: "2026-11-13",
+    title: "Theme Locus with the shadcn variables",
+    packages: [
+      "tokens 0.6.0",
+      "components 0.8.0",
+      "blocks 0.10.0",
+      "loop 0.8.0",
+      "json-render 0.4.0",
+    ],
+    changes: [
+      "Every color reads the shadcn variable first (--primary, --background, --border…) and falls back to the Locus value. An app that already defines shadcn variables now sees them in Locus components.",
+      "--radius drives a radius scale for fields, menus and dialogs; pills use rounded-pill and --radius-pill.",
+      "--font-sans, --font-heading and --font-mono set in :root reach every component, buttons and toasts included.",
+      "core.css leaves out the fonts, the 17px root size and the pointer cursor; fonts.css and document.css add them back.",
+      "Components built on a large library also have their own import paths: /chart, /calendar, /carousel, /combobox, /command, /drawer, /hook-form, /input-otp, /resizable and /toaster.",
+    ],
+  },
+  {
     id: "2026-11-12-peers",
     date: "2026-11-12",
     title: "Blocks, Loop and json-render accept components 0.7",
