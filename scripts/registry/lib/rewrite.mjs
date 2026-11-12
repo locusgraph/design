@@ -7,6 +7,7 @@ const internalPackages = new Map([
   ["@locusgraph/brand", "brand"],
   ["@locusgraph/blocks", "blocks"],
   ["@locusgraph/loop", "loop"],
+  ["@locusgraph/marketing", "marketing"],
 ]);
 const platformPackages = new Set(["react", "react-dom"]);
 const fromStatement = /^(import|export)(\s+type)?\s+([\s\S]*?)\s+from\s+"([^"]+)";/gm;

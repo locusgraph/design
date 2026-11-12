@@ -6,7 +6,7 @@ export const siteOrigin = "https://design.locusgraph.com";
 
 const intro = `# Locus Design
 
-> Locus Design, a design system for agent products: components, product blocks (\`@locusgraph/blocks\`), an agent kit with the human in the loop (\`@locusgraph/loop\`), a json-render catalog so a model can lay out screens as JSON (\`@locusgraph/json-render\`) and brand assets. React 19, Tailwind v4, Radix. Light and dark.
+> Locus Design, a design system for agent products: components, product blocks (\`@locusgraph/blocks\`), landing page sections (\`@locusgraph/marketing\`), an agent kit with the human in the loop (\`@locusgraph/loop\`), a json-render catalog so a model can lay out screens as JSON (\`@locusgraph/json-render\`) and brand assets. React 19, Tailwind v4, Radix. Light and dark.
 
 Every page below has a Markdown version: add \`.md\` to its path. Fetch the ones you need instead of guessing props, or load them all at once from ${siteOrigin}/llms-full.txt. The App and Docs shells (\`AppShell\`, \`AppSidebar\`, \`AppHeader\`, \`DocsShell\`) are shown at ${siteOrigin}/shells, which has no Markdown version. \`Sidebar\` and its parts, \`SkipLink\` and \`ThemeToggle\` are exported from \`@locusgraph/components\` but have no docs page yet.
 
@@ -25,6 +25,8 @@ pnpm add @locusgraph/components @locusgraph/blocks @locusgraph/loop @locusgraph/
 \`\`\`
 
 Components built on a large library also have their own import path: \`@locusgraph/components/chart\`, \`/calendar\`, \`/carousel\`, \`/combobox\`, \`/command\`, \`/drawer\`, \`/hook-form\`, \`/input-otp\`, \`/resizable\` and \`/toaster\`. Prefer them over the main entry for those components.
+
+For a landing page, add \`@locusgraph/marketing\` and \`@import "@locusgraph/marketing/sources.css";\`: \`Navbar\`, \`Hero\` and \`Footer\` take their content as props and stay server components.
 
 For generated screens, add \`@locusgraph/json-render\`. Its catalog (\`locusComponents\`) and registry (\`locusRenderers\`) cover Stack, Columns, Notice, Usage, Quota, UsageAlert, Wallet, TopUp, Plans, KeysEmpty and Keys. It has no CSS of its own; the blocks import above covers it.
 

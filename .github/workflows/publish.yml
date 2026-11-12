@@ -10,6 +10,7 @@ on:
       - "email-v*"
       - "json-render-v*"
       - "loop-v*"
+      - "marketing-v*"
       - "tokens-v*"
       - "utils-v*"
 

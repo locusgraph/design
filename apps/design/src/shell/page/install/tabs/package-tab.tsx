@@ -4,8 +4,17 @@ import { InstallLabel } from "../install-parts";
 import { addPackagesCommand, usePackageManager } from "../package-manager";
 
 const componentsPackage = "@locusgraph/components";
-const packagesWithSources = ["@locusgraph/blocks", "@locusgraph/loop", "@locusgraph/brand"];
-const packagesNeedingComponents = ["@locusgraph/blocks", "@locusgraph/loop"];
+const packagesWithSources = [
+  "@locusgraph/blocks",
+  "@locusgraph/marketing",
+  "@locusgraph/loop",
+  "@locusgraph/brand",
+];
+const packagesNeedingComponents = [
+  "@locusgraph/blocks",
+  "@locusgraph/marketing",
+  "@locusgraph/loop",
+];
 
 function importedPackages(importLine: string) {
   return [...importLine.matchAll(/from "(@locusgraph\/[a-z-]+)"/g)].map(([, name = ""]) => name);

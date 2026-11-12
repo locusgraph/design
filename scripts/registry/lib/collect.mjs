@@ -1,7 +1,7 @@
 import { readdirSync, readFileSync } from "node:fs";
 import { basename, dirname, join, relative } from "node:path";
 
-export const sourcePackages = ["utils", "brand", "components", "blocks", "loop"];
+export const sourcePackages = ["utils", "brand", "components", "blocks", "loop", "marketing"];
 
 const sourceRoots = [
   ...sourcePackages.map((packageName) => ({

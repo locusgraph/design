@@ -1,0 +1,12 @@
+{
+  "extends": [
+    "@locusgraph/config/typescript/library.json",
+    "@locusgraph/config/typescript/tests.json"
+  ],
+  "compilerOptions": {
+    "rootDir": "src",
+    "lib": ["ES2022", "DOM", "DOM.Iterable"],
+    "jsx": "react-jsx"
+  },
+  "include": ["src"]
+}

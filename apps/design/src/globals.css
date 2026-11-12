@@ -4,6 +4,7 @@
 @import "@locusgraph/blocks/sources.css";
 @import "@locusgraph/brand/sources.css";
 @import "@locusgraph/loop/sources.css";
+@import "@locusgraph/marketing/sources.css";
 
 body {
   background: var(--locus-background);

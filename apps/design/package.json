@@ -21,6 +21,7 @@
     "@locusgraph/email": "workspace:*",
     "@locusgraph/json-render": "workspace:*",
     "@locusgraph/loop": "workspace:*",
+    "@locusgraph/marketing": "workspace:*",
     "@locusgraph/tokens": "workspace:*",
     "@locusgraph/utils": "workspace:*",
     "@phosphor-icons/react": "catalog:",

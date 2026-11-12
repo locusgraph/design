@@ -5,6 +5,7 @@ const packageNames = new Map([
   ["@locusgraph/components", "components"],
   ["@locusgraph/blocks", "blocks"],
   ["@locusgraph/loop", "loop"],
+  ["@locusgraph/marketing", "marketing"],
   ["@locusgraph/brand", "brand"],
   ["@locusgraph/utils", "utils"],
 ]);
