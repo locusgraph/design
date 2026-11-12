@@ -26,7 +26,7 @@ pnpm add @locusgraph/components @locusgraph/blocks @locusgraph/loop @locusgraph/
 
 Components built on a large library also have their own import path: \`@locusgraph/components/chart\`, \`/calendar\`, \`/carousel\`, \`/combobox\`, \`/command\`, \`/drawer\`, \`/hook-form\`, \`/input-otp\`, \`/resizable\` and \`/toaster\`. Prefer them over the main entry for those components.
 
-For a landing page, add \`@locusgraph/marketing\` and \`@import "@locusgraph/marketing/sources.css";\`: \`Navbar\`, \`Hero\` and \`Footer\` take their content as props and stay server components.
+For a landing page, add \`@locusgraph/marketing\` and \`@import "@locusgraph/marketing/sources.css";\`: \`Navbar\`, \`Hero\`, \`Features\`, \`FeatureRows\`, \`LogoCloud\`, \`Testimonials\`, \`Pricing\`, \`Faq\`, \`CtaBand\`, \`Waitlist\` and \`Footer\` take their content as props and stay server components; only the navbar menu, the pricing toggle and the waitlist form run on the client.
 
 For generated screens, add \`@locusgraph/json-render\`. Its catalog (\`locusComponents\`) and registry (\`locusRenderers\`) cover Stack, Columns, Notice, Usage, Quota, UsageAlert, Wallet, TopUp, Plans, KeysEmpty and Keys. It has no CSS of its own; the blocks import above covers it.
 

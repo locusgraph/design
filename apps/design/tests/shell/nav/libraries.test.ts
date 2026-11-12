@@ -39,7 +39,9 @@ describe("libraries", () => {
       "Hero",
       "Logo Cloud",
       "Navbar",
+      "Pricing",
       "Testimonials",
+      "Waitlist",
     ]);
   });
 });
