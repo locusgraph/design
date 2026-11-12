@@ -11,7 +11,8 @@ export const forAgentsSections: PageSection[] = [
 ];
 
 const fetchCode = `curl ${siteOrigin}/DESIGN.md
-curl ${siteOrigin}/loop/approval/approval.md`;
+curl ${siteOrigin}/loop/approval/approval.md
+curl ${siteOrigin}/llms-full.txt`;
 
 const registryCode = `pnpm dlx shadcn@latest add ${siteOrigin}/r/theme.json ${siteOrigin}/r/approval.json`;
 
@@ -26,6 +27,8 @@ export function ForAgentsPage() {
           <p>
             <code>/DESIGN.md</code> lists every component, block and Loop part with one line each,
             how to install them and the house style. Point your agent at it before it writes any UI.
+            The same index is at <code>/llms.txt</code>, and <code>/llms-full.txt</code> has every
+            page in one file.
           </p>
         </Prose>
         <GuideCode code={fetchCode} language="bash" />

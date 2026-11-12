@@ -6,7 +6,7 @@ export default defineConfig({
     compatibilityDate: "2026-08-06",
     domains: ["design.locusgraph.com"],
     assets: {
-      notFoundHandling: "single-page-application",
+      notFoundHandling: "404-page",
     },
   },
 });
