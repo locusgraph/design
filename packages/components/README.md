@@ -43,6 +43,32 @@ Then:
 import { Button, AppShell, AppSidebar, AppHeader } from "@locusgraph/components";
 ```
 
+### Import paths for the larger components
+
+Ten components depend on a large library. Each also has its own import path, so you can import it
+without the main entry:
+
+| Import path | Exports | Library |
+|---|---|---|
+| `@locusgraph/components/chart` | `ChartContainer`, `ChartLegend`, `ChartTooltip` and their parts | `recharts` |
+| `@locusgraph/components/calendar` | `Calendar`, `CalendarDayButton` | `react-day-picker` |
+| `@locusgraph/components/carousel` | `Carousel` and its controls | `embla-carousel-react` |
+| `@locusgraph/components/combobox` | `Combobox` and its parts | `@base-ui/react` |
+| `@locusgraph/components/command` | `Command` and its parts | `cmdk` |
+| `@locusgraph/components/drawer` | `Drawer` and its parts | `vaul` |
+| `@locusgraph/components/hook-form` | `Form`, `FormField` and the other form helpers | `react-hook-form` |
+| `@locusgraph/components/input-otp` | `InputOTP` and its parts | `input-otp` |
+| `@locusgraph/components/resizable` | `ResizablePanelGroup`, `ResizablePanel`, `ResizableHandle` | `react-resizable-panels` |
+| `@locusgraph/components/toaster` | `Toaster`, `toast` | `sonner` |
+
+```tsx
+import { Toaster } from "@locusgraph/components/toaster";
+```
+
+For now they are also exported from `@locusgraph/components`, and the libraries are still installed
+with the package. A later minor release will make the libraries optional and drop these components
+from the main entry, so move these imports to their own path now.
+
 The built packages (`components`, `blocks` and `loop`) are compiled with the React Compiler, so
 they import `react/compiler-runtime`. A Vite app with React Server Components, such as one on
 vinext, must pre-bundle it, or the browser fails with "does not provide an export named 'c'":

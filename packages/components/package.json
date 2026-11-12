@@ -17,6 +17,16 @@
   ],
   "exports": {
     ".": "./src/index.ts",
+    "./calendar": "./src/entries/form/calendar.ts",
+    "./carousel": "./src/entries/display/carousel.ts",
+    "./chart": "./src/entries/display/chart.ts",
+    "./combobox": "./src/entries/form/combobox.ts",
+    "./command": "./src/entries/overlay/command.ts",
+    "./drawer": "./src/entries/overlay/drawer.ts",
+    "./hook-form": "./src/entries/form/hook-form.ts",
+    "./input-otp": "./src/entries/form/input-otp.ts",
+    "./resizable": "./src/entries/layout/resizable.ts",
+    "./toaster": "./src/entries/overlay/toaster.ts",
     "./theme.css": "./src/styles/theme.css",
     "./shadcn.css": "./src/styles/shadcn.css"
   },
@@ -28,6 +38,46 @@
       ".": {
         "types": "./dist/index.d.ts",
         "default": "./dist/index.js"
+      },
+      "./calendar": {
+        "types": "./dist/entries/form/calendar.d.ts",
+        "default": "./dist/entries/form/calendar.js"
+      },
+      "./carousel": {
+        "types": "./dist/entries/display/carousel.d.ts",
+        "default": "./dist/entries/display/carousel.js"
+      },
+      "./chart": {
+        "types": "./dist/entries/display/chart.d.ts",
+        "default": "./dist/entries/display/chart.js"
+      },
+      "./combobox": {
+        "types": "./dist/entries/form/combobox.d.ts",
+        "default": "./dist/entries/form/combobox.js"
+      },
+      "./command": {
+        "types": "./dist/entries/overlay/command.d.ts",
+        "default": "./dist/entries/overlay/command.js"
+      },
+      "./drawer": {
+        "types": "./dist/entries/overlay/drawer.d.ts",
+        "default": "./dist/entries/overlay/drawer.js"
+      },
+      "./hook-form": {
+        "types": "./dist/entries/form/hook-form.d.ts",
+        "default": "./dist/entries/form/hook-form.js"
+      },
+      "./input-otp": {
+        "types": "./dist/entries/form/input-otp.d.ts",
+        "default": "./dist/entries/form/input-otp.js"
+      },
+      "./resizable": {
+        "types": "./dist/entries/layout/resizable.d.ts",
+        "default": "./dist/entries/layout/resizable.js"
+      },
+      "./toaster": {
+        "types": "./dist/entries/overlay/toaster.d.ts",
+        "default": "./dist/entries/overlay/toaster.js"
       },
       "./theme.css": "./dist/styles/theme.css",
       "./shadcn.css": "./dist/styles/shadcn.css"
