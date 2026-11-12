@@ -8,11 +8,32 @@ export type ChangelogEntry = {
 
 export const changelogEntries: ChangelogEntry[] = [
   {
-    id: "next",
-    date: "Next release",
-    title: "More blocks for models, and local times",
-    packages: ["blocks 0.9.0", "loop 0.7.0", "json-render 0.3.0"],
+    id: "2026-11-12",
+    date: "2026-11-12",
+    title: "Counts in the app sidebar",
+    packages: ["components 0.7.0"],
     changes: [
+      "AppSidebar nav items take an optional count, read as part of the link name and kept for screen readers when the sidebar collapses to icons.",
+      "useIsMobile and the docs active section hook start with use client, so a server component can import them.",
+      "@phosphor-icons/react is a caret range instead of an exact pin.",
+    ],
+  },
+  {
+    id: "2026-11-10",
+    date: "2026-11-10",
+    title: "Overlays without shadows",
+    packages: ["components 0.6.2"],
+    changes: [
+      "Dialogs, sheets, drawers, popovers, menus, selects, comboboxes, chart tooltips and toasts drop the overlay shadow and keep their border or ring.",
+    ],
+  },
+  {
+    id: "2026-11-07",
+    date: "2026-11-07",
+    title: "More blocks for models, local times and the SpendGraph mark",
+    packages: ["blocks 0.9.0", "loop 0.7.0", "json-render 0.3.0", "brand 0.4.0"],
+    changes: [
+      "SpendGraphMark, the tally stick, alone and in SpendGraphWordmark withMark, also as spendgraph-mark.svg.",
       "json-render catalog adds Quota, UsageAlert and KeysEmpty, with links bound to state.",
       "TopUp takes settled and shows the outcome in place of the packs.",
       "Approval and Decision Log times show in the viewer's time zone after hydration, UTC before.",
