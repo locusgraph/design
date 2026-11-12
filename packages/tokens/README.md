@@ -30,7 +30,7 @@ Everything the theme defines is prefixed with `locus`: variables are `--locus-*`
 - Role colors: `interactive` (clickable, on hover), `memory` (remembered), `good`, `warn` (waiting) and `destructive`. Color means state; chart series `--locus-s1` to `--locus-s8` carry no meaning.
 - Fill colors: `--locus-good-fill` and `--locus-warn-fill` (`bg-good-fill`, `bg-warn-fill`) for bars and meters. They are brighter than the role colors in light and equal to them in dark; never use them for text.
 - Hairlines: `--locus-border` is the text color mixed into the surface, 9% light and 10% dark.
-- Square containers: every radius token is 0. Buttons, chips, badges, dots and avatars use `rounded-full`.
+- Square containers: `--locus-radius` is 0, and the radius scale (`rounded-sm` to `rounded-4xl`) is derived from `--radius`, falling back to it. Fields, menus, popovers and dialogs carry a step of the scale, so they stay square until an app sets `--radius`. Buttons, chips, badges, dots and avatars use `rounded-pill` (`--radius-pill`, 9999px).
 - Fonts: IBM Plex Sans for text, inputs and menus, Archivo for headings, `locus-eyebrow` labels, buttons and the brand, IBM Plex Mono for code and ids.
 - Base: interactive elements (buttons, tabs, options, switches, `summary`, `label[for]`) get `cursor: pointer` unless disabled.
 - Type scale: Tailwind's steps plus `text-2xs` (0.6875rem) for badges and counters and `text-code` (0.8125rem) for code.
@@ -40,6 +40,32 @@ Everything the theme defines is prefixed with `locus`: variables are `--locus-*`
 - Effects: `locus-brand-grid` and `locus-brand-grid-quiet` backgrounds, `locus-enter-cascade`, `locus-rises`, `locus-shimmer`, `locus-scroll-fade-b`, `locus-scroll-fade-x`, `locus-no-scrollbar`, `locus-scrollbar-none`, `locus-scrollbar-thin`, `locus-scrollbar-gutter-stable`, the `locus-eyebrow` label, `locus-ignites` and `locus-tracked`. Motion falls back to a fade under reduced motion.
 
 `typeset.css` styles long-form content inside `.typeset`, vendored from shadcn/typeset. Add `locus-typeset-chat` for agent replies: 14px, sans headings, tables without row rules.
+
+## Theming with the shadcn variables
+
+Every Tailwind color the components use reads the standard shadcn variable first and falls back to the Locus value: `bg-primary` is `var(--primary, var(--locus-btn))`. With no overrides nothing changes. To retheme, set the shadcn variables in your app, in `:root` and `.dark`:
+
+```css
+:root {
+  --primary: oklch(0.55 0.2 260);
+  --primary-foreground: oklch(0.98 0 0);
+  --radius: 0.5rem;
+  --radius-pill: 0.5rem;
+}
+```
+
+- Colors: `--background`, `--foreground`, `--card`, `--popover`, `--primary`, `--secondary`, `--muted`, `--accent`, `--destructive`, `--border`, `--input`, `--ring`, the `-foreground` pairs and the `--sidebar-*` set.
+- Radius: `--radius` sets the scale (`sm` 0.6×, `md` 0.8×, `lg` 1×, `xl` 1.4×). `--radius-pill` sets buttons, chips and badges.
+- Locus-only roles (`memory`, `good`, `warn`, `faint`, `interactive`, `skeleton`, `scrim` and the `--locus-s1` to `--locus-s8` series) have no shadcn name; override their `--locus-*` variable.
+- The `--locus-*` variables keep working.
+
+## Migrating to the shadcn fallbacks
+
+If your app already defines shadcn variables (a `shadcn init` app does), Locus components now use them instead of the Locus palette and radius. To keep the Locus look in such an app, import `@locusgraph/tokens/shadcn.css` after your own variables, or remove the shadcn variables you don't want. An app that defines none sees no change.
+
+With `shadcn.css` imported, the shadcn names are set once on `:root` from the `--locus-*` values. Overriding a `--locus-*` variable on a nested element then no longer reaches the components; override the shadcn name on that element instead.
+
+`rounded-full` in the components is now `rounded-pill`. It is still 9999px unless you set `--radius-pill`.
 
 ## Migrating from 0.3
 

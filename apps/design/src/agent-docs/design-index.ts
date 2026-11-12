@@ -51,7 +51,8 @@ Every item is listed at https://design.locusgraph.com/r/registry.json. Files lan
 
 ## House style
 
-- Containers, fields, menus and code are square: never add a radius class. Buttons, segmented tabs and toggle groups, chips, badges, dots, avatars and bars are pills (\`rounded-full\`). Line tabs have no shape, only an underline. Nothing in between.
+- Containers, fields, menus and code are square by default: radius comes only from the scale (\`rounded-md\` on fields and menus, \`rounded-lg\` on dialogs and alerts), which is 0 until an app sets \`--radius\`. Never use fixed radii such as \`rounded-[4px]\`. Buttons, segmented tabs and toggle groups, chips, badges, dots, avatars and bars are pills (\`rounded-pill\`, set by \`--radius-pill\`). Line tabs have no shape, only an underline.
+- Theming: every color reads the shadcn variable first (\`bg-primary\` is \`var(--primary, var(--locus-btn))\`), so an app restyles Locus by setting \`--primary\`, \`--background\`, \`--border\`, \`--radius\` and the rest in \`:root\` and \`.dark\`.
 - Every clickable element shows focus with \`locus-focus-ring\` (a 2px outline in the ring color at 70%, offset 2px), or \`locus-focus-ring-inset\` (the same outline, offset -2px) on full-bleed rows, tabs and scroll areas where an outer ring would clip. Text fields use \`focus-visible:border-ring\` with \`ring-1\`.
 - App pages (components, blocks, shells): group with ruled lines (\`RuleGrid\`, \`ring-1 ring-border\`, \`divide-y\`), not cards or shadows.
 - The chat area (\`@locusgraph/loop\`): no rules, frames or panels. Hierarchy comes from text weight and tone, spacing and color that means state. Only fields (the composer) and overlays (menus, popovers) keep a frame.
@@ -63,7 +64,7 @@ Every item is listed at https://design.locusgraph.com/r/registry.json. Files lan
 - Text tones: \`text-foreground\` for values, \`text-muted-foreground\` for labels, \`text-faint\` for meta and hints. All three pass WCAG AA.
 - Surfaces: the page is \`bg-background\` (light gray, near-black in dark); cells and panels are a solid \`bg-card\` one step above it. Action strips are \`RuleGridFooter\` (\`border-t bg-muted/70\`), header strips \`RuleGridHeader\` (\`border-b bg-muted/35\`). One tint per strip; never tint content.
 - Use tokens (\`bg-card\`, \`bg-muted\`, \`text-muted-foreground\`, \`border-input\`), never raw hex.
-- In CSS the theme variables are \`--locus-*\` (\`var(--locus-surface)\`, \`var(--locus-border)\`, \`var(--locus-muted)\`) and the theme's own classes are \`locus-*\`. The shadcn names (\`--background\`, \`--muted-foreground\`) exist only when the app imports \`@locusgraph/components/shadcn.css\`.`;
+- In CSS the theme variables are \`--locus-*\` (\`var(--locus-surface)\`, \`var(--locus-border)\`, \`var(--locus-muted)\`) and the theme's own classes are \`locus-*\`. The shadcn names (\`--background\`, \`--muted-foreground\`) are defined only when the app imports \`@locusgraph/components/shadcn.css\` or sets them itself; the components read them when they exist and fall back to the \`--locus-*\` values.`;
 
 function firstSentence(text: string) {
   const match = text.match(/^.*?[.!?](\s|$)/);

@@ -19,7 +19,7 @@ function QuotaSkeleton() {
         <SkeletonBar className="h-4 w-28" />
         <SkeletonBar className="h-4 w-36" />
       </div>
-      <SkeletonBar className="h-2 w-full rounded-full" />
+      <SkeletonBar className="h-2 w-full rounded-pill" />
     </div>
   );
 }

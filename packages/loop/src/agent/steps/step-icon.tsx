@@ -29,7 +29,7 @@ function StepGlyph({ status }: { status: StepStatus }) {
   if (status === "done") return <CheckIcon weight="bold" aria-hidden />;
   if (status === "failed") return <XIcon weight="bold" aria-hidden />;
   if (status === "skipped") return <MinusIcon weight="bold" aria-hidden />;
-  return <span className="size-1.5 rounded-full bg-current" />;
+  return <span className="size-1.5 rounded-pill bg-current" />;
 }
 
 type StepIconProps = { status: StepStatus; current?: boolean };

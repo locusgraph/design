@@ -15,7 +15,7 @@ function Bar({ delay }: { delay: number }) {
   return (
     <span
       ref={ref}
-      className="h-full w-[0.16em] origin-center scale-y-[0.35] rounded-full bg-current"
+      className="h-full w-[0.16em] origin-center scale-y-[0.35] rounded-pill bg-current"
     />
   );
 }

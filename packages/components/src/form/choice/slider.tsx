@@ -34,7 +34,7 @@ function Slider({
       <SliderPrimitive.Track
         data-slot="slider-track"
         className={cn(
-          "relative grow overflow-hidden rounded-full bg-input data-[orientation=horizontal]:h-1.5 data-[orientation=horizontal]:w-full data-[orientation=vertical]:h-full data-[orientation=vertical]:w-1.5"
+          "relative grow overflow-hidden rounded-pill bg-input data-[orientation=horizontal]:h-1.5 data-[orientation=horizontal]:w-full data-[orientation=vertical]:h-full data-[orientation=vertical]:w-1.5"
         )}
       >
         <SliderPrimitive.Range
@@ -51,7 +51,7 @@ function Slider({
           key={index}
           aria-label={thumbLabels?.[index] ?? props["aria-label"]}
           aria-labelledby={thumbLabels?.[index] ? undefined : props["aria-labelledby"]}
-          className="block size-4 shrink-0 rounded-full border border-primary bg-background shadow-sm transition-[color,box-shadow] locus-focus-ring disabled:pointer-events-none disabled:opacity-50"
+          className="block size-4 shrink-0 rounded-pill border border-primary bg-background shadow-sm transition-[color,box-shadow] locus-focus-ring disabled:pointer-events-none disabled:opacity-50"
         />
       ))}
     </SliderPrimitive.Root>

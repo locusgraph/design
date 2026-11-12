@@ -48,7 +48,7 @@ function ChartLegendContent({
                 <itemConfig.icon />
               ) : (
                 <div
-                  className="size-2 shrink-0 rounded-full"
+                  className="size-2 shrink-0 rounded-pill"
                   style={{
                     backgroundColor: item.color,
                   }}

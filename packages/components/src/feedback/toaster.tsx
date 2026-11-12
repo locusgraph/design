@@ -24,9 +24,9 @@ const quietCardClassNames = {
   title: "text-sm! leading-snug! font-medium!",
   description: "text-xs! leading-snug! text-muted-foreground!",
   actionButton:
-    "h-control-xs! self-center! rounded-full! bg-primary! px-3! font-heading! text-xs! font-medium! text-primary-foreground! locus-focus-ring",
+    "h-control-xs! self-center! rounded-pill! bg-primary! px-3! font-heading! text-xs! font-medium! text-primary-foreground! locus-focus-ring",
   cancelButton:
-    "h-control-xs! self-center! rounded-full! bg-muted! px-3! font-heading! text-xs! font-medium! text-foreground! locus-focus-ring",
+    "h-control-xs! self-center! rounded-pill! bg-muted! px-3! font-heading! text-xs! font-medium! text-foreground! locus-focus-ring",
   closeButton:
     "border-border! bg-popover! text-muted-foreground! hover:text-foreground! locus-focus-ring",
   success: "[&_[data-icon]]:text-good",

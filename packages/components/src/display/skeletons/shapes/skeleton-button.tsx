@@ -3,7 +3,7 @@ import type * as React from "react";
 import { cn } from "../../../cn";
 import { SkeletonBar, SkeletonLoadingLabel, skeletonRootProps } from "../skeleton-parts";
 
-const skeletonButtonVariants = cva("rounded-full", {
+const skeletonButtonVariants = cva("rounded-pill", {
   variants: {
     size: {
       sm: "h-control-sm w-20",

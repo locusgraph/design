@@ -65,7 +65,7 @@ export function ContextBreakdown({
       <div className="locus-eyebrow flex items-center gap-2 px-4 pt-3">
         <span>{label}</span>
         <span className="ml-auto flex items-center gap-1.5">
-          <span aria-hidden className={cn("size-1.5 rounded-full", statusDot[status])} />
+          <span aria-hidden className={cn("size-1.5 rounded-pill", statusDot[status])} />
           {statusWord[status]}
         </span>
       </div>
