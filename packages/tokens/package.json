@@ -19,6 +19,9 @@
   "exports": {
     ".": "./src/values/index.ts",
     "./theme.css": "./src/theme.css",
+    "./core.css": "./src/core.css",
+    "./fonts.css": "./src/fonts.css",
+    "./document.css": "./src/base/document.css",
     "./typeset.css": "./src/typeset.css",
     "./shadcn.css": "./src/variables/shadcn.css"
   },
@@ -32,6 +35,9 @@
         "default": "./dist/values/index.js"
       },
       "./theme.css": "./dist/theme.css",
+      "./core.css": "./dist/core.css",
+      "./fonts.css": "./dist/fonts.css",
+      "./document.css": "./dist/base/document.css",
       "./typeset.css": "./dist/typeset.css",
       "./shadcn.css": "./dist/variables/shadcn.css"
     }

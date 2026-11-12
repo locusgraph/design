@@ -1,0 +1,5 @@
+@import "@locusgraph/tokens/shadcn.css";
+@import "@locusgraph/tokens/core.css";
+@import "@locusgraph/tokens/typeset.css";
+
+@source "../";

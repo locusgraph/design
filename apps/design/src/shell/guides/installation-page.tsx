@@ -91,6 +91,16 @@ export function InstallationPage() {
           </p>
         </Prose>
         <Code code={snippets.shadcnAliases} language="css" />
+        <Prose>
+          <p>
+            The theme also sets the root font size to 17px and a pointer cursor on buttons, tabs and
+            options. To add Locus to an app that has its own type and fonts, import core.css
+            instead: it leaves the root size, the cursor and the fonts alone. Set your fonts with
+            --font-sans, --font-heading and --font-mono in your own @theme, or add fonts.css for the
+            Locus fonts.
+          </p>
+        </Prose>
+        <Code code={snippets.coreCss} language="css" />
       </Step>
       <Step id="configure-the-bundler" title="Configure the bundler">
         <Tabs defaultValue="vite">

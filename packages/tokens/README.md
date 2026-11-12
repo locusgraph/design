@@ -18,6 +18,26 @@ pnpm add @locusgraph/tokens
 
 `@locusgraph/components/theme.css` already imports both; import tokens directly only in an app that does not use the components.
 
+`theme.css` is three files you can also import on their own:
+
+- `fonts.css`: the IBM Plex Sans, Archivo and IBM Plex Mono packages.
+- `core.css`: the palette, the Tailwind mapping, element styles, utilities and effects.
+- `document.css`: the 17px root font size and a pointer cursor on buttons, tabs, options and other interactive elements.
+
+`core.css` changes nothing outside Locus classes except the `body` colors and font and the heading font, so it fits inside an app with its own type. Without `document.css`, `rem` sizes follow the app's root size (usually 16px), so controls and text are about 6% smaller than on the Locus sites. Without `fonts.css`, text falls back to system fonts until you set your own:
+
+```css
+@import "tailwindcss";
+@import "@locusgraph/tokens/core.css";
+
+@theme inline {
+  --font-sans: "Inter Variable", ui-sans-serif, system-ui, sans-serif;
+  --font-heading: "Inter Variable", ui-sans-serif, system-ui, sans-serif;
+}
+```
+
+`@locusgraph/components` re-exports the same three as `@locusgraph/components/core.css`, `fonts.css` and `document.css`; its `core.css` also adds the shadcn aliases, typeset and the Tailwind source for the components.
+
 Everything the theme defines is prefixed with `locus`: variables are `--locus-*` (light on `:root`, dark on `.dark`) and our classes, utilities and keyframes are `locus-*`. The Tailwind keys keep their names (`bg-surface`, `text-faint`, `bg-primary`, `text-muted-foreground`), now pointing at `--locus-*`. An app that also uses shadcn components and needs the shadcn variable names (`--background`, `--primary`, `--muted-foreground`, `--radius`, …) adds the optional aliases:
 
 ```css
@@ -32,11 +52,11 @@ Everything the theme defines is prefixed with `locus`: variables are `--locus-*`
 - Hairlines: `--locus-border` is the text color mixed into the surface, 9% light and 10% dark.
 - Square containers: `--locus-radius` is 0, and the radius scale (`rounded-sm` to `rounded-4xl`) is derived from `--radius`, falling back to it. Fields, menus, popovers and dialogs carry a step of the scale, so they stay square until an app sets `--radius`. Buttons, chips, badges, dots and avatars use `rounded-pill` (`--radius-pill`, 9999px).
 - Fonts: IBM Plex Sans for text, inputs and menus, Archivo for headings, `locus-eyebrow` labels, buttons and the brand, IBM Plex Mono for code and ids.
-- Base: interactive elements (buttons, tabs, options, switches, `summary`, `label[for]`) get `cursor: pointer` unless disabled.
+- Document (`document.css`): interactive elements (buttons, tabs, options, switches, `summary`, `label[for]`) get `cursor: pointer` unless disabled, and the root font size is 17px.
 - Type scale: Tailwind's steps plus `text-2xs` (0.6875rem) for badges and counters and `text-code` (0.8125rem) for code.
 - Control heights: `h-control-xs` (1.5rem), `h-control-sm` (2rem), `h-control` (2.25rem) and `h-control-lg` (2.5rem), also as `size-control-*`.
 - Focus: `locus-focus-ring` draws a 2px ring outside the element; `locus-focus-ring-inset` draws it inside for rows, tabs and scroll areas.
-- Base: 17px root size, tight balanced headings, `text-pretty` paragraphs.
+- Base: tight balanced headings, `text-pretty` paragraphs. `body`, `locus-eyebrow` and `locus-focus-ring` read the shadcn variables first (`--background`, `--foreground`, `--muted-foreground`, `--ring`), like the Tailwind colors.
 - Effects: `locus-brand-grid` and `locus-brand-grid-quiet` backgrounds, `locus-enter-cascade`, `locus-rises`, `locus-shimmer`, `locus-scroll-fade-b`, `locus-scroll-fade-x`, `locus-no-scrollbar`, `locus-scrollbar-none`, `locus-scrollbar-thin`, `locus-scrollbar-gutter-stable`, the `locus-eyebrow` label, `locus-ignites` and `locus-tracked`. Motion falls back to a fade under reduced motion.
 
 `typeset.css` styles long-form content inside `.typeset`, vendored from shadcn/typeset. Add `locus-typeset-chat` for agent replies: 14px, sans headings, tables without row rules.
@@ -56,7 +76,8 @@ Every Tailwind color the components use reads the standard shadcn variable first
 
 - Colors: `--background`, `--foreground`, `--card`, `--popover`, `--primary`, `--secondary`, `--muted`, `--accent`, `--destructive`, `--border`, `--input`, `--ring`, the `-foreground` pairs and the `--sidebar-*` set.
 - Radius: `--radius` sets the scale (`sm` 0.6×, `md` 0.8×, `lg` 1×, `xl` 1.4×). `--radius-pill` sets buttons, chips and badges.
-- Locus-only roles (`memory`, `good`, `warn`, `faint`, `interactive`, `skeleton`, `scrim` and the `--locus-s1` to `--locus-s8` series) have no shadcn name; override their `--locus-*` variable.
+- Locus-only roles (`memory`, `good`, `warn`, `faint`, `interactive`, `skeleton`, `scrim` and the `--locus-s1` to `--locus-s8` series) have no shadcn name. They keep the Locus values, so a theme only needs the shadcn variables; override their `--locus-*` variable to change one.
+- Fonts: set `--font-sans`, `--font-heading` and `--font-mono` in your own `@theme inline` after the import.
 - The `--locus-*` variables keep working.
 
 ## Migrating to the shadcn fallbacks

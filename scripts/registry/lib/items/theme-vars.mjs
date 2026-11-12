@@ -7,10 +7,6 @@ function shadcnAliases(shadcnPath) {
   );
 }
 
-const squareRadius = Object.fromEntries(
-  ["xs", "sm", "md", "lg", "xl", "2xl", "3xl", "4xl"].map((size) => [`radius-${size}`, "0px"])
-);
-
 export function shadcnCssVars(shadcnPath) {
   const aliases = shadcnAliases(shadcnPath);
   return {
@@ -18,7 +14,6 @@ export function shadcnCssVars(shadcnPath) {
       "font-sans": '"IBM Plex Sans Variable", ui-sans-serif, system-ui, sans-serif',
       "font-heading": '"Archivo Variable", ui-sans-serif, system-ui, sans-serif',
       "font-mono": '"IBM Plex Mono", ui-monospace, monospace',
-      ...squareRadius,
     },
     light: aliases,
     dark: aliases,

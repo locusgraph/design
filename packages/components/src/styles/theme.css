@@ -1,4 +1,3 @@
-@import "@locusgraph/tokens/theme.css";
-@import "@locusgraph/tokens/typeset.css";
-
-@source "../";
+@import "@locusgraph/tokens/fonts.css";
+@import "./core.css";
+@import "@locusgraph/tokens/document.css";

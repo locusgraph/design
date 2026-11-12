@@ -23,19 +23,11 @@
   :where(p) {
     text-wrap: pretty;
   }
-
-  :where(button, [role="button"], [role="tab"], [role="option"], [role="menuitem"], [role="switch"], [role="checkbox"], [role="radio"], summary, label[for], select):not(:disabled, [aria-disabled="true"], [data-disabled]) {
-    cursor: pointer;
-  }
-}
-
-html {
-  font-size: 17px;
 }
 
 body {
-  background: var(--locus-background);
-  color: var(--locus-foreground);
+  background: var(--background, var(--locus-background));
+  color: var(--foreground, var(--locus-foreground));
 }
 
 .locus-typeset-docs {
@@ -64,6 +56,6 @@ body {
 }
 
 [data-rehype-pretty-code-figure] [data-highlighted-line] {
-  background: var(--locus-muted);
-  box-shadow: inset 2px 0 var(--locus-border);
+  background: var(--muted, var(--locus-muted));
+  box-shadow: inset 2px 0 var(--border, var(--locus-border));
 }
