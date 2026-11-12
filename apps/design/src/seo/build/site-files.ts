@@ -12,7 +12,9 @@ import {
   themeColors,
 } from "../site-meta";
 
+export { agentDocFiles } from "../../agent-docs/agent-doc-files";
 export { sitemapXml } from "./sitemap";
+export { staticPageBody, staticPageMarkdown, withStaticBody } from "./static-page";
 export { notFoundPageMeta };
 
 export async function buildSitePages() {

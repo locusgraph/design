@@ -452,6 +452,12 @@ importers:
       cf:
         specifier: 'catalog:'
         version: 1.0.0-beta.17(@types/node@22.20.5)
+      react-markdown:
+        specifier: 'catalog:'
+        version: 10.1.0(@types/react@19.3.0)(react@19.2.8)(supports-color@10.2.2)
+      remark-gfm:
+        specifier: 'catalog:'
+        version: 4.0.1(supports-color@10.2.2)
       satori:
         specifier: 'catalog:'
         version: 0.33.5
