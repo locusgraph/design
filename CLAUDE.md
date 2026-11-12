@@ -39,7 +39,7 @@ These rules apply to every source file. They are not suggestions.
 - `packages/brand`: `@locusgraph/brand`, the LocusGraph and SpendGraph marks and wordmarks, `LocusGraphIcon`, `SocialCard` (inline styles, works in Next.js `ImageResponse`) and the Google and GitHub marks, as React and SVG
 - `packages/components`: `@locusgraph/components`, Radix based React components, Rule Grid, the App and Docs shells, and `theme.css` (tokens plus a Tailwind source for the components)
 - `packages/blocks`: `@locusgraph/blocks`, product sections (`Usage`, `UsageAlert`, `Quota`, `Wallet`, `TopUp`, `Plans`, `Keys`, `KeysEmpty` and their skeletons) built from components. Props and callbacks only, never fetching
-- `packages/marketing`: `@locusgraph/marketing`, landing page sections (`Navbar`, `Hero`, `Footer`) built from components. Content as props, server components except the interactive parts. Separate from `blocks` so product apps never scan or ship it
+- `packages/marketing`: `@locusgraph/marketing`, landing page sections (`Navbar`, `Hero`, `Features`, `LogoCloud`, `Testimonials`, `Pricing`, `Faq`, `CtaBand`, `Waitlist`, `Footer`) built from components. Content as props, server components except the interactive parts. Separate from `blocks` so product apps never scan or ship it
 - `packages/loop`: `@locusgraph/loop`, agent UI (chat, thread, agent, approval, memory, cost) on Vercel AI SDK `UIMessage` parts. Never calls a model
 - `packages/email`: `@locusgraph/email`, transactional email templates with inline styles from tokens
 - `packages/json-render`: `@locusgraph/json-render`, a json-render catalog (`locusComponents`) and registry (`locusRenderers`) for components and blocks, so a model can lay out LocusGraph screens as JSON

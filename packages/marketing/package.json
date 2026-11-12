@@ -1,7 +1,7 @@
 {
   "name": "@locusgraph/marketing",
   "version": "0.1.0",
-  "description": "Landing page sections built from @locusgraph/components: navbar, hero and footer, with content as props.",
+  "description": "Landing page sections built from @locusgraph/components: navbar, hero, features, logos, testimonials, pricing, FAQ, call to action, waitlist and footer, with content as props.",
   "license": "MIT",
   "repository": {
     "type": "git",
