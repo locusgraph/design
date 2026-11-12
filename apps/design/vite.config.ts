@@ -11,7 +11,15 @@ import { siteAssetsPlugin } from "./plugins/site-assets.ts";
 const entry = (file: string) => fileURLToPath(new URL(file, import.meta.url));
 
 export default defineConfig({
-  plugins: [devPageRoutes(), react(), tailwindcss(), agentDocs(), siteAssetsPlugin(), fontPreload(), cloudflare()],
+  plugins: [
+    devPageRoutes(),
+    react(),
+    tailwindcss(),
+    agentDocs(),
+    siteAssetsPlugin(),
+    fontPreload(),
+    cloudflare(),
+  ],
   server: { port: 5180, strictPort: true },
   build: {
     rolldownOptions: {
