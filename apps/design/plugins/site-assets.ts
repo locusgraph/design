@@ -15,7 +15,12 @@ type SiteFilesModule = {
   socialCardElement: () => ReactNode;
   sitemapXml: (pages: PageMeta[]) => string;
   notFoundPageMeta: (path: string) => PageMeta;
+  agentDocFiles: () => Promise<DocFile[]>;
+  staticPageMarkdown: (path: string, docs: DocFile[]) => string;
+  staticPageBody: (markdown: string) => string;
+  withStaticBody: (html: string, body: string) => string;
 };
+type DocFile = { fileName: string; markdown: string };
 type SiteMetaModule = {
   iconFiles: Record<"svg" | "ico" | "appleTouch" | "maskable" | "manifest", string>;
   socialImage: { path: string; width: number; height: number };
@@ -80,7 +85,8 @@ async function readBuildOutput(server: ViteDevServer) {
   const assets = siteAssets(modules);
   const sources = await Promise.all(assets.map((asset) => asset.source()));
   const pages = await modules.files.buildSitePages();
-  return { assets, sources, pages, head: modules.head, files: modules.files };
+  const docs = await modules.files.agentDocFiles();
+  return { assets, sources, pages, docs, head: modules.head, files: modules.files };
 }
 
 export function siteAssetsPlugin(): Plugin {
@@ -105,12 +111,14 @@ export function siteAssetsPlugin(): Plugin {
         this.error("index.html is missing from the client bundle");
       }
       const template = String(indexHtml.source);
-      const { assets, sources, pages, head, files } = await withStandaloneServer(readBuildOutput);
+      const { assets, sources, pages, docs, head, files } =
+        await withStandaloneServer(readBuildOutput);
       assets.forEach((asset, index) => {
         this.emitFile({ type: "asset", fileName: asset.fileName, source: sources[index] });
       });
       for (const page of pages) {
-        const html = head.withPageHead(template, page);
+        const body = files.staticPageBody(files.staticPageMarkdown(page.path, docs));
+        const html = files.withStaticBody(head.withPageHead(template, page), body);
         const fileName = head.pageHtmlFileName(page.path);
         if (fileName === "index.html") indexHtml.source = html;
         else this.emitFile({ type: "asset", fileName, source: html });
