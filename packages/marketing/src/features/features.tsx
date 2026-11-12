@@ -1,5 +1,6 @@
 import { RuleGrid, RuleGridCell } from "@locusgraph/components";
 import type { ReactNode } from "react";
+import { withUniqueKeys } from "../keys";
 import { Section, type SectionHeadingProps } from "../section/section";
 
 export type FeatureItem = { title: string; description?: ReactNode; icon?: ReactNode };
@@ -15,8 +16,8 @@ export function Features({ items, columns = 3, ...section }: FeaturesProps) {
   return (
     <Section slot="marketing-features" {...section}>
       <RuleGrid columns={columns}>
-        {items.map((item) => (
-          <RuleGridCell key={item.title} className="gap-3">
+        {withUniqueKeys(items, (item) => item.title).map(({ key, item }) => (
+          <RuleGridCell key={key} className="gap-3">
             {item.icon && (
               <span aria-hidden className="text-foreground [&_svg]:size-5">
                 {item.icon}

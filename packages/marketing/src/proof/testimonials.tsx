@@ -1,5 +1,6 @@
 import { RuleGrid, RuleGridCell } from "@locusgraph/components";
 import type { ReactNode } from "react";
+import { withUniqueKeys } from "../keys";
 import { Section, type SectionHeadingProps } from "../section/section";
 
 export type Testimonial = {
@@ -54,14 +55,16 @@ export function Testimonials({ testimonials, ...section }: TestimonialsProps) {
   return (
     <Section slot="marketing-testimonials" {...section}>
       <RuleGrid columns={3}>
-        {testimonials.map(({ quote, ...person }) => (
-          <RuleGridCell key={person.name} asChild className="justify-between gap-6">
-            <figure>
-              <blockquote className="text-base">{quote}</blockquote>
-              <Attribution {...person} />
-            </figure>
-          </RuleGridCell>
-        ))}
+        {withUniqueKeys(testimonials, (entry) => entry.name).map(
+          ({ key, item: { quote, ...person } }) => (
+            <RuleGridCell key={key} asChild className="justify-between gap-6">
+              <figure>
+                <blockquote className="text-base">{quote}</blockquote>
+                <Attribution {...person} />
+              </figure>
+            </RuleGridCell>
+          )
+        )}
       </RuleGrid>
     </Section>
   );

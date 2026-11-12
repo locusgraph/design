@@ -1,5 +1,6 @@
 import { RuleGrid } from "@locusgraph/components";
 import type { ReactNode } from "react";
+import { withUniqueKeys } from "../keys";
 import { Section, type SectionHeadingProps } from "../section/section";
 import type { LinkComponent } from "../types";
 import { type BillingPeriod, PricingPeriod } from "./pricing-period";
@@ -37,13 +38,8 @@ export function Pricing({
 }: PricingProps) {
   const grid = (
     <RuleGrid columns={columnsFor(plans.length)}>
-      {plans.map((plan) => (
-        <PricingPlanCell
-          key={plan.name}
-          plan={plan}
-          cadence={cadence}
-          linkComponent={linkComponent}
-        />
+      {withUniqueKeys(plans, (plan) => plan.name).map(({ key, item: plan }) => (
+        <PricingPlanCell key={key} plan={plan} cadence={cadence} linkComponent={linkComponent} />
       ))}
     </RuleGrid>
   );
