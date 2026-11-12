@@ -19,6 +19,10 @@ export function installDom() {
   for (const key of sharedGlobals) {
     Object.defineProperty(globalThis, key, { configurable: true, value: Reflect.get(window, key) });
   }
+  for (const key of Object.getOwnPropertyNames(window)) {
+    if (key in globalThis) continue;
+    Object.defineProperty(globalThis, key, { configurable: true, value: Reflect.get(window, key) });
+  }
   Reflect.set(globalThis, "IS_REACT_ACT_ENVIRONMENT", true);
 }
 

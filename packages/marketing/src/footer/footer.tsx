@@ -1,5 +1,6 @@
 import { cn } from "@locusgraph/components";
 import type { ReactNode } from "react";
+import { linkKey, withUniqueKeys } from "../keys";
 import type { LinkComponent, MarketingLink } from "../types";
 
 export type FooterColumn = { title: string; links: MarketingLink[] };
@@ -39,11 +40,11 @@ export function Footer({
         )}
         {columns.length > 0 && (
           <div className="grid grid-cols-2 gap-8 sm:grid-cols-3 lg:col-start-2">
-            {columns.map((column) => (
-              <nav key={column.title} aria-label={column.title} className="flex flex-col gap-3">
+            {withUniqueKeys(columns, (column) => column.title).map(({ key, item: column }) => (
+              <nav key={key} aria-label={column.title} className="flex flex-col gap-3">
                 <p className="locus-eyebrow">{column.title}</p>
-                {column.links.map((link) => (
-                  <Link key={link.href} href={link.href} className={linkClass}>
+                {withUniqueKeys(column.links, linkKey).map(({ key: linkId, item: link }) => (
+                  <Link key={linkId} href={link.href} className={linkClass}>
                     {link.label}
                   </Link>
                 ))}
@@ -57,8 +58,8 @@ export function Footer({
           {copyright && <p className="text-xs text-faint">{copyright}</p>}
           {legal.length > 0 && (
             <nav aria-label="Legal" className="flex flex-wrap gap-x-6 gap-y-2">
-              {legal.map((link) => (
-                <Link key={link.href} href={link.href} className={cn(linkClass, "text-xs")}>
+              {withUniqueKeys(legal, linkKey).map(({ key, item: link }) => (
+                <Link key={key} href={link.href} className={cn(linkClass, "text-xs")}>
                   {link.label}
                 </Link>
               ))}

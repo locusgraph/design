@@ -1,6 +1,7 @@
 import { cn } from "@locusgraph/components";
 import type { ReactNode } from "react";
 import { MarketingActions } from "../actions/marketing-actions";
+import { linkKey, withUniqueKeys } from "../keys";
 import type { LinkComponent, MarketingAction, MarketingLink } from "../types";
 import { NavbarMenu } from "./navbar-menu";
 
@@ -47,8 +48,8 @@ export function Navbar({
         </Link>
         {links.length > 0 && (
           <nav aria-label="Main" className="hidden items-center gap-6 md:flex">
-            {links.map((link) => (
-              <Link key={link.href} href={link.href} className={linkClass}>
+            {withUniqueKeys(links, linkKey).map(({ key, item: link }) => (
+              <Link key={key} href={link.href} className={linkClass}>
                 {link.label}
               </Link>
             ))}
@@ -65,8 +66,8 @@ export function Navbar({
           {(links.length > 0 || actions.length > 0) && (
             <NavbarMenu label={menuLabel}>
               <nav aria-label={menuLabel} className="flex flex-col gap-4">
-                {links.map((link) => (
-                  <Link key={link.href} href={link.href} className={cn(linkClass, "text-base")}>
+                {withUniqueKeys(links, linkKey).map(({ key, item: link }) => (
+                  <Link key={key} href={link.href} className={cn(linkClass, "text-base")}>
                     {link.label}
                   </Link>
                 ))}

@@ -2,6 +2,7 @@ import { Badge, cn, RuleGridCell } from "@locusgraph/components";
 import { Check as CheckIcon } from "@phosphor-icons/react/ssr";
 import type { ReactNode } from "react";
 import { MarketingActions } from "../actions/marketing-actions";
+import { withUniqueKeys } from "../keys";
 import type { LinkComponent, MarketingAction } from "../types";
 import type { BillingPeriod } from "./pricing-period";
 
@@ -78,8 +79,8 @@ export function PricingPlanCell({ plan, cadence, linkComponent }: PricingPlanCel
       />
       {plan.features && plan.features.length > 0 && (
         <ul className="flex flex-col gap-2.5 text-sm">
-          {plan.features.map((feature) => (
-            <li key={feature} className="flex gap-2.5">
+          {withUniqueKeys(plan.features, (feature) => feature).map(({ key, item: feature }) => (
+            <li key={key} className="flex gap-2.5">
               <CheckIcon weight="bold" aria-hidden className="mt-0.5 size-4 shrink-0 text-good" />
               <span>{feature}</span>
             </li>

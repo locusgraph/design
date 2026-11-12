@@ -1,4 +1,5 @@
 import type { ReactNode } from "react";
+import { withUniqueKeys } from "../keys";
 import { Section, type SectionHeadingProps } from "../section/section";
 
 export type LogoItem = { name: string; logo: ReactNode; href?: string };
@@ -18,8 +19,8 @@ export function LogoCloud({ logos, ...section }: LogoCloudProps) {
       {...section}
     >
       <ul className="flex flex-wrap items-center justify-center gap-x-12 gap-y-8 text-muted-foreground">
-        {logos.map((item) => (
-          <li key={item.name} className="flex h-8 items-center [&_img]:h-full [&_svg]:h-full">
+        {withUniqueKeys(logos, (logo) => logo.name).map(({ key, item }) => (
+          <li key={key} className="flex h-8 items-center [&_img]:h-full [&_svg]:h-full">
             {item.href ? (
               <a
                 href={item.href}

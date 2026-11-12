@@ -1,6 +1,7 @@
 import { cn } from "@locusgraph/components";
 import type { ReactNode } from "react";
 import { MarketingActions } from "../actions/marketing-actions";
+import { withUniqueKeys } from "../keys";
 import { Section, type SectionHeadingProps } from "../section/section";
 import type { LinkComponent, MarketingAction } from "../types";
 
@@ -23,9 +24,9 @@ export function FeatureRows({ rows, linkComponent, ...section }: FeatureRowsProp
   return (
     <Section slot="marketing-feature-rows" {...section}>
       <div className="flex flex-col gap-16 sm:gap-24">
-        {rows.map((row, index) => (
+        {withUniqueKeys(rows, (row) => row.title).map(({ key, item: row }, index) => (
           <div
-            key={row.title}
+            key={key}
             data-slot="marketing-feature-row"
             className="grid items-center gap-8 lg:grid-cols-2 lg:gap-16"
           >
