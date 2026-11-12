@@ -201,7 +201,7 @@ catalogs:
       specifier: 0.21.3
       version: 0.21.3
     '@phosphor-icons/react':
-      specifier: 2.1.10
+      specifier: ^2.1.10
       version: 2.1.10
     '@resvg/resvg-js':
       specifier: 2.6.2
