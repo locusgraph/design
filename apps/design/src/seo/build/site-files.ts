@@ -2,7 +2,7 @@ import { SocialCard } from "@locusgraph/brand";
 import { darkColors } from "@locusgraph/tokens";
 import { createElement, Fragment } from "react";
 import { loadAllDemoEntries } from "../../registry/load-demos";
-import { sitePages } from "../page-meta";
+import { notFoundPageMeta, sitePages } from "../page-meta";
 import {
   iconFiles,
   siteName,
@@ -11,6 +11,9 @@ import {
   siteTagline,
   themeColors,
 } from "../site-meta";
+
+export { sitemapXml } from "./sitemap";
+export { notFoundPageMeta };
 
 export async function buildSitePages() {
   return sitePages(await loadAllDemoEntries());

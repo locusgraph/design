@@ -5,10 +5,20 @@ const docsModule = "/src/agent-docs/agent-doc-files.ts";
 
 type AgentDocFile = { fileName: string; markdown: string };
 type DocsModule = { agentDocFiles: () => Promise<AgentDocFile[]> };
+type LlmsModule = { llmsFiles: (files: AgentDocFile[]) => AgentDocFile[] };
+
+const llmsModule = "/src/agent-docs/llms-files.ts";
+const servedDocPattern = /\.(md|txt)$/;
 
 async function readDocFiles(server: ViteDevServer) {
   const docs = (await server.ssrLoadModule(docsModule)) as DocsModule;
-  return docs.agentDocFiles();
+  const llms = (await server.ssrLoadModule(llmsModule)) as LlmsModule;
+  const files = await docs.agentDocFiles();
+  return [...files, ...llms.llmsFiles(files)];
+}
+
+function contentTypeOf(fileName: string) {
+  return fileName.endsWith(".txt") ? "text/plain" : "text/markdown";
 }
 
 export function agentDocs(): Plugin {
@@ -17,11 +27,11 @@ export function agentDocs(): Plugin {
     configureServer(server) {
       server.middlewares.use(async (request, response, next) => {
         const path = request.url?.split("?")[0] ?? "";
-        if (!path.endsWith(".md")) return next();
+        if (!servedDocPattern.test(path)) return next();
         const files = await readDocFiles(server);
         const file = files.find((item) => `/${item.fileName}` === decodeURIComponent(path));
         if (!file) return next();
-        response.setHeader("content-type", "text/markdown; charset=utf-8");
+        response.setHeader("content-type", `${contentTypeOf(file.fileName)}; charset=utf-8`);
         response.end(file.markdown);
       });
     },

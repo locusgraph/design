@@ -8,7 +8,7 @@ const intro = `# Locus Design
 
 > Locus Design, a design system for agent products: components, product blocks (\`@locusgraph/blocks\`), an agent kit with the human in the loop (\`@locusgraph/loop\`), a json-render catalog so a model can lay out screens as JSON (\`@locusgraph/json-render\`) and brand assets. React 19, Tailwind v4, Radix. Light and dark.
 
-Every page below has a Markdown version: add \`.md\` to its path. Fetch the ones you need instead of guessing props. The App and Docs shells (\`AppShell\`, \`AppSidebar\`, \`AppHeader\`, \`DocsShell\`) are shown at ${siteOrigin}/shells, which has no Markdown version. \`Sidebar\` and its parts, \`SkipLink\` and \`ThemeToggle\` are exported from \`@locusgraph/components\` but have no docs page yet.
+Every page below has a Markdown version: add \`.md\` to its path. Fetch the ones you need instead of guessing props, or load them all at once from ${siteOrigin}/llms-full.txt. The App and Docs shells (\`AppShell\`, \`AppSidebar\`, \`AppHeader\`, \`DocsShell\`) are shown at ${siteOrigin}/shells, which has no Markdown version. \`Sidebar\` and its parts, \`SkipLink\` and \`ThemeToggle\` are exported from \`@locusgraph/components\` but have no docs page yet.
 
 ## Install
 

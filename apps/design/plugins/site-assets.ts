@@ -13,6 +13,8 @@ type SiteFilesModule = {
   iconSvg: (size: number) => string;
   webManifest: () => string;
   socialCardElement: () => ReactNode;
+  sitemapXml: (pages: PageMeta[]) => string;
+  notFoundPageMeta: (path: string) => PageMeta;
 };
 type SiteMetaModule = {
   iconFiles: Record<"svg" | "ico" | "appleTouch" | "maskable" | "manifest", string>;
@@ -28,7 +30,7 @@ type SiteAsset = {
   source: () => Promise<string | Uint8Array>;
 };
 
-const rootFilePattern = /^\/[^/]+\.(svg|ico|png|webmanifest)$/;
+const rootFilePattern = /^\/[^/]+\.(svg|ico|png|webmanifest|xml)$/;
 
 async function loadModules(server: ViteDevServer) {
   const [files, meta, head] = await Promise.all([
@@ -65,6 +67,11 @@ function siteAssets({ files, meta }: Awaited<ReturnType<typeof loadModules>>): S
       contentType: "image/png",
       source: () => elementToPng(files.socialCardElement(), socialImage),
     },
+    {
+      fileName: "sitemap.xml",
+      contentType: "application/xml",
+      source: async () => files.sitemapXml(await files.buildSitePages()),
+    },
   ];
 }
 
@@ -73,7 +80,7 @@ async function readBuildOutput(server: ViteDevServer) {
   const assets = siteAssets(modules);
   const sources = await Promise.all(assets.map((asset) => asset.source()));
   const pages = await modules.files.buildSitePages();
-  return { assets, sources, pages, head: modules.head };
+  return { assets, sources, pages, head: modules.head, files: modules.files };
 }
 
 export function siteAssetsPlugin(): Plugin {
@@ -98,7 +105,7 @@ export function siteAssetsPlugin(): Plugin {
         this.error("index.html is missing from the client bundle");
       }
       const template = String(indexHtml.source);
-      const { assets, sources, pages, head } = await withStandaloneServer(readBuildOutput);
+      const { assets, sources, pages, head, files } = await withStandaloneServer(readBuildOutput);
       assets.forEach((asset, index) => {
         this.emitFile({ type: "asset", fileName: asset.fileName, source: sources[index] });
       });
@@ -108,6 +115,8 @@ export function siteAssetsPlugin(): Plugin {
         if (fileName === "index.html") indexHtml.source = html;
         else this.emitFile({ type: "asset", fileName, source: html });
       }
+      const notFound = head.withPageHead(template, files.notFoundPageMeta("404"));
+      this.emitFile({ type: "asset", fileName: "404.html", source: notFound });
     },
   };
 }
