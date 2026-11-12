@@ -1,5 +1,5 @@
 import type { Plugin, ViteDevServer } from "vite";
-import { withStandaloneServer } from "./standalone-server";
+import { withStandaloneServer } from "./standalone-server.ts";
 
 const docsModule = "/src/agent-docs/agent-doc-files.ts";
 
