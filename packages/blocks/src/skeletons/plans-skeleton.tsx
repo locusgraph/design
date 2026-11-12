@@ -42,7 +42,7 @@ export function PlansSkeleton({ plans = 2, points = 2, currentIndex = 0 }: Plans
               <SkeletonBar className="h-4 w-16" />
             </div>
           ) : (
-            <SkeletonBar className="mt-auto h-control-sm w-28 rounded-full" />
+            <SkeletonBar className="mt-auto h-control-sm w-28 rounded-pill" />
           )}
         </RuleGridCell>
       ))}

@@ -35,7 +35,7 @@ function Progress({
       data-tone={resolvedTone}
       value={value}
       max={max}
-      className={cn("relative h-2 w-full overflow-hidden rounded-full bg-foreground/10", className)}
+      className={cn("relative h-2 w-full overflow-hidden rounded-pill bg-foreground/10", className)}
       {...props}
     >
       <ProgressPrimitive.Indicator

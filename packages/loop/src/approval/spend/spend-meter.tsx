@@ -109,12 +109,12 @@ export function SpendMeter(props: SpendMeterProps) {
         aria-valuemax={scale}
         aria-valuenow={projected}
         aria-valuetext={`${formatMicroUsd(projected)} after the next step, ${limitLabel.toLowerCase()} ${formatMicroUsd(limit)}`}
-        className="relative h-1 rounded-full bg-muted-foreground/15"
+        className="relative h-1 rounded-pill bg-muted-foreground/15"
       >
         <span
           aria-hidden
           className={cn(
-            "absolute inset-y-0 left-0 rounded-l-full",
+            "absolute inset-y-0 left-0 rounded-l-pill",
             muted ? "bg-muted-foreground/30" : "bg-muted-foreground/60"
           )}
           style={{ width: `${baseWidth}%` }}

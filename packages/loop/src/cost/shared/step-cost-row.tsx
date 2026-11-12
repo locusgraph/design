@@ -71,11 +71,11 @@ export function StepCostRow({
       </span>
       <span
         aria-hidden
-        className="relative h-1 w-full overflow-hidden rounded-full bg-muted-foreground/10 max-sm:col-span-3 max-sm:row-start-2"
+        className="relative h-1 w-full overflow-hidden rounded-pill bg-muted-foreground/10 max-sm:col-span-3 max-sm:row-start-2"
       >
         <span
           className={cn(
-            "absolute inset-y-0 left-0 rounded-full transition-[width] duration-300 motion-reduce:transition-none",
+            "absolute inset-y-0 left-0 rounded-pill transition-[width] duration-300 motion-reduce:transition-none",
             barTone(step)
           )}
           style={{ width: `${barWidth(cost, maxCost)}%` }}

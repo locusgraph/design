@@ -26,7 +26,7 @@ function InputGroup({ className, ...props }: React.ComponentProps<"div">) {
       data-slot="input-group"
       role="group"
       className={cn(
-        "group/input-group relative flex w-full items-center border border-input shadow-xs transition-[color,box-shadow] outline-none dark:bg-input/30",
+        "rounded-md group/input-group relative flex w-full items-center border border-input shadow-xs transition-[color,box-shadow] outline-none dark:bg-input/30",
         "h-control min-w-0 has-[>textarea]:h-auto has-[[data-slot=input-group-control]:disabled]:cursor-not-allowed",
         inputGroupAlignmentClasses,
         inputGroupFocusClasses,
@@ -84,10 +84,10 @@ function InputGroupAddon({
 const inputGroupButtonVariants = cva("flex items-center gap-2 text-sm shadow-none", {
   variants: {
     size: {
-      xs: "h-control-xs gap-1 rounded-full px-2.5 has-[>svg]:px-2 [&>svg:not([class*='size-'])]:size-3.5",
-      sm: "h-control-sm gap-1.5 rounded-full px-3 has-[>svg]:px-2.5",
-      "icon-xs": "size-control-xs rounded-full p-0 has-[>svg]:p-0",
-      "icon-sm": "size-control-sm rounded-full p-0 has-[>svg]:p-0",
+      xs: "h-control-xs gap-1 rounded-pill px-2.5 has-[>svg]:px-2 [&>svg:not([class*='size-'])]:size-3.5",
+      sm: "h-control-sm gap-1.5 rounded-pill px-3 has-[>svg]:px-2.5",
+      "icon-xs": "size-control-xs rounded-pill p-0 has-[>svg]:p-0",
+      "icon-sm": "size-control-sm rounded-pill p-0 has-[>svg]:p-0",
     },
   },
   defaultVariants: {

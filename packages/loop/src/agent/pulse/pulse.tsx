@@ -48,7 +48,7 @@ function TypingDots() {
         <span
           key={delay}
           className={cn(
-            "size-1.5 rounded-full bg-muted-foreground motion-safe:animate-pulse",
+            "size-1.5 rounded-pill bg-muted-foreground motion-safe:animate-pulse",
             delay
           )}
         />

@@ -39,14 +39,14 @@ describe("SkeletonAvatar and SkeletonButton", () => {
     const html = renderToStaticMarkup(<SkeletonAvatar size="lg" />);
     expectAnnouncedOnce(html, "skeleton-avatar");
     expect(html).toContain('data-size="lg"');
-    expect(html).toContain("rounded-full");
+    expect(html).toContain("rounded-pill");
     expect(html).toContain("size-10");
   });
 
   it("renders a pill matching the button height", () => {
     const html = renderToStaticMarkup(<SkeletonButton size="sm" />);
     expectAnnouncedOnce(html, "skeleton-button");
-    expect(html).toContain("rounded-full");
+    expect(html).toContain("rounded-pill");
     expect(html).toContain("h-control-sm");
   });
 });

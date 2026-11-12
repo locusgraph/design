@@ -13,7 +13,7 @@ export type CiteProps = {
 };
 
 const pillClass =
-  "inline-flex h-4 min-w-4 items-center justify-center rounded-full bg-muted px-1 text-2xs leading-none font-medium text-muted-foreground tabular-nums no-underline transition-colors duration-150 locus-focus-ring hover:bg-interactive/15 hover:text-interactive data-[state=open]:bg-interactive/15 data-[state=open]:text-interactive motion-reduce:transition-none";
+  "inline-flex h-4 min-w-4 items-center justify-center rounded-pill bg-muted px-1 text-2xs leading-none font-medium text-muted-foreground tabular-nums no-underline transition-colors duration-150 locus-focus-ring hover:bg-interactive/15 hover:text-interactive data-[state=open]:bg-interactive/15 data-[state=open]:text-interactive motion-reduce:transition-none";
 
 export function citationLabel(citation: Citation): string {
   return `Source ${citation.index}: ${citation.title}`;

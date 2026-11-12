@@ -70,7 +70,7 @@ function ChartTooltipContent({
   return (
     <div
       className={cn(
-        "grid min-w-[8rem] items-start gap-1.5 bg-popover px-2.5 py-1.5 text-xs text-popover-foreground ring-1 ring-border",
+        "rounded-md grid min-w-[8rem] items-start gap-1.5 bg-popover px-2.5 py-1.5 text-xs text-popover-foreground ring-1 ring-border",
         className
       )}
     >
@@ -101,8 +101,8 @@ function ChartTooltipContent({
                       !hideIndicator && (
                         <div
                           className={cn("shrink-0 border-(--color-border) bg-(--color-bg)", {
-                            "size-2.5 rounded-full": indicator === "dot",
-                            "w-1 rounded-full": indicator === "line",
+                            "size-2.5 rounded-pill": indicator === "dot",
+                            "w-1 rounded-pill": indicator === "line",
                             "w-0 border-[1.5px] border-dashed bg-transparent":
                               indicator === "dashed",
                             "my-0.5": nestLabel && indicator === "dashed",
