@@ -20,6 +20,8 @@ const libraryDescriptions: Record<string, string> = {
     "Radix based React components from Locus Design: square, ruled and quiet, in light and dark. Install @locusgraph/components or copy with shadcn.",
   blocks:
     "Product blocks for usage, quota, wallet, top-ups, plans and API keys. Props and callbacks only, built from @locusgraph/components.",
+  marketing:
+    "Marketing blocks for landing pages: navbar, hero and footer. Content as props, server components first, built from @locusgraph/components.",
   loop: "Loop, the agent UI with the human in the loop: chat, thread, agent, approval, memory and cost, on Vercel AI SDK message parts.",
   brand:
     "The LocusGraph and SpendGraph marks, wordmarks, app icon, social card and sign-in marks, as React components and SVG files.",

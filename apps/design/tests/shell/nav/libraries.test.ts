@@ -3,8 +3,9 @@ import { demoIndex } from "../../../src/registry/load-demos";
 import { libraryEntries, libraryOfGroup, libraryOfPath } from "../../../src/shell/nav/libraries";
 
 describe("libraries", () => {
-  it("files blocks and brand demos under their own package and everything else under components", () => {
+  it("files blocks, marketing and brand demos under their own package and everything else under components", () => {
     expect(libraryOfGroup("blocks")).toBe("blocks");
+    expect(libraryOfGroup("marketing")).toBe("marketing");
     expect(libraryOfGroup("brand")).toBe("brand");
     expect(libraryOfGroup("loop")).toBe("loop");
     expect(libraryOfGroup("patterns")).toBe("patterns");
@@ -22,6 +23,7 @@ describe("libraries", () => {
     const listed = [
       ...libraryEntries("components"),
       ...libraryEntries("blocks"),
+      ...libraryEntries("marketing"),
       ...libraryEntries("loop"),
       ...libraryEntries("patterns"),
       ...libraryEntries("brand"),
@@ -29,5 +31,10 @@ describe("libraries", () => {
     expect(listed).toHaveLength(demoIndex.length);
     expect(libraryEntries("components").some((entry) => entry.group === "blocks")).toBe(false);
     expect(libraryEntries("blocks").map((entry) => entry.title)).toContain("Billing");
+    expect(libraryEntries("marketing").map((entry) => entry.title)).toEqual([
+      "Footer",
+      "Hero",
+      "Navbar",
+    ]);
   });
 });
