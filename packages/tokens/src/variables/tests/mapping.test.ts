@@ -28,7 +28,16 @@ describe("Tailwind mapping", () => {
     }
   });
 
+  it("keeps the fonts out of the inline theme so the font classes read the variables at runtime", () => {
+    const inline = mapping.slice(mapping.indexOf("@theme inline"), mapping.indexOf("}") + 1);
+    const runtime = mapping.slice(mapping.lastIndexOf("@theme {"));
+    for (const name of ["sans", "heading", "mono", "brand"]) {
+      expect(inline, name).not.toContain(`--font-${name}:`);
+      expect(runtime, name).toMatch(new RegExp(`--font-${name}: var\\(--locus-font-[\\w-]+\\);`));
+    }
+  });
+
   it("gives pills their own overridable radius", () => {
-    expect(mapping).toMatch(/@theme\s*\{\s*--radius-pill: 9999px;\s*\}/);
+    expect(mapping).toMatch(/@theme\s*\{[^}]*--radius-pill: 9999px;\s*\}/);
   });
 });

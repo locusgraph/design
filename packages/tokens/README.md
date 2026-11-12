@@ -71,13 +71,15 @@ Every Tailwind color the components use reads the standard shadcn variable first
   --primary-foreground: oklch(0.98 0 0);
   --radius: 0.5rem;
   --radius-pill: 0.5rem;
+  --font-sans: "Inter Variable", ui-sans-serif, system-ui, sans-serif;
+  --font-heading: "Inter Variable", ui-sans-serif, system-ui, sans-serif;
 }
 ```
 
 - Colors: `--background`, `--foreground`, `--card`, `--popover`, `--primary`, `--secondary`, `--muted`, `--accent`, `--destructive`, `--border`, `--input`, `--ring`, the `-foreground` pairs and the `--sidebar-*` set.
-- Radius: `--radius` sets the scale (`sm` 0.6×, `md` 0.8×, `lg` 1×, `xl` 1.4×). `--radius-pill` sets buttons, chips and badges.
+- Radius: `--radius` sets the scale (`sm` 0.6×, `md` 0.8×, `lg` 1×, `xl` 1.4×). Buttons, toggles, button groups, segmented tabs, chips, badges and avatars are pills by design and do not follow `--radius`; set `--radius-pill` (9999px by default) to change all of them, for example `0` for square buttons.
 - Locus-only roles (`memory`, `good`, `warn`, `faint`, `interactive`, `skeleton`, `scrim` and the `--locus-s1` to `--locus-s8` series) have no shadcn name. They keep the Locus values, so a theme only needs the shadcn variables; override their `--locus-*` variable to change one.
-- Fonts: set `--font-sans`, `--font-heading` and `--font-mono` in your own `@theme inline` after the import.
+- Fonts: `--font-sans` (body text, inputs, menus), `--font-heading` (headings, buttons, toggles, toasts, `locus-eyebrow`), `--font-mono` (code, ids) and `--font-brand` (the wordmark). Set them in `:root` like the colors, or in your own `@theme inline`; the `font-*` classes read them at runtime. Load the font files yourself; without `fonts.css` the Locus fonts are not loaded.
 - The `--locus-*` variables keep working.
 
 ## Migrating to the shadcn fallbacks
