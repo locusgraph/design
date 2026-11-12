@@ -18,6 +18,8 @@ const demoSources = import.meta.glob<string>("../demos/**/*.demo.tsx", {
 });
 
 const titleOverrides: Record<string, string> = {
+  "cta-band": "CTA Band",
+  faq: "FAQ",
   "generative-ui": "Generative UI",
   "input-otp": "Input OTP",
   "spendgraph-mark": "SpendGraph Mark",

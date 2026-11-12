@@ -1,6 +1,6 @@
 import { LocusGraphWordmark } from "@locusgraph/brand";
 import { Navbar } from "@locusgraph/marketing";
-import { defineDemo, toggle } from "../../registry/define-demo";
+import { defineDemo, toggle } from "../../../registry/define-demo";
 
 const links = [
   { label: "Product", href: "#product" },

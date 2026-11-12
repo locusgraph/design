@@ -32,9 +32,14 @@ describe("libraries", () => {
     expect(libraryEntries("components").some((entry) => entry.group === "blocks")).toBe(false);
     expect(libraryEntries("blocks").map((entry) => entry.title)).toContain("Billing");
     expect(libraryEntries("marketing").map((entry) => entry.title)).toEqual([
+      "CTA Band",
+      "FAQ",
+      "Features",
       "Footer",
       "Hero",
+      "Logo Cloud",
       "Navbar",
+      "Testimonials",
     ]);
   });
 });

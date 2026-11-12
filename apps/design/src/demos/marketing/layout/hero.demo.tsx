@@ -1,6 +1,6 @@
 import { Badge, RuleGrid, RuleGridCell, RuleGridTitle } from "@locusgraph/components";
 import { Hero } from "@locusgraph/marketing";
-import { defineDemo, select } from "../../registry/define-demo";
+import { defineDemo, select } from "../../../registry/define-demo";
 
 const layouts = ["centered", "split"] as const;
 

@@ -1,6 +1,6 @@
 import { LocusGraphWordmark } from "@locusgraph/brand";
 import { Footer } from "@locusgraph/marketing";
-import { defineDemo, toggle } from "../../registry/define-demo";
+import { defineDemo, toggle } from "../../../registry/define-demo";
 
 const columns = [
   {
