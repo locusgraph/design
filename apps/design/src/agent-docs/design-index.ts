@@ -24,6 +24,8 @@ pnpm add @locusgraph/components @locusgraph/blocks @locusgraph/loop @locusgraph/
 @import "@locusgraph/brand/sources.css";
 \`\`\`
 
+Components built on a large library also have their own import path: \`@locusgraph/components/chart\`, \`/calendar\`, \`/carousel\`, \`/combobox\`, \`/command\`, \`/drawer\`, \`/hook-form\`, \`/input-otp\`, \`/resizable\` and \`/toaster\`. Prefer them over the main entry for those components.
+
 For generated screens, add \`@locusgraph/json-render\`. Its catalog (\`locusComponents\`) and registry (\`locusRenderers\`) cover Stack, Columns, Notice, Usage, Quota, UsageAlert, Wallet, TopUp, Plans, KeysEmpty and Keys. It has no CSS of its own; the blocks import above covers it.
 
 An app that also uses its own shadcn components adds \`@import "@locusgraph/components/shadcn.css";\` after the theme, so the shadcn variables (\`--background\`, \`--primary\`, \`--muted-foreground\`, \`--radius\`) point at the Locus ones.
