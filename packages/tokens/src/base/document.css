@@ -1,0 +1,9 @@
+@layer base {
+  :where(button, [role="button"], [role="tab"], [role="option"], [role="menuitem"], [role="switch"], [role="checkbox"], [role="radio"], summary, label[for], select):not(:disabled, [aria-disabled="true"], [data-disabled]) {
+    cursor: pointer;
+  }
+}
+
+html {
+  font-size: 17px;
+}

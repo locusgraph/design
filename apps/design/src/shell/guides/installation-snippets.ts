@@ -77,3 +77,11 @@ export const shadcnAliases = `@import "tailwindcss";
 
 export const shadcnTheme = `@import "tailwindcss";
 @import "../styles/locus.css";`;
+
+export const coreCss = `@import "tailwindcss";
+@import "tw-animate-css";
+@import "@locusgraph/components/core.css";
+
+@theme inline {
+  --font-sans: "Inter Variable", ui-sans-serif, system-ui, sans-serif;
+}`;

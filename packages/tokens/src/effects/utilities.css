@@ -60,14 +60,14 @@
   font-size: var(--text-xs);
   line-height: var(--text-xs--line-height);
   font-weight: 500;
-  color: var(--locus-muted-foreground);
+  color: var(--muted-foreground, var(--locus-muted-foreground));
 }
 
 @utility locus-focus-ring {
   outline: none;
 
   &:focus-visible {
-    outline: 2px solid color-mix(in oklch, var(--color-ring) 70%, transparent);
+    outline: 2px solid color-mix(in oklch, var(--ring, var(--locus-interactive)) 70%, transparent);
     outline-offset: 2px;
   }
 }
@@ -76,7 +76,7 @@
   outline: none;
 
   &:focus-visible {
-    outline: 2px solid color-mix(in oklch, var(--color-ring) 70%, transparent);
+    outline: 2px solid color-mix(in oklch, var(--ring, var(--locus-interactive)) 70%, transparent);
     outline-offset: -2px;
   }
 }

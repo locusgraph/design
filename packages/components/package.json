@@ -28,6 +28,9 @@
     "./resizable": "./src/entries/layout/resizable.ts",
     "./toaster": "./src/entries/overlay/toaster.ts",
     "./theme.css": "./src/styles/theme.css",
+    "./core.css": "./src/styles/core.css",
+    "./fonts.css": "./src/styles/fonts.css",
+    "./document.css": "./src/styles/document.css",
     "./shadcn.css": "./src/styles/shadcn.css"
   },
   "publishConfig": {
@@ -80,6 +83,9 @@
         "default": "./dist/entries/overlay/toaster.js"
       },
       "./theme.css": "./dist/styles/theme.css",
+      "./core.css": "./dist/styles/core.css",
+      "./fonts.css": "./dist/styles/fonts.css",
+      "./document.css": "./dist/styles/document.css",
       "./shadcn.css": "./dist/styles/shadcn.css"
     }
   },

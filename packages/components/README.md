@@ -37,6 +37,16 @@ as aliases of ours:
 @import "@locusgraph/components/shadcn.css";
 ```
 
+The theme also loads the Locus fonts, sets the root font size to 17px and gives buttons, tabs and
+options a pointer cursor. In an app with its own type, import `core.css` instead, which leaves the
+root size, the cursor and the fonts alone; add `fonts.css` for the Locus fonts or set `--font-sans`
+in your own `@theme`:
+
+```css
+@import "tailwindcss";
+@import "@locusgraph/components/core.css";
+```
+
 Then:
 
 ```tsx
