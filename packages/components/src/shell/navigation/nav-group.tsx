@@ -13,6 +13,7 @@ type AppNavItem = {
   href: string;
   icon: IconType;
   external?: boolean;
+  count?: number;
 };
 
 type AppNavGroup = { label: string; items: AppNavItem[] };
@@ -28,6 +29,26 @@ function isActiveHref(itemHref: string, activeHref: string) {
   return activeHref === itemHref || activeHref.startsWith(`${itemHref}/`);
 }
 
+function hasCount(item: AppNavItem): item is AppNavItem & { count: number } {
+  return item.count !== undefined && item.count > 0;
+}
+
+function tooltipFor(item: AppNavItem) {
+  return hasCount(item) ? `${item.title} (${item.count})` : item.title;
+}
+
+function NavItemCount({ count }: { count: number }) {
+  return (
+    <span
+      data-slot="app-nav-count"
+      className="ml-auto text-xs text-muted-foreground tabular-nums group-data-[collapsible=icon]:sr-only"
+    >
+      <span className="sr-only">, </span>
+      {count}
+    </span>
+  );
+}
+
 function NavItemLink({
   item,
   Link,
@@ -36,7 +57,8 @@ function NavItemLink({
   const content = (
     <>
       <item.icon weight="bold" aria-hidden />
-      <span>{item.title}</span>
+      <span className="truncate">{item.title}</span>
+      {hasCount(item) && <NavItemCount count={item.count} />}
     </>
   );
   if (item.external) {
@@ -65,7 +87,7 @@ function NavGroup({ group, activeHref, Link, className }: NavGroupProps) {
               <SidebarMenuButton
                 asChild
                 isActive={isActiveHref(item.href, activeHref)}
-                tooltip={item.title}
+                tooltip={tooltipFor(item)}
               >
                 <NavItemLink item={item} Link={Link} />
               </SidebarMenuButton>

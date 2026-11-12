@@ -32,7 +32,7 @@ const groups = [
     label: "Billing",
     items: [
       { title: "Plan", href: "#billing", icon: CreditCardIcon },
-      { title: "Invoices", href: "#invoices", icon: FileTextIcon },
+      { title: "Invoices", href: "#invoices", icon: FileTextIcon, count: 2 },
       { title: "Usage", href: "#usage", icon: GaugeIcon },
     ],
   },
@@ -78,7 +78,7 @@ function AccountsShell() {
 export default defineShell({
   title: "App Shell",
   description:
-    "Full-bleed sidebar on a hairline that collapses to icons, a header with breadcrumbs, and a ruled body. For the accounts app.",
+    "Full-bleed sidebar on a hairline that collapses to icons (nav items take an optional `count`), a header with breadcrumbs, and a ruled body. For the accounts app.",
   importLine: 'import { AppHeader, AppShell, AppSidebar } from "@locusgraph/components";',
   component: AccountsShell,
 });
