@@ -8,6 +8,16 @@ export type ChangelogEntry = {
 
 export const changelogEntries: ChangelogEntry[] = [
   {
+    id: "2026-11-12-peers",
+    date: "2026-11-12",
+    title: "Blocks, Loop and json-render accept components 0.7",
+    packages: ["blocks 0.9.1", "loop 0.7.1", "json-render 0.3.1"],
+    changes: [
+      "The components peer range moves to ^0.7.0, so an app on components 0.7 gets one copy and no peer warnings.",
+      "Loop's model picker and context popover drop the overlay shadow, like the other overlays.",
+    ],
+  },
+  {
     id: "2026-11-12",
     date: "2026-11-12",
     title: "Counts in the app sidebar",
