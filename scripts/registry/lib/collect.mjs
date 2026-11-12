@@ -11,10 +11,12 @@ const sourceRoots = [
   { packageName: "patterns", dir: join("apps", "design", "src", "patterns") },
 ];
 
+const skippedFolders = new Set(["tests", "entries"]);
+
 function sourceFiles(dir) {
   return readdirSync(dir, { withFileTypes: true }).flatMap((entry) => {
     const path = join(dir, entry.name);
-    if (entry.isDirectory()) return entry.name === "tests" ? [] : sourceFiles(path);
+    if (entry.isDirectory()) return skippedFolders.has(entry.name) ? [] : sourceFiles(path);
     const isSource = /\.(ts|tsx)$/.test(entry.name) && !/\.d\.ts$/.test(entry.name);
     return isSource && entry.name !== "index.ts" ? [path] : [];
   });
