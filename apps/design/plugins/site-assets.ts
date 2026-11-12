@@ -1,7 +1,7 @@
 import type { ReactNode } from "react";
 import type { Plugin, ViteDevServer } from "vite";
-import { elementToPng, pngToIco, svgToPng } from "./raster";
-import { withStandaloneServer } from "./standalone-server";
+import { elementToPng, pngToIco, svgToPng } from "./raster.ts";
+import { withStandaloneServer } from "./standalone-server.ts";
 
 const siteFilesModule = "/src/seo/build/site-files.ts";
 const siteMetaModule = "/src/seo/site-meta.ts";
